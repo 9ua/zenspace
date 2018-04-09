@@ -3,19 +3,30 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Element from 'element-ui'
+import Carousel from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import Vant from 'vant'
+import { Icon, NoticeBar, Actionsheet } from 'vant';
 import 'vant/lib/vant-css/index.css'
 import 'lib-flexible/flexible.js'
 import './assets/iconfont/iconfont.css'
-Vue.use(Vant)
-Vue.use(Element)
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import store from './vuex/store'
+
+//axios.defaults.baseURL = 'http://api.douban.com/v2/movie/';
+//Vue.prototype.axios = axios;
+
+Vue.use(VueAxios, axios);
+Vue.use(Actionsheet);
+Vue.use(NoticeBar);
+Vue.use(Icon);
+Vue.use(Carousel)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },

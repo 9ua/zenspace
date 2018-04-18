@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="home-cneter">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
     <div class="home-footer">
       <ul>
@@ -14,13 +16,11 @@
   </div>
 </template>
 <script>
-import one from './one.vue'
-import three from './three.vue'
-import four from './four.vue'
-import five from './five.vue'
+
 export default {
   data() {
     return {
+    	five:2,
       navbat: [
         {
         	icon:'icon-shouye',
@@ -40,22 +40,16 @@ export default {
         {
         	icon:'icon-wode',
           name: '我的',
-          pathbat: 'five'
+          pathbat: 'login'
         }
       ]
     }
   },
-  components: {
-    one,
-    three,
-    four,
-    five
-  }
+  
 }
 </script>
 <style lang='scss'>
 @import '../../assets/scss/home.scss';
-@import '../../assets/scss/one.scss';
 @import '../../assets/scss/three.scss';
 @import '../../assets/scss/four.scss';
 </style>

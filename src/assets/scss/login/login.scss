@@ -99,8 +99,6 @@
   > div {
     display: flex;
     align-items: center;
-    width: 110px;
-    height: 32px;
     line-height: 32px;
     background: #fff;
     border-radius: 6px;
@@ -139,7 +137,6 @@
   top: 0px;
   height: 46px;
   width: 100%;
-//background: #dc3b40;
   background: linear-gradient(to right, #f75f5b , #fead50);
   z-index: 12;
   & i {

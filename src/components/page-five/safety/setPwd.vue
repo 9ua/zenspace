@@ -27,7 +27,7 @@
     methods: {
       setPwd() {
         this.$router.push({
-          path: '/safety'
+          path: '/login'
         });
       }
     },

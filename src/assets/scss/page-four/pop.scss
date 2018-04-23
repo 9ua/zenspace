@@ -134,9 +134,7 @@
                 @for $i from 1 through 8 {
                     & li:nth-child(#{$i}) {
                         display: block;
-                        @include Bg('haaa.png',
-                        55px,
-                        55px);
+                        @include Bg('haaa.png',55px,55px);
                         background-size: 100%;
                         margin: 5px 10px;
                     }

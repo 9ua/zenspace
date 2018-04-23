@@ -2,13 +2,21 @@
   <div class="three">
     <headers></headers>
     <ul v-show="showFlag">
-      <li v-for="(threeC,index) in threeContent" :key="index" @click="selectFood(threeC,$event,index)">
+      <router-link to="" tag="li" v-for="(actives,index) in activitys" :key="index">
+        <img :src="'http://115.144.238.217'+actives.icon"/>
+      	<div class="three-box">
+      		<p>活动时间：{{actives.beginPrizeTime}}</p>
+      		<p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
+      	</div>
+        <b>{{actives.remark}}</b>
+      </router-link>
+      <!-- <li v-for="(threeC,index) in threeContent" :key="index" @click="selectFood(threeC,$event,index)">
       	<img :src="threeC.img"/>
       	<div class="three-box">
       		<p>活动时间：2018-4-6 ~ 2018-4-32</p>
       		<p>进行中</p>
       	</div>
-      </li>
+      </li> -->
     </ul>
     <promote :promote="selectedFood" ref="promote" @sonclick="haashow"></promote>
     <days :days="selectedFood" ref="days" @sonclick="haashow"></days>
@@ -25,36 +33,46 @@ import lucky from "../page-three/lucky";
 export default {
   data() {
     return {
+      activitys:'',
       threeContent: [
         {
           title: "晋级奖励",
           msg:"喷雾时期木是因为回归日加盟因果关系加盟苦脸色去英雄副本姚弘云石切割机",
-          img: require('../../../static/img/three/three1.jpg')
+          img: require('../../assets/img/three/three1.jpg')
         },
         {
           title: "每日加奖",
-          msg:
-            "喷雾时期木是因为回归日加盟因果关系加盟苦脸色去英雄副本姚弘云石切割机",
-            img: require('../../../static/img/three/three2.jpg')
+          msg:"喷雾时期木是因为回归日加盟因果关系加盟苦脸色去英雄副本姚弘云石切割机",
+          img: require('../../assets/img/three/three2.jpg')
         },
         {
           title: "中宏诚信彩，包赔嗨翻天",
-          msg:
-            "喷雾时期木是因为回归日加盟因果关系加盟苦脸色去英雄副本姚弘云石切割机",
-            img: require('../../../static/img/three/three3.jpg')
+          msg:"喷雾时期木是因为回归日加盟因果关系加盟苦脸色去英雄副本姚弘云石切割机",
+          img: require('../../assets/img/three/three3.jpg')
         },
         {
           title: "幸运大奖",
-          msg:
-            "喷雾时期木是因为回归日加盟因果关系加盟苦脸色去英雄副本姚弘云石切割机",
-            img: require('../../../static/img/three/three4.jpg')
+          msg:"喷雾时期木是因为回归日加盟因果关系加盟苦脸色去英雄副本姚弘云石切割机",
+          img: require('../../assets/img/three/three4.jpg')
         }
       ],
       selectedFood: {},
       showFlag: true
     };
   },
+  mounted(){
+    this.activity();
+  },
   methods: {
+    activity(){
+      this.$http.get('api/activity/getList').then((res) => {
+        this.activitys = res.data.data;
+
+        console.log(this.activitys); 
+      }).catch((error) => {
+          console.log("No")
+      })
+    },
     selectFood(threeC, event,index) {
       this.selectedFood = threeC;
       this.showFlag = false;

@@ -10,20 +10,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/schema': 'http://115.144.238.217',
-        '/api': 'http://115.144.238.217'
-    },
-//  proxyTable: {
-//  	"/api":{
-//				target:"http://alpha-frontend.test.bestsnake.com/api/static-data/",
-//				target:"https://115.182.201.8/v2/",
-//				target:"http://115.144.238.217",
-//				changeOrigin:true,
+    	"/api":{
+				target:"http://115.144.238.217",
+				changeOrigin:true,
 //				pathRewrite:{
 //					"^/api":""
 //				}
-//			}
-//  },
+			}
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -32,7 +26,7 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-    
+
     /**
      * Source Maps
      */

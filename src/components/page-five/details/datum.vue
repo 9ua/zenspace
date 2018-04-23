@@ -18,7 +18,7 @@
       <li>
         <p>账号</p>
         <div>
-          <p>haaaa</p>
+          <p>{{$store.state.Globalusername}}</p>
         </div>
       </li>
     </ul>

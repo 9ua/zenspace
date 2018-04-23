@@ -4,7 +4,11 @@
       <i class="el-icon-arrow-left" @click="hide"></i>
       <p>{{happy.title}}</p>
     </div>
-    <div class="happy-box">嗨</div>
+    <div class="happy-box">
+      <div v-for="(item,index) in getLotterlist" :key="index">
+        <div>{{item.remark}}</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -13,7 +17,8 @@ export default {
   data() {
     return {
       isshow: {
-        showPage: false
+        showPage: false,
+        getLotterlist:'',
       }
     };
   },
@@ -22,7 +27,17 @@ export default {
       type: Object
     }
   },
+  mounted(){
+    this.getLotterlist();
+  },
   methods: {
+    getLotterlist(){
+	      this.$http.get('api/activity/getList').then((res) => {
+          console.log(res.data.data[0]);
+	      }).catch((error) => {
+	      		console.log("No")
+	      })
+    	},
     show() {
       this.isshow.showPage = true;
     },

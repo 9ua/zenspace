@@ -18,7 +18,7 @@
           </div>
           <h3>{{pop.name}}</h3>
           <ul>
-            <li>账号：{{pop.name}}</li>
+            <li>账号：{{$store.state.Globalusername}}</li>
             <li>性别：保密</li>
             <li>
               <p>头衔：农民</p>

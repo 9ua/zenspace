@@ -1,5 +1,5 @@
 <template>
-  <div class="five">
+  <div class="five" v-show="$store.state.loginStatus === true">
     <headers></headers>
     <div class="five-top">
       <div>
@@ -8,11 +8,11 @@
         </div>
         <div class="five-top-right">
           <p>账号：
-            <span>{{cookieName}}</span>
+            <span>{{$store.state.Globalusername}}</span>
           </p>
           <p>余额：
             <span v-show=" !money ">*****</span>
-            <span v-show=" money ">111111</span>
+            <span v-show=" money ">{{ balances | keepTwoNum}}</span>
             <button v-show="!money" @click="money = !money">显示</button>
           </p>
         </div>
@@ -55,7 +55,7 @@
   export default {
     data() {
       return {
-      	cookieName:'',
+        balances:0,//用户余额
       	money:false,
         fiveNav: [{
           name: '个人信息',
@@ -81,12 +81,22 @@
       }
     },
     mounted(){
-    	this.getCookie();
+      this.getBalance();
     },
     methods:{
-    	getCookie(){
-    		this.cookieName = VueCookie.get("username");
+      getBalance(){
+	      this.$http.get('api/userCenter/getBalance').then((res) => {
+          this.balances = res.data.data.balance;
+	      }).catch((error) => {
+	      		console.log("No11")
+	      })
     	}
+    },
+    filters: {
+      keepTwoNum(value) {
+        value = Number(value);
+        return value.toFixed(2);
+      }
     },
     components: {
       headers

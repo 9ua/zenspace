@@ -19,6 +19,9 @@
 					{name:'昨日盈利榜',pathurl:'profit'}
 				]
 			}
+		},
+		methods:{
+			
 		}
 	}
 </script>

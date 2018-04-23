@@ -6,14 +6,14 @@
         <span>倍</span>
       </div>
       <div>
-        <span :class="{'active': index === lists}" v-for="(moneys,index) in money" :key="index" @click="moneyC($event,index,moneys)">{{moneys}}</span>
+        <span :class="{'active': index === lists}" v-for="(unit,index) in ['元','角','分']" :key="index" @click="moneyC(index)">{{unit}}</span>
       </div>
     </div>
     <div class="basket">
       <div class="basket-left" :class="{'active':selected.length > 0}" @click="addbasket">
         <i class="el-icon-plus"></i>
         <div>
-          <p>共{{selected.length}}注，{{totalMoney | keepTwoNum}}元</p>
+          <p>共{{selected.length}}注，{{totalMoney * unit | keepTwoNum}}元</p>
           <p>
             <span>{{cart}}</span>
           </p>
@@ -38,7 +38,6 @@
         badge: 0, //购物篮数
         lists: 0,
         allmoney: 2, //共多少钱
-        money: ['元', '角', '分'],
         balls:[
         	{show:false},
         	{show:false},
@@ -58,15 +57,18 @@
     },
     watch: {},
     computed: {
-      totalMoney: function() {
+      totalMoney() {
         let sum = 0;
         sum = this.allmoney * this.selected.length * this.value;
         return sum;
       },
+      unit() {
+	      //1=1元, 2=1角, 3=1分, 4=1厘
+	      return 10 / Math.pow(10, this.lists + 1)
+	    },
     },
-    mounted() {},
     methods: {
-      moneyC(event, index, moneys) {
+      moneyC(index) {
         this.lists = index;
       },
       addbasket() {

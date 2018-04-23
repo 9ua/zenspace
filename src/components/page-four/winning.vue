@@ -11,7 +11,7 @@
             </p>
             <p>
               <span>喜中</span>
-              <span>￥{{index+10000.26}}</span>
+              <span>￥{{index+10000.26 | keepTwoNum}}</span>
             </p>
           </div>
         </div>
@@ -59,6 +59,10 @@
         let start = value.slice(0, 1);
         let end = value.slice(-1);
         return `${start}***${end}`;
+      },
+      keepTwoNum(value) {
+        value = Number(value);
+        return value.toFixed(2);
       }
     },
     components: {

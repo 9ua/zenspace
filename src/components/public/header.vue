@@ -18,7 +18,7 @@
           title: 'UU直播',
           show: 'second'
         }, {
-          title: '活动',
+          title: '活动中心',
           show: 'three'
         }, {
           title: '我的',
@@ -33,7 +33,6 @@
   .head-top {
     height: 46px;
     width: 100%;
-    /*background: #dc3b40 !important;*/
    	background: linear-gradient(to right, #f75f5b , #fead50);
     position: fixed;
     top: 0px;

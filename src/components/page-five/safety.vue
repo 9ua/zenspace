@@ -61,7 +61,7 @@
       		</div>
       	</router-link>
       </ul>
-      <div class="logout">
+      <div class="logout" @click="logout">
       	<p>退出登陆</p>
       	<i class="el-icon-arrow-right"></i>
       </div>
@@ -72,6 +72,14 @@
   export default {
     data() {
       return {}
+    },
+    methods:{
+    	logout(){
+    		this.$store.state.loginStatus = false;
+    		this.$store.state.Globalusername = "";
+    		this.$store.state.Globalpassword = "";
+    		this.$router.push('/one');
+    	}
     }
   }
 </script>

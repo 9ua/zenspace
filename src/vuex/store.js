@@ -3,20 +3,24 @@ import Vuex from 'vuex';
 import mutations from './mutations'
 import actions from './action'
 import axios from 'axios';
+import { setStore, getStore, removeStore } from '../config/mutil'
 
 Vue.use(Vuex)
 
 const state = {
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-//  'Content-Type': 'multipart/form-data'
+  'Content-Type': 'application/x-www-form-urlencoded',
+    // 'Content-Type': 'multipart/form-data'
   },
+  JSESSIONICookie:'',
   url: 'http://115.144.238.217',
-  loginStatus: null, //登陆状态
-  Globalusername: "", //全局账号
-  Globalpassword: "", //全局密码
+  loginStatus: false, //登陆状态
+  Globalusername: getStore('username'), //全局账号
+  Globalpassword: getStore('password'), //全局密码
   newDate:new Date().getTime(),//获取时间戳
   captchaCodeImg:{}, //验证码地址
+  errorcode:0,//输入错误次数
+  balance:null,//余额
 }
 
 export default new Vuex.Store({

@@ -87,10 +87,29 @@
 .el-carousel {
     //  margin-top: 46px;
 }
-
-.el-carousel__item:nth-child(2n+1),
-.el-carousel__item:nth-child(2n) {
-    background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523517614&di=c89353908a351e1da119b975cb2c67a0&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F16%2F47%2F53%2F32658PICXjm_1024.jpg') no-repeat center center;
-    //  background: url(../../assets/img/home/one/banner.jpg) no-repeat center center;
-    background-size: 100% 100%;
+.el-carousel__item{
+	box-sizing: border-box;
+	vertical-align:middle;
+	& img{
+		width: 100%;
+		height: 100%;
+		vertical-align:middle;
+		border: none;
+	}
 }
+.van-swipe{
+	height: 180px;
+	& .van-swipe-item{
+		& img{
+			width: 100%;
+			height: 100%;
+//			vertical-align:middle;
+//			border: none;
+		}
+	}
+}
+//.el-carousel__item:nth-child(2n+1),
+//.el-carousel__item:nth-child(2n) {
+//  background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523517614&di=c89353908a351e1da119b975cb2c67a0&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F16%2F47%2F53%2F32658PICXjm_1024.jpg') no-repeat center center;
+//  background-size: 100% 100%;
+//}

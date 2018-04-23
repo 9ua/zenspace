@@ -40,7 +40,7 @@ export default {
         {
         	icon:'icon-wode',
           name: '我的',
-          pathbat: 'login'
+          pathbat: this.$store.state.loginStatus ? 'five' : 'login'
         }
       ]
     }

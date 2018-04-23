@@ -205,7 +205,6 @@ import cart from '../../public/cart'
         quwei:['上下盘','奇偶盘','和值大小单双']
       };
     },
-    mounted () {}, 
     methods: {
       menunav(event,index,muens){
         if(muens){

@@ -1,13 +1,34 @@
 <template>
   <div class="klc">
     <ul>
-      <router-link v-for="(item,index) in 10" :key="index" tag="li" to="">
+      <router-link v-for="(item,index) in lotteryListklc" :key="index" tag="li" to="">
         <img src="../../assets/img/one/zhssc.png" alt="images"/>
-        <h5>快乐彩</h5>
+        <h5>{{item.name}}</h5>
       </router-link>
     </ul>
   </div>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      lotteryListklc:'',
+    }
+  },
+  mounted(){
+    this.lotteryklc();
+  },
+  methods:{
+    lotteryklc(){
+      this.$http.get('api/lottery/getLotteryList').then((res) => {
+        this.lotteryListklc = res.data.data.k3;
+      }).catch((error) => {
+          console.log("No")
+      })
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 @import '../../assets/scss/lotter-list/klc.scss'
 </style>

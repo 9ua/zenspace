@@ -50,7 +50,7 @@
 	    			</div>
 	    		</div>
 	    		<div class="content-right">
-	    			<p>{{'0'+(seasonId*1+1)}}期投注截止</p>
+	    			<p>{{'0'+(seasonId*1)}}期投注截止</p>
 	    			<div>
 	    				<p>{{countDown}}</p>
 	    			</div>
@@ -62,12 +62,12 @@
 						<li v-for="(item,index) in getPastOpens" :key="index">
 							<p>{{item.seasonId.substring(4).split("-").join("")}}<i class="el-icon-minus"></i></p>
 							<p>
-								<!-- <a>{{item.n1}}</a>
+								<a>{{item.n1}}</a>
 								<a>{{item.n2}}</a>
-								<a>{{item.n3}}</a> -->
+								<a>{{item.n3}}</a>
+								<!-- <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
 								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
+								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
 							</p>
 							<p>{{item.n1+item.n2+item.n3}}</p><p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
 						</li>

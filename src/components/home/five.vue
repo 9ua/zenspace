@@ -4,7 +4,7 @@
     <div class="five-top">
       <div>
         <div class="five-top-left">
-          <router-link to="/detail/datum" tag="p"><img :src="'../../assets/img/five/'+$store.state.image+'.jpg'" alt=""></router-link>
+          <router-link to="/detail/datum" tag="p"><img :src='"../../assets/img/five/"+$store.state.image+".jpg"' alt=""></router-link>
         </div>
         <div class="five-top-right">
           <p>账号：

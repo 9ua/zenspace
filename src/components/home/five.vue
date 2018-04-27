@@ -4,7 +4,7 @@
     <div class="five-top">
       <div>
         <div class="five-top-left">
-          <router-link to="/detail/datum" tag="p"><img v-lazy='"../../assets/img/five/"+$store.state.image+".jpg"' alt=""></router-link>
+          <router-link to="/detail/datum" tag="p"><img :src='"../../assets/img/five/"+$store.state.image+".jpg"' alt=""></router-link>
         </div>
         <div class="five-top-right">
           <p>账号：
@@ -83,17 +83,24 @@
       }
     },
     mounted(){
-      this.getBalance();
       this.getTopUserData();
+      this.getBalance();
     },
     methods:{
       //获取头部个人信息
       getTopUserData(){
 	      this.$http.get('api/userCenter/getTopUserData').then((res) => {
-          this.image = res.data.data.image;
-          this.$store.state.image = this.image;
-          setStore('image',this.image);
-          setStore('image',this.$store.state.image);
+          if(res.data.data.image === ''){
+            this.image = 0;
+            this.$store.state.image = this.image;
+            setStore('image',this.image);
+            setStore('image',this.$store.state.image);
+          }else{
+            this.image = res.data.data.image;
+            this.$store.state.image = this.image;
+            setStore('image',this.image);
+            setStore('image',this.$store.state.image);
+          }
 	      }).catch((error) => {
 	      		console.log("获取头部个人信息No")
 	      })

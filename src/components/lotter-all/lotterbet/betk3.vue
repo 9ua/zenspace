@@ -82,7 +82,6 @@
 								<!-- {{k3item.title}} -->
 								<span></span>
 							</h2>
-							<!-- <span>{{k3item.rates}}</span> -->
 						</li>
 					</ul>
 					<!-- 二同号 -->
@@ -112,7 +111,6 @@
 								<!-- {{k3item.title}} -->
 								<span></span>
 							</h2>
-							<!-- <span>{{k3item.rates}}</span> -->
 						</li>
 					</ul>
 					<!-- 和值 -->
@@ -123,22 +121,33 @@
 						</li>
 					</ul>
 					<!-- 大小单双 -->
-					<ul class="sanlianhao" v-show="index === 4">
+					<ul class="daoxiaodanshuang" v-show="index === 4">
 						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
 							<h2>{{k3item.title}}</h2>
 						</li>
 					</ul>
 					<!-- 三连号 -->
 					<ul class="sanlianhao" v-show="index === 5">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
-							<h2>{{k3item.title}}</h2>
+						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
+							<h2>
+								<!-- {{k3item.title}} -->
+								<a></a>
+								<a></a>
+								<a></a>
+							</h2>
 						</li>
 					</ul>
 					<!-- 三同号 -->
 					<ul class="santonghao" v-show="index === 6">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
-							<h2>{{k3item.title}}</h2>
+						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
+							<h2>
+								<!-- {{k3item.title}} -->
+								<a></a>
+								<a></a>
+								<a></a>
+							</h2>
 						</li>
+						<p><span>通选</span></p>
 					</ul>
 					<!-- 三不同 -->
 					<ul class="sanbutong" v-show="index === 7">
@@ -147,7 +156,6 @@
 								<!-- {{k3item.title}} -->
 								<span></span>
 							</h2>
-							<!-- <span>{{k3item.rates}}</span> -->
 						</li>
 					</ul>
 					</p>
@@ -352,9 +360,21 @@
 					{title:'17',rates:'赔率63.72',rate:'63.72',selected:false},
 				],
 				// 三连号
-				sanlianhao:[],
+				sanlianhao:[
+					{title:'123',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'234',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'345',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'456',rates:'赔率63.72',rate:'63.72',selected:false}
+				],
 				// 三同号
-				santonghao:[],
+				santonghao:[
+					{title:'111',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'222',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'333',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'444',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'555',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'666',rates:'赔率63.72',rate:'63.72',selected:false}
+				],
 				// 三不同
 				sanbutong:[
 					{title:'1',rates:'赔率63.72',rate:'63.72',selected:false},

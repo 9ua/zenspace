@@ -1,6 +1,6 @@
 <template>
   <div class="mInvite">
-    <div class="mInvite-content">
+    <div class="mInvite-content2">
         <ul>
             <li>
             <span>用戶類型</span>
@@ -49,13 +49,19 @@ export default {
   methods: {
     createbetlist(){
         this.$http.get('api/agent/getExtQuota').then((res) => {
+            console.log(res);
             this.highbet = res.data.data.rebateRatio;
             for(let i = res.data.data.rebateRatio*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};
                 console.log(this.betlist)
                 return this.betlist;
                     console.log(res.data.data.rebateRatio);
 			}).catch((error) => {
-					console.log("获取彩種ratio ERROR");
+                console.log(error);
+                    console.log("获取彩種ratio ERROR");
+                    this.highbet = 12.5;
+            for(let i = this.highbet*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};
+                console.log(this.betlist)
+                return this.betlist;
 		});
     },
     setrebet(b){

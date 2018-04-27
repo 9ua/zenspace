@@ -27,10 +27,17 @@
     height: 100%;
     background: #fafafa;
     flex-direction: column;
+    & .mInvite-top {
+        padding:20px;
+        text-align: center;
+        & label {
+            font-size: 18px;
+            margin-right: 20px;
+        }
+    }
     & .mInvite-content {
         width: 100%;
         & ul {
-            margin-top: 20px;
             background: #fff;
             border-top: 1px solid #c6c6c6;
             & li {
@@ -38,8 +45,8 @@
                 display: flex;
                 align-items: center;
                 border-bottom: 1px solid #c6c6c6;
-                height: 70px;
-                padding: 0px 16px;
+                height: 80px;
+                padding: 0px 20px;
                 & span {
                     font-size: 16px;
                     font-weight: 500;
@@ -69,8 +76,74 @@
                     border-color: #ddd;
                 }
             }
+        & .mInvite-left{
+            width:75%;
+            & p{
+                font-size: 12px;
+                & span {
+                    color: #dc3b40;
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+            }
+        }
+        & .mInvite-right{
+            text-align: center;
+            & p{
+                font-size: 12px;
+                & span {
+                    color: #fead50;
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+            }
+        }
         }
     }
+    & .mInvite-content2 {
+        width: 100%;
+        & ul {
+            background: #fff;
+            border-top: 1px solid #c6c6c6;
+            & li {
+                position: relative;
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid #c6c6c6;
+                height: 70px;
+                padding: 0px 30px;
+                & span {
+                    font-size: 16px;
+                    font-weight: 500;
+                    width: 22%;
+                    padding-right:30px; 
+                }
+                & input {
+                    border: none;
+                    font-size: 16px;
+                }
+                & i{
+                    font-size: 20px;
+                    position: absolute;
+                    right:20px;
+                    color: #ddd;
+                }
+                & img{
+                    width: 120px;
+                    height: 40px;
+                }
+                & select{
+                    width: 100px;
+                    height: auto;
+                    text-align: center;
+                    padding:10px;
+                    font-size:16px;
+                    border-color: #ddd;
+                }
+            }
+        }
+    }
+
     & a{
         padding: 0px 16px;
         text-align: right;

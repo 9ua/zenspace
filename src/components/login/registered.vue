@@ -9,7 +9,7 @@
       <ul>
         <li>
           <span>邀请码</span>
-          <input type="text" onfocus="this.select()" v-model="invitationCode" v-focus placeholder="请输入8位数字邀请码" /> </li>
+          <input type="text" onfocus="this.select()" v-model="invitationCode" v-focus placeholder="请输入邀请码" /> </li>
         <li>
           <span>账号</span>
           <input type="text" onfocus="this.select()" v-model="username" placeholder="请输入您要注册的账号" /> </li>

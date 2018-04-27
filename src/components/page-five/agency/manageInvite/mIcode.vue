@@ -2,29 +2,36 @@
   <div class="mInvite">
       <div class="mInvite-top" @change="typechange">
           <input v-model="usertype" type="radio" value="2" id="member" class="magic-radio">
-          <label for="member">會員</label>
+          <label for="member">會員邀請碼</label>
           <input v-model="usertype" type="radio" value="1" id="member2" class="magic-radio">
-          <label for="member2">代理</label>
+          <label for="member2">代理邀請碼</label>
       </div>
       <div class="mInvite-content">
             <ul v-show="showFlag">
                 <li v-for="(item,index) in invitelist" :key="index" @click="select(item,$event)">
-                    <div class="winning-left">
-                    <div class="winning-xq">
-                        <p>{{item.id}}
+                    <div class="mInvite-left">
+                        <p><span>{{item.id}} 邀請碼</span><br>
+                        {{item.code}}<br>
+                        <span>產生日期</span>{{item.date}}
+                        </p>
+                    </div>
+                    <div class="mInvite-right">
+                        
+                        <p>
+                        <span>註冊數</span><br>
+                        <span>({{item.count}})</span>
+                        </p>
+                        
+                    </div>
+                    <i class="el-icon-arrow-down"></i>
+                    <van-popup v-model="show" position="bottom" >
+	                    <div class="mInvite-go">
+                            <p>{{item.id}}
                         <span>邀請碼<br>{{item.code}}</span><br>
                         <span>產生日期{{item.date}}</span>
                         </p>
-                    </div>
-                    </div>
-                    <div class="winning-right">
-                        <p>
                         <span>註冊</span>
                         <span>{{item.count}}</span>
-                        </p>
-                    </div>
-                    <van-popup v-model="show" position="bottom" >
-	                    <div class="mInvite-go">
                         <button @click="delInviteCode()">刪除</button>
                         </div>
 	                </van-popup>

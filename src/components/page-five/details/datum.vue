@@ -4,7 +4,7 @@
       <li @click="show = !show">
         <p>头像</p>
         <div>
-          <img :src='"../../../assets/img/five/"+image+".jpg"' alt="" />
+          <img :src='"../../../assets/img/five/"+$store.state.image+".jpg"' alt="" />
           <i class="el-icon-arrow-right"></i>
         </div>
       </li>

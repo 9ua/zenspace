@@ -50,7 +50,7 @@
 	    			</div>
 	    		</div>
 	    		<div class="content-right">
-	    			<p>{{'0'+(seasonId*1+1)}}期投注截止</p>
+	    			<p>{{'0'+(seasonId*1)}}期投注截止</p>
 	    			<div>
 	    				<p>{{countDown}}</p>
 	    			</div>
@@ -62,12 +62,12 @@
 						<li v-for="(item,index) in getPastOpens" :key="index">
 							<p>{{item.seasonId.substring(4).split("-").join("")}}<i class="el-icon-minus"></i></p>
 							<p>
-								<!-- <a>{{item.n1}}</a>
+								<a>{{item.n1}}</a>
 								<a>{{item.n2}}</a>
-								<a>{{item.n3}}</a> -->
+								<a>{{item.n3}}</a>
+								<!-- <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
 								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
+								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
 							</p>
 							<p>{{item.n1+item.n2+item.n3}}</p><p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
 						</li>
@@ -482,12 +482,13 @@
 				if(k3item.selected === true){
 					this.rates = k3item.rate;
 					this.d[index] = k3item.title
-					this.con = this.d.join(' ');
+					this.con = this.d.join(',');
+					console.log(this.con)
 					this.zhu ++;
 				}else if(k3item.selected === false){
 					this.rates = 0;
 					this.d.splice(index,1,"");
-					this.con = this.d.join(' ');
+					this.con = this.d.join(',');
 					this.zhu --;
 				}
 			},
@@ -508,7 +509,7 @@
 			betGo(){
 				let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
 				let formData = new FormData();
-					formData.append('order[0].content','3,4');
+					formData.append('order[0].content',this.con);
 					formData.append('order[0].betCount',this.zhu);
 					formData.append('order[0].price',1);
 					formData.append('order[0].unit',1);

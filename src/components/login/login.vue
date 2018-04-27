@@ -55,6 +55,7 @@
         content: '',//弹窗内容
         newDate: null,//时间戳
         errorcode:false,//判断账号密码错误次数
+        loginStatus:false,//当前登陆状态
         newUserInfo: {
           user: '',
           pwd: '',
@@ -96,6 +97,9 @@
           formData.append('password', pwd);
           this.$axios.post('api/user/login', formData, config).then((res) => {
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
+              this.loginSta = true;
+              this.$store.state.loginStatus = true;
+              setStore('loginSta',this.$store.state.loginStatus);
           	if(res.data.code === 1){
               this.$router.push({path:'/one'});
               setStore('username',this.newUserInfo.user);
@@ -105,7 +109,7 @@
               this.$store.state.balance = res.data.data.balance;
               setStore('username',this.$store.state.Globalusername);
               setStore('password',this.$store.state.Globalpassword);
-              this.$store.state.loginStatus = true;
+              
           	}else {
               this.$store.state.errorcode ++;
               this.newUserInfo.user = '';

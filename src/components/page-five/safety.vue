@@ -70,6 +70,7 @@
   </div>
 </template>
 <script>
+import { setStore, getStore, removeStore } from '../../config/mutil'
   export default {
     data() {
       return {
@@ -112,10 +113,16 @@
 			},
 			//退出
     	logout(){
-    		this.$store.state.loginStatus = false;
+				this.$axios.get('api/user/logout').then((res) => {
+				this.$store.state.loginStatus = false;
     		this.$store.state.Globalusername = "";
-    		this.$store.state.Globalpassword = "";
+				this.$store.state.Globalpassword = "";
+				this.$store.state.JSESSIONICookie = '';
+				removeStore('loginSta');
     		this.$router.push('/one');
+				}).catch((error) =>{
+					console.log(error)
+				})
     	}
     }
   }

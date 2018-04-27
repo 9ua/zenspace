@@ -8,7 +8,7 @@
       <div class="agency-content-top">
         <img src="http://imagess-google.com/system/mobile/other/proxySlide.png" /> </div>
       <ul>
-        <router-link to="" tag="li"><p>代理说明</p><i class="el-icon-arrow-right"></i></router-link>
+        <router-link to="abbbc" tag="li"><p>代理说明</p><i class="el-icon-arrow-right"></i></router-link>
         <router-link to="" tag="li"><p>代理报表</p><i class="el-icon-arrow-right"></i></router-link>
         <router-link to="" tag="li"><p>下级报表</p><i class="el-icon-arrow-right"></i></router-link>
         <router-link to="" tag="li"><p>下级开户</p><i class="el-icon-arrow-right"></i></router-link>

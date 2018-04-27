@@ -14,7 +14,7 @@ import {
   Stepper,
   Dialog,
   Swipe,
-  SwipeItem
+  SwipeItem,Collapse, CollapseItem
 } from 'vant';
 import 'vant/lib/vant-css/index.css'
 import 'lib-flexible/flexible.js'
@@ -38,7 +38,10 @@ import {
 } from 'vue-ydui/dist/lib.px/checkbox';
 import 'vue-ydui/dist/ydui.px.css';
 import md5 from 'js-md5';
+import { SendCode } from 'vue-ydui/dist/lib.px/sendcode';
 
+Vue.component(SendCode.name, SendCode);
+Vue.use(Collapse).use(CollapseItem)
 Vue.use(Swipe).use(SwipeItem);
 Vue.component(CheckBox.name, CheckBox);
 Vue.component(CheckBoxGroup.name, CheckBoxGroup);

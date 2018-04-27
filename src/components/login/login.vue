@@ -90,13 +90,11 @@
           this.pop = true
         } else if (yzuser == true && yzpwd == true) {
           let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
-          // let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
           let pwd = md5(this.newUserInfo.pwd)
           let formData = new FormData();
           formData.append('account', this.newUserInfo.user);
           formData.append('password', pwd);
           this.$axios.post('api/user/login', formData, config).then((res) => {
-            console.log(res.data.data.sessionId)
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
           	if(res.data.code === 1){
               this.$router.push({path:'/one'});

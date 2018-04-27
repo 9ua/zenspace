@@ -11,8 +11,6 @@
     </div>
     <div class="one-center">
     	<ul>
-    		<!--<router-link v-for="(item,index) in lotters" :key="index" tag="li" v-if="item.title" :to="'/'+item.title">
-    			<img :src='item.paths' alt="images"/>-->
     		<router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.id" :to="'/'+item.id">
     			<img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
     			<h5>{{item.name}}</h5>

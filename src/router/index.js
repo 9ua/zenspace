@@ -15,8 +15,11 @@ import winning from '@/components/page-four/winning'
 import profit from '@/components/page-four/profit'
 import pop from '@/components/page-four/pop'
 import agency from '@/components/page-five/agency'
+import abbbc from '@/components/page-five/agency/abbbc'
 import detail from '@/components/page-five/detail'
 import datum from '@/components/page-five/details/datum'
+import setmobile from '@/components/page-five/details/setmobile'
+import setemail from '@/components/page-five/details/setemail'
 import title from '@/components/page-five/details/title'
 import mymsg from '@/components/page-five/mymsg'
 import letter from '@/components/page-five/mymsg/letter'
@@ -26,9 +29,13 @@ import safety from '@/components/page-five/safety'
 import verifyPwd from '@/components/page-five/safety/verifyPwd'
 import setPwd from '@/components/page-five/safety/setPwd'
 import verifySafePwd from '@/components/page-five/safety/verifySafePwd'
+import changeSafePwd from '@/components/page-five/safety/changeSafePwd'
+import safeMobile from '@/components/page-five/safety/safeMobile'
+import safeEmail from '@/components/page-five/safety/safeEmail'
 import setSafePwd from '@/components/page-five/safety/setSafePwd'
 import resetWay from '@/components/page-five/safety/resetWay'
 import setQuestion from '@/components/page-five/safety/setQuestion'
+import safeQuestion from '@/components/page-five/safety/safeQuestion'
 import ErrorPage from '@/components/public/ErrorPage'
 import lotterList from '@/components/lotter-all/lotterList'
 import lotterAll from '@/components/lotter-all/lotterAll'
@@ -99,7 +106,9 @@ export default new Router({
                         { path: 'profit', name: 'profit', component: profit, meta: { keepAlive: true } }
                     ]
                 },
-                { path: 'five', name: 'five', component: resolve => require(['@/components/home/five.vue'], resolve), meta: { keepAlive: true } },
+                {
+                    path: 'five', name: 'five', component: resolve => require(['@/components/home/five.vue'], resolve), meta: { keepAlive: true }
+                },
             ]
         },
         { path: '/pop', name: 'pop', component: resolve => require(['@/components/page-four/pop.vue'], resolve), meta: { keepAlive: true } },
@@ -107,9 +116,13 @@ export default new Router({
         { path: '/verifyPwd', name: 'verifyPwd', component: verifyPwd, meta: { keepAlive: true } },
         { path: '/setPwd', name: 'setPwd', component: setPwd, meta: { keepAlive: true } },
         { path: '/verifySafePwd', name: 'verifySafePwd', component: verifySafePwd, meta: { keepAlive: true } },
+        { path: '/changeSafePwd', name: 'changeSafePwd', component: changeSafePwd, meta: { keepAlive: true } },
+        { path: '/safeMobile', name: 'safeMobile', component: safeMobile, meta: { keepAlive: true } },
+        { path: '/safeEmail', name: 'safeEmail', component: safeEmail, meta: { keepAlive: true } },
         { path: '/setSafePwd', name: 'setSafePwd', component: setSafePwd, meta: { keepAlive: true } },
         { path: '/resetWay', name: 'resetWay', component: resetWay, meta: { keepAlive: true } },
         { path: '/setQuestion', name: 'setQuestion', component: setQuestion, meta: { keepAlive: true } },
+        { path: '/safeQuestion', name: 'safeQuestion', component: safeQuestion, meta: { keepAlive: true } },
         { path: '/profits', name: 'profits', component: profits, meta: { keepAlive: true } },
         {
             path: '/mymsg',
@@ -120,17 +133,24 @@ export default new Router({
                 { path: 'notice', name: 'notice', component: notice, meta: { keepAlive: true } },
                 { path: 'letter', name: 'letter', component: letter, meta: { keepAlive: true } }
             ]
-        }, {
+        },
+        {
             path: '/detail',
             name: 'detail',
             redirect: 'detail/datum',
             component: detail,
             meta: { keepAlive: true },
             children: [
-                { path: 'datum', name: 'datum', component: datum, meta: { keepAlive: true } },
-                { path: 'title', name: 'title', component: title, meta: { keepAlive: true } }
+                { path: 'datum', name: 'datum', component: resolve => require(['@/components//page-five/details/datum.vue'], resolve), meta: { keepAlive: true } },
+                { path: 'title', name: 'title', component: title, meta: { keepAlive: true } },
+                
             ]
         },
-        { path: '/agency', name: 'agency', component: agency, meta: { keepAlive: true } }
+        {
+            path: '/agency', name: 'agency', component: agency, meta: { keepAlive: true },
+        },
+        { path: '/abbbc', name: 'abbbc', component: abbbc, meta: { keepAlive: true } },
+        { path: '/detail/setmobile', name: 'setmobile', component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve), meta: { keepAlive: true } },
+        { path: '/detail/setemail', name: 'setemail', component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve), meta: { keepAlive: true } },
     ]
 })

@@ -3,9 +3,6 @@
     <div class="detail-top">
       <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
       <p>个人资料</p>
-      <!--<ul>
-        <router-link v-for="(navs,index) in nav" :to="'/detail/'+navs.pathurl" tag="li" :key="index">{{navs.name}}</router-link>
-      </ul>-->
     </div>
     <div class="detail-content">
       <router-view></router-view>

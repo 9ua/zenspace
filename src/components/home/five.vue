@@ -4,7 +4,7 @@
     <div class="five-top">
       <div>
         <div class="five-top-left">
-          <p></p>
+          <p><img :src='"../../assets/img/five/"+$store.state.image+".jpg"' alt=""></p>
         </div>
         <div class="five-top-right">
           <p>账号：
@@ -52,10 +52,12 @@
 <script>
   import headers from '../public/header';
   import VueCookie from "vue-cookie";
+  import { setStore, getStore,removeStore } from '../../config/mutil'
   export default {
     data() {
       return {
         balances:0,//用户余额
+        image:0,//用户头像
       	money:false,
         fiveNav: [{
           name: '个人信息',
@@ -82,8 +84,20 @@
     },
     mounted(){
       this.getBalance();
+      this.getTopUserData();
     },
     methods:{
+      //获取头部个人信息
+      getTopUserData(){
+	      this.$http.get('api/userCenter/getTopUserData').then((res) => {
+          this.image = res.data.data.image;
+          this.$store.state.image = this.image;
+          setStore('image',this.image);
+          setStore('image',this.$store.state.image);
+	      }).catch((error) => {
+	      		console.log("获取头部个人信息No")
+	      })
+    	},
       getBalance(){
 	      this.$http.get('api/userCenter/getBalance').then((res) => {
           this.balances = res.data.data.balance;

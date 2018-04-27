@@ -2,7 +2,6 @@
     background: #efeef4;
     height: 100%;
 }
-
 .setQuestion-top {
     display: flex;
     justify-content: center;
@@ -37,12 +36,15 @@
         border-bottom: 1px solid #ccc;
     }
     & p {
-        margin-right: 20px;
+        width: 18%;
     }
     & input {
         width: 200px;
         height: 30px;
         border: none;
+    }
+    input[type="text"]{
+        padding-left: 16px;
     }
 }
 

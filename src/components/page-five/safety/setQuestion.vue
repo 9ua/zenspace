@@ -6,14 +6,25 @@
     </div>
     <div class="setQuestion-input">
       <div>
-        <p>安全密码</p>
-        <el-select v-model="value8" filterable placeholder="请选择">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-        </el-select>
+        <p>问题一:</p>
+        <select v-model="title1" @change="selecteds1($event)">
+          <option v-for="(item,index) in options" :key="index" :value="item.value">{{item.label}}</option>
+        </select>
       </div>
       <div>
-        <p>确认密码</p>
-        <input type="password" placeholder="请再次输入密码" /> </div>
+        <p>答案:</p>
+        <input type="text" v-model="answer1" v-focus/> </div>
+    </div>
+    <div class="setQuestion-input">
+      <div>
+        <p>问题二:</p>
+        <select v-model="title2" @change="selecteds2($event)">
+          <option v-for="(item,index) in options" :key="index" :value="item.value">{{item.label}}</option>
+        </select>
+      </div>
+      <div>
+        <p>答案:</p>
+        <input type="text" v-model="answer2"/> </div>
     </div>
     <div class="setQuestion-but">
       <button @click="setQuestion">确定</button>
@@ -21,47 +32,61 @@
   </div>
 </template>
 <script>
+  import md5 from 'js-md5';
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '点击选择密保问题'
-        }, {
-          value: '选项2',
-          label: '你的小学班主任是谁？'
-        }, {
-          value: '选项3',
-          label: '你的初中班主任是谁？'
-        }, {
-          value: '选项4',
-          label: '你的高中班主任是谁？'
-        }, 
-        {
-          value: '选项5',
-          label: '你最喜欢的人是谁？'
-        },
-        {
-          value: '选项6',
-          label: '你的爸爸名字叫什么？'
-        },
-        {
-          value: '选项7',
-          label: '你的妈妈名字叫什么？'
-        },
-        {
-          value: '选项8',
-          label: '你的配偶名字叫什么？'
-        },
+        options: [
+          {value: 1,label: '您的出生地是哪里？'}, 
+          {value: 2,label: '您高中的学校是？'}, 
+          {value: 3,label: '您父亲的名字是？'}, 
+          {value: 4,label: '您母亲的名字是？'}, 
+          {value: 5,label: '您的兴趣爱好是什么？'},
+          {value: 6,label: '您配偶的名字是？'},
+          {value: 7,label: '您大学学校的名字是？'},
+          {value: 8,label: '你的家乡是？'},
         ],
-        value8: '选项1'
+        title1:'1',//密保问题一
+        title2:'1',//密保问题二
+        answer1:'',//密保答案一
+        answer2:'',//密保答案二
       }
     },
     methods: {
+      selecteds1(e){
+        this.title1 = e.target.value;
+      },
+      selecteds2(e){
+        this.title2 = e.target.value;
+      },
+      //设置密保问题
       setQuestion() {
-        this.$router.push({
-          path: '/safety'
-        });
+        let md5answer1 = md5(this.answer1);
+        let md5answer2 = md5(this.answer2);
+        console.log('answer1----',md5answer1,'answer2----',md5answer2,'title1-----',this.title1,'title2-----',this.title2)
+        let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+        let formData = new FormData();
+        formData.append('title1', this.title1);
+        formData.append('title2', this.title2);
+        formData.append('answer1', md5answer1);
+        formData.append('answer2', md5answer2);
+        if(this.title1 != this.title2){
+          this.$axios.post('api/userCenter/setSecurityQuestion', formData, config).then((res) => {
+            console.log(res)
+            this.show = !this.show;
+            this.content = res.data.data.message;
+            setTimeout(() => {
+              if(this.content === '设定成功！'){
+                this.$router.push({path: '/safety'});
+              }
+            }, 2000);
+          }).catch((error) => {
+              console.log("设置密保问题No")
+          })
+        }else{
+          this.show = !this.show;
+          this.content = '密保问题不能相同！';
+        }
       }
     },
     directives: {

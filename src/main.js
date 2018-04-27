@@ -6,6 +6,7 @@ import router from './router'
 import VueCookie from "vue-cookie";
 import Carousel from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import {Radio, RadioGroup} from 'vue-ydui/dist/lib.px/radio'
 import {
   Icon,
   NoticeBar,
@@ -58,7 +59,9 @@ Vue.use(VueAxios, axios);
 Vue.use(Actionsheet);
 Vue.use(NoticeBar);
 Vue.use(Icon);
-Vue.use(Carousel)
+Vue.component(Radio.name, Radio);
+Vue.component(RadioGroup.name, RadioGroup);
+Vue.use(Carousel);
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({

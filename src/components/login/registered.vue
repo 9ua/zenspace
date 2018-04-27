@@ -41,16 +41,16 @@
   export default {
     data() {
       return {
-        pop: false,
-        content: '',
-        pwd: false, //是否显示密码
-        newDate: null,
-        invitationCode: '', //邀请码
-        username: '', //用户名
-        password1: '', //密码
-        password2: '', //确认密码
-        verification: '', //验证码
-        captchaCodeImg: '', //验证码图
+        pop:false,
+        content:'',
+        pwd:false, //是否显示密码
+        newDate:null,
+        invitationCode:'', //邀请码
+        username:'', //用户名
+        password1:'', //密码
+        password2:'', //确认密码
+        verification:'', //验证码
+        captchaCodeImg:'', //验证码图
       }
     },
     created() {
@@ -62,10 +62,8 @@
         this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
       },
       registeredGo() {
-        const invitationCode_yz = /^[0-9][0-9]{7,20}$/;
         const user_yz = /^[A-Za-z][A-Za-z1-9]{5,20}$/;
         const pwd1_yz = /^[A-Za-z1-9]{6,20}$/;
-        let invitationCode = invitationCode_yz.test(this.invitationCode);
         let yzuser = user_yz.test(this.username);
         let yzpwd1 = pwd1_yz.test(this.password1);
         if (this.invitationCode === '') {
@@ -83,9 +81,6 @@
         } else if (this.verification === '') {
           this.content = '验证码不能为空';
           this.pop = true;
-        } else if (invitationCode == false) {
-          this.content = "邀请码是则8位数字组成，如有疑问，请您联系客服！";
-          this.pop = true;
         } else if (yzuser == false) {
           this.content = "用户名：字母开头，6-20位，包括大小字母、数字";
           this.pop = true;
@@ -95,8 +90,20 @@
         } else if (this.password1 !== this.password2) {
           this.content = "两次密码不一致";
           this.pop = true;
+        } else {
+            let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+            let formData = new FormData();
+            formData.append('inviteCode',this.invitationCode);
+            formData.append('account',this.username);
+            formData.append('password',this.password1);
+            formData.append('code',this.verification);
+                console.log(formData,"post資料包");
+            this.$axios.post('api/user/register', formData,config).then((res) => {
+                console.log(res,"post的response");
+            }).catch((error) => {
+                console.log("No","post失敗")
+            });   
         }
-        
       }
     },
     directives: {

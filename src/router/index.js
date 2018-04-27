@@ -15,7 +15,15 @@ import winning from '@/components/page-four/winning'
 import profit from '@/components/page-four/profit'
 import pop from '@/components/page-four/pop'
 import agency from '@/components/page-five/agency'
-import abbbc from '@/components/page-five/agency/abbbc'
+import agentBetRecord from '@/components/page-five/agency/agentBetRecord'
+import agentBillRecord from '@/components/page-five/agency/agentBillRecord'
+import agentIntro from '@/components/page-five/agency/agentIntro'
+import agentMember from '@/components/page-five/agency/agentMember'
+import agentReport from '@/components/page-five/agency/agentReport'
+import lowerReport from '@/components/page-five/agency/lowerReport'
+import manageInvite from '@/components/page-five/agency/manageInvite'
+import mIcode from '@/components/page-five/agency/manageInvite/mIcode'
+import mInvite from '@/components/page-five/agency/manageInvite/mInvite'
 import detail from '@/components/page-five/detail'
 import datum from '@/components/page-five/details/datum'
 import setmobile from '@/components/page-five/details/setmobile'
@@ -149,7 +157,24 @@ export default new Router({
         {
             path: '/agency', name: 'agency', component: agency, meta: { keepAlive: true },
         },
-        { path: '/abbbc', name: 'abbbc', component: abbbc, meta: { keepAlive: true } },
+        { path: '/agentIntro', name: 'agentIntro', component: agentIntro, meta: { keepAlive: true } },
+        { path: '/agentReport', name: 'agentReport', component: agentReport, meta: { keepAlive: true } },
+        { path: '/lowerReport', name: 'lowerReport', component: lowerReport, meta: { keepAlive: true } },
+        {   path: '/manageInvite', 
+            name: 'manageInvite', 
+            component: manageInvite, 
+            meta: { keepAlive: true },
+            redirect: 'manageInvite/mInvite',
+            children: [
+            { path: 'mInvite', name: 'mInvite', component: mInvite, meta: { keepAlive: true } },
+            { path: 'mIcode', name: 'mIcode', component: mIcode, meta: { keepAlive: true } }
+            ] 
+        },
+        { path: '/agentMember', name: 'agentMember', component: agentMember, meta: { keepAlive: true } },
+        { path: '/agentBetRecord', name: 'agentBetRecord', component: agentBetRecord, meta: { keepAlive: true } },
+        { path: '/agentBillRecord', name: 'agentBillRecord', component: agentBillRecord, meta: { keepAlive: true } },
+        { path: '/detail/setmobile', name: 'setmobile', component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve), meta: { keepAlive: true } },
+        { path: '/detail/setemail', name: 'setemail', component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve), meta: { keepAlive: true } },
         { path: '/detail/setmobile', name: 'setmobile', component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve), meta: { keepAlive: true } },
         { path: '/detail/setemail', name: 'setemail', component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve), meta: { keepAlive: true } },
     ]

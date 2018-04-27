@@ -4,7 +4,7 @@
     <div class="five-top">
       <div>
         <div class="five-top-left">
-          <p><img :src='"../../assets/img/five/"+$store.state.image+".jpg"' alt=""></p>
+          <p><img :src='"../../assets/img/five/1.jpg"' alt=""></p>
         </div>
         <div class="five-top-right">
           <p>账号：

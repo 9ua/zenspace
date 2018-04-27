@@ -40,7 +40,10 @@ import {
 import 'vue-ydui/dist/ydui.px.css';
 import md5 from 'js-md5';
 import { SendCode } from 'vue-ydui/dist/lib.px/sendcode';
+import VueLazyload from 'vue-lazyload';  //引入这个懒加载插件
 
+
+Vue.use(VueLazyload);
 Vue.component(SendCode.name, SendCode);
 Vue.use(Collapse).use(CollapseItem)
 Vue.use(Swipe).use(SwipeItem);

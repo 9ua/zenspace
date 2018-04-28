@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getLotterlist(){
-	      this.$http.get('api/activity/getList').then((res) => {
+	      this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
           console.log(res.data.data[0]);
 	      }).catch((error) => {
 	      		console.log("No")

@@ -63,7 +63,7 @@
     methods: {
       //获取密保问题
       getUserSafeData(){
-        this.$axios.get('api/userCenter/getUserSafeData').then((res) => {
+        this.$axios.get(this.$store.state.url+'api/userCenter/getUserSafeData').then((res) => {
           this.title1 = res.data.data.title1;
           this.title2 = res.data.data.title2;
           this.answer3 = res.data.data.answer1;

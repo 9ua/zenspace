@@ -31,7 +31,7 @@
         let oldPassword = md5(this.oldPassword);
         let formData = new FormData();
         formData.append('oldPassword', oldPassword);
-        this.$axios.post('api/userCenter/validSecurityCode', formData, config).then((res) => {
+        this.$axios.post(this.$store.state.url+'api/userCenter/validSecurityCode', formData, config).then((res) => {
           this.show = !this.show;
           this.content = res.data.data.message
           setTimeout(() => {

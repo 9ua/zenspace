@@ -55,7 +55,7 @@
     },
     methods:{
     	getLotterlist(){
-	      this.$http.get('api/index/getIndexInfo').then((res) => {
+	      this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
 	      	this.lotteryList = res.data.data.hotLotterys;
 	      	this.bannerList = res.data.data.banners;
 	      }).catch((error) => {

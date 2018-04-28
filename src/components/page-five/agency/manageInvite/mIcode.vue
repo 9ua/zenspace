@@ -95,7 +95,7 @@ export default {
         this.getInviteList();
         },
     getInviteList(){
-        this.$http.get('api/agent/inviteCode',{params:{type:this.usertype}}).then((res) => {
+        this.$http.get(this.$store.state.url+'api/agent/inviteCode',{params:{type:this.usertype}}).then((res) => {
                 this.invitelist = res.data.data;
                 console.log(this.invitelist);
 			}).catch((error) => {
@@ -109,8 +109,8 @@ export default {
     delInviteCode(){
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
             let formData = new FormData();
-            formData.append('id',this.selected.id);
-            this.$axios.post('api/agent/deleteInviteCode', formData,config).then((res) => {
+            formData.append('id',this.selected);
+            this.$axios.post(this.$store.state.url+'api/agent/deleteInviteCode', formData,config).then((res) => {
             this.getInviteList();
             this.show = !this.show;
             this.show2 = !this.show2;

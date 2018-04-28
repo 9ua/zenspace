@@ -13,7 +13,7 @@ const state = {
         // 'Content-Type': 'multipart/form-data'
     },
     JSESSIONICookie: '',
-    url: 'http://115.144.238.217',
+    url: 'http://115.144.238.217/',
     loginStatus: false, //登陆状态
     Globalusername: getStore('username'), //全局账号
     Globalpassword: getStore('password'), //全局密码

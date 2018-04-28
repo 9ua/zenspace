@@ -44,7 +44,7 @@ export default {
       this.activesremarks = !this.activesremarks;
     },
     activity(){
-      this.$http.get('api/activity/getList').then((res) => {
+      this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
         this.activitys = res.data.data;
       }).catch((error) => {
           console.log("No")

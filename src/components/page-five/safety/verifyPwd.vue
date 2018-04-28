@@ -29,7 +29,7 @@
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
         let formData = new FormData();
         formData.append('oldPassword', oldPassword);
-        this.$axios.post('api/userCenter/validOldLoginPassword', formData, config).then((res) => {
+        this.$axios.post(this.$store.state.url+'api/userCenter/validOldLoginPassword', formData, config).then((res) => {
           this.show = !this.show;
           this.content = res.data.data.message
           setTimeout(() => {

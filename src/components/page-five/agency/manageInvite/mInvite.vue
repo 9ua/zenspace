@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     createbetlist(){
-        this.$http.get('api/agent/getExtQuota').then((res) => {
+        this.$http.get(this.$store.state.url+'api/agent/getExtQuota').then((res) => {
             console.log(res);
             this.highbet = res.data.data.rebateRatio;
             for(let i = res.data.data.rebateRatio*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};
@@ -77,7 +77,7 @@ export default {
             formData.append('validtime',this.validtime);
             formData.append('extaddress','123');
                 console.log(formData);
-            this.$axios.post('api/agent/createInviteCode', formData,config).then((res) => {
+            this.$axios.post(this.$store.state.url+'api/agent/createInviteCode', formData,config).then((res) => {
                 console.log(res.data.data.code);
             this.$router.push({path:'/manageInvite/mIcode'});
             

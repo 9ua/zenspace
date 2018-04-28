@@ -400,7 +400,7 @@
 		methods:{
 			//获取彩種當前獎期時間
 			geteServerTime(){
-				this.$http.get('api/lottery/getCurrentSaleTime',{params:{lotteryId:'jsk3'}}).then((res) => {
+				this.$http.get(this.$store.state.url+'api/lottery/getCurrentSaleTime',{params:{lotteryId:'jsk3'}}).then((res) => {
 					this.seasonId2 = res.data.data.seasonId
 					this.seasonId = this.seasonId2.substring(4).split("-").join("");
 					this.today = res.data.data.restSeconds;
@@ -432,7 +432,7 @@
 			},
 			//获取过去开奖号码10个
 			getPastOpen(){
-				this.$http.get('api/lottery/getPastOpen',{params:{lotteryId:this.lotteryId,count:10}}).then((res) => {
+				this.$http.get(this.$store.state.url+'api/lottery/getPastOpen',{params:{lotteryId:this.lotteryId,count:10}}).then((res) => {
 					this.getPastOpens = res.data.data;
 				}).catch((error) => {
 					console.log("获取过去开奖号码No")
@@ -440,7 +440,7 @@
 			},
 			//获取过去开奖号码1个
 			getPastOp(){
-				this.$http.get('api/lottery/getPastOpen',{params:{lotteryId:this.lotteryId,count:1}}).then((res) => {
+				this.$http.get(this.$store.state.url+'api/lottery/getPastOpen',{params:{lotteryId:this.lotteryId,count:1}}).then((res) => {
 					this.getPastO = res.data.data;
 				}).catch((error) => {
 					console.log("获取过去开奖号码No")
@@ -448,7 +448,7 @@
 			},
 			//右上获取彩种
 			getLotteryList(){
-				this.$http.get('api/lottery/getLotteryList').then((res) => {
+				this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
 					this.LotteryList = res.data.data.k3;
 				}).catch((error) => {
 					console.log("右上彩种No")
@@ -469,7 +469,7 @@
 			},
 			//玩法树
 			getPlayTree(){
-				this.$http.get('api/lottery/getPlayTree',{params:{lotteryId:this.lotteryId}}).then((res) => {
+				this.$http.get(this.$store.state.url+'api/lottery/getPlayTree',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					this.playBonus = res.data.data.playBonus;
 					console.log(res.data.data.playBonus,"玩法树");
 				}).catch((error) => {
@@ -521,7 +521,7 @@
 					formData.append('traceWinStop', 0);
 					formData.append('isTrace', 0);
 					formData.append('lotteryId', this.lotteryId);
-				this.$axios.post('api/lottery/bet',formData,config).then((res) => {
+				this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
 					if(res.data.message === 'success'){
 						this.betGoshow = !this.betGoshow;
 						this.betsuccess = !this.betsuccess;

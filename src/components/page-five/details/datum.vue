@@ -163,7 +163,7 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
           formData.append('nickName', this.nickname);
           formData.append('sex', this.sex);
           formData.append('birthday', this.birthday);
-          this.$axios.post('api/userCenter/saveUserData', formData, config).then((res) => {
+          this.$axios.post(this.$store.state.url+'api/userCenter/saveUserData', formData, config).then((res) => {
             console.log(res,'提交个人信息');
           }).catch((error) => {
           		console.log("用户信息保存失败")
@@ -171,7 +171,7 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
       },
       //获取个人信息
 			getUserData(){
-				this.$http.get('api/userCenter/getUserData').then((res) => {
+				this.$http.get(this.$store.state.url+'api/userCenter/getUserData').then((res) => {
           this.image = res.data.data.image;
           this.nickname = res.data.data.nickName;
           this.mobile = res.data.data.mobile;

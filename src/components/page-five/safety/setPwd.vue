@@ -41,7 +41,7 @@
           let formData = new FormData();
           formData.append('newPassword', newPassword);
           formData.append('newPassword2', newPassword2);
-          this.$axios.post('api/userCenter/changeLoginPassword', formData, config).then((res) => {
+          this.$axios.post(this.$store.state.url+'api/userCenter/changeLoginPassword', formData, config).then((res) => {
             this.show = !this.show;
             this.content = res.data.data.message
             setTimeout(() => {

@@ -22,7 +22,7 @@ export default {
   },
   methods:{
     lotteryAll(){
-      this.$http.get('api/lottery/getLotteryList').then((res) => {
+      this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
         this.lotteryListAll = res.data.data.all;
       }).catch((error) => {
           console.log("No")

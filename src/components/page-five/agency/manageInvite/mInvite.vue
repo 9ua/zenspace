@@ -58,7 +58,7 @@ export default {
 			}).catch((error) => {
                 console.log(error);
                     console.log("获取彩種ratio ERROR");
-                    this.highbet = 12.5;
+                    this.highbet = 0;
             for(let i = this.highbet*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};
                 console.log(this.betlist)
                 return this.betlist;

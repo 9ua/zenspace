@@ -35,13 +35,19 @@
       <div>
         <i class="iconfont icon-information"></i>{{content}}</div>
     </div>
+    <div class="login-pop" v-show="popdone" @click="popdone = false,donetologin()">
+      <div>
+        <i class="iconfont icon-information"></i>{{content}}</div>
+    </div>
   </div>
 </template>
 <script>
+  import md5 from 'js-md5';
   export default {
     data() {
       return {
         pop:false,
+        popdone:false,
         content:'',
         pwd:false, //是否显示密码
         newDate:null,
@@ -93,6 +99,7 @@
         } else {
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
             let formData = new FormData();
+            
             formData.append('inviteCode',this.invitationCode);
             formData.append('account',this.username);
             formData.append('password',this.password1);
@@ -100,11 +107,21 @@
                 console.log(formData,"post資料包");
             this.$axios.post('api/user/register', formData,config).then((res) => {
                 console.log(res,"post的response");
+                if(res.data.code === 1) {
+                  this.content = '註冊完成! 請使用新帳號密碼登入';
+                  this.popdone = true;
+                } else {
+                  this.content = res.data.data;
+                  this.pop = true;
+                }
             }).catch((error) => {
                 console.log("No","post失敗")
             });   
         }
-      }
+      },
+      donetologin(){
+          this.$router.push({path:'/login'});
+      },
     },
     directives: {
       focus: {

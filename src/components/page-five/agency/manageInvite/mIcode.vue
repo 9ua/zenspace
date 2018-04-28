@@ -24,19 +24,28 @@
                         
                     </div>
                     <i class="el-icon-arrow-down"></i>
-                    <van-popup v-model="show" position="bottom" >
-	                    <div class="mInvite-go">
-                            <p>{{item.id}}
-                        <span>邀請碼<br>{{item.code}}</span><br>
-                        <span>產生日期{{item.date}}</span>
-                        </p>
-                        <span>註冊</span>
-                        <span>{{item.count}}</span>
-                        <button @click="delInviteCode()">刪除</button>
-                        </div>
-	                </van-popup>
+                    
+                    
+                    
                 </li>
+            <van-actionsheet class="mIcode-go" v-model="show">
+	            <div class="mIcode-inner">
+                    <p><span>邀請碼</span><br>{{this.selected.code}}</p>
+                    <p><span>產生日期</span><br>{{this.selected.date}}</p>
+                    <p><span>註冊數</span>({{this.selected.count}})個帳戶</p>
+                    <br><br>
+                    <div><button @click="select2()">刪除此邀請碼</button><button class="nosure" @click="show = !show">取消</button></div>
+                    
+                </div>
+	        </van-actionsheet>
+            <van-popup v-model="show2" position="bottom">
+	            <div class="mIcode-sure">
+                    <div class="sure2"><p>確定要刪除此邀請碼?</p></div>
+                    <button class="del" @click="delInviteCode()">刪除</button><button class="nodel" @click="select2()">取消</button>
+                </div>
+	        </van-popup>
             </ul>
+
            
     </div>
 </div>
@@ -47,6 +56,7 @@ export default {
   data(){
     return {
         show:false,
+        show2:false,
         usertype:2,
         highbet:0,
         rebateratio:0,
@@ -54,7 +64,7 @@ export default {
         validtime:0,
         extaddress:'',
         invitelist:'',
-        selected: '',
+        selected:[],
         showFlag: true
         
     }
@@ -74,8 +84,11 @@ export default {
     },
     select(a) {
         this.show = !this.show;
-            console.log(a.id);
-        this.selected = a.id;
+            console.log(a);
+        this.selected = a;
+      },
+    select2() {
+        this.show2 = !this.show2;
       },
     typechange() {
         console.log(this.usertype);
@@ -96,9 +109,11 @@ export default {
     delInviteCode(){
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
             let formData = new FormData();
-            formData.append('id',this.selected);
+            formData.append('id',this.selected.id);
             this.$axios.post('api/agent/deleteInviteCode', formData,config).then((res) => {
             this.getInviteList();
+            this.show = !this.show;
+            this.show2 = !this.show2;
           }).catch((error) => {
           		console.log("No")
           });   

@@ -44,7 +44,7 @@ export default {
       let oldPassword = md5(this.oldPassword);
       let formData = new FormData();
       formData.append('oldPassword', oldPassword);
-      this.$axios.post('api/userCenter/validSecurityCode', formData, config).then((res) => {
+      this.$axios.post(this.$store.state.url+'api/userCenter/validSecurityCode', formData, config).then((res) => {
         this.show = !this.show;
         this.content = res.data.data.message
         setTimeout(() => {
@@ -62,7 +62,7 @@ export default {
       let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
       let formData = new FormData();
       formData.append('mobil', this.mobile);
-      this.$axios.post('api/userCenter/sendMobilCode', formData, config).then((res) => {
+      this.$axios.post(this.$store.state.url+'api/userCenter/sendMobilCode', formData, config).then((res) => {
         this.show = !this.show;
         this.content = res.data.data.message
       }).catch((error) => {
@@ -79,7 +79,7 @@ export default {
     },
     //获取已经绑定的手机号码
     getBindEmail(){
-      this.$http.get('api/userCenter/getBindEmail').then((res) => {
+      this.$http.get(this.$store.state.url+'api/userCenter/getBindEmail').then((res) => {
         this.email = res.data.data.email;
       }).catch((error) => {
         console.log("获取已经绑定的手机号码No");

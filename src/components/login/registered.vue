@@ -98,7 +98,7 @@
             formData.append('password',this.password1);
             formData.append('code',this.verification);
                 console.log(formData,"post資料包");
-            this.$axios.post('api/user/register', formData,config).then((res) => {
+            this.$axios.post(this.$store.state.url+'api/user/register', formData,config).then((res) => {
                 console.log(res,"post的response");
             }).catch((error) => {
                 console.log("No","post失敗")

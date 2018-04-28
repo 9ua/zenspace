@@ -88,7 +88,7 @@ import { setStore, getStore, removeStore } from '../../config/mutil'
     methods:{
 			//取安全中心状态
 			getSecurityCenterStatus(){
-				this.$axios.get('api/userCenter/getSecurityCenterStatus').then((res) => {
+				this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
 					this.password = res.data.data.password;
 					this.securityCoe = res.data.data.securityCoe;
 					this.mobile = res.data.data.mobile;
@@ -113,7 +113,7 @@ import { setStore, getStore, removeStore } from '../../config/mutil'
 			},
 			//退出
     	logout(){
-				this.$axios.get('api/user/logout').then((res) => {
+				this.$axios.get(this.$store.state.url+'api/user/logout').then((res) => {
 				this.$store.state.loginStatus = false;
     		this.$store.state.Globalusername = "";
 				this.$store.state.Globalpassword = "";

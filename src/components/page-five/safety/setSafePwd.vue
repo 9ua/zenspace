@@ -40,7 +40,7 @@
         formData.append('newPassword', pwd1);
         formData.append('newPassword2', pwd2);
         if(pwd1 === pwd2){
-          this.$axios.post('api/userCenter/setSecurityCode', formData, config).then((res) => {
+          this.$axios.post(this.$store.state.url+'api/userCenter/setSecurityCode', formData, config).then((res) => {
             this.$router.push({path: '/safety'});
             console.log(res);
           }).catch((error) => {

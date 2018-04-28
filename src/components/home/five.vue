@@ -89,7 +89,7 @@
     methods:{
       //获取头部个人信息
       getTopUserData(){
-	      this.$http.get('api/userCenter/getTopUserData').then((res) => {
+	      this.$http.get(this.$store.state.url+'api/userCenter/getTopUserData').then((res) => {
           if(res.data.data.image === ''){
             this.image = 0;
             this.$store.state.image = this.image;
@@ -106,7 +106,7 @@
 	      })
     	},
       getBalance(){
-	      this.$http.get('api/userCenter/getBalance').then((res) => {
+	      this.$http.get(this.$store.state.url+'api/userCenter/getBalance').then((res) => {
           this.balances = res.data.data.balance;
 	      }).catch((error) => {
 	      		console.log("No11")

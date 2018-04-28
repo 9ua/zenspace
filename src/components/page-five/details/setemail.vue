@@ -54,7 +54,7 @@ export default {
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
         let formData = new FormData();
         formData.append('email', this.email);
-        this.$axios.post('api/userCenter/sendEmailCode', formData, config).then((res) => {
+        this.$axios.post(this.$store.state.url+'api/userCenter/sendEmailCode', formData, config).then((res) => {
           console.log(res)
         }).catch((error) => {
             console.log("取验证码No")
@@ -69,7 +69,7 @@ export default {
       formData.append('email', this.email);
       formData.append('validCode', this.validCode);
       formData.append('securityCode', securityCode);
-      this.$axios.post('api/userCenter/saveBindEmail', formData, config).then((res) => {
+      this.$axios.post(this.$store.state.url+'api/userCenter/saveBindEmail', formData, config).then((res) => {
         this.show = !this.show;
         this.content = res.data.data.message
         if(this.content === '绑定成功！'){

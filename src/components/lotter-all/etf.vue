@@ -20,7 +20,7 @@ export default {
   },
   methods:{
     lotteryetf(){
-      this.$http.get('api/lottery/getLotteryList').then((res) => {
+      this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
         // this.lotteryListetf = res.data.data.11x5;
       }).catch((error) => {
           console.log("No")

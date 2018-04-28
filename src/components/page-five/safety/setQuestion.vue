@@ -71,7 +71,7 @@
         formData.append('answer1', md5answer1);
         formData.append('answer2', md5answer2);
         if(this.title1 != this.title2){
-          this.$axios.post('api/userCenter/setSecurityQuestion', formData, config).then((res) => {
+          this.$axios.post(this.$store.state.url+'api/userCenter/setSecurityQuestion', formData, config).then((res) => {
             console.log(res)
             this.show = !this.show;
             this.content = res.data.data.message;

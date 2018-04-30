@@ -37,7 +37,7 @@
     }
     & .agent-content {
         height: 100%;
-        margin-top: 20px;
+        
         border-top: #e8e8e8 2px solid;
         background: #fff;
         & .agent-content-top {
@@ -109,5 +109,18 @@
                 }
             }
         }
+    }
+}
+
+.intro {
+    & span {
+        font-size: 18px;
+        padding:15px;
+        color: #dc3b40;
+    }
+    & p {
+        padding:10px 15px 10px 15px;
+        color: #666;
+        font-size: 14px;
     }
 }

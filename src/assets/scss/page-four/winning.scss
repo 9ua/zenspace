@@ -3,20 +3,30 @@
     background: #fff;
     height: 100%;
     & ul{
+        box-shadow:0 0 60px 20px #ddd inset;
         background: #fff;
+        & li:nth-child(1) {
+            background: #FFC043;
+            font-weight: 600;
+            & span {
+                font-size: 16px;
+                color: #fff;
+            }
+        }
         & li{
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0px 20px;
-            height: 60px;
-            border-bottom: 1px solid #345476;
+            height: 70px;
+            border-bottom: 1px solid #ddd;
             & .winning-left{
                 display: flex;
                 & img{
                     width: 30px;
                     height: 30px;
-                    margin-right: 10px;
+                    padding-left:  20px;
+                    margin-right: 20px;
                 }
                 & .winning-xq{
                     & p {
@@ -27,13 +37,16 @@
                     & :nth-child(1) {
                         display: inline-block;
                         width: 60px;
-                        color: blue;
+                        font-size: 16px;
+                        color: #666;
                     }
                 }
                 & .winning-xq p:nth-child(2) {
+                    font-size:16px;
                     & :nth-child(1) {
                         display: inline-block;
-                        width: 60px;
+                        width: 40px;
+                        color: red;
                     }
                     & :nth-child(2) {
                         color: red;

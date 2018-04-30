@@ -1,15 +1,16 @@
 .profit {
     margin-top: 46px;
     background: #fff;
-    height: 100%;
+    height: auto;
+    padding: 0 20px;
     ul {
         & li {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0px 20px;
-            height: 60px;
-            border-bottom: 1px solid #345476;
+            height: 70px;
+            border-bottom: 1px solid #ddd;
             & .profit-left {
                 display: flex;
                 & img {

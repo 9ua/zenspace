@@ -244,7 +244,7 @@
 				d:[],//选中的号码的下标
 				con:'',
 				cons:'',
-				playBonus:'',
+				playBonus:'',//玩法树
 				// 单挑一骰
 				yishai:[
 					{title:'1',rates:'赔率63.72',rate:'63.72',selected:false},
@@ -390,8 +390,8 @@
 			this.getPastOpen();
 			this.getPastOp();
 			this.geteServerTime();
-			this.getLotteryList();
-			this.getPlayTree();
+			this.getLotteryList();//右上获取彩种
+			this.getPlayTree();//玩法树
 		},
 		created() {
 　　	this.geteServerTime(this.today),//input显示当前时间
@@ -483,7 +483,6 @@
 					this.rates = k3item.rate;
 					this.d[index] = k3item.title
 					this.con = this.d.join(',');
-					console.log(this.con)
 					this.zhu ++;
 				}else if(k3item.selected === false){
 					this.rates = 0;

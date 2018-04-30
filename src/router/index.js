@@ -47,10 +47,10 @@ import safeQuestion from '@/components/page-five/safety/safeQuestion'
 import ErrorPage from '@/components/public/ErrorPage'
 import lotterList from '@/components/lotter-all/lotterList'
 import lotterAll from '@/components/lotter-all/lotterAll'
-import k3 from '@/components/lotter-all/k3'
-import ssc from '@/components/lotter-all/ssc'
-import klc from '@/components/lotter-all/klc'
-import etf from '@/components/lotter-all/etf'
+import k3s from '@/components/lotter-all/k3'
+import sscs from '@/components/lotter-all/ssc'
+import klcs from '@/components/lotter-all/klc'
+import etfs from '@/components/lotter-all/etf'
 import betbj10 from '@/components/lotter-all/lotterbet/betbj10'
 import betbjkl8 from '@/components/lotter-all/lotterbet/betbjkl8'
 import betetf from '@/components/lotter-all/lotterbet/betetf'
@@ -70,12 +70,12 @@ export default new Router({
         { path: "/resetpwd", name: 'resetpwd', component: resolve => require(['@/components/login/resetpwd.vue'], resolve), meta: { keepAlive: true } },
         { path: "/resetway", name: 'resetway', component: resolve => require(['@/components/login/resetway.vue'], resolve), meta: { keepAlive: true } },
         { path: "/verifyPwdSafe", name: 'verifyPwdSafe', component: resolve => require(['@/components/login/verifyPwdSafe.vue'], resolve), meta: { keepAlive: true } },
-        { path: "/betbj10", name: 'betbj10', component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve), meta: { keepAlive: true } },
+        { path: "/pk10", name: 'betbj10', component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve), meta: { keepAlive: true } },
         { path: "/betbjkl8", name: 'betbjkl8', component: resolve => require(['@/components/lotter-all/lotterbet/betbjkl8.vue'], resolve), meta: { keepAlive: true } },
         { path: "/betetf", name: 'betetf', component: resolve => require(['@/components/lotter-all/lotterbet/betetf.vue'], resolve), meta: { keepAlive: true } },
-        { path: "/jsk3", name: 'betk3', component: resolve => require(['@/components/lotter-all/lotterbet/betk3.vue'], resolve), meta: { keepAlive: true } },
+        { path: "/k3", name: 'betk3', component: resolve => require(['@/components/lotter-all/lotterbet/betk3.vue'], resolve), meta: { keepAlive: true } },
         { path: "/betlhc", name: 'betlhc', component: resolve => require(['@/components/lotter-all/lotterbet/betlhc.vue'], resolve), meta: { keepAlive: true } },
-        { path: "/betssc", name: 'betssc', component: resolve => require(['@/components/lotter-all/lotterbet/betssc.vue'], resolve), meta: { keepAlive: true } },
+        { path: "/ssc", name: 'betssc', component: resolve => require(['@/components/lotter-all/lotterbet/betssc.vue'], resolve), meta: { keepAlive: true } },
         {
             path: '/lotterList',
             name: 'lotterList',
@@ -84,10 +84,10 @@ export default new Router({
             meta: { keepAlive: true },
             children: [
                 { path: 'lotterAll', name: 'lotterAll', component: lotterAll },
-                { path: 'k3', name: 'k3', component: k3 },
-                { path: 'ssc', name: 'ssc', component: ssc },
-                { path: 'klc', name: 'klc', component: klc },
-                { path: 'etf', name: 'etf', component: etf }
+                { path: 'k3s', name: 'k3s', component: k3s },
+                { path: 'sscs', name: 'sscs', component: sscs },
+                { path: 'klcs', name: 'klcs', component: klcs },
+                { path: 'etfs', name: 'etfs', component: etfs }
             ]
         },
         {

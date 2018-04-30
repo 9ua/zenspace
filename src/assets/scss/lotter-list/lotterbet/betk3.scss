@@ -50,6 +50,7 @@
                 width: 100%;
                 & .van-popup--top {
                     top: 43px;
+                    background: none !important;
                     & .menu-list-top {
                         display: flex;
                         flex-direction: row;
@@ -108,7 +109,7 @@
                 flex-wrap: wrap;
                 position: absolute;
                 top: 44px;
-                right: 0;
+                right: 1px;
                 width: 160px;
                 background: #fff;
                 & li {
@@ -396,8 +397,9 @@
             width: 100px;
             color: #000;
             border-radius: 4px;
-            background: -webkit-linear-gradient(bottom, #ffdb01, #e07a06);
-            background: linear-gradient(bottom, #ffdb01, #e07a06);
+            background: #ffaf36;
+            // background: -webkit-linear-gradient(bottom, #ffdb01, #e07a06);
+            // background: linear-gradient(bottom, #ffdb01, #e07a06);
         }
     }
 }

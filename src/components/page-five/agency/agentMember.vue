@@ -1,11 +1,11 @@
 <template>
-  <div class="agency">
-    <div class="agency-top">
+  <div class="agent">
+    <div class="agent-top">
       <router-link to="/agency" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>會員管理</p>
+      <p>会员管理</p>
     </div>
-    <div class="agency-content">
-      <div class="agency-content-top">
+    <div class="agent-content">
+      <div class="agent-content-top">
         <img src="http://imagess-google.com/system/mobile/other/proxySlide.png" /> </div>
       <ul>
         
@@ -17,5 +17,5 @@
 <script>
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agentIntro.scss';
+  @import '../../../assets/scss/page-five/agency/agent.scss';
 </style>

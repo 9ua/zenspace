@@ -2,23 +2,23 @@
   <div class="mInvite">
       <div class="mInvite-top" @change="typechange">
           <input v-model="usertype" type="radio" value="2" id="member" class="magic-radio">
-          <label for="member">會員邀請碼</label>
+          <label for="member">会员邀请码</label>
           <input v-model="usertype" type="radio" value="1" id="member2" class="magic-radio">
-          <label for="member2">代理邀請碼</label>
+          <label for="member2">代理邀请码</label>
       </div>
       <div class="mInvite-content">
             <ul v-show="showFlag">
                 <li v-for="(item,index) in invitelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
-                        <p><span>{{item.id}} 邀請碼</span><br>
+                        <p><span>{{item.id}} 邀请码</span><br>
                         {{item.code}}<br>
-                        <span>產生日期</span>{{item.date}}
+                        <span>产生日期</span>{{item.date}}
                         </p>
                     </div>
                     <div class="mInvite-right">
                         
                         <p>
-                        <span>註冊數</span><br>
+                        <span>注册数</span><br>
                         <span>({{item.count}})</span>
                         </p>
                         
@@ -30,18 +30,18 @@
                 </li>
             <van-actionsheet class="mIcode-go" v-model="show">
 	            <div class="mIcode-inner">
-                    <p><span>邀請碼</span><br>{{this.selected.code}}</p>
-                    <p><span>產生日期</span><br>{{this.selected.date}}</p>
-                    <p><span>註冊數</span>({{this.selected.count}})個帳戶</p>
+                    <p><span>邀请码</span><br>{{this.selected.code}}</p>
+                    <p><span>产生日期</span><br>{{this.selected.date}}</p>
+                    <p><span>注册数</span>({{this.selected.count}})个帐户</p>
                     <br><br>
-                    <div><button @click="select2()">刪除此邀請碼</button><button class="nosure" @click="show = !show">取消</button></div>
+                    <div><button @click="select2()">删除此邀请码</button><button class="nosure" @click="show = !show">取消</button></div>
                     
                 </div>
 	        </van-actionsheet>
             <van-popup v-model="show2" position="bottom">
 	            <div class="mIcode-sure">
-                    <div class="sure2"><p>確定要刪除此邀請碼?</p></div>
-                    <button class="del" @click="delInviteCode()">刪除</button><button class="nodel" @click="select2()">取消</button>
+                    <div class="sure2"><p>确定要删除此邀请码?</p></div>
+                    <button class="del" @click="delInviteCode()">删除</button><button class="nodel" @click="select2()">取消</button>
                 </div>
 	        </van-popup>
             </ul>
@@ -99,7 +99,7 @@ export default {
                 this.invitelist = res.data.data;
                 console.log(this.invitelist);
 			}).catch((error) => {
-					console.log("获取邀請碼列表Err");
+					console.log("获取邀请码列表Err");
 		});
     },
     setrebet(b){

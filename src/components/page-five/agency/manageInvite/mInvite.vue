@@ -3,19 +3,19 @@
     <div class="mInvite-content2">
         <ul>
             <li>
-            <span>用戶類型</span>
+            <span>用户类型</span>
             <yd-radio-group v-model="usertype">
-                <yd-radio val="0">會員</yd-radio>
+                <yd-radio val="0">会员</yd-radio>
                 <yd-radio val="1">代理</yd-radio>
             </yd-radio-group>
             </li>
             <li>
-            <span>設定返點</span>
+            <span>设定返点</span>
             <select v-model="rebateratio"  @change="setrebet($event)">
                 <option v-for="bet in betlist" :key="bet" :value="bet">{{bet}}</option>
             </select></li>
             <li>
-            <span>推廣渠道</span>
+            <span>推广渠道</span>
             <input type="text" v-model="extaddress" onfocus="this.select()" placeholder="请输入推廣渠道" />
             </li>
             <!-- <li>
@@ -24,7 +24,7 @@
       </ul>
     </div>
     <div class="mInvite-go">
-        <button @click="getInviteCode()">取得邀請碼</button>
+        <button @click="getInviteCode()">取得邀请码</button>
     </div>
   </div>
 </template>

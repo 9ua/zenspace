@@ -16,10 +16,10 @@
     data() {
       return {
         nav: [{
-          name: '下級開戶',
+          name: '下级开户',
           pathurl: 'mInvite'
         }, {
-          name: '邀請碼',
+          name: '邀请码',
           pathurl: 'mIcode'
         }],
         radio: '1',

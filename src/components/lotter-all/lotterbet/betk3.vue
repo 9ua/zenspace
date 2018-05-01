@@ -56,111 +56,111 @@
 	    			</div>
 	    		</div>
 	    	</div>
-				<div class="betk3-content-top-pop" v-show="betk3ContentTopPop">
-					<ul>
-						<li><p>期号</p><p>开奖号码</p><p>和值</p><p>大小</p><p>单双 </p></li>
-						<li v-for="(item,index) in getPastOpens" :key="index">
-							<p>{{item.seasonId.substring(4).split("-").join("")}}<i class="el-icon-minus"></i></p>
-							<p>
-								<a>{{item.n1}}</a>
-								<a>{{item.n2}}</a>
-								<a>{{item.n3}}</a>
-								<!-- <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
-							</p>
-							<p>{{item.n1+item.n2+item.n3}}</p><p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
-						</li>
-					</ul>
-				</div>
-				<div class="betk3-content-foot">
-					<p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
-					<!-- 单挑一骰 -->
-					<ul class="yishai" v-show="index === 0">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
-							<h2>
-								<!-- {{k3item.title}} -->
-								<span></span>
-							</h2>
-						</li>
-					</ul>
-					<!-- 二同号 -->
-					<ul class="ertonghao" v-show="index === 1">
-						<li >
-							<ul>
-								<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in ertonghao" :key="index" @click="k3option($event,index,k3item)">
-									<span v-for="item in k3item.a" :key="item.id">
-										<!-- {{item.title}} -->
-										<a></a>
-										<a></a>
-										<a></a>
-									</span>
-									<p v-for="(isclick,index) in k3item.a1" :key="index">
-										<!-- {{isclick.title}} -->
-										<a></a>
-										<a></a>
-									</p>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<!-- 二不同 -->
-					<ul class="erbutong" v-show="index === 2">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
-							<h2>
-								<!-- {{k3item.title}} -->
-								<span></span>
-							</h2>
-						</li>
-					</ul>
-					<!-- 和值 -->
-					<ul class="hezhi" v-show="index === 3">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
-							<h2>{{k3item.title}}</h2>
-							<span>{{k3item.rates}}</span>
-						</li>
-					</ul>
-					<!-- 大小单双 -->
-					<ul class="daoxiaodanshuang" v-show="index === 4">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
-							<h2>{{k3item.title}}</h2>
-						</li>
-					</ul>
-					<!-- 三连号 -->
-					<ul class="sanlianhao" v-show="index === 5">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
-							<h2>
-								<!-- {{k3item.title}} -->
-								<a></a>
-								<a></a>
-								<a></a>
-							</h2>
-						</li>
-					</ul>
-					<!-- 三同号 -->
-					<ul class="santonghao" v-show="index === 6">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
-							<h2>
-								<!-- {{k3item.title}} -->
-								<a></a>
-								<a></a>
-								<a></a>
-							</h2>
-						</li>
-						<p><span>通选</span></p>
-					</ul>
-					<!-- 三不同 -->
-					<ul class="sanbutong" v-show="index === 7">
-						<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
-							<h2>
-								<!-- {{k3item.title}} -->
-								<span></span>
-							</h2>
-						</li>
-					</ul>
-					</p>
-				</div>
+			<div class="betk3-content-top-pop" v-show="betk3ContentTopPop">
+				<ul>
+					<li><p>期号</p><p>开奖号码</p><p>和值</p><p>大小</p><p>单双 </p></li>
+					<li v-for="(item,index) in getPastOpens" :key="index">
+						<p>{{item.seasonId.substring(4).split("-").join("")}}<i class="el-icon-minus"></i></p>
+						<p>
+							<a>{{item.n1}}</a>
+							<a>{{item.n2}}</a>
+							<a>{{item.n3}}</a>
+							<!-- <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
+							<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
+							<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
+						</p>
+						<p>{{item.n1+item.n2+item.n3}}</p><p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
+					</li>
+				</ul>
 			</div>
+			<div class="betk3-content-foot">
+				<p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
+				<!-- 单挑一骰 -->
+				<ul class="yishai" v-show="index === 0">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
+						<h2>
+							<!-- {{k3item.title}} -->
+							<span></span>
+						</h2>
+					</li>
+				</ul>
+				<!-- 二同号 -->
+				<ul class="ertonghao" v-show="index === 1">
+					<li >
+						<ul>
+							<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in ertonghao" :key="index" @click="k3option($event,index,k3item)">
+								<span v-for="item in k3item.a" :key="item.id">
+									<!-- {{item.title}} -->
+									<a></a>
+									<a></a>
+									<a></a>
+								</span>
+								<p v-for="(isclick,index) in k3item.a1" :key="index">
+									<!-- {{isclick.title}} -->
+									<a></a>
+									<a></a>
+								</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- 二不同 -->
+				<ul class="erbutong" v-show="index === 2">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
+						<h2>
+							<!-- {{k3item.title}} -->
+							<span></span>
+						</h2>
+					</li>
+				</ul>
+				<!-- 和值 -->
+				<ul class="hezhi" v-show="index === 3">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
+						<h2>{{k3item.title}}</h2>
+						<span>{{k3item.rates}}</span>
+					</li>
+				</ul>
+				<!-- 大小单双 -->
+				<ul class="daoxiaodanshuang" v-show="index === 4">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
+						<h2>{{k3item.title}}</h2>
+					</li>
+				</ul>
+				<!-- 三连号 -->
+				<ul class="sanlianhao" v-show="index === 5">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
+						<h2>
+							<!-- {{k3item.title}} -->
+							<a></a>
+							<a></a>
+							<a></a>
+						</h2>
+					</li>
+				</ul>
+				<!-- 三同号 -->
+				<ul class="santonghao" v-show="index === 6">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
+						<h2>
+							<!-- {{k3item.title}} -->
+							<a></a>
+							<a></a>
+							<a></a>
+						</h2>
+					</li>
+					<p><span>通选</span></p>
+				</ul>
+				<!-- 三不同 -->
+				<ul class="sanbutong" v-show="index === 7">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
+						<h2>
+							<!-- {{k3item.title}} -->
+							<span></span>
+						</h2>
+					</li>
+				</ul>
+				</p>
+			</div>
+		</div>
     </div>
   	<div class="betk3-footer">
   		<div class="betk3-footer-top" v-show="zhu > 0">
@@ -168,7 +168,7 @@
   				<p>当前选号</p><span>{{con}}</span>
   			</div>
   			<div class="betk3-footer-buttoms">
-  				<p>每注金额</p><input type="text" v-model="money" v-focus/>
+  				<p>每注金额</p><input type="text" v-model="money"/>
   				<span v-if="money === '' ">请输入要投注的金额</span>
   				<span v-else>最高可中<p>{{rates}}</p>元</span>
   			</div>
@@ -230,8 +230,8 @@
 				n1:1,
 				n2:1,
 				n3:1,
-				getPastOpens:'',
-				getPastO:'',
+				getPastOpens:'',//获取过去开奖号码10个
+				getPastO:'',//获取过去开奖号码1个
 				LotteryList:'',
 				seasonId:'',//截取后的期号
 				seasonId2:'',//当前期号
@@ -240,7 +240,7 @@
 				betk3ContentTopPop:false,
 				today:'',
 				countDown:'',
-				c:[],//选中的号码的下标
+				// c:[],//选中的号码的下标
 				d:[],//选中的号码的下标
 				con:'',
 				cons:'',
@@ -394,13 +394,13 @@
 			this.getPlayTree();//玩法树
 		},
 		created() {
-　　	this.geteServerTime(this.today),//input显示当前时间
-　　	this.initSetTimeout(this.today)//调用每隔1秒刷新数据,
+　　		this.geteServerTime(this.today),//input显示当前时间
+　　		this.initSetTimeout(this.today)//调用每隔1秒刷新数据,
 		},
 		methods:{
 			//获取彩種當前獎期時間
 			geteServerTime(){
-				this.$http.get(this.$store.state.url+'api/lottery/getCurrentSaleTime',{params:{lotteryId:'jsk3'}}).then((res) => {
+				this.$http.get(this.$store.state.url+'api/lottery/getCurrentSaleTime',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					this.seasonId2 = res.data.data.seasonId
 					this.seasonId = this.seasonId2.substring(4).split("-").join("");
 					this.today = res.data.data.restSeconds;
@@ -432,6 +432,7 @@
 			},
 			//获取过去开奖号码10个
 			getPastOpen(){
+				this.getLotteryList();
 				this.$http.get(this.$store.state.url+'api/lottery/getPastOpen',{params:{lotteryId:this.lotteryId,count:10}}).then((res) => {
 					this.getPastOpens = res.data.data;
 				}).catch((error) => {
@@ -466,6 +467,9 @@
 				this.lotteryId = into.id
 				this.showan = index;
 				this.showa = !this.showa;
+				this.getPastOpen();
+				this.getPastOp();
+				this.geteServerTime();
 			},
 			//玩法树
 			getPlayTree(){

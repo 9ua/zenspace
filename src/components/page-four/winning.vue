@@ -100,21 +100,15 @@ import index from 'vue';
           this.b = Math.floor(Math.random(this.a)*10+1);
           this.winpool.reverse();
           this.winpool.push(this.haa[Math.floor(Math.random(this.a)*10+1)]);
-          console.log(this.winpool);
           this.winpool[10].money = this.x;
           this.winpool.shift();
           this.winpool.reverse();
-          // this.a = Math.floor(Math.random(this.a)*(max-min+1)+min)
-          // this.winpool.push();
-          // this.winpool.shift();
-     
-          console.log(this.x);
 
         //随机整数数
           this.a = Math.floor(Math.random(this.a)*(max-min+1)+min)
-          setTimeout(countdown, 2000)
+          setTimeout(countdown, 1400)
       }
-      setTimeout(countdown, 2000)
+      setTimeout(countdown, 1400)
     },
     methods: {
       selectFood(item, event) {

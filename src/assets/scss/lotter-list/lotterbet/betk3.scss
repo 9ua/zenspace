@@ -140,7 +140,6 @@
             justify-content: space-between;
             background: #22563f;
             color: #caebda;
-            // padding: 0px 16px 10px;
             & .content-left {
                 display: flex;
                 flex-direction: column;
@@ -307,24 +306,28 @@
     position: relative;
     background: #000;
     color: #ffaf36;
+    width: 100%;
     & .betk3-footer-top {
         position: absolute;
         top: -60px;
         background: #22563f;
         height: 60px;
-        padding: 0px 16px;
         display: flex;
         flex-direction: column;
         color: #caebda;
         font-size: 16px;
+        width: 100%;
         & .betk3-footer-tops {
             display: flex;
             align-items: center;
+            padding: 0px 16px;
             height: 50%;
             & span {
                 color: #ffaf36;
-                width: 78%;
+                width: 210px;
                 overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
                 height: 20px;
                 padding-left: 2%;
             }
@@ -336,6 +339,7 @@
             height: 50%;
             display: flex;
             align-items: center;
+            padding: 0px 16px;
             width: 100%;
             & input {
                 width: 20%;

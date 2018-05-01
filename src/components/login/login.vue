@@ -11,10 +11,10 @@
       <div class="login-form">
         <div class="login-user">
           <van-icon name="contact" />
-          <input type="text" v-model="newUserInfo.user" placeholder="请输入用户名" v-focus onfocus="this.select()"> </div>
+          <input type="text" v-model="newUserInfo.user" placeholder="请输入用户名" onfocus="this.select()"> </div>
         <div class="login-pwd">
           <i class="iconfont icon-mima"></i>
-          <input :type="pwd ? 'text' : 'password'" v-model="newUserInfo.pwd" placeholder="请输入密码" onfocus="this.select()">
+          <input :type="pwd ? 'text' : 'password'" v-model="newUserInfo.pwd" placeholder="请输入密码" onfocus="this.select()" v-focus @keyup.enter="login">
           <i class="iconfont" :class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'" @click="pwd = !pwd"></i>
         </div>
         <div class="login-captchaCodeImg" v-show="errorcode">

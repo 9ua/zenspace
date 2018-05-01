@@ -11,11 +11,17 @@
 	        <van-popup v-model="show" position="top" >
 				<div class="popscroll">
 					<ul class="menu-list-top">
-						<li v-for="(into,index) in playGroups" :key="index"  @click="k3Tab($event,index,into)">
+						<li v-for="(into,index) in playGroups" :key="index">
 							<div class="title">{{into.title}}</div>
 							<div class="menu-list-list-box">
-								<div class="menu-list-list" v-for="(item,index) in into.groups" :key="index">
-									<span :class="{'active': indexs === navlist}" v-for="(items,indexs) in item.players" :key="indexs"><a>{{items.title}}</a></span>
+								<div class="menu-list-list" v-for="(item,indexa) in into.groups" :key="indexa">
+									<!-- <span :class="{'active': indexs === navlist}" v-for="(items,indexs) in item.players" :key="indexs" @click="k3Tab($event,indexs,items,into)"> -->
+									<span v-for="(items,indexb) in item.players" :key="indexb" @click="k3Tab($event,indexa,indexb,items,into,index)">
+										<!-- <a>{{index}}</a> -->
+										<!-- <a>{{indexa}}</a> -->
+										<!-- <a>{{indexb}}</a> -->
+										<a>{{items.title}}</a>
+									</span>
 								</div>
 							</div>
 							
@@ -73,11 +79,132 @@
 				</ul>
 			</div>
 			<div class="betk3-content-foot">
-				<p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
-					<ul>
-						<li>1</li>
-					</ul>
-				</p>
+				<div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
+					<div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
+						<span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}<b>。奖金 <i>{{player.bonus}}</i> 元</b><br/></span>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5'">
+							<!-- <li v-for="(item,index) in layout" :key="index">
+								<p>
+									<b>{{item.title}}</b>
+									<span v-for="(b,bs) in item.balls" :key="bs" :class="b.choose ? 'active' : '' " @click.stop="curBall(b,item,bs)">{{b.ball}}</span>
+								</p>
+							</li> -->
+							<li v-for="(player,indexf) in group.players" :key="indexf">
+								<p v-for="(numViews,indexff) in player.numView" :key="indexff">
+									<b>{{numViews.title}}</b>
+									<span v-for="(num,indexg) in numViews.nums" :key="indexg" :class=" indexg ? 'active' : '' " @click="curBalls(indexg,num,numViews)">{{num}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_group5'">
+							<li v-for="(item,index) in zuxuan" :key="index">
+								<p>
+									<b>{{item.title}}</b>
+									<span v-for="(b,bs) in item.balls" :key="bs" :class="b.choose ? 'active' : '' " @click.stop="curBall(b,item,bs)">{{b.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_group10'">
+							<li v-for="(item,index) in chonghao" :key="index">
+								<p>
+									<b>{{item.title}}</b>
+									<span v-for="(b,bs) in item.balls" :key="bs" :class="b.choose ? 'active' : '' " @click.stop="curBall(b,item,bs)">{{b.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_group20'">
+							<li v-for="(item,index) in zuxuan" :key="index">
+								<p>
+									<b>{{item.title}}</b>
+									<span v-for="(b,bs) in item.balls" :key="bs" :class="b.choose ? 'active' : '' " @click.stop="curBall(b,item,bs)">{{b.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_group30'">
+							<li v-for="(item,index) in zuxuan" :key="index">
+								<p>
+									<b>{{item.title}}</b>
+									<span v-for="(b,bs) in item.balls" :key="bs" :class="b.choose ? 'active' : '' " @click.stop="curBall(b,item,bs)">{{b.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_group60'">
+							<li v-for="(item,index) in zuxuan" :key="index">
+								<p>
+									<b>{{item.title}}</b>
+									<span v-for="(b,bs) in item.balls" :key="bs" :class="b.choose ? 'active' : '' " @click.stop="curBall(b,item,bs)">{{b.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_group120'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_other1'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_other2'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_other3'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_other4'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_none1'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_none2'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<ul class="fushi" v-show="playBonusId === 'ssc_star5_none3'">
+							<li>
+								<p>
+									<b></b>
+									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
+								</p>
+							</li>
+						</ul>
+						<div class="danshi">
+							<textarea  cols="30" rows="10" v-model="con" v-show="playBonusId === 'ssc_star5_single'" placeholder="每一个号码之间无需用符号隔开"></textarea>
+						</div>
+					</div>
+				</div>
 			</div>
 	    </div>
     </div>
@@ -88,7 +215,7 @@
   				<p>当前选号</p><span>{{con}}</span>
   			</div>
   			<div class="betssc-footer-buttoms">
-  				<p>每注金额</p><input type="text" v-model="money" v-focus/>
+  				<p>每注金额</p><input type="text" v-model="money"/>
   				<span v-if="money === '' ">请输入要投注的金额</span>
   				<span v-else>最高可中<p>{{rates}}</p>元</span>
   			</div>
@@ -118,12 +245,15 @@
 				lotteryId:'cqssc',
 				LotteryList:'',
 				money:1,//投注金额
-				con:'3,4',
-				zhu:1,
+				con:'',//已选号码
+				zhu:0,//注数
 				rates:0,//最高可中
 				playBonus:'',//玩法树
+				playBonusId:'ssc_star5',//点击选中后获取此玩法ID
 				playGroups:'',
 				navlist:0,
+				navlistb:0,
+				navlistf:0,
 				betsscContentTopPop:false,
 				getPastOpens:'',//获取过去开奖号码10个
 				getPastO:'',//获取过去开奖号码1个
@@ -131,6 +261,27 @@
 				seasonId2:'',//当前期号
 				countDown:'',
 				players:'',
+				intotitle:'',
+				itemstitle:'复式',
+				d:[],//选中的号码的下标
+				layout: [
+					{"title": "万位","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+					{"title": "千位","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+					{"title": "百位","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+					{"title": "十位","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+					{"title": "个位","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+				],
+				zuxuan: [
+					{"title": "重号","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+					{"title": "单号","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+				],
+				chonghao: [
+					{"title": "三重号","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+					{"title": "二重号","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
+				],
+				zuxuan120: [
+					{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}, 
+				],
 			}
 		},
 		mounted(){
@@ -144,22 +295,38 @@
 　　		this.geteServerTime(this.today),//input显示当前时间
 　　		this.initSetTimeout(this.today)//调用每隔1秒刷新数据,
 		},
-		methods:{
-//			
-//			this.showpop = !this.showpop;
-//    this.content = res.data.data.message
-//    setTimeout(() => {
-//      if(this.content === '验证成功！'){
-//        this.$router.push({path: '/changeSafePwd'});
-//      }
-//    }, 2000);
-//			
+		methods:{	
+			curBalls(indexg,num,numViews){
+				
+			},
+			// 如果只能选择一个球
+			curBall(b,item,index){
+				if(item.choose) {
+					item.balls.map((b) => {
+						b.choose = false
+					})
+				}
+				b.choose = !b.choose
+				if(b.choose === true){
+					this.d.push(b.ball);
+					
+					this.d.sort((a,b) => {
+						return a-b;
+					})
+					this.con = this.d.join(',');
+					this.zhu ++;
+				}else if(b.choose === false){
+					this.d.splice(1,"");
+					this.con = this.d.join(',');
+					this.zhu --;
+				}
+			},		
 			//玩法树
 			getPlayTree(){
 				this.$http.get(this.$store.state.url+'api/lottery/getPlayTree',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					this.playBonus = res.data.data.playBonus;
 					this.playGroups = res.data.data.playGroups;
-					console.log(this.players,"玩法树");
+					// console.log(this.playGroups,"玩法树");
 				}).catch((error) => {
 					console.log("玩法树No");
 				})
@@ -183,10 +350,22 @@
 				this.geteServerTime();
 			},
 			//头部菜单项
-			k3Tab(e,index,into){
-				this.titles = into.title;
+			k3Tab(e,indexa,indexb,items,into,index){
+				this.titles = into.title+ ' ' +items.title;
+				this.intotitle = into.title;
+				this.itemstitle = items.title;
 				this.navlist = index;
+				this.navlistb = indexa;
+				this.navlistf = indexb;
+				this.playBonusId = items.id;
 				this.show = !this.show;
+				console.log('--index',index)
+				console.log('--this.navlistf',this.navlistf)
+				console.log('--this.navlist',this.navlist)
+				console.log('--this.intotitle',this.intotitle)
+				console.log('--this.itemstitle',this.itemstitle)
+				console.log('--this.titles',this.titles)
+				console.log('--this.playBonusId',this.playBonusId)
 			},
 			//获取过去开奖号码10个
 			getPastOpen(){
@@ -242,12 +421,14 @@
 			},
 			//清空
 			iscreat(){
-				for(let i=0;i<this.k3options.length;i++){
-					this.k3options[i].selected = false;
-					this.d = [];
-					this.con = '';
-					this.zhu =0;
-					this.money = '';
+				for(let i=0;i<this.layout.length;i++){
+					for(let j=0;j<this.layout[i].balls.length;j++){
+						this.layout[i].balls[j].choose = false;
+						this.d = [];
+						this.con = '';
+						this.zhu =0;
+						this.money = '1';
+					}
 				}
 			},
 		},

@@ -324,8 +324,10 @@
             height: 50%;
             & span {
                 color: #ffaf36;
-                width: 78%;
+                width: 210px;
                 overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
                 height: 20px;
                 padding-left: 2%;
             }

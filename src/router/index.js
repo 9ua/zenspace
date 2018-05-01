@@ -14,6 +14,8 @@ import verifyPwdSafe from '@/components/login/verifyPwdSafe'
 import winning from '@/components/page-four/winning'
 import profit from '@/components/page-four/profit'
 import pop from '@/components/page-four/pop'
+import bet from '@/components/page-five/money/bet'
+import trade from '@/components/page-five/money/trade'
 import agency from '@/components/page-five/agency'
 import agentBetRecord from '@/components/page-five/agency/agentBetRecord'
 import agentBillRecord from '@/components/page-five/agency/agentBillRecord'
@@ -177,5 +179,11 @@ export default new Router({
         { path: '/detail/setemail', name: 'setemail', component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve), meta: { keepAlive: true } },
         { path: '/detail/setmobile', name: 'setmobile', component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve), meta: { keepAlive: true } },
         { path: '/detail/setemail', name: 'setemail', component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve), meta: { keepAlive: true } },
+        {
+            path: '/bet', name: 'bet', component: bet, meta: { keepAlive: true },
+        },
+        {
+            path: '/trade', name: 'trade', component: trade, meta: { keepAlive: true },
+        },
     ]
 })

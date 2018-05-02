@@ -411,6 +411,11 @@
 .betk3pop {
     width: 66%;
     border-radius: 4px;
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter: blur(0px);    
     ul {
         display: flex;
         flex-direction: column;

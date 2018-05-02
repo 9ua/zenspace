@@ -26,11 +26,11 @@
           <img src="../../assets/img/five/Box.png" />
           <span>我要提现</span>
         </router-link>
-        <router-link to="" tag="li">
+        <router-link to="/trade" tag="li">
           <img src="../../assets/img/five/Confirm.png" />
           <span>交易记录</span>
         </router-link>
-        <router-link to="" tag="li">
+        <router-link to="/bet" tag="li">
           <img src="../../assets/img/five/370.png" />
           <span>投注记录</span>
         </router-link>

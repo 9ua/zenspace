@@ -473,13 +473,17 @@
 				this.getPastOp();
 				this.geteServerTime();
 			},
+			//三同号全/反选
 			tosantonghao(){
 				this.issantonghao = !this.issantonghao;
 				for(let i=0;i<this.santonghao.length;i++){
-					if(this.santonghao[i].selected === true){
+					if(this.issantonghao === true){
 						this.santonghao[i].selected = true;
-					}else{
-						this.santonghao[i].selected = !this.santonghao[i].selected;
+						this.zhu =6;
+					}else if(this.issantonghao === false){
+						this.santonghao[i].selected = false;
+						this.zhu=0;
+						this.con ='';
 					}
 				}
 			},
@@ -495,10 +499,6 @@
 			//中间->投注选号
 			k3option(e,index,k3item){
 				k3item.selected = !k3item.selected;
-				if(this.playId === 'k3_star2_same'){
-					
-					console.log('haaaaaaaaaa')
-				}
 				if(k3item.selected === true){
 					this.rates = k3item.rate;
 					this.d[index] = k3item.title

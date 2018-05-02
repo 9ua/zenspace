@@ -1,5 +1,5 @@
 <template>
-  <div class="login" v-show="$store.state.loginStatus === false">
+  <div class="login" v-show="loginStatus === false">
     <div class="login-title">
       <router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link>
       <p>用户登录</p>
@@ -97,9 +97,9 @@
           formData.append('password', pwd);
           this.$axios.post(this.$store.state.url+'api/user/login', formData, config).then((res) => {
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
-              this.loginSta = true;
-              this.$store.state.loginStatus = true;
-              setStore('loginSta',this.$store.state.loginStatus);
+            this.loginSta = true;
+            setStore('loginSta',this.loginSta);
+            this.$store.state.loginStatus = getStore('loginSta');
           	if(res.data.code === 1){
               this.$router.push({path:'/one'});
               setStore('username',this.newUserInfo.user);

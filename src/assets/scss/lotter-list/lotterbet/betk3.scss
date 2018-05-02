@@ -195,6 +195,7 @@
             >p {
                 color: #caebda;
                 font-size: 12px;
+                width: 100%;
                 >ul {
                     display: flex;
                     flex-wrap: wrap;
@@ -206,7 +207,7 @@
                         align-items: center;
                         width: 22%;
                         margin: 0px 8px 8px 0px;
-                        border: 1px solid hsla(0, 0%, 100%, .3);
+                        border: 1px solid hsla(0, 0%, 100%, .3) ;
                         padding: 2px 0px 4px;
                         & h2 {
                             font-size: 18px;
@@ -660,7 +661,7 @@
             flex-wrap: wrap;
             align-items: center;
             & li{
-                border:0.026667rem solid rgba(255, 255, 255, 0.3) !important;
+                border:0.026667rem solid rgba(255, 255, 255, 0.3);
                 width: 32% !important;
                 margin: 0px !important;
                 & span,& p{
@@ -671,6 +672,7 @@
                     padding: 4px 0px;
                     border-radius: 6px;
                     background: #164630;
+                     border: 1px solid #164630;
                     margin-bottom: 6px;
                 }
                 & p{
@@ -688,6 +690,9 @@
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
+                }
+                & p.active{
+                    border: 1px solid #f4c829;
                 }
                 & span{
                     & a:nth-child(1){
@@ -708,6 +713,9 @@
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
+                }
+                & span.active{
+                    border: 1px solid #f4c829;
                 }
                 
             }
@@ -1285,7 +1293,11 @@
             }
         }
     }
-    
+}
+.daoxiaodanshuang{
+    // display: flex;
+    // justify-content: space-between;
+    // width: 100%;
 }
 
 .sanlianhao {
@@ -1295,7 +1307,7 @@
     & li {
         display: flex;
         justify-content: center;
-        border: 0.026667rem solid rgba(255, 255, 255, 0.3) !important;
+        border: 0.026667rem solid rgba(255, 255, 255, 0.3);
         margin: 0px !important;
         & h2{
             display: flex;
@@ -1398,9 +1410,9 @@
     & li {
       display: flex;
       justify-content: center;
-      border: 0.026667rem solid rgba(255, 255, 255, 0.3) !important;
-      margin: 0px 0px 4px !important;
-      width: 32% !important;
+      border: 0.026667rem solid rgba(255, 255, 255, 0.3);
+      margin: 0px 4px 8px !important;
+      width: 30% !important;
       & h2 {
         display: flex;
         justify-content: center;
@@ -1438,7 +1450,11 @@
             align-items: center;
             width: 110px;
             height: 26px;
-            border: 0.026667rem solid rgba(255, 255, 255, 0.3) !important;
+            border: 0.026667rem solid rgba(255, 255, 255, 0.3);
+        }
+        & span.active{
+            border: 1px solid #f4c829;
+            color: #f4c829;
         }
     }
     & li:nth-child(1) {

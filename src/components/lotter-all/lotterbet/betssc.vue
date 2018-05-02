@@ -82,21 +82,21 @@
 				<div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
 					<div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
 						<span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}<b>。奖金 <i>{{player.bonus}}</i> 元</b><br/></span>
-						<ul class="fushi" v-show="playBonusId === 'ssc_star5'">
+						<ul class="fushi">
 							<!-- <li v-for="(item,index) in layout" :key="index">
 								<p>
 									<b>{{item.title}}</b>
 									<span v-for="(b,bs) in item.balls" :key="bs" :class="b.choose ? 'active' : '' " @click.stop="curBall(b,item,bs)">{{b.ball}}</span>
 								</p>
 							</li> -->
-							<li v-for="(player,indexf) in group.players" :key="indexf">
+							<li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
 								<p v-for="(numViews,indexff) in player.numView" :key="indexff">
 									<b>{{numViews.title}}</b>
-									<span v-for="(num,indexg) in numViews.nums" :key="indexg" :class=" indexg ? 'active' : '' " @click="curBalls(indexg,num,numViews)">{{num}}</span>
+									<span v-for="(num,indexg) in numViews.nums" :key="indexg" :class=" indexg===0 ? 'active' : '' " @click="curBalls(indexg,num,numViews)">{{num.ball}}</span>
 								</p>
 							</li>
 						</ul>
-						<ul class="fushi" v-show="playBonusId === 'ssc_star5_group5'">
+						<!-- <ul class="fushi" v-show="playBonusId === 'ssc_star5_group5'">
 							<li v-for="(item,index) in zuxuan" :key="index">
 								<p>
 									<b>{{item.title}}</b>
@@ -199,7 +199,7 @@
 									<span v-for="(item,index) in zuxuan120" :key="index" :class="item.choose ? 'active' : '' " @click.stop="curBall(item,index)">{{item.ball}}</span>
 								</p>
 							</li>
-						</ul>
+						</ul> -->
 						<div class="danshi">
 							<textarea  cols="30" rows="10" v-model="con" v-show="playBonusId === 'ssc_star5_single'" placeholder="每一个号码之间无需用符号隔开"></textarea>
 						</div>

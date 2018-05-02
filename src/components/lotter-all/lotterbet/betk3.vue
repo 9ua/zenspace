@@ -86,17 +86,15 @@
 				</ul>
 				<!-- 二同号 -->
 				<ul class="ertonghao" v-show="index === 1">
-					<li >
+					<li>
 						<ul>
-							<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in ertonghao" :key="index" @click="k3option($event,index,k3item)">
-								<span v-for="item in k3item.a" :key="item.id">
-									<!-- {{item.title}} -->
+							<li v-for="(k3item,index) in ertonghao" :key="index">
+								<span :class="item.selected ? 'active' : ''" v-for="item in k3item.a" :key="item.id" @click="k3option($event,index,item)">
 									<a></a>
 									<a></a>
 									<a></a>
 								</span>
-								<p v-for="(isclick,index) in k3item.a1" :key="index">
-									<!-- {{isclick.title}} -->
+								<p :class="isclick.selected ? 'active' : ''" v-for="(isclick,index) in k3item.a1" :key="index" @click="k3option($event,index,isclick)">
 									<a></a>
 									<a></a>
 								</p>
@@ -108,7 +106,6 @@
 				<ul class="erbutong" v-show="index === 2">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
 						<h2>
-							<!-- {{k3item.title}} -->
 							<span></span>
 						</h2>
 					</li>
@@ -122,7 +119,7 @@
 				</ul>
 				<!-- 大小单双 -->
 				<ul class="daoxiaodanshuang" v-show="index === 4">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in daxiaodanshuang" :key="index" @click="k3option($event,index,k3item)">
 						<h2>{{k3item.title}}</h2>
 					</li>
 				</ul>
@@ -130,7 +127,6 @@
 				<ul class="sanlianhao" v-show="index === 5">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
 						<h2>
-							<!-- {{k3item.title}} -->
 							<a></a>
 							<a></a>
 							<a></a>
@@ -141,19 +137,17 @@
 				<ul class="santonghao" v-show="index === 6">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
 						<h2>
-							<!-- {{k3item.title}} -->
 							<a></a>
 							<a></a>
 							<a></a>
 						</h2>
 					</li>
-					<p><span>通选</span></p>
+					<p><span :class="issantonghao ? 'active' : ''" @click="tosantonghao">通选</span></p>
 				</ul>
 				<!-- 三不同 -->
 				<ul class="sanbutong" v-show="index === 7">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
 						<h2>
-							<!-- {{k3item.title}} -->
 							<span></span>
 						</h2>
 					</li>
@@ -215,6 +209,7 @@
 	export default{
 		data(){
 			return{
+				issantonghao:false,
 				show:false,//头部中间
 				showa:false,//头部右
 				showan:0,//头部右数字
@@ -227,6 +222,7 @@
 				titles:'单挑一骰',
 				listname:'江苏',
 				lotteryId:'jsk3',
+				playId:'k3_star1',//玩法术
 				n1:1,
 				n2:1,
 				n3:1,
@@ -242,6 +238,7 @@
 				countDown:'',
 				// c:[],//选中的号码的下标
 				d:[],//选中的号码的下标
+				dd:[],//选中的号码的下标
 				con:'',
 				cons:'',
 				playBonus:'',//玩法树
@@ -340,10 +337,6 @@
 				],
 				// 和值
 				k3options:[
-					{title:'大',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'小',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'单',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'双',rates:'赔率63.72',rate:'63.72',selected:false},
 					{title:'4',rates:'赔率63.72',rate:'63.72',selected:false},
 					{title:'5',rates:'赔率31.86',rate:'31.86',selected:false},
 					{title:'6',rates:'赔率19.11',rate:'19.11',selected:false},
@@ -358,6 +351,13 @@
 					{title:'15',rates:'赔率19.11',rate:'19.11',selected:false},
 					{title:'16',rates:'赔率31.86',rate:'31.86',selected:false},
 					{title:'17',rates:'赔率63.72',rate:'63.72',selected:false},
+				],
+				// 大小单双
+				daxiaodanshuang:[
+					{title:'大',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'小',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'单',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'双',rates:'赔率63.72',rate:'63.72',selected:false},
 				],
 				// 三连号
 				sanlianhao:[
@@ -457,9 +457,11 @@
 			},
 			//头部菜单项
 			k3Tab(e,index,into){
+				this.iscreat();
 				this.titles = into.title;
 				this.navlist = index;
 				this.show = !this.show;
+				this.playId = this.playBonus[index].id
 			},
 			//头部右->菜单点击
 			listnames(e,index,into){
@@ -470,6 +472,16 @@
 				this.getPastOpen();
 				this.getPastOp();
 				this.geteServerTime();
+			},
+			tosantonghao(){
+				this.issantonghao = !this.issantonghao;
+				for(let i=0;i<this.santonghao.length;i++){
+					if(this.santonghao[i].selected === true){
+						this.santonghao[i].selected = true;
+					}else{
+						this.santonghao[i].selected = !this.santonghao[i].selected;
+					}
+				}
 			},
 			//玩法树
 			getPlayTree(){
@@ -483,26 +495,99 @@
 			//中间->投注选号
 			k3option(e,index,k3item){
 				k3item.selected = !k3item.selected;
+				if(this.playId === 'k3_star2_same'){
+					
+					console.log('haaaaaaaaaa')
+				}
 				if(k3item.selected === true){
 					this.rates = k3item.rate;
 					this.d[index] = k3item.title
-					this.con = this.d.join(',');
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
 					this.zhu ++;
+					// console.log(this.d,'---',this.con,'---',this.con.length,'------')
 				}else if(k3item.selected === false){
 					this.rates = 0;
 					this.d.splice(index,1,"");
-					this.con = this.d.join(',');
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
 					this.zhu --;
 				}
 			},
 			//清空
 			iscreat(){
+				// 单挑一骰
+				for(let i=0;i<this.yishai.length;i++){
+					this.yishai[i].selected = false;
+					this.d = [];
+					this.con = '';
+					this.zhu =0;
+					this.money = 1;
+				}
+				// 二同号
+				for(let i=0;i<this.ertonghao.length;i++){
+					for(let j=0;j<this.ertonghao[i].a.length;j++){
+						this.ertonghao[i].a[j].selected = false;
+						this.d = [];
+						this.con = '';
+						this.zhu =0;
+						this.money = 1;
+					}
+					for(let k=0;k<this.ertonghao[i].a1.length;k++){
+						this.ertonghao[i].a1[k].selected = false;
+						this.d = [];
+						this.con = '';
+						this.zhu =0;
+						this.money = 1;
+					}
+				}
+				// 二不同
+				for(let i=0;i<this.erbutong.length;i++){
+						this.erbutong[i].selected = false;
+						this.d = [];
+						this.con = '';
+						this.zhu =0;
+						this.money = 1;	
+				}
+				// 和值
 				for(let i=0;i<this.k3options.length;i++){
 					this.k3options[i].selected = false;
 					this.d = [];
 					this.con = '';
 					this.zhu =0;
-					this.money = '';
+					this.money = 1;
+				}
+				// 大小单双
+				for(let i=0;i<this.daxiaodanshuang.length;i++){
+					this.daxiaodanshuang[i].selected = false;
+					this.d = [];
+					this.con = '';
+					this.zhu =0;
+					this.money = 1;
+				}
+				// 三连号
+				for(let i=0;i<this.sanlianhao.length;i++){
+					this.sanlianhao[i].selected = false;
+					this.d = [];
+					this.con = '';
+					this.zhu =0;
+					this.money = 1;
+				}
+				// 三同号
+				for(let i=0;i<this.santonghao.length;i++){
+					this.santonghao[i].selected = false;
+					this.d = [];
+					this.con = '';
+					this.zhu =0;
+					this.money = 1;
+				}
+				// 三不同
+				for(let i=0;i<this.sanbutong.length;i++){
+					this.sanbutong[i].selected = false;
+					this.d = [];
+					this.con = '';
+					this.zhu =0;
+					this.money = 1;
 				}
 			},
 			betC(){
@@ -516,7 +601,7 @@
 					formData.append('order[0].betCount',this.zhu);
 					formData.append('order[0].price',1);
 					formData.append('order[0].unit',1);
-					formData.append('order[0].playId','k3_star1');
+					formData.append('order[0].playId',this.playId);
 					formData.append('count',this.zhu);
 					formData.append('traceOrders[0].price', this.money);
 					formData.append('traceOrders[0].seasonId', this.seasonId2);
@@ -529,6 +614,7 @@
 						this.betGoshow = !this.betGoshow;
 						this.betsuccess = !this.betsuccess;
 					}
+					console.log(this.playId)
 				}).catch((error) => {
 					console.log("No");
 				})

@@ -89,12 +89,12 @@
 					<li>
 						<ul>
 							<li v-for="(k3item,index) in ertonghao" :key="index">
-								<span :class="item.selected ? 'active' : ''" v-for="item in k3item.a" :key="item.id" @click="k3option($event,index,item)">
+								<span :class="item.selected ? 'active' : ''" v-for="(item,indexaa) in k3item.a" :key="item.id" @click="ertonghaooption($event,indexaa,item,k3item)">
 									<a></a>
 									<a></a>
 									<a></a>
 								</span>
-								<p :class="isclick.selected ? 'active' : ''" v-for="(isclick,index) in k3item.a1" :key="index" @click="k3option($event,index,isclick)">
+								<p :class="isclick.selected ? 'active' : ''" v-for="(isclick,indexbb) in k3item.a1" :key="index" @click="ertonghaoalloption($event,indexbb,isclick,k3item)" ref="isclicka">
 									<a></a>
 									<a></a>
 								</p>
@@ -420,7 +420,7 @@
 					}
 					if(minutes < 10){
 						minutes = "0"+minutes
-					} 
+					}
 					if(seconds < 10){
 						seconds = "0"+seconds
 					}
@@ -473,17 +473,48 @@
 				this.getPastOp();
 				this.geteServerTime();
 			},
+			//二同号时
+			ertonghaooption(e,index,item,items){
+				item.selected = !item.selected;
+				if(item.selected === true){
+					this.rates = item.rate;
+					this.d[index] = item.title
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					this.zhu ++;
+					console.log(items.a.length)
+					console.log(this.d,'---',this.con,'---',this.con.length,'------')
+				}else if(item.selected === false){
+					this.rates = 0;
+					this.d.splice(index,1,"");
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					this.zhu --;
+				}
+			},
+			ertonghaoalloption(e,index,item,items){
+				item.selected = !item.selected;
+				if(item.selected === true){
+					for(let i=0;i<items.a.length;i++){
+						items.a[i].selected = true;
+					}
+				}else if(item.selected === false){
+					for(let i=0;i<items.a.length;i++){
+						items.a[i].selected = false;
+					}
+				}
+			},
 			//三同号全/反选
 			tosantonghao(){
 				this.issantonghao = !this.issantonghao;
 				for(let i=0;i<this.santonghao.length;i++){
 					if(this.issantonghao === true){
 						this.santonghao[i].selected = true;
-						this.zhu =6;
+						this.zhu ++;
+						this.con ='111,222,333,444,555,666';
 					}else if(this.issantonghao === false){
 						this.santonghao[i].selected = false;
-						this.zhu=0;
-						this.con ='';
+						this.iscreat();
 					}
 				}
 			},
@@ -505,6 +536,32 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
+					//二不同时
+					if(this.playId === 'k3_star2_same_not'){
+						let ret = this.groupSplit(this.dd,2);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.con = abc;
+						this.zhu = arr.length;
+					}
+					//三不同时
+					if(this.playId === 'k3_star3_same_not'){
+						let ret = this.groupSplit(this.dd,3);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.con = abc;
+						this.zhu = arr.length;
+					}
 					// console.log(this.d,'---',this.con,'---',this.con.length,'------')
 				}else if(k3item.selected === false){
 					this.rates = 0;
@@ -547,7 +604,7 @@
 						this.d = [];
 						this.con = '';
 						this.zhu =0;
-						this.money = 1;	
+						this.money = 1;
 				}
 				// 和值
 				for(let i=0;i<this.k3options.length;i++){
@@ -622,6 +679,33 @@
 			betsucc(){
 				this.betsuccess = !this.betsuccess;
 				this.$router.push({path:'/one'})
+			},
+			//排列组合
+			groupSplit(arr, size) {
+				let maxSize = arr.length,
+					groupArr = [];
+				if (size >= 1 && size <= maxSize) {
+					getArr(arr, 0, []);
+				}
+				function each(arr, index, fn) {
+					for (let i = index; i < maxSize; i++) {
+						fn(arr[i], i, arr);
+					}
+				}
+				function getArr(arr, _size, _arr, index) {
+					if (_size === size) {
+						return;
+					}
+					let len = _size + 1;
+					each(arr, index || 0, function(val, i, arr) {
+						_arr.splice(_size, 1, val);
+						if (_size === size - 1) {
+							groupArr.push(_arr.slice());
+						}
+						getArr(arr, len, _arr, i + 1);
+					});
+				}
+				return groupArr;
 			}
 		},
 		directives: {

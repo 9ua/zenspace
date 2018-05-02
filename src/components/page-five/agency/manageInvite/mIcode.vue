@@ -109,7 +109,7 @@ export default {
     delInviteCode(){
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
             let formData = new FormData();
-            formData.append('id',this.selected);
+            formData.append('id',this.selected.id);
             this.$axios.post(this.$store.state.url+'api/agent/deleteInviteCode', formData,config).then((res) => {
             this.getInviteList();
             this.show = !this.show;

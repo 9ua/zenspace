@@ -46,7 +46,24 @@
 				</el-input>
 				</div>
 			</li>
+			<li><div class="button1"><button>删除此邀请码</button></div></li>
 		</ul>
+			<!-- <van-actionsheet class="mIcode-go" v-model="show">
+	            <div class="mIcode-inner">
+                    <p><span>邀请码</span><br>{{this.selected.code}}</p>
+                    <p><span>产生日期</span><br>{{this.selected.date}}</p>
+                    <p><span>注册数</span>({{this.selected.count}})个帐户</p>
+                    <br><br>
+                    <div><button >删除此邀请码</button><button class="nosure" @click="show = !show">取消</button></div>
+                    
+                </div>
+	        </van-actionsheet>
+            <van-popup v-model="show2" position="bottom">
+	            <div class="mIcode-sure">
+                    <div class="sure2"><p>确定要删除此邀请码?</p></div>
+                    <button class="del" @click="delInviteCode()">删除</button><button class="nodel" @click="select2()">取消</button>
+                </div>
+	        </van-popup> -->
 		<van-actionsheet class="mIcode-go" v-model="show" :actions="payway" cancel-text="取消">
         </van-actionsheet>
   </div>

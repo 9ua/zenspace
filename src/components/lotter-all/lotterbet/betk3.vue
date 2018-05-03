@@ -88,25 +88,17 @@
 				<ul class="ertonghao" v-show="index === 1">
 					<li>
 						<ul>
-							<li v-for="(ertongh,index) in ertonghao" :key="index" @click="k3option($event,index,ertongh)">
-								<span :class="ertongh.selected ? 'active' : ''">
-									{{ertongh.title}}
-									<!-- <a></a>
-									<a></a>
-									<a></a> -->
-								</span>
-							</li>
-							<!-- <li v-for="(k3item,index) in ertonghao" :key="index">
-								<span :class="item.selected ? 'active' : ''" v-for="(item,indexaa) in k3item.a" :key="item.id" @click="ertonghaooption($event,indexaa,item,index,k3item)">
+							<li v-for="(k3item,index) in ertonghao" :key="index">
+								<span :class="item.selected ? 'active' : ''" v-for="(item,indexaa) in k3item.a" :key="item.id" @click="ertonghaooption($event,indexaa,item,k3item)">
 									<a></a>
 									<a></a>
 									<a></a>
 								</span>
-								<p :class="isclick.selected ? 'active' : ''" v-for="(isclick,indexbb) in k3item.a1" :key="indexbb" @click="ertonghaoalloption($event,indexbb,isclick,index,k3item)" ref="isclicka">
+								<p :class="isclick.selected ? 'active' : ''" v-for="(isclick,indexbb) in k3item.a1" :key="index" @click="ertonghaoalloption($event,indexbb,isclick,k3item)" ref="isclicka">
 									<a></a>
 									<a></a>
 								</p>
-							</li> -->
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -261,45 +253,6 @@
 				],
 				// 二同号
 				ertonghao:[
-					{title:'112',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'221',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'331',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'113',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'223',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'332',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'114',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'224',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'334',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'115',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'225',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'335',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'116',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'226',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'336',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'11',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'22',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'33',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'441',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'551',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'661',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'442',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'552',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'662',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'443',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'553',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'663',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'445',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'554',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'664',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'446',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'556',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'665',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'44',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'55',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'66',rates:'赔率63.72',rate:'63.72',selected:false},
-				],
-				// 二同号
-				ertonghaos:[
 					{
 						a:[
 							{title:'112',rates:'赔率63.72',rate:'63.72',selected:false},
@@ -436,13 +389,11 @@
 		mounted(){
 			this.getPastOpen();
 			this.getPastOp();
-			this.geteServerTime();
 			this.getLotteryList();//右上获取彩种
 			this.getPlayTree();//玩法树
 		},
 		created() {
-　　		this.geteServerTime(this.today),//input显示当前时间
-　　		this.initSetTimeout(this.today)//调用每隔1秒刷新数据,
+　　		this.geteServerTime(this.today);//input显示当前时间
 		},
 		methods:{
 			//获取彩種當前獎期時間
@@ -451,13 +402,9 @@
 					this.seasonId2 = res.data.data.seasonId
 					this.seasonId = this.seasonId2.substring(4).split("-").join("");
 					this.today = res.data.data.restSeconds;
+					this.initSetTimeout();
 				}).catch((error) => {
 					console.log("获取彩種當前獎期時間No");
-					// this.$store.state.loginStatus =false;
-					// setTimeout(() => {
-					// 	this.$router.push('/login');
-					// }, 3000);
-					
 				})
 			},
 			//倒计时
@@ -525,7 +472,6 @@
 				this.getPastOp();
 				this.geteServerTime();
 			},
-<<<<<<< HEAD
 			//二同号时
 			ertonghaooption(e,index,item,items){
 				item.selected = !item.selected;
@@ -540,7 +486,7 @@
 					console.log(kkb)
 					for(let i=0;i<this.ertonghao.length;i++){
 						for(let j=0;j<items.a.length;j++){
-							// this.d[index] = item.title;
+							// this.d[index] = item.title; 
 						}
 					}
 					// console.log(items.a.length)
@@ -555,20 +501,16 @@
 			},
 			ertonghaoalloption(e,index,item,items){
 				item.selected = !item.selected;
-				let kkb=[];
-				for(let j=0;j<items.a.length;j++){
-						items.a[j].selected = !items.a[j].selected;
-						console.log(items.a[j].title); 
-						kkb.push(items.a[j].title);
-						console.log(kkb);
+				for(let j=0;j<items.a1.length;j++){
+						// console.log(j) 
 					}
 				if(item.selected === true){
-					// for(let i=0;i<items.a.length;i++){
-					// 	items.a[i].selected = true;
-					// 	this.zhu =items.a.length;
-					// 	// console.log(i)
+					for(let i=0;i<items.a.length;i++){
+						items.a[i].selected = true;
+						this.zhu =items.a.length;
+						// console.log(i)
 						
-					// }
+					}
 					
 				}else if(item.selected === false){
 					for(let i=0;i<items.a.length;i++){
@@ -578,8 +520,6 @@
 					}
 				}
 			},
-=======
->>>>>>> edd2d24ab8e1ef6ca1f5e2ebcae544bd2ecf6c35
 			//三同号全/反选
 			tosantonghao(){
 				this.issantonghao = !this.issantonghao;
@@ -601,8 +541,6 @@
 					console.log(res.data.data.playBonus,"玩法树");
 				}).catch((error) => {
 					console.log("玩法树No");
-					// this.$store.state.loginStatus =false;
-					// this.$router.push('/login');
 				})
 			},
 			//中间->投注选号
@@ -614,35 +552,6 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
-					//二同号时
-					if(this.playId === 'k3_star2_same'){
-						if(index === 15 && k3item.selected === true){
-							for(let i=0;i<this.ertonghao.length;i++){
-								if(i % 3 === 0 && i< 15){	
-									this.ertonghao[i].selected = !this.ertonghao[i].selected;;
-									this.d[i] = this.ertonghao[i].title;
-									this.dd = this.d.filter(function(n) { return n; });
-									this.zhu ++;
-								}
-							}	
-							
-							if(index === 15 && k3item.selected === false){
-								this.ertonghao[i].selected = !this.ertonghao[i].selected;
-								for(let i=0;i<this.ertonghao.length;i++){
-									if(i % 3 === 0 && i< 15){	
-										this.ertonghao[i].selected = !this.ertonghao[i].selected;
-										this.con = '';
-										this.zhu = 0;
-									}
-								}
-							}
-							this.con = this.dd.join(',');
-						}
-						if (index === 15 || index === 16 || index === 17|| index === 34 || index === 35 || index === 36){
-							this.zhu  = this.zhu -1;
-							this.d[index] = k3item.title;
-						}
-					}
 					//二不同时
 					if(this.playId === 'k3_star2_same_not'){
 						let ret = this.groupSplit(this.dd,2);
@@ -690,11 +599,20 @@
 				}
 				// 二同号
 				for(let i=0;i<this.ertonghao.length;i++){
-					this.ertonghao[i].selected = false;
-					this.d = [];
-					this.con = '';
-					this.zhu =0;
-					this.money = 1;
+					for(let j=0;j<this.ertonghao[i].a.length;j++){
+						this.ertonghao[i].a[j].selected = false;
+						this.d = [];
+						this.con = '';
+						this.zhu =0;
+						this.money = 1;
+					}
+					for(let k=0;k<this.ertonghao[i].a1.length;k++){
+						this.ertonghao[i].a1[k].selected = false;
+						this.d = [];
+						this.con = '';
+						this.zhu =0;
+						this.money = 1;
+					}
 				}
 				// 二不同
 				for(let i=0;i<this.erbutong.length;i++){

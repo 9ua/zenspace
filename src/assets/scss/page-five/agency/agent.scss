@@ -271,3 +271,20 @@
         padding: 12px;
     }
 }
+.button1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & button {
+        width: 100%;
+        border: none;
+        height: 45px;
+        margin: 10px;
+        background: #fd4f42;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 6px;
+    }
+    
+}

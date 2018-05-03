@@ -18,7 +18,7 @@
         </div>
       </div>
       <ul>
-        <router-link to="" tag="li">
+        <router-link to="/recharge" tag="li">
           <img src="../../assets/img/five/Wallet.png" />
           <span>我要充值</span>
         </router-link>

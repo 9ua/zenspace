@@ -502,16 +502,20 @@
 			},
 			ertonghaoalloption(e,index,item,items){
 				item.selected = !item.selected;
-				for(let j=0;j<items.a1.length;j++){
-						// console.log(j) 
+				let kkb=[];
+				for(let j=0;j<items.a.length;j++){
+						items.a[j].selected = !items.a[j].selected;
+						console.log(items.a[j].title); 
+						kkb.push(items.a[j].title);
+						console.log(kkb);
 					}
 				if(item.selected === true){
-					for(let i=0;i<items.a.length;i++){
-						items.a[i].selected = true;
-						this.zhu =items.a.length;
-						// console.log(i)
+					// for(let i=0;i<items.a.length;i++){
+					// 	items.a[i].selected = true;
+					// 	this.zhu =items.a.length;
+					// 	// console.log(i)
 						
-					}
+					// }
 					
 				}else if(item.selected === false){
 					for(let i=0;i<items.a.length;i++){

@@ -395,7 +395,7 @@
 		},
 		created() {
 　　		this.geteServerTime(this.today),//input显示当前时间
-　　		this.initSetTimeout(this.today)//调用每隔1秒刷新数据,
+　　		this.initSetTimeout(this.today)//调用每隔1秒刷新数据
 		},
 		methods:{
 			//获取彩種當前獎期時間
@@ -484,6 +484,8 @@
 						this.santonghao[i].selected = false;
 						this.zhu=0;
 						this.con ='';
+					}else if(this.santonghao[i].selected === false){
+						this.issantonghao = false;
 					}
 				}
 			},

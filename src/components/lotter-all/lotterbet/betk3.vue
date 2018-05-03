@@ -88,8 +88,16 @@
 				<ul class="ertonghao" v-show="index === 1">
 					<li>
 						<ul>
-							<li v-for="(k3item,index) in ertonghao" :key="index">
-								<span :class="item.selected ? 'active' : ''" v-for="(item,indexaa) in k3item.a" :key="item.id" @click="ertonghaooption($event,indexaa,item,k3item)">
+							<li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)">
+								<span :class="ertongh.selected ? 'active' : ''">
+									{{ertongh.title}}
+									<!-- <a></a>
+									<a></a>
+									<a></a> -->
+								</span>
+							</li>
+							<!-- <li v-for="(k3item,index) in ertonghao" :key="index">
+								<span :class="item.selected ? 'active' : ''" v-for="(item,indexaa) in k3item.a" :key="item.id" @click="ertonghaooption($event,indexaa,item,index,k3item)">
 									<a></a>
 									<a></a>
 									<a></a>
@@ -393,7 +401,7 @@
 			this.getPlayTree();//玩法树
 		},
 		created() {
-　　		this.geteServerTime(this.today);//input显示当前时间
+			this.geteServerTime(this.today);//input显示当前时间
 		},
 		methods:{
 			//获取彩種當前獎期時間
@@ -410,25 +418,26 @@
 			//倒计时
 			initSetTimeout(today){
 				setInterval(() =>{
-					this.today = this.today-1;
-					var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
-          			var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-					var seconds = Math.floor((this.today % (1 * 60)) / 1);
-					if(hours < 10){
-						hours = "0"+hours
+				this.today = this.today-1;
+				var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
+						var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+				var seconds = Math.floor((this.today % (1 * 60)) / 1);
+				if(hours < 10){
+					hours = "0"+hours
+				}
+				if(minutes < 10){
+					minutes = "0"+minutes
+				}
+				if(seconds < 10){
+					seconds = "0"+seconds
+				}
+				this.countDown = hours + ":" + minutes + ":" + seconds;
+				if (this.today < 1) {
+						this.geteServerTime();
 					}
-					if(minutes < 10){
-						minutes = "0"+minutes
-					}
-					if(seconds < 10){
-						seconds = "0"+seconds
-					}
-					this.countDown = hours + ":" + minutes + ":" + seconds;
-					if (this.today < 1) {
-   				    	this.geteServerTime();
-  					}
 				},1000);
 			},
+			
 			//获取过去开奖号码10个
 			getPastOpen(){
 				this.getLotteryList();
@@ -533,6 +542,136 @@
 						this.iscreat();
 					}
 				}
+			},
+			//二同号
+			ertonghaoto(e,index,k3item){
+				k3item.selected = !k3item.selected;
+				//取余==0
+				if(index === 15 && k3item.selected === true){
+					for(let i=0;i<this.ertonghao.length;i++){
+						if(i % 3 === 0 && i<15){	
+							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
+							this.d[i] = this.ertonghao[i].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 15 && k3item.selected === false){
+						for(let i=0;i<this.ertonghao.length;i++){
+							if(i % 3 === 0 && i<15){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==1
+				if(index === 16 && k3item.selected === true){
+					for(let i=0;i<this.ertonghao.length;i++){
+						if(i % 3 === 1 && i< 16){	
+							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
+							this.d[i] = this.ertonghao[i].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 16 && k3item.selected === false){
+						for(let i=0;i<this.ertonghao.length;i++){
+							if(i % 3 === 1 && i< 16){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==2
+				if(index === 17 && k3item.selected === true){
+					for(let i=0;i<this.ertonghao.length;i++){
+						if(i % 3 === 2 && i< 17){	
+							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
+							this.d[i] = this.ertonghao[i].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 17 && k3item.selected === false){
+						for(let i=0;i<this.ertonghao.length;i++){
+							if(i % 3 === 2 && i< 17){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==0
+				if(index === 33 && k3item.selected === true){
+					for(let j=0;j<this.ertonghao.length;j++){
+						if(j % 3 === 0 && j > 17 && j< 33){	
+							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
+							this.d[j] = this.ertonghao[j].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 33 && k3item.selected === false){
+						for(let j = 0;j < this.ertonghao.length;j++){
+							if(j % 3 === 0 && j > 17 && j< 33){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==1
+				if(index === 34 && k3item.selected === true){
+					for(let j=0;j<this.ertonghao.length;j++){
+						if(j % 3 === 1 && j > 17 && j< 34){	
+							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
+							this.d[j] = this.ertonghao[j].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 34 && k3item.selected === false){
+						for(let j = 0;j < this.ertonghao.length;j++){
+							if(j % 3 === 1 && j > 17 && j< 34){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==2
+				if(index === 35 && k3item.selected === true){
+					for(let j=0;j<this.ertonghao.length;j++){
+						if(j % 3 === 2 && j > 17 && j< 35){	
+							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
+							this.d[j] = this.ertonghao[j].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 35 && k3item.selected === false){
+						for(let j = 0;j < this.ertonghao.length;j++){
+							if(j % 3 === 2 && j > 17 && j< 35){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+
+				// this.con = this.dd.join(',');
+				if(this.zhu === 0){
+					this.zhu = 0;
+				}
+				console.log(this.con)
 			},
 			//玩法树
 			getPlayTree(){

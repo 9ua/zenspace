@@ -82,12 +82,9 @@ axios.interceptors.request.use(config => {
 })
 // http响应拦截器
 axios.interceptors.response.use(data => {// 响应成功关闭loading
-  loadinginstace.close()
+  loadinginstace.close();console.log(data.data.status)
   if (data.data.status === 302) {
-    setTimeout(() => {
       router.push('/login');
-    }, 2000);
-      
   }
   return data
 }, error => {

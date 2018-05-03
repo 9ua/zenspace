@@ -88,7 +88,7 @@
 				<ul class="ertonghao" v-show="index === 1">
 					<li>
 						<ul>
-							<li v-for="(ertongh,index) in ertonghao" :key="index" @click="k3option($event,index,ertongh)">
+							<li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)">
 								<span :class="ertongh.selected ? 'active' : ''">
 									{{ertongh.title}}
 									<!-- <a></a>
@@ -539,6 +539,136 @@
 					}
 				}
 			},
+			//二同号
+			ertonghaoto(e,index,k3item){
+				k3item.selected = !k3item.selected;
+				//取余==0
+				if(index === 15 && k3item.selected === true){
+					for(let i=0;i<this.ertonghao.length;i++){
+						if(i % 3 === 0 && i<15){	
+							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
+							this.d[i] = this.ertonghao[i].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 15 && k3item.selected === false){
+						for(let i=0;i<this.ertonghao.length;i++){
+							if(i % 3 === 0 && i<15){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==1
+				if(index === 16 && k3item.selected === true){
+					for(let i=0;i<this.ertonghao.length;i++){
+						if(i % 3 === 1 && i< 16){	
+							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
+							this.d[i] = this.ertonghao[i].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 16 && k3item.selected === false){
+						for(let i=0;i<this.ertonghao.length;i++){
+							if(i % 3 === 1 && i< 16){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==2
+				if(index === 17 && k3item.selected === true){
+					for(let i=0;i<this.ertonghao.length;i++){
+						if(i % 3 === 2 && i< 17){	
+							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
+							this.d[i] = this.ertonghao[i].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 17 && k3item.selected === false){
+						for(let i=0;i<this.ertonghao.length;i++){
+							if(i % 3 === 2 && i< 17){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==0
+				if(index === 33 && k3item.selected === true){
+					for(let j=0;j<this.ertonghao.length;j++){
+						if(j % 3 === 0 && j > 17 && j< 33){	
+							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
+							this.d[j] = this.ertonghao[j].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 33 && k3item.selected === false){
+						for(let j = 0;j < this.ertonghao.length;j++){
+							if(j % 3 === 0 && j > 17 && j< 33){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==1
+				if(index === 34 && k3item.selected === true){
+					for(let j=0;j<this.ertonghao.length;j++){
+						if(j % 3 === 1 && j > 17 && j< 34){	
+							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
+							this.d[j] = this.ertonghao[j].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 34 && k3item.selected === false){
+						for(let j = 0;j < this.ertonghao.length;j++){
+							if(j % 3 === 1 && j > 17 && j< 34){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+				//取余==2
+				if(index === 35 && k3item.selected === true){
+					for(let j=0;j<this.ertonghao.length;j++){
+						if(j % 3 === 2 && j > 17 && j< 35){	
+							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
+							this.d[j] = this.ertonghao[j].title;
+							this.dd = this.d.filter(function(n) { return n; });
+							this.zhu ++;
+						}
+					}	
+					if(index === 35 && k3item.selected === false){
+						for(let j = 0;j < this.ertonghao.length;j++){
+							if(j % 3 === 2 && j > 17 && j< 35){	
+								this.con = '';
+								this.zhu = 0;
+							}
+						}
+					}
+					this.con = this.dd.join(',');
+				}
+
+				// this.con = this.dd.join(',');
+				if(this.zhu === 0){
+					this.zhu = 0;
+				}
+				console.log(this.con)
+			},
 			//玩法树
 			getPlayTree(){
 				this.$http.get(this.$store.state.url+'api/lottery/getPlayTree',{params:{lotteryId:this.lotteryId}}).then((res) => {
@@ -559,35 +689,6 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
-					//二同号时
-					if(this.playId === 'k3_star2_same'){
-						if(index === 15 && k3item.selected === true){
-							for(let i=0;i<this.ertonghao.length;i++){
-								if(i % 3 === 0 && i< 15){	
-									this.ertonghao[i].selected = !this.ertonghao[i].selected;;
-									this.d[i] = this.ertonghao[i].title;
-									this.dd = this.d.filter(function(n) { return n; });
-									this.zhu ++;
-								}
-							}	
-							
-							if(index === 15 && k3item.selected === false){
-								this.ertonghao[i].selected = !this.ertonghao[i].selected;
-								for(let i=0;i<this.ertonghao.length;i++){
-									if(i % 3 === 0 && i< 15){	
-										this.ertonghao[i].selected = !this.ertonghao[i].selected;
-										this.con = '';
-										this.zhu = 0;
-									}
-								}
-							}
-							this.con = this.dd.join(',');
-						}
-						if (index === 15 || index === 16 || index === 17|| index === 34 || index === 35 || index === 36){
-							this.zhu  = this.zhu -1;
-							this.d[index] = k3item.title;
-						}
-					}
 					//二不同时
 					if(this.playId === 'k3_star2_same_not'){
 						let ret = this.groupSplit(this.dd,2);

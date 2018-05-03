@@ -341,7 +341,7 @@
             display: flex;
             align-items: center;
             padding: 0px 16px;
-            width: 100%;
+            // width: 100%;
             & input {
                 width: 20%;
                 margin-left: 10px;
@@ -351,7 +351,7 @@
                 border-radius: 2px;
             }
             & span {
-                width: 55%;
+                width: 45%;
                 display: flex;
                 flex-direction: row;
                 font-size: 12px;
@@ -682,7 +682,7 @@
                     border-radius: 6px;
                     background: #164630;
                     border: 1px solid #164630;
-                    margin-bottom: 6px;
+                    margin-bottom: 4px;
                 }
                 & p {
                     width: 52px;
@@ -809,8 +809,7 @@
                         background-size: 200% 600%;
                     }
                     & a:nth-child(3) {
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-                        background-size: 200% 600%;
+                        display: none;
                     }
                 }
             }
@@ -896,8 +895,7 @@
                         background-size: 200% 600%;
                     }
                     & a:nth-child(3) {
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-                        background-size: 200% 600%;
+                      display: none;
                     }
                 }
                 & p {
@@ -993,8 +991,7 @@
                         background-size: 200% 600%;
                     }
                     & a:nth-child(3) {
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-                        background-size: 200% 600%;
+                        display:none;
                     }
                 }
                 & p {
@@ -1090,8 +1087,7 @@
                         background-size: 200% 600%;
                     }
                     & a:nth-child(3) {
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-                        background-size: 200% 600%;
+                        display: none;
                     }
                 }
                 & p {
@@ -1187,8 +1183,7 @@
                         background-size: 200% 600%;
                     }
                     & a:nth-child(3) {
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-                        background-size: 200% 600%;
+                        display: none;
                     }
                 }
                 & p {
@@ -1284,8 +1279,7 @@
                         background-size: 200% 600%;
                     }
                     & a:nth-child(3) {
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-                        background-size: 200% 600%;
+                        display: none;
                     }
                 }
                 & p {

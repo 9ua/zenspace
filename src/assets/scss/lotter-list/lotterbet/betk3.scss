@@ -195,6 +195,7 @@
             >p {
                 color: #caebda;
                 font-size: 12px;
+                width: 100%;
                 >ul {
                     display: flex;
                     flex-wrap: wrap;
@@ -415,7 +416,7 @@
     -moz-filter: blur(0px);
     -o-filter: blur(0px);
     -ms-filter: blur(0px);
-    filter: blur(0px);    
+    filter: blur(0px);
     ul {
         display: flex;
         flex-direction: column;
@@ -589,86 +590,90 @@
         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -48px;
     }
 }
-.yishai,.erbutong,.sanbutong{
-    display:flex;
+
+.yishai,
+.erbutong,
+.sanbutong {
+    display: flex;
     justify-content: space-between;
-    & li{
-        width:12% !important;
-        & h2{
+    & li {
+        width: 12% !important;
+        & h2 {
             padding: 4px 0px;
-          & span{
+            & span {
                 display: flex;
                 width: 22px !important;
                 height: 22px !important;
-            }  
+            }
         }
     }
     & li:nth-child(1) {
-      & h2 {
-        & span {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-          background-size: 200% 600%;
+        & h2 {
+            & span {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
+            }
         }
-      }
     }
     & li:nth-child(2) {
-      & h2 {
-        & span {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-          background-size: 200% 600%;
+        & h2 {
+            & span {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
+                background-size: 200% 600%;
+            }
         }
-      }
     }
     & li:nth-child(3) {
-      & h2 {
-        & span {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-          background-size: 200% 600%;
+        & h2 {
+            & span {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
+                background-size: 200% 600%;
+            }
         }
-      }
     }
     & li:nth-child(4) {
-      & h2 {
-        & span {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-          background-size: 200% 600%;
+        & h2 {
+            & span {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
+                background-size: 200% 600%;
+            }
         }
-      }
     }
     & li:nth-child(5) {
-    & h2 {
-        & span {
-        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-        background-size: 200% 600%;
+        & h2 {
+            & span {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
+                background-size: 200% 600%;
+            }
         }
-    }
     }
     & li:nth-child(6) {
-    & h2 {
-        & span {
-        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-        background-size: 200% 600%;
+        & h2 {
+            & span {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
+                background-size: 200% 600%;
+            }
         }
-    }
     }
 }
 
-.ertonghao{
+.ertonghao {
     border: none !important;
-    & li{
+    & li {
         border: none !important;
         width: 100% !important;
         display: flex;
-        & ul{
+        & ul {
             width: 100% !important;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            & li{
-                border:0.026667rem solid rgba(255, 255, 255, 0.3) !important;
+            & li {
+                border: 0.026667rem solid rgba(255, 255, 255, 0.3);
                 width: 32% !important;
                 margin: 0px !important;
-                & span,& p{
+                & span,
+                & p {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -676,613 +681,619 @@
                     padding: 4px 0px;
                     border-radius: 6px;
                     background: #164630;
+                    border: 1px solid #164630;
                     margin-bottom: 6px;
                 }
-                & p{
+                & p {
                     width: 52px;
                     margin: 0;
-                    & a:nth-child(1){
+                    & a:nth-child(1) {
                         width: 22px;
                         height: 22px;
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         width: 22px;
                         height: 22px;
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
                 }
-                & span{
-                    & a:nth-child(1){
+                & p.active {
+                    border: 1px solid #f4c829;
+                }
+                & span {
+                    & a:nth-child(1) {
                         width: 22px;
                         height: 22px;
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         width: 22px;
                         height: 22px;
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         width: 22px;
                         height: 22px;
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
                 }
-                
+                & span.active {
+                    border: 1px solid #f4c829;
+                }
             }
             //第一组
-            & li:nth-child(1){
-                & span:nth-child(1){
-                    & a:nth-child(1){
+            & li:nth-child(1) {
+                & span:nth-child(1) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(2){
-                    & a:nth-child(1){
+                & span:nth-child(2) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(3){
-                    & a:nth-child(1){
+                & span:nth-child(3) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-                        background-size: 200% 600%;
-                    }
-                }
-                & span:nth-child(4){
-                    & a:nth-child(1){
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-                        background-size: 200% 600%;
-                    }
-                    & a:nth-child(2){
-                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-                        background-size: 200% 600%;
-                    }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(5){
-                    & a:nth-child(1){
+                & span:nth-child(4) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(6){
-                    & a:nth-child(1){
+                & span:nth-child(5) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
+                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
+                        background-size: 200% 600%;
+                    }
+                }
+                & span:nth-child(6) {
+                    & a:nth-child(1) {
+                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                        background-size: 200% 600%;
+                    }
+                    & a:nth-child(2) {
+                        background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                        background-size: 200% 600%;
+                    }
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
             }
             //第二组
-            & li:nth-child(2){
-                & span:nth-child(1){
-                    & a:nth-child(1){
+            & li:nth-child(2) {
+                & span:nth-child(1) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(2){
-                    & a:nth-child(1){
+                & span:nth-child(2) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(3){
-                    & a:nth-child(1){
+                & span:nth-child(3) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(4){
-                    & a:nth-child(1){
+                & span:nth-child(4) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(5){
-                    & a:nth-child(1){
+                & span:nth-child(5) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(6){
-                    & a:nth-child(1){
+                & span:nth-child(6) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & p{
-                    & a:nth-child(1){
+                & p {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
                 }
             }
             //第三组
-            & li:nth-child(3){
-                & span:nth-child(1){
-                    & a:nth-child(1){
+            & li:nth-child(3) {
+                & span:nth-child(1) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(2){
-                    & a:nth-child(1){
+                & span:nth-child(2) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(3){
-                    & a:nth-child(1){
+                & span:nth-child(3) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(4){
-                    & a:nth-child(1){
+                & span:nth-child(4) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(5){
-                    & a:nth-child(1){
+                & span:nth-child(5) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(6){
-                    & a:nth-child(1){
+                & span:nth-child(6) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & p{
-                    & a:nth-child(1){
+                & p {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
                 }
             }
             //第四组
-            & li:nth-child(4){
-                & span:nth-child(1){
-                    & a:nth-child(1){
+            & li:nth-child(4) {
+                & span:nth-child(1) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(2){
-                    & a:nth-child(1){
+                & span:nth-child(2) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(3){
-                    & a:nth-child(1){
+                & span:nth-child(3) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(4){
-                    & a:nth-child(1){
+                & span:nth-child(4) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(5){
-                    & a:nth-child(1){
+                & span:nth-child(5) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(6){
-                    & a:nth-child(1){
+                & span:nth-child(6) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & p{
-                    & a:nth-child(1){
+                & p {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
                 }
             }
             //第五组
-            & li:nth-child(5){
-                & span:nth-child(1){
-                    & a:nth-child(1){
+            & li:nth-child(5) {
+                & span:nth-child(1) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(2){
-                    & a:nth-child(1){
+                & span:nth-child(2) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(3){
-                    & a:nth-child(1){
+                & span:nth-child(3) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(4){
-                    & a:nth-child(1){
+                & span:nth-child(4) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(5){
-                    & a:nth-child(1){
+                & span:nth-child(5) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(6){
-                    & a:nth-child(1){
+                & span:nth-child(6) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & p{
-                    & a:nth-child(1){
+                & p {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
                 }
             }
             //第六组
-            & li:nth-child(6){
-                & span:nth-child(1){
-                    & a:nth-child(1){
+            & li:nth-child(6) {
+                & span:nth-child(1) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(2){
-                    & a:nth-child(1){
+                & span:nth-child(2) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(3){
-                    & a:nth-child(1){
+                & span:nth-child(3) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(4){
-                    & a:nth-child(1){
+                & span:nth-child(4) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(5){
-                    & a:nth-child(1){
+                & span:nth-child(5) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
                         background-size: 200% 600%;
                     }
                 }
-                & span:nth-child(6){
-                    & a:nth-child(1){
+                & span:nth-child(6) {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(3){
+                    & a:nth-child(3) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
                 }
-                & p{
-                    & a:nth-child(1){
+                & p {
+                    & a:nth-child(1) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
-                    & a:nth-child(2){
+                    & a:nth-child(2) {
                         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
                         background-size: 200% 600%;
                     }
@@ -1290,7 +1301,12 @@
             }
         }
     }
-    
+}
+
+.daoxiaodanshuang {
+    // display: flex;
+    // justify-content: space-between;
+    // width: 100%;
 }
 
 .sanlianhao {
@@ -1300,20 +1316,20 @@
     & li {
         display: flex;
         justify-content: center;
-        border: 0.026667rem solid rgba(255, 255, 255, 0.3) !important;
+        border: 0.026667rem solid rgba(255, 255, 255, 0.3);
         margin: 0px !important;
-        & h2{
+        & h2 {
             display: flex;
             justify-content: center;
             width: 100% !important;
             height: 22px;
             overflow: hidden;
-            & a{
+            & a {
                 display: flex;
                 width: 22px !important;
                 height: 22px !important;
             }
-            & a:nth-child(1){
+            & a:nth-child(1) {
                 background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
                 background-size: 200% 600%;
             }
@@ -1327,218 +1343,219 @@
             }
         }
     }
-    & li:nth-child(1){
-        & h2{
+    & li:nth-child(1) {
+        & h2 {
             & a:nth-child(1) {
-              background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-              background-size: 200% 600%;
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
             }
-
             & a:nth-child(2) {
-              background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-              background-size: 200% 600%;
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
+                background-size: 200% 600%;
             }
-
             & a:nth-child(3) {
-              background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-              background-size: 200% 600%;
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
+                background-size: 200% 600%;
             }
         }
     }
     & li:nth-child(2) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-          background-size: 200% 600%;
-        }
-      }
     }
-
     & li:nth-child(3) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-          background-size: 200% 600%;
-        }
-      }
     }
-
     & li:nth-child(4) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-          background-size: 200% 600%;
-        }
-      }
     }
 }
-.santonghao{
+
+.santonghao {
     display: flex;
     // justify-content: space-between;
     border: none !important;
     & li {
-      display: flex;
-      justify-content: center;
-      border: 0.026667rem solid rgba(255, 255, 255, 0.3) !important;
-      margin: 0px 0px 4px !important;
-      width: 32% !important;
-      & h2 {
         display: flex;
         justify-content: center;
-        width: 100% !important;
-        height: 22px;
-        overflow: hidden;
-        & a {
-          display: flex;
-          width: 22px !important;
-          height: 22px !important;
+        border: 0.026667rem solid rgba(255, 255, 255, 0.3);
+        margin: 0px 4px 8px !important;
+        width: 30% !important;
+        & h2 {
+            display: flex;
+            justify-content: center;
+            width: 100% !important;
+            height: 22px;
+            overflow: hidden;
+            & a {
+                display: flex;
+                width: 22px !important;
+                height: 22px !important;
+            }
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-          background-size: 200% 600%;
-        }
-      }
     }
-    & p{
+    & p {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         margin-top: 20px;
-        & span{
+        & span {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 110px;
             height: 26px;
-            border: 0.026667rem solid rgba(255, 255, 255, 0.3) !important;
+            border: 0.026667rem solid rgba(255, 255, 255, 0.3);
+        }
+        & span.active {
+            border: 1px solid #f4c829;
+            color: #f4c829;
         }
     }
     & li:nth-child(1) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-          background-size: 200% 600%;
-        }
-      }
     }
     & li:nth-child(2) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-          background-size: 200% 600%;
-        }
-      }
     }
     & li:nth-child(3) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-          background-size: 200% 600%;
-        }
-      }
     }
     & li:nth-child(4) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-          background-size: 200% 600%;
-        }
-      }
     }
     & li:nth-child(5) {
-      & h2 {
-        & a:nth-child(1) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-          background-size: 200% 600%;
+        & h2 {
+            & a:nth-child(1) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(2) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
+                background-size: 200% 600%;
+            }
+            & a:nth-child(3) {
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
+                background-size: 200% 600%;
+            }
         }
-        & a:nth-child(2) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-          background-size: 200% 600%;
-        }
-        & a:nth-child(3) {
-          background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-          background-size: 200% 600%;
-        }
-      }
     }
     & li:nth-child(6) {
         & h2 {
             & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
+                background-size: 200% 600%;
             }
             & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
+                background-size: 200% 600%;
             }
             & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
+                background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
+                background-size: 200% 600%;
             }
         }
     }

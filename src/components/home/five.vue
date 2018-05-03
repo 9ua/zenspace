@@ -1,5 +1,5 @@
 <template>
-  <div class="five" v-show="$store.state.loginStatus === true">
+  <div class="five" v-show="$store.state.loginStatus">
     <headers></headers>
     <div class="five-top">
       <div>

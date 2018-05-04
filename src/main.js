@@ -66,6 +66,37 @@ Vue.use(Carousel);
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 
+<<<<<<< HEAD
+// 超时时间
+axios.defaults.timeout = 5000
+// http请求拦截器
+var loadinginstace
+axios.interceptors.request.use(config => {
+  // element ui Loading方法
+  loadinginstace = Loading.service({ fullscreen: true })
+  return config
+}, error => {
+  loadinginstace.close()
+  Message.error({
+    message: '加载超时！请检查网络或重新登陆!'
+  })
+  return Promise.reject(error)
+})
+// http响应拦截器
+axios.interceptors.response.use(data => {// 响应成功关闭loading
+  loadinginstace.close();console.log(data.data.status)
+  if (data.data.status === 302) {
+      router.push('/login');
+  }
+  return data
+}, error => {
+  loadinginstace.close()
+  Message.error({
+    message: '加载失败！请检查网络或重新登陆!'
+  })
+  return Promise.reject(error)
+})
+=======
 // // 超时时间
 // axios.defaults.timeout = 5000
 // // http请求拦截器
@@ -98,6 +129,7 @@ Vue.config.productionTip = false
 //   })
 //   return Promise.reject(error)
 // })
+>>>>>>> 148e03768f3e3dcd9fd740c42f6ff6d86e87a0b9
 
 // export default axios
 

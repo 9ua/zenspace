@@ -15,6 +15,9 @@
             position: absolute;
             right: 16px;
             padding: 16px;
+            & span {
+                padding: 16px;
+            }
         }
         & i {
             position: absolute;
@@ -156,4 +159,132 @@
 
 .typeo {
     border-bottom: 5px solid #f2f2f2 ;
+}
+
+.recharge {
+    .agent-top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 46px;
+        font-size: 20px;
+        background: linear-gradient(to right, #f75f5b, #fead50);
+        & .dim {
+            color: #fff;
+            font-size: 16px;
+            position: absolute;
+            right: 16px;
+            padding: 16px;
+        }
+        & i {
+            position: absolute;
+            left: 16px;
+            color: #fff;
+        }
+        & p {
+            color: #fff;
+        }
+        & ul {
+            border: 1px solid #fff;
+            display: flex;
+            height: 32px;
+            border-radius: 4px;
+            align-items: center;
+            & li {
+                font-size: 16px;
+                padding: 0px 14px;
+                height: 32px;
+                line-height: 32px;
+                color: #fff;
+            }
+            & .router-link-exact-active.router-link-active {
+                background: #fff;
+                color: #dc3b40;
+            }
+        }
+
+    }
+    & .recharge-top {
+        background: #fff;
+        padding: 0px 12px;
+        & li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            height: 60px;
+            border-bottom: 1px solid #E8E8E8;
+            >div {
+                display: flex;
+                align-items: center;
+            }
+        }
+        & i {
+            margin-left: 10px;
+            color: #777;
+            font-size: 20px;
+        }
+        
+    }
+    & .recharge-btn {
+        background: #fff;
+        padding: 0px 12px;
+        margin-top: 16px;
+        & li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            height: 52px;
+            >div {
+                display: flex;
+                align-items: center;
+            }
+        }
+        & i {
+            margin-left: 10px;
+            color: #777;
+            font-size: 20px;
+        }
+        & li:nth-child(3) {
+            & select {
+                width: 42px;
+                border: none;
+                line-height: 22px;
+                font-size: 16px;
+                appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+            }
+        }
+    }
+}
+
+.dim {
+    color: #333;
+    font-size: 16px;
+    position: absolute;
+    right: 16px;
+    padding: 12px;
+    & span {
+        padding: 12px;
+    }
+}
+.button1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & button {
+        width: 100%;
+        border: none;
+        height: 45px;
+        margin: 10px;
+        background: #fd4f42;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 6px;
+    }
+    
 }

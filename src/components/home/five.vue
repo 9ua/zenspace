@@ -79,6 +79,10 @@
           name: '我的消息',
           icon: 'icon-wenben',
           paths: 'mymsg'
+        },{
+          name: '查詢訂單',
+          icon: 'icon-wenben',
+          paths: 'rechargeserch'
         }, ]
       }
     },

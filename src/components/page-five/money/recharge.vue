@@ -19,7 +19,7 @@
 			</li>
 			<li>
 				<p>账号</p>
-				<div class="dim" @click="show = ! show">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
+				<div class="dim" @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
 				
 			</li>
 			<li>
@@ -71,13 +71,13 @@
 					<li><div class="button1"><button @click="sendReq()">确定</button><button @click="show2 = !show2">取消</button></div></li>
 				</ul>
 	        </van-actionsheet>
-            <!-- <van-popup v-model="show2" position="bottom">
+            <van-popup v-model="show3" position="bottom">
 	            <div class="mIcode-sure">
-                    <div class="sure2"><p>确定要删除此邀请码?</p></div>
-                    <button class="del" @click="delInviteCode()">删除</button><button class="nodel" @click="select2()">取消</button>
+                    <div class="sure2"><p>{{content}}</p></div>
+                    <button class="del" @click="show3 = !show3">確定</button>
                 </div>
-	        </van-popup> -->
-		<van-actionsheet class="mIcode-go" v-model="show" :actions="payway" cancel-text="取消">
+	        </van-popup>
+		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
         </van-actionsheet>
   </div>
 </template>
@@ -92,8 +92,10 @@ export default {
 		  chargeamount:'',
 		  card:'',
 		  niceName:'',
-		  show:false,
+		  content:'',
+		  show1:false,
 		  show2:false,
+		  show3:false,
 		  selectBank:'請選擇銀行',
 		  bankList:[],
 		  payway:[],
@@ -123,7 +125,7 @@ export default {
 		onClick(item){
 			this.selectBank = item.name;
 			this.bankNameId = item.id;
-			this.show = ! this.show;
+			this.show1 = ! this.show1;
 			console.log(this.betweenType);
 		},
 		sendReq(){
@@ -134,8 +136,28 @@ export default {
             formData.append('niceName',this.niceName);
             formData.append('card',this.card);
             this.$axios.post(this.$store.state.url+'api/proxy/setPayApplication', formData,config).then((res) => {
-            console.log("成功!");
-            this.show2 = !this.show2;
+				console.log(res.code);
+				if(res.data.code === 1) {
+					console.log(res.data.data.message);
+					console.log(res.data.code);
+					this.content = res.data.data.message;
+					this.show2 = !this.show2;
+					this.show3 = !this.show3;
+				} else if ( res.data.code === 0 ) {
+					console.log(res.data.data.message);
+					console.log(res.data.code);
+					this.content = res.data.data.message;
+					this.show2 = !this.show2;
+					this.show3 = !this.show3;
+				} else {
+					console.log(res.data.content);
+					console.log(res.data.code);
+					
+					this.content = res.data.content;
+					this.show2 = !this.show2;
+					this.show3 = !this.show3;
+				}
+			
           }).catch((error) => {
           		console.log("No")
           });   

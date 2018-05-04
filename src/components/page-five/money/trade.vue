@@ -91,7 +91,7 @@ export default {
       this.getTradeList();
     },
     getTradeList(){
-        this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:3,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
+        this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:0,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
             console.log(res);
             // this.highbet = res.data.data.rebateRatio;
             // for(let i = res.data.data.rebateRatio*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};

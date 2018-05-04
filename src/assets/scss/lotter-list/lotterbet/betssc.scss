@@ -286,29 +286,40 @@
                           flex-direction: column;
                           & p{
                               display: flex;
-                              height: 36px;
+                              height: 80px;
                               align-items: center;
-                              justify-content: space-between;
                             & b{
                                 display: flex;
-                                align-items: center;
+                                align-items: flex-start;
                                 justify-content: center;
                                 width: 14%;
+                                height: 80px;
                             }
                             & span{
                                 display: flex;
-                                align-items: center;
+                                width: 86%;
+                                flex-wrap: wrap;
                                 justify-content: center;
-                                width: 24px;
-                                height: 24px;
-                                border-radius: 50%;
-                                background: #caebda;
-                                color: #212121;
-                            }  
-                            & span.active{
-                                background: #f0c930;
-                                border: #f0c930;
-                            }
+                                // justify-content: space-between;
+                                & a{
+                                    margin:0px 26px 8px 0px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    width:30px;
+                                    height: 30px;
+                                    border-radius: 50%;
+                                    background: #caebda;
+                                    color: #212121; 
+                                }
+                                & a:nth-child(5){
+                                    // margin-right:0px;
+                                }
+                                & a.active {
+                                  background: #f0c930;
+                                  border: #f0c930;
+                                }
+                            } 
                           }
                       }
                   }

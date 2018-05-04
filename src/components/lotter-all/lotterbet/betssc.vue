@@ -20,7 +20,7 @@
 										<!-- <a>{{index}}</a> -->
 										<!-- <a>{{indexa}}</a> -->
 										<!-- <a>{{indexb}}</a> -->
-										<a>{{items.title}}</a>
+										<a>{{items.groupName}}{{items.title}}</a>
 									</span>
 								</div>
 							</div>
@@ -92,7 +92,9 @@
 							<li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
 								<p v-for="(numViews,indexff) in player.numView" :key="indexff">
 									<b>{{numViews.title}}</b>
-									<span v-for="(num,indexg) in numViews.nums" :key="indexg" :class=" indexg===0 ? 'active' : '' " @click="curBalls(indexg,num,numViews)">{{num.ball}}</span>
+									<span>
+										<a v-for="(num,indexg) in numViews.nums" :key="indexg" :class=" indexg===0 ? 'active' : '' " @click="curBalls(indexg,num,numViews)">{{num.ball}}</a>
+									</span>
 								</p>
 							</li>
 						</ul>
@@ -351,7 +353,7 @@
 			},
 			//头部菜单项
 			k3Tab(e,indexa,indexb,items,into,index){
-				this.titles = into.title+ ' ' +items.title;
+				this.titles = into.title +' '+items.groupName+' '+items.title;
 				this.intotitle = into.title;
 				this.itemstitle = items.title;
 				this.navlist = index;

@@ -247,6 +247,7 @@
 				// c:[],//选中的号码的下标
 				d:[],//选中的号码的下标
 				dd:[],//选中的号码的下标
+				hezhiitem:[],//和值时选中的号码的下标
 				con:'',
 				cons:'',
 				playBonus:'',//玩法树
@@ -384,12 +385,12 @@
 				],
 				// 和值
 				k3options:[
-					{title:'4',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'5',rates:'赔率31.86',rate:'31.86',selected:false},
-					{title:'6',rates:'赔率19.11',rate:'19.11',selected:false},
-					{title:'7',rates:'赔率12.74',rate:'12.74',selected:false},
-					{title:'8',rates:'赔率9.10',rate:'9.10',selected:false},
-					{title:'9',rates:'赔率7.64',rate:'7.64',selected:false},
+					{title:'04',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'05',rates:'赔率31.86',rate:'31.86',selected:false},
+					{title:'06',rates:'赔率19.11',rate:'19.11',selected:false},
+					{title:'07',rates:'赔率12.74',rate:'12.74',selected:false},
+					{title:'08',rates:'赔率9.10',rate:'9.10',selected:false},
+					{title:'09',rates:'赔率7.64',rate:'7.64',selected:false},
 					{title:'10',rates:'赔率7.08',rate:'7.08',selected:false},
 					{title:'11',rates:'赔率7.08',rate:'7.08',selected:false},
 					{title:'12',rates:'赔率7.64',rate:'7.64',selected:false},
@@ -438,9 +439,10 @@
 			this.getPastOp();
 			this.getLotteryList();//右上获取彩种
 			this.getPlayTree();//玩法树
+			this.geteServerTime(this.today);//input显示当前时间
 		},
 		created() {
-			this.geteServerTime(this.today);//input显示当前时间
+			// this.geteServerTime(this.today);//input显示当前时间
 		},
 		methods:{
 			//获取彩種當前獎期時間
@@ -456,7 +458,7 @@
 			},
 			//倒计时
 			initSetTimeout(today){
-				setInterval(() =>{
+				settimeout(() =>{
 				this.today = this.today-1;
 				var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
 						var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
@@ -538,124 +540,139 @@
 			ertonghaoto(e,index,k3item){
 				k3item.selected = !k3item.selected;
 				//取余==0
-				if(index === 15 && k3item.selected === true){
-					for(let i=0;i<this.ertonghao.length;i++){
-						if(i % 3 === 0 && i<15){	
-							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
-							this.d[i] = this.ertonghao[i].title;
-							this.dd = this.d.filter(function(n) { return n; });
-							this.zhu ++;
-						}
-					}	
-					if(index === 15 && k3item.selected === false){
+				if(k3item.selected === true){
+					this.rates = k3item.rate;
+					this.d[index] = k3item.title
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					this.zhu ++;
+
+					if(index === 15 && k3item.selected === true){
+						k3item.selected === false;
 						for(let i=0;i<this.ertonghao.length;i++){
 							if(i % 3 === 0 && i<15){	
-								this.con = '';
-								this.zhu = 0;
+								this.ertonghao[i].selected = !this.ertonghao[i].selected;
+								this.d[i] = this.ertonghao[i].title;
+								this.dd = this.d.filter(function(n) { return n; });
+								this.zhu ++;
+							}
+						}	
+						if(index === 15 && k3item.selected === false){
+							for(let i=0;i<this.ertonghao.length;i++){
+								if(i % 3 === 0 && i<15){	
+									this.con = '';
+									this.zhu = 0;
+								}
 							}
 						}
+						this.con = this.dd.join(',');
 					}
-					this.con = this.dd.join(',');
-				}
-				//取余==1
-				if(index === 16 && k3item.selected === true){
-					for(let i=0;i<this.ertonghao.length;i++){
-						if(i % 3 === 1 && i< 16){	
-							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
-							this.d[i] = this.ertonghao[i].title;
-							this.dd = this.d.filter(function(n) { return n; });
-							this.zhu ++;
-						}
-					}	
-					if(index === 16 && k3item.selected === false){
+					//取余==1
+					if(index === 16 && k3item.selected === true){
 						for(let i=0;i<this.ertonghao.length;i++){
 							if(i % 3 === 1 && i< 16){	
-								this.con = '';
-								this.zhu = 0;
+								this.ertonghao[i].selected = !this.ertonghao[i].selected;
+								this.d[i] = this.ertonghao[i].title;
+								this.dd = this.d.filter(function(n) { return n; });
+								this.zhu ++;
+							}
+						}	
+						if(index === 16 && k3item.selected === false){
+							for(let i=0;i<this.ertonghao.length;i++){
+								if(i % 3 === 1 && i< 16){	
+									this.con = '';
+									this.zhu = 0;
+								}
 							}
 						}
+						this.con = this.dd.join(',');
 					}
-					this.con = this.dd.join(',');
-				}
-				//取余==2
-				if(index === 17 && k3item.selected === true){
-					for(let i=0;i<this.ertonghao.length;i++){
-						if(i % 3 === 2 && i< 17){	
-							this.ertonghao[i].selected = !this.ertonghao[i].selected;;
-							this.d[i] = this.ertonghao[i].title;
-							this.dd = this.d.filter(function(n) { return n; });
-							this.zhu ++;
-						}
-					}	
-					if(index === 17 && k3item.selected === false){
+					//取余==2
+					if(index === 17 && k3item.selected === true){
 						for(let i=0;i<this.ertonghao.length;i++){
 							if(i % 3 === 2 && i< 17){	
-								this.con = '';
-								this.zhu = 0;
+								this.ertonghao[i].selected = !this.ertonghao[i].selected;
+								this.d[i] = this.ertonghao[i].title;
+								this.dd = this.d.filter(function(n) { return n; });
+								this.zhu ++;
+							}
+						}	
+						if(index === 17 && k3item.selected === false){
+							for(let i=0;i<this.ertonghao.length;i++){
+								if(i % 3 === 2 && i< 17){	
+									this.con = '';
+									this.zhu = 0;
+								}
 							}
 						}
+						this.con = this.dd.join(',');
 					}
-					this.con = this.dd.join(',');
-				}
-				//取余==0
-				if(index === 33 && k3item.selected === true){
-					for(let j=0;j<this.ertonghao.length;j++){
-						if(j % 3 === 0 && j > 17 && j< 33){	
-							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
-							this.d[j] = this.ertonghao[j].title;
-							this.dd = this.d.filter(function(n) { return n; });
-							this.zhu ++;
-						}
-					}	
-					if(index === 33 && k3item.selected === false){
-						for(let j = 0;j < this.ertonghao.length;j++){
+					//取余==0
+					if(index === 33 && k3item.selected === true){
+						for(let j=0;j<this.ertonghao.length;j++){
 							if(j % 3 === 0 && j > 17 && j< 33){	
-								this.con = '';
-								this.zhu = 0;
+								this.ertonghao[j].selected = !this.ertonghao[j].selected;
+								this.d[j] = this.ertonghao[j].title;
+								this.dd = this.d.filter(function(n) { return n; });
+								this.zhu ++;
+							}
+						}	
+						if(index === 33 && k3item.selected === false){
+							for(let j = 0;j < this.ertonghao.length;j++){
+								if(j % 3 === 0 && j > 17 && j< 33){	
+									this.con = '';
+									this.zhu = 0;
+								}
 							}
 						}
+						this.con = this.dd.join(',');
 					}
-					this.con = this.dd.join(',');
-				}
-				//取余==1
-				if(index === 34 && k3item.selected === true){
-					for(let j=0;j<this.ertonghao.length;j++){
-						if(j % 3 === 1 && j > 17 && j< 34){	
-							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
-							this.d[j] = this.ertonghao[j].title;
-							this.dd = this.d.filter(function(n) { return n; });
-							this.zhu ++;
-						}
-					}	
-					if(index === 34 && k3item.selected === false){
-						for(let j = 0;j < this.ertonghao.length;j++){
+					//取余==1
+					if(index === 34 && k3item.selected === true){
+						for(let j=0;j<this.ertonghao.length;j++){
 							if(j % 3 === 1 && j > 17 && j< 34){	
-								this.con = '';
-								this.zhu = 0;
+								this.ertonghao[j].selected = !this.ertonghao[j].selected;
+								this.d[j] = this.ertonghao[j].title;
+								this.dd = this.d.filter(function(n) { return n; });
+								this.zhu ++;
+							}
+						}	
+						if(index === 34 && k3item.selected === false){
+							for(let j = 0;j < this.ertonghao.length;j++){
+								if(j % 3 === 1 && j > 17 && j< 34){	
+									this.con = '';
+									this.zhu = 0;
+								}
 							}
 						}
+						this.con = this.dd.join(',');
 					}
-					this.con = this.dd.join(',');
-				}
-				//取余==2
-				if(index === 35 && k3item.selected === true){
-					for(let j=0;j<this.ertonghao.length;j++){
-						if(j % 3 === 2 && j > 17 && j< 35){	
-							this.ertonghao[j].selected = !this.ertonghao[j].selected;;
-							this.d[j] = this.ertonghao[j].title;
-							this.dd = this.d.filter(function(n) { return n; });
-							this.zhu ++;
-						}
-					}	
-					if(index === 35 && k3item.selected === false){
-						for(let j = 0;j < this.ertonghao.length;j++){
+					//取余==2
+					if(index === 35 && k3item.selected === true){
+						for(let j=0;j<this.ertonghao.length;j++){
 							if(j % 3 === 2 && j > 17 && j< 35){	
-								this.con = '';
-								this.zhu = 0;
+								this.ertonghao[j].selected = !this.ertonghao[j].selected;
+								this.d[j] = this.ertonghao[j].title;
+								this.dd = this.d.filter(function(n) { return n; });
+								this.zhu ++;
+							}
+						}	
+						if(index === 35 && k3item.selected === false){
+							for(let j = 0;j < this.ertonghao.length;j++){
+								if(j % 3 === 2 && j > 17 && j< 35){	
+									this.con = '';
+									this.zhu = 0;
+								}
 							}
 						}
+						this.con = this.dd.join(',');
 					}
+				}else if(k3item.selected === false){
+					this.rates = 0;
+					this.d.splice(index,1,"");
+					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
+					this.zhu --;
 				}
 
 				// this.con = this.dd.join(',');
@@ -663,6 +680,40 @@
 					this.zhu = 0;
 				}
 				console.log(this.con)
+			},
+			//和值
+			hezhi(e,index,k3item){
+				k3item.selected = !k3item.selected;
+				let rets = [3,6,10,15, 21, 25, 27, 27, 25, 21, 15, 10, 6,3];
+					let selected = ['04','05','06','07', '08', '09', '10', '11', '12', '13', '14', '15', '16','17'];
+					let j=0;
+				if(k3item.selected === true){
+					this.rates = k3item.rate;
+					this.d[index] = k3item.title
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					
+					for (var i = 0; i < selected.length; i++) {
+						for (var k = 0; k < this.d.length; k++) {
+							if (selected[i] == this.d[k]) {
+								this.hezhiitem[i] = rets[i]
+								j += this.hezhiitem[i];
+							}
+						}
+					}
+					this.zhu = j;
+					console.log(this.hezhiitem,'-----',this.hezhiitem[index])
+				}else if(k3item.selected === false){
+					this.rates = 0;
+					this.d.splice(index,1,"");
+					this.hezhiitem.splice(index,1,"");
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					// this.zhu =this.zhu - hezhiitem[index];
+					console.log(this.hezhiitem[index],'abc')
+				}
+				// console.log(this.hezhiitem,'abc')
+				// console.log(this.zhu,hezhiitem,'----',this.zhu - hezhiitem[index]);
 			},
 			//玩法树
 			getPlayTree(){
@@ -684,17 +735,6 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
-					console.log(this.playId);
-					console.log(this.dd)
-					if(this.playId === 'k3_star3_and'){
-						let rets = [3,6,10,15, 21, 25, 27, 27, 25, 21, 15, 10, 6,3];
-						let selected = [4,5,6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17];
-						for(let i = 0; i < selected.length; i++){
-							if(this. k3item.title === i){
-									this.zhu += rets[i];
-							}
-						} 
-					}
 					//二不同时
 					if(this.playId === 'k3_star2_same_not'){
 						let ret = this.groupSplit(this.dd,2);
@@ -707,6 +747,7 @@
 						abc = arr.join(',')
 						this.con = abc;
 						this.zhu = arr.length;
+						console.log(this.zhu)
 					}
 					//三不同时
 					if(this.playId === 'k3_star3_same_not'){

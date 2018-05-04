@@ -71,12 +71,37 @@
 					<li><div class="button1"><button @click="sendReq()">确定</button><button @click="show2 = !show2">取消</button></div></li>
 				</ul>
 	        </van-actionsheet>
-            <van-popup v-model="show3" position="bottom">
-	            <div class="mIcode-sure">
-                    <div class="sure2"><p>{{content}}</p></div>
-                    <button class="del" @click="show3 = !show3">確定</button>
+            <van-popup v-model="show3">
+	            <div class="button1">
+                    <div ><p>{{content}}</p><button class="del" @click="show3 = !show3">確定</button></div>
                 </div>
 	        </van-popup>
+			<van-actionsheet class="" v-model="show4">
+	            <ul class="recharge-top">
+					<li>
+						<div class="center"><p>申请完成，请依据以下资讯打款</p></div>	
+					</li>
+					<li>
+						<p>应打入金额</p><span>{{chargeamount}}</span>
+					</li>
+					<li>
+						<p>收款人姓名</p><span>{{receiveNickName}}</span>
+					</li>
+					<li>
+						<p>收款银行</p><span>{{receiveBankName}}</span>
+					</li>
+					<li>
+						<p>收款卡号</p><span>{{receiveCard}}</span>
+					</li>
+					<li>
+						<p>收款银行地址</p><span>{{receiveAddress}}</span>
+					</li>
+					<li>
+						<p>(建议将此画面截图方便打款)</p>
+					</li>
+					<li><div class="button1"><button @click="goBack()">确定</button></div></li>
+				</ul>
+	        </van-actionsheet>
 		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
         </van-actionsheet>
   </div>
@@ -93,9 +118,14 @@ export default {
 		  card:'',
 		  niceName:'',
 		  content:'',
+		  receiveNickName:'',
+		  receiveBankName:'',
+		  receiveCard:'',
+		  receiveAddress:'',
 		  show1:false,
 		  show2:false,
 		  show3:false,
+		  show4:false,
 		  selectBank:'請選擇銀行',
 		  bankList:[],
 		  payway:[],
@@ -122,6 +152,9 @@ export default {
 				console.log(this.bankList);
 			
 		},
+		goBack(){
+			this.$router.push({path:'/five'});
+		},
 		onClick(item){
 			this.selectBank = item.name;
 			this.bankNameId = item.id;
@@ -138,11 +171,16 @@ export default {
             this.$axios.post(this.$store.state.url+'api/proxy/setPayApplication', formData,config).then((res) => {
 				console.log(res.code);
 				if(res.data.code === 1) {
-					console.log(res.data.data.message);
-					console.log(res.data.code);
-					this.content = res.data.data.message;
+					console.log(res.data.data.receiveAddress);
+					this.receiveAddress = res.data.data.receiveAddress;
+					console.log(res.data.data.receiveNickName);
+					this.receiveNickName = res.data.data.receiveNickName;
+					console.log(res.data.data.receiveCard);
+					this.receiveCard = res.data.data.receiveCard;
+					console.log(res.data.data.receiveBankName);
+					this.receiveBankName = res.data.data.receiveBankName;
 					this.show2 = !this.show2;
-					this.show3 = !this.show3;
+					this.show4 = !this.show4;
 				} else if ( res.data.code === 0 ) {
 					console.log(res.data.data.message);
 					console.log(res.data.code);

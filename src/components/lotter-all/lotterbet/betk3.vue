@@ -684,6 +684,17 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
+					console.log(this.playId);
+					console.log(this.dd)
+					if(this.playId === 'k3_star3_and'){
+						let rets = [3,6,10,15, 21, 25, 27, 27, 25, 21, 15, 10, 6,3];
+						let selected = [4,5,6,7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17];
+						for(let i = 0; i < selected.length; i++){
+							if(this. k3item.title === i){
+									this.zhu += rets[i];
+							}
+						} 
+					}
 					//二不同时
 					if(this.playId === 'k3_star2_same_not'){
 						let ret = this.groupSplit(this.dd,2);

@@ -184,33 +184,33 @@
   		</div>
   	</div>
   	<van-popup v-model="bet" class="betk3pop">
-			<ul class="beta"  v-if="zhu < 1">
-				<li>温馨提示！</li>
-				<li>请至少选择一注号码投注</li>
-				<li @click="bet = ! bet"><button>确定</button></li>
-			</ul>
-			<ul class="betb" v-else-if="money === ''">
-				<li>温馨提示！</li>
-				<li>请填写您要投注的金额</li>
-				<li @click="bet = ! bet"><button>确定</button></li>
-			</ul>
-			<ul class="betc" v-show="betGoshow"  v-else>
-				<li>投注确认</li>
-				<li>
-					<p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-					<p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-					<p><span>投注内容：</span>{{con}}</p>
-				</li>
-				<li><button @click="bet = ! bet">取消</button><button @click="betGo">确定</button></li>
-			</ul>
-			<ul class="bete"  v-show="betsuccess">
-				<li>温馨提示！</li>
-				<li>
-					<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
-				</li>
-				<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
-			</ul>
-		</van-popup>
+		<ul class="beta"  v-if="zhu < 1">
+			<li>温馨提示！</li>
+			<li>请至少选择一注号码投注</li>
+			<li @click="bet = ! bet"><button>确定</button></li>
+		</ul>
+		<ul class="betb" v-else-if="money === ''">
+			<li>温馨提示！</li>
+			<li>请填写您要投注的金额</li>
+			<li @click="bet = ! bet"><button>确定</button></li>
+		</ul>
+		<ul class="betc" v-show="betGoshow"  v-else>
+			<li>投注确认</li>
+			<li>
+				<p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+				<p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+				<p><span>投注内容：</span>{{con}}</p>
+			</li>
+			<li><button @click="bet = ! bet">取消</button><button @click="betGo">确定</button></li>
+		</ul>
+		<ul class="bete"  v-show="betsuccess">
+			<li>温馨提示！</li>
+			<li>
+				<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+			</li>
+			<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
+		</ul>
+	</van-popup>
   </div>
 </template>
 <script>
@@ -385,6 +385,10 @@
 				],
 				// 和值
 				k3options:[
+					{title:'大',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'小',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'单',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'双',rates:'赔率63.72',rate:'63.72',selected:false},
 					{title:'04',rates:'赔率63.72',rate:'63.72',selected:false},
 					{title:'05',rates:'赔率31.86',rate:'31.86',selected:false},
 					{title:'06',rates:'赔率19.11',rate:'19.11',selected:false},
@@ -439,10 +443,11 @@
 			this.getPastOp();
 			this.getLotteryList();//右上获取彩种
 			this.getPlayTree();//玩法树
-			this.geteServerTime(this.today);//input显示当前时间
+			this.geteServerTime();//获取彩種當前獎期時間
 		},
 		created() {
-			// this.geteServerTime(this.today);//input显示当前时间
+			this.geteServerTime(this.today),//input显示当前时间
+　　		this.initSetTimeout(this.today)//调用每隔1秒刷新数据,
 		},
 		methods:{
 			//获取彩種當前獎期時間
@@ -451,14 +456,13 @@
 				this.seasonId2 = res.data.data.seasonId
 				this.seasonId = this.seasonId2.substring(4).split("-").join("");
 				this.today = res.data.data.restSeconds;
-				this.initSetTimeout();
 				}).catch((error) => {
 				console.log("获取彩種當前獎期時間No");
 				})
 			},
 			//倒计时
 			initSetTimeout(today){
-				settimeout(() =>{
+				setInterval(() =>{
 				this.today = this.today-1;
 				var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
 						var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));

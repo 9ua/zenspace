@@ -16,6 +16,7 @@ import profit from '@/components/page-four/profit'
 import pop from '@/components/page-four/pop'
 import bet from '@/components/page-five/money/bet'
 import recharge from '@/components/page-five/money/recharge'
+import rechargeserch from '@/components/page-five/money/rechargeserch'
 import trade from '@/components/page-five/money/trade'
 import agency from '@/components/page-five/agency'
 import agentBetRecord from '@/components/page-five/agency/agentBetRecord'
@@ -185,5 +186,6 @@ export default new Router({
         },
         { path: '/trade', name: 'trade', component: trade, meta: { keepAlive: true }, },
         { path: '/recharge', name: 'recharge', component: recharge, meta: { keepAlive: true }, },
+        { path: '/rechargeserch', name: 'rechargeserch', component: rechargeserch, meta: { keepAlive: true }, },
     ]
 })

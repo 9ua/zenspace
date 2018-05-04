@@ -324,9 +324,8 @@
 			this.getLotteryList();//右上获取彩种
 			this.getPlayTree();//玩法树
 		},
-		created() {
-　　		this.geteServerTime(this.today),//input显示当前时间
-　　		this.initSetTimeout(this.today)//调用每隔1秒刷新数据,
+		created(){
+			this.geteServerTime();//input显示当前时间
 		},
 		methods:{
 			//中间->投注选号
@@ -504,33 +503,37 @@
 			//获取彩種當前獎期時間
 			geteServerTime(){
 				this.$http.get(this.$store.state.url+'api/lottery/getCurrentSaleTime',{params:{lotteryId:this.lotteryId}}).then((res) => {
+					if (res.data.code === 1) {
 					this.seasonId2 = res.data.data.seasonId
 					this.seasonId = this.seasonId2.substring(4).split("-").join("");
 					this.today = res.data.data.restSeconds;
+					this.initSetTimeout();
+					}
 				}).catch((error) => {
 					console.log("获取彩種當前獎期時間No");
 				})
 			},
 			//倒计时
 			initSetTimeout(today){
-				setInterval(() =>{
-					this.today = this.today-1;
-					var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
-          			var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-					var seconds = Math.floor((this.today % (1 * 60)) / 1);
-					if(hours < 10){
-						hours = "0"+hours
+				let timer = setInterval(() =>{
+				this.today = this.today-1;
+				var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
+						var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+				var seconds = Math.floor((this.today % (1 * 60)) / 1);
+				if(hours < 10){
+					hours = "0"+hours
+				}
+				if(minutes < 10){
+					minutes = "0"+minutes
+				}
+				if(seconds < 10){
+					seconds = "0"+seconds
+				}
+				this.countDown = hours + ":" + minutes + ":" + seconds;
+				if (this.today <1 ) {
+						this.geteServerTime();
+						clearInterval(timer);
 					}
-					if(minutes < 10){
-						minutes = "0"+minutes
-					} 
-					if(seconds < 10){
-						seconds = "0"+seconds
-					}
-					this.countDown = hours + ":" + minutes + ":" + seconds;
-					if (this.today < 1) {
-   				    	this.geteServerTime();
-  					}
 				},1000);
 			},
 			betC(){

@@ -10,8 +10,8 @@
 				<div>
 				<el-input 
 					placeholder="请输入充值金额" 
-					v-model="money" 
-					:value="money" 
+					v-model="chargeamount" 
+					:value="chargeamount" 
 					clearable 
 				>
 				</el-input>
@@ -27,8 +27,8 @@
 				<div>
 				<el-input 
 					placeholder="请输入充值人姓名" 
-					v-model="chargename" 
-					:value="chargename" 
+					v-model="niceName" 
+					:value="niceName" 
 					clearable 
 				>
 				</el-input>
@@ -39,26 +39,39 @@
 				<div>
 				<el-input 
 					placeholder="请输入您的卡号" 
-					v-model="cardnum" 
-					:value="cardnum" 
+					v-model="card" 
+					:value="card" 
 					clearable 
 				>
 				</el-input>
 				</div>
 			</li>
-			<li><div class="button1"><button>删除此邀请码</button></div></li>
+			<li><div class="button1"><button @click="show2 = !show2">充值申请</button></div></li>
 		</ul>
-			<!-- <van-actionsheet class="mIcode-go" v-model="show">
-	            <div class="mIcode-inner">
-                    <p><span>邀请码</span><br>{{this.selected.code}}</p>
-                    <p><span>产生日期</span><br>{{this.selected.date}}</p>
-                    <p><span>注册数</span>({{this.selected.count}})个帐户</p>
-                    <br><br>
-                    <div><button >删除此邀请码</button><button class="nosure" @click="show = !show">取消</button></div>
-                    
-                </div>
+			<van-actionsheet class="" v-model="show2">
+	            <ul class="recharge-top">
+					<li>
+						<div class="center"><p>您所输入的资讯</p></div>	
+					</li>
+					<li>
+						<p>充值金额</p><span>{{chargeamount}}</span>
+					</li>
+					<li>
+						<p>账号</p><span>{{selectBank}}</span>
+					</li>
+					<li>
+						<p>充值人姓名</p><span>{{niceName}}</span>
+					</li>
+					<li>
+						<p>充值卡号</p><span>{{card}}</span>
+					</li>
+					<li>
+						<div class="center"><p>请确认上列信息正确</p></div>	
+					</li>
+					<li><div class="button1"><button @click="sendReq()">确定</button><button @click="show2 = !show2">取消</button></div></li>
+				</ul>
 	        </van-actionsheet>
-            <van-popup v-model="show2" position="bottom">
+            <!-- <van-popup v-model="show2" position="bottom">
 	            <div class="mIcode-sure">
                     <div class="sure2"><p>确定要删除此邀请码?</p></div>
                     <button class="del" @click="delInviteCode()">删除</button><button class="nodel" @click="select2()">取消</button>
@@ -73,33 +86,18 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
 export default {
 	data() {
       return {
-		  money:'',
 		  timeline:'今天',
-		  chargename:'',
 		  cardnum:'',
+		  bankNameId:'',
+		  chargeamount:'',
+		  card:'',
+		  niceName:'',
 		  show:false,
+		  show2:false,
 		  selectBank:'請選擇銀行',
 		  bankList:[],
 		  payway:[],
-		  actions: [
-        {
-          name: '今天',
-          Type:1,
-          callback: this.onClick,
-        },
-        {
-          name: '昨天',
-          Type:2,
-          callback: this.onClick,
-        //   subname: '描述信息'
-        },
-        {
-          name: '七天',
-          Type:3,
-          callback: this.onClick,
-          loading: false
-        },
-        ],
+		  
 	  }
 	},
 	mounted(){
@@ -112,7 +110,7 @@ export default {
 				console.log(res.data.data.length);
 				for(let i=0;i<res.data.data.length;i++) {
 					if(i >= 3){
-						this.payway.push({name:res.data.data[i].title,callback: this.onClick});
+						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
 					};
 				};
 				console.log(this.payway);
@@ -124,9 +122,24 @@ export default {
 		},
 		onClick(item){
 			this.selectBank = item.name;
+			this.bankNameId = item.id;
 			this.show = ! this.show;
 			console.log(this.betweenType);
 		},
+		sendReq(){
+            let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+            let formData = new FormData();
+            formData.append('bankNameId',this.bankNameId);
+            formData.append('chargeamount',this.chargeamount);
+            formData.append('niceName',this.niceName);
+            formData.append('card',this.card);
+            this.$axios.post(this.$store.state.url+'api/proxy/setPayApplication', formData,config).then((res) => {
+            console.log("成功!");
+            this.show2 = !this.show2;
+          }).catch((error) => {
+          		console.log("No")
+          });   
+    }
 	}
 }
 </script>

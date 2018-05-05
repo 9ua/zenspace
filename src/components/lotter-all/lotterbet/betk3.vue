@@ -447,7 +447,6 @@
 			this.getPlayTree();//玩法树
 		},
 		created(){
-			
 			this.geteServerTime();//input显示当前时间
 		},
 		methods:{
@@ -461,12 +460,10 @@
 						this.today = res.data.data.restSeconds;
 						this.initSetTimeout();
 					}
-				
 				}).catch((error) => {
 				console.log("获取彩種當前獎期時間No");
 				})
 			},
-			
 			//倒计时
 			initSetTimeout(){
 				this.timer = setInterval(() =>{
@@ -490,7 +487,6 @@
 					}
 				},1000);
 			},
-
 			//获取过去开奖号码10个
 			getPastOpen(){
 				this.getLotteryList();

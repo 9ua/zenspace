@@ -228,6 +228,7 @@
 				zhu:0,
 				navs:0,
 				navlist:0,
+				timer:'',
 				titles:'单挑一骰',
 				listname:'江苏',
 				lotteryId:'jsk3',
@@ -446,6 +447,7 @@
 			this.getPlayTree();//玩法树
 		},
 		created(){
+			
 			this.geteServerTime();//input显示当前时间
 		},
 		methods:{
@@ -453,6 +455,7 @@
 			geteServerTime(){
 				this.$http.get(this.$store.state.url+'api/lottery/getCurrentSaleTime',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					if (res.data.code === 1) {
+						clearInterval(this.timer);
 						this.seasonId2 = res.data.data.seasonId
 						this.seasonId = this.seasonId2.substring(4).split("-").join("");
 						this.today = res.data.data.restSeconds;
@@ -465,8 +468,8 @@
 			},
 			
 			//倒计时
-			initSetTimeout(today){
-				let timer = setInterval(() =>{
+			initSetTimeout(){
+				this.timer = setInterval(() =>{
 				this.today = this.today-1;
 				var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
 						var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
@@ -483,11 +486,11 @@
 				this.countDown = hours + ":" + minutes + ":" + seconds;
 				if (this.today <1 ) {
 						this.geteServerTime();
-						clearInterval(timer);
+						clearInterval(this.timer);
 					}
 				},1000);
 			},
-			
+
 			//获取过去开奖号码10个
 			getPastOpen(){
 				this.getLotteryList();

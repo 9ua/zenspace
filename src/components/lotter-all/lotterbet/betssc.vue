@@ -273,6 +273,7 @@
 				show:false,//头部中间
 				showa:false,//头部右
 				showan:0,//头部右数字
+				time:'',
 				titles:'五星 复式',
 				listname:'重庆',
 				lotteryId:'cqssc',
@@ -776,6 +777,7 @@
 			geteServerTime(){
 				this.$http.get(this.$store.state.url+'api/lottery/getCurrentSaleTime',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					if (res.data.code === 1) {
+					clearInterval(this.timer);
 					this.seasonId2 = res.data.data.seasonId
 					this.seasonId = this.seasonId2.substring(4).split("-").join("");
 					this.today = res.data.data.restSeconds;
@@ -787,7 +789,7 @@
 			},
 			//倒计时
 			initSetTimeout(today){
-				let timer = setInterval(() =>{
+				this.timer = setInterval(() =>{
 				this.today = this.today-1;
 				var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
 				var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));

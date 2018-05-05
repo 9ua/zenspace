@@ -279,6 +279,7 @@
 				lotteryId:'cqssc',
 				LotteryList:'',
 				money:1,//投注金额
+				amount:0,//总金额
 				con:'',//已选号码
 				zhu:0,//注数
 				rates:0,//最高可中
@@ -347,14 +348,43 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
+					//二码不定位
+					if(this.playBonusId === 'ssc_star5_none2'|| this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2'){
+						let ret = this.groupSplit(this.dd,2);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.zhu = arr.length;
+					}
+					//三码不定位
+					if(this.playBonusId === 'ssc_star5_none3'){
+						let ret = this.groupSplit(this.dd,3);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.zhu = arr.length;
+					}
+					// 复式 +
 					this.ssc_star5jia(indexff,indexg,num,numViews,player);
+					// 组选
+					this.zuxuansscjia(indexff,indexg,num,numViews,player);
 				}else if(num.choose === false){
 					this.d.splice(indexg,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu --;
+					//复式 -
 					this.ssc_star5jian(indexff,indexg,num,numViews,player);
-					console.log(this.zhu,'_________')
+					//组选 -
+					this.zuxuansscjian(indexff,indexg,num,numViews,player);
 				}
 				// console.log(num.ball,numViews.nums.length,player.numView.length)
 			},
@@ -386,7 +416,6 @@
 						this.dd = this.ke.filter(function(n) { return n; });
 						this.en = this.dd.join('');
 					}
-					
 					if(this.playBonusId === 'ssc_star4_front'){
 						this.con = this.an+','+this.bn+','+this.cn+','+this.dn;
 						this.zhu = this.getCount(this.con.split(','),4);
@@ -489,6 +518,89 @@
 				}
 				return count;
 			},
+			//组选 +
+			zuxuansscjia(indexff,indexg,num,numViews,player){
+				// if(this.playBonusId === 'ssc_star5_group5'){
+				// 	console.log('ssc_star5_group5')
+				// 	this.d = this.d.filter(function (n){ return n;})
+				// 	this.zhu = this.getzuCount5(this.d);
+				// }
+				if(this.playBonusId === 'ssc_star5_group120'){
+					this.d = this.d.filter(function (n){ return n;})
+					let lengths = this.d.length;
+					this.zhu = this.getCount120(lengths);
+				}
+			},
+			//组选 -
+			zuxuansscjian(indexff,indexg,num,numViews,player){
+				
+			},
+			//组选共用函数
+			getCombin(num, len){
+				if (num < len) {
+				return 0;
+				}
+				let nums = 1;
+				let lens = 1;
+				for (let i = 0; i < len; i++)
+				{
+				nums *= (num - i);
+				lens *= (len - i);
+				}
+				return nums / lens;
+			},			
+	//组选-組選五
+			// bets = ["0,1", "1,2,3"]
+			getzuCount5(bets){
+				if (bets.length != 2) {
+					return 0;
+				}
+
+				let n1 = bets[0].join(',');
+				let n2 = bets[1].join(',');
+
+				let count = 0;
+				for (let i=0;i<n1.length;i++){
+					count += n2.length;
+					//若n2中中有包含n1[i]
+					if (n2.indexOf(n1[i]) >= 0) {
+						count--;
+					}
+				}
+				return count;
+			},
+			//組選120
+			// bets = ["0", "1","3","7","9"]
+			getCount120( bets){
+				return this.getCombin(bets, 5);
+			},
+			//排列组合
+			groupSplit(arr, size) {
+				let maxSize = arr.length,
+					groupArr = [];
+				if (size >= 1 && size <= maxSize) {
+					getArr(arr, 0, []);
+				}
+				function each(arr, index, fn) {
+					for (let i = index; i < maxSize; i++) {
+						fn(arr[i], i, arr);
+					}
+				}
+				function getArr(arr, _size, _arr, index) {
+					if (_size === size) {
+						return;
+					}
+					let len = _size + 1;
+					each(arr, index || 0, function(val, i, arr) {
+						_arr.splice(_size, 1, val);
+						if (_size === size - 1) {
+							groupArr.push(_arr.slice());
+						}
+						getArr(arr, len, _arr, i + 1);
+					});
+				}
+				return groupArr;
+			},
 			//清空
 			iscreat(){
 				for( let i=0; i<this.playGroups.length;i++){
@@ -524,7 +636,6 @@
 				b.choose = !b.choose
 				if(b.choose === true){
 					this.d.push(b.ball);
-					
 					this.d.sort((a,b) => {
 						return a-b;
 					})
@@ -562,6 +673,7 @@
 					formData.append('traceWinStop', 0);
 					formData.append('isTrace', 0);
 					formData.append('lotteryId', this.lotteryId);
+					formData.append('amount', this.money * this.zhu);
 				this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
 					if(res.data.message === 'success'){
 						this.betGoshow = !this.betGoshow;
@@ -620,16 +732,27 @@
 					for(let j=0; j<player.numView[i].nums.length; j++){
 						if(player.numView[i].nums[j].choose === true){
 							player.numView[i].nums[j].choose =false;
+							if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last'){
+								this.d = [];
+								this.ka = [];
+								this.kb = [];
+								this.kc = [];
+								this.kd = [];
+								this.ke = [];
+								this.zhu = 0;
+								this.con = '';
+								this.money = 1;
+							}
 						}
 					}
-				}
+				}			
 				this.d = [];
 				this.ka = [];
 				this.kb = [];
 				this.kc = [];
 				this.kd = [];
 				this.ke = [];
-				// this.zhu = 0;
+				this.zhu = 0;
 				this.con = '';
 				this.money = 1;
 			},

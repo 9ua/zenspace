@@ -222,6 +222,7 @@
 				showa:false,//头部右
 				showan:0,//头部右数字
 				money:1,//投注金额
+				amount:0,//总金额
 				rates:0,
 				bet:false,//投注弹窗
 				zhu:0,
@@ -529,6 +530,7 @@
 				this.getPastOpen();
 				this.getPastOp();
 				this.geteServerTime();
+				this.iscreat();
 			},
 			//三同号全/反选
 			tosantonghao(){
@@ -755,7 +757,6 @@
 						abc = arr.join(',')
 						this.con = abc;
 						this.zhu = arr.length;
-						console.log(this.zhu)
 					}
 					//三不同时
 					if(this.playId === 'k3_star3_same_not'){
@@ -865,6 +866,7 @@
 					formData.append('traceWinStop', 0);
 					formData.append('isTrace', 0);
 					formData.append('lotteryId', this.lotteryId);
+					formData.append('amount', this.money * this.zhu);
 				this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
 					if(res.data.message === 'success'){
 						this.betGoshow = !this.betGoshow;

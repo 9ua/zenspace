@@ -66,6 +66,7 @@
 				lotteryId:'pk10',
 				LotteryList:'',
 				money:1,//投注金额
+				amount:0,//总金额
 				con:'3',
 				zhu:1,
 				rates:0,//最高可中

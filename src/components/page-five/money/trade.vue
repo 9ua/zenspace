@@ -37,24 +37,33 @@
                     
                     
                 </li>
-            <!-- <van-actionsheet class="mIcode-go" v-model="show">
-	            <div class="mIcode-inner">
-                    <p><span>邀请码</span><br>{{this.selected.code}}</p>
-                    <p><span>产生日期</span><br>{{this.selected.date}}</p>
-                    <p><span>注册数</span>({{this.selected.count}})个帐户</p>
-                    <br><br>
-                    <div><button @click="select2()">删除此邀请码</button><button class="nosure" @click="show = !show">取消</button></div>
-                    
-                </div>
-	        </van-actionsheet>
-            <van-popup v-model="show2" position="bottom">
-	            <div class="mIcode-sure">
-                    <div class="sure2"><p>确定要删除此邀请码?</p></div>
-                    <button class="del" @click="delInviteCode()">删除</button><button class="nodel" @click="select2()">取消</button>
-                </div>
-	        </van-popup> -->
-        </ul>
 
+        </ul>
+        <van-actionsheet class="" v-model="show2">
+	            <ul class="recharge-top">
+            <li>
+              <span>{{selected.lotteryName}}</span><br>
+              <p>第--?--期</p> <p>開獎狀態{{selected.status}}</p>
+            </li>
+            <li>
+              <p>投注時間</p><span>{{selected.createTime}}</span><br>
+              <p>投注单号</p><span>{{selected.id}}</span>
+            </li>
+            <li>
+              <p>投注金额</p><span>{{selected.content}}</span>
+            </li>
+            <li>
+              <p>派送奖金</p><span>{{selected.win}}</span>
+            </li>
+            <li>
+              <p>开奖号码</p><span>{{selected.openNum}}</span>
+            </li>
+            <li>
+              <p>我的投注</p>--?-- <p>玩法</p> --?--
+            </li>
+            <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
+          </ul>
+	      </van-actionsheet>
 
     </div>
   </div>
@@ -66,6 +75,7 @@ export default {
 		    active: 1,
         timeline:'今天',
         show:false,
+        show2:false,
         accountChangeType:100,
         betweenType:1,
         accountChangeTypeName:'',
@@ -127,6 +137,11 @@ export default {
       this.getTradeList();
   },
   methods: {
+     select(a) {
+        this.show2 = !this.show2;
+            console.log(a);
+        this.selected = a;
+      },
     onClick(item){
       this.timeline = item.name;
       this.betweenType = item.Type;

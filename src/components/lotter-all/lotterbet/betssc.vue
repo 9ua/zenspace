@@ -14,13 +14,13 @@
 						<li v-for="(into,index) in playGroups" :key="index">
 							<div class="title">{{into.title}}</div>
 							<div class="menu-list-list-box">
-								<div class="menu-list-list" v-for="(item,indexa) in into.groups" :key="indexa">
+								<div class="menu-list-list" v-for="(group,indexa) in into.groups" :key="indexa">
 									<!-- <span :class="{'active': indexs === navlist}" v-for="(items,indexs) in item.players" :key="indexs" @click="k3Tab($event,indexs,items,into)"> -->
-									<span v-for="(items,indexb) in item.players" :key="indexb" @click="k3Tab($event,indexa,indexb,items,into,index)">
+									<span v-for="(player,indexb) in group.players" :key="indexb" @click="k3Tab($event,indexa,indexb,player,group,into,index)">
 										<!-- <a>{{index}}</a> -->
 										<!-- <a>{{indexa}}</a> -->
 										<!-- <a>{{indexb}}</a> -->
-										<a>{{items.groupName}}{{items.title}}</a>
+										<a>{{player.groupName}}{{player.title}}</a>
 									</span>
 								</div>
 							</div>
@@ -81,7 +81,7 @@
 			<div class="betk3-content-foot">
 				<div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
 					<div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
-						<span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}<b>。奖金 <i>{{player.bonus}}</i> 元</b><br/></span>
+						<span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}<b>。奖金 <i>{{player.bonusStr}}</i> 元</b><br/></span>
 						<ul class="fushi">
 							<!-- <li v-for="(item,index) in layout" :key="index">
 								<p>
@@ -93,7 +93,7 @@
 								<p v-for="(numViews,indexff) in player.numView" :key="indexff">
 									<b>{{numViews.title}}</b>
 									<span>
-										<a v-for="(num,indexg) in numViews.nums" :key="indexg" :class=" indexg===0 ? 'active' : '' " @click="curBalls(indexg,num,numViews)">{{num.ball}}</a>
+										<a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexg,num,numViews,player)">{{num.ball}}</a>
 									</span>
 								</p>
 							</li>
@@ -230,6 +230,34 @@
   			<div class="betssc-footer-buttom-right" @click="betC">马上投注</div>
   		</div>
     </div>
+	<van-popup v-model="bet" class="betk3pop">
+		<ul class="beta"  v-if="zhu < 1">
+			<li>温馨提示！</li>
+			<li>请至少选择一注号码投注</li>
+			<li @click="bet = ! bet"><button>确定</button></li>
+		</ul>
+		<ul class="betb" v-else-if="money === ''">
+			<li>温馨提示！</li>
+			<li>请填写您要投注的金额</li>
+			<li @click="bet = ! bet"><button>确定</button></li>
+		</ul>
+		<ul class="betc" v-show="betGoshow"  v-else>
+			<li>投注确认</li>
+			<li>
+				<p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+				<p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+				<p><span>投注内容：</span>{{con}}</p>
+			</li>
+			<li><button @click="bet = ! bet">取消</button><button @click="betGo">确定</button></li>
+		</ul>
+		<ul class="bete"  v-show="betsuccess">
+			<li>温馨提示！</li>
+			<li>
+				<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+			</li>
+			<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
+		</ul>
+	</van-popup>
     <van-popup class="sscpop" v-model="showpop">{{content}}</van-popup>
   </div>
 </template>
@@ -238,7 +266,10 @@
 		data(){
 			return{
 				showpop:false,//弹窗
-        		content:'提示内容!',//弹窗内容
+				content:'提示内容!',//弹窗内容
+				bet:false,//投注弹窗
+				betsuccess:false,
+				betGoshow:true,
 				show:false,//头部中间
 				showa:false,//头部右
 				showan:0,//头部右数字
@@ -295,9 +326,48 @@
 		created(){
 			this.geteServerTime();//input显示当前时间
 		},
-		methods:{	
-			curBalls(indexg,num,numViews){
-				
+		methods:{
+			//中间->投注选号
+			curBalls(index,num,numViews,player){
+				num.choose = !num.choose;
+				// for(let i=0; i<player.numView.length; i++){
+				// 	for(let i=0; i<numViews.nums.length; i++){
+				// 		console.log(1111111111)
+				// 	}
+				// }
+				if(num.choose === true){
+					this.d[index] = num.ball
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					this.zhu ++;
+				}else if(num.choose === false){
+					this.d.splice(index,1,"");
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					this.zhu --;
+				}
+				// console.log(num.ball,numViews.nums.length,player.numView.length)
+			},
+			//betContent = [0,0,0,0,0] , count = 5
+			getCount(betContent, stars){
+				if (betContent.length != stars) {
+					return 0;
+				}
+				let count = 1;
+				for (let i = 0; i < stars; i++)
+				{
+					let n = betContent[i]
+					n = [...new Set(n)];
+					count *= n.length;
+				}
+				return count;
+			},
+			//清空
+			iscreat(){
+				this.d = [];
+				this.con = '';
+				this.zhu =0;
+				this.money = 1;
 			},
 			// 如果只能选择一个球
 			curBall(b,item,index){
@@ -326,10 +396,40 @@
 				this.$http.get(this.$store.state.url+'api/lottery/getPlayTree',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					this.playBonus = res.data.data.playBonus;
 					this.playGroups = res.data.data.playGroups;
-					// console.log(this.playGroups,"玩法树");
+					console.log(this.playGroups,"玩法树");
 				}).catch((error) => {
 					console.log("玩法树No");
 				})
+			},
+			//投注
+			betGo(){
+				let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+				let formData = new FormData();
+					formData.append('order[0].content',this.con);
+					formData.append('order[0].betCount',this.zhu);
+					formData.append('order[0].price',1);
+					formData.append('order[0].unit',1);
+					formData.append('order[0].playId',this.playBonusId);
+					formData.append('count',this.zhu);
+					formData.append('traceOrders[0].price', this.money);
+					formData.append('traceOrders[0].seasonId', this.seasonId2);
+					formData.append('bounsType', 0);
+					formData.append('traceWinStop', 0);
+					formData.append('isTrace', 0);
+					formData.append('lotteryId', this.lotteryId);
+				this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
+					if(res.data.message === 'success'){
+						this.betGoshow = !this.betGoshow;
+						this.betsuccess = !this.betsuccess;
+					}
+					console.log(res.data.data)
+				}).catch((error) => {
+					console.log("No");
+				})
+			},
+			betsucc(){
+				this.betsuccess = !this.betsuccess;
+				this.$router.push({path:'/one'})
 			},
 			//右上获取彩种
 			getLotteryList(){
@@ -350,7 +450,8 @@
 				this.geteServerTime();
 			},
 			//头部菜单项
-			k3Tab(e,indexa,indexb,items,into,index){
+			//indexa:groups, indexb:players, index:playGroups, into:groups, items:players
+			k3Tab(e,indexa,indexb,items,group,into,index){
 				this.titles = into.title +' '+items.groupName+' '+items.title;
 				this.intotitle = into.title;
 				this.itemstitle = items.title;
@@ -366,6 +467,20 @@
 				console.log('--this.itemstitle',this.itemstitle)
 				console.log('--this.titles',this.titles)
 				console.log('--this.playBonusId',this.playBonusId)
+				this.iscreatnav(e,indexa,indexb,items,into,index);
+			},
+			//头部菜单切换清空
+			iscreatnav(e,indexa,indexb,player,group,into,index){
+				for( let i=0; i<player.numView.length;i++){
+					for(let j=0; j<player.numView[i].nums.length; j++){
+						if(player.numView[i].nums[j].choose === true){
+							player.numView[i].nums[j].choose =false;
+						}
+					}
+				}
+				this.zhu = 0;
+				this.con = '';
+				this.money = 1;
 			},
 			//获取过去开奖号码10个
 			getPastOpen(){
@@ -422,18 +537,6 @@
 			},
 			betC(){
 				this.bet = !this.bet;
-			},
-			//清空
-			iscreat(){
-				for(let i=0;i<this.layout.length;i++){
-					for(let j=0;j<this.layout[i].balls.length;j++){
-						this.layout[i].balls[j].choose = false;
-						this.d = [];
-						this.con = '';
-						this.zhu =0;
-						this.money = '1';
-					}
-				}
 			},
 		},
 		//focus

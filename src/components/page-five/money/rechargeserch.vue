@@ -64,7 +64,7 @@ export default {
 				this.id = res.data.data[0].id;
 		        this.statusName = res.data.data[0].statusName;
                 this.amount = res.data.data[0].amount;
-                this.receiveNickName = res.data.data[0].receiveNiceName;
+                this.receiveNickName = res.data.data[0].receiveNickName;
                 this.receiveBankName = res.data.data[0].receiveBankName;
                 this.receiveCard = res.data.data[0].receiveCard;
                 this.createTime = res.data.data[0].createTime;

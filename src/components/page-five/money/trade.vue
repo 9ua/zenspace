@@ -16,6 +16,46 @@
    			 <!-- 内容 {{ item.name }} -->
   		</van-tab>
 	  </van-tabs>
+
+        <ul v-show="showFlag">
+                <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
+                    <div class="mInvite-left">
+                        <p><span>{{item.accountChangeTypeName}}</span><br>
+                        <span></span>{{item.changeTime}}
+                        </p>
+                    </div>
+                    <div class="mInvite-right">
+                        
+                        <p>
+                        <span>金額</span><br>
+                        <span>{{item.changeAmount}}</span>
+                        </p>
+                        
+                    </div>
+                    <i class="el-icon-arrow-down"></i>
+                    
+                    
+                    
+                </li>
+            <!-- <van-actionsheet class="mIcode-go" v-model="show">
+	            <div class="mIcode-inner">
+                    <p><span>邀请码</span><br>{{this.selected.code}}</p>
+                    <p><span>产生日期</span><br>{{this.selected.date}}</p>
+                    <p><span>注册数</span>({{this.selected.count}})个帐户</p>
+                    <br><br>
+                    <div><button @click="select2()">删除此邀请码</button><button class="nosure" @click="show = !show">取消</button></div>
+                    
+                </div>
+	        </van-actionsheet>
+            <van-popup v-model="show2" position="bottom">
+	            <div class="mIcode-sure">
+                    <div class="sure2"><p>确定要删除此邀请码?</p></div>
+                    <button class="del" @click="delInviteCode()">删除</button><button class="nodel" @click="select2()">取消</button>
+                </div>
+	        </van-popup> -->
+        </ul>
+
+
     </div>
   </div>
 </template>
@@ -24,10 +64,16 @@ export default {
   data(){
     return {
 		    active: 1,
-        timeline:'今日',
+        timeline:'今天',
         show:false,
-        betweenType:1,
         accountChangeType:100,
+        betweenType:1,
+        accountChangeTypeName:'',
+        changeAmount:'',
+        changeTime:'',
+        tradelist:[],
+
+
         usertype:2,
         highbet:0,
         rebateratio:0,
@@ -77,6 +123,9 @@ export default {
         
     }
   },
+  mounted(){
+      this.getTradeList();
+  },
   methods: {
     onClick(item){
       this.timeline = item.name;
@@ -92,12 +141,8 @@ export default {
     },
     getTradeList(){
         this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:0,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
-            console.log(res);
-            // this.highbet = res.data.data.rebateRatio;
-            // for(let i = res.data.data.rebateRatio*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};
-            //     console.log(this.betlist)
-            //     return this.betlist;
-            //         console.log(res.data.data.rebateRatio);
+            this.tradelist = res.data.data.list;
+            console.log(res.data.data.list);
 			}).catch((error) => {
                 console.log(error);
                     console.log("获取彩種ratio ERROR");

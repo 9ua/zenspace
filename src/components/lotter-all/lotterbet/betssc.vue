@@ -289,7 +289,6 @@
 		mounted(){
 			this.getPastOpen();//获取过去开奖号码10个
 			this.getPastOp();//获取过去开奖号码1个
-			this.geteServerTime();//获取彩種當前獎期時間
 			this.getLotteryList();//右上获取彩种
 			this.getPlayTree();//玩法树
 		},

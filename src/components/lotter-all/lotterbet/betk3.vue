@@ -855,7 +855,7 @@
 				let formData = new FormData();
 					formData.append('order[0].content',this.con);
 					formData.append('order[0].betCount',this.zhu);
-					formData.append('order[0].price',1);
+					formData.append('order[0].price', this.money);
 					formData.append('order[0].unit',1);
 					formData.append('order[0].playId',this.playId);
 					formData.append('count',this.zhu);

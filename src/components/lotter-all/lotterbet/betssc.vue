@@ -93,7 +93,7 @@
 								<p v-for="(numViews,indexff) in player.numView" :key="indexff">
 									<b>{{numViews.title}}</b>
 									<span>
-										<a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexg,num,numViews,player)">{{num.ball}}</a>
+										<a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,player)">{{num.ball}}</a>
 									</span>
 								</p>
 							</li>
@@ -297,6 +297,17 @@
 				intotitle:'',
 				itemstitle:'复式',
 				d:[],//选中的号码的下标
+				dd:[],//选中的号码的下标
+				ka:[],//选中的号码的下标
+				kb:[],//选中的号码的下标
+				kc:[],//选中的号码的下标
+				kd:[],//选中的号码的下标
+				ke:[],//选中的号码的下标
+				an:'',
+				bn:'',
+				cn:'',
+				dn:'',
+				en:'',
 				layout: [
 					{"title": "万位","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
 					{"title": "千位","balls": [{"ball": 0,"choose": false},{"ball": 1,"choose": false},{"ball": 2,"choose": false},{"ball": 3,"choose": false},{"ball": 4,"choose": false},{"ball": 5,"choose": false},{"ball": 6,"choose": false},{"ball": 7,"choose": false},{"ball": 8,"choose": false},{"ball": 9,"choose": false}]}, 
@@ -320,7 +331,6 @@
 		mounted(){
 			this.getPastOpen();//获取过去开奖号码10个
 			this.getPastOp();//获取过去开奖号码1个
-			this.geteServerTime();//获取彩種當前獎期時間
 			this.getLotteryList();//右上获取彩种
 			this.getPlayTree();//玩法树
 		},
@@ -329,27 +339,142 @@
 		},
 		methods:{
 			//中间->投注选号
-			curBalls(index,num,numViews,player){
+			curBalls(indexff,indexg,num,numViews,player){
 				num.choose = !num.choose;
-				// for(let i=0; i<player.numView.length; i++){
-				// 	for(let i=0; i<numViews.nums.length; i++){
-				// 		console.log(1111111111)
-				// 	}
-				// }
 				if(num.choose === true){
-					this.d[index] = num.ball
+					this.d[indexg] = num.ball
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
+					this.ssc_star5jia(indexff,indexg,num,numViews,player);
 				}else if(num.choose === false){
-					this.d.splice(index,1,"");
+					this.d.splice(indexg,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu --;
+					this.ssc_star5jian(indexff,indexg,num,numViews,player);
+					console.log(this.zhu,'_________')
 				}
 				// console.log(num.ball,numViews.nums.length,player.numView.length)
 			},
-			//betContent = [0,0,0,0,0] , count = 5
+			//复式 -
+			ssc_star5jian(indexff,indexg,num,numViews,player){
+				if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kc.splice(indexg,1,"");
+						this.dd = this.kc.filter(function(n) { return n; });
+						this.cn = this.dd.join('');
+					}
+					if(indexff === 3){
+						this.kd.splice(indexg,1,"");
+						this.dd = this.kd.filter(function(n) { return n; });
+						this.dn = this.dd.join('');
+					}
+					if(indexff === 4){
+						this.ke.splice(indexg,1,"");
+						this.dd = this.ke.filter(function(n) { return n; });
+						this.en = this.dd.join('');
+					}
+					
+					if(this.playBonusId === 'ssc_star4_front'){
+						this.con = this.an+','+this.bn+','+this.cn+','+this.dn;
+						this.zhu = this.getCount(this.con.split(','),4);
+					}else if(this.playBonusId === 'ssc_star3_front'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+					}else if(this.playBonusId === 'ssc_star3_mid'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+					}else if(this.playBonusId === 'ssc_star3_last'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+					}else if(this.playBonusId === 'ssc_star2_front'){
+						this.con = this.an+','+this.bn;
+						this.zhu = this.getCount(this.con.split(','),2);
+					}else if(this.playBonusId === 'ssc_star2_last'){
+						this.con = this.an+','+this.bn;
+						this.zhu = this.getCount(this.con.split(','),2);
+					}else if(this.playBonusId === 'ssc_star5'){
+						this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en;
+						this.zhu = this.getCount(this.con.split(','),5);
+					}
+				}
+			},
+			//复式 +
+			ssc_star5jia(indexff,indexg,num,numViews,player){
+				if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last'){
+					if(indexff === 0){
+						this.ka[indexg] = num.ball;
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb[indexg] = num.ball;
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kc[indexg] = num.ball;
+						this.dd = this.kc.filter(function(n) { return n; });
+						this.cn = this.dd.join('');
+					}
+					if(indexff === 3){
+						this.kd[indexg] = num.ball;
+						this.dd = this.kd.filter(function(n) { return n; });
+						this.dn = this.dd.join('');
+					}
+					if(indexff === 4){
+						this.ke[indexg] = num.ball;
+						this.dd = this.ke.filter(function(n) { return n; });
+						this.en = this.dd.join('');
+					}
+					if(this.playBonusId === 'ssc_star4_front'){
+						this.con = this.an+','+this.bn+','+this.cn+','+this.dn;
+						this.zhu = this.getCount(this.con.split(','),4);
+						this.con = this.con+',-';
+					}
+					if(this.playBonusId === 'ssc_star3_front'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+						this.con = this.con+',-'+',-';
+					}
+					if(this.playBonusId === 'ssc_star3_mid'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+						this.con = '-,'+this.con+',-';
+					}
+					if(this.playBonusId === 'ssc_star3_last'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+						this.con = '-,-,'+this.con;
+					}
+					if(this.playBonusId === 'ssc_star2_front'){
+						this.con = this.an+','+this.bn;
+						this.zhu = this.getCount(this.con.split(','),2);
+						this.con = this.con+',-'+',-'+',-';
+					}
+					if(this.playBonusId === 'ssc_star2_last'){
+						this.con =this.an+','+this.bn;
+						this.zhu = this.getCount(this.con.split(','),2);
+						this.con = '-,-,-,'+this.con;
+					}
+					if(this.playBonusId === 'ssc_star5'){
+						this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en;
+						this.zhu = this.getCount(this.con.split(','),5);
+					}
+				}
+			},
+			//复式 betContent = [0,0,0,0,0] , count = 5	
 			getCount(betContent, stars){
 				if (betContent.length != stars) {
 					return 0;
@@ -365,10 +490,28 @@
 			},
 			//清空
 			iscreat(){
-				this.d = [];
-				this.con = '';
-				this.zhu =0;
-				this.money = 1;
+				for( let i=0; i<this.playGroups.length;i++){
+					for(let j=0; j<this.playGroups[i].groups.length; j++){
+						for(let k=0; k<this.playGroups[i].groups[j].players.length; k++){
+							for(let l=0; l<this.playGroups[i].groups[j].players[k].numView.length; l++){
+								for(let h=0; h<this.playGroups[i].groups[j].players[k].numView[l].nums.length; h++){
+									if(this.playGroups[i].groups[j].players[k].numView[l].nums[h].choose === true){
+										this.playGroups[i].groups[j].players[k].numView[l].nums[h].choose =false;
+										this.d = [];
+										this.ka = [];
+										this.kb = [];
+										this.kc = [];
+										this.kd = [];
+										this.ke = [];
+										this.con = '';
+										// this.zhu =0;
+										this.money = 1;
+									}
+								}
+							}
+						}
+					}
+				}
 			},
 			// 如果只能选择一个球
 			curBall(b,item,index){
@@ -408,7 +551,7 @@
 				let formData = new FormData();
 					formData.append('order[0].content',this.con);
 					formData.append('order[0].betCount',this.zhu);
-					formData.append('order[0].price',1);
+					formData.append('order[0].price',this.money);
 					formData.append('order[0].unit',1);
 					formData.append('order[0].playId',this.playBonusId);
 					formData.append('count',this.zhu);
@@ -479,7 +622,13 @@
 						}
 					}
 				}
-				this.zhu = 0;
+				this.d = [];
+				this.ka = [];
+				this.kb = [];
+				this.kc = [];
+				this.kd = [];
+				this.ke = [];
+				// this.zhu = 0;
 				this.con = '';
 				this.money = 1;
 			},
@@ -518,7 +667,7 @@
 				let timer = setInterval(() =>{
 				this.today = this.today-1;
 				var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
-						var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+				var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
 				var seconds = Math.floor((this.today % (1 * 60)) / 1);
 				if(hours < 10){
 					hours = "0"+hours

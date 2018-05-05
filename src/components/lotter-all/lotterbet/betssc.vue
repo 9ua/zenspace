@@ -348,7 +348,7 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
-					//二码不定位
+					//二码不定位 +
 					if(this.playBonusId === 'ssc_star5_none2'|| this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2'){
 						let ret = this.groupSplit(this.dd,2);
 						let arr=[];
@@ -360,7 +360,7 @@
 						abc = arr.join(',')
 						this.zhu = arr.length;
 					}
-					//三码不定位
+					//三码不定位 +
 					if(this.playBonusId === 'ssc_star5_none3'){
 						let ret = this.groupSplit(this.dd,3);
 						let arr=[];
@@ -374,71 +374,43 @@
 					}
 					// 复式 +
 					this.ssc_star5jia(indexff,indexg,num,numViews,player);
-					// 组选
+					// 组选 +
 					this.zuxuansscjia(indexff,indexg,num,numViews,player);
 				}else if(num.choose === false){
 					this.d.splice(indexg,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu --;
+					//二码不定位 +
+					if(this.playBonusId === 'ssc_star5_none2'|| this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2'){
+						let ret = this.groupSplit(this.dd,2);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.zhu -= arr.length;
+					}
+					//三码不定位 -
+					if(this.playBonusId === 'ssc_star5_none3'){
+						let ret = this.groupSplit(this.dd,3);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.zhu -= arr.length;
+					}
 					//复式 -
 					this.ssc_star5jian(indexff,indexg,num,numViews,player);
 					//组选 -
 					this.zuxuansscjian(indexff,indexg,num,numViews,player);
 				}
 				// console.log(num.ball,numViews.nums.length,player.numView.length)
-			},
-			//复式 -
-			ssc_star5jian(indexff,indexg,num,numViews,player){
-				if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last'){
-					if(indexff === 0){
-						this.ka.splice(indexg,1,"");
-						this.dd = this.ka.filter(function(n) { return n; });
-						this.an = this.dd.join('');
-					}
-					if(indexff === 1){
-						this.kb.splice(indexg,1,"");
-						this.dd = this.kb.filter(function(n) { return n; });
-						this.bn = this.dd.join('');
-					}
-					if(indexff === 2){
-						this.kc.splice(indexg,1,"");
-						this.dd = this.kc.filter(function(n) { return n; });
-						this.cn = this.dd.join('');
-					}
-					if(indexff === 3){
-						this.kd.splice(indexg,1,"");
-						this.dd = this.kd.filter(function(n) { return n; });
-						this.dn = this.dd.join('');
-					}
-					if(indexff === 4){
-						this.ke.splice(indexg,1,"");
-						this.dd = this.ke.filter(function(n) { return n; });
-						this.en = this.dd.join('');
-					}
-					if(this.playBonusId === 'ssc_star4_front'){
-						this.con = this.an+','+this.bn+','+this.cn+','+this.dn;
-						this.zhu = this.getCount(this.con.split(','),4);
-					}else if(this.playBonusId === 'ssc_star3_front'){
-						this.con = this.an+','+this.bn+','+this.cn;
-						this.zhu = this.getCount(this.con.split(','),3);
-					}else if(this.playBonusId === 'ssc_star3_mid'){
-						this.con = this.an+','+this.bn+','+this.cn;
-						this.zhu = this.getCount(this.con.split(','),3);
-					}else if(this.playBonusId === 'ssc_star3_last'){
-						this.con = this.an+','+this.bn+','+this.cn;
-						this.zhu = this.getCount(this.con.split(','),3);
-					}else if(this.playBonusId === 'ssc_star2_front'){
-						this.con = this.an+','+this.bn;
-						this.zhu = this.getCount(this.con.split(','),2);
-					}else if(this.playBonusId === 'ssc_star2_last'){
-						this.con = this.an+','+this.bn;
-						this.zhu = this.getCount(this.con.split(','),2);
-					}else if(this.playBonusId === 'ssc_star5'){
-						this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en;
-						this.zhu = this.getCount(this.con.split(','),5);
-					}
-				}
 			},
 			//复式 +
 			ssc_star5jia(indexff,indexg,num,numViews,player){
@@ -504,6 +476,58 @@
 					}
 				}
 			},
+			//复式 -
+			ssc_star5jian(indexff,indexg,num,numViews,player){
+				if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kc.splice(indexg,1,"");
+						this.dd = this.kc.filter(function(n) { return n; });
+						this.cn = this.dd.join('');
+					}
+					if(indexff === 3){
+						this.kd.splice(indexg,1,"");
+						this.dd = this.kd.filter(function(n) { return n; });
+						this.dn = this.dd.join('');
+					}
+					if(indexff === 4){
+						this.ke.splice(indexg,1,"");
+						this.dd = this.ke.filter(function(n) { return n; });
+						this.en = this.dd.join('');
+					}
+					if(this.playBonusId === 'ssc_star4_front'){
+						this.con = this.an+','+this.bn+','+this.cn+','+this.dn;
+						this.zhu = this.getCount(this.con.split(','),4);
+					}else if(this.playBonusId === 'ssc_star3_front'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+					}else if(this.playBonusId === 'ssc_star3_mid'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+					}else if(this.playBonusId === 'ssc_star3_last'){
+						this.con = this.an+','+this.bn+','+this.cn;
+						this.zhu = this.getCount(this.con.split(','),3);
+					}else if(this.playBonusId === 'ssc_star2_front'){
+						this.con = this.an+','+this.bn;
+						this.zhu = this.getCount(this.con.split(','),2);
+					}else if(this.playBonusId === 'ssc_star2_last'){
+						this.con = this.an+','+this.bn;
+						this.zhu = this.getCount(this.con.split(','),2);
+					}else if(this.playBonusId === 'ssc_star5'){
+						this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en;
+						this.zhu = this.getCount(this.con.split(','),5);
+					}
+				}
+			},
 			//复式 betContent = [0,0,0,0,0] , count = 5	
 			getCount(betContent, stars){
 				if (betContent.length != stars) {
@@ -520,20 +544,141 @@
 			},
 			//组选 +
 			zuxuansscjia(indexff,indexg,num,numViews,player){
-				// if(this.playBonusId === 'ssc_star5_group5'){
-				// 	console.log('ssc_star5_group5')
-				// 	this.d = this.d.filter(function (n){ return n;})
-				// 	this.zhu = this.getzuCount5(this.d);
+				if(this.playBonusId === 'ssc_star5_group5'){
+					if(indexff === 0){
+						this.ka[indexg] = num.ball;
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb[indexg] = num.ball;
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					this.con = this.an+','+this.bn;
+					this.zhu = this.getzuCount5(this.con.split(','));
+				}
+				// if(this.playBonusId === 'ssc_star5_group10'){
+				// 	if(indexff === 0){
+				// 		this.ka[indexg] = num.ball;
+				// 		this.dd = this.ka.filter(function(n) { return n; });
+				// 		this.an = this.dd.join('');
+				// 	}
+				// 	if(indexff === 2){
+				// 		this.kb[indexg] = num.ball;
+				// 		this.dd = this.kb.filter(function(n) { return n; });
+				// 		this.bn = this.dd.join('');
+				// 	}
+				// }
+				// if(this.playBonusId === 'ssc_star5_group20'){
+				// 	if(indexff === 0){
+				// 		this.ka[indexg] = num.ball;
+				// 		this.dd = this.ka.filter(function(n) { return n; });
+				// 		this.an = this.dd.join('');
+				// 	}
+				// 	if(indexff === 2){
+				// 		this.kb[indexg] = num.ball;
+				// 		this.dd = this.kb.filter(function(n) { return n; });
+				// 		this.bn = this.dd.join('');
+				// 	}
+				// }
+				// if(this.playBonusId === 'ssc_star5_group30'){
+				// 	if(indexff === 0){
+				// 		this.ka[indexg] = num.ball;
+				// 		this.dd = this.ka.filter(function(n) { return n; });
+				// 		this.an = this.dd.join('');
+				// 	}
+				// 	if(indexff === 2){
+				// 		this.kb[indexg] = num.ball;
+				// 		this.dd = this.kb.filter(function(n) { return n; });
+				// 		this.bn = this.dd.join('');
+				// 	}
+				// }
+				// if(this.playBonusId === 'ssc_star5_group60'){
+				// 	if(indexff === 0){
+				// 		this.ka[indexg] = num.ball;
+				// 		this.dd = this.ka.filter(function(n) { return n; });
+				// 		this.an = this.dd.join('');
+				// 	}
+				// 	if(indexff === 2){
+				// 		this.kb[indexg] = num.ball;
+				// 		this.dd = this.kb.filter(function(n) { return n; });
+				// 		this.bn = this.dd.join('');
+				// 	}
 				// }
 				if(this.playBonusId === 'ssc_star5_group120'){
-					this.d = this.d.filter(function (n){ return n;})
-					let lengths = this.d.length;
+					this.dd = this.d.filter(function (n){ return n;})
+					let lengths = this.dd.length;
 					this.zhu = this.getCount120(lengths);
 				}
 			},
 			//组选 -
 			zuxuansscjian(indexff,indexg,num,numViews,player){
-				
+				if(this.playBonusId === 'ssc_star5_group5'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+				}
+				if(this.playBonusId === 'ssc_star5_group10'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+				}
+				if(this.playBonusId === 'ssc_star5_group20'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+				}
+				if(this.playBonusId === 'ssc_star5_group30'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+				}
+				if(this.playBonusId === 'ssc_star5_group60'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 2){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+				}
+				if(this.playBonusId === 'ssc_star5_group120'){
+					this.dd = this.d.filter(function (n){ return n;})
+					let lengths = this.dd.length;
+					this.zhu = this.getCount120(lengths);
+				}
 			},
 			//组选共用函数
 			getCombin(num, len){
@@ -549,16 +694,14 @@
 				}
 				return nums / lens;
 			},			
-	//组选-組選五
+			//組選五
 			// bets = ["0,1", "1,2,3"]
 			getzuCount5(bets){
 				if (bets.length != 2) {
 					return 0;
 				}
-
-				let n1 = bets[0].join(',');
-				let n2 = bets[1].join(',');
-
+				let n1 = bets[0];
+				let n2 = bets[1];
 				let count = 0;
 				for (let i=0;i<n1.length;i++){
 					count += n2.length;
@@ -569,9 +712,80 @@
 				}
 				return count;
 			},
+			// 組選10
+			// bets = ["0,1,3", "1,2,3"]
+			getzuCount10(bets){
+				if (bets.length != 2) {
+					return 0;
+				}
+				let n1 = bets[0].join(',');
+				let n2 =bets[1].join(',');
+				let count = 0;
+				for (let i=0; i < n1.length; i++){
+					count += n2.length;
+					if (n2.indexOf(n1[i]) >=0) {
+						count--;
+					}
+				}
+				return count;
+			},
+			// 組選20
+			// bets = ["0,1,3", "1,2,3"]
+			getCount20(bets){
+				if (bets.length != 2) {
+					return 0;
+				}
+				let n1 = bets[0].join(',');
+				let n2 = bets[1].join(',');
+				let count = 0;
+				for (let i=0; i<n1.length; i++){
+					let nowCount = n2.length();
+					if (n2.indexOf(n1[i]) >=0) {
+						nowCount--;
+					}
+					count += getCombin(nowCount, 2);
+				}
+				return count;
+			},
+			//組選30
+			// bets = ["0,1,3", "1,2,3"]
+			getCount30(bets){
+				if (bets.length != 2) {
+					return 0;
+				}
+				let n1 = bets[0].join(',');
+				let n2 = bets[1].join(',');
+				let count = 0;
+				for (let i=0; i < n2.length; i++){
+					let nowCount = n1.length;
+					if (n1.indexOf(n2[i]) >= 0) {
+						nowCount--;
+					}
+					count += getCombin(nowCount, 2);
+				}
+				return count;
+			},
+			//組選60
+			// bets = ["0,1,3", "1,2,3"]
+			getCount60(bets){
+				if (bets.length != 2) {
+					return 0;
+				}
+				let n1 = bets[0].join(',');
+				let n2 = bets[1].join(',');
+				let count = 0;
+				for (let i=0; i< n1.length; i++){
+					let nowCount = n2.length;
+					if (n2.indexOf(n1[i]) >= 0) {
+					nowCount--;
+					}
+					count += getCombin(nowCount, 3);
+				}
+				return count;
+			},
 			//組選120
 			// bets = ["0", "1","3","7","9"]
-			getCount120( bets){
+			getCount120(bets){
 				return this.getCombin(bets, 5);
 			},
 			//排列组合

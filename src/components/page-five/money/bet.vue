@@ -46,7 +46,7 @@
               <p>投注单号</p><span>{{selected.id}}</span>
             </li>
             <li>
-              <p>投注金额</p><span>￥ {{selected.content}}</span>
+              <p>投注金额</p><span>￥ {{selected.amount}}</span>
             </li>
             <li>
               <p>派送奖金</p><span>￥ {{selected.win}}</span>
@@ -55,7 +55,7 @@
               <p>开奖号码</p><span>{{selected.openNum}}</span>
             </li>
             <li>
-              <p>我的投注</p>--?-- <p>玩法</p> --?--
+              <p>我的投注</p>{{selected.content}}<p>玩法</p>{{selected.playName}}
             </li>
             <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
           </ul>

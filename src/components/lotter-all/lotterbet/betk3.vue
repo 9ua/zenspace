@@ -122,7 +122,7 @@
 				<ul class="hezhi" v-show="index === 3">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
 						<h2>{{k3item.title}}</h2>
-						<span>{{k3item.rates}}</span>
+						<span>{{k3item.rate}}</span>
 					</li>
 				</ul>
 				<!-- 大小单双 -->
@@ -397,24 +397,24 @@
 				],
 				// 和值
 				k3options:[
-					{title:'大',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'小',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'单',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'双',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'04',rates:'赔率63.72',rate:'63.72',selected:false},
-					{title:'05',rates:'赔率31.86',rate:'31.86',selected:false},
-					{title:'06',rates:'赔率19.11',rate:'19.11',selected:false},
-					{title:'07',rates:'赔率12.74',rate:'12.74',selected:false},
-					{title:'08',rates:'赔率9.10',rate:'9.10',selected:false},
-					{title:'09',rates:'赔率7.64',rate:'7.64',selected:false},
-					{title:'10',rates:'赔率7.08',rate:'7.08',selected:false},
-					{title:'11',rates:'赔率7.08',rate:'7.08',selected:false},
-					{title:'12',rates:'赔率7.64',rate:'7.64',selected:false},
-					{title:'13',rates:'赔率9.10',rate:'9.10',selected:false},
-					{title:'14',rates:'赔率12.74',rate:'12.74',selected:false},
-					{title:'15',rates:'赔率19.11',rate:'19.11',selected:false},
-					{title:'16',rates:'赔率31.86',rate:'31.86',selected:false},
-					{title:'17',rates:'赔率63.72',rate:'63.72',selected:false},
+					{title:'大',rates:'赔率1.998750',rate:'1.998750',selected:false},
+					{title:'小',rates:'赔率1.998750',rate:'1.998750',selected:false},
+					{title:'单',rates:'赔率1.998750',rate:'1.998750',selected:false},
+					{title:'双',rates:'赔率1.998750',rate:'1.998750',selected:false},
+					{title:'04',rates:'赔率60.8400',rate:'60.8400',selected:false},
+					{title:'05',rates:'赔率30.4200',rate:'30.4200',selected:false},
+					{title:'06',rates:'赔率20.2800',rate:'20.2800',selected:false},
+					{title:'07',rates:'赔率12.1680',rate:'12.1680',selected:false},
+					{title:'08',rates:'赔率8.6914',rate:'8.6914',selected:false},
+					{title:'09',rates:'赔率7.6050',rate:'7.6050',selected:false},
+					{title:'10',rates:'赔率6.7600',rate:'6.7600',selected:false},
+					{title:'11',rates:'赔率6.7600',rate:'6.7600',selected:false},
+					{title:'12',rates:'赔率7.6050',rate:'7.6050',selected:false},
+					{title:'13',rates:'赔率8.6914',rate:'8.6914',selected:false},
+					{title:'14',rates:'赔率12.1680',rate:'12.1680',selected:false},
+					{title:'15',rates:'赔率20.2800',rate:'20.2800',selected:false},
+					{title:'16',rates:'赔率30.4200',rate:'30.4200',selected:false},
+					{title:'17',rates:'赔率60.8400',rate:'60.8400',selected:false},
 				],
 				// 大小单双
 				daxiaodanshuang:[

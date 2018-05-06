@@ -625,6 +625,7 @@
 						this.dd = this.kb.filter(function(n) { return n; });
 						this.bn = this.dd.join('');
 					}
+
 				}
 				if(this.playBonusId === 'ssc_star5_group10'){
 					if(indexff === 0){

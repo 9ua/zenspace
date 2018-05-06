@@ -120,7 +120,7 @@
 				</ul>
 				<!-- 和值 -->
 				<ul class="hezhi" v-show="index === 3">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="k3option($event,index,k3item)">
+					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
 						<h2>{{k3item.title}}</h2>
 						<span>{{k3item.rates}}</span>
 					</li>
@@ -184,33 +184,33 @@
   		</div>
   	</div>
   	<van-popup v-model="bet" class="betk3pop">
-		<ul class="beta"  v-if="zhu < 1">
-			<li>温馨提示！</li>
-			<li>请至少选择一注号码投注</li>
-			<li @click="bet = ! bet"><button>确定</button></li>
-		</ul>
-		<ul class="betb" v-else-if="money === ''">
-			<li>温馨提示！</li>
-			<li>请填写您要投注的金额</li>
-			<li @click="bet = ! bet"><button>确定</button></li>
-		</ul>
-		<ul class="betc" v-show="betGoshow"  v-else>
-			<li>投注确认</li>
-			<li>
-				<p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-				<p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-				<p><span>投注内容：</span>{{con}}</p>
-			</li>
-			<li><button @click="bet = ! bet">取消</button><button @click="betGo">确定</button></li>
-		</ul>
-		<ul class="bete"  v-show="betsuccess">
-			<li>温馨提示！</li>
-			<li>
-				<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
-			</li>
-			<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
-		</ul>
-	</van-popup>
+			<ul class="beta"  v-if="zhu < 1">
+				<li>温馨提示！</li>
+				<li>请至少选择一注号码投注</li>
+				<li @click="bet = ! bet"><button>确定</button></li>
+			</ul>
+			<ul class="betb" v-else-if="money === ''">
+				<li>温馨提示！</li>
+				<li>请填写您要投注的金额</li>
+				<li @click="bet = ! bet"><button>确定</button></li>
+			</ul>
+			<ul class="betc" v-show="betGoshow"  v-else>
+				<li>投注确认</li>
+				<li>
+					<p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+					<p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+					<p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+				</li>
+				<li><button @click="bet = ! bet">取消</button><button @click="betGo">确定</button></li>
+			</ul>
+			<ul class="bete"  v-show="betsuccess">
+				<li>温馨提示！</li>
+				<li>
+					<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+				</li>
+				<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
+			</ul>
+		</van-popup>
   </div>
 </template>
 <script>
@@ -226,13 +226,17 @@
 				rates:0,
 				bet:false,//投注弹窗
 				zhu:0,
+				zhu1:0,
+				zhu2:0,
 				navs:0,
-				navlist:0,
+				navlist:3,
 				timer:'',
-				titles:'单挑一骰',
+				titles:'和值',
 				listname:'江苏',
 				lotteryId:'jsk3',
 				playId:'k3_star1',//玩法术
+				playId1:'',//玩法术
+				playId2:'',//玩法术
 				n1:1,
 				n2:1,
 				n3:1,
@@ -248,9 +252,15 @@
 				countDown:'',
 				// c:[],//选中的号码的下标
 				d:[],//选中的号码的下标
+				d1:[],//选中的号码的下标
+				d2:[],//选中的号码的下标
 				dd:[],//选中的号码的下标
+				dd1:[],//选中的号码的下标
+				dd2:[],//选中的号码的下标
 				hezhiitem:[],//和值时选中的号码的下标
 				con:'',
+				con1:'',
+				con2:'',
 				cons:'',
 				playBonus:'',//玩法树
 				// 单挑一骰
@@ -690,39 +700,65 @@
 				}
 				console.log(this.con)
 			},
-			//和值
+			//和值-大小单双
 			hezhi(e,index,k3item){
 				k3item.selected = !k3item.selected;
+				let dxds = ['大','小','单','双'];
 				let rets = [3,6,10,15, 21, 25, 27, 27, 25, 21, 15, 10, 6,3];
-					let selected = ['04','05','06','07', '08', '09', '10', '11', '12', '13', '14', '15', '16','17'];
-					let j=0;
+				let selectedx = ['04','05','06','07', '08', '09', '10', '11', '12', '13', '14', '15', '16','17'];
+				let j=0;
 				if(k3item.selected === true){
 					this.rates = k3item.rate;
 					this.d[index] = k3item.title
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					
-					for (var i = 0; i < selected.length; i++) {
+					for (var i = 0; i < selectedx.length; i++) {
 						for (var k = 0; k < this.d.length; k++) {
-							if (selected[i] == this.d[k]) {
+							if (selectedx[i] == this.d[k]) {
 								this.hezhiitem[i] = rets[i]
 								j += this.hezhiitem[i];
 							}
 						}
 					}
 					this.zhu = j;
-					console.log(this.hezhiitem,'-----',this.hezhiitem[index])
 				}else if(k3item.selected === false){
 					this.rates = 0;
 					this.d.splice(index,1,"");
 					this.hezhiitem.splice(index,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
-					// this.zhu =this.zhu - hezhiitem[index];
 					console.log(this.hezhiitem[index],'abc')
 				}
-				// console.log(this.hezhiitem,'abc')
-				// console.log(this.zhu,hezhiitem,'----',this.zhu - hezhiitem[index]);
+			},
+			hezhidaxiaodanshuang(e,index,k3item){
+				k3item.selected = !k3item.selected;
+				if(k3item.selected === true){
+					if(index <= 3){
+						this.playId1 = 'k3_star3_big_odd';
+						this.d1[index] = k3item.title;
+						this.dd = this.d1.filter(function(n) { return n; });
+						this.con1 = this.dd.join(',');
+						this.zhu1 ++ ;
+					}else if(index > 3){
+						this.playId2 = 'k3_star3_and';
+						this.d2[index] = k3item.title;
+						this.dd = this.d2.filter(function(n) { return n; });
+						this.con2 = this.dd.join(',');
+						this.zhu2 ++ ;
+					}
+					this.rates = k3item.rate;
+					this.d[index] = k3item.title;
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(',');
+					this.zhu = this.zhu1+this.zhu2;
+				}else if(k3item.selected === false){
+					this.rates = 0;
+					this.d.splice(index,1,"");
+					this.dd = this.d.filter(function(n) { return n; });
+					this.con = this.dd.join(','); 
+					this.zhu --;
+				}
 			},
 			//玩法树
 			getPlayTree(){
@@ -744,7 +780,7 @@
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu ++;
-					//二不同时
+					//二不同时 +
 					if(this.playId === 'k3_star2_same_not'){
 						let ret = this.groupSplit(this.dd,2);
 						let arr=[];
@@ -757,7 +793,7 @@
 						this.con = abc;
 						this.zhu = arr.length;
 					}
-					//三不同时
+					//三不同时 +
 					if(this.playId === 'k3_star3_same_not'){
 						let ret = this.groupSplit(this.dd,3);
 						let arr=[];
@@ -775,10 +811,37 @@
 					this.rates = 0;
 					this.d.splice(index,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
-					this.con = this.dd.join(',');
+					this.con = this.dd.join(','); 
 					this.zhu --;
+					//二不同时 -
+					if(this.playId === 'k3_star2_same_not'){
+						let ret = this.groupSplit(this.dd,2);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.con = abc;
+						this.zhu = arr.length;
+					}
+					//三不同时 -
+					if(this.playId === 'k3_star3_same_not'){
+						let ret = this.groupSplit(this.dd,3);
+						let arr=[];
+						let abc='';
+						for (var k = 0;k<ret.length;k++) {
+							var cc = ret[k].join('');
+							arr.push(cc);
+						}
+						abc = arr.join(',')
+						this.con = abc;
+						this.zhu = arr.length;
+					}
 				}
 			},
+
 			//清空
 			iscreat(){
 				// 单挑一骰
@@ -852,29 +915,84 @@
 			//投注
 			betGo(){
 				let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
-				let formData = new FormData();
-					formData.append('order[0].content',this.con);
-					formData.append('order[0].betCount',this.zhu);
-					formData.append('order[0].price', this.money);
-					formData.append('order[0].unit',1);
-					formData.append('order[0].playId',this.playId);
-					formData.append('count',this.zhu);
-					formData.append('traceOrders[0].price', this.money);
-					formData.append('traceOrders[0].seasonId', this.seasonId2);
-					formData.append('bounsType', 0);
-					formData.append('traceWinStop', 0);
-					formData.append('isTrace', 0);
-					formData.append('lotteryId', this.lotteryId);
-					formData.append('amount', this.money * this.zhu);
-				this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
-					if(res.data.message === 'success'){
-						this.betGoshow = !this.betGoshow;
-						this.betsuccess = !this.betsuccess;
+				if(this.playId1 === 'k3_star3_big_odd' || this.playId2 === 'k3_star3_and' || this.playId === 'k3_star3_and'){
+					if(this.playId1 === 'k3_star3_big_odd'){
+						let formData = new FormData();
+						formData.append('order[0].content',this.con1);
+						formData.append('order[0].betCount',this.zhu1);
+						formData.append('order[0].price', this.money);
+						formData.append('order[0].unit',1);
+						formData.append('order[0].playId',this.playId1);
+						formData.append('count',this.zhu1);
+						formData.append('traceOrders[0].price', this.money);
+						formData.append('traceOrders[0].seasonId', this.seasonId2);
+						formData.append('bounsType', 0);
+						formData.append('traceWinStop', 0);
+						formData.append('isTrace', 0);
+						formData.append('lotteryId', this.lotteryId);
+						formData.append('amount', this.money * this.zhu1);
+						this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
+							if(res.data.message === 'success'){
+								// this.betGoshow = !this.betGoshow;
+								// this.betsuccess = !this.betsuccess;
+							}
+						}).catch((error) => {
+							console.log("No");
+						})
 					}
-					console.log(this.playId)
-				}).catch((error) => {
-					console.log("No");
-				})
+					if(this.playId2 === 'k3_star3_and'){
+						let formData = new FormData();
+						formData.append('order[0].content',this.con2);
+						formData.append('order[0].betCount',this.zhu2);
+						formData.append('order[0].price', this.money);
+						formData.append('order[0].unit',1);
+						formData.append('order[0].playId',this.playId2);
+						formData.append('count',this.zhu2);
+						formData.append('traceOrders[0].price', this.money);
+						formData.append('traceOrders[0].seasonId', this.seasonId2);
+						formData.append('bounsType', 0);
+						formData.append('traceWinStop', 0);
+						formData.append('isTrace', 0);
+						formData.append('lotteryId', this.lotteryId);
+						formData.append('amount', this.money * this.zhu1);
+						this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
+							if(res.data.message === 'success'){
+								this.betGoshow = !this.betGoshow;
+								this.betsuccess = !this.betsuccess;
+							}
+						}).catch((error) => {
+							console.log("No");
+						})
+					}
+				}
+				else {
+					// default
+					if(this.playId1 !== 'k3_star3_big_odd' && this.playId2 !== 'k3_star3_and'){		
+						let formData = new FormData();
+						formData.append('order[0].content',this.con);
+						formData.append('order[0].betCount',this.zhu);
+						formData.append('order[0].price', this.money);
+						formData.append('order[0].unit',1);
+						formData.append('order[0].playId',this.playId);
+						formData.append('count',this.zhu);
+						formData.append('traceOrders[0].price', this.money);
+						formData.append('traceOrders[0].seasonId', this.seasonId2);
+						formData.append('bounsType', 0);
+						formData.append('traceWinStop', 0);
+						formData.append('isTrace', 0);
+						formData.append('lotteryId', this.lotteryId);
+						formData.append('amount', this.money * this.zhu);
+						this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
+							if(res.data.message === 'success'){
+								this.betGoshow = !this.betGoshow;
+								this.betsuccess = !this.betsuccess;
+							}
+							console.log(this.playId)
+						}).catch((error) => {
+							console.log("No");
+						})
+					}
+				}
 			},
 			betsucc(){
 				this.betsuccess = !this.betsuccess;

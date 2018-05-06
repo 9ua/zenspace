@@ -36,7 +36,7 @@
               <span>{{selected.account}}</span>
             </li>
             <li>
-              <p>查詢返點率</p>
+              <p>返點率 {{selected.rebateRatio}}</p>
             </li>
             <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
         </ul>

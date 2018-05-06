@@ -1,40 +1,142 @@
 <template>
   <div class="agent">
     <div class="agent-top">
-      <router-link to="/agency" tag="i" class="el-icon-arrow-left"></router-link>
+      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
       <p>交易明細</p>
-    </div>
-    <div class="agent-content">
-      
-      <div class="agent-content-top">
-          <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane tag="tab" label="所有类型" name="first"></el-tab-pane>
-            <el-tab-pane label="提现记录" name="second"></el-tab-pane>
-            <el-tab-pane label="充值记录" name="third"></el-tab-pane>
-          </el-tabs>
-      </div>
-      <ul>
-        <li><span>nathantest</span> <p>2018-04-25 19:58:25</p> </li>
-        <li>456</li>
-        <li>789</li>
-      </ul>
+      <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
     </div>
     
+    <div class="agent-content">
+      <div class="agent-content-top">
+        <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
+        </van-actionsheet>
+      </div>
+	  <van-tabs v-model="accountChangeType" @click="print">
+  		<van-tab class="typeo" v-for="(item,index) in pagelist" :key="index" :title="item.name">
+   			 <!-- 内容 {{ item.name }} -->
+  		</van-tab>
+	  </van-tabs>
+
+        <ul v-show="showFlag">
+                <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
+                    <div class="mInvite-left">
+                        <p><span>{{item.accountChangeTypeName}}</span><br>
+                        <span></span>{{item.changeTime}}
+                        </p>
+                    </div>
+                    <div class="mInvite-right">
+                        
+                        <p>
+                        <span>金額</span><br>
+                        <span>{{item.changeAmount}}</span>
+                        </p>
+                        
+                    </div>
+                    <i class="el-icon-arrow-down"></i>
+                    
+                    
+                    
+                </li>
+
+        </ul>
+
+
+    </div>
   </div>
 </template>
 <script>
-   export default {
-    data() {
-      return {
-        activeName: 'first',
-      }
-    },
-    methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
+export default {
+  data(){
+    return {
+		    active: 1,
+        timeline:'今天',
+        show:false,
+        show2:false,
+        accountChangeType:100,
+        betweenType:1,
+        accountChangeTypeName:'',
+        changeAmount:'',
+        changeTime:'',
+        tradelist:[],
+        
+
+        usertype:2,
+        highbet:0,
+        rebateratio:0,
+        betlist:[],
+        validtime:0,
+        extaddress:'',
+        invitelist:'',
+        selected:[],
+		showFlag: true,
+          pagelist:[
+          {
+            name:'所有类型',
+            Type:100,
+            callback: this.print,
+          },
+          {
+            name:'提现记录',
+            Type:1,
+            callback: this.print,
+          },
+          {
+            name:'充值记录',
+            Type:2,
+            callback: this.print,
+          }
+        ],
+        actions: [
+        {
+          name: '今天',
+          Type:1,
+          callback: this.onClick,
+        },
+        {
+          name: '昨天',
+          Type:2,
+          callback: this.onClick,
+        //   subname: '描述信息'
+        },
+        {
+          name: '七天',
+          Type:3,
+          callback: this.onClick,
+          loading: false
+        },
+        ],
+        
+        
     }
-  }
+  },
+  mounted(){
+      this.getTradeList();
+  },
+  methods: {
+     
+    onClick(item){
+      this.timeline = item.name;
+      this.betweenType = item.Type;
+      this.show = ! this.show;
+      console.log(this.betweenType);
+      this.getTradeList();
+    },
+    print(index,title){
+      this.accountChangeType = this.pagelist[index].Type;
+      console.log(this.pagelist[index].Type);
+      this.getTradeList();
+    },
+    getTradeList(){
+        this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:2,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
+            this.tradelist = res.data.data.list;
+            console.log(res.data.data.list);
+			}).catch((error) => {
+                console.log(error);
+                    console.log("获取彩種ratio ERROR");
+		});
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
   @import '../../../assets/scss/page-five/agency/agent.scss';

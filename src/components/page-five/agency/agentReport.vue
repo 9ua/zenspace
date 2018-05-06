@@ -14,23 +14,23 @@
       <div class="agent-content-list">
         <ul>
           <li>
-            <span>12.00</span>
+            <span>{{userTeam.actualSaleAmount}}</span>
             <span>投注金额</span>
           </li>
           <li>
-            <span>12.00</span>
+            <span>{{userTeam.winAmount}}</span>
             <span>中奖金额</span>
           </li>
           <li>
-            <span>12.00</span>
+            <span>{{userTeam.activityAndSend}}</span>
             <span>活动礼金</span>
           </li>
           <li>
-            <span>12.00</span>
+            <span>{{userTeam.rebateAmount}}</span>
             <span>团队返点</span>
           </li>
           <li>
-            <span>12.00</span>
+            <span></span>
             <span>团队盈利</span>
           </li>
           <li>
@@ -83,13 +83,15 @@
 export default {
   data(){
     return {
+
+        dateFlag:0,
         timeline:'今日',
         show:false,
         show2:false,
         usertype:2,
         highbet:0,
         rebateratio:0,
-        betlist:[],
+        userTeam:[],
         validtime:0,
         extaddress:'',
         invitelist:'',
@@ -98,20 +100,24 @@ export default {
         actions: [
         {
           name: '今日',
+          type:0,
           callback: this.onClick,
         },
         {
           name: '昨日',
+          type:1,
           callback: this.onClick,
           subname: '描述信息'
         },
         {
           name: '本月',
+          type:2,
           callback: this.onClick,
           loading: false
         },
         {
           name: '上月',
+          type:3,
           callback: this.onClick,
           loading: false
         }
@@ -120,11 +126,26 @@ export default {
         
     }
   },
+  mounted(){
+    this.getUserTeam();
+  },
   methods: {
     onClick(name){
       this.timeline = name.name;
+      this.dateFlag = name.type;
       this.show = ! this.show;
+      this.getUserTeam();
     },
+    getUserTeam() {
+			this.$http.get(this.$store.state.url+'api/proxy/getUserTeam',{params:{account:this.$store.state.Globalusername,dateFlag:this.dateFlag}}).then((res) => {
+        
+        this.userTeam = res.data.data;
+        console.log(this.userTeam);
+			}).catch((error) => {
+					console.log("获取列表Error");
+			});
+				console.log(this.bankList);
+		},
   },
 };
 </script>

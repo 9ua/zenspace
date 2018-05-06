@@ -18,6 +18,23 @@
         <div class="title">盈利</div>
       </div>
       
+      <ul style="padding:0">
+        <li class="row2" v-for="(item,index) in underLevelReport" :key="index" @click="select(item,$event)">
+          <div class="title">
+            <p>{{item.account}}</p>
+          </div>
+          <div class="title">
+            <p>{{item.userType}}</p>
+          </div>
+          <div class="title">
+            <p>{{item.teamCount}}</p>
+          </div>
+          <div class="title">
+            <p>{{item.count}}</p>
+          </div>
+        </li>         
+      </ul>
+
     </div>
   </div>
 </template>
@@ -25,7 +42,9 @@
 export default {
   data(){
     return {
-        timeline:'今日',
+        dateFlag:0,
+        underLevelReport:[],
+        timeline:'今天',
         show:false,
         show2:false,
         usertype:2,
@@ -39,21 +58,24 @@ export default {
         showFlag: true,
         actions: [
         {
-          name: '今日',
+          name: '今天',
+          type:0,
           callback: this.onClick,
         },
         {
-          name: '昨日',
+          name: '昨天',
+          type:1,
           callback: this.onClick,
-          subname: '描述信息'
         },
         {
           name: '本月',
+          type:2,
           callback: this.onClick,
           loading: false
         },
         {
           name: '上月',
+          type:3,
           callback: this.onClick,
           loading: false
         }
@@ -62,11 +84,24 @@ export default {
         
     }
   },
+  mounted(){
+      this.getUnderLevelReport();
+  },
   methods: {
     onClick(name){
       this.timeline = name.name;
+      this.dateFlag = name.type;
       this.show = ! this.show;
+      this.getUnderLevelReport();
     },
+    getUnderLevelReport() {
+			this.$http.get(this.$store.state.url+'api/proxy/getUnderLevelReport',{params:{dateFlag:this.dateFlag}}).then((res) => {
+        this.underLevelReport = res.data.data;
+        console.log(this.underLevelReport);
+			}).catch((error) => {
+					console.log("获取列表Error");
+			});
+		},
   },
 };
 </script>

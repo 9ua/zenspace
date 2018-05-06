@@ -1,7 +1,7 @@
 <template>
   <div class="agent">
     <div class="agent-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
+      <router-link to="/agency" tag="i" class="el-icon-arrow-left"></router-link>
       <p>交易明細</p>
       <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
     </div>

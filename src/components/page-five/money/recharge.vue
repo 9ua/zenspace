@@ -63,9 +63,6 @@
 						<p>充值人姓名</p><span>{{niceName}}</span>
 					</li>
 					<li>
-						<p>充值卡号</p><span>{{card}}</span>
-					</li>
-					<li>
 						<div class="center"><p>请确认上列信息正确</p></div>	
 					</li>
 					<li><div class="button1"><button @click="sendReq()">确定</button><button @click="show2 = !show2">取消</button></div></li>
@@ -167,7 +164,6 @@ export default {
             formData.append('bankNameId',this.bankNameId);
             formData.append('chargeamount',this.chargeamount);
             formData.append('niceName',this.niceName);
-            formData.append('card',this.card);
             this.$axios.post(this.$store.state.url+'api/proxy/setPayApplication', formData,config).then((res) => {
 				console.log(res.code);
 				if(res.data.code === 1) {

@@ -990,9 +990,9 @@
 			},
 			//获取彩種當前獎期時間
 			geteServerTime(){
+					clearInterval(this.timer);
 				this.$http.get(this.$store.state.url+'api/lottery/getCurrentSaleTime',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					if (res.data.code === 1) {
-					clearInterval(this.timer);
 					this.seasonId2 = res.data.data.seasonId
 					this.seasonId = this.seasonId2.substring(4).split("-").join("");
 					this.today = res.data.data.restSeconds;

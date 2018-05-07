@@ -14,8 +14,8 @@
 	            		<div class="title">
 	            			{{into.title}}
 	            		</div>
-	            		<!-- <div class="xq">{{into.rates}}</div> -->
-	            		<div class="xq"></div>
+	            		<div class="xq" v-show=" index !== 3">赔率 {{into.displayBonus | keepTwoNum}}</div>
+	            		<div class="xq" v-show=" index === 3"></div>
 	            		<div class="img">
 	            			<span class="img1"></span><span class="img2"></span><span class="img3"></span>
 	            		</div>
@@ -75,6 +75,7 @@
 			</div>
 			<div class="betk3-content-foot">
 				<p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
+					<span v-show="index !== 3">赔率 <span class="k3remark">{{item.displayBonus | keepTwoNum}}</span> 倍。</span>	
 				<!-- 单挑一骰 -->
 				<ul class="yishai" v-show="index === 0">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
@@ -122,7 +123,7 @@
 				<ul class="hezhi" v-show="index === 3">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
 						<h2>{{k3item.title}}</h2>
-						<span>{{k3item.rate}}</span>
+						<span>赔率{{k3item.rate | keepTwoNum}}</span>
 					</li>
 				</ul>
 				<!-- 大小单双 -->
@@ -183,40 +184,31 @@
   			<div class="betk3-footer-buttom-right" @click="betC">马上投注</div>
   		</div>
   	</div>
-  	<van-popup v-model="bet" class="betk3pop">
-			<ul class="beta"  v-if="zhu < 1">
-				<li>温馨提示！</li>
-				<li>请至少选择一注号码投注</li>
-				<li @click="bet = ! bet"><button>确定</button></li>
-			</ul>
-			<ul class="betb" v-else-if="money === ''">
-				<li>温馨提示！</li>
-				<li>请填写您要投注的金额</li>
-				<li @click="bet = ! bet"><button>确定</button></li>
-			</ul>
-			<ul class="betc" v-show="betGoshow"  v-else>
-				<li>投注确认</li>
-				<li>
-					<p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-					<p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-					<p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
-				</li>
-				<li><button @click="bet = ! bet">取消</button><button @click="betGo">确定</button></li>
-			</ul>
-			<ul class="bete"  v-show="betsuccess">
-				<li>温馨提示！</li>
-				<li>
-					<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
-				</li>
-				<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
-			</ul>
-		</van-popup>
+	<ul class="betc" v-show="betGoshow">
+		<li>投注确认</li>
+		<li>
+			<p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+			<p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+			<p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+		</li>
+		<li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
+	</ul>
+	<ul class="betc"  v-show="betsuccess">
+		<li>温馨提示！</li>
+		<li>
+			<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+		</li>
+		<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
+	</ul>
+	<van-popup class="betshow" v-model="betshow">{{content}}</van-popup>
   </div>
 </template>
 <script>
 	export default{
 		data(){
 			return{
+				betshow:false,//投注弹窗
+				content:'提示内容!',//弹窗内容
 				issantonghao:false,
 				show:false,//头部中间
 				showa:false,//头部右
@@ -246,7 +238,7 @@
 				seasonId:'',//截取后的期号
 				seasonId2:'',//当前期号
 				betsuccess:false,
-				betGoshow:true,
+				betGoshow:false,
 				betk3ContentTopPop:false,
 				today:'',
 				countDown:'',
@@ -731,6 +723,7 @@
 					console.log(this.hezhiitem[index],'abc')
 				}
 			},
+			//和值-大小单双 +
 			hezhidaxiaodanshuang(e,index,k3item){
 				k3item.selected = !k3item.selected;
 				if(k3item.selected === true){
@@ -753,11 +746,24 @@
 					this.con = this.dd.join(',');
 					this.zhu = this.zhu1+this.zhu2;
 				}else if(k3item.selected === false){
-					this.rates = 0;
+					if(index <= 3){
+						this.playId1 = 'k3_star3_big_odd';
+						this.d1.splice(index,1,"");
+						this.dd = this.d1.filter(function(n) { return n; });
+						this.con1 = this.dd.join(',');
+						this.zhu1 -- ;
+					}else if(index > 3){
+						this.playId2 = 'k3_star3_and';
+						this.d2.splice(index,1,"");
+						this.dd = this.d2.filter(function(n) { return n; });
+						this.con2 = this.dd.join(',');
+						this.zhu2 -- ;
+					}
+					this.rates = k3item.rate;
 					this.d.splice(index,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
-					this.con = this.dd.join(','); 
-					this.zhu --;
+					this.con = this.dd.join(',');
+					this.zhu = this.zhu1+this.zhu2;
 				}
 			},
 			//玩法树
@@ -767,8 +773,8 @@
 					console.log(res.data.data.playBonus,"玩法树");
 				}).catch((error) => {
 					console.log("玩法树No");
-					// this.$store.state.loginStatus =false;
-					// this.$router.push('/login');
+					this.$store.state.loginStatus =false;
+					this.$router.push('/login');
 				})
 			},
 			//中间->投注选号
@@ -872,8 +878,14 @@
 				for(let i=0;i<this.k3options.length;i++){
 					this.k3options[i].selected = false;
 					this.d = [];
+					this.d1 = [];
+					this.d2 = [];
 					this.con = '';
+					this.con1 = '';
+					this.con2 = '';
 					this.zhu =0;
+					this.zhu1 =0;
+					this.zhu2 =0;
 					this.money = 1;
 				}
 				// 大小单双
@@ -909,13 +921,25 @@
 					this.money = 1;
 				}
 			},
+			betCancel(){
+				this.betGoshow = !this.betGoshow;
+			},
 			betC(){
-				this.bet = !this.bet;
+				if(this.zhu <= 0){
+					this.betshow = !this.betshow
+					this.content = '请至少选择一注号码投注!'
+				} if(this.money === ''){
+					this.betshow = !this.betshow
+					this.content = '请填写您要投注的金额!'
+				} if(this.zhu > 0 && this.money !== ''){
+					this.betGoshow = !this.betGoshow;
+				}
 			},
 			//投注
 			betGo(){
 				let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
 				if(this.playId1 === 'k3_star3_big_odd' || this.playId2 === 'k3_star3_and' || this.playId === 'k3_star3_and'){
+					console.log('playId: ' + this.playId +", playId1: "+ this.playId1+", playId2: "+ this.playId2 + ', content: '+this.con1)
 					if(this.playId1 === 'k3_star3_big_odd'){
 						let formData = new FormData();
 						formData.append('order[0].content',this.con1);
@@ -932,10 +956,22 @@
 						formData.append('lotteryId', this.lotteryId);
 						formData.append('amount', this.money * this.zhu1);
 						this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
-							if(res.data.message === 'success'){
-								// this.betGoshow = !this.betGoshow;
-								// this.betsuccess = !this.betsuccess;
-							}
+							// // if(this.zhu2 < 1){
+								if(res.data.message === 'success'){
+									this.con1 = '';
+									console.log(this.con1+'-----1121')
+									setTimeout(() => {
+										this.betshow = !this.betshow
+										this.content = '投注成功!'
+										this.betGoshow = !this.betGoshow;
+										this.iscreat();
+										setTimeout(() => {
+											this.betshow = !this.betshow
+											this.betsuccess = !this.betsuccess;
+										}, 1300);
+									}, 600);
+								}
+							// }
 						}).catch((error) => {
 							console.log("No");
 						})
@@ -956,9 +992,20 @@
 						formData.append('lotteryId', this.lotteryId);
 						formData.append('amount', this.money * this.zhu1);
 						this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
-							if(res.data.message === 'success'){
-								this.betGoshow = !this.betGoshow;
-								this.betsuccess = !this.betsuccess;
+							if(this.zhu1 < 1){
+								if(res.data.message === 'success'){
+									setTimeout(() => {
+										this.betshow = !this.betshow
+										this.content = '投注成功!'
+										this.betGoshow = !this.betGoshow;
+										this.iscreat();
+										setTimeout(() => {
+											this.betshow = !this.betshow
+											this.betsuccess = !this.betsuccess;
+											
+										}, 1300);
+									}, 600);
+								}
 							}
 						}).catch((error) => {
 							console.log("No");
@@ -984,8 +1031,16 @@
 						formData.append('amount', this.money * this.zhu);
 						this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
 							if(res.data.message === 'success'){
-								this.betGoshow = !this.betGoshow;
-								this.betsuccess = !this.betsuccess;
+								setTimeout(() => {
+									this.betshow = !this.betshow
+									this.content = '投注成功!'
+									this.betGoshow = !this.betGoshow;
+									setTimeout(() => {
+										this.betshow = !this.betshow
+										this.betsuccess = !this.betsuccess;
+										this.iscreat();
+									}, 1300);
+								}, 600);
 							}
 							console.log(this.playId)
 						}).catch((error) => {
@@ -994,9 +1049,10 @@
 					}
 				}
 			},
+			//继续投注
 			betsucc(){
 				this.betsuccess = !this.betsuccess;
-				this.$router.push({path:'/one'})
+				this.iscreat();
 			},
 			//排列组合
 			groupSplit(arr, size) {
@@ -1032,6 +1088,13 @@
 				el.focus()
 				}
 			}
+		},
+		// 保留二个小数,不四舍五入
+		filters: {
+		keepTwoNum(value) {
+			value = parseInt((value)*1000)/1000;
+			return value;
+		}
 		}
 	}
 </script>

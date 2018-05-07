@@ -82,7 +82,7 @@
       	}
       }
     },
-    // 保留二个小数
+    // 保留二个小数,四舍五入
     filters: {
       keepTwoNum(value) {
         value = Number(value);

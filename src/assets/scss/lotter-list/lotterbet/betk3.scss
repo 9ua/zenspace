@@ -93,12 +93,15 @@
                         & li.active {
                             border: 1px solid #f4c829;
                         }
-                        & li:nth-child(5) {
+                        & li:nth-child(5),
+                        & li:nth-child(7) {
                             display: none;
                         }
+                        // & li:nth-child(8) {
+                        //   margin-right: 10px;
+                        // }
                         & li:nth-child(3),
-                        & li:nth-child(6),
-                        & li:nth-child(9) {
+                        & li:nth-child(8) {
                             margin-right: 0;
                         }
                     }
@@ -201,6 +204,9 @@
                 color: #caebda;
                 font-size: 12px;
                 width: 100%;
+                & .k3remark {
+                    color: #f0c930;
+                }
                 >ul {
                     display: flex;
                     flex-wrap: wrap;
@@ -414,61 +420,6 @@
     }
 }
 
-.betk3pop {
-    width: 78%;
-    border-radius: 4px;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -o-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: blur(0px);
-    ul {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        & li {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            // width: 100%;
-            border-bottom: 1px solid #DFE4ED;
-            min-height: 30px;
-            font-size: 14px;
-        }
-        & li:nth-child(2) {
-            min-height: 54px;
-            display: flex;
-            flex-direction: column;
-            padding: 4px 0px;
-            & p {
-                display: flex;
-                align-items: center;
-                padding: 4px 0px 4px 60px;
-                width: 100%;
-                & span {
-                    width: 30%;
-                }
-                & span.popcon {
-                    word-wrap: break-word;
-                    width: 178px;
-                }
-                & b {
-                    color: red;
-                    font-weight: 400;
-                }
-            }
-        }
-        & li:nth-child(3) {
-            & button {
-                width: 50%;
-                border: none;
-                color: #22563f;
-                background: none;
-            }
-        }
-    }
-}
-
 .bete {
     display: flex;
     flex-wrap: nowrap;
@@ -489,9 +440,10 @@
     background-color: rgba(0, 0, 0, 0) !important;
 }
 
-// .van-modal {
-//     background-color: rgba(0, 0, 0, 0.8) !important;
-// }
+.van-modal {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    display: none;
+}
 .menu-list-top li:nth-child(1) {
     .img1 {
         background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
@@ -1562,4 +1514,69 @@
             }
         }
     }
+}
+
+.betc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -170px;
+  margin-top: -80px;
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  background: #ddd;
+  & li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #DFE4ED;
+    min-height: 30px;
+    font-size: 14px;
+  }
+  & li:nth-child(2) {
+    min-height: 54px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0px;
+    & p {
+      display: flex;
+      align-items: center;
+      padding: 4px 0px 4px 60px;
+      width: 100%;
+      & span {
+        width: 30%;
+      }
+      & span.popcon {
+        word-wrap: break-word;
+        width: 178px;
+      }
+      & b {
+        color: red;
+        font-weight: 400;
+      }
+    }
+  }
+  & li:nth-child(3) {
+    & button {
+      width: 50%;
+      border: none;
+      color: #22563f;
+      background: none;
+    }
+  }
+}
+
+
+.betshow.van-popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  max-width: 300px;
+  min-width: 180px;
+  background: linear-gradient(to right, #f75f5b, #fead50);
 }

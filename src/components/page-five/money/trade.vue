@@ -18,7 +18,7 @@
 	  </van-tabs>
 
         <ul v-show="showFlag">
-                <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
+                <li v-for="(item,index) in tradelist" :key="index">
                     <div class="mInvite-left">
                         <p><span>{{item.accountChangeTypeName}}</span><br>
                         <span></span>{{item.changeTime}}
@@ -32,38 +32,13 @@
                         </p>
                         
                     </div>
-                    <i class="el-icon-arrow-down"></i>
                     
                     
                     
                 </li>
 
         </ul>
-        <van-actionsheet class="" v-model="show2">
-	            <ul class="recharge-top">
-            <li>
-              <span>{{selected.lotteryName}}</span><br>
-              <p>第--?--期</p> <p>開獎狀態{{selected.status}}</p>
-            </li>
-            <li>
-              <p>投注時間</p><span>{{selected.createTime}}</span><br>
-              <p>投注单号</p><span>{{selected.id}}</span>
-            </li>
-            <li>
-              <p>投注金额</p><span>{{selected.content}}</span>
-            </li>
-            <li>
-              <p>派送奖金</p><span>{{selected.win}}</span>
-            </li>
-            <li>
-              <p>开奖号码</p><span>{{selected.openNum}}</span>
-            </li>
-            <li>
-              <p>我的投注</p>--?-- <p>玩法</p> --?--
-            </li>
-            <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
-          </ul>
-	      </van-actionsheet>
+        
 
     </div>
   </div>

@@ -17,6 +17,7 @@ import pop from '@/components/page-four/pop'
 import bet from '@/components/page-five/money/bet'
 import recharge from '@/components/page-five/money/recharge'
 import rechargeserch from '@/components/page-five/money/rechargeserch'
+import cashOut from '@/components/page-five/money/cashOut'
 import trade from '@/components/page-five/money/trade'
 import agency from '@/components/page-five/agency'
 import agentBetRecord from '@/components/page-five/agency/agentBetRecord'
@@ -40,6 +41,8 @@ import profits from '@/components/page-five/profit'
 import safety from '@/components/page-five/safety'
 import verifyPwd from '@/components/page-five/safety/verifyPwd'
 import setPwd from '@/components/page-five/safety/setPwd'
+import getCards from '@/components/page-five/safety/getCards'
+import newCard from '@/components/page-five/safety/newCard'
 import verifySafePwd from '@/components/page-five/safety/verifySafePwd'
 import changeSafePwd from '@/components/page-five/safety/changeSafePwd'
 import safeMobile from '@/components/page-five/safety/safeMobile'
@@ -187,5 +190,8 @@ export default new Router({
         { path: '/trade', name: 'trade', component: trade, meta: { keepAlive: true }, },
         { path: '/recharge', name: 'recharge', component: recharge, meta: { keepAlive: true }, },
         { path: '/rechargeserch', name: 'rechargeserch', component: rechargeserch, meta: { keepAlive: true }, },
+        { path: '/getCards', name: 'getCards', component: getCards, meta: { keepAlive: true } },
+        { path: '/newCard', name: 'newCard', component: newCard, meta: { keepAlive: true } },
+        { path: '/cashOut', name: 'cashOut', component: cashOut, meta: { keepAlive: true }, },
     ]
 })

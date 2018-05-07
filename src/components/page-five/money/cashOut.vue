@@ -2,7 +2,7 @@
   <div class="recharge">
     <div class="agent-top">
       <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>我要充值</p>
+      <p>我要提现</p>
     </div>
 		  <ul class="recharge-top">
 			<li>
@@ -86,7 +86,6 @@
   </div>
 </template>
 <script>
-import { setStore, getStore,removeStore } from '../../../config/mutil'
 export default {
 	data() {
       return {
@@ -106,31 +105,25 @@ export default {
 		  show2:false,
 		  show3:false,
 		  show4:false,
-		  selectBank:'請選擇銀行',
+		  selectBank:'請選擇要提现銀行',
 		  bankList:[],
 		  payway:[],
-		  
+		  withdrawInformation:'',
 	  }
 	},
-	mounted(){
-		this.getBankNameList();
+	created(){
+		this.getWithdrawInformation();
     },
 	methods :{
-		getBankNameList() {
-			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
-				this.bankList = res.data.data;
-				console.log(res.data.data.length);
-				for(let i=0;i<res.data.data.length;i++) {
-					if(i >= 3){
-						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
-					};
-				};
+		getWithdrawInformation() {
+			this.$http.get(this.$store.state.url+'api/proxy/getWithdrawInformation').then((res) => {
+				this.withdrawInformation = res.data.data;
+				this.payway = res.data.data.bankUserList;
+				console.log(this.withdrawInformation);
 				console.log(this.payway);
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
-				console.log(this.bankList);
-			
 		},
 		goBack(){
 			this.$router.push({path:'/five'});

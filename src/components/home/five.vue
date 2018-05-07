@@ -22,7 +22,7 @@
           <img src="../../assets/img/five/Wallet.png" />
           <span>我要充值</span>
         </router-link>
-        <router-link to="" tag="li">
+        <router-link to="/cashOut" tag="li">
           <img src="../../assets/img/five/Box.png" />
           <span>我要提现</span>
         </router-link>

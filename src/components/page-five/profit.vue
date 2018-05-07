@@ -65,16 +65,12 @@ export default {
 		getGainLost() {
 			this.$http.get(this.$store.state.url+'api/proxy/getGainLost').then((res) => {
         console.log(res.data.data);
-        if (res.data.data = '{}') {
-          
-        } else {
           this.betAmount = res.data.data.betAmount;
           this.winAmount = res.data.data.winAmount;
           this.activityAndSend = res.data.data.activityAndSend;
           this.juniorRebateAmount = res.data.data.juniorRebateAmount;
           this.rechargeAmount = res.data.data.rechargeAmount;
           this.drawingAmount = res.data.data.drawingAmount;
-        }
           
 			}).catch((error) => {
 					console.log("获取列表Error");

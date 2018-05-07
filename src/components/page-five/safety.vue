@@ -54,7 +54,7 @@
       			<i class="el-icon-arrow-right"></i>
       		</div>
       	</router-link>
-      	<router-link to="" tag="li">
+      	<router-link to="getCards" tag="li">
       		<p>银行卡管理</p>
       		<div>
       			<p>设置</p>

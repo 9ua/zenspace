@@ -200,6 +200,13 @@
 		</li>
 		<li><router-link to="/bet" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
 	</ul>
+	<van-popup v-model="showTimesUp" :close-on-click-overlay="false">
+             <div class="mIcode-sure">
+                    <div class="sure2"><p>温馨提示！</p></div>
+     <div class="sure2"><p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p></div>
+                    <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
+                </div>
+ 	</van-popup>
 	<van-popup class="betshow" v-model="betshow">{{content}}</van-popup>
   </div>
 </template>
@@ -207,6 +214,7 @@
 	export default{
 		data(){
 			return{
+				showTimesUp:false,
 				betshow:false,//投注弹窗
 				content:'提示内容!',//弹窗内容
 				issantonghao:false,
@@ -485,10 +493,15 @@
 				}
 				this.countDown = hours + ":" + minutes + ":" + seconds;
 				if (this.today <1 ) {
-						this.geteServerTime();
 						clearInterval(this.timer);
+						this.timesUp();
 					}
 				},1000);
+			},
+			//時間到彈窗
+			timesUp(){
+				this.showTimesUp = ! this.showTimesUp;
+				this.geteServerTime();
 			},
 			//获取过去开奖号码10个
 			getPastOpen(){

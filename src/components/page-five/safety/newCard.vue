@@ -106,14 +106,13 @@ export default {
 		  bankList:[],
           payway:[],
           content:'',
-		  
 	  }
 	},
 	mounted(){
         this.getBankNameList();
+        
     },
 	methods :{
-        
 		getBankNameList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
 				this.bankList = res.data.data;

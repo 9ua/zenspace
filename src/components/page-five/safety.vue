@@ -89,6 +89,7 @@ import { setStore, getStore, removeStore } from '../../config/mutil'
 			//取安全中心状态
 			getSecurityCenterStatus(){
 				this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
+					console.log(res);
 					this.password = res.data.data.password;
 					this.securityCoe = res.data.data.securityCoe;
 					this.mobile = res.data.data.mobile;

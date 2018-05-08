@@ -42,16 +42,16 @@
 					<li>
 						<p>申請充值金額</p><span>{{this.amount}}</span>
 					</li>
-					<li>
+					<li v-if="this.status == '0'">
 						<p>收款人姓名</p><span>{{this.receiveNickName}}</span>
 					</li>
-					<li>
+					<li v-if="this.status == '0'">
 						<p>收款银行</p><span>{{this.receiveBankName}}</span>
 					</li>
-                    <li>
+                    <li v-if="this.status == '0'">
 						<p>收款卡號</p><span>{{this.receiveCard}}</span>
 					</li>
-                    <li>
+                    <li v-if="this.status == '0'">
 						<p>收款银行地址</p><span>{{this.receiveAddress}}</span>
 					</li>
                     <li>
@@ -71,7 +71,8 @@ export default {
 	data() {
       return {
           show2:false,
-		  id:'',
+          id:'',
+          status:'',
 		  statusName:'',
 		  amount:'',
 		  receiveNickName:'',
@@ -89,6 +90,7 @@ export default {
 	methods :{
         select(a) {
             this.id = a.id;
+            this.status=a.status;
 		    this.statusName = a.statusName;
             this.amount = a.amount;
             this.receiveNickName = a.receiveNickName;

@@ -26,7 +26,7 @@
                     </div>
                     <div class="mInvite-right">
                         <p>
-                        <span>{{item.status}}</span><br>
+                        <span>{{item.statusName}}</span><br>
                         <span></span>
                         </p>
                     </div>
@@ -38,7 +38,7 @@
             <li>
               <span>{{selected.lotteryName}}</span>
             </li>
-            <li><p>第--?--期</p> <p>開獎狀態{{selected.status}}</p></li>
+            <li><p>第{{selected.seasonId}}期</p> <p>{{selected.statusName}}</p></li>
             <li>
               <p>投注時間</p><span>{{selected.createTime}}</span>
             </li>

@@ -979,6 +979,58 @@
 			getCount120(bets){
 				return this.getCombin(bets, 5);
 			},
+			//四星-組選4
+			getzuCount4(){
+				if (bets.length != 2) {
+					return 0;
+				}
+				let n1 =  bets[0];
+				let n2 =  bets[1];
+				let count = 0;
+				for (let i = 0; i< n1.length;i++)
+				{
+					count += n2.length;
+					if (n2.indexOf(n1[i])) {
+						count--;
+					}
+				}
+				return count;
+			},
+			//四星-組選6
+			getzuCount6(){
+				return getCombin(bets, 2);
+			},
+			//四星-組選12
+			getzuCount12(){
+				if (bets.length != 2) {
+					return 0;
+				}
+				let n1 =  bets[0];
+				let n2 =  bets[1];
+				let count = 0;
+				for (let i = 0; i< n1.length;i++)
+				{
+					count += n2.length;
+					if (n2.indexOf(n1[i])) {
+						count--;
+					}
+				}
+				return count;
+			},
+			//四星-組選6
+			getzuCount24(){
+				return getCombin(bets, 4);
+			},
+			//三星-组三
+			getzuCount3(){
+				let count = getCombin(bets, 2) * 2;
+  				return count;
+			},
+			//三星-组六
+			getzuCount6(){
+				let count = getCombin(bets, 3);
+  				return count;
+			},
 			//排列组合
 			groupSplit(arr, size) {
 				let maxSize = arr.length,

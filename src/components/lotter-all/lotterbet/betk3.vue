@@ -75,7 +75,7 @@
 			</div>
 			<div class="betk3-content-foot">
 				<p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
-					<span v-show="index !== 3">赔率 <span class="k3remark">{{item.displayBonus | keepTwoNum}}</span> 倍。</span>	
+					<span v-show="index !== 3">赔率 <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>	
 				<!-- 单挑一骰 -->
 				<ul class="yishai" v-show="index === 0">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
@@ -123,7 +123,7 @@
 				<ul class="hezhi" v-show="index === 3">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
 						<h2>{{k3item.title}}</h2>
-						<span>赔率{{k3item.rate | keepTwoNum}}</span>
+						<span>赔率 {{k3item.rate | keepTwoNum}}</span>
 					</li>
 				</ul>
 				<!-- 大小单双 -->
@@ -173,7 +173,7 @@
   			<div class="betk3-footer-buttoms">
   				<p>每注金额</p><input type="text" v-model="money"/>
   				<span v-if="money === '' ">请输入要投注的金额</span>
-  				<span v-else>最高可中<p>{{rates}}</p>元</span>
+  				<span v-else>单注最高可中<p>{{navlist === 3 ? rates * money : rates*10  | keepTwoNum}}</p>元</span>
   			</div>
   		</div>
   		<div class="betk3-footer-buttom">
@@ -198,7 +198,7 @@
 		<li>
 			<p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
 		</li>
-		<li><router-link to="/five" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
+		<li><router-link to="/bet" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
 	</ul>
 	<van-popup class="betshow" v-model="betshow">{{content}}</van-popup>
   </div>
@@ -242,7 +242,8 @@
 				betk3ContentTopPop:false,
 				today:'',
 				countDown:'',
-				// c:[],//选中的号码的下标
+				peilv:[],//当前赔率
+				peilv1:[],//当前赔率
 				d:[],//选中的号码的下标
 				d1:[],//选中的号码的下标
 				d2:[],//选中的号码的下标
@@ -521,6 +522,7 @@
 				this.navlist = index;
 				this.show = !this.show;
 				this.playId = this.playBonus[index].id
+				this.rates = this.playBonus[this.navlist].displayBonus
 			},
 			//头部右->菜单点击
 			listnames(e,index,into){
@@ -552,7 +554,6 @@
 				k3item.selected = !k3item.selected;
 				//取余==0
 				if(k3item.selected === true){
-					this.rates = k3item.rate;
 					this.d[index] = k3item.title
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
@@ -679,18 +680,14 @@
 						this.con = this.dd.join(',');
 					}
 				}else if(k3item.selected === false){
-					this.rates = 0;
 					this.d.splice(index,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu --;
 				}
-
-				// this.con = this.dd.join(',');
 				if(this.zhu === 0){
 					this.zhu = 0;
 				}
-				console.log(this.con)
 			},
 			//和值-大小单双
 			hezhi(e,index,k3item){
@@ -700,27 +697,27 @@
 				let selectedx = ['04','05','06','07', '08', '09', '10', '11', '12', '13', '14', '15', '16','17'];
 				let j=0;
 				if(k3item.selected === true){
-					this.rates = k3item.rate;
-					this.d[index] = k3item.title
-					this.dd = this.d.filter(function(n) { return n; });
-					this.con = this.dd.join(',');
-					
-					for (var i = 0; i < selectedx.length; i++) {
-						for (var k = 0; k < this.d.length; k++) {
-							if (selectedx[i] == this.d[k]) {
-								this.hezhiitem[i] = rets[i]
-								j += this.hezhiitem[i];
-							}
-						}
+				this.rates = k3item.rate;
+				this.d[index] = k3item.title
+				this.dd = this.d.filter(function(n) { return n; });
+				this.con = this.dd.join(',');
+				
+				for (var i = 0; i < selectedx.length; i++) {
+					for (var k = 0; k < this.d.length; k++) {
+					if (selectedx[i] == this.d[k]) {
+						this.hezhiitem[i] = rets[i]
+						j += this.hezhiitem[i];
 					}
-					this.zhu = j;
+					}
+				}
+				this.zhu = j;
 				}else if(k3item.selected === false){
-					this.rates = 0;
-					this.d.splice(index,1,"");
-					this.hezhiitem.splice(index,1,"");
-					this.dd = this.d.filter(function(n) { return n; });
-					this.con = this.dd.join(',');
-					console.log(this.hezhiitem[index],'abc')
+				this.rates = 0;
+				this.d.splice(index,1,"");
+				this.hezhiitem.splice(index,1,"");
+				this.dd = this.d.filter(function(n) { return n; });
+				this.con = this.dd.join(',');
+				console.log(this.hezhiitem[index],'abc')
 				}
 			},
 			//和值-大小单双 +
@@ -740,8 +737,11 @@
 						this.con2 = this.dd.join(',');
 						this.zhu2 ++ ;
 					}
-					this.rates = k3item.rate;
+					
 					this.d[index] = k3item.title;
+					this.peilv[index] = k3item.rate;
+					this.peilv1 = this.peilv.filter(function(n) { return n; });
+					this.rates = Math.max(...this.peilv1);
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu = this.zhu1+this.zhu2;
@@ -759,8 +759,10 @@
 						this.con2 = this.dd.join(',');
 						this.zhu2 -- ;
 					}
-					this.rates = k3item.rate;
 					this.d.splice(index,1,"");
+					this.peilv.splice(index,1,"");
+					this.peilv1 = this.peilv.filter(function(n) { return n; });
+					this.rates = Math.max(...this.peilv1);
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu = this.zhu1+this.zhu2;
@@ -770,18 +772,47 @@
 			getPlayTree(){
 				this.$http.get(this.$store.state.url+'api/lottery/getPlayTree',{params:{lotteryId:this.lotteryId}}).then((res) => {
 					this.playBonus = res.data.data.playBonus;
-					console.log(res.data.data.playBonus,"玩法树");
+					let arrpeilv1 = [];
+					let arrpeilv2 = [];
+					arrpeilv1 = this.playBonus[3].bonusArray;
+					arrpeilv2 = this.playBonus[4].bonusArray;
+					for(let i = 0;i<this.k3options.length;i++){
+						this.k3options[0].rate = arrpeilv2.大
+						this.k3options[1].rate = arrpeilv2.小
+						this.k3options[2].rate = arrpeilv2.单
+						this.k3options[3].rate = arrpeilv2.双
+						this.k3options[4].rate = arrpeilv1[4]
+						this.k3options[5].rate = arrpeilv1[5]
+						this.k3options[6].rate = arrpeilv1[6]
+						this.k3options[7].rate = arrpeilv1[7]
+						this.k3options[8].rate = arrpeilv1[8]
+						this.k3options[9].rate = arrpeilv1[9]
+						this.k3options[10].rate = arrpeilv1[10]
+						this.k3options[11].rate = arrpeilv1[11]
+						this.k3options[12].rate = arrpeilv1[12]
+						this.k3options[13].rate = arrpeilv1[13]
+						this.k3options[14].rate = arrpeilv1[14]
+						this.k3options[15].rate = arrpeilv1[15]
+						this.k3options[16].rate = arrpeilv1[16]
+						this.k3options[17].rate = arrpeilv1[17]
+					}
 				}).catch((error) => {
 					console.log("玩法树No");
 					this.$store.state.loginStatus =false;
-					this.$router.push('/login');
+					this.betshow = !this.betshow
+					this.content = '获取不成功!'
+					setTimeout(() => {
+						this.betshow = !this.betshow
+						this.$router.push('/login');
+					}, 1300);
+					
 				})
 			},
 			//中间->投注选号
 			k3option(e,index,k3item){
 				k3item.selected = !k3item.selected;
 				if(k3item.selected === true){
-					this.rates = k3item.rate;
+					// this.rates = k3item.rate;
 					this.d[index] = k3item.title
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
@@ -812,9 +843,8 @@
 						this.con = abc;
 						this.zhu = arr.length;
 					}
-					// console.log(this.d,'---',this.con,'---',this.con.length,'------')
 				}else if(k3item.selected === false){
-					this.rates = 0;
+					// this.rates = 0;
 					this.d.splice(index,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(','); 
@@ -956,22 +986,19 @@
 						formData.append('lotteryId', this.lotteryId);
 						formData.append('amount', this.money * this.zhu1);
 						this.$axios.post(this.$store.state.url+'api/lottery/bet',formData,config).then((res) => {
-							// // if(this.zhu2 < 1){
-								if(res.data.message === 'success'){
-									this.con1 = '';
-									console.log(this.con1+'-----1121')
+							if(res.data.message === 'success'){
+								this.con1 = '';
+								setTimeout(() => {
+									this.betshow = !this.betshow
+									this.content = '投注成功!'
+									this.betGoshow = !this.betGoshow;
+									this.iscreat();
 									setTimeout(() => {
 										this.betshow = !this.betshow
-										this.content = '投注成功!'
-										this.betGoshow = !this.betGoshow;
-										this.iscreat();
-										setTimeout(() => {
-											this.betshow = !this.betshow
-											this.betsuccess = !this.betsuccess;
-										}, 1300);
-									}, 600);
-								}
-							// }
+										this.betsuccess = !this.betsuccess;
+									}, 1300);
+								}, 600);
+							}
 						}).catch((error) => {
 							console.log("No");
 						})
@@ -1089,7 +1116,7 @@
 				}
 			}
 		},
-		// 保留二个小数,不四舍五入
+		// 保留三个小数,不四舍五入
 		filters: {
 		keepTwoNum(value) {
 			value = parseInt((value)*1000)/1000;

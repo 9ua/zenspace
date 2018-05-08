@@ -231,7 +231,7 @@
 					this.con = this.dd.join(',');
 					this.zhu ++;
 					//二码不定位 +
-					if(this.playBonusId === 'ssc_star5_none2'|| this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2'){
+					if(this.playBonusId === 'ssc_star4_front_group6' || this.playBonusId === 'ssc_star5_none2'|| this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2'){
 						let ret = this.groupSplit(this.dd,2);
 						let arr=[];
 						let abc='';
@@ -242,8 +242,8 @@
 						abc = arr.join(',')
 						this.zhu = arr.length;
 					}
-					//三码不定位 +
-					if(this.playBonusId === 'ssc_star5_none3'){
+					//三码不定位、三星组六 + 
+					if(this.playBonusId === 'ssc_star5_none3' || this.playBonusId === 'ssc_star3_mid_group6' || this.playBonusId === 'ssc_star3_last_group6' || this.playBonusId === 'ssc_star3_front_group6'){
 						let ret = this.groupSplit(this.dd,3);
 						let arr=[];
 						let abc='';
@@ -262,13 +262,17 @@
 					this.ssc_dxdsjia(indexff,indexg,num,numViews,player);
 					// 组选 +
 					this.zuxuansscjia(indexff,indexg,num,numViews,player);
+					//三星包胆 +
+					this.sanbaodanjia(indexff,indexg,num,numViews,player);
+					//二星包胆 +
+					this.erbaodanjia(indexff,indexg,num,numViews,player);
 				}else if(num.choose === false){
 					this.d.splice(indexg,1,"");
 					this.dd = this.d.filter(function(n) { return n; });
 					this.con = this.dd.join(',');
 					this.zhu --;
 					//二码不定位 +
-					if(this.playBonusId === 'ssc_star5_none2'|| this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2'){
+					if(this.playBonusId === 'ssc_star4_front_group6' || this.playBonusId === 'ssc_star5_none2'|| this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2'){
 						let ret = this.groupSplit(this.dd,2);
 						let arr=[];
 						let abc='';
@@ -279,8 +283,8 @@
 						abc = arr.join(',')
 						this.zhu -= arr.length;
 					}
-					//三码不定位 -
-					if(this.playBonusId === 'ssc_star5_none3'){
+					//三码不定位、前三组六、中三组六、后三组六 -
+					if(this.playBonusId === 'ssc_star5_none3' || this.playBonusId === 'ssc_star3_mid_group6' || this.playBonusId === 'ssc_star3_last_group6' || this.playBonusId === 'ssc_star3_front_group6'){
 						let ret = this.groupSplit(this.dd,3);
 						let arr=[];
 						let abc='';
@@ -299,6 +303,10 @@
 					this.ssc_dxdsjian(indexff,indexg,num,numViews,player);
 					//组选 -
 					this.zuxuansscjian(indexff,indexg,num,numViews,player);
+					//三星包胆 -
+					this.sanbaodanjian(indexff,indexg,num,numViews,player);
+					//二星包胆 -
+					this.erbaodanjian(indexff,indexg,num,numViews,player);
 				}
 				// console.log(num.ball,numViews.nums.length,player.numView.length)
 			},
@@ -437,6 +445,46 @@
 				}
 				return count;
 			},
+			//三星包胆 +
+			sanbaodanjia(indexff,indexg,num,numViews,player){
+				if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains'){
+					for (let i = 0; i < numViews.nums.length; i++) {
+						this.zhu = 54;
+						this.con = num.ball;
+						numViews.nums[i].choose = false;
+						numViews.nums[indexg].choose = true;
+					}
+				}
+			},
+			//三星包胆 +
+			sanbaodanjian(indexff,indexg,num,numViews,player){
+				if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains'){
+					for (let i = 0; i < numViews.nums.length; i++) {
+						this.zhu = 0;
+						this.con = '';
+					}
+				}
+			},
+			//二星包胆 +
+			erbaodanjia(indexff,indexg,num,numViews,player){
+				if(this.playBonusId === 'ssc_star2_front_group_contains' || this.playBonusId === 'ssc_star2_last_group_contains'){
+					for (let i = 0; i < numViews.nums.length; i++) {
+						this.zhu = 9;
+						this.con = num.ball;
+						numViews.nums[i].choose = false;
+						numViews.nums[indexg].choose = true;
+					}
+				}
+			},
+			//二星包胆 +
+			erbaodanjian(indexff,indexg,num,numViews,player){
+				if(this.playBonusId === 'ssc_star2_front_group_contains' || this.playBonusId === 'ssc_star2_last_group_contains'){
+					for (let i = 0; i < numViews.nums.length; i++) {
+						this.zhu = 0;
+						this.con = '';
+					}
+				}
+			},
 			//龙虎和 +
 			ssc_side_lhhjia(indexff,indexg,num,numViews,player){
 				// console.log(indexff)
@@ -495,9 +543,15 @@
 						if(this.an === ''){
 							this.an = '-';
 						}
+						// else if(this.an !== '' || this.an !== '-'){
+						// 	this.an = '[万千]'+this.an
+						// }
 						if(this.bn === ''){
 							this.bn = '-';
 						}
+						// else if(this.bn !== '' || this.bn !== '-'){
+						// 	this.bn = '[万百]'+this.bn
+						// }
 						if(this.cn === ''){
 							this.cn = '-';
 						}
@@ -515,21 +569,20 @@
 						}
 						if(this.hn === ''){
 							this.hn = '-';
-						}else if(this.hn !== '-'){
-							this.hn = '[百十]'+this.hn;
 						}
 						if(this.in === ''){
 							this.in = '-';
-						}else if(this.in !== '-'){
-							this.in = '[百个]'+this.in;
 						}
 						if(this.jn === ''){
 							this.jn = '-';
-						}else if(this.jn !== '-'){
-							this.jn = '[十个]'+this.jn;
 						}
-						this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en+','+this.fn+','+this.gn+','+this.hn+','+this.in+','+this.jn;
+						// if(this.an === ''){
+						// 	this.con = +'[万千]'+this.an+','+'[万百]'+this.bn+','+'[万十]'+this.cn+','+'[万个]'+this.dn+','+'[千百]'+this.en+','+'[千十]'+this.fn+','+'[千个]'+this.gn+','+'[百十]'+this.hn+','+'[百个]'+this.in+','+'[十个]'+this.jn;
+						// }else if(a){
+							// this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en+','+this.fn+','+this.gn+','+this.hn+','+this.in+','+this.jn;
+						// }
 					}
+					this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en+','+this.fn+','+this.gn+','+this.hn+','+this.in+','+this.jn;
 				}
 			},
 			//龙虎和 -
@@ -793,6 +846,60 @@
 					let lengths = this.dd.length;
 					this.zhu = this.getCount120(lengths);
 				}
+				if(this.playBonusId === 'ssc_star4_front_group4'){
+					if(indexff === 0){
+						this.ka[indexg] = num.ball;
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb[indexg] = num.ball;
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					this.con = this.an+','+this.bn;
+					this.zhu = this.getzuCount4(this.con.split(','));
+					console.log(this.an,'----',this.bn,'---',this.con.split(','))
+				}
+				if(this.playBonusId === 'ssc_star4_front_group12'){
+					if(indexff === 0){
+						this.ka[indexg] = num.ball;
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb[indexg] = num.ball;
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					this.con = this.an+','+this.bn;
+					this.zhu = this.getzuCount12(this.con.split(','));
+				}
+				if(this.playBonusId === 'ssc_star4_front_group24'){
+					this.dd = this.d.filter(function (n){ return n;})
+					let lengths = this.dd.length;
+					this.zhu = this.getzuCount24(lengths);
+				}
+				if(this.playBonusId === 'ssc_star3_front_group3' || this.playBonusId === 'ssc_star3_mid_group3' || this.playBonusId === 'ssc_star3_last_group3'){
+					this.dd = this.d.filter(function (n){ return n;})
+					let lengths = this.dd.length;
+					this.zhu = this.getzuCount3(lengths);
+				}
+				//二星组选 复式
+				if(this.playBonusId === 'ssc_star2_front_group' || this.playBonusId === 'ssc_star2_last_group'){
+					this.dd = this.d.filter(function (n){ return n;})
+					this.zhu = this.erzuxuanfushi(this.dd);
+				}
+				//三星组选和值
+				if(this.playBonusId === 'ssc_star3_front_group_and' || this.playBonusId === 'ssc_star3_mid_group_and' || this.playBonusId === 'ssc_star3_last_group_and'){
+					this.dd = this.d.filter(function (n){ return n;})
+					this.zhu = this.sanzuxuanhezhi(this.dd);
+				}
+				//二星组选和值
+				if(this.playBonusId === 'ssc_star2_front_group_and' || this.playBonusId === 'ssc_star2_last_group_and'){
+					this.dd = this.d.filter(function (n){ return n;})
+					this.zhu = this.erzuxuanhezhi(this.dd);
+				}
 			},
 			//组选 -
 			zuxuansscjian(indexff,indexg,num,numViews,player){
@@ -871,18 +978,71 @@
 					let lengths = this.dd.length;
 					this.zhu = this.getCount120(lengths);
 				}
+				if(this.playBonusId === 'ssc_star4_front_group4'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					this.con = this.an+','+this.bn;
+					this.zhu = this.getzuCount4(this.con.split(','));
+				}
+				if(this.playBonusId === 'ssc_star4_front_group12'){
+					if(indexff === 0){
+						this.ka.splice(indexg,1,"");
+						this.dd = this.ka.filter(function(n) { return n; });
+						this.an = this.dd.join('');
+					}
+					if(indexff === 1){
+						this.kb.splice(indexg,1,"");
+						this.dd = this.kb.filter(function(n) { return n; });
+						this.bn = this.dd.join('');
+					}
+					this.con = this.an+','+this.bn;
+					this.zhu = this.getzuCount12(this.con.split(','));
+				}
+				if(this.playBonusId === 'ssc_star4_front_group24'){
+					this.dd = this.d.filter(function (n){ return n;})
+					let lengths = this.dd.length;
+					this.zhu = this.getzuCount24(lengths);
+				}
+				if(this.playBonusId === 'ssc_star3_front_group3' || this.playBonusId === 'ssc_star3_mid_group3' || this.playBonusId === 'ssc_star3_last_group3'){
+					this.dd = this.d.filter(function (n){ return n;})
+					let lengths = this.dd.length;
+					this.zhu = this.getzuCount3(lengths);
+				}
+				//二星组选 复式
+				if(this.playBonusId === 'ssc_star2_front_group' || this.playBonusId === 'ssc_star2_last_group'){
+					this.dd = this.d.filter(function (n){ return n;})
+					this.zhu = this.erzuxuanfushi(this.dd);
+				}
+				//三星组选和值
+				if(this.playBonusId === 'ssc_star3_front_group_and' || this.playBonusId === 'ssc_star3_mid_group_and' || this.playBonusId === 'ssc_star3_last_group_and'){
+					this.dd = this.d.filter(function (n){ return n;})
+					this.zhu = this.sanzuxuanhezhi(this.dd);
+				}
+				//二星组选和值
+				if(this.playBonusId === 'ssc_star2_front_group_and' || this.playBonusId === 'ssc_star2_last_group_and'){
+					this.dd = this.d.filter(function (n){ return n;})
+					this.zhu = this.erzuxuanhezhi(this.dd);
+				}
 			},
 			//组选共用函数
 			getCombin(num, len){
 				if (num < len) {
-				return 0;
+					return 0;
 				}
 				let nums = 1;
 				let lens = 1;
 				for (let i = 0; i < len; i++)
 				{
-				nums *= (num - i);
-				lens *= (len - i);
+					nums *= (num - i);
+					lens *= (len - i);
 				}
 				return nums / lens;
 			},			
@@ -978,6 +1138,86 @@
 			// bets = ["0", "1","3","7","9"]
 			getCount120(bets){
 				return this.getCombin(bets, 5);
+			},
+			//四星-組選4
+			// bets = ["0,1,3", "1,2,3"]
+			getzuCount4(bets){
+				if (bets.length != 2 || bets[0] === ''  ||  bets[1] === '') {
+					return 0;
+				}
+				let n1 =  bets[0];
+				let n2 =  bets[1];
+				let count = 0;
+				for (let i = 0; i< n1.length;i++)
+				{
+					count += n2.length;
+					if (n2.indexOf(n1[i])) {
+						count--;
+					}
+				}
+				return count;
+			},
+			//四星-組選12
+			// bets = ["0,1,3", "1,2,3"]
+			getzuCount12(bets){
+				console.log("bets: ", bets)
+				if (bets.length != 2 || bets[0] === ''  ||  bets[1] === '') {
+					return 0;
+				}
+				let n1 = bets[0];
+				let n2 = bets[1];
+				if (n1.length < 1) {
+					return 0;
+				}
+				if (n2.length < 2) {
+					return 0;
+				}
+				let count = 0;
+				for (let i=0 ; i< n1.length; i++)
+				{
+					let  a = n2.length;
+					if (n2.indexOf(n1[i]) >= 0){
+						a--;
+					}
+					count += this.getCombin(a, 2);
+				}
+				return count;
+			},
+			//四星-組選24
+			//bets = ["0", "1","9"]
+			getzuCount24(bets){
+				return this.getCombin(bets, 4);
+			},
+			//三星-组三
+			//bets = ["0", "1","9"]
+			getzuCount3(bets){
+  				return this.getCombin(bets, 2) * 2;
+			},
+			//三星-组选和值
+			sanzuxuanhezhi(bets){
+				let betCount = [1, 2, 2, 4, 5, 6, 8, 10, 11, 13, 14, 14, 15, 15, 14, 14, 13, 11, 10, 8, 6, 5, 4, 2, 2, 1 ];
+				let count = 0;
+				for (let i=0; i< bets.length;i++) {
+					count += betCount[(Number(bets[i]) - 1)];
+				}
+				return count;
+			},
+			// 二星-组选複式 
+			//bets = ["6","7"]  
+			erzuxuanfushi(bets){
+				let count = 0;
+				let size = bets.length;
+				count = this.getCombin(size, 2);
+				return count;
+			},
+			//二星-组选和值
+			erzuxuanhezhi(bets){
+				let betCount = [1, 1 ,2, 2, 3, 3, 4, 4, 5, 4, 4, 3, 3, 2, 2, 1, 1];
+				let count = 0;
+				for (let i=0; i< bets.length;i++) {
+					count += betCount[(Number(bets[i]) - 1)];
+				}
+				return count;
 			},
 			//排列组合
 			groupSplit(arr, size) {

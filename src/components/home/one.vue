@@ -31,23 +31,6 @@
       	lotteryList:[],
       	bannerList:[],
       	getimgurl:'',
-        lotters:[
-          {name:'中宏时时彩',paths: require('../../assets/img/one/zhssc.png'),title:'betssc',sort:'ssc'},
-          {name:'江苏快3',paths: require('../../assets/img/one/zsk3.png'),title:'betk3',sort:'k3'},
-          {name:'中宏六合彩',paths: require('../../assets/img/one/zhlhc.png'),title:'betlhc',sort:'klc'},
-          {name:'中宏快3',paths: require('../../assets/img/one/zhk3.png'),title:'betk3',sort:'k3'},
-          {name:'香港六合彩',paths: require('../../assets/img/one/xglhc.png'),title:'betlhc',sort:'klc'},
-          {name:'安徽快3',paths: require('../../assets/img/one/zhk3.png'),title:'betk3',sort:'k3'},
-          {name:'广东11选5',paths: require('../../assets/img/one/gd11.png'),title:'betetf',sort:'etf'},
-          {name:'广西快3',paths: require('../../assets/img/one/zhk3.png'),title:'betk3',sort:'k3'},
-          {name:'重庆时时彩',paths: require('../../assets/img/one/ccssc.png'),title:'betssc',sort:'ssc'},
-          {name:'湖北快3',paths: require('../../assets/img/one/bjk3.png'),title:'betk3',sort:'k3'},
-          {name:'北京PK10',paths: require('../../assets/img/one/bj10.png'),title:'betbj10',sort:'klc'},
-          {name:'大发六合彩',paths: require('../../assets/img/one/xglhc.png'),title:'betlhc',sort:'klc'},
-          {name:'大发PK10',paths: require('../../assets/img/one/bj10.png'),title:'betbj10',sort:'klc'},
-          {name:'上海快3',paths: require('../../assets/img/one/zhk3.png'),title:'betk3',sort:'k3'},
-          {name:'北京快乐8',paths: require('../../assets/img/one/bj10.png'),title:'betbjkl8',sort:'klc'},
-        ]
       };
     },
     mounted(){
@@ -58,6 +41,7 @@
 	      this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
 	      	this.lotteryList = res.data.data.hotLotterys;
 	      	this.bannerList = res.data.data.banners;
+          console.log(res)
 	      }).catch((error) => {
 	      		console.log("No")
 	      })

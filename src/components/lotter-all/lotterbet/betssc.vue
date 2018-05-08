@@ -580,51 +580,81 @@
 						this.ka.splice(indexg,1,"");
 						this.dd = this.ka.filter(function(n) { return n; });
 						this.an = '[万千]'+this.dd.join('');
+						if(this.an == '' || this.an == '-' || this.an == '[万千]'){
+							this.an = this.dd.join('');
+						}
 					}
 					if(indexff === 1){
 						this.kb.splice(indexg,1,"");
 						this.dd = this.kb.filter(function(n) { return n; });
 						this.bn = '[万百]'+this.dd.join('');
+						if(this.bn == '' || this.bn == '-' || this.bn == '[万百]'){
+							this.bn = this.dd.join('');
+						}
 					}
 					if(indexff === 2){
 						this.kc.splice(indexg,1,"");
 						this.dd = this.kc.filter(function(n) { return n; });
 						this.cn = '[万十]'+this.dd.join('');
+						if(this.cn == '' || this.cn == '-' || this.cn == '[万十]'){
+							this.cn = this.dd.join('');
+						}
 					}
 					if(indexff === 3){
 						this.kd.splice(indexg,1,"");
 						this.dd = this.kd.filter(function(n) { return n; });
 						this.dn = '[万个]'+this.dd.join('');
+						if(this.dn == '' || this.dn == '-' || this.dn == '[万个]'){
+							this.dn = this.dd.join('');
+						}
 					}
 					if(indexff === 4){
 						this.ke.splice(indexg,1,"");
 						this.dd = this.ke.filter(function(n) { return n; });
 						this.en = '[千百]'+this.dd.join('');
+						if(this.en == '' || this.en == '-' || this.en == '[千百]'){
+							this.en = this.dd.join('');
+						}
 					}
 					if(indexff === 5){
 						this.kf.splice(indexg,1,"");
 						this.dd = this.kf.filter(function(n) { return n; });
 						this.fn = '[千十]'+this.dd.join('');
+						if(this.fn == '' || this.fn == '-' || this.fn == '[千十]'){
+							this.fn = this.dd.join('');
+						}
 					}
 					if(indexff === 6){
 						this.kg.splice(indexg,1,"");
 						this.dd = this.kg.filter(function(n) { return n; });
 						this.gn = '[千个]'+this.dd.join('');
+						if(this.gn == '' || this.gn == '-' || this.gn == '[千个]'){
+							this.gn = this.dd.join('');
+						}
 					}
 					if(indexff === 7){
 						this.kh.splice(indexg,1,"");
 						this.dd = this.kh.filter(function(n) { return n; });
 						this.hn = '[百十]'+this.dd.join('');
+						if(this.hn == '' || this.hn == '-' || this.hn == '[百十]'){
+							this.hn = this.dd.join('');
+						}
 					}
 					if(indexff === 8){
 						this.ki.splice(indexg,1,"");
 						this.dd = this.ki.filter(function(n) { return n; });
 						this.in = '[百个]'+this.dd.join('');
+						if(this.in == '' || this.in == '-' || this.in == '[百个]'){
+							this.in = this.dd.join('');
+						}
 					}
 					if(indexff === 9){
 						this.kj.splice(indexg,1,"");
 						this.dd = this.kj.filter(function(n) { return n; });
 						this.jn = '[十个]'+this.dd.join('');
+						if(this.jn == '' || this.jn == '-' || this.jn == '[十个]'){
+							this.jn = this.dd.join('');
+						}
 					}
 					if(this.playBonusId === 'ssc_side_lhh'){
 						if(this.an === ''){

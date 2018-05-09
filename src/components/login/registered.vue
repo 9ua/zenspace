@@ -68,8 +68,8 @@
         this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
       },
       registeredGo() {
-        const user_yz = /^[A-Za-z][A-Za-z1-9]{5,20}$/;
-        const pwd1_yz = /^[A-Za-z1-9]{6,20}$/;
+        const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
+        const pwd1_yz = /^[A-Za-z0-9]{6,20}$/;
         let yzuser = user_yz.test(this.username);
         let yzpwd1 = pwd1_yz.test(this.password1);
         if (this.invitationCode === '') {

@@ -73,8 +73,8 @@
         this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
       },
       login() {
-        const user_yz = /^[A-Za-z][A-Za-z1-9]{5,20}$/;
-        const pwd_yz = /^[A-Za-z1-9]{6,120}$/;
+        const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
+        const pwd_yz = /^[A-Za-z0-9]{6,120}$/;
         let yzuser = user_yz.test(this.newUserInfo.user);
         let yzpwd = pwd_yz.test(this.newUserInfo.pwd);
         if (this.newUserInfo.user === '') {
@@ -103,14 +103,13 @@
             this.$store.state.loginStatus = getStore('loginSta');
           	if(res.data.code === 1){
               this.$router.push({path:'/one'});
-              setStore('username',this.newUserInfo.user);
-              setStore('password',this.newUserInfo.pwd);
-          		this.$store.state.Globalusername = this.newUserInfo.user;
+              // setStore('username',this.newUserInfo.user);
+              // setStore('password',this.newUserInfo.pwd);
+          		this.$store.state.Globalusername = res.data.data.account;
 	            this.$store.state.Globalpassword = this.newUserInfo.pwd;
               this.$store.state.balance = res.data.data.balance;
               setStore('username',this.$store.state.Globalusername);
               setStore('password',this.$store.state.Globalpassword);
-              
           	}else {
               this.$store.state.errorcode ++;
               this.newUserInfo.user = '';
@@ -122,7 +121,7 @@
 	          	}
           		this.content = '账号或密码错误'
           		this.pop = true
-          	}
+            }
           }).catch((error) => {
           		console.log("No")
           })

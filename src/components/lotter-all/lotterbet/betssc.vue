@@ -18,11 +18,7 @@
                   <div class="title">{{into.title}}</div>
                   <div class="menu-list-list-box">
                     <div class="menu-list-list" v-for="(group,indexa) in into.groups" :key="indexa">
-                      <!-- <span :class="{'active': indexs === navlist}" v-for="(items,indexs) in item.players" :key="indexs" @click="k3Tab($event,indexs,items,into)"> -->
                       <span v-for="(player,indexb) in group.players" :key="indexb" @click="k3Tab($event,indexa,indexb,player,group,into,index)">
-                        <!-- <a>{{index}}</a> -->
-                        <!-- <a>{{indexa}}</a> -->
-                        <!-- <a>{{indexb}}</a> -->
                         <a>{{player.groupName}}{{player.title}}</a>
                       </span>
                     </div>
@@ -105,9 +101,6 @@
                   </p>
                 </li>
               </ul>
-              <div class="danshi">
-                <textarea cols="30" rows="10" v-model="con" v-show="playBonusId === 'ssc_star5_single'" placeholder="每一个号码之间无需用符号隔开"></textarea>
-              </div>
             </div>
           </div>
         </div>
@@ -263,9 +256,7 @@
         num.choose = !num.choose;
         if(num.choose === true) {
           this.d[indexg] = num.ball
-          this.dd = this.d.filter(function(n) {
-            return n;
-          });
+          this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu++;
           //二码不定位 +
@@ -306,9 +297,7 @@
           this.erbaodanjia(indexff, indexg, num, numViews, player);
         } else if(num.choose === false) {
           this.d.splice(indexg, 1, "");
-          this.dd = this.d.filter(function(n) {
-            return n;
-          });
+          this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu--;
           //二码不定位 +
@@ -355,37 +344,27 @@
         if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kc.filter(function(n) {return n;});
             this.cn = this.dd.join('');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kd.filter(function(n) {return n;});
             this.dn = this.dd.join('');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ke.filter(function(n) {return n;});
             this.en = this.dd.join('');
           }
           if(this.playBonusId === 'ssc_star4_front') {
@@ -432,37 +411,27 @@
         if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           if(indexff === 2) {
             this.kc.splice(indexg, 1, "");
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kc.filter(function(n) {return n;});
             this.cn = this.dd.join('');
           }
           if(indexff === 3) {
             this.kd.splice(indexg, 1, "");
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kd.filter(function(n) {return n;});
             this.dn = this.dd.join('');
           }
           if(indexff === 4) {
             this.ke.splice(indexg, 1, "");
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ke.filter(function(n) {return n;});
             this.en = this.dd.join('');
           }
           if(this.playBonusId === 'ssc_star4_front') {
@@ -549,72 +518,52 @@
         if(this.playBonusId === 'ssc_side_lhh') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = '[万千]' + this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = '[万百]' + this.dd.join('');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kc.filter(function(n) {return n;});
             this.cn = '[万十]' + this.dd.join('');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kd.filter(function(n) {return n;});
             this.dn = '[万个]' + this.dd.join('');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ke.filter(function(n) {return n;});
             this.en = '[千百]' + this.dd.join('');
           }
           if(indexff === 5) {
             this.kf[indexg] = num.ball;
-            this.dd = this.kf.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kf.filter(function(n) {return n;});
             this.fn = '[千十]' + this.dd.join('');
           }
           if(indexff === 6) {
             this.kg[indexg] = num.ball;
-            this.dd = this.kg.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kg.filter(function(n) {return n;});
             this.gn = '[千个]' + this.dd.join('');
           }
           if(indexff === 7) {
             this.kh[indexg] = num.ball;
-            this.dd = this.kh.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kh.filter(function(n) {return n;});
             this.hn = '[百十]' + this.dd.join('');
           }
           if(indexff === 8) {
             this.ki[indexg] = num.ball;
-            this.dd = this.ki.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ki.filter(function(n) {return n;});
             this.in = '[百个]' + this.dd.join('');
           }
           if(indexff === 9) {
             this.kj[indexg] = num.ball;
-            this.dd = this.kj.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kj.filter(function(n) {return n;});
             this.jn = '[十个]' + this.dd.join('');
           }
           if(this.playBonusId === 'ssc_side_lhh') {
@@ -747,9 +696,7 @@
           }
           if(indexff === 9) {
             this.kj.splice(indexg, 1, "");
-            this.dd = this.kj.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kj.filter(function(n) {return n;});
             this.jn = '[十个]' + this.dd.join('');
             if(this.jn == '' || this.jn == '-' || this.jn == '[十个]') {
               this.jn = this.dd.join('');
@@ -911,16 +858,12 @@
         if(this.playBonusId === 'ssc_star5_group5') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -929,9 +872,7 @@
         if(this.playBonusId === 'ssc_star5_group10') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
@@ -965,16 +906,12 @@
         if(this.playBonusId === 'ssc_star5_group30') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -983,41 +920,31 @@
         if(this.playBonusId === 'ssc_star5_group60') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount60(this.con.split(','));
         }
         if(this.playBonusId === 'ssc_star5_group120') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           let lengths = this.dd.length;
           this.zhu = this.getCount120(lengths);
         }
         if(this.playBonusId === 'ssc_star4_front_group4') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -1027,82 +954,60 @@
         if(this.playBonusId === 'ssc_star4_front_group12') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount12(this.con.split(','));
         }
         if(this.playBonusId === 'ssc_star4_front_group24') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           let lengths = this.dd.length;
           this.zhu = this.getzuCount24(lengths);
         }
         if(this.playBonusId === 'ssc_star3_front_group3' || this.playBonusId === 'ssc_star3_mid_group3' || this.playBonusId === 'ssc_star3_last_group3') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           let lengths = this.dd.length;
           this.zhu = this.getzuCount3(lengths);
         }
         //二星组选 复式 +
         if(this.playBonusId === 'ssc_star2_front_group' || this.playBonusId === 'ssc_star2_last_group') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           this.zhu = this.erzuxuanfushi(this.dd);
         }
         //三星直选和值 +
         if(this.playBonusId === 'ssc_star3_front_and' || this.playBonusId === 'ssc_star3_mid_and' || this.playBonusId === 'ssc_star3_last_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           this.zhu = this.sanzhixuanhezhi(this.dd);
         }
         //三星组选和值 +
         if(this.playBonusId === 'ssc_star3_front_group_and' || this.playBonusId === 'ssc_star3_mid_group_and' || this.playBonusId === 'ssc_star3_last_group_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           this.zhu = this.sanzuxuanhezhi(this.dd);
         }
         //三星跨度 +
         if(this.playBonusId === 'ssc_star3_front_kd' || this.playBonusId === 'ssc_star3_mid_kd' || this.playBonusId === 'ssc_star3_last_kd') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           this.zhu = this.sankuadu(this.dd);
         }
         //二星直选和值 +
         if(this.playBonusId === 'ssc_star2_front_and' || this.playBonusId === 'ssc_star2_last_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           this.zhu = this.erzhixuanhezhi(this.dd);
         }
         //二星组选和值 +
         if(this.playBonusId === 'ssc_star2_front_group_and' || this.playBonusId === 'ssc_star2_last_group_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           this.zhu = this.erzuxuanhezhi(this.dd);
         }
         //二星跨度 +
         if(this.playBonusId === 'ssc_star2_front_kd' || this.playBonusId === 'ssc_star2_last_kd') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;})
           this.zhu = this.erkuadu(this.dd);
         }
       },
@@ -1111,16 +1016,12 @@
         if(this.playBonusId === 'ssc_star5_group5') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -1129,16 +1030,12 @@
         if(this.playBonusId === 'ssc_star5_group10') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -1147,16 +1044,12 @@
         if(this.playBonusId === 'ssc_star5_group20') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -1165,16 +1058,12 @@
         if(this.playBonusId === 'ssc_star5_group30') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -1183,41 +1072,31 @@
         if(this.playBonusId === 'ssc_star5_group60') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount60(this.con.split(','));
         }
         if(this.playBonusId === 'ssc_star5_group120') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           let lengths = this.dd.length;
           this.zhu = this.getCount120(lengths);
         }
         if(this.playBonusId === 'ssc_star4_front_group4') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -1226,82 +1105,60 @@
         if(this.playBonusId === 'ssc_star4_front_group12') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount12(this.con.split(','));
         }
         if(this.playBonusId === 'ssc_star4_front_group24') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           let lengths = this.dd.length;
           this.zhu = this.getzuCount24(lengths);
         }
         if(this.playBonusId === 'ssc_star3_front_group3' || this.playBonusId === 'ssc_star3_mid_group3' || this.playBonusId === 'ssc_star3_last_group3') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           let lengths = this.dd.length;
           this.zhu = this.getzuCount3(lengths);
         }
         //二星组选 复式 -
         if(this.playBonusId === 'ssc_star2_front_group' || this.playBonusId === 'ssc_star2_last_group') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.erzuxuanfushi(this.dd);
         }
         //三星直选和值 -
         if(this.playBonusId === 'ssc_star3_front_and' || this.playBonusId === 'ssc_star3_mid_and' || this.playBonusId === 'ssc_star3_last_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.sanzhixuanhezhi(this.dd);
         }
         //三星组选和值 -
         if(this.playBonusId === 'ssc_star3_front_group_and' || this.playBonusId === 'ssc_star3_mid_group_and' || this.playBonusId === 'ssc_star3_last_group_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.sanzuxuanhezhi(this.dd);
         }
         //三星跨度 -
         if(this.playBonusId === 'ssc_star3_front_kd' || this.playBonusId === 'ssc_star3_mid_kd' || this.playBonusId === 'ssc_star3_last_kd') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.sankuadu(this.dd);
         }
         //二星直选和值 -
         if(this.playBonusId === 'ssc_star2_front_and' || this.playBonusId === 'ssc_star2_last_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.erzhixuanhezhi(this.dd);
         }
         //二星组选和值 -
         if(this.playBonusId === 'ssc_star2_front_group_and' || this.playBonusId === 'ssc_star2_last_group_and') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.erzuxuanhezhi(this.dd);
         }
         //二星跨度 -
         if(this.playBonusId === 'ssc_star2_front_kd' || this.playBonusId === 'ssc_star2_last_kd') {
-          this.dd = this.d.filter(function(n) {
-            return n;
-          })
+          this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.erkuadu(this.dd);
         }
       },
@@ -1558,6 +1415,7 @@
       iscreat() {
         for(let i = 0; i < this.playGroups.length; i++) {
           for(let j = 0; j < this.playGroups[i].groups.length; j++) {
+            this.abc = this.playGroups[i].groups;
             for(let k = 0; k < this.playGroups[i].groups[j].players.length; k++) {
               for(let l = 0; l < this.playGroups[i].groups[j].players[k].numView.length; l++) {
                 for(let h = 0; h < this.playGroups[i].groups[j].players[k].numView[l].nums.length; h++) {
@@ -1616,12 +1474,7 @@
       },
       //投注
       betGo() {
-        let config = {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          withCredentials: true
-        };
+        let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials: true};
         let formData = new FormData();
         formData.append('order[0].content', this.con);
         formData.append('order[0].betCount', this.zhu);

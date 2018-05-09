@@ -8,7 +8,7 @@
     <div class="agent-content">
       <div class="agent-content-top">
         <van-actionsheet class="mIcode-go" v-model="show2" :actions="actions" cancel-text="取消">
-            <ul class="recharge-top">
+            <!-- <ul class="recharge-top">
             <li>
 				<p>选择银行</p>
 				<div class="dim" @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
@@ -74,7 +74,7 @@
 				</div>
 			</li>
 			<li><div class="button1"><button @click="sendReq()">确定</button></div></li>
-		</ul>
+		</ul> -->
         </van-actionsheet>
       </div>
       <ul style="padding:0">
@@ -93,11 +93,13 @@
   </div>
 </template>
 <script>
+import { Message } from "element-ui";
 export default {
   data(){
     return {
         content:'',
         securityCoe:'',
+        securityCode:'',
         loading:false,
         dateFlag:0,
         bankUserList:[],
@@ -141,18 +143,7 @@ export default {
   mounted(){
   },
   methods: {
-        //取安全中心状态
-			getSecurityCenterStatus(){
-				this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
-					this.securityCoe = res.data.data.securityCoe;
-					if(this.securityCoe === 0){
-                        console.log(popup安全密碼先確認唷)
-					} 
-				}).catch((error) => {
-						console.log("取安全中心状态No")
-				})
-				
-			},
+        
 
     onClick(name){
       this.timeline = name.name;
@@ -175,14 +166,20 @@ export default {
         },
     goCreate(){
             this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
+                    console.log(res.data.data.securityCoe);
 					this.securityCoe = res.data.data.securityCoe;
-					if(this.securityCoe === 0){
-                        console.log(popup安全密碼先確認唷)
+					if(this.securityCoe !== 1){
+                        Message.error({
+                            message: "請先綁定安全密碼!"
+                        });
+                        setTimeout(() => {
+                             this.$router.push({path:'/setSafePwd'});
+                        }, 3000);
 					} else {
                         this.$router.push({path:'/newCard'});
-                    }
+                    };
 			}).catch((error) => {
-					console.log("取安全中心状态No")
+					console.log("取安全中心状态No111")
 			})
 
     },

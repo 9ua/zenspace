@@ -94,9 +94,15 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
     }
     if (data.data.pup === true) {
         console.log(data.data.data);
-        Message.error({
-            message: data.data.data
-        })
+        if (data.data.data.message === ''){
+            Message.error({
+                message: data.data.data
+            })
+        } else {
+            message: data.data.data.message
+        }
+        
+        
     }
     return data
 }, error => {

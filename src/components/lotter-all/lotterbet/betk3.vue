@@ -83,8 +83,7 @@
 								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
-              <p>{{item.n1+item.n2+item.n3
-                < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
+              <p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
 						</li>
 					</ul>
 				</div>
@@ -729,6 +728,7 @@ export default {
       this.getPastOp();
       this.geteServerTime();
       this.iscreat();
+      this.getPlayTree();
     },
     //三同号全/反选
     tosantonghao() {
@@ -905,22 +905,7 @@ export default {
       k3item.selected = !k3item.selected;
       let dxds = ["大", "小", "单", "双"];
       let rets = [3, 6, 10, 15, 21, 25, 27, 27, 25, 21, 15, 10, 6, 3];
-      let selectedx = [
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17"
-      ];
+      let selectedx = ["04","05","06","07","08","09","10","11","12","13","14","15","16","17"];
       let j = 0;
       if (k3item.selected === true) {
         this.rates = k3item.rate;
@@ -1016,11 +1001,7 @@ export default {
     },
     //玩法树
     getPlayTree() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPlayTree", {
-          params: { lotteryId: this.lotteryId }
-        })
-        .then(res => {
+      this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.lotteryId }}).then(res => {
           this.playBonus = res.data.data.playBonus;
           let arrpeilv1 = [];
           let arrpeilv2 = [];
@@ -1335,9 +1316,7 @@ export default {
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.lotteryId);
           formData.append("amount", this.money * this.zhu);
-          this.$axios
-            .post(this.$store.state.url + "api/lottery/bet", formData, config)
-            .then(res => {
+          this.$axios.post(this.$store.state.url + "api/lottery/bet", formData, config).then(res => {
               if (res.data.message === "success") {
                 setTimeout(() => {
                   this.betshow = !this.betshow;

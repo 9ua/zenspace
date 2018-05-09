@@ -1,56 +1,70 @@
 <template>
   <div class="betbjkl8">
     <ul class="betbjkl8-top">
-      <li><router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link></li>
       <li>
-        <p class="wangfa">玩<br/>法</p>
+        <router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link>
+      </li>
+      <li>
+        <p class="wangfa">玩
+          <br/>法</p>
         <div class="menu" @click="show = !show">{{titles}}
           <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
         </div>
         <div class="menu-list">
-	        <van-popup v-model="show" position="top">
-	            <div class="menu-list-top" v-for="(val,index) in renxuan" :key="index">
-	              <p :class="{'active': index === navs}" v-for="(muens,index) in val.a" :key="index" @click="menunav($event,index,muens)">{{muens}}</p>
-	            </div>
-	            <ul>
-	              <li v-for="(val,index) in renxuan" :key="index" v-show="navs === 0">
-	                <p :class="{'active': index === renxuanlist}" v-for="(item,index) in val.valus" :key="index"  @click="showrenxuan($event,item,index)">{{item}}</p>
-	              </li>
-	              <li v-show="navs === 1">
-	                <p :class="{'active': index === quweilist}" v-for="(item,index) in quwei" :key="index"  @click="showquwei($event,item,index)">{{item}}</p>
-	              </li>
-	            </ul>
-	        </van-popup>
+          <van-popup v-model="show" position="top">
+            <div class="menu-list-top" v-for="(val,index) in renxuan" :key="index">
+              <p :class="{'active': index === navs}" v-for="(muens,index) in val.a" :key="index" @click="menunav($event,index,muens)">{{muens}}</p>
+            </div>
+            <ul>
+              <li v-for="(val,index) in renxuan" :key="index" v-show="navs === 0">
+                <p :class="{'active': index === renxuanlist}" v-for="(item,index) in val.valus" :key="index" @click="showrenxuan($event,item,index)">{{item}}</p>
+              </li>
+              <li v-show="navs === 1">
+                <p :class="{'active': index === quweilist}" v-for="(item,index) in quwei" :key="index" @click="showquwei($event,item,index)">{{item}}</p>
+              </li>
+            </ul>
+          </van-popup>
         </div>
       </li>
-      <li><p>北京快乐8</p></li>
+      <li>
+        <p>北京快乐8</p>
+      </li>
     </ul>
     <div class="betbjkl8-content">
       <div class="lottery-box">
         <div class="lottery-top" @click="lottery = !lottery">
           <p>888888开奖：
-          	<ul>
-          		<li v-for="(item,index) in 10" :key="index">
-          			<yd-countup :endnum="item" duration="1" decimals="0"  separator="" suffix=""></yd-countup>
-          		</li>...
-          	</ul></p>
+            <ul>
+              <li v-for="(item,index) in 10" :key="index">
+                <yd-countup :endnum="item" duration="1" decimals="0" separator="" suffix=""></yd-countup>
+              </li>... </ul>
+          </p>
           <p>888888投注：
             <span>
               <yd-countdown time="2018/04/13 22:00:00">
-                <span>{%h}<i>:</i></span>
-                <span>{%m}<i>:</i></span>
+                <span>{%h}
+                  <i>:</i>
+                </span>
+                <span>{%m}
+                  <i>:</i>
+                </span>
                 <span>{%s}</span>
               </yd-countdown>
             </span>
-          <i :class=" lottery ? 'el-icon-arrow-down' :'el-icon-arrow-up'"></i></p>
+            <i :class=" lottery ? 'el-icon-arrow-down' :'el-icon-arrow-up'"></i>
+          </p>
           <div class="lottery-ms" v-show=" !lottery">
-            <p><span>期号</span><span>开奖号码</span></p>
+            <p>
+              <span>期号</span>
+              <span>开奖号码</span>
+            </p>
             <ul>
               <li v-for=" (item,index) in 10" :key="index">
                 <div>
                   <span>888888</span>
                   <span>00:00:00</span>
-                </div><i class="el-icon-minus"></i>
+                </div>
+                <i class="el-icon-minus"></i>
                 <div>
                   <ul>
                     <li v-for="(item,index) in 20" :key="index">02</li>
@@ -64,8 +78,10 @@
           <div class="lottery-scoll-box">
             <p v-for="(annotations,index) in annotation" :key="index" v-show="index === renxuanlist">{{annotations.title}}
               <ul>
-                <li v-show="index===0">奖金<span>7.80</span>元</li>
-                <li v-show="index===1">奖金<span>32.43</span>元</li>
+                <li v-show="index===0">奖金
+                  <span>7.80</span>元</li>
+                <li v-show="index===1">奖金
+                  <span>32.43</span>元</li>
                 <li v-show="index===2">
                   <span @click="pop3=!pop3">奖金详情</span>
                 </li>
@@ -84,9 +100,12 @@
               </ul>
             </p>
             <div class="lottery-scoll lottery-scoll1">
-              <p><span>上盘</span></p>
+              <p>
+                <span>上盘</span>
+              </p>
               <ul>
-                <li v-for="(val,shang) in 40" class="choose1" :key="shang" @click="selecNumShang($event,shang,val)">{{ shang < 9 ? '0'+(shang+1) : (shang+1) }}</li>
+                <li v-for="(val,shang) in 40" class="choose1" :key="shang" @click="selecNumShang($event,shang,val)">{{ shang
+                  < 9 ? '0'+(shang+1) : (shang+1) }}</li>
               </ul>
             </div>
             <div class="lottery-scoll lottery-scoll2">

@@ -8,5 +8,5 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@import '../../../assets/scss/lotter-list/lotterbet/betlhc.scss'
+  @import '../../../assets/scss/lotter-list/lotterbet/betlhc.scss'
 </style>

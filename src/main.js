@@ -6,6 +6,7 @@ import router from './router'
 import VueCookie from "vue-cookie";
 import Carousel from 'element-ui'
 // import { Carousel, Loading } from 'element-ui'
+import { Message } from "element-ui";
 import 'element-ui/lib/theme-chalk/index.css'
 import { Radio, RadioGroup } from 'vue-ydui/dist/lib.px/radio'
 import {
@@ -87,10 +88,21 @@ var loadinginstace
 axios.interceptors.response.use(data => { // 响应成功关闭loading
     // loadinginstace.close()
     if (data.data.status === 302) {
-        setTimeout(() => {
+        // setTimeout(() => {
             router.push('/login');
-        }, 1000);
-
+        // }, 1000);
+    }
+    if (data.data.pup === true) {
+        console.log(data.data.data);
+        if (data.data.data.message === ''){
+            Message.error({
+                message: data.data.data
+            })
+        } else {
+            message: data.data.data.message
+        }
+        
+        
     }
     return data
 }, error => {

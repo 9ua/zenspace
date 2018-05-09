@@ -7,7 +7,74 @@
     
     <div class="agent-content">
       <div class="agent-content-top">
-        <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
+        <van-actionsheet class="mIcode-go" v-model="show2" :actions="actions" cancel-text="取消">
+            <!-- <ul class="recharge-top">
+            <li>
+				<p>选择银行</p>
+				<div class="dim" @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
+			</li>
+			<li>
+				<p>开户地址</p>
+				<div>
+				<el-input 
+					placeholder="请输入开户地址" 
+					v-model="address" 
+					:value="address" 
+					clearable 
+				>
+				</el-input>
+				</div>
+			</li>
+			<li>
+				<p>开户人姓名</p>
+				<div>
+				<el-input 
+					placeholder="请输入银行卡的姓名" 
+					v-model="niceName" 
+					:value="niceName" 
+					clearable 
+				>
+				</el-input>
+				</div>
+			</li>
+            <li>
+				<p>银行卡号</p>
+				<div>
+				<el-input 
+					placeholder="请输入银行卡号" 
+					v-model="card" 
+					:value="card" 
+					clearable 
+				>
+				</el-input>
+				</div>
+			</li>
+            <li>
+				<p>确认卡号</p>
+				<div>
+				<el-input 
+					placeholder="请确认银行卡号" 
+					v-model="card2" 
+					:value="card2" 
+					clearable 
+				>
+				</el-input>
+				</div>
+			</li>
+            <li>
+				<p>安全密码</p>
+				<div>
+				<el-input 
+					placeholder="请输入安全密码" 
+					v-model="securityCode" 
+					:value="securityCode" 
+					clearable 
+				>
+				</el-input>
+				</div>
+			</li>
+			<li><div class="button1"><button @click="sendReq()">确定</button></div></li>
+		</ul> -->
         </van-actionsheet>
       </div>
       <ul style="padding:0">
@@ -26,11 +93,13 @@
   </div>
 </template>
 <script>
+import { Message } from "element-ui";
 export default {
   data(){
     return {
         content:'',
         securityCoe:'',
+        securityCode:'',
         loading:false,
         dateFlag:0,
         bankUserList:[],
@@ -74,34 +143,43 @@ export default {
   mounted(){
   },
   methods: {
-        //取安全中心状态
-			getSecurityCenterStatus(){
-				this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
-					this.securityCoe = res.data.data.securityCoe;
-					if(this.securityCoe === 0){
-                        console.log(popup安全密碼先確認唷)
-					} 
-				}).catch((error) => {
-						console.log("取安全中心状态No")
-				})
-				
-			},
+        
 
     onClick(name){
       this.timeline = name.name;
       this.dateFlag = name.type;
       this.show = ! this.show;
     },
+    select(a) {
+            this.id = a.id;
+		    this.statusName = a.statusName;
+            this.amount = a.amount;
+            this.receiveNickName = a.receiveNickName;
+            this.receiveBankName = a.receiveBankName;
+            this.receiveCard = a.receiveCard;
+            this.createTime = a.createTime;
+            this.receiveAddress = a.receiveAddress;
+            this.checkCode = a.checkCode;
+            this.show2 = !this.show2;
+                console.log(a);
+            this.selected = a;
+        },
     goCreate(){
             this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
+                    console.log(res.data.data.securityCoe);
 					this.securityCoe = res.data.data.securityCoe;
-					if(this.securityCoe === 0){
-                        console.log(popup安全密碼先確認唷)
+					if(this.securityCoe !== 1){
+                        Message.error({
+                            message: "請先綁定安全密碼!"
+                        });
+                        setTimeout(() => {
+                             this.$router.push({path:'/setSafePwd'});
+                        }, 3000);
 					} else {
                         this.$router.push({path:'/newCard'});
-                    }
+                    };
 			}).catch((error) => {
-					console.log("取安全中心状态No")
+					console.log("取安全中心状态No111")
 			})
 
     },

@@ -6,6 +6,7 @@ import router from './router'
 import VueCookie from "vue-cookie";
 import Carousel from 'element-ui'
 // import { Carousel, Loading } from 'element-ui'
+import { Message } from "element-ui";
 import 'element-ui/lib/theme-chalk/index.css'
 import { Radio, RadioGroup } from 'vue-ydui/dist/lib.px/radio'
 import {
@@ -93,6 +94,9 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
     }
     if (data.data.pup === true) {
         console.log(data.data.data);
+        Message.error({
+            message: data.data.data
+        })
     }
     return data
 }, error => {

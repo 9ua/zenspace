@@ -95,7 +95,7 @@ export default {
       this.getUnderLevelReport();
     },
     getUnderLevelReport() {
-			this.$http.get(this.$store.state.url+'api/proxy/getUnderLevelReport',{params:{dateFlag:this.dateFlag}}).then((res) => {
+			this.$http.get(this.$store.state.url+'api/proxy/getUnderLevelReport',{params:{account:this.$store.state.Globalusername,dateFlag:this.dateFlag}}).then((res) => {
         this.underLevelReport = res.data.data;
         console.log(this.underLevelReport);
 			}).catch((error) => {

@@ -487,52 +487,54 @@
 			},
 			//龙虎和 +
 			ssc_side_lhhjia(indexff,indexg,num,numViews,player){
-				// console.log(indexff)
+				console.log(indexff)
 				if(this.playBonusId === 'ssc_side_lhh'){
 					if(indexff === 0){
 						this.ka[indexg] = num.ball;
 						this.dd = this.ka.filter(function(n) { return n; });
-						this.an = this.dd.join('');
+						console.log(this.dd,this.ka);
+						this.an = "[万千]"+this.dd.join('');
+					
 					}
 					if(indexff === 1){
 						this.kb[indexg] = num.ball;
 						this.dd = this.kb.filter(function(n) { return n; });
-						this.bn = this.dd.join('');
+						this.bn = "[万百]"+ this.dd.join('');
 					}
 					if(indexff === 2){
 						this.kc[indexg] = num.ball;
 						this.dd = this.kc.filter(function(n) { return n; });
-						this.cn = this.dd.join('');
+						this.cn = "[万十]"+ this.dd.join('');
 					}
 					if(indexff === 3){
 						this.kd[indexg] = num.ball;
 						this.dd = this.kd.filter(function(n) { return n; });
-						this.dn = this.dd.join('');
+						this.dn = "[千百]"+ this.dd.join('');
 					}
 					if(indexff === 4){
 						this.ke[indexg] = num.ball;
 						this.dd = this.ke.filter(function(n) { return n; });
-						this.en = this.dd.join('');
+						this.en = "[千十]"+ this.dd.join('');
 					}
 					if(indexff === 5){
 						this.kf[indexg] = num.ball;
 						this.dd = this.kf.filter(function(n) { return n; });
-						this.fn = this.dd.join('');
+						this.fn = "[千个]"+this.dd.join('');
 					}
 					if(indexff === 6){
 						this.kg[indexg] = num.ball;
 						this.dd = this.kg.filter(function(n) { return n; });
-						this.gn = this.dd.join('');
+						this.gn = "[百十]"+this.dd.join('');
 					}
 					if(indexff === 7){
 						this.kh[indexg] = num.ball;
 						this.dd = this.kh.filter(function(n) { return n; });
-						this.hn = this.dd.join('');
+						this.hn = "[百个]"+this.dd.join('');
 					}
 					if(indexff === 8){
 						this.ki[indexg] = num.ball;
 						this.dd = this.ki.filter(function(n) { return n; });
-						this.in = this.dd.join('');
+						this.in = "[十个]"+this.dd.join('');
 					}
 					if(indexff === 9){
 						this.kj[indexg] = num.ball;
@@ -542,7 +544,7 @@
 					if(this.playBonusId === 'ssc_side_lhh'){
 						if(this.an === ''){
 							this.an = '-';
-						}
+						} 
 						// else if(this.an !== '' || this.an !== '-'){
 						// 	this.an = '[万千]'+this.an
 						// }
@@ -591,52 +593,56 @@
 					if(indexff === 0){
 						this.ka.splice(indexg,1,"");
 						this.dd = this.ka.filter(function(n) { return n; });
-						this.an = this.dd.join('');
+						this.an = "[万千]"+this.dd.join('');
+						if(this.an == '' || this.an == '-' || this.an == '[万千]'){
+							this.an = this.dd.join('');
+						}
+						
 					}
 					if(indexff === 1){
 						this.kb.splice(indexg,1,"");
 						this.dd = this.kb.filter(function(n) { return n; });
-						this.bn = this.dd.join('');
+						this.bn = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 2){
 						this.kc.splice(indexg,1,"");
 						this.dd = this.kc.filter(function(n) { return n; });
-						this.cn = this.dd.join('');
+						this.cn = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 3){
 						this.kd.splice(indexg,1,"");
 						this.dd = this.kd.filter(function(n) { return n; });
-						this.dn = this.dd.join('');
+						this.dn = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 4){
 						this.ke.splice(indexg,1,"");
 						this.dd = this.ke.filter(function(n) { return n; });
-						this.en = this.dd.join('');
+						this.en = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 5){
-						this.kf[indexg] = num.ball;
+						this.kf.splice(indexg,1,"");
 						this.dd = this.kf.filter(function(n) { return n; });
-						this.fn = this.dd.join('');
+						this.fn = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 6){
-						this.kg[indexg] = num.ball;
+						this.kg.splice(indexg,1,"");
 						this.dd = this.kg.filter(function(n) { return n; });
-						this.gn = this.dd.join('');
+						this.gn = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 7){
-						this.kh[indexg] = num.ball;
+						this.kh.splice(indexg,1,"");
 						this.dd = this.kh.filter(function(n) { return n; });
-						this.hn = this.dd.join('');
+						this.hn = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 8){
-						this.ki[indexg] = num.ball;
+						this.ki.splice(indexg,1,"");
 						this.dd = this.ki.filter(function(n) { return n; });
-						this.in = this.dd.join('');
+						this.in = "[万千]"+this.dd.join('');
 					}
 					if(indexff === 9){
-						this.kj[indexg] = num.ball;
+						this.kj.splice(indexg,1,"");
 						this.dd = this.kj.filter(function(n) { return n; });
-						this.jn = this.dd.join('');
+						this.jn = "[万千]"+this.dd.join('');
 					}
 					if(this.playBonusId === 'ssc_side_lhh'){
 						if(this.an === ''){

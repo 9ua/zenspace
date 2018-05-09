@@ -87,10 +87,12 @@ var loadinginstace
 axios.interceptors.response.use(data => { // 响应成功关闭loading
     // loadinginstace.close()
     if (data.data.status === 302) {
-        setTimeout(() => {
+        // setTimeout(() => {
             router.push('/login');
-        }, 1000);
-
+        // }, 1000);
+    }
+    if (data.data.pup === true) {
+        console.log(data.data.data);
     }
     return data
 }, error => {

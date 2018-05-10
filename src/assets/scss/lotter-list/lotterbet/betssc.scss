@@ -150,7 +150,9 @@
 .betssc-content {
     height: 100%;
     background: #317455;
+    overflow: hidden;
     >div {
+        height: 100%;
         & .betk3-content-top {
             display: flex;
             justify-content: space-between;
@@ -266,8 +268,11 @@
             padding: 4px 16px 0px;
             color: #caebda;
             >div {
+                overflow: scroll;
+
                 >.betssc-list-box {
                     width: 100%;
+                    padding-bottom: 200px;
                     & b {
                         & i {
                             color: #f0c930;

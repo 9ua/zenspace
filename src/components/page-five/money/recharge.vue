@@ -62,18 +62,22 @@
                 </div>
 	        </van-popup>
 			<van-actionsheet class="" v-model="show4">
-	            <ul class="recharge-top">
+	            <ul class="recharge-top2">
 					<li>
 						<div class="center"><p>申请完成，请依据以下资讯打款</p></div>	
 					</li>
-						<p>应打入金额</p><span>{{chargeamount}}</span><br>
-						<p>收款人姓名</p><span>{{receiveNickName}}</span>
-						<p>收款银行</p><span>{{receiveBankName}}</span>
-						<p>收款卡号</p><span>{{receiveCard}}</span>
-						<p>收款银行地址</p><span>{{receiveAddress}}</span><br><br>
-						<p>識別碼</p><span>{{checkCode}}</span>
+						<div class="cards">
+							<ul>
+								<li><p>应打入金额</p><span>{{chargeamount}}</span></li>
+								<li><p>收款人姓名</p><span>{{receiveNickName}}</span></li>
+								<li><p>收款银行</p><span>{{receiveBankName}}</span></li>
+								<li><p>收款卡号</p><span>{{receiveCard}}</span></li>
+								<li><p>收款银行地址</p><span>{{receiveAddress}}</span></li>
+								<li><p>！識別碼</p><span>{{checkCode}}</span></li>
+							</ul>
+						</div>
 					<li>
-						<p>！重要：打款时请务必于打款备注栏输入识别码</p>
+						<p>重要：打款时请务必于打款备注栏输入识别码</p>
 					</li>
 					<li>
 						<p>此画面资讯可至 "查询订单" 页面查询。</p>

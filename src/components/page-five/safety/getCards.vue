@@ -6,12 +6,23 @@
     </div>
     
     <div class="agent-content">
-      <div class="agent-content-top">
-        <van-actionsheet class="mIcode-go" v-model="show2" :actions="actions" cancel-text="取消">
-            <!-- <ul class="recharge-top">
+      <ul style="padding:0">
+        <li class="row2" v-for="(item,index) in bankUserList" :key="index" @click="select(item,$event)">
+          <div class="title4">
+            <p>{{item.title}}[{{item.id}}] {{item.card | lastFive}}</p>
+          </div>
+          <div class="title">
+            <p>修改</p>
+          </div>
+        </li>         
+      </ul>
+        <div class="button1"><button @click="goCreate()">添加银行卡</button></div>
+        <div class="warning"><p>{{content}}</p></div>
+    </div>
+    <van-actionsheet class="" v-model="show3">
+	    <ul class="recharge-top">
             <li>
-				<p>选择银行</p>
-				<div class="dim" @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
+				<p>银行</p><div  @click="show1 = ! show1">{{this.selectBank}}</div>
 			</li>
 			<li>
 				<p>开户地址</p>
@@ -73,27 +84,28 @@
 				</el-input>
 				</div>
 			</li>
-			<li><div class="button1"><button @click="sendReq()">确定</button></div></li>
-		</ul> -->
-        </van-actionsheet>
-      </div>
-      <ul style="padding:0">
-        <li class="row2" v-for="(item,index) in bankUserList" :key="index" @click="select(item,$event)">
-          <div class="title4">
-            <p>{{item.bankNameId}} --  {{item.card | lastFive}}</p>
-          </div>
-          <div class="title">
-            <p>修改</p>
-          </div>
-        </li>         
-      </ul>
-        <div class="button1"><button @click="goCreate()">添加银行卡</button></div>
-        <div class="warning"><p>{{content}}</p></div>
-    </div>
+			<li><div class="button1"><button @click="sendReq()">修改</button></div></li>
+			<li><div class="button1"><button @click="show3=!show3">取消</button></div></li>
+		</ul>
+	</van-actionsheet>
+            <van-popup v-model="show6">
+	            <div class="button1">
+                    <div ><p>{{content2}}</p><button class="del" @click="show6 = !show6">確定</button></div>
+                </div>
+	        </van-popup>
+            <van-popup v-model="show5">
+	            <div class="button1">
+                    <div ><p>{{content2}}</p><button class="del" @click="show5 = !show5">確定</button></div>
+                </div>
+	        </van-popup>
+	<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
+    </van-actionsheet>
   </div>
 </template>
 <script>
+import md5 from 'js-md5';
 import { Message } from "element-ui";
+import { setStore, getStore,removeStore } from '../../../config/mutil'
 export default {
   data(){
     return {
@@ -104,65 +116,47 @@ export default {
         dateFlag:0,
         bankUserList:[],
         timeline:'今天',
-        show:false,
+        show1:false,
         show2:false,
+        show3:false,
+        show5:false,
+        show6:false,
         usertype:2,
         selected:[],
+        bankUserList:[],
         showFlag: true,
-        actions: [
-        {
-          name: '今天',
-          type:0,
-          callback: this.onClick,
-        },
-        {
-          name: '昨天',
-          type:1,
-          callback: this.onClick,
-        },
-        {
-          name: '本月',
-          type:2,
-          callback: this.onClick,
-          loading: false
-        },
-        {
-          name: '上月',
-          type:3,
-          callback: this.onClick,
-          loading: false
-        }
-        ],
         
+        id:'',
+        bankNameId:'',
+        payway:[],
+        selectBank:'',
+        address:'',
+        niceName:'',
+        card:'',
+        card2:'',
+        securityCode:'',
+        content2:'',
         
     }
   },
   created(){
         this.getBankUserList();
+        this.getBankNameList();
   },
   mounted(){
   },
   methods: {
         
 
-    onClick(name){
-      this.timeline = name.name;
-      this.dateFlag = name.type;
-      this.show = ! this.show;
-    },
+    
     select(a) {
             this.id = a.id;
-		    this.statusName = a.statusName;
-            this.amount = a.amount;
-            this.receiveNickName = a.receiveNickName;
-            this.receiveBankName = a.receiveBankName;
-            this.receiveCard = a.receiveCard;
-            this.createTime = a.createTime;
-            this.receiveAddress = a.receiveAddress;
-            this.checkCode = a.checkCode;
-            this.show2 = !this.show2;
+            this.selectBank= a.title;
+            this.address =  a.address;
+            this.niceName = a.niceName;
+            this.card = a.card;
+            this.show3 = !this.show3;
                 console.log(a);
-            this.selected = a;
         },
     goCreate(){
             this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
@@ -174,7 +168,7 @@ export default {
                         });
                         setTimeout(() => {
                              this.$router.push({path:'/setSafePwd'});
-                        }, 3000);
+                        }, 1000);
 					} else {
                         this.$router.push({path:'/newCard'});
                     };
@@ -183,6 +177,23 @@ export default {
 			})
 
     },
+    	onClick(item){
+            this.selectBank = item.name;
+			this.bankNameId = item.id;
+			this.show1 = ! this.show1;
+		},
+    getBankNameList() {
+			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
+				console.log(res.data.data.length);
+				for(let i=0;i<res.data.data.length;i++) {
+					if(i >= 3){
+						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
+					};
+				};
+			}).catch((error) => {
+					console.log("获取列表Error");
+			});
+		},
     getBankUserList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankUserList').then((res) => {
                     this.bankUserList = res.data.data;
@@ -197,12 +208,41 @@ export default {
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
-		},
+        },
+        
+		sendReq(){
+            let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+            let formData = new FormData();
+            formData.append('id',this.id);
+            formData.append('bankNameId',this.bankNameId);
+            formData.append('card',this.card);
+            formData.append('card2',this.card2);
+            formData.append('address',this.address);
+            formData.append('niceName',this.niceName);
+            formData.append('securityCode',md5(this.securityCode));            
+            this.$axios.post(this.$store.state.url+'api/proxy/setBankUser', formData,config).then((res) => {
+				console.log(res.data.data.message);
+                console.log(res.data.code);
+                if (res.data.code === 1){
+                    this.content2 = res.data.data.message;
+                    this.show5 = true;
+                    this.show3 = false;
+                } else {
+                    this.content2 = res.data.data.message;
+                    this.show6 = true;
+                }
+            this.getBankUserList();
+          }).catch((error) => {
+          		console.log("No")
+          });   
+            }
+
+
   },
   filters: {
       lastFive(value) {
         let end = value.slice(-5);
-        return `************${end}`;
+        return `*********${end}`;
       },
     },
 };

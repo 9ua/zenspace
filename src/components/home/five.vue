@@ -22,10 +22,10 @@
           <img src="../../assets/img/five/Wallet.png" />
           <span>我要充值</span>
         </router-link>
-        <router-link to="/cashOut" tag="li">
+        <li @click="safeCenter()">
           <img src="../../assets/img/five/Box.png" />
           <span>我要提现</span>
-        </router-link>
+        </li>
         <router-link to="/trade" tag="li">
           <img src="../../assets/img/five/Confirm.png" />
           <span>交易记录</span>
@@ -47,6 +47,14 @@
         </router-link>
       </ul>
     </div>
+
+    <van-popup v-model="show2" position="bottom">
+	    <div class="mIcode-sure">
+          <div class="sure2"><p>{{content}}</p></div>
+          <button class="del" @click="goToSet()">删除</button><button class="nodel" @click="show2 = !show2">取消</button>
+      </div>
+	  </van-popup>
+
   </div>
 </template>
 <script>
@@ -56,6 +64,10 @@
   export default {
     data() {
       return {
+        bankUserFlag:'',
+        securityCoe:'',
+        content:'',
+        show2:false,
         balances:0,//用户余额
         image:0,//用户头像
       	money:false,
@@ -91,6 +103,38 @@
       this.getBalance();
     },
     methods:{
+        //獲取安全中心狀態
+          safeCenter(){
+            console.log(5566);
+                this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
+                        console.log(res.data.data.securityCoe ,"-----",res.data.data.bankUserFlag);
+              this.securityCoe = res.data.data.securityCoe;
+              this.bankUserFlag = res.data.data.bankUserFlag;
+              if(this.securityCoe == 0 && this.bankUserFlag == 0){
+                            this.content = "請先綁定安全密碼及銀行帳戶，是否跳轉至設定頁？";
+                            this.show2 = !this.show2;
+                           
+              } else if ( this.bankUserFlag == 0 ){
+                            this.content = "請先綁定銀行帳戶，是否跳轉至設定頁？";
+                            this.show2 = !this.show2;
+              } else {
+                    this.$router.push({path:'/cashOut'});
+              };
+          }).catch((error) => {
+              console.log("取安全中心状态No111")
+          })
+
+          },
+          goToSet(){
+              if(this.securityCoe == 0 && this.bankUserFlag == 0){
+                  this.$router.push({path:'/setSafePwd'});
+              } else if ( this.bankUserFlag == 0 ){
+                  this.$router.push({path:'/newCard'});
+              } else {
+                  this.$router.push({path:'/cashOut'});
+              };
+              
+          },
       //获取头部个人信息
       getTopUserData(){
 	      this.$http.get(this.$store.state.url+'api/userCenter/getTopUserData').then((res) => {
@@ -130,4 +174,5 @@
 </script>
 <style lang="scss" scoped>
   @import '../../assets/scss/five.scss';
+  @import '../../assets/scss/page-five/agency/mInvite.scss';
 </style>

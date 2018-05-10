@@ -110,7 +110,6 @@ export default {
 	},
 	mounted(){
         this.getBankNameList();
-        
     },
 	methods :{
 		getBankNameList() {
@@ -161,7 +160,7 @@ export default {
           }).catch((error) => {
           		console.log("No")
           });   
-    }
+            }
 	}
 }
 </script>

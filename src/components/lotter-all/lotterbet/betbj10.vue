@@ -47,16 +47,16 @@
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
             <p>{{item.seasonId}}期开奖号码</p>
             <div>
-              <p>{{item.n1}}</p>
-              <p>{{item.n2}}</p>
-              <p>{{item.n3}}</p>
-              <p>{{item.n4}}</p>
-              <p>{{item.n5}}</p>
-              <p>{{item.n6}}</p>
-              <p>{{item.n7}}</p>
-              <p>{{item.n8}}</p>
-              <p>{{item.n9}}</p>
-              <p>{{item.n10}}</p>
+              <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
+              <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>
+              <p>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</p>
+              <p>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</p>
+              <p>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</p>
+              <p>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</p>
+              <p>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</p>
+              <p>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</p>
+              <p>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</p>
+              <p>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</p>
             </div>
           </div>
           <div class="content-right">

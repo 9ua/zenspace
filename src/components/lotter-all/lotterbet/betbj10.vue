@@ -47,16 +47,16 @@
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
             <p>{{item.seasonId}}期开奖号码</p>
             <div>
-              <p>{{item.n1}}</p>
-              <p>{{item.n2}}</p>
-              <p>{{item.n3}}</p>
-              <p>{{item.n4}}</p>
-              <p>{{item.n5}}</p>
-              <p>{{item.n6}}</p>
-              <p>{{item.n7}}</p>
-              <p>{{item.n8}}</p>
-              <p>{{item.n9}}</p>
-              <p>{{item.n10}}</p>
+              <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
+              <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>
+              <p>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</p>
+              <p>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</p>
+              <p>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</p>
+              <p>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</p>
+              <p>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</p>
+              <p>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</p>
+              <p>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</p>
+              <p>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</p>
             </div>
           </div>
           <div class="content-right">
@@ -559,8 +559,7 @@
           }
           if(this.playGroupsId === 'pk10_star2_dj') {
             this.con = this.an + ',' + this.bn;
-            // this.zhu = this.fushi(this.con.split(','), 2);
-            console.log(this.con.split(','))
+            this.zhu = this.fushi(this.con.split(','), 2);
           }
           if(this.playGroupsId === 'pk10_star3_dj') {
             this.con = this.an + ',' + this.bn + ',' + this.cn;
@@ -858,33 +857,49 @@
             this.zhu = this.fushi(this.con.split(','), 5);
           }
         }
-        //前二，猜前二
-        if(this.playGroupsId === 'pk10_star2_dj'){
-
-        }
-        //前三，复式
-        if(this.playGroupsId === 'pk10_star3'){
-
-        }
-        //前三，猜前三
-        if(this.playGroupsId === 'pk10_star3_dj'){
-
-        }
-        //前四，复式
-        if(this.playGroupsId === 'pk10_star4'){
-
-        }
-        //前四，猜前四
-        if(this.playGroupsId === 'pk10_star4_dj'){
-
-        }
-        //前五，复式
-        if(this.playGroupsId === 'pk10_star5'){
-
-        }
-        //前五，猜前五
-        if(this.playGroupsId === 'pk10_star5_dj'){
-
+        //猜前二、猜前三、猜前四、猜前五
+        if(this.playGroupsId === 'pk10_star2_dj' || this.playGroupsId === 'pk10_star3_dj' || this.playGroupsId === 'pk10_star4_dj' || this.playGroupsId === ''){
+          if(indexff === 0) {
+            this.ka.splice(indexg, 1, "");
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb.splice(indexg, 1, "");
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          if(indexff === 2) {
+            this.kc.splice(indexg, 1, "");
+            this.dd = this.kc.filter(function(n) {return n;});
+            this.cn = this.dd.join('');
+          }
+          if(indexff === 3) {
+            this.kd.splice(indexg, 1, "");
+            this.dd = this.kd.filter(function(n) {return n;});
+            this.dn = this.dd.join('');
+          }
+          if(indexff === 4) {
+            this.ke.splice(indexg, 1, "");
+            this.dd = this.ke.filter(function(n) {return n;});
+            this.en = this.dd.join('');
+          }
+          if(this.playGroupsId === 'pk10_star2_dj') {
+            this.con = this.an + ',' + this.bn;
+            this.zhu = this.fushi(this.con.split(','), 2);
+          }
+          if(this.playGroupsId === 'pk10_star3_dj') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn;
+            this.zhu = this.fushi(this.con.split(','), 3);
+          }
+          if(this.playGroupsId === 'pk10_star4_dj') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn;
+            this.zhu = this.fushi(this.con.split(','), 4);
+          }
+          if(this.playGroupsId === 'pk10_star5_dj') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
+            this.zhu = this.fushi(this.con.split(','), 5);
+          }
         }
       },
       //前二-冠亚和
@@ -900,34 +915,29 @@
       //公用
       toListByLength( str,  len){
         let line = [];
-        if (str !== "-") {
+        if (str !== "-" || str !== "") {
           for (let i = 0; i < str.length; i += len) {
             line.push(str.substring(i, i + len));
           }
         }
         return line;
       },
-      getCountall( lines){
-        return this.getCountCached(lines, 0, lines.length, []);
+      getCountall(lines) {
+        return this.getCountCached(lines, 0, lines.length, new Set());
       },
-      getCountCached( lines,  index,  allSize, cache){
+      getCountCached(lines, index, allSize, cache) {
         let line = lines[index];
         let size = line.length;
         let count = 0;
-        for (let i = 0; i < size; i++)
-        {
+        for (let i = 0; i < size; i++) {
           let n = line[i];
-          if (cache.indexOf(n) < 0) {
-            if (index + 1 < allSize)
-            {
-              cache.push(n);
-              console.log(cache)
+          if (!cache.has(n)) {
+            if (index + 1 < allSize) {
+              cache.add(n);
               count += this.getCountCached(lines, index + 1, allSize, cache);
-              cache.splice(0);
-              console.log(cache)
+              cache.delete(n);
             }
-            else
-            {
+            else {
               count++;
             }
           }
@@ -941,7 +951,7 @@
         }
         let all = [];
         for (let i=0; i< bets.length; i++) {
-          let n = this.toListByLength(bets[i], zhu);
+          let n = this.toListByLength(bets[i], 2);
           all.push(n);
         }
         let count = this.getCountall(all);
@@ -1025,12 +1035,8 @@
         this.lotteryId = into.id
         this.showan = index;
         this.showa = !this.showa;
-        this.showpop =!this.showpop;
-        this.content = '头部右->菜单点击'
-        setTimeout(() => {
-           this.showpop =!this.showpop;
-        }, 800);
         this.getPlayTree();
+        this.iscreat();
       },
       //头部菜单项
       k3Tab(e, indexa, indexb, items, group, into, index) {
@@ -1043,13 +1049,7 @@
         this.navlist = index;
         this.navlistb = indexa;
         this.navlistf = indexb;
-        console.log('--index', index)
-        console.log('--this.navlistf', this.navlistf)
-        console.log('--this.navlist', this.navlist)
-        console.log('--this.intotitle', this.intotitle)
-        console.log('--this.itemstitle', this.itemstitle)
-        console.log('--this.titles', this.titles)
-        console.log('--this.playGroupsId', this.playGroupsId)
+        this.iscreat();
       },
       //继续投注
       betsucc() {

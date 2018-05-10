@@ -1,7 +1,7 @@
 <template>
   <div class="k3">
     <ul>
-      <router-link v-for="(item,index) in lotteryListk3" :key="index" tag="li" to="/jsk3">
+      <router-link v-for="(item,index) in lotteryListk3" :key="index" tag="li" to="/k3">
         <img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>

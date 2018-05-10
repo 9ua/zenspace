@@ -23,10 +23,10 @@
       return{
         navTitle:[
           {name:'全部彩种',pathsrc:'lotterAll'},
-          {name:'快3',pathsrc:'k3'},
-          {name:'时时彩',pathsrc:'ssc'},
-          {name:'快乐彩',pathsrc:'klc'},
-          {name:'11选5',pathsrc:'etf'},
+          {name:'快3',pathsrc:'k3s'},
+          {name:'时时彩',pathsrc:'sscs'},
+          {name:'快乐彩',pathsrc:'klcs'},
+          {name:'11选5',pathsrc:'etfs'},
         ]
       }
     }

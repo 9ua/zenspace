@@ -21,7 +21,8 @@ export default {
   methods:{
     lotteryetf(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
-        // this.lotteryListetf = res.data.data.11x5;
+        this.lotteryListetf = res.data.data.x11x5;
+        // console.log(res)
       }).catch((error) => {
           console.log("No")
       })

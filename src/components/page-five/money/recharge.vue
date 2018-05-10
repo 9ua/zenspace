@@ -58,7 +58,7 @@
 	        </van-actionsheet>
             <van-popup v-model="show3">
 	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="show3 = !show3">確定</button></div>
+                    <div ><p>{{content}}</p><button class="del" @click="show3 = !show3">确定</button></div>
                 </div>
 	        </van-popup>
 			<van-actionsheet class="" v-model="show4">
@@ -73,14 +73,14 @@
 								<li><p>收款银行</p><span>{{receiveBankName}}</span></li>
 								<li><p>收款卡号</p><span>{{receiveCard}}</span></li>
 								<li><p>收款银行地址</p><span>{{receiveAddress}}</span></li>
-								<li><p>！識別碼</p><span>{{checkCode}}</span></li>
+								<li><p>！识别码</p><span>{{checkCode}}</span></li>
 							</ul>
 						</div>
 					<li>
 						<p>重要：打款时请务必于打款备注栏输入识别码</p>
 					</li>
 					<li>
-						<p>此画面资讯可至 "查询订单" 页面查询。</p>
+						<p>此画面资讯可至 "充值信息" 页面查询。</p>
 					</li>
 					<li><div class="button1"><button @click="goBack()">确定</button></div></li>
 				</ul>
@@ -110,7 +110,7 @@ export default {
 		  show2:false,
 		  show3:false,
 		  show4:false,
-		  selectBank:'請選擇銀行',
+		  selectBank:'请选择银行',
 		  bankList:[],
 		  payway:[],
 		  

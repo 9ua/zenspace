@@ -51,7 +51,7 @@
     <van-popup v-model="show2" position="bottom">
 	    <div class="mIcode-sure">
           <div class="sure2"><p>{{content}}</p></div>
-          <button class="del" @click="goToSet()">删除</button><button class="nodel" @click="show2 = !show2">取消</button>
+          <button class="del" @click="goToSet()">确定</button><button class="nodel" @click="show2 = !show2">取消</button>
       </div>
 	  </van-popup>
 
@@ -111,11 +111,11 @@
               this.securityCoe = res.data.data.securityCoe;
               this.bankUserFlag = res.data.data.bankUserFlag;
               if(this.securityCoe == 0 && this.bankUserFlag == 0){
-                            this.content = "請先綁定安全密碼及銀行帳戶，是否跳轉至設定頁？";
+                            this.content = "请先绑定安全密码及银行帐户，是否跳转至设定页？";
                             this.show2 = !this.show2;
                            
               } else if ( this.bankUserFlag == 0 ){
-                            this.content = "請先綁定銀行帳戶，是否跳轉至設定頁？";
+                            this.content = "请先绑定银行帐户，是否跳转至设定页？";
                             this.show2 = !this.show2;
               } else {
                     this.$router.push({path:'/cashOut'});

@@ -8,7 +8,7 @@
              <ul class="recharge-top">
                 <li v-for="(item,index) in rechargeList" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
-                        <p>金額<span>{{item.amount}}</span> ---
+                        <p>金额<span>{{item.amount}}</span> ---
                         {{item.bankName}}<br>
                         <span>产生日期</span>{{item.createTime}}
                         </p>
@@ -34,13 +34,13 @@
             <van-actionsheet class="" v-model="show2">
 	            <ul class="recharge-top">
 					<li>
-						<p>訂單編號</p><span>{{this.id}}</span>
+						<p>订单编号</p><span>{{this.id}}</span>
 					</li>
 					<li>
-						<p>目前處理狀況</p><span>{{this.statusName}}</span>
+						<p>目前处理状况</p><span>{{this.statusName}}</span>
 					</li>
 					<li>
-						<p>申請充值金額</p><span>{{this.amount}}</span>
+						<p>申请充值金额</p><span>{{this.amount}}</span>
 					</li>
 					<li v-if="this.status == '0'">
 						<p>收款人姓名</p><span>{{this.receiveNickName}}</span>
@@ -49,13 +49,13 @@
 						<p>收款银行</p><span>{{this.receiveBankName}}</span>
 					</li>
                     <li v-if="this.status == '0'">
-						<p>收款卡號</p><span>{{this.receiveCard}}</span>
+						<p>收款卡号</p><span>{{this.receiveCard}}</span>
 					</li>
                     <li v-if="this.status == '0'">
 						<p>收款银行地址</p><span>{{this.receiveAddress}}</span>
 					</li>
                     <li>
-						<p>訂單時間</p><span>{{this.createTime}}</span>
+						<p>订单时间</p><span>{{this.createTime}}</span>
 					</li>
                     <li>
 						<p>识别码</p><span>{{this.checkCode}}</span>

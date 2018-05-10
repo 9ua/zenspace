@@ -42,12 +42,12 @@
 		</ul>
 			<van-popup v-model="show2">
 	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="show2 = !show2">確定</button></div>
+                    <div ><p>{{content}}</p><button class="del" @click="show2 = !show2">确定</button></div>
                 </div>
 	        </van-popup>
             <van-popup v-model="show3">
 	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="goBack()">確定</button></div>
+                    <div ><p>{{content}}</p><button class="del" @click="goBack()">确定</button></div>
                 </div>
 	        </van-popup>
 		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
@@ -67,7 +67,7 @@ export default {
 		  show2:false,
 		  show3:false,
 		  show4:false,
-		  selectBank:'請選擇要提现銀行',
+		  selectBank:'请选择要提现银行',
 		  bankList:[],
 		  payway:[],
 		  withdrawInformation:'',

@@ -90,12 +90,12 @@
 	</van-actionsheet>
             <van-popup v-model="show6">
 	            <div class="button1">
-                    <div ><p>{{content2}}</p><button class="del" @click="show6 = !show6">確定</button></div>
+                    <div ><p>{{content2}}</p><button class="del" @click="show6 = !show6">确定</button></div>
                 </div>
 	        </van-popup>
             <van-popup v-model="show5">
 	            <div class="button1">
-                    <div ><p>{{content2}}</p><button class="del" @click="show5 = !show5">確定</button></div>
+                    <div ><p>{{content2}}</p><button class="del" @click="show5 = !show5">确定</button></div>
                 </div>
 	        </van-popup>
 	<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
@@ -164,7 +164,7 @@ export default {
 					this.securityCoe = res.data.data.securityCoe;
 					if(this.securityCoe !== 1){
                         Message.error({
-                            message: "請先綁定安全密碼!"
+                            message: "请先绑定安全密码!"
                         });
                         setTimeout(() => {
                              this.$router.push({path:'/setSafePwd'});

@@ -74,12 +74,12 @@
 
             <van-popup v-model="show2">
 	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="show2 = !show2">確定</button></div>
+                    <div ><p>{{content}}</p><button class="del" @click="show2 = !show2">确定</button></div>
                 </div>
 	        </van-popup>
             <van-popup v-model="show3">
 	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="goBack()">確定</button></div>
+                    <div ><p>{{content}}</p><button class="del" @click="goBack()">确定</button></div>
                 </div>
 	        </van-popup>
 			
@@ -102,7 +102,7 @@ export default {
 		  show1:false,
 		  show2:false,
 		  show3:false,
-		  selectBank:'請選擇銀行',
+		  selectBank:'请选择银行',
 		  bankList:[],
           payway:[],
           content:'',

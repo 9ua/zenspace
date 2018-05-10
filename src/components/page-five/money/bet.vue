@@ -106,7 +106,7 @@ export default {
             callback: this.print,
           },
           {
-            name:'等待開獎',
+            name:'等待开奖',
             Type:6,
             callback: this.print,
           }

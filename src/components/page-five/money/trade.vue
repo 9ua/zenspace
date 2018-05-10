@@ -27,7 +27,7 @@
                     <div class="mInvite-right">
                         
                         <p>
-                        <span>金額</span><br>
+                        <span>金额</span><br>
                         <span>{{item.changeAmount}}</span>
                         </p>
                         

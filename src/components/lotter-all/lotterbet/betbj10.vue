@@ -1035,12 +1035,8 @@
         this.lotteryId = into.id
         this.showan = index;
         this.showa = !this.showa;
-        this.showpop =!this.showpop;
-        this.content = '头部右->菜单点击'
-        setTimeout(() => {
-           this.showpop =!this.showpop;
-        }, 800);
         this.getPlayTree();
+        this.iscreat();
       },
       //头部菜单项
       k3Tab(e, indexa, indexb, items, group, into, index) {
@@ -1053,13 +1049,7 @@
         this.navlist = index;
         this.navlistb = indexa;
         this.navlistf = indexb;
-        console.log('--index', index)
-        console.log('--this.navlistf', this.navlistf)
-        console.log('--this.navlist', this.navlist)
-        console.log('--this.intotitle', this.intotitle)
-        console.log('--this.itemstitle', this.itemstitle)
-        console.log('--this.titles', this.titles)
-        console.log('--this.playGroupsId', this.playGroupsId)
+        this.iscreat();
       },
       //继续投注
       betsucc() {

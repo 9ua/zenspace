@@ -131,51 +131,32 @@
         <div class="betssc-footer-buttom-right" @click="betC">马上投注</div>
       </div>
     </div>
-    <van-popup v-model="bet" class="betk3pop">
-      <ul class="beta" v-if="zhu < 1">
-        <li>温馨提示！</li>
-        <li>请至少选择一注号码投注</li>
-        <li @click="bet = ! bet">
-          <button>确定</button>
-        </li>
-      </ul>
-      <ul class="betb" v-else-if="money === ''">
-        <li>温馨提示！</li>
-        <li>请填写您要投注的金额</li>
-        <li @click="bet = ! bet">
-          <button>确定</button>
-        </li>
-      </ul>
-      <ul class="betc" v-show="betGoshow" v-else>
-        <li>投注确认</li>
-        <li>
-          <p>
-            <span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-          <p>
-            <span>投注金额：</span>
-            <b>{{money*zhu}}元</b>
-          </p>
-          <p>
-            <span>投注内容：</span>{{con}}</p>
-        </li>
-        <li>
-          <button @click="bet = ! bet">取消</button>
-          <button @click="betGo">确定</button>
-        </li>
-      </ul>
-      <ul class="bete" v-show="betsuccess">
-        <li>温馨提示！</li>
-        <li>
-          <p>
-            <b>投注成功,</b>
-            <span>您可以在我的账户查看注单详情</span>
-          </p>
-        </li>
-        <li>
-          <router-link to="/five" tag='button'>查看注单</router-link>
-          <button @click="betsucc">继续投注</button>
-        </li>
-      </ul>
+    <ul class="betc" v-show="betGoshow">
+      <li>投注确认</li>
+      <li>
+        <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+        <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+        <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+      </li>
+      <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
+    </ul>
+    <ul class="betc"  v-show="betsuccess">
+      <li>温馨提示！</li>
+      <li>
+        <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+      </li>
+      <li><router-link to="/bet" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
+    </ul>
+    <van-popup v-model="showTimesUp" :close-on-click-overlay="false">
+      <div class="mIcode-sure">
+        <div class="sure2">
+          <p>温馨提示！</p>
+        </div>
+        <div class="sure2">
+        <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+        </div>
+        <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
+      </div>
     </van-popup>
     <van-popup class="sscpop" v-model="showpop">{{content}}</van-popup>
   </div>
@@ -184,11 +165,12 @@
   export default {
     data() {
       return {
+        showTimesUp: false,
         showpop: false, //弹窗
         content: '提示内容!', //弹窗内容
         bet: false, //投注弹窗
         betsuccess: false,
-        betGoshow: true,
+        betGoshow: false,
         show: false, //头部中间
         showa: false, //头部右
         showan: 0, //头部右数字
@@ -239,6 +221,12 @@
         hn: '',
         in : '',
         jn: '',
+        splayGroups:[],
+        sgroups:[],//
+        sgroups2:[],//
+        splayers:[],//
+        snumView:[],//
+        snums:'',//
       }
     },
     mounted() {
@@ -259,88 +247,98 @@
           this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu++;
-          //二码不定位 +
-          if(this.playBonusId === 'ssc_star4_front_group6' || this.playBonusId === 'ssc_star5_none2' || this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2') {
-            let ret = this.groupSplit(this.dd, 2);
-            let arr = [];
-            let abc = '';
-            for(var k = 0; k < ret.length; k++) {
-              var cc = ret[k].join('');
-              arr.push(cc);
-            }
-            abc = arr.join(',')
-            this.zhu = arr.length;
-          }
-          //三码不定位、三星组六 +
-          if(this.playBonusId === 'ssc_star5_none3' || this.playBonusId === 'ssc_star3_mid_group6' || this.playBonusId === 'ssc_star3_last_group6' || this.playBonusId === 'ssc_star3_front_group6') {
-            let ret = this.groupSplit(this.dd, 3);
-            let arr = [];
-            let abc = '';
-            for(var k = 0; k < ret.length; k++) {
-              var cc = ret[k].join('');
-              arr.push(cc);
-            }
-            abc = arr.join(',')
-            this.zhu = arr.length;
-          }
-          // 复式 +
-          this.ssc_star5jia(indexff, indexg, num, numViews, player);
-          //龙虎和 +
-          this.ssc_side_lhhjia(indexff, indexg, num, numViews, player)
-          // 大小单双 +
-          this.ssc_dxdsjia(indexff, indexg, num, numViews, player);
-          // 组选 +
-          this.zuxuansscjia(indexff, indexg, num, numViews, player);
-          //三星包胆 +
-          this.sanbaodanjia(indexff, indexg, num, numViews, player);
-          //二星包胆 +
-          this.erbaodanjia(indexff, indexg, num, numViews, player);
+          this.betssc_boxjia(indexff, indexg, num, numViews, player);
         } else if(num.choose === false) {
           this.d.splice(indexg, 1, "");
           this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu--;
-          //二码不定位 +
-          if(this.playBonusId === 'ssc_star4_front_group6' || this.playBonusId === 'ssc_star5_none2' || this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2') {
-            let ret = this.groupSplit(this.dd, 2);
-            let arr = [];
-            let abc = '';
-            for(var k = 0; k < ret.length; k++) {
-              var cc = ret[k].join('');
-              arr.push(cc);
-            }
-            abc = arr.join(',')
-            this.zhu -= arr.length;
-          }
-          //三码不定位、前三组六、中三组六、后三组六 -
-          if(this.playBonusId === 'ssc_star5_none3' || this.playBonusId === 'ssc_star3_mid_group6' || this.playBonusId === 'ssc_star3_last_group6' || this.playBonusId === 'ssc_star3_front_group6') {
-            let ret = this.groupSplit(this.dd, 3);
-            let arr = [];
-            let abc = '';
-            for(var k = 0; k < ret.length; k++) {
-              var cc = ret[k].join('');
-              arr.push(cc);
-            }
-            abc = arr.join(',')
-            this.zhu -= arr.length;
-          }
-          //复式 -
-          this.ssc_star5jia(indexff, indexg, num, numViews, player);
-          //龙虎和 -
-          this.ssc_side_lhhjian(indexff, indexg, num, numViews, player)
-          // 大小单双 -
-          this.ssc_dxdsjian(indexff, indexg, num, numViews, player);
-          //组选 -
-          this.zuxuansscjian(indexff, indexg, num, numViews, player);
-          //三星包胆 -
-          this.sanbaodanjian(indexff, indexg, num, numViews, player);
-          //二星包胆 -
-          this.erbaodanjian(indexff, indexg, num, numViews, player);
+          this.betssc_boxjian(indexff, indexg, num, numViews, player);
         }
-        // console.log(num.ball,numViews.nums.length,player.numView.length)
       },
-      //复式 +
-      ssc_star5jia(indexff, indexg, num, numViews, player) {
+      //投注 ++++
+      betssc_boxjia(indexff, indexg, num, numViews, player){
+        //大小单双 +
+        if(this.playBonusId === 'ssc_dxds') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {
+              return n;
+            });
+            this.an = this.dd.join('+');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {
+              return n;
+            });
+            this.bn = this.dd.join('+');
+          }
+          if(indexff === 2) {
+            this.kc[indexg] = num.ball;
+            this.dd = this.kc.filter(function(n) {
+              return n;
+            });
+            this.cn = this.dd.join('+');
+          }
+          if(indexff === 3) {
+            this.kd[indexg] = num.ball;
+            this.dd = this.kd.filter(function(n) {
+              return n;
+            });
+            this.dn = this.dd.join('+');
+          }
+          if(indexff === 4) {
+            this.ke[indexg] = num.ball;
+            this.dd = this.ke.filter(function(n) {
+              return n;
+            });
+            this.en = this.dd.join('+');
+          }
+          if(this.playBonusId === 'ssc_dxds') {
+            if(this.an === '') {
+              this.an = '-';
+            }
+            if(this.bn === '') {
+              this.bn = '-';
+            }
+            if(this.cn === '') {
+              this.cn = '-';
+            }
+            if(this.dn === '') {
+              this.dn = '-';
+            }
+            if(this.en === '') {
+              this.en = '-';
+            }
+            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
+          }
+        }
+        //五星、四星、三星、二星二码不定位 、前四组选6+
+        if(this.playBonusId === 'ssc_star4_front_group6' || this.playBonusId === 'ssc_star5_none2' || this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2') {
+          let ret = this.groupSplit(this.dd, 2);
+          let arr = [];
+          let abc = '';
+          for(var k = 0; k < ret.length; k++) {
+            var cc = ret[k].join('');
+            arr.push(cc);
+          }
+          abc = arr.join(',')
+          this.zhu = arr.length;
+        }
+        //三码不定位、三星组六 +
+        if(this.playBonusId === 'ssc_star5_none3' || this.playBonusId === 'ssc_star3_mid_group6' || this.playBonusId === 'ssc_star3_last_group6' || this.playBonusId === 'ssc_star3_front_group6') {
+          let ret = this.groupSplit(this.dd, 3);
+          let arr = [];
+          let abc = '';
+          for(var k = 0; k < ret.length; k++) {
+            var cc = ret[k].join('');
+            arr.push(cc);
+          }
+          abc = arr.join(',')
+          this.zhu = arr.length;
+        }
+        //复式 +
         if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
@@ -405,116 +403,7 @@
             this.zhu = this.getCount(this.con.split(','), 5);
           }
         }
-      },
-      //复式 -
-      ssc_star5jian(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
-          if(indexff === 0) {
-            this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
-          }
-          if(indexff === 2) {
-            this.kc.splice(indexg, 1, "");
-            this.dd = this.kc.filter(function(n) {return n;});
-            this.cn = this.dd.join('');
-          }
-          if(indexff === 3) {
-            this.kd.splice(indexg, 1, "");
-            this.dd = this.kd.filter(function(n) {return n;});
-            this.dn = this.dd.join('');
-          }
-          if(indexff === 4) {
-            this.ke.splice(indexg, 1, "");
-            this.dd = this.ke.filter(function(n) {return n;});
-            this.en = this.dd.join('');
-          }
-          if(this.playBonusId === 'ssc_star4_front') {
-            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn;
-            this.zhu = this.getCount(this.con.split(','), 4);
-          } else if(this.playBonusId === 'ssc_star3_front') {
-            this.con = this.an + ',' + this.bn + ',' + this.cn;
-            this.zhu = this.getCount(this.con.split(','), 3);
-          } else if(this.playBonusId === 'ssc_star3_mid') {
-            this.con = this.an + ',' + this.bn + ',' + this.cn;
-            this.zhu = this.getCount(this.con.split(','), 3);
-          } else if(this.playBonusId === 'ssc_star3_last') {
-            this.con = this.an + ',' + this.bn + ',' + this.cn;
-            this.zhu = this.getCount(this.con.split(','), 3);
-          } else if(this.playBonusId === 'ssc_star2_front') {
-            this.con = this.an + ',' + this.bn;
-            this.zhu = this.getCount(this.con.split(','), 2);
-          } else if(this.playBonusId === 'ssc_star2_last') {
-            this.con = this.an + ',' + this.bn;
-            this.zhu = this.getCount(this.con.split(','), 2);
-          } else if(this.playBonusId === 'ssc_star1_dwd') {
-            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
-          } else if(this.playBonusId === 'ssc_star5') {
-            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
-            this.zhu = this.getCount(this.con.split(','), 5);
-          }
-        }
-      },
-      //复式 betContent = [0,0,0,0,0] , count = 5
-      getCount(betContent, stars) {
-        if(betContent.length != stars) {
-          return 0;
-        }
-        let count = 1;
-        for(let i = 0; i < stars; i++) {
-          let n = betContent[i]
-          n = [...new Set(n)];
-          count *= n.length;
-        }
-        return count;
-      },
-      //三星包胆 +
-      sanbaodanjia(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains') {
-          for(let i = 0; i < numViews.nums.length; i++) {
-            this.zhu = 54;
-            this.con = num.ball;
-            numViews.nums[i].choose = false;
-            numViews.nums[indexg].choose = true;
-          }
-        }
-      },
-      //三星包胆 +
-      sanbaodanjian(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains') {
-          for(let i = 0; i < numViews.nums.length; i++) {
-            this.zhu = 0;
-            this.con = '';
-          }
-        }
-      },
-      //二星包胆 +
-      erbaodanjia(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_star2_front_group_contains' || this.playBonusId === 'ssc_star2_last_group_contains') {
-          for(let i = 0; i < numViews.nums.length; i++) {
-            this.zhu = 9;
-            this.con = num.ball;
-            numViews.nums[i].choose = false;
-            numViews.nums[indexg].choose = true;
-          }
-        }
-      },
-      //二星包胆 +
-      erbaodanjian(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_star2_front_group_contains' || this.playBonusId === 'ssc_star2_last_group_contains') {
-          for(let i = 0; i < numViews.nums.length; i++) {
-            this.zhu = 0;
-            this.con = '';
-          }
-        }
-      },
-      //龙虎和 +
-      ssc_side_lhhjia(indexff, indexg, num, numViews, player) {
+        //龙虎和 +
         if(this.playBonusId === 'ssc_side_lhh') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
@@ -600,9 +489,319 @@
           }
           this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en + ',' + this.fn + ',' + this.gn + ',' + this.hn + ',' + this.in + ',' + this.jn;
         }
+        //三星包胆 +
+        if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains') {
+          for(let i = 0; i < numViews.nums.length; i++) {
+            this.zhu = 54;
+            this.con = num.ball;
+            numViews.nums[i].choose = false;
+            numViews.nums[indexg].choose = true;
+          }
+        }
+        //二星包胆 +
+        if(this.playBonusId === 'ssc_star2_front_group_contains' || this.playBonusId === 'ssc_star2_last_group_contains') {
+          for(let i = 0; i < numViews.nums.length; i++) {
+            this.zhu = 9;
+            this.con = num.ball;
+            numViews.nums[i].choose = false;
+            numViews.nums[indexg].choose = true;
+          }
+        }
+        //五星--组选5 +
+        if(this.playBonusId === 'ssc_star5_group5') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          this.con = this.an + ',' + this.bn;
+          this.zhu = this.getzuCount5(this.con.split(','));
+        }
+        //五星--组选10 +
+        if(this.playBonusId === 'ssc_star5_group10') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          this.con = this.an + ',' + this.bn;
+          this.zhu = this.getzuCount10(this.con.split(','));
+        }
+        //五星--组选20 +
+        if(this.playBonusId === 'ssc_star5_group20') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          this.con = this.an + ',' + this.bn;
+          this.zhu = this.getzuCount20(this.con.split(','));
+        }
+        //五星--组选30 +
+        if(this.playBonusId === 'ssc_star5_group30') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          this.con = this.an + ',' + this.bn;
+          this.zhu = this.getzuCount30(this.con.split(','));
+        }
+        //五星--组选60 +
+        if(this.playBonusId === 'ssc_star5_group60') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          this.con = this.an + ',' + this.bn;
+          this.zhu = this.getzuCount60(this.con.split(','));
+        }
+        //五星--组选120 +
+        if(this.playBonusId === 'ssc_star5_group120') {
+          this.dd = this.d.filter(function(n) {return n;})
+          let lengths = this.dd.length;
+          this.zhu = this.getCount120(lengths);
+        }
+        //前四--组选4 +
+        if(this.playBonusId === 'ssc_star4_front_group4') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          this.con = this.an + ',' + this.bn;
+          this.zhu = this.getzuCount4(this.con.split(','));
+        }
+        //前四--组选12 +
+        if(this.playBonusId === 'ssc_star4_front_group12') {
+          if(indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          this.con = this.an + ',' + this.bn;
+          this.zhu = this.getzuCount12(this.con.split(','));
+        }
+        //前四--组选24 +
+        if(this.playBonusId === 'ssc_star4_front_group24') {
+          this.dd = this.d.filter(function(n) {return n;})
+          let lengths = this.dd.length;
+          this.zhu = this.getzuCount24(lengths);
+        }
+        //前三、中三、后三组选 -
+        if(this.playBonusId === 'ssc_star3_front_group3' || this.playBonusId === 'ssc_star3_mid_group3' || this.playBonusId === 'ssc_star3_last_group3') {
+          this.dd = this.d.filter(function(n) {return n;})
+          let lengths = this.dd.length;
+          this.zhu = this.getzuCount3(lengths);
+        }
+        //二星组选 复式 +
+        if(this.playBonusId === 'ssc_star2_front_group' || this.playBonusId === 'ssc_star2_last_group') {
+          this.dd = this.d.filter(function(n) {return n;})
+          this.zhu = this.erzuxuanfushi(this.dd);
+        }
+        //三星直选和值 +
+        if(this.playBonusId === 'ssc_star3_front_and' || this.playBonusId === 'ssc_star3_mid_and' || this.playBonusId === 'ssc_star3_last_and') {
+          this.dd = this.d.filter(function(n) {return n;})
+          this.zhu = this.sanzhixuanhezhi(this.dd);
+        }
+        //三星组选和值 +
+        if(this.playBonusId === 'ssc_star3_front_group_and' || this.playBonusId === 'ssc_star3_mid_group_and' || this.playBonusId === 'ssc_star3_last_group_and') {
+          this.dd = this.d.filter(function(n) {return n;})
+          this.zhu = this.sanzuxuanhezhi(this.dd);
+        }
+        //三星跨度 +
+        if(this.playBonusId === 'ssc_star3_front_kd' || this.playBonusId === 'ssc_star3_mid_kd' || this.playBonusId === 'ssc_star3_last_kd') {
+          this.dd = this.d.filter(function(n) {return n;})
+          this.zhu = this.sankuadu(this.dd);
+        }
+        //二星直选和值 +
+        if(this.playBonusId === 'ssc_star2_front_and' || this.playBonusId === 'ssc_star2_last_and') {
+          this.dd = this.d.filter(function(n) {return n;})
+          this.zhu = this.erzhixuanhezhi(this.dd);
+        }
+        //二星组选和值 +
+        if(this.playBonusId === 'ssc_star2_front_group_and' || this.playBonusId === 'ssc_star2_last_group_and') {
+          this.dd = this.d.filter(function(n) {return n;})
+          this.zhu = this.erzuxuanhezhi(this.dd);
+        }
+        //二星跨度 +
+        if(this.playBonusId === 'ssc_star2_front_kd' || this.playBonusId === 'ssc_star2_last_kd') {
+          this.dd = this.d.filter(function(n) {return n;})
+          this.zhu = this.erkuadu(this.dd);
+        }
       },
-      //龙虎和 -
-      ssc_side_lhhjian(indexff, indexg, num, numViews, player) {
+
+      //投注 ----
+      betssc_boxjian(indexff, indexg, num, numViews, player){
+        //大小单双 -
+        if(this.playBonusId === 'ssc_dxds') {
+          if(indexff === 0) {
+            this.ka.splice(indexg, 1, "");
+            this.dd = this.ka.filter(function(n) {
+              return n;
+            });
+            this.an = this.dd.join('+');
+          }
+          if(indexff === 1) {
+            this.kb.splice(indexg, 1, "");
+            this.dd = this.kb.filter(function(n) {
+              return n;
+            });
+            this.bn = this.dd.join('+');
+          }
+          if(indexff === 2) {
+            this.kc.splice(indexg, 1, "");
+            this.dd = this.kc.filter(function(n) {
+              return n;
+            });
+            this.cn = this.dd.join('+');
+          }
+          if(indexff === 3) {
+            this.kd.splice(indexg, 1, "");
+            this.dd = this.kd.filter(function(n) {
+              return n;
+            });
+            this.dn = this.dd.join('+');
+          }
+          if(indexff === 4) {
+            this.ke.splice(indexg, 1, "");
+            this.dd = this.ke.filter(function(n) {
+              return n;
+            });
+            this.en = this.dd.join('+');
+          }
+          if(this.playBonusId === 'ssc_dxds') {
+            if(this.an === '') {
+              this.an = '-';
+            }
+            if(this.bn === '') {
+              this.bn = '-';
+            }
+            if(this.cn === '') {
+              this.cn = '-';
+            }
+            if(this.dn === '') {
+              this.dn = '-';
+            }
+            if(this.en === '') {
+              this.en = '-';
+            }
+            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
+          }
+        }
+        //五星、四星、三星、二星二码不定位 、前四组选6 -
+        if(this.playBonusId === 'ssc_star4_front_group6' || this.playBonusId === 'ssc_star5_none2' || this.playBonusId === 'ssc_star4_front_none2' || this.playBonusId === 'ssc_star3_front_none2' || this.playBonusId === 'ssc_star3_mid_none2' || this.playBonusId === 'ssc_star3_last_none2') {
+          let ret = this.groupSplit(this.dd, 2);
+          let arr = [];
+          let abc = '';
+          for(var k = 0; k < ret.length; k++) {
+            var cc = ret[k].join('');
+            arr.push(cc);
+          }
+          abc = arr.join(',')
+          this.zhu = arr.length;
+        }
+        //三码不定位、前三组六、中三组六、后三组六 -
+        if(this.playBonusId === 'ssc_star5_none3' || this.playBonusId === 'ssc_star3_mid_group6' || this.playBonusId === 'ssc_star3_last_group6' || this.playBonusId === 'ssc_star3_front_group6') {
+          let ret = this.groupSplit(this.dd, 3);
+          let arr = [];
+          let abc = '';
+          for(var k = 0; k < ret.length; k++) {
+            var cc = ret[k].join('');
+            arr.push(cc);
+          }
+          abc = arr.join(',')
+          this.zhu = arr.length;
+        }
+        //复式 -
+        if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
+          if(indexff === 0) {
+            this.ka.splice(indexg, 1, "");
+            this.dd = this.ka.filter(function(n) {return n;});
+            this.an = this.dd.join('');
+          }
+          if(indexff === 1) {
+            this.kb.splice(indexg, 1, "");
+            this.dd = this.kb.filter(function(n) {return n;});
+            this.bn = this.dd.join('');
+          }
+          if(indexff === 2) {
+            this.kc.splice(indexg, 1, "");
+            this.dd = this.kc.filter(function(n) {return n;});
+            this.cn = this.dd.join('');
+          }
+          if(indexff === 3) {
+            this.kd.splice(indexg, 1, "");
+            this.dd = this.kd.filter(function(n) {return n;});
+            this.dn = this.dd.join('');
+          }
+          if(indexff === 4) {
+            this.ke.splice(indexg, 1, "");
+            this.dd = this.ke.filter(function(n) {return n;});
+            this.en = this.dd.join('');
+          }
+          if(this.playBonusId === 'ssc_star4_front') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn;
+            this.zhu = this.getCount(this.con.split(','), 4);
+          } else if(this.playBonusId === 'ssc_star3_front') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn;
+            this.zhu = this.getCount(this.con.split(','), 3);
+          } else if(this.playBonusId === 'ssc_star3_mid') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn;
+            this.zhu = this.getCount(this.con.split(','), 3);
+          } else if(this.playBonusId === 'ssc_star3_last') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn;
+            this.zhu = this.getCount(this.con.split(','), 3);
+          } else if(this.playBonusId === 'ssc_star2_front') {
+            this.con = this.an + ',' + this.bn;
+            this.zhu = this.getCount(this.con.split(','), 2);
+          } else if(this.playBonusId === 'ssc_star2_last') {
+            this.con = this.an + ',' + this.bn;
+            this.zhu = this.getCount(this.con.split(','), 2);
+          } else if(this.playBonusId === 'ssc_star1_dwd') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
+          } else if(this.playBonusId === 'ssc_star5') {
+            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
+            this.zhu = this.getCount(this.con.split(','), 5);
+          }
+        }
+        //龙虎和 -
         if(this.playBonusId === 'ssc_side_lhh') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -736,283 +935,21 @@
           }
           this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en + ',' + this.fn + ',' + this.gn + ',' + this.hn + ',' + this.in + ',' + this.jn;
         }
-      },
-      //大小单双 +
-      ssc_dxdsjia(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_dxds') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
-            this.an = this.dd.join('+');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
-            this.bn = this.dd.join('+');
-          }
-          if(indexff === 2) {
-            this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
-            this.cn = this.dd.join('+');
-          }
-          if(indexff === 3) {
-            this.kd[indexg] = num.ball;
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
-            this.dn = this.dd.join('+');
-          }
-          if(indexff === 4) {
-            this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
-            this.en = this.dd.join('+');
-          }
-          if(this.playBonusId === 'ssc_dxds') {
-            if(this.an === '') {
-              this.an = '-';
-            }
-            if(this.bn === '') {
-              this.bn = '-';
-            }
-            if(this.cn === '') {
-              this.cn = '-';
-            }
-            if(this.dn === '') {
-              this.dn = '-';
-            }
-            if(this.en === '') {
-              this.en = '-';
-            }
-            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
+        //三星包胆 -
+        if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains') {
+          for(let i = 0; i < numViews.nums.length; i++) {
+            this.zhu = 0;
+            this.con = '';
           }
         }
-      },
-      //大小单双 -
-      ssc_dxdsjian(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_dxds') {
-          if(indexff === 0) {
-            this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
-            this.an = this.dd.join('+');
-          }
-          if(indexff === 1) {
-            this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
-            this.bn = this.dd.join('+');
-          }
-          if(indexff === 2) {
-            this.kc.splice(indexg, 1, "");
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
-            this.cn = this.dd.join('+');
-          }
-          if(indexff === 3) {
-            this.kd.splice(indexg, 1, "");
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
-            this.dn = this.dd.join('+');
-          }
-          if(indexff === 4) {
-            this.ke.splice(indexg, 1, "");
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
-            this.en = this.dd.join('+');
-          }
-          if(this.playBonusId === 'ssc_dxds') {
-            if(this.an === '') {
-              this.an = '-';
-            }
-            if(this.bn === '') {
-              this.bn = '-';
-            }
-            if(this.cn === '') {
-              this.cn = '-';
-            }
-            if(this.dn === '') {
-              this.dn = '-';
-            }
-            if(this.en === '') {
-              this.en = '-';
-            }
-            this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
+        //二星包胆 -
+        if(this.playBonusId === 'ssc_star2_front_group_contains' || this.playBonusId === 'ssc_star2_last_group_contains') {
+          for(let i = 0; i < numViews.nums.length; i++) {
+            this.zhu = 0;
+            this.con = '';
           }
         }
-      },
-      //组选 +
-      zuxuansscjia(indexff, indexg, num, numViews, player) {
-        if(this.playBonusId === 'ssc_star5_group5') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
-          }
-          this.con = this.an + ',' + this.bn;
-          this.zhu = this.getzuCount5(this.con.split(','));
-        }
-        if(this.playBonusId === 'ssc_star5_group10') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
-            this.bn = this.dd.join('');
-          }
-          this.con = this.an + ',' + this.bn;
-          this.zhu = this.getzuCount10(this.con.split(','));
-        }
-        if(this.playBonusId === 'ssc_star5_group20') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
-            this.bn = this.dd.join('');
-          }
-          this.con = this.an + ',' + this.bn;
-          this.zhu = this.getzuCount20(this.con.split(','));
-        }
-        if(this.playBonusId === 'ssc_star5_group30') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
-          }
-          this.con = this.an + ',' + this.bn;
-          this.zhu = this.getzuCount30(this.con.split(','));
-        }
-        if(this.playBonusId === 'ssc_star5_group60') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
-          }
-          this.con = this.an + ',' + this.bn;
-          this.zhu = this.getzuCount60(this.con.split(','));
-        }
-        if(this.playBonusId === 'ssc_star5_group120') {
-          this.dd = this.d.filter(function(n) {return n;})
-          let lengths = this.dd.length;
-          this.zhu = this.getCount120(lengths);
-        }
-        if(this.playBonusId === 'ssc_star4_front_group4') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
-          }
-          this.con = this.an + ',' + this.bn;
-          this.zhu = this.getzuCount4(this.con.split(','));
-          console.log(this.an, '----', this.bn, '---', this.con.split(','))
-        }
-        if(this.playBonusId === 'ssc_star4_front_group12') {
-          if(indexff === 0) {
-            this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
-            this.an = this.dd.join('');
-          }
-          if(indexff === 1) {
-            this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
-          }
-          this.con = this.an + ',' + this.bn;
-          this.zhu = this.getzuCount12(this.con.split(','));
-        }
-        if(this.playBonusId === 'ssc_star4_front_group24') {
-          this.dd = this.d.filter(function(n) {return n;})
-          let lengths = this.dd.length;
-          this.zhu = this.getzuCount24(lengths);
-        }
-        if(this.playBonusId === 'ssc_star3_front_group3' || this.playBonusId === 'ssc_star3_mid_group3' || this.playBonusId === 'ssc_star3_last_group3') {
-          this.dd = this.d.filter(function(n) {return n;})
-          let lengths = this.dd.length;
-          this.zhu = this.getzuCount3(lengths);
-        }
-        //二星组选 复式 +
-        if(this.playBonusId === 'ssc_star2_front_group' || this.playBonusId === 'ssc_star2_last_group') {
-          this.dd = this.d.filter(function(n) {return n;})
-          this.zhu = this.erzuxuanfushi(this.dd);
-        }
-        //三星直选和值 +
-        if(this.playBonusId === 'ssc_star3_front_and' || this.playBonusId === 'ssc_star3_mid_and' || this.playBonusId === 'ssc_star3_last_and') {
-          this.dd = this.d.filter(function(n) {return n;})
-          this.zhu = this.sanzhixuanhezhi(this.dd);
-        }
-        //三星组选和值 +
-        if(this.playBonusId === 'ssc_star3_front_group_and' || this.playBonusId === 'ssc_star3_mid_group_and' || this.playBonusId === 'ssc_star3_last_group_and') {
-          this.dd = this.d.filter(function(n) {return n;})
-          this.zhu = this.sanzuxuanhezhi(this.dd);
-        }
-        //三星跨度 +
-        if(this.playBonusId === 'ssc_star3_front_kd' || this.playBonusId === 'ssc_star3_mid_kd' || this.playBonusId === 'ssc_star3_last_kd') {
-          this.dd = this.d.filter(function(n) {return n;})
-          this.zhu = this.sankuadu(this.dd);
-        }
-        //二星直选和值 +
-        if(this.playBonusId === 'ssc_star2_front_and' || this.playBonusId === 'ssc_star2_last_and') {
-          this.dd = this.d.filter(function(n) {return n;})
-          this.zhu = this.erzhixuanhezhi(this.dd);
-        }
-        //二星组选和值 +
-        if(this.playBonusId === 'ssc_star2_front_group_and' || this.playBonusId === 'ssc_star2_last_group_and') {
-          this.dd = this.d.filter(function(n) {return n;})
-          this.zhu = this.erzuxuanhezhi(this.dd);
-        }
-        //二星跨度 +
-        if(this.playBonusId === 'ssc_star2_front_kd' || this.playBonusId === 'ssc_star2_last_kd') {
-          this.dd = this.d.filter(function(n) {return n;})
-          this.zhu = this.erkuadu(this.dd);
-        }
-      },
-      //组选 -
-      zuxuansscjian(indexff, indexg, num, numViews, player) {
+        //五星--组选5 -
         if(this.playBonusId === 'ssc_star5_group5') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -1027,6 +964,7 @@
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount5(this.con.split(','));
         }
+        //五星--组选10 -
         if(this.playBonusId === 'ssc_star5_group10') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -1041,6 +979,7 @@
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount10(this.con.split(','));
         }
+        //五星--组选20 -
         if(this.playBonusId === 'ssc_star5_group20') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -1055,6 +994,7 @@
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount20(this.con.split(','));
         }
+        //五星--组选30 -
         if(this.playBonusId === 'ssc_star5_group30') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -1069,6 +1009,7 @@
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount30(this.con.split(','));
         }
+        //五星--组选60 -
         if(this.playBonusId === 'ssc_star5_group60') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -1083,11 +1024,13 @@
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount60(this.con.split(','));
         }
+        //五星--组选120 -
         if(this.playBonusId === 'ssc_star5_group120') {
           this.dd = this.d.filter(function(n) {return n;});
           let lengths = this.dd.length;
           this.zhu = this.getCount120(lengths);
         }
+        //前四--组选4 -
         if(this.playBonusId === 'ssc_star4_front_group4') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -1102,6 +1045,7 @@
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount4(this.con.split(','));
         }
+        //前四--组选12 -
         if(this.playBonusId === 'ssc_star4_front_group12') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
@@ -1116,11 +1060,13 @@
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount12(this.con.split(','));
         }
+        //前四--组选24 -
         if(this.playBonusId === 'ssc_star4_front_group24') {
           this.dd = this.d.filter(function(n) {return n;});
           let lengths = this.dd.length;
           this.zhu = this.getzuCount24(lengths);
         }
+        //前三、中三、后三组选 -
         if(this.playBonusId === 'ssc_star3_front_group3' || this.playBonusId === 'ssc_star3_mid_group3' || this.playBonusId === 'ssc_star3_last_group3') {
           this.dd = this.d.filter(function(n) {return n;});
           let lengths = this.dd.length;
@@ -1161,6 +1107,21 @@
           this.dd = this.d.filter(function(n) {return n;});
           this.zhu = this.erkuadu(this.dd);
         }
+      },
+      
+      //----------公用函数-----------
+      //复式 betContent = [0,0,0,0,0] , count = 5
+      getCount(betContent, stars) {
+        if(betContent.length != stars) {
+          return 0;
+        }
+        let count = 1;
+        for(let i = 0; i < stars; i++) {
+          let n = betContent[i]
+          n = [...new Set(n)];
+          count *= n.length;
+        }
+        return count;
       },
       //组选共用函数
       getCombin(num, len) {
@@ -1413,29 +1374,42 @@
       },
       //清空
       iscreat() {
-        for(let i = 0; i < this.playGroups.length; i++) {
-          for(let j = 0; j < this.playGroups[i].groups.length; j++) {
-            this.abc = this.playGroups[i].groups;
-            for(let k = 0; k < this.playGroups[i].groups[j].players.length; k++) {
-              for(let l = 0; l < this.playGroups[i].groups[j].players[k].numView.length; l++) {
-                for(let h = 0; h < this.playGroups[i].groups[j].players[k].numView[l].nums.length; h++) {
-                  if(this.playGroups[i].groups[j].players[k].numView[l].nums[h].choose === true) {
-                    this.playGroups[i].groups[j].players[k].numView[l].nums[h].choose = false;
-                    this.d = [];
-                    this.ka = [];
-                    this.kb = [];
-                    this.kc = [];
-                    this.kd = [];
-                    this.ke = [];
-                    this.con = '';
-                    // this.zhu =0;
-                    this.money = 1;
-                  }
-                }
-              }
+        this.zhu = '';
+        this.money = 1;
+        this.con ='';
+        this.d = [];
+        this.dd = [];
+        this.ka = [];
+        this.kb = [];
+        this.kc = [];
+        this.kd = [];
+        this.ke = [];
+        this.kf = [];
+        this.kg = [];
+        this.kh = [];
+        this.ki = [];
+        this.kj = [];
+        this.an = '';
+        this.bn = '';
+        this.cn = '';
+        this.dn = '';
+        this.en = '';
+        this.fn = '';
+        this.gn = '';
+        this.hn = '';
+        this.in = '';
+        this.jn = '';
+        for (let i = 0; i < this.snumView.length; i++) {
+          for (let j = 0; j < this.snumView[i].length; j++) {
+            for (let k = 0; k < this.snumView[i][j].nums.length; k++) {
+              this.snumView[i][j].nums[k].choose = false;
             }
           }
+          
         }
+      },
+      betCancel() {
+        this.betGoshow = !this.betGoshow;
       },
       // 如果只能选择一个球
       curBall(b, item, index) {
@@ -1460,13 +1434,28 @@
       },
       //玩法树
       getPlayTree() {
-        this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {
-          params: {
-            lotteryId: this.lotteryId
-          }
-        }).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
           this.playBonus = res.data.data.playBonus;
           this.playGroups = res.data.data.playGroups;
+          for (let i = 0; i < this.playGroups.length; i++) {
+            this.splayGroups.push(this.playGroups[i])
+          }
+          for (let j = 0; j < this.splayGroups.length; j++) {
+             this.sgroups.push(this.splayGroups[j].groups)
+          }
+          for (let k = 0; k < this.sgroups.length; k++) {
+            for (let j = 0; j < this.sgroups[k].length; j++) {
+              this.sgroups2.push(this.sgroups[k][j])
+            }
+          }
+          for (let i = 0; i < this.sgroups2.length; i++) {
+            this.splayers.push(this.sgroups2[i].players)
+          }
+          for (let h = 0; h < this.splayers.length; h++) {
+            for (let i = 0; i < this.splayers[h].length; i++) {
+              this.snumView.push(this.splayers[h][i].numView)
+            }
+          }
           console.log(this.playGroups, "玩法树");
         }).catch((error) => {
           console.log("玩法树No");
@@ -1490,20 +1479,25 @@
         formData.append('lotteryId', this.lotteryId);
         formData.append('amount', this.money * this.zhu);
         this.$axios.post(this.$store.state.url + 'api/lottery/bet', formData, config).then((res) => {
-          if(res.data.message === 'success') {
-            this.betGoshow = !this.betGoshow;
-            this.betsuccess = !this.betsuccess;
+          if (res.data.message === "success") {
+            setTimeout(() => {
+              this.showpop = !this.showpop;
+              this.content = "投注成功!";
+              this.betGoshow = !this.betGoshow;
+              this.iscreat();
+              setTimeout(() => {
+                this.showpop = !this.showpop;
+                this.betsuccess = !this.betsuccess;
+              }, 1000);
+            }, 600);
           }
-          console.log(res.data.data)
         }).catch((error) => {
           console.log("No");
         })
       },
       betsucc() {
         this.betsuccess = !this.betsuccess;
-        this.$router.push({
-          path: '/one'
-        })
+        this.iscreat();
       },
       //右上获取彩种
       getLotteryList() {
@@ -1522,9 +1516,9 @@
         this.getPastOpen();
         this.getPastOp();
         this.geteServerTime();
+        this.iscreat();
       },
       //头部菜单项
-      //indexa:groups, indexb:players, index:playGroups, into:groups, items:players
       k3Tab(e, indexa, indexb, items, group, into, index) {
         this.titles = into.title + ' ' + items.groupName + ' ' + items.title;
         this.intotitle = into.title;
@@ -1534,54 +1528,12 @@
         this.navlistf = indexb;
         this.playBonusId = items.id;
         this.show = !this.show;
-        console.log('--index', index)
-        console.log('--this.navlistf', this.navlistf)
-        console.log('--this.navlist', this.navlist)
-        console.log('--this.intotitle', this.intotitle)
-        console.log('--this.itemstitle', this.itemstitle)
-        console.log('--this.titles', this.titles)
-        console.log('--this.playBonusId', this.playBonusId)
-        this.iscreatnav(e, indexa, indexb, items, into, index);
-      },
-      //头部菜单切换清空
-      iscreatnav(e, indexa, indexb, player, group, into, index) {
-        for(let i = 0; i < player.numView.length; i++) {
-          for(let j = 0; j < player.numView[i].nums.length; j++) {
-            if(player.numView[i].nums[j].choose === true) {
-              player.numView[i].nums[j].choose = false;
-              if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last') {
-                this.d = [];
-                this.ka = [];
-                this.kb = [];
-                this.kc = [];
-                this.kd = [];
-                this.ke = [];
-                this.zhu = 0;
-                this.con = '';
-                this.money = 1;
-              }
-            }
-          }
-        }
-        this.d = [];
-        this.ka = [];
-        this.kb = [];
-        this.kc = [];
-        this.kd = [];
-        this.ke = [];
-        this.zhu = 0;
-        this.con = '';
-        this.money = 1;
+        this.iscreat();
       },
       //获取过去开奖号码10个
       getPastOpen() {
         this.getLotteryList();
-        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {
-          params: {
-            lotteryId: this.lotteryId,
-            count: 10
-          }
-        }).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', { params: {lotteryId: this.lotteryId,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
         }).catch((error) => {
           console.log("获取过去开奖号码No")
@@ -1589,12 +1541,7 @@
       },
       //获取过去开奖号码1个
       getPastOp() {
-        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {
-          params: {
-            lotteryId: this.lotteryId,
-            count: 1
-          }
-        }).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.lotteryId,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
         }).catch((error) => {
           console.log("获取过去开奖号码No")
@@ -1603,11 +1550,7 @@
       //获取彩種當前獎期時間
       geteServerTime() {
         clearInterval(this.timer);
-        this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {
-          params: {
-            lotteryId: this.lotteryId
-          }
-        }).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.lotteryId}}).then((res) => {
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
             this.seasonId = this.seasonId2.substring(4).split("-").join("");
@@ -1642,7 +1585,17 @@
         }, 1000);
       },
       betC() {
-        this.bet = !this.bet;
+        if (this.zhu <= 0) {
+          this.betshow = !this.betshow;
+          this.content = "请至少选择一注号码投注!";
+        }
+        if (this.money === "") {
+          this.betshow = !this.betshow;
+          this.content = "请填写您要投注的金额!";
+        }
+        if (this.zhu > 0 && this.money !== "") {
+          this.betGoshow = !this.betGoshow;
+        }
       },
     },
     //focus

@@ -38,7 +38,7 @@
     </div>
     <div class="five-content">
       <ul>
-        <router-link :to="fiveNavs.paths" tag="li" v-for="(fiveNavs,index) in fiveNav" :key="index">
+        <router-link :to="fiveNavs.paths" tag="li" v-for="(fiveNavs,index) in fiveNav" :key="index" v-if="fiveNavs.viewC">
           <div class="five-content-nav">
             <i class="iconfont" :class="fiveNavs.icon"></i>
             <p>{{fiveNavs.name}}</p>
@@ -74,35 +74,50 @@
         fiveNav: [{
           name: '个人信息',
           icon: 'icon-wenbenicon',
-          paths: 'detail'
+          paths: 'detail',
+          viewC:true,
         }, {
           name: '安全中心',
           icon: 'icon-weibiaoti1',
-          paths: 'safety'
+          paths: 'safety',
+          viewC:true,
         }, {
           name: '代理中心',
           icon: 'icon-dailizizhizizhiqiyezizhi',
-          paths: 'agency'
+          paths: 'agency',
+          viewC:false,
         }, {
           name: '今日盈亏',
           icon: 'icon-shuju',
-          paths: 'profits'
+          paths: 'profits',
+          viewC:true,
         }, {
           name: '我的消息',
           icon: 'icon-wenben',
-          paths: 'mymsg'
+          paths: 'mymsg',
+          viewC:true,
         },{
           name: '查詢訂單',
           icon: 'icon-wenben',
-          paths: 'rechargeserch'
+          paths: 'rechargeserch',
+          viewC:true,
         }, ]
       }
     },
     mounted(){
       this.getTopUserData();
       this.getBalance();
+      this.checkType();
     },
     methods:{
+          checkType(){
+              console.log(this.$store.state.userType);
+              console.log(this.$store.state.loginStatus);
+              if (this.$store.state.userType == 1){
+                this.fiveNav[2].viewC = true;
+              }
+              
+          },
         //獲取安全中心狀態
           safeCenter(){
             console.log(5566);

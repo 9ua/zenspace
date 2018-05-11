@@ -20,27 +20,19 @@
         <ul v-show="showFlag">
                 <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
-                        <p><span>{{item.accountChangeTypeName}}</span><br>
+                        <p><span>{{item.account}}</span><br>
                         <span></span>{{item.changeTime}}
                         </p>
                     </div>
                     <div class="mInvite-right">
                         
                         <p>
-                        <span>金額</span><br>
+                        <span>{{item.accountChangeTypeName}}</span><br>
                         <span>{{item.changeAmount}}</span>
                         </p>
-                        
                     </div>
-                    <i class="el-icon-arrow-down"></i>
-                    
-                    
-                    
                 </li>
-
         </ul>
-
-
     </div>
   </div>
 </template>

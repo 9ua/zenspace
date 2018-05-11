@@ -20,7 +20,7 @@
         <ul v-show="showFlag">
                 <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
-                        <p><span>{{item.lotteryName}} - ￥{{item.amount}}</span><br>
+                        <p><span>{{item.account}} - ￥{{item.amount}}</span><br>
                         <span></span>{{item.createTime}}
                         </p>
                     </div>
@@ -38,7 +38,7 @@
             <li>
               <span>{{selected.lotteryName}}</span>
             </li>
-            <li><p>第--?--期</p> <p>開獎狀態{{selected.status}}</p></li>
+            <li><p>第{{selected.seasonId}}期</p> <p>{{selected.statusName}}</p></li>
             <li>
               <p>投注時間</p><span>{{selected.createTime}}</span>
             </li>

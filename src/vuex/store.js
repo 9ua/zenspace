@@ -27,6 +27,7 @@ const state = {
     email: getStore('email'), //邮箱
     sex: getStore('sex'), //性别ID
     birthday: getStore('birthday'), //生日
+    userType: getStore('userType'), //member type
 }
 
 export default new Vuex.Store({

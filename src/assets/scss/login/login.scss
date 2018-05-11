@@ -36,7 +36,7 @@
                 border: 1px solid #c6c6c6;
                 background: #fff;
                 & i {
-                    color: #c6c6c6;
+                    color:#f75f5b;
                     font-size: 20px;
                 }
                 & input {
@@ -57,7 +57,11 @@
                 & .yd-checkbox-icon{
                     width: 18px !important;
                     height: 18px !important;
-                    color: #419fd9 !important;
+                    color: #f75f5b !important;
+                    border:1px solid #fff;
+                }
+                & .yd-checkbox-text{
+                    color: #fff !important;
                 }
             }
             .login-pwd,
@@ -68,6 +72,7 @@
             .login-go {
                 border: none;
                 margin-top: 30px;
+                border-radius: 6px;
             }
             & button {
                 width: 100%;
@@ -90,11 +95,14 @@
                     background: none;
                     color: #ddd;
                 }
-                & :nth-child(1) {
+                & a:nth-child(1) {
                     border-right: 1px solid #ddd;
                     padding-right: 6px;
                     margin-right: 6px;
                     color: #dc3b40;
+                }
+                & a:nth-child(2){
+                    color:#fff;
                 }
             }
         }

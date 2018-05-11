@@ -756,7 +756,7 @@ export default {
         this.con = this.dd.join(",");
         this.zhu ++;
         if (index === 15 && k3item.selected === true) {
-          // k3item.selected === false;
+          k3item.selected === false;
           for (let i = 0; i < this.ertonghao.length; i++) {
             if (i % 3 === 0 && i < 13) {
               this.ertonghao[i].selected = !this.ertonghao[i].selected;
@@ -773,7 +773,6 @@ export default {
               this.d.splice(index, 5, "");
               this.dd = this.d.filter(function(n) {return n;});
               this.zhu =0 ;
-              console.log(this.ertonghao)
             }
           }
         }

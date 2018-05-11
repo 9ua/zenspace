@@ -103,7 +103,7 @@
 				<ul class="ertonghao" v-show="index === 1">
 					<li>
 						<ul>
-							<li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)">
+							<li v-for="(ertongh,indexer) in ertonghao" :key="indexer" @click="ertonghaoto($event,indexer,ertongh)">
 								<span :class="ertongh.selected ? 'active' : ''">
 									<!-- {{ertongh.title}} -->
 									<a></a>
@@ -226,9 +226,11 @@
       </div>
     </van-popup>
     <van-popup class="betshow" v-model="betshow">{{content}}</van-popup>
+    <!-- <pop :pop="content"></pop> -->
   </div>
 </template>
 <script>
+import pop from '../../public/pop'
 export default {
   data() {
     return {
@@ -748,32 +750,33 @@ export default {
     ertonghaoto(e, index, k3item) {
       k3item.selected = !k3item.selected;
       //取余==0
-      if (k3item.selected === true) {
+      if (k3item.selected === true && index !== 15 || index !== 16 || index !== 17 || index !== 33 || index !== 34 || index !== 35) {
         this.d[index] = k3item.title;
         this.dd = this.d.filter(function(n) {return n;});
         this.con = this.dd.join(",");
-        this.zhu++;
-
+        this.zhu ++;
         if (index === 15 && k3item.selected === true) {
           k3item.selected === false;
           for (let i = 0; i < this.ertonghao.length; i++) {
-            if (i % 3 === 0 && i < 15) {
+            if (i % 3 === 0 && i < 13) {
               this.ertonghao[i].selected = !this.ertonghao[i].selected;
               this.d[i] = this.ertonghao[i].title;
               this.dd = this.d.filter(function(n) {return n;});
-              this.zhu++;
+              this.zhu = 5;
             }
           }
-          if (index === 15 && k3item.selected === false) {
-            for (let i = 0; i < this.ertonghao.length; i++) {
-              if (i % 3 === 0 && i < 15) {
-                this.con = "";
-                this.zhu = 0;
-              }
-            }
-          }
-          this.con = this.dd.join(",");
         }
+        if (index === 15 && k3item.selected === false) {
+          for (let i = 0; i < this.ertonghao.length; i++) {
+            if (i % 3 === 0 && i < 15) {
+              this.ertonghao[i].selected = !this.ertonghao[i].selected;
+              this.d.splice(index, 5, "");
+              this.dd = this.d.filter(function(n) {return n;});
+              this.zhu =0 ;
+            }
+          }
+        }
+        this.con = this.dd.join(",");
         //取余==1
         if (index === 16 && k3item.selected === true) {
           for (let i = 0; i < this.ertonghao.length; i++) {
@@ -874,21 +877,15 @@ export default {
           }
           this.con = this.dd.join(",");
         }
-        if(index === 15 || index === 16 || index === 17 || index === 33 || index === 34 || index === 35){
-          this.d[index] = [];
-          // k3item.selected = false;
-        }
       } else if (k3item.selected === false) {
         this.d.splice(index, 1, "");
-        this.dd = this.d.filter(function(n) {
-          return n;
-        });
+        this.dd = this.d.filter(function(n) {return n;});
         this.con = this.dd.join(",");
         this.zhu--;
       }
-      if (this.zhu === 0) {
-        this.zhu = 0;
-      }
+      // if (this.zhu === 0) {
+      //   this.zhu = 0;
+      // }
     },
     //和值-大小单双 +
     hezhidaxiaodanshuang(e, index, k3item) {
@@ -1172,13 +1169,14 @@ export default {
           formData.append("count", this.zhu1);
           formData.append("traceOrders[0].price", this.money);
           formData.append("traceOrders[0].seasonId", this.seasonId2);
-          formData.append("bonusType", 0);
+          formData.append("bounsType", 0);
           formData.append("traceWinStop", 0);
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.lotteryId);
           formData.append("amount", this.money * this.zhu1);
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config).then(res => {
+              console.log(res)
               if (res.data.message === "success") {
                 this.con1 = "";
                 setTimeout(() => {
@@ -1305,6 +1303,9 @@ export default {
       }
       return groupArr;
     }
+  },
+  components:{
+    pop
   },
   directives: {
     focus: {

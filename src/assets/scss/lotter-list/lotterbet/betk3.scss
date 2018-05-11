@@ -138,9 +138,14 @@
 }
 
 .betk3-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
     background: #317455;
+    overflow: hidden;
     >div {
+        height: 100%;
         & .betk3-content-top {
             display: flex;
             justify-content: space-between;
@@ -195,15 +200,17 @@
             }
         }
         & .betk3-content-foot {
-            padding: 20px 30px 0px;
+            padding: 20px 20px 0px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            overflow: hidden;
+            height: 100%;
             >p {
                 color: #caebda;
                 font-size: 12px;
                 width: 100%;
+                overflow-y: scroll;
                 & .k3remark {
                     color: #f0c930;
                 }
@@ -211,6 +218,7 @@
                     display: flex;
                     flex-wrap: wrap;
                     margin-top: 10px;
+                    margin-bottom: 140px;
                     & li {
                         display: flex;
                         flex-direction: column;
@@ -252,13 +260,21 @@
                     & li:nth-child(4n) {
                         margin-right: 0px;
                     }
-                     & li:nth-child(1),
-                     & li:nth-child(2),
-                     & li:nth-child(3),
-                     & li:nth-child(4){
-                        margin-bottom: 14px;
-                        border-bottom: 1px solid #22563F;
-                     }
+                }
+                & .hezhi {
+                  & li:nth-child(1),
+                  & li:nth-child(2),
+                  & li:nth-child(3),
+                  & li:nth-child(4) {
+                    margin-bottom: 14px;
+                    border: 1px solid #22563F;
+                  }
+                  & li.active:nth-child(1),
+                  & li.active:nth-child(2),
+                  & li.active:nth-child(3),
+                  & li.active:nth-child(4) {
+                      border: 1px solid #f4c829;
+                  }
                 }
             }
         }

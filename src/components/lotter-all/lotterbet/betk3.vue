@@ -103,25 +103,18 @@
 				<ul class="ertonghao" v-show="index === 1">
 					<li>
 						<ul>
-							<li v-for="(ertongh,indexer) in ertonghao" :key="indexer" @click="ertonghaoto($event,indexer,ertongh)">
+							<!-- <li v-for="(ertongh,indexer) in ertonghao" :key="indexer" @click="ertonghaoto($event,indexer,ertongh)">
 								<span :class="ertongh.selected ? 'active' : ''">
-									<!-- {{ertongh.title}} -->
+									{{ertongh.title}}
 									<a></a>
 									<a></a>
 									<a></a>
 								</span>
-							</li>
-							<!-- <li v-for="(k3item,index) in ertonghao" :key="index">
-								<span :class="item.selected ? 'active' : ''" v-for="(item,indexaa) in k3item.a" :key="item.id" @click="ertonghaooption($event,indexaa,item,index,k3item)">
-									<a></a>
-									<a></a>
-									<a></a>
-								</span>
-								<p :class="isclick.selected ? 'active' : ''" v-for="(isclick,indexbb) in k3item.a1" :key="indexbb" @click="ertonghaoalloption($event,indexbb,isclick,index,k3item)" ref="isclicka">
-									<a></a>
-									<a></a>
-								</p>
 							</li> -->
+              <li v-for="(item,index) in ertonghaos" :key="index">
+                <span v-for="(b,itemaa) in item.aaa" :key="itemaa" :class="b.choose ? 'active' : ''" @click="toertonghao(b,item,itemaa,index)"> {{ b.title}} </span>
+                <p v-for="tool in ertonghaox" :key="tool.id" @click="toolsCur(tool,item)">{{tool.name}}</p>
+              </li>
 						</ul>
 					</li>
 				</ul>
@@ -279,9 +272,22 @@ export default {
       dd1: [], //选中的号码的下标
       dd2: [], //选中的号码的下标
       hezhiitem: [], //和值时选中的号码的下标
+      ka: [], //选中的号码的下标
+      kb: [], //选中的号码的下标
+      kc: [], //选中的号码的下标
+      kd: [], //选中的号码的下标
+      ke: [], //选中的号码的下标
+      kf: [], //选中的号码的下标
+      an: '',
+      bn: '',
+      cn: '',
+      dn: '',
+      en: '',
+      fn: '',
       con: "",
       con1: "",
       con2: "",
+      con3: "",
       cons: "",
       playBonus: "", //玩法树
       // 单挑一骰
@@ -335,197 +341,62 @@ export default {
       // 二同号
       ertonghaos: [
         {
-          a: [
-            {
-              title: "112",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "113",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "114",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "115",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "116", rates: "赔率63.72", rate: "63.72", selected: false }
+          "aaa": [
+            {"title": "112","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "113","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "114","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "115","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "116","rates": "赔率63.72","rate": "63.72","choose": false }
           ],
-          a1: [
-            { title: "11", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
         },
         {
-          a: [
-            {
-              title: "221",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "223",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "224",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "225",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "226", rates: "赔率63.72", rate: "63.72", selected: false }
+          "aaa": [
+            {"title": "221","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "223","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "224","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "225","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "226","rates": "赔率63.72","rate": "63.72","choose": false }
           ],
-          a1: [
-            { title: "22", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
         },
         {
-          a: [
-            {
-              title: "331",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "332",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "334",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "335",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "336", rates: "赔率63.72", rate: "63.72", selected: false }
+          "aaa": [
+            {"title": "331","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "332","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "334","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "335","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "336","rates": "赔率63.72","rate": "63.72","choose": false }
           ],
-          a1: [
-            { title: "33", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
         },
         {
-          a: [
-            {
-              title: "441",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "442",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "443",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "445",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "446", rates: "赔率63.72", rate: "63.72", selected: false }
+          "aaa": [
+            {"title": "441","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "442","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "443","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "445","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "446","rates": "赔率63.72","rate": "63.72","choose": false }
           ],
-          a1: [
-            { title: "44", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
         },
         {
-          a: [
-            {
-              title: "551",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "552",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "553",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "554",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "556", rates: "赔率63.72", rate: "63.72", selected: false }
+          "aaa": [
+            {"title": "551","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "552","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "553","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "554","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "556","rates": "赔率63.72","rate": "63.72","choose": false }
           ],
-          a1: [
-            { title: "55", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
         },
         {
-          a: [
-            {
-              title: "661",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "662",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "663",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "664",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "665", rates: "赔率63.72", rate: "63.72", selected: false }
-          ],
-          a1: [
-            { title: "66", rates: "赔率63.72", rate: "63.72", selected: false }
+          "aaa": [
+            {"title": "661","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "662","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "663","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "664","rates": "赔率63.72","rate": "63.72","choose": false},
+            {"title": "665","rates": "赔率63.72","rate": "63.72","choose": false}
           ]
         }
+      ],
+      ertonghaox:[
+        {"title": "11","name":'quan'},
       ],
       // 二不同
       erbutong: [
@@ -538,30 +409,10 @@ export default {
       ],
       // 和值
       k3options: [
-        {
-          title: "大",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
-        {
-          title: "小",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
-        {
-          title: "单",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
-        {
-          title: "双",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
+        {title: "大",rates: "赔率1.998750",rate: "1.998750",selected: false},
+        {title: "小",rates: "赔率1.998750",rate: "1.998750",selected: false},
+        {title: "单",rates: "赔率1.998750",rate: "1.998750",selected: false},
+        {title: "双",rates: "赔率1.998750",rate: "1.998750",selected: false},
         { title: "04", rates: "赔率60.8400", rate: "60.8400", selected: false },
         { title: "05", rates: "赔率30.4200", rate: "30.4200", selected: false },
         { title: "06", rates: "赔率20.2800", rate: "20.2800", selected: false },
@@ -621,6 +472,90 @@ export default {
     this.geteServerTime(); //input显示当前时间
   },
   methods: {
+    toertonghao(b,item,indexa,index){
+      b.choose = !b.choose;
+      if(index === 0 && b.choose === true){
+        this.ka[indexa] = b.title;
+        this.dd = this.ka.filter(function(n) {return n;});
+        this.an = this.dd.join(',');
+        this.zhu ++
+      }else if(index === 0 && b.choose === false){
+        this.ka.splice(indexa, 1, "");
+        this.dd = this.ka.filter(function(n) {return n;});
+        this.an = this.dd.join(',');
+        this.zhu --
+      }
+      if(index === 1 && b.choose === true){
+        this.kb[indexa] = b.title;
+        this.dd = this.kb.filter(function(n) {return n;});
+        this.bn = this.dd.join(',');
+        this.zhu ++
+      }else if(index === 1 && b.choose === false){
+        this.kb.splice(indexa, 1, "");
+        this.dd = this.kb.filter(function(n) {return n;});
+        this.bn = this.dd.join(',');
+        this.zhu --
+      }
+      if(index === 2 && b.choose === true){
+        this.kc[indexa] = b.title;
+        this.dd = this.kc.filter(function(n) {return n;});
+        this.cn = this.dd.join(',');
+        this.zhu ++
+      }else if(index === 2 && b.choose === false){
+        this.kc.splice(indexa, 1, "");
+        this.dd = this.kc.filter(function(n) {return n;});
+        this.cn = this.dd.join(',');
+        this.zhu --
+      }
+      if(index === 3 && b.choose === true){
+        this.kd[indexa] = b.title;
+        this.dd = this.kd.filter(function(n) {return n;});
+        this.dn = this.dd.join(',');
+        this.zhu ++
+      }else if(index === 3 && b.choose === false){
+        this.kd.splice(indexa, 1, "");
+        this.dd = this.kd.filter(function(n) {return n;});
+        this.dn = this.dd.join(',');
+        this.zhu --
+      }
+      if(index === 4 && b.choose === true){
+        this.ke[indexa] = b.title;
+        this.dd = this.ke.filter(function(n) {return n;});
+        this.en = this.dd.join(',');
+        this.zhu ++
+      }else if(index === 4 && b.choose === false){
+        this.ke.splice(indexa, 1, "");
+        this.dd = this.ke.filter(function(n) {return n;});
+        this.en = this.dd.join(',');
+        this.zhu --
+      }
+      if(index === 5 && b.choose === true){
+        this.kf[indexa] = b.title;
+        this.dd = this.kf.filter(function(n) {return n;});
+        this.fn = this.dd.join(',');
+        this.zhu ++
+      }else if(index === 5 && b.choose === false){
+        this.kf.splice(indexa, 1, "");
+        this.dd = this.kf.filter(function(n) {return n;});
+        this.fn = this.dd.join(',');
+        this.zhu --
+      }
+      this.con = this.an+','+this.bn+','+this.cn+','+this.dn+','+this.en+','+this.fn;
+    },
+    //清
+    empty({ball}) {
+      ball.filter(list => {list.choose = false})
+    },
+    //全
+    full({ball}) {
+      this.empty({ball});
+      ball.filter(list => {list.choose = true});
+    },
+    toolsCur(tools, item){
+      if(Object.is(tools.name, 'quan')) {
+        this.full({ ball: item.aaa});
+      }
+    },
     //获取彩種當前獎期時間
     geteServerTime() {
       clearInterval(this.timer);
@@ -1073,12 +1008,26 @@ export default {
         this.money = 1;
       }
       // 二同号
-      for (let i = 0; i < this.ertonghao.length; i++) {
-        this.ertonghao[i].selected = false;
-        this.d = [];
-        this.con = "";
-        this.zhu = 0;
-        this.money = 1;
+      for (let i = 0; i < this.ertonghaos.length; i++) {
+        for (let j = 0; j < this.ertonghaos[i].aaa.length; j++) {
+          this.ertonghaos[i].aaa[j].choose =false;
+          this.d = [];
+          this.ka = [];
+          this.kb = [];
+          this.kc = [];
+          this.kd = [];
+          this.ke = [];
+          this.kf = [];
+          this.an = "";
+          this.bn = "";
+          this.cn = "";
+          this.dn = "";
+          this.en = "";
+          this.fn = "";
+          this.con = "";
+          this.zhu = 0;
+          this.money = 1;
+        }
       }
       // 二不同
       for (let i = 0; i < this.erbutong.length; i++) {

@@ -971,7 +971,7 @@
         formData.append('count', this.zhu);
         formData.append('traceOrders[0].price', this.money);
         formData.append('traceOrders[0].seasonId', this.seasonId2);
-        formData.append('bounsType', 0);
+        formData.append('bonusType', 0);
         formData.append('traceWinStop', 0);
         formData.append('isTrace', 0);
         formData.append('lotteryId', this.lotteryId);

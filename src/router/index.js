@@ -79,7 +79,7 @@ export default new Router({
         { path: "/verifyPwdSafe", name: 'verifyPwdSafe', component: resolve => require(['@/components/login/verifyPwdSafe.vue'], resolve), meta: { keepAlive: true } },
         { path: "/pk10", name: 'betbj10', component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve), meta: { keepAlive: true } },
         { path: "/betbjkl8", name: 'betbjkl8', component: resolve => require(['@/components/lotter-all/lotterbet/betbjkl8.vue'], resolve), meta: { keepAlive: true } },
-        { path: "/betetf", name: 'betetf', component: resolve => require(['@/components/lotter-all/lotterbet/betetf.vue'], resolve), meta: { keepAlive: true } },
+        { path: "/x11x5", name: 'betetf', component: resolve => require(['@/components/lotter-all/lotterbet/betetf.vue'], resolve), meta: { keepAlive: true } },
         { path: "/k3", name: 'betk3', component: resolve => require(['@/components/lotter-all/lotterbet/betk3.vue'], resolve), meta: { keepAlive: true } },
         { path: "/betlhc", name: 'betlhc', component: resolve => require(['@/components/lotter-all/lotterbet/betlhc.vue'], resolve), meta: { keepAlive: true } },
         { path: "/ssc", name: 'betssc', component: resolve => require(['@/components/lotter-all/lotterbet/betssc.vue'], resolve), meta: { keepAlive: true } },

@@ -2,7 +2,7 @@
   <div class="ssc">
     <ul>
       <router-link v-for="(item,index) in lotteryListssc" :key="index" tag="li" to="/ssc">
-        <img src="../../assets/img/one/zhssc.png" alt="images"/>
+        <img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
     </ul>
@@ -21,7 +21,7 @@ export default {
   methods:{
     lotteryssc(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
-        this.lotteryListssc = res.data.data.k3;
+        this.lotteryListssc = res.data.data.ssc;
       }).catch((error) => {
           console.log("No")
       })

@@ -1,8 +1,8 @@
 <template>
   <div class="etf">
     <ul>
-      <router-link v-for="(item,index) in lotteryListetf" :key="index" tag="li" to="">
-        <img src="../../assets/img/one/zhssc.png" alt="images"/>
+      <router-link v-for="(item,index) in lotteryListetf" :key="index" tag="li" to="/x11x5">
+        <img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
     </ul>
@@ -22,7 +22,6 @@ export default {
     lotteryetf(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
         this.lotteryListetf = res.data.data.x11x5;
-        // console.log(res)
       }).catch((error) => {
           console.log("No")
       })

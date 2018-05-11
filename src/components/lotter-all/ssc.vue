@@ -21,7 +21,7 @@ export default {
   methods:{
     lotteryssc(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
-        this.lotteryListssc = res.data.data.k3;
+        this.lotteryListssc = res.data.data.ssc;
       }).catch((error) => {
           console.log("No")
       })

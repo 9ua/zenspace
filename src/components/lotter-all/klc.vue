@@ -1,7 +1,7 @@
 <template>
   <div class="klc">
     <ul>
-      <router-link v-for="(item,index) in lotteryListklc" :key="index" tag="li" to="">
+      <router-link v-for="(item,index) in lotteryListklc" :key="index" tag="li" to="/pk10">
         <img src="../../assets/img/one/zhssc.png" alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
@@ -21,7 +21,7 @@ export default {
   methods:{
     lotteryklc(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
-        this.lotteryListklc = res.data.data.k3;
+        this.lotteryListklc = res.data.data.pk10;
       }).catch((error) => {
           console.log("No")
       })

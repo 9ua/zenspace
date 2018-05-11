@@ -6,6 +6,9 @@
         width: 100%;
         height: 46px;
         background: linear-gradient(to right, #f75f5b , #fead50);
+        position: fixed;
+        top: 0px;
+        z-index: 100;
         & i{
             position: absolute;
             left: 16px;
@@ -32,6 +35,7 @@
         }
     }
     & .mymsg-conter{
+        margin-top: 46px;
         height: 100%;
     }
 }

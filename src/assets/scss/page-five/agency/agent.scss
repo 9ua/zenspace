@@ -1,6 +1,5 @@
 .agent {
     background: #efeef4;
-    
     .agent-top {
         display: flex;
         justify-content: center;
@@ -9,6 +8,9 @@
         height: 46px;
         font-size: 20px;
         background: linear-gradient(to right, #f75f5b, #fead50);
+        position: fixed;
+        top:0px;
+        z-index: 100;
         & .dim {
             color: #fff;
             font-size: 16px;
@@ -48,6 +50,7 @@
 
     }
     & .agent-content {
+        margin-top:46px;
         height: 100%;
         background: #fff;
         & .agent-content-top {

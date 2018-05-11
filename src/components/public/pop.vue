@@ -6,9 +6,21 @@
           <li class="cont">
             <div class="contBox">
               <ul>
-                <li v-for="(num,index) in  nums" :key="index">
+                <li v-show="betshow">
                   {{content}}
                 </li>
+                <!-- <li v-show="zhu > 0">
+                  <div class="betk3-footer-top" v-show="zhu > 0">
+                    <div class="betk3-footer-tops">
+                      <p>当前选号</p><span>{{con}}</span>
+                    </div>
+                    <div class="betk3-footer-buttoms">
+                      <p>每注金额</p><input type="text" v-model="money"/>
+                      <span v-if="money === '' ">请输入要投注的金额</span>
+                      <span v-else>单注最高可中<p>{{navlist === 3 ? rates * money : rates * money  | keepTwoNum}}</p>元</span>
+                    </div>
+                  </div>
+                </li> -->
               </ul>
             </div>
           </li>
@@ -23,13 +35,13 @@ export default {
     return{
       show:true,
       title:'温馨提示！',
-      content:'内容',
+      // content:'投注成功！',
       nums:1,
     }
   },
   props: {
-    pops: {
-      type: Boolean
+    pop: {
+     type:String
     }
   },
 }

@@ -14,10 +14,10 @@
         background: black;
         color: #fff;
         & li {
-            width: 23.33%;
+            width: 18.33%;
         }
         & li:nth-child(2) {
-            width: 66%;
+            width: 71%;
             text-align: center;
             font-size: 12px;
             display: flex;
@@ -157,8 +157,12 @@
 }
 
 .betbj10-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   background: #317455;
+  overflow: hidden;
   >div {
     & .betk3-content-top {
       display: flex;
@@ -275,9 +279,13 @@
     & .betk3-content-foot {
       padding: 4px 16px 0px;
       color: #caebda;
+      height: 100%;
       >div {
+        height: 100%;
+        overflow-y: hidden;
         >.betssc-list-box {
           width: 100%;
+          padding-bottom:120px; 
           & b {
             & i {
               color: #f0c930;
@@ -286,6 +294,7 @@
           }
           & .fushi {
             margin-top: 10px;
+            margin-bottom: 140px;
             & li {
               display: flex;
               flex-direction: column;

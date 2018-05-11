@@ -14,10 +14,10 @@
         background: black;
         color: #fff;
         & li {
-            width: 33.33%;
+            width: 18.33%;
         }
         & li:nth-child(2) {
-            width: 56%;
+            width: 71%;
             text-align: center;
             font-size: 12px;
             display: flex;
@@ -267,12 +267,13 @@
         & .betk3-content-foot {
             padding: 4px 16px 0px;
             color: #caebda;
+            height: 100%;
             >div {
-                overflow: scroll;
-
+                overflow-y: scroll;
+                height: 100%;
                 >.betssc-list-box {
                     width: 100%;
-                    padding-bottom: 200px;
+                    padding-bottom: 130px;
                     & b {
                         & i {
                             color: #f0c930;

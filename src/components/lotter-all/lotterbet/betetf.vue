@@ -139,7 +139,6 @@
     </van-popup>
     <van-popup class="sscpop" v-model="showpop">{{content}}</van-popup>
     <maintain></maintain>
-    <!-- <pop></pop> -->
   </div>
 </template>
 <script>

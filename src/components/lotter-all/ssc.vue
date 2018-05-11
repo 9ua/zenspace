@@ -2,7 +2,7 @@
   <div class="ssc">
     <ul>
       <router-link v-for="(item,index) in lotteryListssc" :key="index" tag="li" to="/ssc">
-        <img src="../../assets/img/one/zhssc.png" alt="images"/>
+        <img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
     </ul>

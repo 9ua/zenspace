@@ -41,7 +41,7 @@
 	      this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
 	      	this.lotteryList = res.data.data.hotLotterys;
 	      	this.bannerList = res.data.data.banners;
-          // console.log(res)
+          console.log(res)
 	      }).catch((error) => {
 	      		console.log("No")
 	      })

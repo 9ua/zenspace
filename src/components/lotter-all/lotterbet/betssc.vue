@@ -1254,7 +1254,6 @@
       //四星-組選12
       // bets = ["0,1,3", "1,2,3"]
       getzuCount12(bets) {
-        console.log("bets: ", bets)
         if(bets.length != 2 || bets[0] === '' || bets[1] === '') {
           return 0;
         }
@@ -1461,7 +1460,6 @@
               this.snumView.push(this.splayers[h][i].numView)
             }
           }
-          console.log(this.playGroups, "玩法树");
         }).catch((error) => {
           console.log("玩法树No");
         })

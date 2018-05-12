@@ -94,8 +94,6 @@ export default {
 				for(let i=0;i<res.data.data.bankUserList.length;i++) {
 					this.payway.push({name:"["+res.data.data.bankUserList[i].id+"]  "+res.data.data.bankUserList[i].bankTitle,id:res.data.data.bankUserList[i].id,callback: this.onClick});
 				};
-				console.log(this.withdrawInformation);
-				console.log(res.data.data.bankUserList);
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
@@ -119,8 +117,6 @@ export default {
             formData.append('bankUserId',this.bankUserId);
             formData.append('securityCode',md5(this.securityCode));            
             this.$axios.post(this.$store.state.url+'api/proxy/setWithdraw', formData,config).then((res) => {
-				console.log(res.data.data.message);
-                console.log(res.data.code);
                 if (res.data.code === 1){
                     this.content = res.data.data.message;
                     this.show3 = true;

@@ -110,18 +110,15 @@ export default {
       this.timeline = item.name;
       this.betweenType = item.Type;
       this.show = ! this.show;
-      console.log(this.betweenType);
       this.getTradeList();
     },
     print(index,title){
       this.accountChangeType = this.pagelist[index].Type;
-      console.log(this.pagelist[index].Type);
       this.getTradeList();
     },
     getTradeList(){
         this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:2,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
             this.tradelist = res.data.data.list;
-            console.log(res.data.data.list);
 			}).catch((error) => {
                 console.log(error);
                     console.log("获取彩種ratio ERROR");

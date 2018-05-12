@@ -100,12 +100,10 @@ export default {
             this.receiveAddress = a.receiveAddress;
             this.checkCode = a.checkCode;
             this.show2 = !this.show2;
-                console.log(a);
             this.selected = a;
         },
 		getRechargeList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getRechargeList',{params:{start:0,limit:100}}).then((res) => {
-                console.log(res.data.data);
                 this.rechargeList = res.data.data;
 
 			}).catch((error) => {

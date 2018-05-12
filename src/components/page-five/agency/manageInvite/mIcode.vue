@@ -79,32 +79,25 @@ export default {
       }
     },
   methods: {
-    print(item){
-        console.log(item);
-    },
     select(a) {
         this.show = !this.show;
-            console.log(a);
         this.selected = a;
       },
     select2() {
         this.show2 = !this.show2;
       },
     typechange() {
-        console.log(this.usertype);
         this.getInviteList();
         },
     getInviteList(){
         this.$http.get(this.$store.state.url+'api/agent/inviteCode',{params:{type:this.usertype}}).then((res) => {
                 this.invitelist = res.data.data;
-                console.log(this.invitelist);
 			}).catch((error) => {
 					console.log("获取邀请码列表Err");
 		});
     },
     setrebet(b){
         this.rebateratio = b.target.value;
-        console.log(this.rebateratio)
     },
     delInviteCode(){
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};

@@ -127,19 +127,12 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
       this.getUserData();
     },
     methods:{
-      //手机绑定
-      toMobile(){
-        // if(this.mobile === ''){
-        //   this.$router.push({path:'/setmobile'});
-        // }
-      },
       //生日选择
       toBirthday(value){
         this.birthday = value;
         this.$store.state.birthday = this.birthday;
         setStore('birthday',this.$store.state.birthday)
         this.saveUserData();
-        console.log(value)
       },
       //性别选择
       selecteds(e){
@@ -164,7 +157,6 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
           formData.append('sex', this.sex);
           formData.append('birthday', this.birthday);
           this.$axios.post(this.$store.state.url+'api/userCenter/saveUserData', formData, config).then((res) => {
-            console.log(res,'提交个人信息');
           }).catch((error) => {
           		console.log("用户信息保存失败")
           })
@@ -178,8 +170,6 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
           this.email = res.data.data.email;
           this.sex = res.data.data.sex;
           this.birthday = res.data.data.birthday;
-
-          console.log(this.image,this.nickname,this.mobile,this.email,this.sex,this.birthday,"获取个人信息");
 				}).catch((error) => {
 					console.log("获取个人信息No");
 				})

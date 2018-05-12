@@ -104,9 +104,7 @@
             formData.append('account',this.username);
             formData.append('password',this.password1);
             formData.append('code',this.verification);
-                console.log(formData,"post資料包");
             this.$axios.post(this.$store.state.url+'api/user/register', formData,config).then((res) => {
-                console.log(res,"post的response");
                 if(res.data.code === 1) {
                   this.content = '註冊完成! 請使用新帳號密碼登入';
                   this.popdone = true;

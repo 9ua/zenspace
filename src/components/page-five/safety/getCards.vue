@@ -156,11 +156,9 @@ export default {
             this.niceName = a.niceName;
             this.card = a.card;
             this.show3 = !this.show3;
-                console.log(a);
         },
     goCreate(){
             this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
-                    console.log(res.data.data.securityCoe);
 					this.securityCoe = res.data.data.securityCoe;
 					if(this.securityCoe !== 1){
                         Message.error({
@@ -184,7 +182,6 @@ export default {
 		},
     getBankNameList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
-				console.log(res.data.data.length);
 				for(let i=0;i<res.data.data.length;i++) {
 					if(i >= 3){
 						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
@@ -197,7 +194,6 @@ export default {
     getBankUserList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankUserList').then((res) => {
                     this.bankUserList = res.data.data;
-                    console.log(this.bankUserList);
                 if (res.data.data.length === 0) {
                     
                     this.content = '您尚未绑定银行卡，一共可以绑定 5 张银行卡。';
@@ -221,8 +217,6 @@ export default {
             formData.append('niceName',this.niceName);
             formData.append('securityCode',md5(this.securityCode));            
             this.$axios.post(this.$store.state.url+'api/proxy/setBankUser', formData,config).then((res) => {
-				console.log(res.data.data.message);
-                console.log(res.data.code);
                 if (res.data.code === 1){
                     this.content2 = res.data.data.message;
                     this.show5 = true;

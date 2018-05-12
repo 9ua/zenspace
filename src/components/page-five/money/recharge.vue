@@ -123,18 +123,14 @@ export default {
 		getBankNameList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
 				this.bankList = res.data.data;
-				console.log(res.data.data.length);
 				for(let i=0;i<res.data.data.length;i++) {
 					if(i >= 3){
 						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
 					};
 				};
-				console.log(this.payway);
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
-				console.log(this.bankList);
-			
 		},
 		goBack(){
 			this.$router.push({path:'/five'});
@@ -143,7 +139,6 @@ export default {
 			this.selectBank = item.name;
 			this.bankNameId = item.id;
 			this.show1 = ! this.show1;
-			console.log(this.betweenType);
 		},
 		sendReq(){
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
@@ -152,29 +147,19 @@ export default {
             formData.append('chargeamount',this.chargeamount);
             formData.append('niceName',this.niceName);
             this.$axios.post(this.$store.state.url+'api/proxy/setPayApplication', formData,config).then((res) => {
-				console.log(res);
 				if(res.data.code === 1) {
-					console.log(res.data.data.receiveAddress);
 					this.receiveAddress = res.data.data.receiveAddress;
-					console.log(res.data.data.receiveNickName);
 					this.receiveNickName = res.data.data.receiveNickName;
-					console.log(res.data.data.receiveCard);
 					this.receiveCard = res.data.data.receiveCard;
-					console.log(res.data.data.receiveBankName);
 					this.receiveBankName = res.data.data.receiveBankName;
 					this.checkCode = res.data.data.checkCode;
 					this.show2 = !this.show2;
 					this.show4 = !this.show4;
 				} else if ( res.data.code === 0 ) {
-					console.log(res.data.data.message);
-					console.log(res.data.code);
 					this.content = res.data.data.message;
 					this.show2 = !this.show2;
 					this.show3 = !this.show3;
 				} else {
-					console.log(res.data.content);
-					console.log(res.data.code);
-					
 					this.content = res.data.content;
 					this.show2 = !this.show2;
 					this.show3 = !this.show3;

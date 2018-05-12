@@ -111,8 +111,6 @@
     },
     methods:{
           checkType(){
-              console.log(this.$store.state.userType);
-              console.log(this.$store.state.loginStatus);
               if (this.$store.state.userType == 1){
                 this.fiveNav[2].viewC = true;
               }
@@ -120,9 +118,7 @@
           },
         //獲取安全中心狀態
           safeCenter(){
-            console.log(5566);
                 this.$axios.get(this.$store.state.url+'api/userCenter/getSecurityCenterStatus').then((res) => {
-                        console.log(res.data.data.securityCoe ,"-----",res.data.data.bankUserFlag);
               this.securityCoe = res.data.data.securityCoe;
               this.bankUserFlag = res.data.data.bankUserFlag;
               if(this.securityCoe == 0 && this.bankUserFlag == 0){

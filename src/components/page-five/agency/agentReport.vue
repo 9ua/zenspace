@@ -140,11 +140,9 @@ export default {
 			this.$http.get(this.$store.state.url+'api/proxy/getUserTeam',{params:{account:this.$store.state.Globalusername,dateFlag:this.dateFlag}}).then((res) => {
         
         this.userTeam = res.data.data;
-        console.log(this.userTeam);
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
-				console.log(this.bankList);
 		},
   },
 };

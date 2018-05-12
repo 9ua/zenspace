@@ -994,7 +994,6 @@
               }, 1000);
             }, 600);
           }
-          console.log(res.data.data)
         }).catch((error) => {
           console.log("No");
         })
@@ -1057,7 +1056,6 @@
         this.navlistf = indexb;
         this.displayBonus = items.displayBonus;
         this.iscreat();
-        console.log(this.displayBonus)
       },
       //继续投注
       betsucc() {
@@ -1142,7 +1140,6 @@
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
             this.seasonId = this.seasonId2;
-            // this.seasonId = this.seasonId2.substring(4).split("-").join("");
             this.today = res.data.data.restSeconds;
             this.initSetTimeout();
           }

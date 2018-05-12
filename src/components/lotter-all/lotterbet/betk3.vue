@@ -111,17 +111,6 @@
 									<a></a> -->
 								</span>
 							</li>
-							<!-- <li v-for="(k3item,index) in ertonghao" :key="index">
-								<span :class="item.selected ? 'active' : ''" v-for="(item,indexaa) in k3item.a" :key="item.id" @click="ertonghaooption($event,indexaa,item,index,k3item)">
-									<a></a>
-									<a></a>
-									<a></a>
-								</span>
-								<p :class="isclick.selected ? 'active' : ''" v-for="(isclick,indexbb) in k3item.a1" :key="indexbb" @click="ertonghaoalloption($event,indexbb,isclick,index,k3item)" ref="isclicka">
-									<a></a>
-									<a></a>
-								</p>
-							</li> -->
 						</ul>
 					</li>
 				</ul>
@@ -905,7 +894,6 @@ export default {
           return n;
         });
         this.con = this.dd.join(",");
-        console.log(this.hezhiitem[index], "abc");
       }
     },
     //和值-大小单双 +
@@ -1302,7 +1290,6 @@ export default {
                   }, 1300);
                 }, 600);
               }
-              console.log(this.playId);
             })
             .catch(error => {
               console.log("No");

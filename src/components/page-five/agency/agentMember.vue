@@ -74,17 +74,14 @@ export default {
   methods: {
       select(a) {
         this.show2 = !this.show2;
-            console.log(a);
         this.selected = a;
       },
     getUnderUserList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getUnderUserList',{params:{account:this.$store.state.Globalusername}}).then((res) => {
         this.underUserList = res.data.data;
-        console.log(this.underUserList);
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
-				console.log(this.bankList);
 		},
   },
 };

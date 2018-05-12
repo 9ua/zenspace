@@ -95,7 +95,6 @@ export default {
           name: '昨天',
           Type:2,
           callback: this.onClick,
-        //   subname: '描述信息'
         },
         {
           name: '七天',
@@ -114,25 +113,21 @@ export default {
   methods: {
      select(a) {
         this.show2 = !this.show2;
-            console.log(a);
         this.selected = a;
       },
     onClick(item){
       this.timeline = item.name;
       this.betweenType = item.Type;
       this.show = ! this.show;
-      console.log(this.betweenType);
       this.getTradeList();
     },
     print(index,title){
       this.accountChangeType = this.pagelist[index].Type;
-      console.log(this.pagelist[index].Type);
       this.getTradeList();
     },
     getTradeList(){
         this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:0,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
             this.tradelist = res.data.data.list;
-            console.log(res.data.data.list);
 			}).catch((error) => {
                 console.log(error);
                     console.log("获取彩種ratio ERROR");

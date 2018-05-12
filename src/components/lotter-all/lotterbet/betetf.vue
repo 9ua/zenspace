@@ -1232,7 +1232,6 @@ import pop from '../../public/pop'
       //四星-組選12
       // bets = ["0,1,3", "1,2,3"]
       getzuCount12(bets) {
-        console.log("bets: ", bets)
         if(bets.length != 2 || bets[0] === '' || bets[1] === '') {
           return 0;
         }

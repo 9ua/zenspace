@@ -39,34 +39,27 @@ export default {
         betlist:[],
         validtime:0,
         extaddress:'',
-        
     }
   },
   mounted(){
-      console.log(this.usertype);
       this.createbetlist(); 
   },
   methods: {
     createbetlist(){
         this.$http.get(this.$store.state.url+'api/agent/getExtQuota').then((res) => {
-            console.log(res);
             this.highbet = res.data.data.rebateRatio;
             for(let i = res.data.data.rebateRatio*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};
-                console.log(this.betlist)
                 return this.betlist;
-                    console.log(res.data.data.rebateRatio);
 			}).catch((error) => {
                 console.log(error);
                     console.log("获取彩種ratio ERROR");
                     this.highbet = 0;
             for(let i = this.highbet*10; i >= 0 ; i = i - 1 ){this.betlist.push(i/10)};
-                console.log(this.betlist)
                 return this.betlist;
 		});
     },
     setrebet(b){
         this.rebateratio = b.target.value;
-        console.log(this.rebateratio)
     },
     getInviteCode(){
         	let _this = this;
@@ -76,11 +69,8 @@ export default {
             formData.append('rebateratio',Number(this.rebateratio));
             formData.append('validtime',this.validtime);
             formData.append('extaddress','123');
-                console.log(formData);
             this.$axios.post(this.$store.state.url+'api/agent/createInviteCode', formData,config).then((res) => {
-                console.log(res.data.data.code);
             this.$router.push({path:'/manageInvite/mIcode'});
-            
           }).catch((error) => {
           		console.log("No")
           });   

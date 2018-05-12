@@ -1168,10 +1168,15 @@
           }
           this.countDown = hours + ":" + minutes + ":" + seconds;
           if(this.today < 1) {
-            this.geteServerTime();
             clearInterval(this.timer);
+            this.timesUp();
           }
         }, 1000);
+      },
+      //時間到彈窗
+      timesUp() {
+        this.showTimesUp = !this.showTimesUp;
+        this.geteServerTime();
       },
     },
     directives: {

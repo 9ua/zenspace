@@ -320,9 +320,9 @@ export default {
         { title: "116", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "226", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "336", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-11", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-22", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-33", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "11", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "22", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "33", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "441", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "551", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "661", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -338,9 +338,9 @@ export default {
         { title: "446", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "556", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "665", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-44", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-55", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-66", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "44", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "55", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "66", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
       // 二同号
       ertonghaos: [
@@ -476,6 +476,164 @@ export default {
     this.geteServerTime(); //input显示当前时间
   },
   methods: {
+    toertonghao(b,item,indexa,index){
+      b.choose = !b.choose;
+      if(index === 0 && b.choose === true){
+        this.ka[indexa] = b.title;
+        this.dd = this.ka.filter(function(n) {return n;});
+        this.an = this.dd.join(',')+',';
+        this.zhu1 ++
+      }else if(index === 0 && b.choose === false){
+        this.ka.splice(indexa, 1, "");
+        this.dd = this.ka.filter(function(n) {return n;});
+        this.an = this.dd.join(',');
+        this.zhu1 --
+      }
+
+      if(index === 1 && b.choose === true){
+        this.kb[indexa] = b.title;
+        this.dd = this.kb.filter(function(n) {return n;});
+        this.bn = this.dd.join(',')+',';
+        this.zhu2 ++
+      }else if(index === 1 && b.choose === false){
+        this.kb.splice(indexa, 1, "");
+        this.dd = this.kb.filter(function(n) {return n;});
+        this.bn = this.dd.join(',');
+        this.zhu2 --
+      }
+
+      if(index === 2 && b.choose === true){
+        this.kc[indexa] = b.title;
+        this.dd = this.kc.filter(function(n) {return n;});
+        this.cn = this.dd.join(',')+',';
+        this.zhu ++
+      }else if(index === 2 && b.choose === false){
+        this.kc.splice(indexa, 1, "");
+        this.dd = this.kc.filter(function(n) {return n;});
+        this.cn = this.dd.join(',');
+        this.zhu --
+      }
+
+      if(index === 3 && b.choose === true){
+        this.kd[indexa] = b.title;
+        this.dd = this.kd.filter(function(n) {return n;});
+        this.dn = this.dd.join(',')+',';
+        this.zhu ++
+      }else if(index === 3 && b.choose === false){
+        this.kd.splice(indexa, 1, "");
+        this.dd = this.kd.filter(function(n) {return n;});
+        this.dn = this.dd.join(',');
+        this.zhu --
+      }
+
+      if(index === 4 && b.choose === true){
+        this.ke[indexa] = b.title;
+        this.dd = this.ke.filter(function(n) {return n;});
+        this.en = this.dd.join(',')+',';
+        this.zhu ++
+      }else if(index === 4 && b.choose === false){
+        this.ke.splice(indexa, 1, "");
+        this.dd = this.ke.filter(function(n) {return n;});
+        this.en = this.dd.join(',');
+        this.zhu --
+      }
+
+      if(index === 5 && b.choose === true){
+        this.kf[indexa] = b.title;
+        this.dd = this.kf.filter(function(n) {return n;});
+        this.fn = this.dd.join(',');
+        this.zhu ++
+      }else if(index === 5 && b.choose === false){
+        this.kf.splice(indexa, 1, "");
+        this.dd = this.kf.filter(function(n) {return n;});
+        this.fn = this.dd.join(',');
+        this.zhu --
+      }
+      this.con = this.an+this.bn+this.cn+this.dn+this.en+this.fn;
+      this.zhu = this.zhu1+this.zhu2+this.zhu3+this.zhu4+this.zhu5+this.zhu6;
+    },
+    //清
+    empty({ball}) {
+      ball.filter(list => {list.choose = false})
+    },
+    //全
+    full({ball}) {
+      // this.empty({ball});
+      ball.filter(list => {list.choose = true});
+    },
+    toolsCur(tools, item,index){
+      if(Object.is(tools.name, 'quan')) {
+        if(index === 0 && tools.choose === false){
+          this.full({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu1 = 5;
+          // this.an = '112,113,114,115,116';
+          console.log(this.an)
+        }else if(index === 0 && tools.choose === true){
+          this.empty({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu1 =0;
+          this.an = '';
+        }
+        if(index === 1 && tools.choose === false){
+          this.full({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu2 =5;
+          // this.bn = '221,223,224,225,226';
+        }else if(index === 1 && tools.choose === true){
+          this.empty({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu2 =0;
+          this.bn = '';
+        }
+        if(index === 2 && tools.choose === false){
+          this.full({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu3 =5;
+          this.cn = '331,332,334,335,336';
+        }else if(index === 2 && tools.choose === true){
+          this.empty({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu3 =0;
+          this.cn = '';
+        }
+        if(index === 3 && tools.choose === false){
+          this.full({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu4 =5;
+          this.dn = '441,442,443,445,446';
+        }else if(index === 3 && tools.choose === true){
+          this.empty({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu4 =0;
+          this.dn = '';
+        }
+        if(index === 4 && tools.choose === false){
+          this.full({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu5 =5;
+          this.en = '551,552,553,554,556';
+        }else if(index === 4 && tools.choose === true){
+          this.empty({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu5 =0;
+          this.en = '';
+        }
+        if(index === 5 && tools.choose === false){
+          this.full({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu6 =5;
+          this.fn = '661,662,663,664,665'
+        }else if(index === 5 && tools.choose === true){
+          this.empty({ ball: item.aaa});
+          tools.choose = !tools.choose;
+          this.zhu6 =0;
+          this.fn ='';
+        }
+        this.zhu = this.zhu1+this.zhu2+this.zhu3+this.zhu4+this.zhu5+this.zhu6;
+        this.con = this.an+this.bn+this.cn+this.dn+this.en+this.fn;
+      }
+    },
     //获取彩種當前獎期時間
     geteServerTime() {
       clearInterval(this.timer);
@@ -586,6 +744,8 @@ export default {
       this.geteServerTime();
       this.iscreat();
       this.getPlayTree();
+      this.$router.push({path:'k3',query:{id:this.lotteryId}})
+      console.log(this.lotteryId)
     },
     //三同号全/反选
     tosantonghao() {
@@ -601,95 +761,9 @@ export default {
         }
       }
     },
-    //二同複選xx
-    onClickStan(e){
-      //同時被選取時 清空
-      if (this.ertonghao[0].selected === true && this.ertonghao[3].selected === true && this.ertonghao[6].selected === true && this.ertonghao[9].selected === true && this.ertonghao[12].selected === true) {
-        for (let i=0;i<15;i=i+3) {
-            this.ertonghaoto(e, i,this.ertonghao[i]);
-        }
-      } else {  //有缺項時 該列全選
-          for (let i=0;i<15;i=i+3) {
-            if (this.ertonghao[i].selected === false){
-                this.ertonghaoto(e, i,this.ertonghao[i]);
-            }
-          }
-      }
-    },
-    onClickStan2(e){
-      //同時被選取時 清空
-      if (this.ertonghao[1].selected === true && this.ertonghao[4].selected === true && this.ertonghao[7].selected === true && this.ertonghao[10].selected === true && this.ertonghao[13].selected === true) {
-        for (let i=1;i<16;i=i+3) {
-            this.ertonghaoto(e, i,this.ertonghao[i]);
-        }
-      } else {  //有缺項時 該列全選
-          for (let i=1;i<16;i=i+3) {
-            if (this.ertonghao[i].selected === false){
-                this.ertonghaoto(e, i,this.ertonghao[i]);
-            }
-          }
-      }
-    },
-    onClickStan3(e){
-      //同時被選取時 清空
-      if (this.ertonghao[2].selected === true && this.ertonghao[5].selected === true && this.ertonghao[8].selected === true && this.ertonghao[11].selected === true && this.ertonghao[14].selected === true) {
-        for (let i=2;i<17;i=i+3) {
-            this.ertonghaoto(e, i,this.ertonghao[i]);
-        }
-      } else {  //有缺項時 該列全選
-          for (let i=2;i<17;i=i+3) {
-            if (this.ertonghao[i].selected === false){
-                this.ertonghaoto(e, i,this.ertonghao[i]);
-            }
-          }
-      }
-    },
-    onClickStan4(e){
-      //同時被選取時 清空
-      if (this.ertonghao[18].selected === true && this.ertonghao[21].selected === true && this.ertonghao[24].selected === true && this.ertonghao[27].selected === true && this.ertonghao[30].selected === true) {
-        for (let i=18;i<33;i=i+3) {
-            this.ertonghaoto(e, i,this.ertonghao[i]);
-        }
-      } else {  //有缺項時 該列全選
-          for (let i=18;i<33;i=i+3) {
-            if (this.ertonghao[i].selected === false){
-                this.ertonghaoto(e, i,this.ertonghao[i]);
-            }
-          }
-      }
-    },
-    onClickStan5(e){
-      //同時被選取時 清空
-      if (this.ertonghao[19].selected === true && this.ertonghao[22].selected === true && this.ertonghao[25].selected === true && this.ertonghao[28].selected === true && this.ertonghao[31].selected === true) {
-        for (let i=19;i<34;i=i+3) {
-            this.ertonghaoto(e, i,this.ertonghao[i]);
-        }
-      } else {  //有缺項時 該列全選
-          for (let i=19;i<34;i=i+3) {
-            if (this.ertonghao[i].selected === false){
-                this.ertonghaoto(e, i,this.ertonghao[i]);
-            }
-          }
-      }
-    },
-    onClickStan6(e){
-      //同時被選取時 清空
-      if (this.ertonghao[20].selected === true && this.ertonghao[23].selected === true && this.ertonghao[26].selected === true && this.ertonghao[29].selected === true && this.ertonghao[32].selected === true) {
-        for (let i=20;i<35;i=i+3) {
-            this.ertonghaoto(e, i,this.ertonghao[i]);
-        }
-      } else {  //有缺項時 該列全選
-          for (let i=20;i<35;i=i+3) {
-            if (this.ertonghao[i].selected === false){
-                this.ertonghaoto(e, i,this.ertonghao[i]);
-            }
-          }
-      }
-    },
     //二同号
-    ertonghaoto(e, index, k3item) {
+    ertonghaoto(e, index, k3item){
       k3item.selected = !k3item.selected;
-      //取余==0
       if (k3item.selected === true && index !== 15 && index !== 16 && index !== 17 && index !== 33 && index !== 34 && index !== 35) {
         this.d[index] = k3item.title;
         this.dd = this.d.filter(function(n) {return n;});
@@ -700,31 +774,178 @@ export default {
         this.dd = this.d.filter(function(n) {return n;});
         this.con = this.dd.join(",")+this.an+this.bn+this.cn+this.dn+this.en+this.fn;
         this.zhu--;
-      } 
-      if ( index === 15) {
-        k3item.selected = !k3item.selected;
-        this.onClickStan(e);
       }
-      if ( index === 16) {
-        k3item.selected = !k3item.selected;
-        this.onClickStan2(e);
+    },
+
+    ertonghaobutjia(e, index, k3item){
+      for (let i = 0; i < this.ertonghao.length; i++) {
+        if (i % 3 === 0 && i < 15) {
+          this.ertonghao[i].selected = true;
+          this.ka[i] = this.ertonghao[i].title;
+          this.dd = this.ka.filter(function(n) {return n;});
+          this.an = this.dd.join(",");
+          this.zhu1 = 5;
+        }
       }
-      if ( index === 17) {
-        k3item.selected = !k3item.selected;
-        this.onClickStan3(e);
+    },
+
+
+
+    ertonghaotoxxx(e, index, k3item) {
+      k3item.selected = !k3item.selected;
+      if (k3item.selected === true && index !== 15 && index !== 16 && index !== 17 && index !== 33 && index !== 34 && index !== 35) {
+        this.d[index] = k3item.title;
+        this.dd = this.d.filter(function(n) {return n;});
+        this.con = this.an+this.bn+this.cn+this.dn+this.en+this.fn+this.dd.join(",");
+        this.zhu ++;
+      }else if (k3item.selected === false && index !== 15 && index !== 16 && index !== 17 && index !== 33 && index !== 34 && index !== 35) {
+        this.d.splice(index, 1, "");
+        this.dd = this.d.filter(function(n) {return n;});
+        this.con = this.dd.join(",")+this.an+this.bn+this.cn+this.dn+this.en+this.fn;
+        this.zhu--;
       }
-      if ( index === 33) {
-        k3item.selected = !k3item.selected;
-        this.onClickStan4(e);
-      }
-      if ( index === 34) {
-        k3item.selected = !k3item.selected;
-        this.onClickStan5(e);
-      }
-      if ( index === 35) {
-        k3item.selected = !k3item.selected;
-        this.onClickStan6(e);
-      }
+      if (index === 15 || index === 16 || index === 17 || index === 33 || index === 34 || index === 35) {
+        //取余==0
+        if (index === 15 && k3item.selected === true) {
+          for (let i = 0; i < this.ertonghao.length; i++) {
+            if (i % 3 === 0 && i < 15) {
+              this.ertonghao[i].selected = true;
+              this.ka[i] = this.ertonghao[i].title;
+              this.dd = this.ka.filter(function(n) {return n;});
+              this.an = this.dd.join(",");
+              this.zhu1 = 5;
+            }
+          }
+        }
+        if (index === 15 && k3item.selected === false) {
+          for (let i = 0; i < this.ertonghao.length; i++) {
+            if (i % 3 === 0 && i < 15) {
+              this.ertonghao[i].selected = false;
+              this.ka=[];
+              this.dd = this.ka.filter(function(n) {return n;});
+              this.an = '';
+              this.zhu1 = 0;
+            }
+          }
+        }
+        //取余==1
+        if (index === 16 && k3item.selected === true) {
+          for (let i = 0; i < this.ertonghao.length; i++) {
+            if (i % 3 === 1 && i < 16) {
+              this.ertonghao[i].selected = true;
+              this.kb[i] = this.ertonghao[i].title;
+              this.dd = this.kb.filter(function(n) {return n;});
+              this.bn = this.dd.join(",");
+              this.zhu2 = 5;
+            }
+          }
+        }
+        if (index === 16 && k3item.selected === false) {
+          for (let i = 0; i < this.ertonghao.length; i++) {
+            if (i % 3 === 1 && i < 16) {
+              this.ertonghao[i].selected = false;
+              this.kb=[];
+              this.dd = this.kb.filter(function(n) {return n;});
+              this.bn = '';
+              this.zhu2 = 0;
+            }
+          }
+        }
+        //取余==2
+        if (index === 17 && k3item.selected === true) {
+          for (let i = 0; i < this.ertonghao.length; i++) {
+            if (i % 3 === 2 && i < 17) {
+              this.ertonghao[i].selected = true;
+              this.kc[i] = this.ertonghao[i].title;
+              this.dd = this.kc.filter(function(n) {return n;});
+              this.cn = this.dd.join(',');
+              this.zhu3 =5;
+            }
+          }
+        }
+        if (index === 17 && k3item.selected === false) {
+          for (let i = 0; i < this.ertonghao.length; i++) {
+            if (i % 3 === 2 && i < 17) {
+              this.ertonghao[i].selected = false;
+              this.kc=[];
+              this.dd = this.kc.filter(function(n) {return n;});
+              this.cn = '';
+              this.zhu3 = 0;
+            }
+          }
+        }
+        //取余==0
+        if (index === 33 && k3item.selected === true) {
+          for (let j = 0; j < this.ertonghao.length; j++) {
+            if (j % 3 === 0 && j > 17 && j < 33) {
+              this.ertonghao[j].selected = true;
+              this.kd[j] = this.ertonghao[j].title;
+              this.dd = this.kd.filter(function(n) {return n;});
+              this.dn = this.dd.join(',');
+              this.zhu4 = 5;
+            }
+          }
+        }
+        if (index === 33 && k3item.selected === false) {
+          for (let j = 0; j < this.ertonghao.length; j++) {
+            if (j % 3 === 0 && j > 17 && j < 33) {
+              this.ertonghao[j].selected = false;
+              this.kd=[];
+              this.dd = this.kd.filter(function(n) {return n;});
+              this.dn = '';
+              this.zhu4 = 0;
+            }
+          }
+        }
+        //取余==1
+        if (index === 34 && k3item.selected === true) {
+          for (let j = 0; j < this.ertonghao.length; j++) {
+            if (j % 3 === 1 && j > 17 && j < 34) {
+              this.ertonghao[j].selected = true;
+              this.ke[j] = this.ertonghao[j].title;
+              this.dd = this.ke.filter(function(n) {return n;});
+              this.en = this.dd.join(',');
+              this.zhu5 = 5;
+            }
+          }
+        }
+        if (index === 34 && k3item.selected === false) {
+          for (let j = 0; j < this.ertonghao.length; j++) {
+            if (j % 3 === 1 && j > 17 && j < 34) {
+              this.ertonghao[j].selected = false;
+              this.ke=[];
+              this.dd = this.ke.filter(function(n) {return n;});
+              this.en = '';
+              this.zhu5 = 0;
+            }
+          }
+        }
+        //取余==2
+        if (index === 35 && k3item.selected === true) {
+          for (let j = 0; j < this.ertonghao.length; j++) {
+            if (j % 3 === 2 && j > 17 && j < 35) {
+              this.ertonghao[j].selected = true;
+              this.kf[j] = this.ertonghao[j].title;
+              this.dd = this.kf.filter(function(n) {return n;});
+              this.fn = this.dd.join(',');
+              this.zhu6 = 5;
+            }
+          }
+        }
+        if (index === 35 && k3item.selected === false) {
+          for (let j = 0; j < this.ertonghao.length; j++) {
+            if (j % 3 === 2 && j > 17 && j < 35) {
+              this.ertonghao[j].selected = false;
+              this.kf=[];
+              this.dd = this.kf.filter(function(n) {return n;});
+              this.fn = '';
+              this.zhu6 = 0;
+            }
+          }
+        }
+        this.zhu = this.zhu1+this.zhu2+this.zhu3+this.zhu4+this.zhu5+this.zhu6;
+        this.con = this.an+this.bn+this.cn+this.dn+this.en+this.fn;
+      }         
     },
 
     //和值-大小单双 +

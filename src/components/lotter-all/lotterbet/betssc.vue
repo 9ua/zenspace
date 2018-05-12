@@ -89,7 +89,7 @@
             <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
               <span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}
                 <b>。奖金
-                  <i>{{player.bonusStr}}</i> 元</b>
+                  <i>{{player.displayBonus | keepTwoNum}}</i> 元</b>
                 <br/> </span>
               <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
@@ -116,8 +116,8 @@
           <p>每注金额</p>
           <input type="text" v-model="money" />
           <span v-if="money === '' ">请输入要投注的金额</span>
-          <span v-else>最高可中
-            <p>{{rates}}</p>元</span>
+          <span v-else>单注最高可中
+            <p>{{money*displayBonus | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betssc-footer-buttom">
@@ -180,6 +180,7 @@
         lotteryId: 'cqssc',
         LotteryList: '',
         money: 1, //投注金额
+        displayBonus:0,
         amount: 0, //总金额
         con: '', //已选号码
         zhu: 0, //注数
@@ -1513,6 +1514,7 @@
         this.lotteryId = into.id
         this.showan = index;
         this.showa = !this.showa;
+        this.$router.push({path:'ssc',query:{id:this.lotteryId}})
         this.getPastOpen();
         this.getPastOp();
         this.geteServerTime();
@@ -1529,6 +1531,7 @@
         this.playBonusId = items.id;
         this.show = !this.show;
         this.iscreat();
+        this.displayBonus = items.displayBonus;
       },
       //获取过去开奖号码10个
       getPastOpen() {
@@ -1604,6 +1607,13 @@
         inserted: function(el) {
           el.focus()
         }
+      }
+    },
+    // 保留三个小数,不四舍五入
+    filters: {
+      keepTwoNum(value) {
+        value = parseInt(value * 1000) / 1000;
+        return value;
       }
     }
   }

@@ -744,6 +744,8 @@ export default {
       this.geteServerTime();
       this.iscreat();
       this.getPlayTree();
+      this.$router.push({path:'k3',query:{id:this.lotteryId}})
+      console.log(this.lotteryId)
     },
     //三同号全/反选
     tosantonghao() {

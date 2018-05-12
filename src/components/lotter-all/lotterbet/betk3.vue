@@ -763,19 +763,25 @@ export default {
     ertonghaoto(e, index, k3item) {
       k3item.selected = !k3item.selected;
       //取余==0
-      if (k3item.selected === true && index !== 15 || index !== 16 || index !== 17 || index !== 33 || index !== 34 || index !== 35) {
-        // this.d[index] = k3item.title;
-        // this.dd = this.d.filter(function(n) {return n;});
-        // this.con = this.dd.join(",");
-        // this.zhu ++;
+      if (k3item.selected === true && index !== 15 && index !== 16 && index !== 17 && index !== 33 && index !== 34 && index !== 35) {
+        this.d[index] = k3item.title;
+        this.dd = this.d.filter(function(n) {return n;});
+        this.con = this.an+this.bn+this.cn+this.dn+this.en+this.fn+this.dd.join(",");
+        this.zhu ++;
+      }else if (k3item.selected === false && index !== 15 && index !== 16 && index !== 17 && index !== 33 && index !== 34 && index !== 35) {
+        this.d.splice(index, 1, "");
+        this.dd = this.d.filter(function(n) {return n;});
+        this.con = this.dd.join(",")+this.an+this.bn+this.cn+this.dn+this.en+this.fn;
+        this.zhu--;
+      }
+      if (index === 15 || index === 16 || index === 17 || index === 33 || index === 34 || index === 35) {
         if (index === 15 && k3item.selected === true) {
-          k3item.selected === false;
           for (let i = 0; i < this.ertonghao.length; i++) {
             if (i % 3 === 0 && i < 15) {
               this.ertonghao[i].selected = true;
-              this.d[i] = this.ertonghao[i].title;
-              this.dd = this.d.filter(function(n) {return n;});
-              this.an = this.dd.join(',');
+              this.ka[i] = this.ertonghao[i].title;
+              this.dd = this.ka.filter(function(n) {return n;});
+              this.an = this.dd.join(",");
               this.zhu1 = 5;
             }
           }
@@ -784,22 +790,21 @@ export default {
           for (let i = 0; i < this.ertonghao.length; i++) {
             if (i % 3 === 0 && i < 15) {
               this.ertonghao[i].selected = false;
-              this.d.splice(this.ertonghao[i].title, 1, "");
-              this.dd = this.d.filter(function(n) {return n;});
+              this.ka=[];
+              this.dd = this.ka.filter(function(n) {return n;});
               this.an = '';
-              this.zhu1 =0 ;
+              this.zhu1 = 0;
             }
           }
         }
-        this.con = this.dd.join(",");
         //取余==1
         if (index === 16 && k3item.selected === true) {
           for (let i = 0; i < this.ertonghao.length; i++) {
             if (i % 3 === 1 && i < 16) {
               this.ertonghao[i].selected = true;
-              this.d[i] = this.ertonghao[i].title;
-              this.dd = this.d.filter(function(n) {return n;});
-              this.bn = this.dd.join(',');
+              this.kb[i] = this.ertonghao[i].title;
+              this.dd = this.kb.filter(function(n) {return n;});
+              this.bn = this.dd.join(",");
               this.zhu2 = 5;
             }
           }
@@ -808,8 +813,8 @@ export default {
           for (let i = 0; i < this.ertonghao.length; i++) {
             if (i % 3 === 1 && i < 16) {
               this.ertonghao[i].selected = false;
-              this.d.splice(index, 5, "");
-              this.dd = this.d.filter(function(n) {return n;});
+              this.kb=[];
+              this.dd = this.kb.filter(function(n) {return n;});
               this.bn = '';
               this.zhu2 = 0;
             }
@@ -820,8 +825,8 @@ export default {
           for (let i = 0; i < this.ertonghao.length; i++) {
             if (i % 3 === 2 && i < 17) {
               this.ertonghao[i].selected = true;
-              this.d[i] = this.ertonghao[i].title;
-              this.dd = this.d.filter(function(n) {return n;});
+              this.kc[i] = this.ertonghao[i].title;
+              this.dd = this.kc.filter(function(n) {return n;});
               this.cn = this.dd.join(',');
               this.zhu3 =5;
             }
@@ -831,8 +836,8 @@ export default {
           for (let i = 0; i < this.ertonghao.length; i++) {
             if (i % 3 === 2 && i < 17) {
               this.ertonghao[i].selected = false;
-              this.d.splice(index, 5, "");
-              this.dd = this.d.filter(function(n) {return n;});
+              this.kc=[];
+              this.dd = this.kc.filter(function(n) {return n;});
               this.cn = '';
               this.zhu3 = 0;
             }
@@ -843,8 +848,8 @@ export default {
           for (let j = 0; j < this.ertonghao.length; j++) {
             if (j % 3 === 0 && j > 17 && j < 33) {
               this.ertonghao[j].selected = true;
-              this.d[j] = this.ertonghao[j].title;
-              this.dd = this.d.filter(function(n) {return n;});
+              this.kd[j] = this.ertonghao[j].title;
+              this.dd = this.kd.filter(function(n) {return n;});
               this.dn = this.dd.join(',');
               this.zhu4 = 5;
             }
@@ -854,8 +859,8 @@ export default {
           for (let j = 0; j < this.ertonghao.length; j++) {
             if (j % 3 === 0 && j > 17 && j < 33) {
               this.ertonghao[j].selected = false;
-              this.d.splice(index, 5, "");
-              this.dd = this.d.filter(function(n) {return n;});
+              this.kd=[];
+              this.dd = this.kd.filter(function(n) {return n;});
               this.dn = '';
               this.zhu4 = 0;
             }
@@ -866,8 +871,8 @@ export default {
           for (let j = 0; j < this.ertonghao.length; j++) {
             if (j % 3 === 1 && j > 17 && j < 34) {
               this.ertonghao[j].selected = true;
-              this.d[j] = this.ertonghao[j].title;
-              this.dd = this.d.filter(function(n) {return n;});
+              this.ke[j] = this.ertonghao[j].title;
+              this.dd = this.ke.filter(function(n) {return n;});
               this.en = this.dd.join(',');
               this.zhu5 = 5;
             }
@@ -877,8 +882,8 @@ export default {
           for (let j = 0; j < this.ertonghao.length; j++) {
             if (j % 3 === 1 && j > 17 && j < 34) {
               this.ertonghao[j].selected = false;
-              this.d.splice(index, 5, "");
-              this.dd = this.d.filter(function(n) {return n;});
+              this.ke=[];
+              this.dd = this.ke.filter(function(n) {return n;});
               this.en = '';
               this.zhu5 = 0;
             }
@@ -889,8 +894,8 @@ export default {
           for (let j = 0; j < this.ertonghao.length; j++) {
             if (j % 3 === 2 && j > 17 && j < 35) {
               this.ertonghao[j].selected = true;
-              this.d[j] = this.ertonghao[j].title;
-              this.dd = this.d.filter(function(n) {return n;});
+              this.kf[j] = this.ertonghao[j].title;
+              this.dd = this.kf.filter(function(n) {return n;});
               this.fn = this.dd.join(',');
               this.zhu6 = 5;
             }
@@ -900,8 +905,8 @@ export default {
           for (let j = 0; j < this.ertonghao.length; j++) {
             if (j % 3 === 2 && j > 17 && j < 35) {
               this.ertonghao[j].selected = false;
-              this.d.splice(index, 5, "");
-              this.dd = this.d.filter(function(n) {return n;});
+              this.kf=[];
+              this.dd = this.kf.filter(function(n) {return n;});
               this.fn = '';
               this.zhu6 = 0;
             }
@@ -909,14 +914,9 @@ export default {
         }
         this.zhu = this.zhu1+this.zhu2+this.zhu3+this.zhu4+this.zhu5+this.zhu6;
         this.con = this.an+this.bn+this.cn+this.dn+this.en+this.fn;
-      } else if (k3item.selected === false) {
-        this.d.splice(index, 1, "");
-        this.dd = this.d.filter(function(n) {return n;});
-        this.con = this.dd.join(",");
-        this.zhu--;
-      }
-      
+      }         
     },
+
     //和值-大小单双 +
     hezhidaxiaodanshuang(e, index, k3item) {
       k3item.selected = !k3item.selected;

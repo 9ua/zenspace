@@ -97,7 +97,7 @@
             <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
               <span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}
                 <b>。奖金
-                  <i>{{player.bonusStr}}</i> 元</b>
+                  <i>{{player.displayBonus | keepTwoNum}}</i> 元</b>
                 <br/> </span>
               <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playGroupsId === player.id">
@@ -125,7 +125,7 @@
           <p>每注金额</p>
           <input type="text" v-model="money" v-focus/>
           <span v-if="money === '' ">请输入要投注的金额</span>
-          <span v-else>单注最高可中<p>{{rates}}</p>元</span>
+          <span v-else>单注最高可中<p>{{money * displayBonus | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betbj10-footer-buttom">
@@ -189,6 +189,7 @@
         lotteryId: 'pk10',
         LotteryList: '',
         money: 1, //投注金额
+        displayBonus:0,
         amount: 0, //总金额
         d: [], //选中的号码的下标
         dd: [], //选中的号码的下标
@@ -1035,6 +1036,7 @@
         this.lotteryId = into.id
         this.showan = index;
         this.showa = !this.showa;
+        this.$router.push({path:'pk10',query:{id:this.lotteryId}})
         this.getPlayTree();
         this.iscreat();
       },
@@ -1049,7 +1051,9 @@
         this.navlist = index;
         this.navlistb = indexa;
         this.navlistf = indexb;
+        this.displayBonus = items.displayBonus;
         this.iscreat();
+        console.log(this.displayBonus)
       },
       //继续投注
       betsucc() {
@@ -1171,6 +1175,13 @@
         inserted: function(el) {
           el.focus()
         }
+      }
+    },
+    // 保留三个小数,不四舍五入
+    filters: {
+      keepTwoNum(value) {
+        value = parseInt(value * 1000) / 1000;
+        return value;
       }
     }
   }

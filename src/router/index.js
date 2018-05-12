@@ -68,10 +68,10 @@ import betssc from '@/components/lotter-all/lotterbet/betssc'
 
 Vue.use(Router)
 export default new Router({
-//  mode: 'history',
+    //  mode: 'history',
     routes: [
         { path: '*', name: 'ErrorPage', component: require('../components/public/ErrorPage'), meta: { title: '操作失败' } },
-        { path: "/login", name: 'login', component: resolve => require(['@/components/login/login.vue'], resolve), meta: {title:'登陆', keepAlive: true } },
+        { path: "/login", name: 'login', component: resolve => require(['@/components/login/login.vue'], resolve), meta: { title: '登陆', keepAlive: true } },
         { path: "/registered", name: 'registered', component: resolve => require(['@/components/login/registered.vue'], resolve), meta: { keepAlive: true } },
         { path: "/reset", name: 'reset', component: resolve => require(['@/components/login/reset.vue'], resolve), meta: { keepAlive: true } },
         { path: "/resetpwd", name: 'resetpwd', component: resolve => require(['@/components/login/resetpwd.vue'], resolve), meta: { keepAlive: true } },
@@ -122,7 +122,10 @@ export default new Router({
                     ]
                 },
                 {
-                    path: 'five', name: 'five', component: resolve => require(['@/components/home/five.vue'], resolve), meta: { keepAlive: true }
+                    path: 'five',
+                    name: 'five',
+                    component: resolve => require(['@/components/home/five.vue'], resolve),
+                    meta: { keepAlive: true }
                 },
             ]
         },
@@ -158,24 +161,28 @@ export default new Router({
             children: [
                 { path: 'datum', name: 'datum', component: resolve => require(['@/components//page-five/details/datum.vue'], resolve), meta: { keepAlive: true } },
                 { path: 'title', name: 'title', component: title, meta: { keepAlive: true } },
-                
+
             ]
         },
         {
-            path: '/agency', name: 'agency', component: agency, meta: { keepAlive: true },
+            path: '/agency',
+            name: 'agency',
+            component: agency,
+            meta: { keepAlive: true },
         },
         { path: '/agentIntro', name: 'agentIntro', component: agentIntro, meta: { keepAlive: true } },
         { path: '/agentReport', name: 'agentReport', component: agentReport, meta: { keepAlive: true } },
         { path: '/lowerReport', name: 'lowerReport', component: lowerReport, meta: { keepAlive: true } },
-        {   path: '/manageInvite', 
-            name: 'manageInvite', 
-            component: manageInvite, 
+        {
+            path: '/manageInvite',
+            name: 'manageInvite',
+            component: manageInvite,
             meta: { keepAlive: true },
             redirect: 'manageInvite/mInvite',
             children: [
-            { path: 'mInvite', name: 'mInvite', component: mInvite, meta: { keepAlive: true } },
-            { path: 'mIcode', name: 'mIcode', component: mIcode, meta: { keepAlive: true } }
-            ] 
+                { path: 'mInvite', name: 'mInvite', component: mInvite, meta: { keepAlive: true } },
+                { path: 'mIcode', name: 'mIcode', component: mIcode, meta: { keepAlive: true } }
+            ]
         },
         { path: '/agentMember', name: 'agentMember', component: agentMember, meta: { keepAlive: true } },
         { path: '/agentBetRecord', name: 'agentBetRecord', component: agentBetRecord, meta: { keepAlive: true } },
@@ -185,7 +192,10 @@ export default new Router({
         { path: '/detail/setmobile', name: 'setmobile', component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve), meta: { keepAlive: true } },
         { path: '/detail/setemail', name: 'setemail', component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve), meta: { keepAlive: true } },
         {
-            path: '/bet', name: 'bet', component: bet, meta: { keepAlive: true },
+            path: '/bet',
+            name: 'bet',
+            component: bet,
+            meta: { keepAlive: true },
         },
         { path: '/trade', name: 'trade', component: trade, meta: { keepAlive: true }, },
         { path: '/recharge', name: 'recharge', component: recharge, meta: { keepAlive: true }, },

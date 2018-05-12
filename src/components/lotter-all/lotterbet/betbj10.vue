@@ -155,15 +155,19 @@
       </li>
       <li><router-link to="/bet" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
     </ul>
-    <van-popup v-model="showTimesUp" :close-on-click-overlay="false">
-      <div class="mIcode-sure">
-        <div class="sure2">
+    <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
+      <div>
+      <ul>
+        <div class="title">
           <p>温馨提示！</p>
         </div>
-        <div class="sure2">
-        <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+        <div class="cont">
+          <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
         </div>
-        <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
+        <div class="but">
+            <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
+        </div>
+      </ul>
       </div>
     </van-popup>
     <van-popup class="betshow" v-model="showpop">{{content}}</van-popup>
@@ -1187,5 +1191,6 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/lotter-list/lotterbet/betbj10.scss'
+  @import '../../../assets/scss/lotter-list/lotterbet/betbj10.scss';
+  @import "../../../assets/scss/popcorn.scss";
 </style>

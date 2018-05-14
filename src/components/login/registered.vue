@@ -99,14 +99,13 @@
         } else {
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
             let formData = new FormData();
-            
             formData.append('inviteCode',this.invitationCode);
             formData.append('account',this.username);
             formData.append('password',this.password1);
             formData.append('code',this.verification);
             this.$axios.post(this.$store.state.url+'api/user/register', formData,config).then((res) => {
                 if(res.data.code === 1) {
-                  this.content = '註冊完成! 請使用新帳號密碼登入';
+                  this.content = '注册完成! 请使用新账号密码登录';
                   this.popdone = true;
                 } else {
                   this.getCaptchaCode();
@@ -115,7 +114,7 @@
 
                 }
             }).catch((error) => {
-                console.log("No","post失敗")
+                console.log("No","post失败")
             });   
         }
       },

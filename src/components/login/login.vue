@@ -94,6 +94,7 @@
           let formData = new FormData();
           formData.append('account', this.newUserInfo.user);
           formData.append('password', pwd);
+          formData.append('code',this.newUserInfo.verification);
           this.$axios.post(this.$store.state.url+'api/user/login', formData, config).then((res) => {
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
             this.$store.state.userType = res.data.data.userType;

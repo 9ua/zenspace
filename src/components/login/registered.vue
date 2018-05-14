@@ -109,8 +109,10 @@
                   this.content = '註冊完成! 請使用新帳號密碼登入';
                   this.popdone = true;
                 } else {
+                  this.getCaptchaCode();
                   this.content = res.data.data;
                   this.pop = true;
+
                 }
             }).catch((error) => {
                 console.log("No","post失敗")

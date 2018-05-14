@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="content-right">
-            <p>{{seasonId*1}}期投注截止</p>
+            <p>{{seasonId}}期投注截止</p>
             <div>
               <p>{{countDown}}</p>
             </div>
@@ -242,7 +242,6 @@
       }
     },
     mounted() {
-      this.getLotteryList(); //右上获取彩种
       this.getPlayTree(); //玩法树
       this.getPastOpen(); //获取过去开奖号码10个
       this.getPastOp(); //获取过去开奖号码1个
@@ -992,7 +991,7 @@
                 this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
               }, 1000);
-            }, 600);
+            }, 400);
           }
         }).catch((error) => {
           console.log("No");
@@ -1029,7 +1028,12 @@
       getLotteryList() {
         this.$http.get(this.$store.state.url + 'api/lottery/getLotteryList').then((res) => {
           this.LotteryList = res.data.data.pk10;
-          }).catch((error) => {
+          for (let i = 0; i < this.LotteryList.length; i++) {
+            if(this.LotteryList[i].id === this.$route.query.id){
+              this.listname = this.LotteryList[i].name.substring(0, 2);
+            }
+          }
+        }).catch((error) => {
           console.log("右上彩种No")
         })
       },
@@ -1039,8 +1043,11 @@
         this.lotteryId = into.id
         this.showan = index;
         this.showa = !this.showa;
-        this.$router.push({path:'pk10',query:{id:this.lotteryId}})
-        this.getPlayTree();
+        this.$router.push({query:{id:into.id}})
+        this.getPastOpen();//获取过去开奖号码10个
+        this.getPastOp();//获取过去开奖号码1个
+        this.geteServerTime();//获取彩種當前獎期時間
+        this.getPlayTree();//玩法术
         this.iscreat();
       },
       //头部菜单项
@@ -1118,7 +1125,7 @@
       //获取过去开奖号码10个
       getPastOpen() {
         this.getLotteryList();
-        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.lotteryId,}}).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,}}).then((res) => {
           this.getPastOpens = res.data.data;
         }).catch((error) => {
           console.log("获取过去开奖号码No")
@@ -1126,9 +1133,8 @@
       },
       //获取过去开奖号码1个
       getPastOp() {
-        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.lotteryId,count: 1}}).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
-          
         }).catch((error) => {
           console.log("获取过去开奖号码No")
         })
@@ -1136,7 +1142,7 @@
       //获取彩種當前獎期時間
       geteServerTime() {
         clearInterval(this.timer);
-        this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.lotteryId}}).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.$route.query.id}}).then((res) => {
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
             this.seasonId = this.seasonId2;
@@ -1167,6 +1173,7 @@
           if(this.today < 1) {
             clearInterval(this.timer);
             this.timesUp();
+            this.getPastOp();
           }
         }, 1000);
       },

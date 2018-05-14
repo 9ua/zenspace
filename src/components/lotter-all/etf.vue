@@ -1,7 +1,7 @@
 <template>
   <div class="etf">
     <ul>
-      <router-link v-for="(item,index) in lotteryListetf" :key="index" tag="li" to="/x11x5">
+      <router-link v-for="(item,index) in lotteryListetf" :key="index" tag="li" :to="{path:'/x11x5',query:{id:item.id}}">
         <img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>

@@ -323,201 +323,6 @@ export default {
         { title: "All-55", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "All-66", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
-      // 二同号
-      ertonghaos: [
-        {
-          a: [
-            {
-              title: "112",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "113",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "114",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "115",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "116", rates: "赔率63.72", rate: "63.72", selected: false }
-          ],
-          a1: [
-            { title: "11", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
-        },
-        {
-          a: [
-            {
-              title: "221",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "223",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "224",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "225",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "226", rates: "赔率63.72", rate: "63.72", selected: false }
-          ],
-          a1: [
-            { title: "22", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
-        },
-        {
-          a: [
-            {
-              title: "331",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "332",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "334",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "335",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "336", rates: "赔率63.72", rate: "63.72", selected: false }
-          ],
-          a1: [
-            { title: "33", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
-        },
-        {
-          a: [
-            {
-              title: "441",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "442",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "443",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "445",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "446", rates: "赔率63.72", rate: "63.72", selected: false }
-          ],
-          a1: [
-            { title: "44", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
-        },
-        {
-          a: [
-            {
-              title: "551",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "552",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "553",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "554",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "556", rates: "赔率63.72", rate: "63.72", selected: false }
-          ],
-          a1: [
-            { title: "55", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
-        },
-        {
-          a: [
-            {
-              title: "661",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "662",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "663",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            {
-              title: "664",
-              rates: "赔率63.72",
-              rate: "63.72",
-              selected: false
-            },
-            { title: "665", rates: "赔率63.72", rate: "63.72", selected: false }
-          ],
-          a1: [
-            { title: "66", rates: "赔率63.72", rate: "63.72", selected: false }
-          ]
-        }
-      ],
       // 二不同
       erbutong: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -738,7 +543,7 @@ export default {
       }
     },
     //二同複選xx
-    onClickStan(e){
+    onClickStan1(e){
       //同時被選取時 清空
       if (this.ertonghao[0].selected === true && this.ertonghao[3].selected === true && this.ertonghao[6].selected === true && this.ertonghao[9].selected === true && this.ertonghao[12].selected === true) {
         for (let i=0;i<15;i=i+3) {
@@ -829,17 +634,17 @@ export default {
       if (k3item.selected === true && index !== 15 && index !== 16 && index !== 17 && index !== 33 && index !== 34 && index !== 35) {
         this.d[index] = k3item.title;
         this.dd = this.d.filter(function(n) {return n;});
-        this.con = this.an+this.bn+this.cn+this.dn+this.en+this.fn+this.dd.join(",");
+        this.con = this.dd.join(",");
         this.zhu ++;
       }else if (k3item.selected === false && index !== 15 && index !== 16 && index !== 17 && index !== 33 && index !== 34 && index !== 35) {
         this.d.splice(index, 1, "");
         this.dd = this.d.filter(function(n) {return n;});
-        this.con = this.dd.join(",")+this.an+this.bn+this.cn+this.dn+this.en+this.fn;
+        this.con = this.dd.join(",");
         this.zhu--;
       } 
       if ( index === 15) {
         k3item.selected = !k3item.selected;
-        this.onClickStan(e);
+        this.onClickStan1(e);
       }
       if ( index === 16) {
         k3item.selected = !k3item.selected;

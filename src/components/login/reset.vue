@@ -34,7 +34,6 @@
         this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
       },
       resetGo(){
-//    	this.$router.push('resetpwd');
       	this.$router.push('resetway');
       }
 		},

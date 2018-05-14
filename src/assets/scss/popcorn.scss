@@ -34,8 +34,11 @@
           font-size: 14px;
         }
         & .cont{
+          padding:14px 0px;
+          width: 90%;
+          margin: auto;
           & .contBox{
-            width: 90%;
+            width: 80%;
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;

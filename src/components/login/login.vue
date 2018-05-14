@@ -64,7 +64,6 @@
       }
     },
     created() {
-      this.getCaptchaCode();
       this.checkeds();
     },
     methods: {
@@ -111,6 +110,7 @@
               setStore('password',this.$store.state.Globalpassword);
           	} else {
               if (res.data.data.errCount >= 3) {
+                this.getCaptchaCode();
                 this.errorcode = true;
               } else {
                 this.errorcode = false;

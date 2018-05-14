@@ -987,7 +987,7 @@ export default {
           formData.append("bounsType", 0);
           formData.append("traceWinStop", 0);
           formData.append("isTrace", 0);
-          formData.append("lotteryId", this.lotteryId);
+          formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
@@ -1023,7 +1023,7 @@ export default {
           formData.append("bounsType", 0);
           formData.append("traceWinStop", 0);
           formData.append("isTrace", 0);
-          formData.append("lotteryId", this.lotteryId);
+          formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
@@ -1065,7 +1065,7 @@ export default {
           formData.append("bounsType", 0);
           formData.append("traceWinStop", 0);
           formData.append("isTrace", 0);
-          formData.append("lotteryId", this.lotteryId);
+          formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu);
           this.$axios.post(this.$store.state.url + "api/lottery/bet", formData, config).then(res => {
               if (res.data.message === "success") {

@@ -44,6 +44,7 @@
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
             <p>{{item.seasonId.substring(4).split("-").join("")}}期开奖号码</p>
+            <!-- <p>{{'0'+(seasonId-1)}}期开奖号码</p> -->
             <div>
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
@@ -256,6 +257,7 @@ export default {
       LotteryList: "",
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
+      seasonId3: "", //当前期号-1
       betsuccess: false,
       betGoshow: false,
       betk3ContentTopPop: false,
@@ -408,30 +410,27 @@ export default {
     };
   },
   mounted() {
-    this.getPastOpen();
-    this.getPastOp();
-    this.getLotteryList(); //右上获取彩种
+    
+    this.getPastOpen();//获取过去开奖号码10个
+    // this.getPastOp();//获取过去开奖号码1个
     this.getPlayTree(); //玩法树
   },
   created() {
     this.geteServerTime(); //input显示当前时间
+    // this.getLotteryList();//右上获取彩种
   },
   methods: {
     //获取彩種當前獎期時間
     geteServerTime() {
       clearInterval(this.timer);
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
-          params: { lotteryId: this.lotteryId }
-        })
-        .then(res => {
+      this.$http.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId: this.$route.query.id }}).then(res => {
           if (res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId;
-            this.seasonId = this.seasonId2
-              .substring(4)
-              .split("-")
-              .join("");
+            this.seasonId3 = this.seasonId2-1;
+            this.seasonId = this.seasonId2.substring(4).split("-").join("");
             this.today = res.data.data.restSeconds;
+            this.getPastOpen();
+            this.getPastOp();
             this.initSetTimeout();
           }
         })
@@ -472,11 +471,7 @@ export default {
     //获取过去开奖号码10个
     getPastOpen() {
       this.getLotteryList();
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.lotteryId, count: 10 }
-        })
-        .then(res => {
+      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
           this.getPastOpens = res.data.data;
         })
         .catch(error => {
@@ -485,11 +480,7 @@ export default {
     },
     //获取过去开奖号码1个
     getPastOp() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.lotteryId, count: 1 }
-        })
-        .then(res => {
+      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
           this.getPastO = res.data.data;
         })
         .catch(error => {
@@ -498,14 +489,17 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getLotteryList")
-        .then(res => {
-          this.LotteryList = res.data.data.k3;
-        })
-        .catch(error => {
-          console.log("右上彩种No");
-        });
+      this.$http.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
+        this.LotteryList = res.data.data.k3;
+        for (let i = 0; i < this.LotteryList.length; i++) {
+          if(this.LotteryList[i].id === this.$route.query.id){
+            this.listname = this.LotteryList[i].name.substring(0, 2);
+          }
+        }
+      })
+      .catch(error => {
+        console.log("右上彩种No");
+      });
     },
     //头部菜单项
     k3Tab(e, index, into) {
@@ -522,11 +516,12 @@ export default {
       this.lotteryId = into.id;
       this.showan = index;
       this.showa = !this.showa;
-      this.getPastOpen();
-      this.getPastOp();
-      this.geteServerTime();
-      this.iscreat();
-      this.getPlayTree();
+      this.$router.push({query:{id:into.id}})
+      this.getPastOpen();//获取过去开奖号码10个
+      this.getPastOp();//获取过去开奖号码1个
+      this.geteServerTime();//获取彩種當前獎期時間
+      this.getPlayTree();//玩法术
+      this.iscreat();//清空
     },
     //三同号全/反选
     tosantonghao() {
@@ -767,7 +762,7 @@ export default {
     },
     //玩法树
     getPlayTree() {
-      this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.lotteryId }}).then(res => {
+      this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
           this.playBonus = res.data.data.playBonus;
           let arrpeilv1 = [];
           let arrpeilv2 = [];
@@ -979,16 +974,6 @@ export default {
         this.playId2 === "k3_star3_and" ||
         this.playId === "k3_star3_and"
       ) {
-        console.log(
-          "playId: " +
-            this.playId +
-            ", playId1: " +
-            this.playId1 +
-            ", playId2: " +
-            this.playId2 +
-            ", content: " +
-            this.con1
-        );
         if (this.playId1 === "k3_star3_big_odd") {
           let formData = new FormData();
           formData.append("order[0].content", this.con1);
@@ -1017,8 +1002,8 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.betsuccess = !this.betsuccess;
-                  }, 1300);
-                }, 600);
+                  }, 1000);
+                }, 400);
               }
             })
             .catch(error => {

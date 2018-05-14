@@ -20,6 +20,21 @@
     <div class="setSafePwd-tisi">
     	安全密码用于提现、绑定银行卡等操作，可保障资金安全。
     </div>
+    <van-popup class="pop2" v-model="show" :close-on-click-overlay="false">
+      <div>
+      <ul>
+        <div class="title">
+          <p>温馨提示！</p>
+        </div>
+        <div class="cont">
+          <p>{{content}}</p>
+        </div>
+        <div class="but">
+            <button class="nodel" @click="show = ! show">确定</button>
+        </div>
+      </ul>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script>
@@ -29,10 +44,24 @@
       return {
         newPassword:null,//安全码
         newPassword2:null,//确认安全码
+        content: '',
+        show: false,
       }
     },
     methods: {
       setSafePwd() {
+        const newPassword_yz = /^[0-9]{6,6}$/;
+        let yzPassword = newPassword_yz.test(this.newPassword);
+        if (this.newPassword === '') {
+          this.content = '密码不能为空';
+          this.show = true;
+        } else if (yzPassword == false) {
+          this.content = '安全密码：6位数字'
+          this.show = true;
+        } else if (this.newPassword !== this.newPassword2) {
+          this.content = '两次密码输入不一致'
+          this.show = true;
+        } else {
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
         let pwd1 = md5(this.newPassword);
         let pwd2 = md5(this.newPassword2);
@@ -46,6 +75,8 @@
           }).catch((error) => {
               console.log("No")
           })
+        };
+
         }
       }
     },
@@ -60,4 +91,5 @@
 </script>
 <style lang="scss" scoped>
   @import '../../../assets/scss/page-five/safety/setSafePwd.scss';
+  @import "../../../assets/scss/popcorn.scss";
 </style>

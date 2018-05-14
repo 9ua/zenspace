@@ -59,12 +59,11 @@
         newUserInfo: {
           user: '',
           pwd: '',
-          verification: ''
+          verification:'',
         }
       }
     },
     created() {
-      this.getCaptchaCode();
       this.checkeds();
     },
     methods: {
@@ -109,15 +108,21 @@
 	            this.$store.state.Globalpassword = this.newUserInfo.pwd;
               setStore('username',this.$store.state.Globalusername);
               setStore('password',this.$store.state.Globalpassword);
-          	}else {
-              this.$store.state.errorcode ++;
+          	} else {
+              if (res.data.data.errCount >= 3) {
+                this.getCaptchaCode();
+                this.errorcode = true;
+              } else {
+                this.errorcode = false;
+              }
+              // this.$store.state.errorcode ++;
               this.newUserInfo.user = '';
               this.newUserInfo.pwd = '';
               this.checked = false;
-              removeStore('username','password');
-          		if(this.$store.state.errorcode > 2 ){
-	          		this.errorcode = !this.errorcode;
-	          	}
+              removeStore('password');
+          		// if(this.$store.state.errorcode > 2 ){
+	          	// 	this.errorcode = !this.errorcode;
+	          	// }
           		this.content = '账号或密码错误'
           		this.pop = true
             }

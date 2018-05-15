@@ -1040,11 +1040,9 @@ export default {
               console.log("No");
             });
         }
-        console.log(this.playId1,this.playId2)
       } else 
         // default
         if (this.playId1 !== "k3_star3_big_odd" && this.playId2 !== "k3_star3_and" && this.playId !== "k3_star3_and") {
-          console.log(2222)
           let formData = new FormData();
           formData.append("order[0].content", this.con);
           formData.append("order[0].betCount", this.zhu);

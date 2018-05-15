@@ -119,6 +119,7 @@ export default {
     getTradeList(){
         this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:2,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
             this.tradelist = res.data.data.list;
+            console.log(this.tradelist);
 			}).catch((error) => {
                 console.log(error);
                     console.log("获取彩種ratio ERROR");

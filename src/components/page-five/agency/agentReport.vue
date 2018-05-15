@@ -10,7 +10,20 @@
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
       </div>
-
+      <ul class="recharge-top">
+            <li>
+              <div>
+              <el-input 
+                placeholder="请输入用户帐号名称" 
+                v-model="accountName" 
+                :value="accountName" 
+                clearable 
+              >
+              </el-input>
+              </div>
+              <button @click="getUserTeam()"><i class="el-icon-arrow-right"></i></button>
+            </li>
+      </ul>
       <div class="agent-content-list">
         <ul>
           <li>
@@ -83,7 +96,7 @@
 export default {
   data(){
     return {
-
+        accountName:'',
         dateFlag:0,
         timeline:'今日',
         show:false,
@@ -127,6 +140,7 @@ export default {
     }
   },
   mounted(){
+    this.serchAccount();
     this.getUserTeam();
   },
   methods: {
@@ -136,13 +150,26 @@ export default {
       this.show = ! this.show;
       this.getUserTeam();
     },
+    serchAccount() {
+          this.accountName = this.$route.query.id;
+    },
     getUserTeam() {
-			this.$http.get(this.$store.state.url+'api/proxy/getUserTeam',{params:{account:this.$store.state.Globalusername,dateFlag:this.dateFlag}}).then((res) => {
-        
-        this.userTeam = res.data.data;
-			}).catch((error) => {
-					console.log("获取列表Error");
-			});
+ 
+      if (this.accountName == '') {
+            this.$http.get(this.$store.state.url+'api/proxy/getUserTeam',{params:{account:this.$store.state.Globalusername,dateFlag:this.dateFlag}}).then((res) => {
+            console.log(res);
+            this.userTeam = res.data.data;
+          }).catch((error) => {
+              console.log("获取列表Error");
+          });
+      } else if (this.accountName !== '') {
+          this.$http.get(this.$store.state.url+'api/proxy/getUserTeam',{params:{account:this.accountName,dateFlag:this.dateFlag}}).then((res) => {
+            console.log(res);
+            this.userTeam = res.data.data;
+          }).catch((error) => {
+              console.log("获取列表Error");
+          });
+      }
 		},
   },
 };

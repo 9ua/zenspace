@@ -26,7 +26,7 @@
                     </div>
                     <div class="mInvite-right">
                         <p>
-                        <span>{{item.status}}</span><br>
+                        <span>{{item.statusName}}</span><br>
                         <span></span>
                         </p>
                     </div>

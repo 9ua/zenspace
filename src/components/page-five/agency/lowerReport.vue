@@ -36,12 +36,24 @@
       </ul>
 
     </div>
+
+    <van-actionsheet class="" v-model="show2">
+	      <ul class="member-top">
+            <li>
+              <span>{{selected.account}}</span>
+            </li>
+            <router-link :to="{path:'/agentReport',query: {id: this.selected.account}}" tag="li"><p>下级报表</p><i class="el-icon-arrow-right"></i></router-link>
+            <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
+        </ul>
+	  </van-actionsheet>
+
   </div>
 </template>
 <script>
 export default {
   data(){
     return {
+        a:'',
         dateFlag:0,
         underLevelReport:[],
         timeline:'今天',
@@ -88,6 +100,10 @@ export default {
       this.getUnderLevelReport();
   },
   methods: {
+    select(a) {
+        this.show2 = !this.show2;
+        this.selected = a;
+      },
     onClick(name){
       this.timeline = name.name;
       this.dateFlag = name.type;

@@ -124,7 +124,7 @@
         setTimeout(() => {
           this.getBalance();
           this.toF5money = !this.toF5money;
-          this.$refs.money.textContent = this.balances
+          this.$refs.money.textContent = this.balances+"元";
         }, 2400);
         
       },

@@ -965,16 +965,9 @@ export default {
     },
     //投注
     betGo() {
-      let config = {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        withCredentials: true
-      };
-      if (
-        this.playId1 === "k3_star3_big_odd" ||
-        this.playId2 === "k3_star3_and" ||
-        this.playId === "k3_star3_and"
-      ) {
-        if (this.playId1 === "k3_star3_big_odd") {
+      let config = {headers: { "Content-Type": "application/x-www-form-urlencoded" },withCredentials: true};
+      if (this.playId1 === "k3_star3_big_odd" || this.playId2 === "k3_star3_and" || bthis.playId === "k3_star3_and") {
+        if (this.playId1 === "k3_star3_big_odd" && this.con1 !== '') {
           let formData = new FormData();
           formData.append("order[0].content", this.con1);
           formData.append("order[0].betCount", this.zhu1);
@@ -989,9 +982,7 @@ export default {
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
-          this.$axios
-            .post(this.$store.state.url + "api/lottery/bet", formData, config)
-            .then(res => {
+          this.$axios.post(this.$store.state.url + "api/lottery/bet", formData, config).then(res => {
               if (res.data.message === "success") {
                 this.con1 = "";
                 setTimeout(() => {
@@ -1010,7 +1001,7 @@ export default {
               console.log("No");
             });
         }
-        if (this.playId2 === "k3_star3_and") {
+        if (this.playId2 === "k3_star3_and"&& this.con2 !== '') {
           let formData = new FormData();
           formData.append("order[0].content", this.con2);
           formData.append("order[0].betCount", this.zhu2);
@@ -1049,10 +1040,7 @@ export default {
         }
       } else {
         // default
-        if (
-          this.playId1 !== "k3_star3_big_odd" &&
-          this.playId2 !== "k3_star3_and"
-        ) {
+        if (this.playId1 !== "k3_star3_big_odd" && this.playId2 !== "k3_star3_and") {
           let formData = new FormData();
           formData.append("order[0].content", this.con);
           formData.append("order[0].betCount", this.zhu);

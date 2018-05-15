@@ -67,30 +67,14 @@ Vue.component(Radio.name, Radio);
 Vue.component(RadioGroup.name, RadioGroup);
 Vue.use(Carousel);
 Vue.config.productionTip = false
-    /* eslint-disable no-new */
+/* eslint-disable no-new */
 
 // 超时时间
 axios.defaults.timeout = 5000
-    // http请求拦截器
-var loadinginstace
-    // axios.interceptors.request.use(config => {
-    //     // element ui Loading方法
-    //     loadinginstace = Loading.service({ fullscreen: true })
-    //     return config
-    // }, error => {
-    //     loadinginstace.close()
-    //     Message.error({
-    //         message: '加载超时！请检查网络或重新登陆!'
-    //     })
-    //     return Promise.reject(error)
-    // })
-    // http响应拦截器
+// http请求拦截器
 axios.interceptors.response.use(data => { // 响应成功关闭loading
-    // loadinginstace.close()
     if (data.data.status === 302) {
-        // setTimeout(() => {
-            router.push('/login');
-        // }, 1000);
+        router.push('/login');
     }
     if (data.data.pup === true) {
         console.log(data.data.data);
@@ -103,20 +87,12 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
                 message: data.data.data
             })
         }
-        
-        
     }
     return data
 }, error => {
-    // loadinginstace.close()
-    // Message.error({
-    //     message: '加载失败！请检查网络或重新登陆!'
-    // })
     return Promise.reject(error)
 })
-
 // export default axios
-
 new Vue({
     el: '#app',
     router,

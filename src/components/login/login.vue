@@ -65,6 +65,7 @@
     },
     created() {
       this.checkeds();
+      this.getCaptchaCode();
     },
     methods: {
     	getCaptchaCode() {
@@ -117,15 +118,13 @@
                 this.errorcode = false;
               }
               // this.$store.state.errorcode ++;
-              this.newUserInfo.user = '';
+              // this.newUserInfo.user = '';
               this.newUserInfo.pwd = '';
               this.checked = false;
               removeStore('password');
           		// if(this.$store.state.errorcode > 2 ){
 	          	// 	this.errorcode = !this.errorcode;
 	          	// }
-          		this.content = '账号或密码错误'
-          		this.pop = true
             }
           }).catch((error) => {
           		console.log("No")

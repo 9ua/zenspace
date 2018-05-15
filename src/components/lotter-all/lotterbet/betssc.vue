@@ -118,7 +118,7 @@
           <input type="text" v-model="money" />
           <span v-if="money === '' ">请输入要投注的金额</span>
           <span v-else v-show="playBonusId !== 'ssc_dxds'">单注最高可中
-            <p v-show="Number(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
+            <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
             <p v-show="isNaN(money*displayBonus)">{{youhezhi ? money*displayBonus2 : money*displayBonus1 | keepTwoNum}}</p>元</span>
         </div>
       </div>

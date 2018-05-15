@@ -8,7 +8,7 @@
       <div class="profit-content-top">
         <div>
           <p>盈利金额</p>
-          <p>{{winAmount-betAmount+activityAndSend+juniorRebateAmount}}</p>
+          <p>{{winAmount-betAmount+activityAndSend+juniorRebateAmount | keepTwoNum2}}</p>
         </div>
       </div>
       <div class="profit-contents">
@@ -64,19 +64,29 @@ export default {
 	methods :{
 		getGainLost() {
 			this.$http.get(this.$store.state.url+'api/proxy/getGainLost').then((res) => {
-        console.log(res.data.data);
           this.betAmount = res.data.data.betAmount;
           this.winAmount = res.data.data.winAmount;
           this.activityAndSend = res.data.data.activityAndSend;
           this.juniorRebateAmount = res.data.data.juniorRebateAmount;
           this.rechargeAmount = res.data.data.rechargeAmount;
           this.drawingAmount = res.data.data.drawingAmount;
-          
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
 		},
-	}
+  },
+  filters: {
+    // 保留三个小数,不四舍五入
+    keepTwoNum1(value) {
+      value = parseInt(value * 10000) / 10000;
+      return value;
+    },
+    // 保留三个小数,四舍五入
+    keepTwoNum2(value) {
+      value = Number(value);
+      return value.toFixed(3);
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

@@ -151,7 +151,12 @@ export default {
       this.getUserTeam();
     },
     serchAccount() {
+          if (!this.$route.query.id){
+
+          } else {
           this.accountName = this.$route.query.id;
+          console.log(this.accountName);
+          }
     },
     getUserTeam() {
  

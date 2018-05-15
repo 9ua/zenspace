@@ -56,6 +56,7 @@
         newDate: null,//时间戳
         errorcode:false,//判断账号密码错误次数
         loginStatus:false,//当前登陆状态
+        captchaCodeImg:'',
         newUserInfo: {
           user: '',
           pwd: '',

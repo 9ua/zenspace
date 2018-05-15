@@ -193,7 +193,7 @@
         lotteryId: 'pk10',
         LotteryList: '',
         money: 1, //投注金额
-        displayBonus:0,
+        displayBonus:1.96,
         amount: 0, //总金额
         d: [], //选中的号码的下标
         dd: [], //选中的号码的下标
@@ -978,7 +978,7 @@
         formData.append('bounsType', 0);
         formData.append('traceWinStop', 0);
         formData.append('isTrace', 0);
-        formData.append('lotteryId', this.lotteryId);
+        formData.append('lotteryId', this.$route.query.id);
         formData.append('amount', this.money * this.zhu);
         this.$axios.post(this.$store.state.url + 'api/lottery/bet', formData, config).then((res) => {
           if (res.data.message === "success") {
@@ -1125,7 +1125,7 @@
       //获取过去开奖号码10个
       getPastOpen() {
         this.getLotteryList();
-        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,}}).then((res) => {
+        this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id}}).then((res) => {
           this.getPastOpens = res.data.data;
         }).catch((error) => {
           console.log("获取过去开奖号码No")

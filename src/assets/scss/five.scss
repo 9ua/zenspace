@@ -13,11 +13,12 @@
             display: flex;
             border-bottom: 2px solid #eee;
             padding-bottom: 15px;
+            justify-content: space-between;
             & .five-top-left {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 70px;
+                width: 20%;
                 height: 70px;
                 background: #ececec;
                 border-radius: 50%;
@@ -37,7 +38,9 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                align-items: flex-start;
                 margin-left: 20px;
+                width: 70%;
                 & p {
                     color: #aaa;
                     font-size: 16px;
@@ -49,6 +52,21 @@
                         border: none;
                         background: none;
                     }
+                }
+            }
+            & .five-top-right2{
+                width: 10%;
+                display: flex;
+                align-items: center;
+                margin-left: 26px;
+                justify-content: end;
+                & img{
+                    width: 28px;
+                    height: 28px;
+                }
+                & .totransition{
+                    transition:All 2.4s ease-in-out;
+                    transform:rotate(3600deg);
                 }
             }
         }

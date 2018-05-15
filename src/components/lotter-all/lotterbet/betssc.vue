@@ -89,8 +89,9 @@
             <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
               <span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}
                 <b>。奖金
-                  <i>{{player.displayBonus | keepTwoNum}}</i> 元</b>
-                <br/> </span>
+                  <i v-show="Number(player.displayBonus)">{{player.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(player.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                 </span>
               <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
                   <p v-for="(numViews,indexff) in player.numView" :key="indexff">
@@ -116,8 +117,9 @@
           <p>每注金额</p>
           <input type="text" v-model="money" />
           <span v-if="money === '' ">请输入要投注的金额</span>
-          <span v-else>单注最高可中
-            <p>{{money*displayBonus | keepTwoNum}}</p>元</span>
+          <span v-else v-show="playBonusId !== 'ssc_dxds'">单注最高可中
+            <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
+            <p v-show="isNaN(money*displayBonus)">{{youhezhi ? money*displayBonus2 : money*displayBonus1 | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betssc-footer-buttom">
@@ -169,6 +171,7 @@
   export default {
     data() {
       return {
+        youhezhi:false,//判断是否有‘和’
         showTimesUp: false,
         showpop: false, //弹窗
         content: '提示内容!', //弹窗内容
@@ -184,7 +187,10 @@
         lotteryId: 'cqssc',
         LotteryList: '',
         money: 1, //投注金额
-        displayBonus:0,
+        displayBonus:97500,
+        displayBonus1:0,
+        displayBonus2:0,
+        displayBonus3:'',
         amount: 0, //总金额
         con: '', //已选号码
         zhu: 0, //注数
@@ -492,6 +498,11 @@
             }
           }
           this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en + ',' + this.fn + ',' + this.gn + ',' + this.hn + ',' + this.in + ',' + this.jn;
+          if(this.con.indexOf("和") !== -1){
+            this.youhezhi = true;
+          }else if(this.con.indexOf("和") === -1){
+            this.youhezhi = false;
+          }
         }
         //三星包胆 +
         if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains') {
@@ -1413,27 +1424,6 @@
       betCancel() {
         this.betGoshow = !this.betGoshow;
       },
-      // 如果只能选择一个球
-      curBall(b, item, index) {
-        if(item.choose) {
-          item.balls.map((b) => {
-            b.choose = false
-          })
-        }
-        b.choose = !b.choose
-        if(b.choose === true) {
-          this.d.push(b.ball);
-          this.d.sort((a, b) => {
-            return a - b;
-          })
-          this.con = this.d.join(',');
-          this.zhu++;
-        } else if(b.choose === false) {
-          this.d.splice(1, "");
-          this.con = this.d.join(',');
-          this.zhu--;
-        }
-      },
       //玩法树
       getPlayTree() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
@@ -1477,7 +1467,7 @@
         formData.append('bounsType', 0);
         formData.append('traceWinStop', 0);
         formData.append('isTrace', 0);
-        formData.append('lotteryId', this.lotteryId);
+        formData.append('lotteryId', this.$route.query.id);
         formData.append('amount', this.money * this.zhu);
         this.$axios.post(this.$store.state.url + 'api/lottery/bet', formData, config).then((res) => {
           if (res.data.message === "success") {
@@ -1538,6 +1528,14 @@
         this.show = !this.show;
         this.iscreat();
         this.displayBonus = items.displayBonus;
+        if(isNaN(this.displayBonus)){
+          let ar = [];
+          ar = this.displayBonus.split('-');
+          this.displayBonus1 = Number(ar[0]);
+          this.displayBonus2 = Number(ar[1]);
+          this.displayBonus3 = this.displayBonus1+'-'+this.displayBonus2;
+          console.log(this.displayBonus1,this.displayBonus2,this.displayBonus3)
+        }
       },
       //获取过去开奖号码10个
       getPastOpen() {

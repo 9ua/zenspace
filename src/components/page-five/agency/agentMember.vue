@@ -18,7 +18,7 @@
             <p>{{item.account}}</p>
           </div>
           <div class="title2">
-            <p>{{item.userType}}</p>
+            <p>{{item.userTypeName}}</p>
           </div>
           <div class="title3">
             <p>{{item.loginTime}}</p>

@@ -56,6 +56,7 @@
         newDate: null,//时间戳
         errorcode:false,//判断账号密码错误次数
         loginStatus:false,//当前登陆状态
+        captchaCodeImg:'',
         newUserInfo: {
           user: '',
           pwd: '',
@@ -116,14 +117,10 @@
               } else {
                 this.errorcode = false;
               }
-              // this.$store.state.errorcode ++;
               this.newUserInfo.user = '';
               this.newUserInfo.pwd = '';
               this.checked = false;
               removeStore('password');
-          		// if(this.$store.state.errorcode > 2 ){
-	          	// 	this.errorcode = !this.errorcode;
-	          	// }
           		this.content = '账号或密码错误'
           		this.pop = true
             }

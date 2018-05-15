@@ -966,7 +966,7 @@ export default {
     //投注
     betGo() {
       let config = {headers: { "Content-Type": "application/x-www-form-urlencoded" },withCredentials: true};
-      if (this.playId1 === "k3_star3_big_odd" || this.playId2 === "k3_star3_and" || bthis.playId === "k3_star3_and") {
+      if (this.playId1 === "k3_star3_big_odd" || this.playId2 === "k3_star3_and" || this.playId === "k3_star3_and") {
         if (this.playId1 === "k3_star3_big_odd" && this.con1 !== '') {
           let formData = new FormData();
           formData.append("order[0].content", this.con1);

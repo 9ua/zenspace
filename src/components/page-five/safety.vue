@@ -15,8 +15,8 @@
         	<i class="el-icon-star-on active"></i>
         	<i class="el-icon-star-on"></i> -->
         </div>
-        <p class="time">上次登陆：2018-04-07  14:14:14</p>
-        <p class="land"><span>香港</span> | <span>不是我登陆？</span></p>
+        <!-- <p class="time">上次登陆：2018-04-07  14:14:14</p>
+        <p class="land"><span>香港</span> | <span>不是我登陆？</span></p> -->
       </div>
       <ul>
       	<router-link to="verifyPwd" tag="li">

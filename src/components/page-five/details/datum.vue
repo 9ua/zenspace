@@ -4,7 +4,7 @@
       <li @click="show = !show">
         <p>头像</p>
         <div>
-          <img :src='"../../../assets/img/five/"+$store.state.image+".jpg"' alt="" />
+          <img :src='"../../../assets/img/five/"+image+".jpg"' alt="" />
           <i class="el-icon-arrow-right"></i>
         </div>
       </li>
@@ -14,13 +14,14 @@
           <el-input 
             placeholder="请设置昵称" 
             v-model="nickname" 
-            v-focus 
+            v-focus
             :value="nickname" 
             clearable 
             ref="isnickname" 
             @blur="nickNameFocus"
-            v-show="nickname === '' ? true : false"
+            v-show="isnickname"
           >
+          <!-- v-show="nickname === '' ? true : false" -->
           </el-input>
           <p>{{nickname}}</p>
           <i v-show="!nickname" class="el-icon-arrow-right"></i>
@@ -93,6 +94,7 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
   export default {
     data() {
       return {
+        isnickname:true,
         input: false,
         show:false,
         imgName:'',
@@ -166,10 +168,14 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
 				this.$http.get(this.$store.state.url+'api/userCenter/getUserData').then((res) => {
           this.image = res.data.data.image;
           this.nickname = res.data.data.nickName;
+          if(res.data.data.nickName !== null || res.data.data.nickName !== ''){
+            this.isnickname = !this.isnickname
+          }
           this.mobile = res.data.data.mobile;
           this.email = res.data.data.email;
           this.sex = res.data.data.sex;
           this.birthday = res.data.data.birthday;
+          console.log(this.image,this.nickname,this.mobile,this.email,this.sex,this.birthday)
 				}).catch((error) => {
 					console.log("获取个人信息No");
 				})

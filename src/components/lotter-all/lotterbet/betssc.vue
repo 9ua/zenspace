@@ -187,7 +187,7 @@
         lotteryId: 'cqssc',
         LotteryList: '',
         money: 1, //投注金额
-        displayBonus:0,
+        displayBonus:97500,
         displayBonus1:0,
         displayBonus2:0,
         displayBonus3:'',

@@ -193,7 +193,7 @@
         lotteryId: 'pk10',
         LotteryList: '',
         money: 1, //投注金额
-        displayBonus:0,
+        displayBonus:1.96,
         amount: 0, //总金额
         d: [], //选中的号码的下标
         dd: [], //选中的号码的下标

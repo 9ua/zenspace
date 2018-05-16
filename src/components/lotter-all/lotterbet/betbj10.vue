@@ -124,7 +124,7 @@
         </div>
         <div class="betbj10-footer-buttoms">
           <p>每注金额</p>
-          <input type="number" v-model="money" v-focus/>
+          <input type="number" v-model="money" onfocus="this.select()"/>
           <span v-show="money === '' ">请输入要投注的金额</span>
           <span v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'">单注最高可中
             <!-- <p>{{money * displayBonus | keepTwoNum}}</p>元</span> -->
@@ -261,6 +261,19 @@
     },
     destroyed() {
       this.endCount();
+    },
+    watch:{
+      money(newVal) {
+        if (this.money === '') {
+          setTimeout(() => {
+            if (this.money === '') {
+              this.money = 1;
+            }
+          }, 1000);
+        }else{
+          this.money = parseInt(newVal);
+        }
+      }
     },
     methods: {
       endCount(){
@@ -1096,7 +1109,6 @@
           this.displayBonus2 = Number(ar[1]);
           this.displayBonus3 = this.displayBonus1+'-'+this.displayBonus2;
         }
-        console.log(items.id,'---',this.playGroupsId)
         this.iscreat();
       },
       //继续投注

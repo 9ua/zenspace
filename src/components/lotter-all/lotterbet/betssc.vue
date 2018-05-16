@@ -115,7 +115,7 @@
         </div>
         <div class="betssc-footer-buttoms">
           <p>每注金额</p>
-          <input type="number" value="money" v-model="money"  onfocus="this.select()"/>
+          <input type="number" v-model="money"  onfocus="this.select()"/>
           <span v-if="money === ''">请输入要投注的金额</span>
           <span v-else v-show="playBonusId !== 'ssc_dxds'">单注最高可中
             <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
@@ -264,21 +264,7 @@
         }
       }
     },
-    computed:{
-      //input只能输入整数
-      inpNum:{
-        get:function(){
-          return this.money;
-        },
-        set:function(newValue){
-          this.money = parseInt(newValue);
-        }
-      }
-    },
     methods: {
-      toMoneyParseInt(){
-        this.money = parseInt(this.money)
-      },
       endCount(){
           clearInterval(this.timer);
       },

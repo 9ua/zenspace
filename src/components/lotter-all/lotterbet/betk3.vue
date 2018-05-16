@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="content-right">
-            <p>{{'0'+(seasonId*1)}}期投注截止</p>
+            <p>{{seasonId}}期投注截止</p>
             <div>
               <p>{{countDown}}</p>
             </div>
@@ -175,7 +175,7 @@
   				<p>当前选号</p><span>{{con}}</span>
   			</div>
   			<div class="betk3-footer-buttoms">
-  				<p>每注金额</p><input type="number" v-model="money"/>
+  				<p>每注金额</p><input type="number" v-model="money" onfocus="this.select()"/>
   				<span v-if="money === '' ">请输入要投注的金额</span>
   				<span v-else>单注最高可中<p>{{navlist === 3 ? rates * money : rates * money  | keepTwoNum}}</p>元</span>
   			</div>
@@ -411,15 +411,27 @@ export default {
   },
   mounted() {
     this.getPastOpen();//获取过去开奖号码10个
-    // this.getPastOp();//获取过去开奖号码1个
+    this.getPastOp();//获取过去开奖号码1个
     this.getPlayTree(); //玩法树
   },
   created() {
     this.geteServerTime(); //input显示当前时间
-    // this.getLotteryList();//右上获取彩种
   },
   destroyed() {
     this.endCount();
+  },
+  watch:{
+    money(newVal) {
+      if (this.money === '') {
+        setTimeout(() => {
+          if (this.money === '') {
+            this.money = 1;
+          }
+        }, 1000);
+      }else{
+        this.money = parseInt(newVal);
+      }
+    }
   },
   methods: {
     endCount(){
@@ -434,8 +446,8 @@ export default {
             this.seasonId3 = this.seasonId2-1;
             this.seasonId = this.seasonId2.substring(4).split("-").join("");
             this.today = res.data.data.restSeconds;
-            this.getPastOpen();
-            this.getPastOp();
+            // this.getPastOpen();
+            // this.getPastOp();
             this.initSetTimeout();
           }
         })

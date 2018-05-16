@@ -124,7 +124,7 @@
         </div>
         <div class="betbj10-footer-buttoms">
           <p>每注金额</p>
-          <input type="text" v-model="money" v-focus/>
+          <input type="number" v-model="money" v-focus/>
           <span v-show="money === '' ">请输入要投注的金额</span>
           <span v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'">单注最高可中
             <!-- <p>{{money * displayBonus | keepTwoNum}}</p>元</span> -->

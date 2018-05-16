@@ -68,7 +68,7 @@ import betssc from '@/components/lotter-all/lotterbet/betssc'
 
 Vue.use(Router)
 export default new Router({
-    //  mode: 'history',
+    mode: 'history',
     routes: [
         { path: '*', name: 'ErrorPage', component: require('../components/public/ErrorPage'), meta: { title: '操作失败' } },
         { path: "/login", name: 'login', component: resolve => require(['@/components/login/login.vue'], resolve), meta: { title: '登陆', keepAlive: true } },

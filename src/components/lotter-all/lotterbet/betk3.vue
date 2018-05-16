@@ -175,7 +175,7 @@
   				<p>当前选号</p><span>{{con}}</span>
   			</div>
   			<div class="betk3-footer-buttoms">
-  				<p>每注金额</p><input type="text" v-model="money"/>
+  				<p>每注金额</p><input type="number" v-model="money"/>
   				<span v-if="money === '' ">请输入要投注的金额</span>
   				<span v-else>单注最高可中<p>{{navlist === 3 ? rates * money : rates * money  | keepTwoNum}}</p>元</span>
   			</div>

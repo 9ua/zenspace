@@ -2,7 +2,7 @@
   <div class="three">
     <headers></headers>
     <ul v-show="showFlag">
-      <router-link to="" tag="li" v-for="(actives,index) in activitys" :key="index">
+      <li v-for="(actives,index) in activitys" :key="index">
         <img :src="'http://115.144.238.217'+actives.icon" @click="activeR($event,actives,index)"/>
       	<div class="three-box">
       		<p>活动时间：{{actives.beginPrizeTime}}</p>
@@ -11,7 +11,7 @@
         <div class="three-content" ref="pppop" v-if="activesremark === index" v-show="activesremarks">
           <p v-html="actives.remark"></p>
         </div>
-      </router-link>
+      </li>
     </ul>
     <promote :promote="selectedFood" ref="promote" @sonclick="haashow"></promote>
     <days :days="selectedFood" ref="days" @sonclick="haashow"></days>
@@ -35,7 +35,10 @@ export default {
       showFlag: true
     };
   },
-  mounted(){
+  // mounted(){
+  //   this.activity();
+  // },
+  created(){
     this.activity();
   },
   methods: {
@@ -46,6 +49,18 @@ export default {
     activity(){
       this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
         this.activitys = res.data.data;
+        // if(this.$route.query.num !== ''){
+        //   let num = 0;
+        //   num = this.$route.query.num
+        //   this.activesremark = Number(num);
+        //   this.activesremarks = !this.activesremarks;
+        //   console.log(num,'----',this.$route.query.num)
+        // }
+        if(this.$route.name === 'three'){
+          this.activesremarks = !this.activesremarks;
+        }else if(this.$route.name !== 'three'){
+          this.activesremarks = false;
+        }
       }).catch((error) => {
           console.log("No")
       })

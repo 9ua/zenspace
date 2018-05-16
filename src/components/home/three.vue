@@ -35,10 +35,7 @@ export default {
       showFlag: true
     };
   },
-  // mounted(){
-  //   this.activity();
-  // },
-  created(){
+  mounted(){
     this.activity();
   },
   methods: {
@@ -49,13 +46,13 @@ export default {
     activity(){
       this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
         this.activitys = res.data.data;
-        // if(this.$route.query.num !== ''){
-        //   let num = 0;
-        //   num = this.$route.query.num
-        //   this.activesremark = Number(num);
-        //   this.activesremarks = !this.activesremarks;
-        //   console.log(num,'----',this.$route.query.num)
-        // }
+        if(this.$route.query.num !== ''){
+          let num = 0;
+          num = this.$route.query.num
+          this.activesremark = Number(num);
+          this.activesremarks = !this.activesremarks;
+          console.log(num,'----',this.$route.query.num)
+        }
         if(this.$route.name === 'three'){
           this.activesremarks = !this.activesremarks;
         }else if(this.$route.name !== 'three'){

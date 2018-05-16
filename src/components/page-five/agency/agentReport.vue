@@ -120,7 +120,6 @@ export default {
           name: '昨日',
           type:1,
           callback: this.onClick,
-          subname: '描述信息'
         },
         {
           name: '本月',

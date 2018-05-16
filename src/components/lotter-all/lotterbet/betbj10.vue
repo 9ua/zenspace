@@ -248,6 +248,7 @@
         splayers:[],//
         snumView:[],//
         snums:'',//
+        timer:'',
       }
     },
     mounted() {
@@ -258,7 +259,13 @@
     created() {
       this.geteServerTime(); //input显示当前时间
     },
+    destroyed() {
+      this.endCount();
+    },
     methods: {
+      endCount(){
+        clearInterval(this.timer);
+      },
       //中间->投注选号
       curBalls(indexff,indexg,num,numViews,player){
         num.choose = !num.choose;

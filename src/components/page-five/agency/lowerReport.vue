@@ -24,7 +24,7 @@
             <p>{{item.account}}</p>
           </div>
           <div class="title">
-            <p>{{item.userType}}</p>
+            <p>{{item.userTypeName}}</p>
           </div>
           <div class="title">
             <p>{{item.teamCount}}</p>

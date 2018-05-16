@@ -238,6 +238,7 @@
         splayers:[],//
         snumView:[],//
         snums:'',//
+        timer:'',
       }
     },
     mounted() {

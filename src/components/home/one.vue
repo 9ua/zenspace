@@ -3,7 +3,9 @@
   	<!-- <headers></headers> -->
     <van-swipe :autoplay="2200" :show-indicators="false">
 		  <van-swipe-item v-for="(item,index) in bannerList" :key="index">
-		  	<img :src='$store.state.url+item.img'/>
+				<router-link :to='item.link'>
+					<img :src='$store.state.url+item.img'/>
+				</router-link>
 		  </van-swipe-item>
 		</van-swipe>
     <!-- <div class="add">
@@ -40,7 +42,7 @@
     	getLotterlist(){
 	      this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
 	      	this.lotteryList = res.data.data.hotLotterys;
-	      	this.bannerList = res.data.data.banners;
+					this.bannerList = res.data.data.banners;
 	      }).catch((error) => {
 	      		console.log("No")
 	      })

@@ -410,7 +410,6 @@ export default {
     };
   },
   mounted() {
-    
     this.getPastOpen();//获取过去开奖号码10个
     // this.getPastOp();//获取过去开奖号码1个
     this.getPlayTree(); //玩法树
@@ -419,7 +418,13 @@ export default {
     this.geteServerTime(); //input显示当前时间
     // this.getLotteryList();//右上获取彩种
   },
+  destroyed() {
+    this.endCount();
+  },
   methods: {
+    endCount(){
+        clearInterval(this.timer);
+    },
     //获取彩種當前獎期時間
     geteServerTime() {
       clearInterval(this.timer);

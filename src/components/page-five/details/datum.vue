@@ -14,12 +14,11 @@
           <el-input 
             placeholder="请设置昵称" 
             v-model="nickname" 
-            v-focus
             :value="nickname" 
             clearable 
             ref="isnickname" 
             @blur="nickNameFocus"
-            v-show="isnickname"
+            v-show="isnicknameto"
           >
           <!-- v-show="nickname === '' ? true : false" -->
           </el-input>
@@ -94,7 +93,7 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
   export default {
     data() {
       return {
-        isnickname:true,
+        isnicknameto:false,
         input: false,
         show:false,
         imgName:'',
@@ -139,6 +138,9 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
       //性别选择
       selecteds(e){
         this.sex = e.target.value;
+        console.log(
+          this.sex
+        )
         this.$store.state.sex = this.sex;
         setStore('sex',this.$store.state.sex)
         this.saveUserData();
@@ -148,7 +150,6 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
         this.nickname = this.$refs.isnickname.value;
         this.$store.state.nickname = this.nickname;
         setStore('nickname',this.$store.state.nickname);
-        this.saveUserData();
       },
       //提交个人信息
       saveUserData(){
@@ -168,14 +169,17 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
 				this.$http.get(this.$store.state.url+'api/userCenter/getUserData').then((res) => {
           this.image = res.data.data.image;
           this.nickname = res.data.data.nickName;
-          if(res.data.data.nickName !== null || res.data.data.nickName !== ''){
-            this.isnickname = !this.isnickname
+          if(!res.data.data.nickName){
+            this.isnicknameto = true;
           }
           this.mobile = res.data.data.mobile;
           this.email = res.data.data.email;
-          this.sex = res.data.data.sex;
-          this.birthday = res.data.data.birthday;
-          console.log(this.image,this.nickname,this.mobile,this.email,this.sex,this.birthday)
+          if(res.data.data.sex !== null){
+            this.sex = res.data.data.sex;
+          }
+          if(res.data.data.sex !== null){
+            this.birthday = res.data.data.birthday;
+          }
 				}).catch((error) => {
 					console.log("获取个人信息No");
 				})

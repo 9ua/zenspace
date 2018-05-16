@@ -187,7 +187,7 @@
         lotteryId: 'cqssc',
         LotteryList: '',
         money: 1, //投注金额
-        displayBonus:97500,
+        displayBonus:0,
         displayBonus1:0,
         displayBonus2:0,
         displayBonus3:'',
@@ -948,6 +948,11 @@
             }
           }
           this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en + ',' + this.fn + ',' + this.gn + ',' + this.hn + ',' + this.in + ',' + this.jn;
+          if(this.con.indexOf("和") !== -1){
+            this.youhezhi = true;
+          }else if(this.con.indexOf("和") === -1){
+            this.youhezhi = false;
+          }
         }
         //三星包胆 -
         if(this.playBonusId === 'ssc_star3_front_group_contains' || this.playBonusId === 'ssc_star3_mid_group_contains' || this.playBonusId === 'ssc_star3_last_group_contains') {
@@ -1448,6 +1453,7 @@
               this.snumView.push(this.splayers[h][i].numView)
             }
           }
+          this.displayBonus = this.splayers[0][0].displayBonus
         }).catch((error) => {
           console.log("玩法树No");
         })

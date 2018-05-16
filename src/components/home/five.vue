@@ -69,7 +69,7 @@
         securityCoe:'',
         content:'',
         show2:false,
-        balances:0,//用户余额
+        balances:0.00,//用户余额
         image:0,//用户头像
       	money:false,
         toF5money:false,//刷新动画
@@ -120,11 +120,11 @@
       //刷新余额
       F5money(){
         this.toF5money = !this.toF5money;
-        this.$refs.money.textContent = "元";
+        this.$refs.money.innerHTML = "元";
         setTimeout(() => {
           this.getBalance();
           this.toF5money = !this.toF5money;
-          this.$refs.money.textContent = this.balances+"元";
+          this.$refs.money.innerHTML = this.balances+"元";
         }, 2400);
         
       },

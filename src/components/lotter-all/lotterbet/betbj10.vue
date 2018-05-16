@@ -97,7 +97,8 @@
             <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
               <span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}
                 <b>。奖金
-                  <i>{{player.displayBonus | keepTwoNum}}</i> 元</b>
+                  <i v-show="Number(player.displayBonus)">{{player.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(player.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
                 <br/> </span>
               <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playGroupsId === player.id">
@@ -124,8 +125,11 @@
         <div class="betbj10-footer-buttoms">
           <p>每注金额</p>
           <input type="text" v-model="money" v-focus/>
-          <span v-if="money === '' ">请输入要投注的金额</span>
-          <span v-else>单注最高可中<p>{{money * displayBonus | keepTwoNum}}</p>元</span>
+          <span v-show="money === '' ">请输入要投注的金额</span>
+          <span v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'">单注最高可中
+            <!-- <p>{{money * displayBonus | keepTwoNum}}</p>元</span> -->
+            <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
+            <p v-show="isNaN(money*displayBonus)">{{youdashuang ? money*displayBonus2 : money*displayBonus1 | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betbj10-footer-buttom">
@@ -177,6 +181,7 @@
   export default {
     data() {
       return {
+        youdashuang:false,//判断是否有‘大双’
         showTimesUp: false,
         showpop: false, //弹窗
         content: '提示内容!', //弹窗内容
@@ -194,6 +199,9 @@
         LotteryList: '',
         money: 1, //投注金额
         displayBonus:1.96,
+        displayBonus1:0,
+        displayBonus2:0,
+        displayBonus3:'',
         amount: 0, //总金额
         d: [], //选中的号码的下标
         dd: [], //选中的号码的下标
@@ -221,6 +229,7 @@
         zhu: 0,
         rates: 0, //最高可中
         playGroups: '', //玩法树
+        pk10star2dj:true,
         playGroupsId: 'pk10_side_lh', //点击选中后获取此玩法ID
         betsscContentTopPop: false,
         getPastOpens: '', //获取过去开奖号码10个
@@ -258,12 +267,22 @@
           this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu++;
+          if(this.con.indexOf("大") !== -1 || this.con.indexOf("双") !== -1){
+            this.youdashuang = true;
+          }else if(this.con.indexOf("大") === -1 || this.con.indexOf("双") === -1){
+            this.youdashuang = false;
+          }
           this.pk10_boxjia(indexff,indexg,num,numViews,player)
         }else if(num.choose === false) {
           this.d.splice(indexg, 1, "");
           this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu--;
+          if(this.con.indexOf("大") !== -1 || this.con.indexOf("双") !== -1){
+            this.youdashuang = true;
+          }else if(this.con.indexOf("大") === -1 || this.con.indexOf("双") === -1){
+            this.youdashuang = false;
+          }
           this.pk10_boxjian(indexff,indexg,num,numViews,player);
         }
       },
@@ -1020,6 +1039,7 @@
               this.snumView.push(this.splayers[h][i].numView)
             }
           }
+          this.displayBonus = this.splayers[0][0].displayBonus
         }).catch((error) => {
           console.log("玩法树No");
         })
@@ -1062,6 +1082,14 @@
         this.navlistb = indexa;
         this.navlistf = indexb;
         this.displayBonus = items.displayBonus;
+        if(isNaN(this.displayBonus)){
+          let ar = [];
+          ar = this.displayBonus.split('-');
+          this.displayBonus1 = Number(ar[0]);
+          this.displayBonus2 = Number(ar[1]);
+          this.displayBonus3 = this.displayBonus1+'-'+this.displayBonus2;
+        }
+        console.log(items.id,'---',this.playGroupsId)
         this.iscreat();
       },
       //继续投注

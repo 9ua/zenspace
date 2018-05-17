@@ -241,6 +241,7 @@
         getPastO: '', //获取过去开奖号码1个
         seasonId: '', //截取后的期号
         seasonId2: '', //当前期号
+        seasonId3:'',
         countDown: '',
         players: '',
         intotitle: '',
@@ -254,12 +255,13 @@
         snumView:[],//
         snums:'',//
         timer:'',
+        timer2:'',
       }
     },
     mounted() {
       this.getPlayTree(); //玩法树
-      this.getPastOpen(); //获取过去开奖号码10个
-      this.getPastOp(); //获取过去开奖号码1个
+      // this.getPastOpen(); //获取过去开奖号码10个
+      // this.getPastOp(); //获取过去开奖号码1个
     },
     created() {
       this.geteServerTime(); //input显示当前时间
@@ -1190,6 +1192,16 @@
       getPastOp() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
+          if (res.data.data[0].seasonId != this.seasonId3) {
+                  this.timer2 = setTimeout(() => {
+                  console.log(res.data.data[0],this.seasonId3,5566)
+                  clearInterval(this.timer2);
+                  this.getPastOp();
+              }, 10000);
+          } else {
+            console.log(res.data.data[0],this.seasonId3,7788)
+            clearInterval(this.timer2);
+          }
         }).catch((error) => {
           console.log("获取过去开奖号码No")
         })
@@ -1201,7 +1213,10 @@
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
             this.seasonId = this.seasonId2;
+            this.seasonId3 = this.seasonId2-1;
             this.today = res.data.data.restSeconds;
+            this.getPastOpen();//获取过去开奖号码10个
+            this.getPastOp();//获取过去开奖号码1个
             this.initSetTimeout();
           }
         }).catch((error) => {

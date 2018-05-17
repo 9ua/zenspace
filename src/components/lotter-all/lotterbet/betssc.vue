@@ -210,6 +210,7 @@
         getPastO: '', //获取过去开奖号码1个
         seasonId: '', //截取后的期号
         seasonId2: '', //当前期号
+        seasonId3:'',
         countDown: '',
         players: '',
         intotitle: '',
@@ -243,11 +244,12 @@
         snumView:[],//
         snums:'',//
         timer:'',
+        timer2:'',
       }
     },
     mounted() {
-      this.getPastOpen(); //获取过去开奖号码10个
-      this.getPastOp(); //获取过去开奖号码1个
+      // this.getPastOpen(); //获取过去开奖号码10个
+      // this.getPastOp(); //获取过去开奖号码1个
       this.getPlayTree(); //玩法树
     },
     created() {
@@ -272,6 +274,7 @@
     methods: {
       endCount(){
           clearInterval(this.timer);
+          clearInterval(this.timer2);
       },
       //中间->投注选号
       curBalls(indexff, indexg, num, numViews, player) {
@@ -1584,6 +1587,17 @@
         this.getLotteryList();
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
+          console.log(res.data.data[0].seasonId,this.seasonId3,123)
+          if (res.data.data[0].seasonId != this.seasonId3) {
+                  this.timer2 = setTimeout(() => {
+                  console.log(res.data.data[0],this.seasonId3,5566)
+                  clearInterval(this.timer2);
+                  this.getPastOp();
+              }, 10000);
+          } else {
+            console.log(res.data.data[0],this.seasonId3,7788)
+            clearInterval(this.timer2);
+          }
         }).catch((error) => {
           console.log("获取过去开奖号码No")
         })
@@ -1595,7 +1609,10 @@
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
             this.seasonId = this.seasonId2.substring(4).split("-").join("");
+            this.seasonId3 = this.seasonId2-1;
             this.today = res.data.data.restSeconds;
+            this.getPastOpen(); //获取过去开奖号码10个
+            this.getPastOp(); //获取过去开奖号码1个
             this.initSetTimeout();
           }
         }).catch((error) => {

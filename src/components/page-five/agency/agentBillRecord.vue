@@ -7,6 +7,20 @@
     </div>
     
     <div class="agent-content">
+      <ul class="recharge-top">
+            <li>
+              <div>
+              <el-input 
+                placeholder="请输入用户帐号名称" 
+                v-model="accountName" 
+                :value="accountName" 
+                clearable 
+              >
+              </el-input>
+              </div>
+              <button @click="getTradeList()"><i class="el-icon-arrow-right"></i></button>
+            </li>
+      </ul>
       <div class="agent-content-top">
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
@@ -50,7 +64,7 @@ export default {
         changeAmount:'',
         changeTime:'',
         tradelist:[],
-        
+        accountName:'',
 
         usertype:2,
         highbet:0,
@@ -117,13 +131,24 @@ export default {
       this.getTradeList();
     },
     getTradeList(){
-        this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:2,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
-            this.tradelist = res.data.data.list;
-            console.log(this.tradelist);
-			}).catch((error) => {
+      if (this.accountName == ''){
+            this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.$store.state.Globalusername,include:2,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
+                this.tradelist = res.data.data.list;
+                console.log(this.tradelist);
+            }).catch((error) => {
                 console.log(error);
-                    console.log("获取彩種ratio ERROR");
-		});
+                console.log("获取彩種ratio ERROR");
+          });
+      } else {
+            this.$http.get(this.$store.state.url+'api/proxy/getTradeList',{params:{account:this.accountName,include:0,accountChangeType:this.accountChangeType,betweenType:this.betweenType,}}).then((res) => {
+                this.tradelist = res.data.data.list;
+                console.log(this.tradelist);
+            }).catch((error) => {
+                console.log(error);
+                console.log("获取彩種ratio ERROR");
+          });
+      }
+
     },
   },
 };

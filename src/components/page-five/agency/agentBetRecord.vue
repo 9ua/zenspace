@@ -7,6 +7,20 @@
     </div>
     
     <div class="agent-content recharge">
+      <ul class="recharge-top">
+            <li>
+              <div>
+              <el-input 
+                placeholder="请输入用户帐号名称" 
+                v-model="accountName" 
+                :value="accountName" 
+                clearable 
+              >
+              </el-input>
+              </div>
+              <button @click="getTradeList()"><i class="el-icon-arrow-right"></i></button>
+            </li>
+      </ul>
       <div class="agent-content-top">
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
@@ -78,7 +92,7 @@ export default {
         changeAmount:'',
         changeTime:'',
         tradelist:[],
-
+        accountName:'',
 
         usertype:2,
         highbet:0,
@@ -153,12 +167,21 @@ export default {
       this.getTradeList();
     },
     getTradeList(){
+      if (this.accountName == '') {
         this.$http.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.$store.state.Globalusername,include:2,status:this.status,betweenType:this.betweenType,}}).then((res) => {
             this.tradelist = res.data.data.list;
-			}).catch((error) => {
+		    	}).catch((error) => {
                 console.log(error);
                     console.log("获取彩種ratio ERROR");
-		});
+	        	});
+      } else if (this.accountName !=='') {
+        this.$http.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.accountName,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
+            this.tradelist = res.data.data.list;
+		    	}).catch((error) => {
+                console.log(error);
+                    console.log("获取彩種ratio ERROR");
+	        	});
+      }
     },
   },
 };

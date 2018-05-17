@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home-cneter">
-      <keep-alive>
+      <keep-alive v-if="$route.meta.keepAlive">
         <router-view></router-view>
       </keep-alive>
     </div>

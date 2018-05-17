@@ -185,27 +185,42 @@ export default new Router({
       children: [{
           path: 'lotterAll',
           name: 'lotterAll',
-          component: lotterAll
+          component: lotterAll,
+          meta: {
+            keepAlive: true
+          }
         },
         {
           path: 'k3s',
           name: 'k3s',
-          component: k3s
+          component: resolve => require(['@/components/lotter-all/k3.vue'], resolve),
+          meta: {
+            keepAlive: true
+          },
         },
         {
           path: 'sscs',
           name: 'sscs',
-          component: sscs
+          component: resolve => require(['@/components/lotter-all/ssc.vue'], resolve),
+          meta: {
+            keepAlive: true
+          },
         },
         {
           path: 'klcs',
           name: 'klcs',
-          component: klcs
+          component: resolve => require(['@/components/lotter-all/klc.vue'], resolve),
+          meta: {
+            keepAlive: true
+          },
         },
         {
           path: 'etfs',
           name: 'etfs',
-          component: etfs
+          component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
+          meta: {
+            keepAlive: true
+          },
         }
       ]
     },
@@ -375,6 +390,9 @@ export default new Router({
       name: 'mymsg',
       redirect: 'mymsg/notice',
       component: mymsg,
+      meta: {
+        keepAlive: true
+      },
       children: [{
           path: 'notice',
           name: 'notice',

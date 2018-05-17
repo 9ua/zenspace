@@ -110,22 +110,26 @@
         <div class="betssc-footer-buttom-right" @click="betC">马上投注</div>
       </div>
     </div>
-    <ul class="betc" v-show="betGoshow">
-      <li>投注确认</li>
-      <li>
-        <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-        <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-        <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
-      </li>
-      <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
-    </ul>
-    <ul class="betc"  v-show="betsuccess">
-      <li>温馨提示！</li>
-      <li>
-        <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
-      </li>
-      <li><router-link to="/bet" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
-    </ul>
+    <van-popup  v-model="betGoshow">
+      <ul class="betc">
+        <li>投注确认</li>
+        <li>
+          <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+          <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+          <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+        </li>
+        <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
+      </ul>
+    </van-popup>
+    <van-popup v-model="betsuccess">
+      <ul class="betc" >
+        <li>温馨提示！</li>
+        <li>
+          <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+        </li>
+        <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
+      </ul>
+    </van-popup>
     <van-popup v-model="showTimesUp" :close-on-click-overlay="false">
       <div class="mIcode-sure">
         <div class="sure2">
@@ -1475,6 +1479,9 @@ import pop from '../../public/pop'
         }).catch((error) => {
           console.log("No");
         })
+      },
+      looksucc(){
+        this.$router.push({path:'/bet'});
       },
       betsucc() {
         this.betsuccess = !this.betsuccess;

@@ -38,12 +38,6 @@ export default {
   mounted(){
     this.activity();
   },
-  watch: {  
-    $route(to, from) {  
-      console.log(to,'-------');  
-      console.log(from.fullPath);  
-    }  
-  },
   methods: {
     activeR(e,actives,index){
       this.activesremark = index;

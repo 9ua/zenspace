@@ -202,7 +202,7 @@
       <li>
         <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
       </li>
-      <li><router-link to="/bet" tag='button'>查看注单</router-link><button @click="betsucc">继续投注</button></li>
+      <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
     </ul>
     <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
       <div>
@@ -1026,7 +1026,7 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.betsuccess = !this.betsuccess;
-                  }, 1000);
+                  }, 800);
                 }, 400);
               }
             })
@@ -1107,6 +1107,9 @@ export default {
             });
         }
       
+    },
+    looksucc(){
+      this.$router.push({path:'/bet'});
     },
     //继续投注
     betsucc() {

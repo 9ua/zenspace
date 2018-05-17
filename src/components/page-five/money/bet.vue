@@ -1,11 +1,11 @@
 <template>
   <div class="agent">
     <div class="agent-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
+      <!-- <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link> -->
+      <i class="el-icon-arrow-left" @click="banckto"></i>
       <p>投注记录</p>
       <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
     </div>
-    
     <div class="agent-content recharge">
       <div class="agent-content-top">
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
@@ -96,12 +96,12 @@ export default {
             callback: this.print,
           },
           {
-            name:'已中獎',
+            name:'已中奖',
             Type:1,
             callback: this.print,
           },
           {
-            name:'未中獎',
+            name:'未中奖',
             Type:2,
             callback: this.print,
           },
@@ -137,6 +137,10 @@ export default {
       this.getTradeList();
   },
   methods: {
+    //返回到上一次进来的页面
+    banckto(){
+      this.$router.go(-1)
+    },
     select(a) {
         this.show2 = !this.show2;
         this.selected = a;

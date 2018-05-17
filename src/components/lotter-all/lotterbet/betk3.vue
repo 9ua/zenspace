@@ -303,9 +303,9 @@ export default {
         { title: "116", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "226", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "336", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-11", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-22", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-33", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-11", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-22", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-33", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "441", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "551", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "661", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -321,9 +321,9 @@ export default {
         { title: "446", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "556", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "665", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-44", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-55", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-66", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "全选-44", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-55", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-66", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
       // 二不同
       erbutong: [

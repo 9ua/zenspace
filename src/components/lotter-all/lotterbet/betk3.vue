@@ -277,6 +277,7 @@ export default {
       con2: "",
       cons: "",
       playBonus: "", //玩法树
+      timer2:'',
       // 单挑一骰
       yishai: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -410,8 +411,8 @@ export default {
     };
   },
   mounted() {
-    this.getPastOpen();//获取过去开奖号码10个
-    this.getPastOp();//获取过去开奖号码1个
+    // this.getPastOpen();//获取过去开奖号码10个
+    // this.getPastOp();//获取过去开奖号码1个
     this.getPlayTree(); //玩法树
   },
   created() {
@@ -436,6 +437,7 @@ export default {
   methods: {
     endCount(){
         clearInterval(this.timer);
+        clearInterval(this.timer2);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
@@ -446,8 +448,8 @@ export default {
             this.seasonId3 = this.seasonId2-1;
             this.seasonId = this.seasonId2.substring(4).split("-").join("");
             this.today = res.data.data.restSeconds;
-            // this.getPastOpen();
-            // this.getPastOp();
+            this.getPastOpen();
+            this.getPastOp();
             this.initSetTimeout();
           }
         })
@@ -491,6 +493,7 @@ export default {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
           this.getPastOpens = res.data.data;
         })
+        
         .catch(error => {
           console.log("获取过去开奖号码No");
         });
@@ -499,6 +502,17 @@ export default {
     getPastOp() {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
           this.getPastO = res.data.data;
+          console.log(res.data.data[0].seasonId,this.seasonId3,123)
+          if (res.data.data[0].seasonId != this.seasonId3) {
+                  this.timer2 = setTimeout(() => {
+                  console.log(res.data.data[0],this.seasonId3,5566)
+                  clearInterval(this.timer2);
+                  this.getPastOp();
+              }, 10000);
+          } else {
+            console.log(res.data.data[0],this.seasonId3,7788)
+            clearInterval(this.timer2);
+          }
         })
         .catch(error => {
           console.log("获取过去开奖号码No");

@@ -1029,7 +1029,7 @@
               setTimeout(() => {
                 this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
-              }, 1000);
+              }, 800);
             }, 400);
           }
         }).catch((error) => {

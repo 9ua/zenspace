@@ -1012,7 +1012,7 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.betsuccess = !this.betsuccess;
-                  }, 1000);
+                  }, 800);
                 }, 400);
               }
             })

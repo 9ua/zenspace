@@ -178,6 +178,11 @@
         & p {
           font-size: 16px;
           line-height: 28px;
+          & i{
+            margin-left: 6px;
+            font-size: 24px;
+            color: #78ba9e;
+          }
         }
         & div {
           display: flex;
@@ -198,10 +203,6 @@
               width: 200%;
               height: 600%;
             }
-          }
-          & i {
-            font-size: 30px;
-            color: #78ba9e;
           }
         }
       }

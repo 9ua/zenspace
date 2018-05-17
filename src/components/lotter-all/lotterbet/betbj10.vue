@@ -45,7 +45,8 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
-            <p>{{item.seasonId}}期开奖号码</p>
+            <p>{{item.seasonId}}期开奖号码<i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i></p>
+            
             <div>
               <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
               <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>

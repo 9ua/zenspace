@@ -188,26 +188,22 @@
   			<div class="betk3-footer-buttom-right" @click="betC">马上投注</div>
   		</div>
   	</div>
-    <van-popup  v-model="betGoshow">
-      <ul class="betc">
-        <li>投注确认</li>
-        <li>
-          <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-          <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-          <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
-        </li>
-        <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
-      </ul>
-    </van-popup>
-    <van-popup v-model="betsuccess">
-      <ul class="betc" >
-        <li>温馨提示！</li>
-        <li>
-          <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
-        </li>
-        <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
-      </ul>
-    </van-popup>
+    <ul class="betc" v-show="betGoshow">
+      <li>投注确认</li>
+      <li>
+        <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+        <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+        <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+      </li>
+      <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
+    </ul>
+    <ul class="betc"  v-show="betsuccess">
+      <li>温馨提示！</li>
+      <li>
+        <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+      </li>
+      <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
+    </ul>
     <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
       <div>
       <ul>
@@ -227,7 +223,7 @@
   </div>
 </template>
 <script>
-import { setStore, getStore,removeStore } from '@/config/mutil'
+import { setStore, getStore, removeStore } from '../../../config/mutil'
 export default {
   data() {
     return {
@@ -281,9 +277,8 @@ export default {
       con1: "",
       con2: "",
       cons: "",
-      playBonus:[], //玩法树
+      playBonus: "", //玩法树
       timer2:'',
-      toototo:'',
       // 单挑一骰
       yishai: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -310,9 +305,9 @@ export default {
         { title: "116", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "226", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "336", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "全选-11", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "全选-22", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "全选-33", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "All-11", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "All-22", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "All-33", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "441", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "551", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "661", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -328,9 +323,9 @@ export default {
         { title: "446", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "556", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "665", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "全选-44", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "全选-55", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "全选-66", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "All-44", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "All-55", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "All-66", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
       // 二不同
       erbutong: [
@@ -413,8 +408,7 @@ export default {
         { title: "4", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "5", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "6", rates: "赔率63.72", rate: "63.72", selected: false }
-      ],
-      setStorePlayTree:[],
+      ]
     };
   },
   mounted() {
@@ -452,11 +446,11 @@ export default {
       }else{
         this.money = parseInt(newVal);
       }
-    },
+    }
   },
   methods: {
     endCount(){
-        clearTimeout(this.timer);
+        clearInterval(this.timer);
         clearTimeout(this.timer2);
     },
     //获取彩種當前獎期時間
@@ -521,19 +515,25 @@ export default {
     //获取过去开奖号码1个
     getPastOp() {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
-        this.getPastO = res.data.data;
-        if (res.data.data[0].seasonId != this.seasonId3) {
-                this.timer2 = setTimeout(() => {
-                clearInterval(this.timer2);
-                this.getPastOp();
-            }, 10000);
-        } else {
-          clearInterval(this.timer2);
-        }
-      })
-      .catch(error => {
-        console.log("获取过去开奖号码No");
-      });
+          this.getPastO = res.data.data;
+          console.log(res.data.data[0].seasonId,this.seasonId3,123)
+          if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
+              console.log(res.data.data[0],this.seasonId3,5566)
+              this.reGetPastOp();
+          } else {
+            console.log(res.data.data[0],this.seasonId3,7788)
+          }
+        })
+        .catch(error => {
+          console.log("获取过去开奖号码No");
+        });
+    },
+    reGetPastOp(){
+        clearTimeout(this.timer2);
+        this.timer2 = setTimeout(() => {
+        console.log(res.data.data[0],this.seasonId3,88888888888888888888888)
+        this.getPastOp();
+        }, 10000);
     },
     //右上获取彩种
     getLotteryList() {
@@ -808,7 +808,7 @@ export default {
         this.zhu = this.zhu1 + this.zhu2;
       }
     },
-    //玩法树
+    // 玩法树
     getPlayTree() {
       this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
           this.playBonus = res.data.data.playBonus;
@@ -845,7 +845,7 @@ export default {
           setTimeout(() => {
             this.betshow = !this.betshow;
             this.$router.push("/login");
-          }, 1000);
+          }, 1300);
         });
     },
     //中间->投注选号
@@ -1043,8 +1043,8 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.betsuccess = !this.betsuccess;
-                  }, 100);
-                }, 100);
+                  }, 800);
+                }, 400);
               }
             })
             .catch(error => {

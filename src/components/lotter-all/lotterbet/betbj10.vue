@@ -1221,7 +1221,6 @@
       reGetPastOp(){
         clearTimeout(this.timer2);
         this.timer2 = setTimeout(() => {
-        console.log(res.data.data[0],this.seasonId3,88888888888888888888888)
         this.getPastOp();
         }, 10000);
       },

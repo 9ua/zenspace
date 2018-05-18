@@ -302,6 +302,9 @@ export default new Router({
       path: '/safety',
       name: 'safety',
       component: resolve => require(['@/components/page-five/safety.vue'], resolve),
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/verifyPwd',
@@ -423,7 +426,7 @@ export default new Router({
       redirect: 'detail/datum',
       component: detail,
       meta: {
-        keepAlive: true
+        keepAlive: false
       },
       children: [{
           path: 'datum',

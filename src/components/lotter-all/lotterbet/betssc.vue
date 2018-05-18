@@ -254,10 +254,20 @@ import { setStore, getStore,removeStore } from '@/config/mutil'
       this.getPlayTree(); //玩法树
     },
     created() {
-      this.geteServerTime(); //input显示当前时间
+      // this.geteServerTime(); //input显示当前时间
     },
     destroyed() {
       this.endCount();
+    },
+    activated(){
+      if(!this.$route.meta.isBack){
+        this.getPlayTree();
+        this.getLotteryList();
+        this.getPastOpen();
+        this.getPastOp();
+        this.geteServerTime();//获取彩種當前獎期時間
+      }
+      this.$route.meta.isBack=false;
     },
     watch:{
       money(newVal) {
@@ -274,7 +284,7 @@ import { setStore, getStore,removeStore } from '@/config/mutil'
     },
     methods: {
       endCount(){
-          clearTimeout(this.timer);
+          clearInterval(this.timer);
           clearTimeout(this.timer2);
       },
       //中间->投注选号
@@ -1449,10 +1459,12 @@ import { setStore, getStore,removeStore } from '@/config/mutil'
           for (let j = 0; j < this.snumView[i].length; j++) {
             for (let k = 0; k < this.snumView[i][j].nums.length; k++) {
               this.snumView[i][j].nums[k].choose = false;
+              // console.log(this.snumView[i])
             }
           }
           
         }
+
       },
       betCancel() {
         this.betGoshow = !this.betGoshow;
@@ -1520,8 +1532,10 @@ import { setStore, getStore,removeStore } from '@/config/mutil'
           console.log("No");
         })
       },
+      //查看注单
       looksucc(){
         this.$router.push({path:'/bet'});
+        this.betsuccess = !this.betsuccess;
       },
       betsucc() {
         this.betsuccess = !this.betsuccess;
@@ -1593,7 +1607,7 @@ import { setStore, getStore,removeStore } from '@/config/mutil'
                   this.getPastOp();
               }, 10000);
           } else {
-            clearInterval(this.timer2);
+            clearTimeout(this.timer2);
           }
         }).catch((error) => {
           console.log("获取过去开奖号码No")
@@ -1602,6 +1616,7 @@ import { setStore, getStore,removeStore } from '@/config/mutil'
       //获取彩種當前獎期時間
       geteServerTime() {
         clearInterval(this.timer);
+        clearTimeout(this.timer2);
         this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.$route.query.id}}).then((res) => {
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
@@ -1636,7 +1651,6 @@ import { setStore, getStore,removeStore } from '@/config/mutil'
           if(this.today < 1) {
             clearInterval(this.timer);
             this.timesUp();
-            this.getPastOp();
           }
         }, 1000);
       },

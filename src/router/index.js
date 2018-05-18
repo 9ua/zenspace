@@ -131,7 +131,8 @@ export default new Router({
       name: 'betbj10',
       component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        isBack:false
       }
     },
     {
@@ -139,7 +140,8 @@ export default new Router({
       name: 'betbjkl8',
       component: resolve => require(['@/components/lotter-all/lotterbet/betbjkl8.vue'], resolve),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        isBack:false
       }
     },
     {
@@ -147,7 +149,8 @@ export default new Router({
       name: 'betetf',
       component: resolve => require(['@/components/lotter-all/lotterbet/betetf.vue'], resolve),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        isBack:false
       }
     },
     {
@@ -155,7 +158,8 @@ export default new Router({
       name: 'betk3',
       component: resolve => require(['@/components/lotter-all/lotterbet/betk3.vue'], resolve),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        isBack:false
       }
     },
     {
@@ -163,7 +167,8 @@ export default new Router({
       name: 'betlhc',
       component: resolve => require(['@/components/lotter-all/lotterbet/betlhc.vue'], resolve),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        isBack:false
       }
     },
     {
@@ -171,7 +176,8 @@ export default new Router({
       name: 'betssc',
       component: resolve => require(['@/components/lotter-all/lotterbet/betssc.vue'], resolve),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        isBack:false
       }
     },
     {

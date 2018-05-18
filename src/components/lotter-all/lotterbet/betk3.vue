@@ -1114,6 +1114,7 @@ export default {
     },
     looksucc(){
       this.$router.push({path:'/bet'});
+      this.betsuccess = !this.betsuccess;
     },
     //继续投注
     betsucc() {

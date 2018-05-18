@@ -1036,8 +1036,8 @@
               setTimeout(() => {
                 this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
-              }, 800);
-            }, 400);
+              }, 100);
+            }, 100);
           }
         }).catch((error) => {
           console.log("No");
@@ -1193,13 +1193,11 @@
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
           if (res.data.data[0].seasonId != this.seasonId3) {
-                  this.timer2 = setTimeout(() => {
-                  console.log(res.data.data[0],this.seasonId3,5566)
-                  clearInterval(this.timer2);
-                  this.getPastOp();
-              }, 10000);
+            this.timer2 = setTimeout(() => {
+              clearInterval(this.timer2);
+              this.getPastOp();
+            }, 10000);
           } else {
-            console.log(res.data.data[0],this.seasonId3,7788)
             clearInterval(this.timer2);
           }
         }).catch((error) => {

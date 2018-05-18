@@ -172,6 +172,7 @@
   </div>
 </template>
 <script>
+import { setStore, getStore,removeStore } from '@/config/mutil'
   export default {
     data() {
       return {
@@ -273,8 +274,8 @@
     },
     methods: {
       endCount(){
-          clearInterval(this.timer);
-          clearInterval(this.timer2);
+          clearTimeout(this.timer);
+          clearTimeout(this.timer2);
       },
       //中间->投注选号
       curBalls(indexff, indexg, num, numViews, player) {
@@ -1512,8 +1513,8 @@
               setTimeout(() => {
                 this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
-              }, 800);
-            }, 400);
+              }, 100);
+            }, 100);
           }
         }).catch((error) => {
           console.log("No");
@@ -1570,7 +1571,6 @@
           this.displayBonus1 = Number(ar[0]);
           this.displayBonus2 = Number(ar[1]);
           this.displayBonus3 = this.displayBonus1+'-'+this.displayBonus2;
-          console.log(this.displayBonus1,this.displayBonus2,this.displayBonus3)
         }
       },
       //获取过去开奖号码10个
@@ -1587,15 +1587,12 @@
         this.getLotteryList();
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
-          console.log(res.data.data[0].seasonId,this.seasonId3,123)
           if (res.data.data[0].seasonId != this.seasonId3) {
                   this.timer2 = setTimeout(() => {
-                  console.log(res.data.data[0],this.seasonId3,5566)
                   clearInterval(this.timer2);
                   this.getPastOp();
               }, 10000);
           } else {
-            console.log(res.data.data[0],this.seasonId3,7788)
             clearInterval(this.timer2);
           }
         }).catch((error) => {

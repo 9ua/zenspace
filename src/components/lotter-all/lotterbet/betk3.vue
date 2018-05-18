@@ -227,6 +227,7 @@
   </div>
 </template>
 <script>
+import { setStore, getStore,removeStore } from '@/config/mutil'
 export default {
   data() {
     return {
@@ -280,8 +281,9 @@ export default {
       con1: "",
       con2: "",
       cons: "",
-      playBonus: "", //玩法树
+      playBonus:[], //玩法树
       timer2:'',
+      toototo:'',
       // 单挑一骰
       yishai: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -411,7 +413,8 @@ export default {
         { title: "4", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "5", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "6", rates: "赔率63.72", rate: "63.72", selected: false }
-      ]
+      ],
+      setStorePlayTree:[],
     };
   },
   mounted() {
@@ -436,12 +439,13 @@ export default {
       }else{
         this.money = parseInt(newVal);
       }
-    }
+    },
+
   },
   methods: {
     endCount(){
-        clearInterval(this.timer);
-        clearInterval(this.timer2);
+        clearTimeout(this.timer);
+        clearTimeout(this.timer2);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
@@ -506,15 +510,12 @@ export default {
     getPastOp() {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
           this.getPastO = res.data.data;
-          console.log(res.data.data[0].seasonId,this.seasonId3,123)
           if (res.data.data[0].seasonId != this.seasonId3) {
                   this.timer2 = setTimeout(() => {
-                  console.log(res.data.data[0],this.seasonId3,5566)
                   clearInterval(this.timer2);
                   this.getPastOp();
               }, 10000);
           } else {
-            console.log(res.data.data[0],this.seasonId3,7788)
             clearInterval(this.timer2);
           }
         })
@@ -799,6 +800,7 @@ export default {
     getPlayTree() {
       this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
           this.playBonus = res.data.data.playBonus;
+          setStore('playBonusk3',this.playBonus)
           let arrpeilv1 = [];
           let arrpeilv2 = [];
           arrpeilv1 = this.playBonus[3].bonusArray;
@@ -832,7 +834,7 @@ export default {
           setTimeout(() => {
             this.betshow = !this.betshow;
             this.$router.push("/login");
-          }, 1300);
+          }, 1000);
         });
     },
     //中间->投注选号
@@ -1030,8 +1032,8 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.betsuccess = !this.betsuccess;
-                  }, 800);
-                }, 400);
+                  }, 100);
+                }, 100);
               }
             })
             .catch(error => {

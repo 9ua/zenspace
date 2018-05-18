@@ -28,6 +28,9 @@ const state = {
     sex: getStore('sex'), //性别ID
     birthday: getStore('birthday'), //生日
     userType: getStore('userType'), //member type
+    playBonusk3: null,
+    playGroupsssc: null,
+    // playBonusk3: JSON.parse(getStore('playBonusk3')),
 }
 
 export default new Vuex.Store({

@@ -133,26 +133,22 @@
         <div class="betssc-footer-buttom-right" @click="betC">马上投注</div>
       </div>
     </div>
-    <van-popup  v-model="betGoshow">
-      <ul class="betc">
-        <li>投注确认</li>
-        <li>
-          <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-          <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-          <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
-        </li>
-        <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
-      </ul>
-    </van-popup>
-    <van-popup v-model="betsuccess">
-      <ul class="betc" >
-        <li>温馨提示！</li>
-        <li>
-          <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
-        </li>
-        <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
-      </ul>
-    </van-popup>
+    <ul class="betc" v-show="betGoshow">
+      <li>投注确认</li>
+      <li>
+        <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+        <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+        <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+      </li>
+      <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
+    </ul>
+    <ul class="betc"  v-show="betsuccess">
+      <li>温馨提示！</li>
+      <li>
+        <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+      </li>
+      <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
+    </ul>
     <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
       <div>
       <ul>
@@ -253,10 +249,20 @@
       this.getPlayTree(); //玩法树
     },
     created() {
-      this.geteServerTime(); //input显示当前时间
+      // this.geteServerTime(); //input显示当前时间
     },
     destroyed() {
       this.endCount();
+    },
+    activated(){
+      if(!this.$route.meta.isBack){
+        this.getPlayTree();
+        this.getLotteryList();
+        this.getPastOpen();
+        this.getPastOp();
+        this.geteServerTime();//获取彩種當前獎期時間
+      }
+      this.$route.meta.isBack=false;
     },
     watch:{
       money(newVal) {
@@ -274,7 +280,7 @@
     methods: {
       endCount(){
           clearInterval(this.timer);
-          clearInterval(this.timer2);
+          clearTimeout(this.timer2);
       },
       //中间->投注选号
       curBalls(indexff, indexg, num, numViews, player) {
@@ -1448,10 +1454,12 @@
           for (let j = 0; j < this.snumView[i].length; j++) {
             for (let k = 0; k < this.snumView[i][j].nums.length; k++) {
               this.snumView[i][j].nums[k].choose = false;
+              // console.log(this.snumView[i])
             }
           }
           
         }
+
       },
       betCancel() {
         this.betGoshow = !this.betGoshow;
@@ -1519,8 +1527,10 @@
           console.log("No");
         })
       },
+      //查看注单
       looksucc(){
         this.$router.push({path:'/bet'});
+        this.betsuccess = !this.betsuccess;
       },
       betsucc() {
         this.betsuccess = !this.betsuccess;
@@ -1589,11 +1599,8 @@
           this.getPastO = res.data.data;
           console.log(res.data.data[0].seasonId,this.seasonId3,123)
           if (res.data.data[0].seasonId != this.seasonId3) {
-                  this.timer2 = setTimeout(() => {
                   console.log(res.data.data[0],this.seasonId3,5566)
-                  clearInterval(this.timer2);
-                  this.getPastOp();
-              }, 10000);
+                  this.reGetPastOp();
           } else {
             console.log(res.data.data[0],this.seasonId3,7788)
             clearInterval(this.timer2);
@@ -1602,9 +1609,17 @@
           console.log("获取过去开奖号码No")
         })
       },
+      reGetPastOp(){
+        clearTimeout(this.timer2);
+        this.timer2 = setTimeout(() => {
+        console.log(res.data.data[0],this.seasonId3,88888888888888888888888)
+        this.getPastOp();
+        }, 10000);
+      },
       //获取彩種當前獎期時間
       geteServerTime() {
         clearInterval(this.timer);
+        clearTimeout(this.timer2);
         this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.$route.query.id}}).then((res) => {
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
@@ -1639,7 +1654,6 @@
           if(this.today < 1) {
             clearInterval(this.timer);
             this.timesUp();
-            this.getPastOp();
           }
         }, 1000);
       },

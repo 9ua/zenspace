@@ -285,6 +285,7 @@
     methods: {
       endCount(){
         clearInterval(this.timer);
+        clearTimeout(this.timer2);
       },
       //中间->投注选号
       curBalls(indexff,indexg,num,numViews,player){
@@ -1193,20 +1194,26 @@
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
           if (res.data.data[0].seasonId != this.seasonId3) {
-            this.timer2 = setTimeout(() => {
-              clearInterval(this.timer2);
-              this.getPastOp();
-            }, 10000);
+              clearTimeout(this.timer2);
+              this.reGetPastOp();
           } else {
-            clearInterval(this.timer2);
+            clearTimeout(this.timer2);
           }
         }).catch((error) => {
           console.log("获取过去开奖号码No")
         })
       },
+      reGetPastOp(){
+        clearTimeout(this.timer2);
+        this.timer2 = setTimeout(() => {
+        console.log(res.data.data[0],this.seasonId3,88888888888888888888888)
+        this.getPastOp();
+        }, 10000);
+      },
       //获取彩種當前獎期時間
       geteServerTime() {
         clearInterval(this.timer);
+        clearTimeout(this.timer2);
         this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.$route.query.id}}).then((res) => {
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
@@ -1241,7 +1248,6 @@
           if(this.today < 1) {
             clearInterval(this.timer);
             this.timesUp();
-            this.getPastOp();
           }
         }, 1000);
       },

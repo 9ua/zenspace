@@ -1,6 +1,5 @@
 <template>
   <div class="five" v-show="$store.state.loginStatus">
-          <div class="dim" @click="show = ! show">客服 <span class="el-icon-arrow-down"></span></div>
     <headers></headers>
     <div class="five-top">
       <div>
@@ -44,7 +43,7 @@
       <ul>
         <router-link :to="fiveNavs.paths" tag="li" v-for="(fiveNavs,index) in fiveNav" :key="index" v-if="fiveNavs.viewC">
           <div class="five-content-nav">
-            <i class="iconfont" :class="fiveNavs.icon"></i>
+            <i class="fa" :class="fiveNavs.icon"></i>
             <p>{{fiveNavs.name}}</p>
           </div>
           <i class="el-icon-arrow-right"></i>
@@ -76,43 +75,41 @@
         toF5money:false,//刷新动画
         fiveNav: [{
           name: '个人信息',
-          icon: 'icon-wenbenicon',
+          icon: 'fa-address-book-o',
           paths: 'detail',
           viewC:true,
         }, {
           name: '安全中心',
-          icon: 'icon-weibiaoti1',
+          icon: 'fa-lock',
           paths: 'safety',
           viewC:true,
         }, {
           name: '代理中心',
-          icon: 'icon-dailizizhizizhiqiyezizhi',
+          icon: 'fa-users',
           paths: 'agency',
           viewC:false,
         }, {
           name: '今日盈亏',
-          icon: 'icon-shuju',
+          icon: 'fa-line-chart',
           paths: 'profits',
           viewC:true,
         }, {
           name: '我的消息',
-          icon: 'icon-wenben',
+          icon: 'fa-envelope-o',
           paths: 'mymsg',
           viewC:true,
         },{
-          name: '查詢訂單',
-          icon: 'icon-wenben',
+          name: '充值信息',
+          icon: 'fa-file-text-o',
           paths: 'rechargeserch',
           viewC:true,
         }, ]
       }
     },
     mounted(){
+      this.getTopUserData();
       this.getBalance();
       this.checkType();
-    },
-    activated(){
-      this.getTopUserData();
     },
     methods:{
       checkType(){

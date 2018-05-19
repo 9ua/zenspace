@@ -12,10 +12,13 @@
             border-bottom: 1px solid #ddd;
             & .profit-left {
                 display: flex;
+                align-items: center;
                 & img {
-                    width: 30px;
-                    height: 30px;
-                    margin-right: 10px;
+                    width: 36px;
+                    height: 36px;
+                    padding-left : 20px;
+                    margin-right: 20px;
+                    border-radius: 4px;
                 }
                 & .profit-xq {
                     & p {

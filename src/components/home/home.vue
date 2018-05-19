@@ -8,7 +8,7 @@
     <div class="home-footer">
       <ul>
         <router-link v-for="(navs,index) in navbat" :to="'/'+navs.pathbat" tag="li" :key="index">
-          <i class="iconfont" :class="navs.icon"></i>
+          <i class="fa" :class="navs.icon"></i>
           <span>{{navs.name}}</span>
         </router-link>
       </ul>
@@ -23,22 +23,22 @@ export default {
     	five:2,
       navbat: [
         {
-        	icon:'icon-shouye',
+        	icon:'fa-home',
           name: '首页',
           pathbat: 'one'
         },
         {
-        	icon:'icon-liwu',
+        	icon:'fa-calendar-check-o',
           name: '活动',
           pathbat: 'three'
         },
         {
-        	icon:'icon-faxian1',
+        	icon:'fa-trophy',
           name: '发现',
           pathbat: 'four'
         },
         {
-        	icon:'icon-wode',
+        	icon:'fa-address-card',
           name: '我的',
           pathbat: this.$store.state.loginStatus ? 'five' : 'login'
         }

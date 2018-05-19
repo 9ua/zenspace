@@ -43,8 +43,7 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
-            <p>{{item.seasonId.substring(4).split("-").join("")}}期开奖号码</p>
-            <!-- <p>{{'0'+(seasonId-1)}}期开奖号码</p> -->
+            <p>{{item.seasonId}}期开奖号码</p>
             <div>
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
@@ -305,9 +304,9 @@ export default {
         { title: "116", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "226", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "336", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-11", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-22", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-33", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-11", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-22", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-33", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "441", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "551", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "661", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -323,9 +322,9 @@ export default {
         { title: "446", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "556", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "665", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-44", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-55", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-66", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "全选-44", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-55", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-66", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
       // 二不同
       erbutong: [
@@ -411,17 +410,9 @@ export default {
       ]
     };
   },
-  mounted() {
-    // this.getPastOpen();//获取过去开奖号码10个
-    // this.getPastOp();//获取过去开奖号码1个
-    this.getPlayTree(); //玩法树
-  },
   created() {
     // this.geteServerTime(); //input显示当前时间
   },
-  // beforeUpdate() {
-  //   this.endCount();
-  // },
   destroyed() {
     this.endCount();
   },
@@ -429,8 +420,6 @@ export default {
     if(!this.$route.meta.isBack){
       this.getPlayTree();
       this.getLotteryList();
-      this.getPastOpen();
-      this.getPastOp();
       this.geteServerTime();//获取彩種當前獎期時間
     }
     this.$route.meta.isBack=false;
@@ -460,8 +449,9 @@ export default {
       this.$http.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId: this.$route.query.id }}).then(res => {
           if (res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId;
-            this.seasonId3 = this.seasonId2-1;
-            this.seasonId = this.seasonId2.substring(4).split("-").join("");
+            this.seasonId3 = this.seasonId2 - 1;
+            // this.seasonId = this.seasonId2.substring(4).split("-").join("");
+            this.seasonId = this.seasonId2.slice(4);
             this.today = res.data.data.restSeconds;
             this.getPastOpen();
             this.getPastOp();
@@ -516,12 +506,9 @@ export default {
     getPastOp() {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
           this.getPastO = res.data.data;
-          console.log(res.data.data[0].seasonId,this.seasonId3,123)
+          console.log(res.data.data)
           if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
-              console.log(res.data.data[0],this.seasonId3,5566)
               this.reGetPastOp();
-          } else {
-            console.log(res.data.data[0],this.seasonId3,7788)
           }
         })
         .catch(error => {

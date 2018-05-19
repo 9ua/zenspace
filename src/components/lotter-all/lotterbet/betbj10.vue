@@ -1065,7 +1065,9 @@
             this.splayGroups.push(this.playGroups[i])
           }
           for (let j = 0; j < this.splayGroups.length; j++) {
-             this.sgroups.push(this.splayGroups[j].groups)
+            if(this.navlist === j){
+              this.sgroups.push(this.splayGroups[j].groups)
+            }
           }
           for (let k = 0; k < this.sgroups.length; k++) {
             for (let j = 0; j < this.sgroups[k].length; j++) {

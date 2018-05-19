@@ -24,6 +24,7 @@ import {
 import 'vant/lib/vant-css/index.css'
 import 'lib-flexible/flexible.js'
 import './assets/iconfont/iconfont.css'
+import './assets/font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './vuex/store'

@@ -54,19 +54,20 @@ a {
         }
     }
     & .home-footer {
-        height: 58px;
+        height: 69px;
+        background: linear-gradient(to right, #f75f5b, #fead50);
         & ul {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #ccc;
+            border-top: 3px solid #dedede;
             width: 100%;
             background: #fff;
             @for $i from 1 through 5 {
                 & li:nth-child(#{$i}) {
                     display: flex;
-                    width: 20%;
-                    height: 58px;
+                    width: 25%;
+                    height: 56px;
                     justify-content: center;
                     align-items: center;
                     color: #999;

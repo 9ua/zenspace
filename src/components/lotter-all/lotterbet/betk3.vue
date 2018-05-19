@@ -43,8 +43,7 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
-            <p>{{item.seasonId.substring(4).split("-").join("")}}期开奖号码</p>
-            <!-- <p>{{'0'+(seasonId-1)}}期开奖号码</p> -->
+            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
             <div>
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
@@ -177,7 +176,7 @@
   			<div class="betk3-footer-buttoms">
   				<p>每注金额</p><input type="number" v-model="money" onfocus="this.select()"/>
   				<span v-if="money === '' ">请输入要投注的金额</span>
-  				<span v-else>单注最高可中<p>{{navlist === 3 ? rates * money : rates * money  | keepTwoNum}}</p>元</span>
+  				<span v-else>单注最高可中<p>{{navlist === 3 ? parseInt(rates*1000)*money/1000  : parseInt(rates*1000)*money/1000  | keepTwoNum}}</p>元</span>
   			</div>
   		</div>
   		<div class="betk3-footer-buttom">
@@ -305,9 +304,9 @@ export default {
         { title: "116", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "226", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "336", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-11", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-22", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-33", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-11", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-22", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-33", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "441", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "551", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "661", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -323,9 +322,9 @@ export default {
         { title: "446", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "556", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "665", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-44", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-55", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "All-66", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "全选-44", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-55", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "全选-66", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
       // 二不同
       erbutong: [
@@ -411,11 +410,9 @@ export default {
       ]
     };
   },
-  mounted() {
-    this.getPlayTree(); //玩法树
-  },
   deactivated() {
     this.endCount();
+    this.iscreat();
   },
   activated(){
     if(!this.$route.meta.isBack){
@@ -450,8 +447,9 @@ export default {
       this.$http.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId: this.$route.query.id }}).then(res => {
           if (res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId;
-            this.seasonId3 = this.seasonId2-1;
-            this.seasonId = this.seasonId2.substring(4).split("-").join("");
+            this.seasonId3 = this.seasonId2 - 1;
+            // this.seasonId = this.seasonId2.substring(4).split("-").join("");
+            this.seasonId = this.seasonId2.slice(4);
             this.today = res.data.data.restSeconds;
             this.getPastOpen();
             this.getPastOp();
@@ -506,12 +504,9 @@ export default {
     getPastOp() {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
           this.getPastO = res.data.data;
-          console.log(res.data.data[0].seasonId,this.seasonId3,123)
+          console.log(res.data.data)
           if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
-              console.log(res.data.data[0],this.seasonId3,5566)
               this.reGetPastOp();
-          } else {
-            console.log(res.data.data[0],this.seasonId3,7788)
           }
         })
         .catch(error => {
@@ -770,29 +765,21 @@ export default {
         if (index <= 3) {
           this.playId1 = "k3_star3_big_odd";
           this.d1.splice(index, 1, "");
-          this.dd = this.d1.filter(function(n) {
-            return n;
-          });
+          this.dd = this.d1.filter(function(n) {return n;});
           this.con1 = this.dd.join(",");
           this.zhu1--;
         } else if (index > 3) {
           this.playId2 = "k3_star3_and";
           this.d2.splice(index, 1, "");
-          this.dd = this.d2.filter(function(n) {
-            return n;
-          });
+          this.dd = this.d2.filter(function(n) {return n;});
           this.con2 = this.dd.join(",");
           this.zhu2--;
         }
         this.d.splice(index, 1, "");
         this.peilv.splice(index, 1, "");
-        this.peilv1 = this.peilv.filter(function(n) {
-          return n;
-        });
+        this.peilv1 = this.peilv.filter(function(n) {return n;});
         this.rates = Math.max(...this.peilv1);
-        this.dd = this.d.filter(function(n) {
-          return n;
-        });
+        this.dd = this.d.filter(function(n) {return n;});
         this.con = this.dd.join(",");
         this.zhu = this.zhu1 + this.zhu2;
       }
@@ -841,7 +828,6 @@ export default {
     k3option(e, index, k3item) {
       k3item.selected = !k3item.selected;
       if (k3item.selected === true) {
-        // this.rates = k3item.rate;
         this.d[index] = k3item.title;
         this.dd = this.d.filter(function(n) {
           return n;
@@ -875,7 +861,6 @@ export default {
           this.zhu = arr.length;
         }
       } else if (k3item.selected === false) {
-        // this.rates = 0;
         this.d.splice(index, 1, "");
         this.dd = this.d.filter(function(n) {
           return n;

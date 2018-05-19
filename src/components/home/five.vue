@@ -108,9 +108,11 @@
       }
     },
     mounted(){
-      this.getTopUserData();
       this.getBalance();
       this.checkType();
+    },
+    activated(){
+      this.getTopUserData();
     },
     methods:{
       checkType(){

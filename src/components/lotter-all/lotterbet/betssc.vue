@@ -45,7 +45,7 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
-            <p>{{item.seasonId.substring(4).split("-").join("")}}期开奖号码</p>
+            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
             <div>
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
@@ -118,8 +118,9 @@
           <input type="number" v-model="money"  onfocus="this.select()"/>
           <span v-if="money === ''">请输入要投注的金额</span>
           <span v-else v-show="playBonusId !== 'ssc_dxds'">单注最高可中
-            <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
-            <p v-show="isNaN(money*displayBonus)">{{youhezhi ? money*displayBonus2 : money*displayBonus1 | keepTwoNum}}</p>元</span>
+            <!-- (money* parseInt(displayBonus*1000))/1000 | keepTwoNum} -->
+            <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
+            <p v-show="isNaN(money*displayBonus)">{{youhezhi ? (money*parseInt(displayBonus2*1000))/1000 : (money* parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betssc-footer-buttom">
@@ -243,11 +244,9 @@
         timer2:'',
       }
     },
-    mounted() {
-      this.getPlayTree(); //玩法树
-    },
     deactivated() {
       this.endCount();
+      this.iscreat();
     },
     activated(){
       if(!this.$route.meta.isBack){
@@ -1443,16 +1442,13 @@
         this.hn = '';
         this.in = '';
         this.jn = '';
-        for (let i = 0; i < this.snumView.length; i++) {
-          for (let j = 0; j < this.snumView[i].length; j++) {
-            for (let k = 0; k < this.snumView[i][j].nums.length; k++) {
-              this.snumView[i][j].nums[k].choose = false;
-              // console.log(this.snumView[i])
+        for (let h = 0; h < this.snumView.length; h++) {
+          for (let j = 0; j < this.snumView[h].length; j++) {
+            for (let k = 0; k < this.snumView[h][j].nums.length; k++) {
+              this.snumView[h][j].nums[k].choose = false;
             }
           }
-          
         }
-
       },
       betCancel() {
         this.betGoshow = !this.betGoshow;
@@ -1463,10 +1459,12 @@
           this.playBonus = res.data.data.playBonus;
           this.playGroups = res.data.data.playGroups;
           for (let i = 0; i < this.playGroups.length; i++) {
-            this.splayGroups.push(this.playGroups[i])
+              this.splayGroups.push(this.playGroups[this.navlist])
           }
           for (let j = 0; j < this.splayGroups.length; j++) {
-             this.sgroups.push(this.splayGroups[j].groups)
+            if(this.navlist === j){
+              this.sgroups.push(this.splayGroups[j].groups)
+            }
           }
           for (let k = 0; k < this.sgroups.length; k++) {
             for (let j = 0; j < this.sgroups[k].length; j++) {
@@ -1573,7 +1571,6 @@
           this.displayBonus1 = Number(ar[0]);
           this.displayBonus2 = Number(ar[1]);
           this.displayBonus3 = this.displayBonus1+'-'+this.displayBonus2;
-          console.log(this.displayBonus1,this.displayBonus2,this.displayBonus3)
         }
       },
       //获取过去开奖号码10个
@@ -1590,12 +1587,9 @@
         this.getLotteryList();
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
-          console.log(res.data.data[0].seasonId,this.seasonId3,123)
           if (res.data.data[0].seasonId != this.seasonId3) {
-                  console.log(res.data.data[0],this.seasonId3,5566)
                   this.reGetPastOp();
           } else {
-            console.log(res.data.data[0],this.seasonId3,7788)
             clearInterval(this.timer2);
           }
         }).catch((error) => {

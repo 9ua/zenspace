@@ -43,7 +43,7 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
-            <p>{{item.seasonId}}期开奖号码</p>
+            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
             <div>
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
@@ -410,10 +410,7 @@ export default {
       ]
     };
   },
-  created() {
-    // this.geteServerTime(); //input显示当前时间
-  },
-  destroyed() {
+  deactivated() {
     this.endCount();
   },
   activated(){

@@ -45,7 +45,7 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastO" :key="index">
-            <p>{{item.seasonId}}期开奖号码</p>
+            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
             <div>
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
@@ -243,18 +243,13 @@
         timer2:'',
       }
     },
-    created() {
-      // this.geteServerTime(); //input显示当前时间
-    },
-    destroyed() {
+    deactivated() {
       this.endCount();
     },
     activated(){
       if(!this.$route.meta.isBack){
         this.getPlayTree();
         this.getLotteryList();
-        // this.getPastOpen();
-        // this.getPastOp();
         this.geteServerTime();//获取彩種當前獎期時間
       }
       this.$route.meta.isBack=false;

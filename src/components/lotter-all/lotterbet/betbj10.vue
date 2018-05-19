@@ -258,26 +258,13 @@
         timer2:'',
       }
     },
-    mounted() {
-      this.getPlayTree(); //玩法树
-      // this.getPastOpen(); //获取过去开奖号码10个
-      // this.getPastOp(); //获取过去开奖号码1个
-    },
-    created() {
-      // this.geteServerTime(); //input显示当前时间
-    },
-    // beforeUpdate() {
-    //   this.endCount();
-    // },
-    destroyed() {
+    deactivated() {
       this.endCount();
     },
     activated(){
       if(!this.$route.meta.isBack){
         this.getPlayTree();
         this.getLotteryList();
-        this.getPastOpen();
-        this.getPastOp();
         this.geteServerTime();//获取彩種當前獎期時間
       }
       this.$route.meta.isBack=false;

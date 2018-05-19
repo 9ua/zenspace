@@ -15,6 +15,7 @@ import winning from '@/components/page-four/winning'
 import profit from '@/components/page-four/profit'
 import pop from '@/components/page-four/pop'
 import bet from '@/components/page-five/money/bet'
+import service from '@/components/page-five/service'
 import recharge from '@/components/page-five/money/recharge'
 import rechargeserch from '@/components/page-five/money/rechargeserch'
 import cashOut from '@/components/page-five/money/cashOut'
@@ -612,5 +613,13 @@ export default new Router({
                 keepAlive: true
             },
         },
+        {
+          path: '/service',
+          name: 'service',
+          component: service,
+          meta: {
+              keepAlive: true
+          },
+      },
     ]
 })

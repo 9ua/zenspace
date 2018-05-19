@@ -118,8 +118,9 @@
           <input type="number" v-model="money"  onfocus="this.select()"/>
           <span v-if="money === ''">请输入要投注的金额</span>
           <span v-else v-show="playBonusId !== 'ssc_dxds'">单注最高可中
-            <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
-            <p v-show="isNaN(money*displayBonus)">{{youhezhi ? money*displayBonus2 : money*displayBonus1 | keepTwoNum}}</p>元</span>
+            <!-- (money* parseInt(displayBonus*1000))/1000 | keepTwoNum} -->
+            <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
+            <p v-show="isNaN(money*displayBonus)">{{youhezhi ? (money*parseInt(displayBonus2*1000))/1000 : (money* parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betssc-footer-buttom">
@@ -245,6 +246,7 @@
     },
     deactivated() {
       this.endCount();
+      this.iscreat();
     },
     activated(){
       if(!this.$route.meta.isBack){

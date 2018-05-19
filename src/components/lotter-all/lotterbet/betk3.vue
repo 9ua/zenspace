@@ -176,7 +176,7 @@
   			<div class="betk3-footer-buttoms">
   				<p>每注金额</p><input type="number" v-model="money" onfocus="this.select()"/>
   				<span v-if="money === '' ">请输入要投注的金额</span>
-  				<span v-else>单注最高可中<p>{{navlist === 3 ? rates * money : rates * money  | keepTwoNum}}</p>元</span>
+  				<span v-else>单注最高可中<p>{{navlist === 3 ? parseInt(rates*1000)*money/1000  : parseInt(rates*1000)*money/1000  | keepTwoNum}}</p>元</span>
   			</div>
   		</div>
   		<div class="betk3-footer-buttom">
@@ -412,6 +412,7 @@ export default {
   },
   deactivated() {
     this.endCount();
+    this.iscreat();
   },
   activated(){
     if(!this.$route.meta.isBack){
@@ -764,29 +765,21 @@ export default {
         if (index <= 3) {
           this.playId1 = "k3_star3_big_odd";
           this.d1.splice(index, 1, "");
-          this.dd = this.d1.filter(function(n) {
-            return n;
-          });
+          this.dd = this.d1.filter(function(n) {return n;});
           this.con1 = this.dd.join(",");
           this.zhu1--;
         } else if (index > 3) {
           this.playId2 = "k3_star3_and";
           this.d2.splice(index, 1, "");
-          this.dd = this.d2.filter(function(n) {
-            return n;
-          });
+          this.dd = this.d2.filter(function(n) {return n;});
           this.con2 = this.dd.join(",");
           this.zhu2--;
         }
         this.d.splice(index, 1, "");
         this.peilv.splice(index, 1, "");
-        this.peilv1 = this.peilv.filter(function(n) {
-          return n;
-        });
+        this.peilv1 = this.peilv.filter(function(n) {return n;});
         this.rates = Math.max(...this.peilv1);
-        this.dd = this.d.filter(function(n) {
-          return n;
-        });
+        this.dd = this.d.filter(function(n) {return n;});
         this.con = this.dd.join(",");
         this.zhu = this.zhu1 + this.zhu2;
       }
@@ -835,7 +828,6 @@ export default {
     k3option(e, index, k3item) {
       k3item.selected = !k3item.selected;
       if (k3item.selected === true) {
-        // this.rates = k3item.rate;
         this.d[index] = k3item.title;
         this.dd = this.d.filter(function(n) {
           return n;
@@ -869,7 +861,6 @@ export default {
           this.zhu = arr.length;
         }
       } else if (k3item.selected === false) {
-        // this.rates = 0;
         this.d.splice(index, 1, "");
         this.dd = this.d.filter(function(n) {
           return n;

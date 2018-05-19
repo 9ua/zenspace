@@ -128,9 +128,8 @@
           <input type="number" v-model="money" onfocus="this.select()"/>
           <span v-show="money === '' ">请输入要投注的金额</span>
           <span v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'">单注最高可中
-            <!-- <p>{{money * displayBonus | keepTwoNum}}</p>元</span> -->
-            <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
-            <p v-show="isNaN(money*displayBonus)">{{youdashuang ? money*displayBonus2 : money*displayBonus1 | keepTwoNum}}</p>元</span>
+            <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
+            <p v-show="isNaN(money*displayBonus)">{{youdashuang ? (money*parseInt(displayBonus2*1000))/1000 : (money*parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betbj10-footer-buttom">
@@ -260,6 +259,7 @@
     },
     deactivated() {
       this.endCount();
+      this.iscreat();
     },
     activated(){
       if(!this.$route.meta.isBack){

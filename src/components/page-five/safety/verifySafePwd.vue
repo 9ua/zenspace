@@ -7,7 +7,7 @@
     <div class="verifySafePwd-input">
       <p>原安全密码</p>
       <input type="password" v-model="oldPassword" placeholder="请输入当前所使用的密码" v-focus/> </div>
-    <router-link to="/resetWay" tag="p" class="zhaohui">找回安全密码？</router-link>
+    <router-link to="/service" tag="p" class="zhaohui">找回安全密码？</router-link>
     <div class="verifySafePwd-but">
       <button @click="validSecurityCode">确定</button>
     </div>

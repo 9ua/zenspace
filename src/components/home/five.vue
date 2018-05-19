@@ -1,5 +1,6 @@
 <template>
   <div class="five" v-show="$store.state.loginStatus">
+          <div class="dim" @click="show = ! show">客服 <span class="el-icon-arrow-down"></span></div>
     <headers></headers>
     <div class="five-top">
       <div>

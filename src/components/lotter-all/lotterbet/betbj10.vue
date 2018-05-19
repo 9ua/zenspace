@@ -259,15 +259,18 @@
       }
     },
     mounted() {
-      this.getPlayTree(); //玩法树
-      // this.getPastOpen(); //获取过去开奖号码10个
-      // this.getPastOp(); //获取过去开奖号码1个
+      // this.getPlayTree(); //玩法树
     },
-    created() {
-      this.geteServerTime(); //input显示当前时间
-    },
-    destroyed() {
+    deactivated() {
       this.endCount();
+    },
+    activated(){
+      if(!this.$route.meta.isBack){
+        this.getPlayTree();
+        this.getLotteryList();
+        this.geteServerTime();//获取彩種當前獎期時間
+      }
+      this.$route.meta.isBack=false;
     },
     watch:{
       money(newVal) {
@@ -1119,8 +1122,10 @@
         }
         this.iscreat();
       },
+      //查看注单
       looksucc(){
         this.$router.push({path:'/bet'});
+        this.betsuccess = !this.betsuccess;
       },
       //继续投注
       betsucc() {
@@ -1206,7 +1211,6 @@
       reGetPastOp(){
         clearTimeout(this.timer2);
         this.timer2 = setTimeout(() => {
-        console.log(res.data.data[0],this.seasonId3,88888888888888888888888)
         this.getPastOp();
         }, 10000);
       },

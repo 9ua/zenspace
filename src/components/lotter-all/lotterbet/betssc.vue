@@ -87,11 +87,11 @@
         <div class="betk3-content-foot">
           <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
             <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
-              <span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}
+              <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playBonusId">{{itemabc.remark}}
                 <b>。奖金
-                  <i v-show="Number(player.displayBonus)">{{player.displayBonus | keepTwoNum}}</i>
-                  <i v-show="isNaN(player.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-                 </span>
+                  <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                <br/> </span>
               <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
                   <p v-for="(numViews,indexff) in player.numView" :key="indexff">

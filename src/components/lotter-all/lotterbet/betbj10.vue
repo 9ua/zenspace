@@ -96,10 +96,10 @@
         <div class="betk3-content-foot">
           <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
             <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
-              <span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}
+              <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playGroupsId">{{itemabc.remark}}
                 <b>。奖金
-                  <i v-show="Number(player.displayBonus)">{{player.displayBonus | keepTwoNum}}</i>
-                  <i v-show="isNaN(player.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                  <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
                 <br/> </span>
               <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playGroupsId === player.id">
@@ -232,7 +232,8 @@
         con: '',
         zhu: 0,
         rates: 0, //最高可中
-        playGroups: '', //玩法树
+        playBonus: '', //玩法树1
+        playGroups: '', //玩法树2
         pk10star2dj:true,
         playGroupsId: 'pk10_side_lh', //点击选中后获取此玩法ID
         betsscContentTopPop: false,
@@ -1047,6 +1048,7 @@
       //玩法树
       getPlayTree() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
+          this.playBonus = res.data.data.playBonus;
           this.playGroups = res.data.data.playGroups;
           for (let i = 0; i < this.playGroups.length; i++) {
             this.splayGroups.push(this.playGroups[i])

@@ -74,11 +74,10 @@
 								<li><p>收款卡号</p><span>{{receiveCard}}</span></li>
 								<li><p>收款银行地址</p><span>{{receiveAddress}}</span></li>
 								<li><p>！识别码</p><span>{{checkCode}}</span></li>
+								<li><p>打款时请务必于打款备注栏输入识别码</p></li>
 							</ul>
 						</div>
-					<li>
-						<p>重要：打款时请务必于打款备注栏输入识别码</p>
-					</li>
+					
 					<li>
 						<p>此画面资讯可至 "充值信息" 页面查询。</p>
 					</li>

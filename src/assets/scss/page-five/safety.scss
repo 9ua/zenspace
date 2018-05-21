@@ -39,7 +39,7 @@
         height: 100%;
         & .safety-content-top{
             background: #444867;
-            padding: 16px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -70,23 +70,25 @@
             }
         }
         > ul{
-            padding-left:16px;
             background: #fff;
             margin-top: 12px;
             & li{
+                padding: 0 20px;
                 display: flex;
+                color: #5e5e5e;
                 justify-content: space-between;
                 align-items: center;
-                height: 48px;
+                height: 56px;
                 font-size: 16px;
-                padding-right: 24px;
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid #e8e8e8;
                 & div{
                     display: flex;
                     align-items: center;
                     color: #ccc;
                     & i{
                         color: #ccc;
+                        padding-left: 10px;
+                        
                     }
                 }
             }
@@ -96,12 +98,12 @@
         }
         & .logout{
             margin-top: 12px;
-            padding-left: 16px;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: #fff;
-            height: 48px;
+            height: 56px;
             font-size: 16px;
             padding-right: 24px;
             color: #dc3b40;

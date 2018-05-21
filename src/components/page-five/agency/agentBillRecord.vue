@@ -30,7 +30,7 @@
    			 <!-- 内容 {{ item.name }} -->
   		</van-tab>
 	  </van-tabs>
-
+    <div class="recharge-top">
         <ul v-show="showFlag">
                 <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
@@ -47,6 +47,7 @@
                     </div>
                 </li>
         </ul>
+      </div>
     </div>
   </div>
 </template>

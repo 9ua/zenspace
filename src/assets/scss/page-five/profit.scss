@@ -76,7 +76,7 @@
             background: #fff;
             margin-top: 12px;
             & ul {
-                width: 80%;
+                width: 100%;
                 padding: 15px;
                 display: flex;
                 flex-wrap: wrap;
@@ -88,9 +88,10 @@
                     justify-content: center;
                     width: 33%;
                     align-items: center;
+                    color: #5e5e5e;
                     height: 110px;
-                    border-bottom: 1px solid #d0d0d0;
-                    border-right: 1px solid #d0d0d0;
+                    border-bottom: 1px solid #e8e8e8;
+                    border-right: 1px solid #e8e8e8;
                     & span:nth-child(1) {
                         color: #ff6818;
                     }
@@ -99,7 +100,7 @@
                     }
                 }
                 & li:nth-child(3n){
-                    border-right: 0px solid #d0d0d0;
+                    border-right: 0px solid #e8e8e8;
                 }
                 & li:nth-child(4),& li:nth-child(5),& li:nth-child(6){
                     border-bottom: 0px solid #d0d0d0;

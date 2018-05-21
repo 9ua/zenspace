@@ -1,12 +1,13 @@
 .datum {
     & .datum-top {
         background: #fff;
-        padding: 0px 12px;
+        color: #5e5e5e;
         & li {
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 16px;
+            padding: 0 20px;
             >div {
                 display: flex;
                 align-items: center;
@@ -14,11 +15,11 @@
         }
         & i {
             margin-left: 10px;
-            color: #777;
+            color: #ccc;
             font-size: 20px;
         }
         & li:nth-child(1) {
-            height: 68px;
+            height: 70px;
             border-bottom: 1px solid #E8E8E8;
             >div {
                 & img {
@@ -29,7 +30,8 @@
             }
         }
         & li:nth-child(2) {
-            height: 58px;
+            height: 56px;
+            border-bottom: 1px solid #E8E8E8;
             >div {
                 & input {
                     color: #E8E8E8;
@@ -40,29 +42,31 @@
                 & input.active {
                     border: 1px solid antiquewhite;
                     text-align: left;
-                    color: #333;
+                    color: #5e5e5e;
                 }
             }
         }
         & li:nth-child(3) {
-            height: 58px;
+            height: 56px;
             >div {
                 & p {
-                    margin-right: 10px;
+                    // margin-right: 10px;
                 }
             }
         }
     }
     & .datum-btn {
         background: #fff;
-        padding: 0px 12px;
+        color: #5e5e5e;
         margin-top: 16px;
         & li {
+            padding: 0px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 16px;
-            height: 52px;
+            height: 56px;
+            border-bottom: 1px solid #E8E8E8;
             >div {
                 display: flex;
                 align-items: center;
@@ -70,12 +74,12 @@
         }
         & i {
             margin-left: 10px;
-            color: #777;
+            color: #ccc;
             font-size: 20px;
         }
         & li:nth-child(3) {
             & select {
-                width: 42px;
+                padding: 5px;
                 border: none;
                 line-height: 22px;
                 font-size: 16px;

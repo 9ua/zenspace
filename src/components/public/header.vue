@@ -3,7 +3,8 @@
     <div class="pop-top">
       <!--<router-link class="el-icon-arrow-left" to="/one" tag="i" v-show="routerUrl === 'five'"></router-link>-->
       <p v-for="(contents,index) in content" :key="index">{{contents.show === routerUrl ? contents.title : ''}} </p>
-      <router-link class="dim" to="service" tag="li">客服</router-link>
+      <img v-show="routerUrl === 'one'" src="../../assets/img/one/logo.png" />
+      <router-link v-show="routerUrl === 'five'" class="dim" to="service" tag="li">客服</router-link>
       
       <!--<router-link to="/one" tag="span" v-show="routerUrl === 'five'">客服</router-link>-->
     </div>
@@ -14,7 +15,7 @@
     data() {
       return {
         content: [{
-          title: '首页',
+          // title: '首页',
           show: 'one',
           check:false,
         }, {
@@ -37,24 +38,27 @@
 </script>
 <style lang="scss" scoped>
 .dim {
-    color: #333;
+    border: solid 1px #fff;
+    border-radius: 5px;
+    color: #fff;
     font-size: 16px;
     position: absolute;
     right: 16px;
+    padding: 3px 8px 6px;
     // padding: 12px;
     & span {
-        padding: 12px;
+        padding: 3px;
     }
 }
   .head-top {
-    height: 46px;
+    height: 50px;
     width: 100%;
    	background: linear-gradient(to right, #f75f5b , #fead50);
     position: fixed;
     top: 0px;
     z-index: 11;
     & .pop-top {
-    	height: 46px;
+    	height: 50px;
       width: 100%;
       display: flex;
       justify-content: center;

@@ -16,8 +16,8 @@
    			 <!-- 内容 {{ item.name }} -->
   		</van-tab>
 	  </van-tabs>
-
-        <ul v-show="showFlag">
+      <div >
+        <ul v-show="showFlag" class="listStyle-I">
                 <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
                         <p><span>{{item.lotteryName}} - ￥{{item.amount}}</span><br>
@@ -33,8 +33,9 @@
                     <i class="el-icon-arrow-down"></i>
                 </li>
         </ul>
+      </div>
         <van-actionsheet class="" v-model="show2">
-	            <ul class="recharge-top">
+	            <ul class="listStyle-II">
             <li>
               <span>{{selected.lotteryName}}</span>
             </li>
@@ -57,7 +58,7 @@
             <li>
               <p>我的投注</p>{{selected.content}}<p>玩法</p>{{selected.playName}}
             </li>
-            <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
+            <li><div class="button"><button class="button1" @click="show2 =! show2">确定</button></div></li>
           </ul>
 	      </van-actionsheet>
 

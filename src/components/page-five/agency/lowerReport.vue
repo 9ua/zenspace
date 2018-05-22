@@ -41,7 +41,7 @@
     </div>
 
     <van-actionsheet class="" v-model="show2">
-	      <ul class="member-top">
+	      <ul class="listStyle-II">
             <li>
               <span>{{selected.account}}</span>
             </li>
@@ -50,7 +50,7 @@
             </li>
             <router-link :to="{path:'/agentReport',query: {id: this.selected.account}}" tag="li"><p>查看报表</p><i class="el-icon-arrow-right"></i></router-link>
             
-            <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
+            <li><div class="button"><button class="button1" @click="show2 =! show2">确定</button></div></li>
         </ul>
 	  </van-actionsheet>
 

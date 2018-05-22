@@ -62,7 +62,7 @@
                 </div>
 	        </van-popup>
 			<van-actionsheet class="" v-model="show4">
-	            <ul class="recharge-top2">
+	            <ul class="listStyle-II">
 					<li>
 						<div class="center"><p>申请完成，请依据以下资讯打款</p></div>	
 					</li>
@@ -81,7 +81,7 @@
 					<li>
 						<p>此画面资讯可至 "充值信息" 页面查询。</p>
 					</li>
-					<li><div class="button1"><button @click="goBack()">确定</button></div></li>
+					<li><div class="button"><button class="button1" @click="goBack()">确定</button></div></li>
 				</ul>
 	        </van-actionsheet>
 		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">

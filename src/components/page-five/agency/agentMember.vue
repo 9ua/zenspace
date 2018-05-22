@@ -30,15 +30,15 @@
       </ul>
     </div>
 
-    <van-actionsheet class="" v-model="show2">
-	      <ul class="member-top">
+    <van-actionsheet v-model="show2">
+	      <ul class="listStyle-II">
             <li>
               <span>{{selected.account}}</span>
             </li>
             <li>
-              <p>返點率 {{selected.rebateRatio}}</p>
+              <p>返點率</p><span>{{selected.rebateRatio}}</span>
             </li>
-            <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
+            <li><div class="button"><button class="button1" @click="show2 =! show2">确定</button></div></li>
         </ul>
 	  </van-actionsheet>
 

@@ -30,8 +30,8 @@
    			 <!-- 内容 {{ item.name }} -->
   		</van-tab>
 	  </van-tabs>
-    <div class="recharge-top">
-        <ul v-show="showFlag">
+    <div>
+        <ul v-show="showFlag" class="listStyle-I">
                 <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
                         <p><span>{{item.account}}</span><br>

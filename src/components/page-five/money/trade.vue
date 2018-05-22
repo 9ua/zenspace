@@ -17,7 +17,7 @@
   		</van-tab>
 	  </van-tabs>
 
-        <ul v-show="showFlag">
+        <ul v-show="showFlag" class="listStyle-I">
                 <li v-for="(item,index) in tradelist" :key="index">
                     <div class="mInvite-left">
                         <p><span>{{item.accountChangeTypeName}}</span><br>
@@ -25,21 +25,13 @@
                         </p>
                     </div>
                     <div class="mInvite-right">
-                        
                         <p>
                         <span>金额</span><br>
                         <span>{{item.changeAmount}}</span>
                         </p>
-                        
                     </div>
-                    
-                    
-                    
                 </li>
-
         </ul>
-        
-
     </div>
   </div>
 </template>

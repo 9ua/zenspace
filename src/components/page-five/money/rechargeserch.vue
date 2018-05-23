@@ -1,11 +1,11 @@
 <template>
-  <div class="recharge">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
       <p>充值信息</p>
     </div>
-        
-             <ul class="recharge-top">
+        <div class="listStyle-content">
+             <ul class="listStyle-I">
                 <li v-for="(item,index) in rechargeList" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
                         <p>金额 <b>{{item.amount}}</b> 
@@ -24,11 +24,11 @@
                     
                 </li>
              </ul>
-        
+        </div>
             
             
             
-            <van-actionsheet class="" v-model="show2">
+            <van-actionsheet v-model="show2">
 	            <ul class="listStyle-II">
                     <li>
 						<p>订单编号</p><span>{{this.id}}</span>
@@ -119,5 +119,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
 </style>

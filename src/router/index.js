@@ -562,7 +562,7 @@ export default new Router({
             name: 'bet',
             component: bet,
             meta: {
-                keepAlive: false
+                keepAlive: true
             },
         },
         {

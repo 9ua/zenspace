@@ -22,19 +22,19 @@
       </div>
       <ul>
         <router-link to="/recharge" tag="li">
-          <img src="../../assets/img/five/Wallet.png" />
+          <div class="icon-top top-1"><i class="fa fa-credit-card" aria-hidden="true"></i></div>
           <span>我要充值</span>
         </router-link>
         <li @click="safeCenter()">
-          <img src="../../assets/img/five/Box.png" />
+          <div class="icon-top top-2"><i class="fa fa-money" aria-hidden="true"></i></div>
           <span>我要提现</span>
         </li>
         <router-link to="/trade" tag="li">
-          <img src="../../assets/img/five/Confirm.png" />
+          <div class="icon-top top-3"><i class="fa fa-book" aria-hidden="true"></i></div>
           <span>交易记录</span>
         </router-link>
         <router-link to="/bet" tag="li">
-          <img src="../../assets/img/five/370.png" />
+          <div class="icon-top top-4"><i class="fa fa-star" aria-hidden="true"></i></div>
           <span>投注记录</span>
         </router-link>
       </ul>

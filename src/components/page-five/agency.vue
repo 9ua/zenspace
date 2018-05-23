@@ -6,7 +6,8 @@
     </div>
     <div class="agency-content">
       <div class="agency-content-top">
-        <img src="http://imagess-google.com/system/mobile/other/proxySlide.png" /> </div>
+        <img src="../../assets/img/five/agent.png" />
+      </div>
       <ul>
         <router-link to="/agentIntro" tag="li"><p>代理说明</p><i class="el-icon-arrow-right"></i></router-link>
         <router-link to="/agentReport" tag="li"><p>代理报表</p><i class="el-icon-arrow-right"></i></router-link>

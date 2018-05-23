@@ -1,27 +1,27 @@
 <template>
-  <div class="agent">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <router-link to="/agency" tag="i" class="el-icon-arrow-left"></router-link>
       <p>交易明細</p>
       <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
     </div>
     
-    <div class="agent-content">
-      <ul class="recharge-top">
+    <div class="listStyle-content">
+      <ul class="listStyle-check-top">
             <li>
-              <div>
               <el-input 
+                size="medium"
+                class="input-top"
                 placeholder="请输入用户帐号名称" 
                 v-model="accountName" 
                 :value="accountName" 
                 clearable 
               >
               </el-input>
-              </div>
               <button @click="getTradeList()"><i class="el-icon-arrow-right"></i></button>
             </li>
       </ul>
-      <div class="agent-content-top">
+      <div class="listStyle-content-top">
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
       </div>
@@ -39,7 +39,6 @@
                         </p>
                     </div>
                     <div class="mInvite-right">
-                        
                         <p>
                         <span>{{item.accountChangeTypeName}}</span><br>
                         <span>{{item.changeAmount}}</span>
@@ -155,5 +154,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
 </style>

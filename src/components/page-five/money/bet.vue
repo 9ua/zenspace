@@ -1,13 +1,13 @@
 <template>
-  <div class="agent">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <!-- <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link> -->
       <i class="el-icon-arrow-left" @click="banckto"></i>
       <p>投注记录</p>
       <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
     </div>
-    <div class="agent-content recharge">
-      <div class="agent-content-top">
+    <div class="listStyle-content">
+      <div class="listStyle-content-top">
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
       </div>
@@ -16,7 +16,7 @@
    			 <!-- 内容 {{ item.name }} -->
   		</van-tab>
 	  </van-tabs>
-      <div >
+      <div>
         <ul v-show="showFlag" class="listStyle-I">
                 <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
@@ -168,5 +168,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
 </style>

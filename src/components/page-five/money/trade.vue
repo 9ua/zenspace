@@ -1,14 +1,14 @@
 <template>
-  <div class="agent">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
       <p>交易记录</p>
       <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
     </div>
     
-    <div class="agent-content">
-      <div class="agent-content-top">
-        <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
+    <div class="listStyle-content">
+      <div class="listStyle-content-top">
+        <van-actionsheet v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
       </div>
 	  <van-tabs v-model="accountChangeType" @click="print">
@@ -17,7 +17,7 @@
   		</van-tab>
 	  </van-tabs>
 
-        <ul v-show="showFlag">
+        <ul v-show="showFlag" class="listStyle-I">
                 <li v-for="(item,index) in tradelist" :key="index">
                     <div class="mInvite-left">
                         <p><span>{{item.accountChangeTypeName}}</span><br>
@@ -25,21 +25,13 @@
                         </p>
                     </div>
                     <div class="mInvite-right">
-                        
                         <p>
                         <span>金额</span><br>
                         <span>{{item.changeAmount}}</span>
                         </p>
-                        
                     </div>
-                    
-                    
-                    
                 </li>
-
         </ul>
-        
-
     </div>
   </div>
 </template>
@@ -57,8 +49,6 @@ export default {
         changeAmount:'',
         changeTime:'',
         tradelist:[],
-
-
         usertype:2,
         highbet:0,
         rebateratio:0,
@@ -137,5 +127,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
 </style>

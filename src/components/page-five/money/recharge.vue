@@ -1,10 +1,11 @@
 <template>
-  <div class="recharge">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
       <p>我要充值</p>
     </div>
-		  <ul class="recharge-top">
+	<div class="listStyle-content">
+		  <ul class="listStyle-III">
 			<li>
 				<p>充值金额</p>
 				<div>
@@ -19,7 +20,7 @@
 			</li>
 			<li>
 				<p>账号</p>
-				<div class="dim" @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
+				<div @click="show1 = ! show1">{{selectBank}}<i class="el-icon-arrow-down"></i></div>
 				
 			</li>
 			<li>
@@ -34,10 +35,11 @@
 				</el-input>
 				</div>
 			</li>
-			<li><div class="button1"><button @click="show2 = !show2">充值申请</button></div></li>
+			<li><div class="button"><button class="button1" @click="show2 = !show2">充值申请</button></div></li>
 		</ul>
-			<van-actionsheet class="" v-model="show2">
-	            <ul class="recharge-top">
+	</div>
+			<van-actionsheet v-model="show2">
+	            <ul class="listStyle-II">
 					<li>
 						<div class="center"><p>您所输入的资讯</p></div>	
 					</li>
@@ -53,16 +55,26 @@
 					<li>
 						<div class="center"><p>请确认上列信息正确</p></div>	
 					</li>
-					<li><div class="button1"><button @click="sendReq()">确定</button><button @click="show2 = !show2">取消</button></div></li>
+					<li><div class="button"><button class="button2" @click="sendReq()">确定</button><button class="button3" @click="show2 = !show2">取消</button></div></li>
 				</ul>
 	        </van-actionsheet>
-            <van-popup v-model="show3">
-	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="show3 = !show3">确定</button></div>
-                </div>
-	        </van-popup>
+			<van-popup class="pop2" v-model="show3" :close-on-click-overlay="false">
+				<div>
+					<ul>
+						<div class="title">
+						<p>温馨提示！</p>
+						</div>
+						<div class="cont">
+						<p>{{content}}</p>
+						</div>
+						<div class="but">
+							<button @click="show3 = ! show3">确定</button>
+						</div>
+					</ul>
+				</div>
+			</van-popup>
 			<van-actionsheet class="" v-model="show4">
-	            <ul class="recharge-top2">
+	            <ul class="listStyle-II">
 					<li>
 						<div class="center"><p>申请完成，请依据以下资讯打款</p></div>	
 					</li>
@@ -74,15 +86,13 @@
 								<li><p>收款卡号</p><span>{{receiveCard}}</span></li>
 								<li><p>收款银行地址</p><span>{{receiveAddress}}</span></li>
 								<li><p>！识别码</p><span>{{checkCode}}</span></li>
+								<li><p>打款时请务必于打款备注栏输入识别码</p></li>
 							</ul>
 						</div>
 					<li>
-						<p>重要：打款时请务必于打款备注栏输入识别码</p>
-					</li>
-					<li>
 						<p>此画面资讯可至 "充值信息" 页面查询。</p>
 					</li>
-					<li><div class="button1"><button @click="goBack()">确定</button></div></li>
+					<li><div class="button"><button class="button1" @click="goBack()">确定</button></div></li>
 				</ul>
 	        </van-actionsheet>
 		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
@@ -174,5 +184,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
+  @import '../../../assets/scss/popcorn.scss';
 </style>

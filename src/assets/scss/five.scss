@@ -85,7 +85,7 @@
                     margin-top:12px;
                 }
                 & span{
-                    color: #5d5d5d;
+                    color: #5e5e5e;
                     margin: 10px 0px;
                 }
             }
@@ -114,7 +114,7 @@
                         text-align: center;
                     }
                     & p{
-                        color: #5d5d5d;
+                        color: #5e5e5e;
                         font-size: 16px;
                     }
                 }
@@ -125,4 +125,35 @@
             }
         }
     }
+}
+
+.icon-top {
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 35%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    & i {
+        margin-top: 13px;
+        font-size: 26px;
+        color: #fff;
+    }
+}
+
+.top-1 {
+    background: #ff5f5f;
+}
+
+.top-2 {
+    background: #ffac5f;
+}
+
+.top-3 {
+    background: #75dac4;
+}
+
+.top-4 {
+    background: #81afe4;
 }

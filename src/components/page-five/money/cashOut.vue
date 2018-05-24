@@ -1,10 +1,11 @@
 <template>
-  <div class="recharge">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
       <p>我要提现</p>
     </div>
-		  <ul class="recharge-top">
+	<div class="listStyle-content">
+		  <ul class="listStyle-III">
 			<li><p>最高提现额度    </p>{{moneyDepositMax}}</li>
 			<li><p>最低提现额度    </p>{{moneyDepositMin}}</li>
 			<li><p>可提现余额    </p>{{myAmount}}</li>
@@ -23,7 +24,7 @@
 			</li>
 			<li>
 				<p>账号</p>
-				<div class="dim" @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
+				<div @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
 				
 			</li>
 			<li>
@@ -38,18 +39,39 @@
 				</el-input>
 				</div>
 			</li>
-			<li><div class="button1"><button @click="sendReq()">提现申请</button></div></li>
+			<li><div class="button"><button class="button1" @click="sendReq()">提现申请</button></div></li>
 		</ul>
-			<van-popup v-model="show2">
-	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="show2 = !show2">确定</button></div>
-                </div>
-	        </van-popup>
-            <van-popup v-model="show3">
-	            <div class="button1">
-                    <div ><p>{{content}}</p><button class="del" @click="goBack()">确定</button></div>
-                </div>
-	        </van-popup>
+	</div>
+		<van-popup class="pop2" v-model="show2" :close-on-click-overlay="false">
+		<div>
+		<ul>
+			<div class="title">
+			<p>温馨提示！</p>
+			</div>
+			<div class="cont">
+			<p>{{content}}</p>
+			</div>
+			<div class="but">
+				<button class="nodel" @click="show2 = ! show2">确定</button>
+			</div>
+		</ul>
+		</div>
+		</van-popup>
+		<van-popup class="pop2" v-model="show3" :close-on-click-overlay="false">
+		<div>
+		<ul>
+			<div class="title">
+			<p>温馨提示！</p>
+			</div>
+			<div class="cont">
+			<p>{{content}}</p>
+			</div>
+			<div class="but">
+				<button class="nodel" @click="goBack()">确定</button>
+			</div>
+		</ul>
+		</div>
+		</van-popup>
 		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
         </van-actionsheet>
   </div>
@@ -137,5 +159,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
+  @import '../../../assets/scss/popcorn.scss';
 </style>

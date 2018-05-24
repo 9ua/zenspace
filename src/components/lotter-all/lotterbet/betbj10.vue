@@ -178,6 +178,7 @@
       </ul>
       </div>
     </van-popup>
+    
     <van-popup class="betshow" v-model="showpop">{{content}}</van-popup>
   </div>
 </template>

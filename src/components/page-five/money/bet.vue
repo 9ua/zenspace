@@ -1,13 +1,13 @@
 <template>
-  <div class="agent">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <!-- <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link> -->
       <i class="el-icon-arrow-left" @click="banckto"></i>
       <p>投注记录</p>
       <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
     </div>
-    <div class="agent-content recharge">
-      <div class="agent-content-top">
+    <div class="listStyle-content">
+      <div class="listStyle-content-top">
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
       </div>
@@ -16,8 +16,8 @@
    			 <!-- 内容 {{ item.name }} -->
   		</van-tab>
 	  </van-tabs>
-
-        <ul v-show="showFlag">
+      <div>
+        <ul v-show="showFlag" class="listStyle-I">
                 <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
                     <div class="mInvite-left">
                         <p><span>{{item.lotteryName}} - ￥{{item.amount}}</span><br>
@@ -33,8 +33,9 @@
                     <i class="el-icon-arrow-down"></i>
                 </li>
         </ul>
+      </div>
         <van-actionsheet class="" v-model="show2">
-	            <ul class="recharge-top">
+	            <ul class="listStyle-II">
             <li>
               <span>{{selected.lotteryName}}</span>
             </li>
@@ -57,7 +58,7 @@
             <li>
               <p>我的投注</p>{{selected.content}}<p>玩法</p>{{selected.playName}}
             </li>
-            <li><div class="button1"><button @click="show2 =! show2">确定</button></div></li>
+            <li><div class="button"><button class="button1" @click="show2 =! show2">确定</button></div></li>
           </ul>
 	      </van-actionsheet>
 
@@ -136,6 +137,9 @@ export default {
   mounted(){
       this.getTradeList();
   },
+  activated(){
+      this.getTradeList();
+  },
   methods: {
     //返回到上一次进来的页面
     banckto(){
@@ -167,5 +171,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
 </style>

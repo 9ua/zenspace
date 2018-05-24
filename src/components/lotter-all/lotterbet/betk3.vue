@@ -5,8 +5,7 @@
         <router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link>
       </li>
       <li>
-        <p class="wangfa">玩
-          <br/>法</p>
+        <p class="wangfa">玩<br/>法</p>
         <div class="menu" @click="show = !show">{{titles}}
           <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
         </div>
@@ -126,7 +125,7 @@
 				<ul class="hezhi" v-show="index === 3">
 					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
 						<h2>{{k3item.title}}</h2>
-						<span>赔率 {{k3item.rate | keepTwoNum}}</span>
+						<span>赔 {{k3item.rate | keepTwoNum}}</span>
 					</li>
 				</ul>
 				<!-- 大小单双 -->
@@ -199,7 +198,7 @@
     <ul class="betc"  v-show="betsuccess">
       <li>温馨提示！</li>
       <li>
-        <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+        <p><b>投注成功,</b>您可以在我的账户查看注单详情</p>
       </li>
       <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
     </ul>
@@ -1015,10 +1014,10 @@ export default {
                   this.betGoshow = !this.betGoshow;
                   this.iscreat();
                   setTimeout(() => {
-                    this.betshow = !this.betshow;
+                    this.betshow = false;
                     this.betsuccess = !this.betsuccess;
-                  }, 800);
-                }, 400);
+                  }, 600);
+                }, 0);
               }
             })
             .catch(error => {

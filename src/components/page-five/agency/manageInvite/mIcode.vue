@@ -16,38 +16,31 @@
                         </p>
                     </div>
                     <div class="mInvite-right">
-                        
                         <p>
                         <span>注册数</span><br>
                         <span>({{item.count}})</span>
                         </p>
-                        
                     </div>
                     <i class="el-icon-arrow-down"></i>
-                    
-                    
-                    
                 </li>
-            <van-actionsheet class="mIcode-go" v-model="show">
-	            <div class="mIcode-inner">
-                    <p><span>邀请码</span><br>{{this.selected.code}}</p>
-                    <p><span>产生日期</span><br>{{this.selected.date}}</p>
-                    <p><span>注册数</span>({{this.selected.count}})个帐户</p>
-                    <br><br>
-                    <div><button @click="select2()">删除此邀请码</button><button class="nosure" @click="show = !show">取消</button></div>
-                    
+            </ul>
+    </div>
+            <van-actionsheet v-model="show">
+	            <div class="listStyle-II">
+                    <li><span>{{this.selected.id}}</span></li>
+                    <li><span>{{this.selected.code}}</span></li>
+                    <li><p>产生日期</p><span>{{this.selected.date}}</span></li>
+                    <li><p>注册数</p><span>({{this.selected.count}})个帐户</span></li>
+                    <li><div class="button"><button class="button2" @click="select2()">删除此邀请码</button><button class="button3" @click="show = !show">取消</button></div></li>
                 </div>
 	        </van-actionsheet>
             <van-popup v-model="show2" position="bottom">
-	            <div class="mIcode-sure">
-                    <div class="sure2"><p>确定要删除此邀请码?</p></div>
-                    <button class="del" @click="delInviteCode()">删除</button><button class="nodel" @click="select2()">取消</button>
+	            <div class="listStyle-II">
+                    <li><p>确定要删除此邀请码?</p></li>
+                    <li><div class="button"><button class="button2" @click="delInviteCode()">删除</button><button class="button3" @click="select2()">取消</button></div></li>
+                    
                 </div>
 	        </van-popup>
-            </ul>
-
-           
-    </div>
 </div>
 </template>
 <script>

@@ -22,19 +22,19 @@
       </div>
       <ul>
         <router-link to="/recharge" tag="li">
-          <img src="../../assets/img/five/Wallet.png" />
+          <div class="icon-top top-1"><i class="fa fa-credit-card" aria-hidden="true"></i></div>
           <span>我要充值</span>
         </router-link>
         <li @click="safeCenter()">
-          <img src="../../assets/img/five/Box.png" />
+          <div class="icon-top top-2"><i class="fa fa-money" aria-hidden="true"></i></div>
           <span>我要提现</span>
         </li>
         <router-link to="/trade" tag="li">
-          <img src="../../assets/img/five/Confirm.png" />
+          <div class="icon-top top-3"><i class="fa fa-book" aria-hidden="true"></i></div>
           <span>交易记录</span>
         </router-link>
         <router-link to="/bet" tag="li">
-          <img src="../../assets/img/five/370.png" />
+          <div class="icon-top top-4"><i class="fa fa-star" aria-hidden="true"></i></div>
           <span>投注记录</span>
         </router-link>
       </ul>
@@ -50,12 +50,22 @@
         </router-link>
       </ul>
     </div>
-    <van-popup v-model="show2" position="bottom">
-	    <div class="mIcode-sure">
-          <div class="sure2"><p>{{content}}</p></div>
-          <button class="del" @click="goToSet()">确定</button><button class="nodel" @click="show2 = !show2">取消</button>
+    <van-popup class="pop2" v-model="show2" :close-on-click-overlay="false">
+      <div>
+      <ul>
+        <div class="title">
+          <p>温馨提示！</p>
+        </div>
+        <div class="cont">
+          <p>{{content}}</p>
+        </div>
+        <div class="but">
+            <button class="del" @click="goToSet()">确定</button><button class="nodel" @click="show2 = !show2">取消</button>
+        </div>
+      </ul>
       </div>
-	  </van-popup>
+    </van-popup>
+
   </div>
 </template>
 <script>
@@ -195,5 +205,5 @@
 </script>
 <style lang="scss" scoped>
   @import '../../assets/scss/five.scss';
-  @import '../../assets/scss/page-five/agency/mInvite.scss';
+  @import '../../assets/scss/popcorn.scss';
 </style>

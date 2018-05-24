@@ -251,6 +251,7 @@ export default {
       n1: 1,
       n2: 1,
       n3: 1,
+      z: {},
       getPastOpens: "", //获取过去开奖号码10个
       getPastO: "", //获取过去开奖号码1个
       LotteryList: "",
@@ -783,10 +784,9 @@ export default {
         this.zhu = this.zhu1 + this.zhu2;
       }
     },
-    // 玩法树
-    getPlayTree() {
-      this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
-          this.playBonus = res.data.data.playBonus;
+    setupPlayTree(){
+      console.log(this.res);
+      this.playBonus = this.res.data.data.playBonus;
           let arrpeilv1 = [];
           let arrpeilv2 = [];
           arrpeilv1 = this.playBonus[3].bonusArray;
@@ -811,9 +811,50 @@ export default {
             this.k3options[16].rate = arrpeilv1[16];
             this.k3options[17].rate = arrpeilv1[17];
           }
+    },
+    // 玩法树
+    getPlayTree() {
+      var now = new Date().getTime();
+      //to check if localstorage exists
+      if(localStorage.getItem("playTree_" + this.$route.query.id) != null){
+        var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
+        if(null == setupTime || now-setupTime > 60){
+          localStorage.removeItem("playTree_" + this.$route.query.id);
+          localStorage.removeItem("date_playTree_" + this.$route.query.id);
+
+          this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
+          this.res = res;
+          this.setupPlayTree();
+          //set to local storage
+          localStorage.setItem("playTree_" + this.$route.query.id, res);
+          localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
+          })
+          .catch(error => {
+            console.log(error);
+            this.$store.state.loginStatus = false;
+            this.betshow = !this.betshow;
+            this.content = "获取不成功!";
+            setTimeout(() => {
+              this.betshow = !this.betshow;
+              this.$router.push("/login");
+            }, 1300);
+          });
+        }
+
+        this.res = localStorage.getItem("playTree_" + this.$route.query.id);
+        this.setupPlayTree();
+
+      }
+      else{
+        this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
+          this.res = res;
+          this.setupPlayTree();
+          //set to local storage
+          localStorage.setItem("playTree_" + this.$route.query.id, res);
+          localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
         })
         .catch(error => {
-          console.log("玩法树No");
+          console.log(error);
           this.$store.state.loginStatus = false;
           this.betshow = !this.betshow;
           this.content = "获取不成功!";
@@ -822,6 +863,7 @@ export default {
             this.$router.push("/login");
           }, 1300);
         });
+      }
     },
     //中间->投注选号
     k3option(e, index, k3item) {
@@ -1155,9 +1197,4 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/lotter-list/lotterbet/betk3.scss";
 @import "../../../assets/scss/popcorn.scss";
-</style>
-<style type="text/css">
-.van-modal {
-  background-color: rgba(0, 0, 0, 0.1) !important;
-}
 </style>

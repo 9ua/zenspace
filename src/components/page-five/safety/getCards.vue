@@ -1,12 +1,12 @@
 <template>
-  <div class="agent">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top">
       <router-link to="/safety" tag="i" class="el-icon-arrow-left"></router-link>
       <p>银行卡管理</p>
     </div>
     
-    <div class="agent-content">
-      <ul style="padding:0">
+    <div class="listStyle-content">
+      <ul style="listStyle-I">
         <li class="row2" v-for="(item,index) in bankUserList" :key="index" @click="select(item,$event)">
           <div class="title4">
             <p>{{item.title}}[{{item.id}}] {{item.card | lastFive}}</p>
@@ -14,14 +14,18 @@
           <div class="title">
             <p>修改</p>
           </div>
-        </li>         
+        </li>
+        <li>
+          <div class="button"><button class="button1" @click="goCreate()">添加银行卡</button></div>
+        </li>     
       </ul>
-        <div class="button1"><button @click="goCreate()">添加银行卡</button></div>
+        
         <div class="warning"><p>{{content}}</p></div>
     </div>
     <van-actionsheet class="" v-model="show3">
-	    <ul class="recharge-top">
-            <li>
+	    <ul class="listStyle-II">
+        <li>修改银行卡</li>
+      <li>
 				<p>银行</p><div  @click="show1 = ! show1">{{this.selectBank}}</div>
 			</li>
 			<li>
@@ -84,20 +88,39 @@
 				</el-input>
 				</div>
 			</li>
-			<li><div class="button1"><button @click="sendReq()">修改</button></div></li>
-			<li><div class="button1"><button @click="show3=!show3">取消</button></div></li>
+			<li><div class="button"><button class="button2" @click="sendReq()">修改</button><button class="button3" @click="show3=!show3">取消</button></div></li>
 		</ul>
 	</van-actionsheet>
-            <van-popup v-model="show6">
-	            <div class="button1">
-                    <div ><p>{{content2}}</p><button class="del" @click="show6 = !show6">确定</button></div>
-                </div>
-	        </van-popup>
-            <van-popup v-model="show5">
-	            <div class="button1">
-                    <div ><p>{{content2}}</p><button class="del" @click="show5 = !show5">确定</button></div>
-                </div>
-	        </van-popup>
+		<van-popup class="pop2" v-model="show6" :close-on-click-overlay="false">
+		<div>
+		<ul>
+			<div class="title">
+			<p>温馨提示！</p>
+			</div>
+			<div class="cont">
+			<p>{{content2}}</p>
+			</div>
+			<div class="but">
+				<button class="nodel" @click="show6 = ! show6">确定</button>
+			</div>
+		</ul>
+		</div>
+		</van-popup>
+		<van-popup class="pop2" v-model="show5" :close-on-click-overlay="false">
+		<div>
+		<ul>
+			<div class="title">
+			<p>温馨提示！</p>
+			</div>
+			<div class="cont">
+			<p>{{content2}}</p>
+			</div>
+			<div class="but">
+				<button class="nodel" @click="show5 = !show5">确定</button>
+			</div>
+		</ul>
+		</div>
+		</van-popup>
 	<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
     </van-actionsheet>
   </div>
@@ -242,5 +265,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
+  @import '../../../assets/scss/popcorn.scss';
 </style>

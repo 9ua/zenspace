@@ -7,9 +7,11 @@
 		  	<img :src='$store.state.url+item.img'/>
 		  </van-swipe-item>
 		</van-swipe>
-    <!-- <div class="add">
-    	<van-notice-bar text="足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。" left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png" />
-    </div> -->
+    <div class="add">
+			<van-notice-bar :speed="20" left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png">
+  			{{title}}
+			</van-notice-bar>
+    </div>
     
     	<ul>
     		<router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id}}">
@@ -31,17 +33,23 @@
       return {
       	lotteryList:[],
       	bannerList:[],
-      	getimgurl:'',
+				getimgurl:'',
+				titlelist:[],
+				title:'【欢迎光临】 欢迎来到中宏彩票，您的支持是我们最大的源动力。',
       };
-    },
+		},
     mounted(){
     	this.getLotterlist();
     },
     methods:{
     	getLotterlist(){
 	      this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
+					this.title = '';
 	      	this.lotteryList = res.data.data.hotLotterys;
-	      	this.bannerList = res.data.data.banners;
+					this.bannerList = res.data.data.banners;
+					for (let i = 0 ; i < res.data.data.noticeList.length; i++) {
+						 this.title = this.title +"   "+ res.data.data.noticeList[i].title;
+					}
 	      }).catch((error) => {
 	      		console.log("No")
 	      })

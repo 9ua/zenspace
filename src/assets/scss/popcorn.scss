@@ -1,11 +1,11 @@
 
-.pop2.van-popup{
+.pop2{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #333;
+    color: #5e5e5e;
     font-size: 14px;
-    border-radius: 6px;
+    border-radius: 10px;
     max-width: 400px;
     min-width: 180px;
     justify-content: center;
@@ -17,8 +17,6 @@
       align-items: center;
       & ul{
         width: 100%;
-        border-radius: 4px;
-        background: #fff;
         & li{
           display: flex;
           justify-content: center;
@@ -27,15 +25,15 @@
           width: 100%;
         }
         & .title{
-          border-radius: 4px 4px 0 0;
-          height: 30px;
+          border-radius: 8px 8px 0 0;
+          height: 36px;
           background:linear-gradient(to right, #f75f5b, #fead50);
           color:#fff;
           font-size: 14px;
         }
         & .cont{
           padding:14px 0px;
-          width: 90%;
+          width: 80%;
           margin: auto;
           & .contBox{
             width: 80%;
@@ -55,13 +53,14 @@
         & .but{
           display: flex;
           flex-direction: row;
-          & button{
-            height: 30px;
-            width: 50%;
-            border:none;
+        & button{
+            height: 40px;
             background: #fff;
-            border-top:1px solid #eee;
+            width: 100%;
+            border:none;
             font-size: 14px;
+            border-top:1px solid #e8e8e8;
+            border-radius: 0 0 8px 8px;
           }
           & button:nth-child(1){
             color:#dc3b40;
@@ -70,4 +69,8 @@
       }
     }
     
+  }
+
+  .van-popup {
+    filter: blur(0px) !important;
   }

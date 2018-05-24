@@ -1,10 +1,10 @@
 <template>
-  <div class="agent">
-    <div class="agent-top">
+  <div class="listStyle">
+    <div class="listStyle-top" v-bind:class="{ blur: show2 }">
       <router-link to="/agency" tag="i" class="el-icon-arrow-left"></router-link>
       <p>会员管理</p>
     </div>
-    <div class="agent-content">
+    <div class="listStyle-content" v-bind:class="{ blur: show2 }">
       <div class="row">
         <div class="title">账号</div>
         <div class="title">类型</div>
@@ -30,7 +30,7 @@
       </ul>
     </div>
 
-    <van-actionsheet v-model="show2">
+    <van-actionsheet v-model="show2" class="listModel">
 	      <ul class="listStyle-II">
             <li>
               <span>{{selected.account}}</span>
@@ -87,5 +87,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/agency/agent.scss';
+  @import '../../../assets/scss/listStyle.scss';
+</style>
+<style type="text/css">
+
 </style>

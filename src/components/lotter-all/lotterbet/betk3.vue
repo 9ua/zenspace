@@ -251,7 +251,7 @@ export default {
       n1: 1,
       n2: 1,
       n3: 1,
-      res: {},
+      cacheTime: 60000000,
       getPastOpens: "", //获取过去开奖号码10个
       getPastO: "", //获取过去开奖号码1个
       LotteryList: "",
@@ -817,14 +817,10 @@ export default {
     getPlayTree() {
       var now = new Date().getTime();
       //to check if localstorage exists
-      console.log(localStorage.getItem("playTree_" + this.$route.query.id));
-       console.log(11111111111111111111)
-      if(localStorage.getItem("playTree_" + this.$route.query.id) != null){
+      if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
         var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
-        console.log(333333333333333333333333)
-        if(null == setupTime || now-setupTime > 6000000000000000){
-         console.log(444444444444444)
-          console.log(now-setupTime)
+      
+        if(null == setupTime || now-setupTime > this.cacheTime){
           localStorage.removeItem("playTree_" + this.$route.query.id);
           localStorage.removeItem("date_playTree_" + this.$route.query.id);
 

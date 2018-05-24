@@ -48,8 +48,8 @@
               <p>{{item.n2}}</p>
               <p>{{item.n3}}</p>
               <!-- <p><img src="../../../assets/img/one/diceK3.png" alt="" /></p>
-	    				<p><img src="../../../assets/img/one/diceK3.png" alt="" /></p>
-	    				<p><img src="../../../assets/img/one/diceK3.png" alt="" /></p> -->
+              <p><img src="../../../assets/img/one/diceK3.png" alt="" /></p>
+              <p><img src="../../../assets/img/one/diceK3.png" alt="" /></p> -->
               <i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
           </div>
@@ -78,114 +78,114 @@
                 <a>{{item.n2}}</a>
                 <a>{{item.n3}}</a>
                 <!-- <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-								<a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
+                <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
+                <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
               <p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
-						</li>
-					</ul>
-				</div>
-			<div class="betk3-content-foot">
-				<p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
-					<span v-show="index !== 3">赔率 <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
-				<!-- 单挑一骰 -->
-				<ul class="yishai" v-show="index === 0">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
-						<h2>
-							<!-- {{k3item.title}} -->
-							<span></span>
-						</h2>
-					</li>
-				</ul>
-				<!-- 二同号 -->
-				<ul class="ertonghao" v-show="index === 1">
-					<li>
-						<ul>
-							<li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)">
-								<span :class="ertongh.selected ? 'active' : ''">
-									{{ertongh.title}}
-									<!-- <a></a>
-									<a></a>
-									<a></a> -->
-								</span>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<!-- 二不同 -->
-				<ul class="erbutong" v-show="index === 2">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
-						<h2>
-							<span></span>
-						</h2>
-					</li>
-				</ul>
-				<!-- 和值 -->
-				<ul class="hezhi" v-show="index === 3">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
-						<h2>{{k3item.title}}</h2>
-						<span>赔 {{k3item.rate | keepTwoNum}}</span>
-					</li>
-				</ul>
-				<!-- 大小单双 -->
-				<ul class="daoxiaodanshuang" v-show="index === 4">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in daxiaodanshuang" :key="index" @click="k3option($event,index,k3item)">
-						<h2>{{k3item.title}}</h2>
-					</li>
-				</ul>
-				<!-- 三连号 -->
-				<ul class="sanlianhao" v-show="index === 5">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
-						<h2>
-							<a></a>
-							<a></a>
-							<a></a>
-						</h2>
-					</li>
-				</ul>
-				<!-- 三同号 -->
-				<ul class="santonghao" v-show="index === 6">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
-						<h2>
-							<a></a>
-							<a></a>
-							<a></a>
-						</h2>
-					</li>
-					<p><span :class="issantonghao ? 'active' : ''" @click="tosantonghao">通选</span></p>
-				</ul>
-				<!-- 三不同 -->
-				<ul class="sanbutong" v-show="index === 7">
-					<li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
-						<h2>
-							<span></span>
-						</h2>
-					</li>
-				</ul>
-				</p>
-			</div>
-		</div>
+            </li>
+          </ul>
+        </div>
+      <div class="betk3-content-foot">
+        <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
+          <span v-show="index !== 3">赔率 <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
+        <!-- 单挑一骰 -->
+        <ul class="yishai" v-show="index === 0">
+          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
+            <h2>
+              <!-- {{k3item.title}} -->
+              <span></span>
+            </h2>
+          </li>
+        </ul>
+        <!-- 二同号 -->
+        <ul class="ertonghao" v-show="index === 1">
+          <li>
+            <ul>
+              <li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)">
+                <span :class="ertongh.selected ? 'active' : ''">
+                  {{ertongh.title}}
+                  <!-- <a></a>
+                  <a></a>
+                  <a></a> -->
+                </span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- 二不同 -->
+        <ul class="erbutong" v-show="index === 2">
+          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
+            <h2>
+              <span></span>
+            </h2>
+          </li>
+        </ul>
+        <!-- 和值 -->
+        <ul class="hezhi" v-show="index === 3">
+          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
+            <h2>{{k3item.title}}</h2>
+            <span>赔 {{k3item.rate | keepTwoNum}}</span>
+          </li>
+        </ul>
+        <!-- 大小单双 -->
+        <ul class="daoxiaodanshuang" v-show="index === 4">
+          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in daxiaodanshuang" :key="index" @click="k3option($event,index,k3item)">
+            <h2>{{k3item.title}}</h2>
+          </li>
+        </ul>
+        <!-- 三连号 -->
+        <ul class="sanlianhao" v-show="index === 5">
+          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
+            <h2>
+              <a></a>
+              <a></a>
+              <a></a>
+            </h2>
+          </li>
+        </ul>
+        <!-- 三同号 -->
+        <ul class="santonghao" v-show="index === 6">
+          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
+            <h2>
+              <a></a>
+              <a></a>
+              <a></a>
+            </h2>
+          </li>
+          <p><span :class="issantonghao ? 'active' : ''" @click="tosantonghao">通选</span></p>
+        </ul>
+        <!-- 三不同 -->
+        <ul class="sanbutong" v-show="index === 7">
+          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
+            <h2>
+              <span></span>
+            </h2>
+          </li>
+        </ul>
+        </p>
+      </div>
     </div>
-  	<div class="betk3-footer">
-  		<div class="betk3-footer-top" v-show="zhu > 0">
-  			<div class="betk3-footer-tops">
-  				<p>当前选号</p><span>{{con}}</span>
-  			</div>
-  			<div class="betk3-footer-buttoms">
-  				<p>每注金额</p><input type="number" v-model="money" onfocus="this.select()"/>
-  				<span v-if="money === '' ">请输入要投注的金额</span>
-  				<span v-else>单注最高可中<p>{{navlist === 3 ? parseInt(rates*1000)*money/1000  : parseInt(rates*1000)*money/1000  | keepTwoNum}}</p>元</span>
-  			</div>
-  		</div>
-  		<div class="betk3-footer-buttom">
-  			<div class="betk3-footer-buttom-left">
-  				<button @click="iscreat">清空</button>
-  				<p><span v-if="zhu >0">共{{zhu}}注,</span><span v-if="this.money !== '' ">共{{zhu*money}}元</span></p>
-  			</div>
-  			<div class="betk3-footer-buttom-right" @click="betC">马上投注</div>
-  		</div>
-  	</div>
+    </div>
+    <div class="betk3-footer">
+      <div class="betk3-footer-top" v-show="zhu > 0">
+        <div class="betk3-footer-tops">
+          <p>当前选号</p><span>{{con}}</span>
+        </div>
+        <div class="betk3-footer-buttoms">
+          <p>每注金额</p><input type="number" v-model="money" onfocus="this.select()"/>
+          <span v-if="money === '' ">请输入要投注的金额</span>
+          <span v-else>单注最高可中<p>{{navlist === 3 ? parseInt(rates*1000)*money/1000  : parseInt(rates*1000)*money/1000  | keepTwoNum}}</p>元</span>
+        </div>
+      </div>
+      <div class="betk3-footer-buttom">
+        <div class="betk3-footer-buttom-left">
+          <button @click="iscreat">清空</button>
+          <p><span v-if="zhu >0">共{{zhu}}注,</span><span v-if="this.money !== '' ">共{{zhu*money}}元</span></p>
+        </div>
+        <div class="betk3-footer-buttom-right" @click="betC">马上投注</div>
+      </div>
+    </div>
     <ul class="betc" v-show="betGoshow">
       <li>投注确认</li>
       <li>
@@ -251,7 +251,7 @@ export default {
       n1: 1,
       n2: 1,
       n3: 1,
-      z: {},
+      cacheTime: 60000000,
       getPastOpens: "", //获取过去开奖号码10个
       getPastO: "", //获取过去开奖号码1个
       LotteryList: "",
@@ -784,9 +784,10 @@ export default {
         this.zhu = this.zhu1 + this.zhu2;
       }
     },
-    setupPlayTree(){
-      console.log(this.res);
-      this.playBonus = this.res.data.data.playBonus;
+    setupPlayTree(resData){
+    //console.log("resdatresData")
+    //console.log(resData)
+      this.playBonus = resData;
           let arrpeilv1 = [];
           let arrpeilv2 = [];
           arrpeilv1 = this.playBonus[3].bonusArray;
@@ -816,17 +817,18 @@ export default {
     getPlayTree() {
       var now = new Date().getTime();
       //to check if localstorage exists
-      if(localStorage.getItem("playTree_" + this.$route.query.id) != null){
+      console.log(localStorage.getItem("playTree_" + this.$route.query.id));
+      if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
         var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
-        if(null == setupTime || now-setupTime > 60){
+      
+        if(null == setupTime || now-setupTime > this.cacheTime){
           localStorage.removeItem("playTree_" + this.$route.query.id);
           localStorage.removeItem("date_playTree_" + this.$route.query.id);
 
           this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
-          this.res = res;
-          this.setupPlayTree();
+          this.setupPlayTree( JSON.parse(JSON.stringify(res.data.data.playBonus)));
           //set to local storage
-          localStorage.setItem("playTree_" + this.$route.query.id, res);
+          localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data.playBonus));
           localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
           })
           .catch(error => {
@@ -840,17 +842,16 @@ export default {
             }, 1300);
           });
         }
-
-        this.res = localStorage.getItem("playTree_" + this.$route.query.id);
-        this.setupPlayTree();
-
+        else
+          this.setupPlayTree(JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)));
       }
       else{
-        this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
-          this.res = res;
-          this.setupPlayTree();
+        this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
+        console.log(res.data.data.playBonus);
+          this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data.playBonus)));
+          console.log("開始塞玩法數localstorage")
           //set to local storage
-          localStorage.setItem("playTree_" + this.$route.query.id, res);
+          localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data.playBonus));
           localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
         })
         .catch(error => {

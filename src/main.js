@@ -78,7 +78,7 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
         router.push('/login');
     }
     if (data.data.pup === true) {
-        if (data.data.data.Message){
+        if (data.data.data.message){
             Message.error({
                 message: data.data.data.message
             })

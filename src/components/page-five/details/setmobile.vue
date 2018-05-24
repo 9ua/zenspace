@@ -1,7 +1,7 @@
 <template>
   <div class="setmobile">
     <div class="setmobile-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
+      <router-link to="/safety" tag="i" class="el-icon-arrow-left"></router-link>
       <p>绑定密保手机</p>
     </div>
     <div class="setmobile-content">

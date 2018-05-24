@@ -29,11 +29,11 @@
     & div {
         display: flex;
         align-items: center;
-        height: 48px;
-        padding-left: 16px;
+        height: 56px;
+        padding:0 20px;
     }
     & div:nth-child(1) {
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #e8e8e8;
     }
     & p {
         width: 18%;

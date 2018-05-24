@@ -6,24 +6,24 @@
     </div>
     <div class="setQuestion-input">
       <div>
-        <p>问题一:</p>
+        <p>问题一</p>
         <select v-model="title1" @change="selecteds1($event)">
           <option v-for="(item,index) in options" :key="index" :value="item.value">{{item.label}}</option>
         </select>
       </div>
       <div>
-        <p>答案:</p>
+        <p>答案：</p>
         <input type="text" v-model="answer1" v-focus/> </div>
     </div>
     <div class="setQuestion-input">
       <div>
-        <p>问题二:</p>
+        <p>问题二</p>
         <select v-model="title2" @change="selecteds2($event)">
           <option v-for="(item,index) in options" :key="index" :value="item.value">{{item.label}}</option>
         </select>
       </div>
       <div>
-        <p>答案:</p>
+        <p>答案：</p>
         <input type="text" v-model="answer2"/> </div>
     </div>
     <div class="setQuestion-but">

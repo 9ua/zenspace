@@ -39,11 +39,11 @@
     height: 100%;
     & ul {
       background: #fff;
-      padding: 0px 16px;
       & li {
         display: flex;
         align-items: center;
-        height: 52px;
+        height: 56px;
+        padding: 0px 20px;
         line-height: 52px;
         font-size: 16px;
         & p {

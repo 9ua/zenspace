@@ -3,15 +3,20 @@
     background: #fff;
     height: 100%;
     & ul{
-        box-shadow:0 0 60px 20px #ddd inset;
         background: #fff;
         & li:nth-child(1) {
-            background: #FFC043;
+            background: rgba(255, 151, 54, 0.15);
             font-weight: 600;
+            height: 90px;
+            font-size: 24px;
             & span {
-                font-size: 16px;
-                color: #fff;
+                font-size: 20px;
+                color: rgb(179, 35, 35);
+                line-height: 32px;
             }
+        }
+        & li:nth-child(even) {
+            background: #fff;
         }
         & li{
             display: flex;
@@ -19,7 +24,7 @@
             align-items: center;
             padding: 0px 20px;
             height: 70px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e8e8e8;
             & .winning-left{
                 display: flex;
                 align-items: center;

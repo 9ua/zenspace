@@ -38,9 +38,6 @@ export default {
   mounted(){
     this.activity();
   },
-  activated(){
-    this.activity();
-  },
   methods: {
     activeR(e,actives,index){
       this.activesremark = index;

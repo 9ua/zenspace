@@ -1453,11 +1453,11 @@
       betCancel() {
         this.betGoshow = !this.betGoshow;
       },
-      //玩法树
-      getPlayTree() {
-        this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
-          this.playBonus = res.data.data.playBonus;
-          this.playGroups = res.data.data.playGroups;
+    setupPlayTree(resData){
+    //console.log("resdatresData")
+    //console.log(resData)
+          this.playBonus = resData.playBonus;
+          this.playGroups = resData.playGroups;
           for (let i = 0; i < this.playGroups.length; i++) {
               this.splayGroups.push(this.playGroups[this.navlist])
           }
@@ -1480,10 +1480,59 @@
             }
           }
           this.displayBonus = this.splayers[0][0].displayBonus
-        }).catch((error) => {
-          console.log("玩法树No");
+    },
+    getPlayTree() {
+      var now = new Date().getTime();
+      //to check if localstorage exists
+      console.log(localStorage.getItem("playTree_" + this.$route.query.id));
+      if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
+        var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
+      
+        if(null == setupTime || now-setupTime > this.cacheTime){
+          localStorage.removeItem("playTree_" + this.$route.query.id);
+          localStorage.removeItem("date_playTree_" + this.$route.query.id);
+
+          this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
+          this.setupPlayTree( JSON.parse(JSON.stringify(res.data.data)));
+          //set to local storage
+          localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
+          localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
+          })
+          .catch(error => {
+            console.log(error);
+            this.$store.state.loginStatus = false;
+            this.betshow = !this.betshow;
+            this.content = "获取不成功!";
+            setTimeout(() => {
+              this.betshow = !this.betshow;
+              this.$router.push("/login");
+            }, 1300);
+          });
+        }
+        else
+          this.setupPlayTree(JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)));
+      }
+      else{
+        this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
+          this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data)));
+          console.log("開始塞玩法數localstorage")
+          //set to local storage
+          localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
+          localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
         })
-      },
+        .catch(error => {
+          console.log(error);
+          this.$store.state.loginStatus = false;
+          this.betshow = !this.betshow;
+          this.content = "获取不成功!";
+          setTimeout(() => {
+            this.betshow = !this.betshow;
+            this.$router.push("/login");
+          }, 1300);
+        });
+      }
+    },
+
       //投注
       betGo() {
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials: true};

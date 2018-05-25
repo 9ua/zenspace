@@ -786,7 +786,7 @@ export default {
     },
     setupPlayTree(resData){
     //console.log("resdatresData")
-    //console.log(resData)
+    console.log(resData , 9999999999)
       this.playBonus = resData;
           let arrpeilv1 = [];
           let arrpeilv2 = [];
@@ -1031,6 +1031,7 @@ export default {
     },
     //投注
     betGo() {
+      this.betGoshow = !this.betGoshow;
       let config = {headers: { "Content-Type": "application/x-www-form-urlencoded" },withCredentials: true};
       if (this.playId1 === "k3_star3_big_odd" || this.playId2 === "k3_star3_and" || this.playId === "k3_star3_and") {
         if (this.playId1 === "k3_star3_big_odd" && this.con1 !== '') {
@@ -1054,7 +1055,7 @@ export default {
                 setTimeout(() => {
                   this.betshow = !this.betshow;
                   this.content = "投注成功!";
-                  this.betGoshow = !this.betGoshow;
+                  // this.betGoshow = !this.betGoshow;
                   this.iscreat();
                   setTimeout(() => {
                     this.betshow = false;

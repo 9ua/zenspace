@@ -1,7 +1,7 @@
 <template>
   <div class="safeMobile">
     <div class="safeMobile-top">
-      <router-link to="/safety" tag="i" class="el-icon-arrow-left"></router-link>
+      <router-link to="/" tag="i" class="el-icon-arrow-left"></router-link>
       <p>验证密保手机</p>
     </div>
     <div class="safeMobile-content">

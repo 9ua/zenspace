@@ -68,7 +68,6 @@
     created() {
       localStorage.clear();
       this.checkeds();
-      this.getCaptchaCode();
     },
     methods: {
     	getCaptchaCode() {

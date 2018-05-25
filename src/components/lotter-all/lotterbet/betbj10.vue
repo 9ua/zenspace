@@ -259,18 +259,29 @@
         timer2:'',
       }
     },
-    deactivated() {
-      this.endCount();
-      this.iscreat();
-    },
-    activated(){
-      if(!this.$route.meta.isBack){
+    mounted(){
+        if(!this.$route.meta.isBack){
         this.getPlayTree();
         this.getLotteryList();
         this.geteServerTime();//获取彩種當前獎期時間
       }
-      this.$route.meta.isBack=false;
+      this.$route.meta.isBack=false; 
     },
+    destroyed(){
+      this.endCount();
+      this.iscreat();
+    },
+    // deactivated() {
+
+    // },
+    // activated(){
+    //   if(!this.$route.meta.isBack){
+    //     this.getPlayTree();
+    //     this.getLotteryList();
+    //     this.geteServerTime();//获取彩種當前獎期時間
+    //   }
+    //   this.$route.meta.isBack=false;
+    // },
     watch:{
       money(newVal) {
         if (this.money === '') {

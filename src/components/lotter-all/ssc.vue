@@ -15,7 +15,10 @@ export default {
       lotteryListssc:'',
     }
   },
-  mounted(){
+  // mounted(){
+  //   this.lotteryssc();
+  // },
+  activated(){
     this.lotteryssc();
   },
   methods:{
@@ -30,5 +33,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/ssc.scss'
+@import '../../assets/scss/lotter-list/ssc.scss';
 </style>

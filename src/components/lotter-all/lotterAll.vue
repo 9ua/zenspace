@@ -15,7 +15,7 @@ export default {
       lotteryListAll:'',
     }
   },
-  mounted(){
+  activated(){
     this.lotteryAll();
   },
   methods:{
@@ -31,6 +31,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/lotterAll.scss'
+@import '../../assets/scss/lotter-list/lotterAll.scss';
 </style>
 

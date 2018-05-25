@@ -33,5 +33,5 @@
   }
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/lotterList.scss'
+@import '../../assets/scss/lotter-list/lotterList.scss';
 </style>

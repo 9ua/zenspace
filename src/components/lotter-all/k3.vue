@@ -15,7 +15,10 @@ export default {
       lotteryListk3:'',
     }
   },
-  mounted(){
+  // mounted(){
+  //   this.lotteryk3();
+  // },
+  activated(){
     this.lotteryk3();
   },
   methods:{
@@ -31,5 +34,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/k3.scss'
+@import '../../assets/scss/lotter-list/k3.scss';
 </style>

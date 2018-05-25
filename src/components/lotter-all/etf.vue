@@ -15,7 +15,10 @@ export default {
       lotteryListetf:'',
     }
   },
-  mounted(){
+  // mounted(){
+  //   this.lotteryetf();
+  // },
+  activated(){
     this.lotteryetf();
   },
   methods:{
@@ -30,5 +33,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/etf.scss'
+@import '../../assets/scss/lotter-list/etf.scss';
 </style>

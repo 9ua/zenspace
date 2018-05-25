@@ -2,7 +2,7 @@
   <div class="klc">
     <ul>
       <router-link v-for="(item,index) in lotteryListklc" :key="index" tag="li" :to="{path:'/pk10',query:{id:item.id}}">
-        <img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
+        <img :src='"@/assets/img/one/"+item.image+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
     </ul>

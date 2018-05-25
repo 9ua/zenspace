@@ -35,7 +35,7 @@
       	bannerList:[],
 				getimgurl:'',
 				titlelist:[],
-				title:'【欢迎光临】 欢迎来到中宏彩票，您的支持是我们最大的源动力。',
+				title:'【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。',
       };
 		},
     // mounted(){

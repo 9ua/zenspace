@@ -8,7 +8,7 @@
       <div class="lotterList-nav-box">
         <ul>
           <router-link :to="'/lotterList/'+navTitles.pathsrc" tag="li" v-for="(navTitles,index) in navTitle" :title="navTitles.name" :key="index">
-          <img :src='"../../assets/img/one/"+navTitles.pathsrc+".png"' alt="">
+          <img :src='"@/assets/img/one/"+navTitles.pathsrc+".png"' alt="">
           <h5>{{navTitles.name}}</h5>
           </router-link>
         </ul>

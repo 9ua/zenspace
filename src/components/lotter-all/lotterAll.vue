@@ -15,7 +15,8 @@ export default {
       lotteryListAll:'',
     }
   },
-  activated(){
+
+  mounted(){
     this.lotteryAll();
   },
   methods:{

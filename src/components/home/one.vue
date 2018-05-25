@@ -15,7 +15,7 @@
     
     	<ul>
     		<router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id}}">
-    			<img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
+    			<img :src='"@/assets/img/one/"+item.image+".png"' alt="images"/>
     			<h5>{{item.name}}</h5>
     		</router-link>
         <router-link class="lotter-list" to="/lotterList" tag="li">
@@ -35,12 +35,12 @@
       	bannerList:[],
 				getimgurl:'',
 				titlelist:[],
-				title:'【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。',
+				title:'【欢迎光临】 欢迎来到宏發彩票，祝您，您的支持是我们最大的源动力。',
       };
 		},
-    // mounted(){
-    // 	this.getLotterlist();
-		// },
+    mounted(){
+    	this.getLotterlist();
+		},
 		activated(){
     	this.getLotterlist();
 		},

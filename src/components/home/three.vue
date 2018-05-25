@@ -35,9 +35,9 @@ export default {
       showFlag: true
     };
   },
-  // mounted(){
-  //   this.activity();
-  // },
+  mounted(){
+    this.activity();
+  },
   activated(){
     this.activity();
   },

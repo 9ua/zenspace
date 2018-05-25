@@ -238,7 +238,7 @@ export default new Router({
                     name: 'one',
                     component: resolve => require(['@/components/home/one.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     },
                 },
                 {
@@ -246,7 +246,7 @@ export default new Router({
                     name: 'three',
                     component: resolve => require(['@/components/home/three.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
                 {

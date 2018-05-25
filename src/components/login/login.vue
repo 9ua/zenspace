@@ -69,12 +69,12 @@
     created() {
       localStorage.clear();
       this.checkeds();
-      this.getCaptchaCode();
     },
     methods: {
     	getCaptchaCode() {
         this.newDate = new Date().getTime();
-        this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
+        this.captchaCodeImg = this.$store.state.url+ "code.jpg?_=" + this.newDate;
+        console.log("獲取認證碼!!!");
       },
       login() {
         const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
@@ -113,6 +113,11 @@
             setStore('loginSta',this.loginSta);
             this.$store.state.loginStatus = getStore('loginSta');
           	if(res.data.code === 1){
+              this.$router.push({path:'/one'});
+          		this.$store.state.Globalusername = res.data.data.account;
+              this.$store.state.Globalpassword = this.newUserInfo.pwd;
+              setStore('username',this.$store.state.Globalusername);
+              setStore('password',pwd);
               if ( this.checked === true) {
                 setStore('username',this.$store.state.Globalusername);
                 setStore('password',pwd);
@@ -122,15 +127,16 @@
                 this.$cookie.delete('username');
                 this.$cookie.delete('password');
               }
-              this.$router.push({path:'/one'});
-          		this.$store.state.Globalusername = res.data.data.account;
-              this.$store.state.Globalpassword = this.newUserInfo.pwd;
-              setStore('username',this.$store.state.Globalusername);
-              setStore('password',pwd);
           	} else {
+              if (res.data.code === 0) {
+                this.$cookie.delete('username');
+                this.$cookie.delete('password');
+              }
               if (res.data.data.errCount >= 3) {
                 this.getCaptchaCode();
-                this.errorcode = true;
+                setTimeout(() => {
+                  this.errorcode = true;
+                }, 0);
               } else {
                 this.errorcode = false;
               }

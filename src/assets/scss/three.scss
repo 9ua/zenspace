@@ -25,6 +25,10 @@
             }
             & .three-content{
                 width: 100%;
+                & div {
+                    background: #fff;
+                    padding: 0 20px;
+                }
             }
         }
     }

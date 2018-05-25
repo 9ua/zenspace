@@ -31,7 +31,7 @@
 		methods:{
 			getCaptchaCode() {
         this.newDate = new Date().getTime();
-        this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
+        this.captchaCodeImg =this.$store.state.url+ "code.jpg?_=" + this.newDate;
       },
       resetGo(){
       	this.$router.push('resetway');

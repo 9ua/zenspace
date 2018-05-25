@@ -65,7 +65,7 @@
     methods: {
       getCaptchaCode() {
         this.newDate = new Date().getTime();
-        this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
+        this.captchaCodeImg = this.$store.state.url+"code.jpg?_=" + this.newDate;
       },
       registeredGo() {
         const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;

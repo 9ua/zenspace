@@ -79,6 +79,9 @@
       },
       login() {
         this.loginReq = false;
+        setTimeout(() => {
+          this.loginReq = true;
+        }, 1200);
         const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
         const pwd_yz = /^[A-Za-z0-9]{6,120}$/;
         let yzuser = user_yz.test(this.newUserInfo.user);
@@ -130,7 +133,6 @@
               }
               this.$router.push({path:'/one'});
           	} else {
-              this.loginReq = true;
               if (res.data.code === 0) {
                 this.$cookie.delete('username');
                 this.$cookie.delete('password');

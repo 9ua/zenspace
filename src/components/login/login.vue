@@ -26,7 +26,7 @@
         		<yd-checkbox v-model="checked" colo="#419fd9" @click="checked = !checked">记住密码</yd-checkbox>
         </div>
         <div class="login-go">
-          <button @click="login">立即登陆</button>
+          <button @click="login" v-show="loginReq">立即登陆</button>
         </div>
         <div class="login-live">
           <router-link to="registered">立即注册</router-link>
@@ -51,6 +51,7 @@
       return {
         pop: false,
         pwd: false,
+        loginReq:true,
         checked: false,//记住密码否?
         content: '',//弹窗内容
         newDate: null,//时间戳
@@ -77,6 +78,7 @@
         console.log("獲取認證碼!!!");
       },
       login() {
+        this.loginReq = false;
         const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
         const pwd_yz = /^[A-Za-z0-9]{6,120}$/;
         let yzuser = user_yz.test(this.newUserInfo.user);
@@ -113,7 +115,6 @@
             setStore('loginSta',this.loginSta);
             this.$store.state.loginStatus = getStore('loginSta');
           	if(res.data.code === 1){
-              this.$router.push({path:'/one'});
           		this.$store.state.Globalusername = res.data.data.account;
               this.$store.state.Globalpassword = this.newUserInfo.pwd;
               setStore('username',this.$store.state.Globalusername);
@@ -127,7 +128,9 @@
                 this.$cookie.delete('username');
                 this.$cookie.delete('password');
               }
+              this.$router.push({path:'/one'});
           	} else {
+              this.loginReq = true;
               if (res.data.code === 0) {
                 this.$cookie.delete('username');
                 this.$cookie.delete('password');

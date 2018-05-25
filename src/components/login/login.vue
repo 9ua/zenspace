@@ -60,14 +60,16 @@
         newUserInfo: {
           user: '',
           pwd: '',
-          rempwd:'',
           verification:'',
+          rempwd:'',
+          
         }
       }
     },
     created() {
       localStorage.clear();
       this.checkeds();
+      this.getCaptchaCode();
     },
     methods: {
     	getCaptchaCode() {
@@ -102,15 +104,6 @@
           formData.append('password', pwd);
           formData.append('code',this.newUserInfo.verification);
           this.$axios.post(this.$store.state.url+'api/user/login', formData, config).then((res) => {
-            if ( this.checked === true) {
-                setStore('username',this.$store.state.Globalusername);
-                setStore('password',pwd);
-                this.$cookie.set('username', res.data.data.account , { expires: '1M' });
-                this.$cookie.set('password', pwd , { expires: '1M' });
-              } else {
-                this.$cookie.delete('username');
-                this.$cookie.delete('password');
-              }
             // if(this.checked === false){this.$cookie.delete('username');this.$cookie.delete('password');}
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
             this.$store.state.userType = res.data.data.userType;
@@ -120,6 +113,15 @@
             setStore('loginSta',this.loginSta);
             this.$store.state.loginStatus = getStore('loginSta');
           	if(res.data.code === 1){
+              if ( this.checked === true) {
+                setStore('username',this.$store.state.Globalusername);
+                setStore('password',pwd);
+                this.$cookie.set('username', res.data.data.account , { expires: '1M' });
+                this.$cookie.set('password', pwd , { expires: '1M' });
+              } else {
+                this.$cookie.delete('username');
+                this.$cookie.delete('password');
+              }
               this.$router.push({path:'/one'});
           		this.$store.state.Globalusername = res.data.data.account;
               this.$store.state.Globalpassword = this.newUserInfo.pwd;

@@ -414,7 +414,7 @@ export default {
       this.getLotteryList();
   },
   mounted(){
-        if(!this.$route.meta.isBack){
+    if(!this.$route.meta.isBack){
       this.getPlayTree();
       this.geteServerTime();//获取彩種當前獎期時間
     }
@@ -1205,4 +1205,12 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/lotter-list/lotterbet/betk3.scss";
 @import "../../../assets/scss/popcorn.scss";
+</style>
+<style>
+/* .menu-list.van-popup {
+  transition: 0s ease-out !important;
+} */
+.van-popup--top{
+  transition: 0s ease-out !important;
+}
 </style>

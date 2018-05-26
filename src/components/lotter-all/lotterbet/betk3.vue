@@ -251,7 +251,7 @@ export default {
       n1: 1,
       n2: 1,
       n3: 1,
-      cacheTime: 60000000,
+      cacheTime: 60000,
       getPastOpens: "", //获取过去开奖号码10个
       getPastO: "", //获取过去开奖号码1个
       LotteryList: "",

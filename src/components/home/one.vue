@@ -35,7 +35,7 @@
       	bannerList:[],
 				getimgurl:'',
 				titlelist:[],
-				title:'【欢迎光临】 欢迎来到宏發彩票，祝您，您的支持是我们最大的源动力。',
+				title:'【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。',
       };
 		},
     mounted(){
@@ -46,16 +46,22 @@
 		// },
     methods:{
     	getLotterlist(){
-	      this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
-					this.title = '';
-	      	this.lotteryList = res.data.data.hotLotterys;
-					this.bannerList = res.data.data.banners;
-					for (let i = 0 ; i < res.data.data.noticeList.length; i++) {
-						 this.title = this.title +"   "+ res.data.data.noticeList[i].title;
-					}
-	      }).catch((error) => {
+				if(localStorage.getItem('indexInfo') !== null){
+					this.lotteryList = JSON.parse(localStorage.getItem('indexInfo')).hotLotterys;
+					this.bannerList = JSON.parse(localStorage.getItem('indexInfo')).banners;
+				} else {
+					this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
+								this.title = '';
+								localStorage.setItem('indexInfo',JSON.stringify(res.data.data)); 
+								this.lotteryList = res.data.data.hotLotterys;
+								this.bannerList = res.data.data.banners;
+								for (let i = 0 ; i < res.data.data.noticeList.length; i++) {
+									this.title = this.title +"   "+ res.data.data.noticeList[i].title;
+								}
+	      	}).catch((error) => {
 	      		console.log("No")
 	      })
+				}
     	}
     },
     components:{

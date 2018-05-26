@@ -115,8 +115,8 @@
             setStore('JSESSIONICookie',this.$store.state.JSESSIONICookie);
             setStore('userType',this.$store.state.userType);
             this.loginSta = true;
+            this.$store.state.loginStatus = this.loginSta;
             setStore('loginSta',this.loginSta);
-            this.$store.state.loginStatus = getStore('loginSta');
           	if(res.data.code === 1){
           		this.$store.state.Globalusername = res.data.data.account;
               this.$store.state.Globalpassword = this.newUserInfo.pwd;
@@ -145,14 +145,9 @@
               } else {
                 this.errorcode = false;
               }
-              // this.$store.state.errorcode ++;
-              // this.newUserInfo.user = '';
               this.newUserInfo.pwd = '';
               this.checked = false;
               removeStore('password');
-          		// if(this.$store.state.errorcode > 2 ){
-	          	// 	this.errorcode = !this.errorcode;
-	          	// }
             }
           }).catch((error) => {
           		console.log("No")

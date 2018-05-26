@@ -249,6 +249,7 @@
         navlist: 0,
         navlistb: 0,
         navlistf: 0,
+        cacheTime: 60000,
         splayGroups:[],
         sgroups:[],//
         sgroups2:[],//
@@ -1071,7 +1072,6 @@
             this.content = "获取不成功!";
             setTimeout(() => {
               this.betshow = !this.betshow;
-              this.$router.push("/login");
             }, 1300);
           });
         }

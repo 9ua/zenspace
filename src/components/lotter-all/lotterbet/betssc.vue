@@ -242,6 +242,7 @@
         snums:'',//
         timer:'',
         timer2:'',
+        cacheTime: 60000,
       }
     },
     destroyed() {

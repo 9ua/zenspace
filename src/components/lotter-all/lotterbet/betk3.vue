@@ -410,7 +410,7 @@ export default {
       ]
     };
   },
-  activated(){
+  mounted(){
         if(!this.$route.meta.isBack){
       this.getPlayTree();
       this.getLotteryList();
@@ -418,7 +418,7 @@ export default {
     }
     this.$route.meta.isBack=false;
   },
-  deactivated() {
+  destroyed() {
     this.endCount();
     this.iscreat();
   },

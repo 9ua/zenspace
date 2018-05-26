@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="home-cneter">
-      <keep-alive v-if="$route.meta.keepAlive">
+      <!-- <keep-alive v-if="$route.meta.keepAlive"> -->
         <router-view></router-view>
-      </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive"></router-view>
+      <!-- </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view> -->
     </div>
     <div class="home-footer">
       <ul>

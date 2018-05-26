@@ -13,16 +13,17 @@
           </router-link>
         </ul>
       </div>
-      <keep-alive v-if="$route.meta.keepAlive">
+      <keep-alive>
         <router-view></router-view>
       </keep-alive>
-       <router-view v-if="!$route.meta.keepAlive"></router-view>
+      
     </div>
 </div>  
 </template>
 <script>
-  export default{
-    data() {
+
+  export default {
+    data(){
       return{
         navTitle:[
           {name:'全部彩种',pathsrc:'lotterAll'},

@@ -259,11 +259,11 @@
         timer2:'',
       }
     },
-    deactivated() {
+    destroyed() {
       this.endCount();
       this.iscreat();
     },
-    activated(){
+    mounted(){
       if(!this.$route.meta.isBack){
         this.getPlayTree();
         this.getLotteryList();

@@ -135,7 +135,7 @@ export default {
     }
   },
 
-  activated(){
+  mounted(){
       this.getTradeList();
   },
   methods: {

@@ -242,7 +242,7 @@
         snums:'',//
         timer:'',
         timer2:'',
-        cacheTime: 60000,
+        cacheTime: 600000,
       }
     },
     destroyed() {
@@ -1578,7 +1578,16 @@
       },
       //右上获取彩种
       getLotteryList() {
+        if(localStorage.getItem('lotteryList') !== null){
+          this.LotteryList = JSON.parse(localStorage.getItem('lotteryList')).ssc;
+          for (let i = 0; i < this.LotteryList.length; i++) {
+            if(this.LotteryList[i].id === this.$route.query.id){
+              this.listname = this.LotteryList[i].name.substring(0, 2);
+            }
+          }
+        } else {
         this.$http.get(this.$store.state.url + 'api/lottery/getLotteryList').then((res) => {
+          localStorage.setItem('lotteryList',JSON.stringify(res.data.data)); 
           this.LotteryList = res.data.data.ssc;
           for (let i = 0; i < this.LotteryList.length; i++) {
             if(this.LotteryList[i].id === this.$route.query.id){
@@ -1588,6 +1597,7 @@
         }).catch((error) => {
           console.log("右上彩种No")
         })
+        }
       },
       //头部右->菜单点击
       listnames(e, index, into) {
@@ -1624,7 +1634,6 @@
       },
       //获取过去开奖号码10个
       getPastOpen() {
-        this.getLotteryList();
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', { params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
         }).catch((error) => {
@@ -1633,7 +1642,6 @@
       },
       //获取过去开奖号码1个
       getPastOp() {
-        this.getLotteryList();
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 1}}).then((res) => {
           this.getPastO = res.data.data;
           if (res.data.data[0].seasonId != this.seasonId3) {

@@ -49,6 +49,9 @@
 				if(localStorage.getItem('indexInfo') !== null){
 					this.lotteryList = JSON.parse(localStorage.getItem('indexInfo')).hotLotterys;
 					this.bannerList = JSON.parse(localStorage.getItem('indexInfo')).banners;
+					for (let i = 0 ; i < res.data.data.noticeList.length; i++) {
+									this.title = this.title +"   "+ res.data.data.noticeList[i].title;
+								}
 				} else {
 					this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
 								this.title = '';

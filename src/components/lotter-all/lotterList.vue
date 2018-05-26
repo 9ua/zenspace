@@ -30,7 +30,7 @@
           {name:'快3',pathsrc:'k3s'},
           {name:'时时彩',pathsrc:'sscs'},
           {name:'快乐彩',pathsrc:'klcs'},
-          {name:'11选5',pathsrc:'etfs'},
+          // {name:'11选5',pathsrc:'etfs'},
         ]
       }
     }

@@ -8,8 +8,8 @@
       <div class="lotterList-nav-box">
         <ul>
           <router-link :to="'/lotterList/'+navTitles.pathsrc" tag="li" v-for="(navTitles,index) in navTitle" :title="navTitles.name" :key="index">
-          <img :src='"@/assets/img/one/"+navTitles.pathsrc+".png"' alt="">
-          <h5>{{navTitles.name}}</h5>
+            <img :src='"@/assets/img/one/"+navTitles.pathsrc+".png"' alt="">
+            <h5>{{navTitles.name}}</h5>
           </router-link>
         </ul>
       </div>
@@ -30,7 +30,7 @@
           {name:'快3',pathsrc:'k3s'},
           {name:'时时彩',pathsrc:'sscs'},
           {name:'快乐彩',pathsrc:'klcs'},
-          // {name:'11选5',pathsrc:'etfs'},
+          {name:'11选5',pathsrc:'etfs'},
         ]
       }
     }

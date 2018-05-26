@@ -69,7 +69,7 @@ import betssc from '@/components/lotter-all/lotterbet/betssc'
 
 Vue.use(Router)
 export default new Router({
-    // mode: 'history',
+    mode: 'history',
     routes: [{
             path: '/ErrorPage',
             name: 'ErrorPage',

@@ -1049,84 +1049,142 @@
       },
     //玩法树
     getPlayTree() {
-      var now = new Date().getTime();
-      //to check if localstorage exists
-      console.log(localStorage.getItem("playTree_" + this.$route.query.id));
-      if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-        var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
-      
-        if(null == setupTime || now-setupTime > this.cacheTime){
-          localStorage.removeItem("playTree_" + this.$route.query.id);
-          localStorage.removeItem("date_playTree_" + this.$route.query.id);
-
-          this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
-          this.setupPlayTree( JSON.parse(JSON.stringify(res.data.data)));
-          //set to local storage
-          localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
-          localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
-          })
-          .catch(error => {
-            console.log(error);
-            this.$store.state.loginStatus = false;
-            this.betshow = !this.betshow;
-            this.content = "获取不成功!";
-            setTimeout(() => {
-              this.betshow = !this.betshow;
-            }, 1300);
-          });
-        }
-        else
-          this.setupPlayTree(JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)));
-      }
-      else{
-        this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
-          this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data)));
-          console.log("開始塞玩法數localstorage")
-          //set to local storage
-          localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
-          localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
-        })
-        .catch(error => {
-          console.log(error);
-          this.$store.state.loginStatus = false;
-          this.betshow = !this.betshow;
-          this.content = "获取不成功!";
-          setTimeout(() => {
-            this.betshow = !this.betshow;
-            this.$router.push("/login");
-          }, 1300);
-        });
-      }
-    },
-
-    setupPlayTree(resData){
-    //console.log("resdatresData")
-    //console.log(resData)
-          this.playBonus = resData.playBonus;
-          this.playGroups = resData.playGroups;
-          for (let i = 0; i < this.playGroups.length; i++) {
-            this.splayGroups.push(this.playGroups[i])
-          }
-          for (let j = 0; j < this.splayGroups.length; j++) {
-            if(this.navlist === j){
+        const now = new Date().getTime();
+        if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
+          this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
+            this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
+            this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
+            for (let i = 0; i < this.playGroups.length; i++) {
+              this.splayGroups.push(this.playGroups[i])
+            }
+            for (let j = 0; j < this.splayGroups.length; j++) {
               this.sgroups.push(this.splayGroups[j].groups)
             }
-          }
-          for (let k = 0; k < this.sgroups.length; k++) {
-            for (let j = 0; j < this.sgroups[k].length; j++) {
-              this.sgroups2.push(this.sgroups[k][j])
+            for (let k = 0; k < this.sgroups.length; k++) {
+              for (let j = 0; j < this.sgroups[k].length; j++) {
+                this.sgroups2.push(this.sgroups[k][j])
+              }
             }
-          }
-          for (let i = 0; i < this.sgroups2.length; i++) {
-            this.splayers.push(this.sgroups2[i].players)
-          }
-          for (let h = 0; h < this.splayers.length; h++) {
-            for (let i = 0; i < this.splayers[h].length; i++) {
-              this.snumView.push(this.splayers[h][i].numView)
+            for (let i = 0; i < this.sgroups2.length; i++) {
+              this.splayers.push(this.sgroups2[i].players)
             }
-          }
-          this.displayBonus = this.splayers[0][0].displayBonus
-    },
+            for (let h = 0; h < this.splayers.length; h++) {
+              for (let i = 0; i < this.splayers[h].length; i++) {
+                this.snumView.push(this.splayers[h][i].numView)
+              }
+            }
+            this.displayBonus = this.splayers[0][0].displayBonus
+          }).catch((error) => {
+            console.log("玩法树No");
+          });
+        }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
+          this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
+            this.playBonus = res.data.data.playBonus;
+            this.playGroups = res.data.data.playGroups;
+            localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
+            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+            for (let i = 0; i < this.playGroups.length; i++) {
+              this.splayGroups.push(this.playGroups[i])
+            }
+            for (let j = 0; j < this.splayGroups.length; j++) {
+              this.sgroups.push(this.splayGroups[j].groups)
+            }
+            for (let k = 0; k < this.sgroups.length; k++) {
+              for (let j = 0; j < this.sgroups[k].length; j++) {
+                this.sgroups2.push(this.sgroups[k][j])
+              }
+            }
+            for (let i = 0; i < this.sgroups2.length; i++) {
+              this.splayers.push(this.sgroups2[i].players)
+            }
+            for (let h = 0; h < this.splayers.length; h++) {
+              for (let i = 0; i < this.splayers[h].length; i++) {
+                this.snumView.push(this.splayers[h][i].numView)
+              }
+            }
+            this.displayBonus = this.splayers[0][0].displayBonus
+          }).catch((error) => {
+            console.log("玩法树No");
+          });
+        }
+      },
+    // getPlayTree() {
+    //   var now = new Date().getTime();
+    //   //to check if localstorage exists
+    //   console.log(localStorage.getItem("playTree_" + this.$route.query.id));
+    //   if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
+    //     var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
+      
+    //     if(null == setupTime || now-setupTime > this.cacheTime){
+    //       localStorage.removeItem("playTree_" + this.$route.query.id);
+    //       localStorage.removeItem("date_playTree_" + this.$route.query.id);
+
+    //       this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
+    //       this.setupPlayTree( JSON.parse(JSON.stringify(res.data.data)));
+    //       //set to local storage
+    //       localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
+    //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //         this.$store.state.loginStatus = false;
+    //         this.betshow = !this.betshow;
+    //         this.content = "获取不成功!";
+    //         setTimeout(() => {
+    //           this.betshow = !this.betshow;
+    //         }, 1300);
+    //       });
+    //     }
+    //     else
+    //       this.setupPlayTree(JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)));
+    //   }
+    //   else{
+    //     this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
+    //       this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data)));
+    //       console.log("開始塞玩法數localstorage")
+    //       //set to local storage
+    //       localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
+    //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //       this.$store.state.loginStatus = false;
+    //       this.betshow = !this.betshow;
+    //       this.content = "获取不成功!";
+    //       setTimeout(() => {
+    //         this.betshow = !this.betshow;
+    //         this.$router.push("/login");
+    //       }, 1300);
+    //     });
+    //   }
+    // },
+
+    // setupPlayTree(resData){
+    //   this.playBonus = resData.playBonus;
+    //   this.playGroups = resData.playGroups;
+    //   for (let i = 0; i < this.playGroups.length; i++) {
+    //     this.splayGroups.push(this.playGroups[i])
+    //   }
+    //   for (let j = 0; j < this.splayGroups.length; j++) {
+    //     if(this.navlist === j){
+    //       this.sgroups.push(this.splayGroups[j].groups)
+    //     }
+    //   }
+    //   for (let k = 0; k < this.sgroups.length; k++) {
+    //     for (let j = 0; j < this.sgroups[k].length; j++) {
+    //       this.sgroups2.push(this.sgroups[k][j])
+    //     }
+    //   }
+    //   for (let i = 0; i < this.sgroups2.length; i++) {
+    //     this.splayers.push(this.sgroups2[i].players)
+    //   }
+    //   for (let h = 0; h < this.splayers.length; h++) {
+    //     for (let i = 0; i < this.splayers[h].length; i++) {
+    //       this.snumView.push(this.splayers[h][i].numView)
+    //     }
+    //   }
+    //   this.displayBonus = this.splayers[0][0].displayBonus
+    // },
 
       
       //右上获取彩种

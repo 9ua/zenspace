@@ -15,12 +15,12 @@ export default {
       lotteryListklc:'',
     }
   },
-  // mounted(){
-  //   this.lotteryklc();
-  // },
-  activated(){
+  mounted(){
     this.lotteryklc();
   },
+  // activated(){
+  //   this.lotteryklc();
+  // },
   methods:{
     lotteryklc(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {

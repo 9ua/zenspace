@@ -42,14 +42,14 @@
     data() {
       return {
         imgs:[
-          {paths: require('../../assets/img/five/1.jpg'),selected:false},
-          {paths: require('../../assets/img/five/2.jpg'),selected:false},
-          {paths: require('../../assets/img/five/3.jpg'),selected:false},
-          {paths: require('../../assets/img/five/4.jpg'),selected:false},
-          {paths: require('../../assets/img/five/5.jpg'),selected:false},
-          {paths: require('../../assets/img/five/6.jpg'),selected:false},
-          {paths: require('../../assets/img/five/7.jpg'),selected:false},
-          {paths: require('../../assets/img/five/8.jpg'),selected:false},
+          {paths: require('@/assets/img/five/1.jpg'),selected:false},
+          {paths: require('@/assets/img/five/2.jpg'),selected:false},
+          {paths: require('@/assets/img/five/3.jpg'),selected:false},
+          {paths: require('@/assets/img/five/4.jpg'),selected:false},
+          {paths: require('@/assets/img/five/5.jpg'),selected:false},
+          {paths: require('@/assets/img/five/6.jpg'),selected:false},
+          {paths: require('@/assets/img/five/7.jpg'),selected:false},
+          {paths: require('@/assets/img/five/8.jpg'),selected:false},
         ],
         isshow: {
           showPage: false

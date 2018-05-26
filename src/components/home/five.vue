@@ -4,7 +4,7 @@
     <div class="five-top">
       <div>
         <div class="five-top-left">
-          <router-link to="/detail/datum" tag="p"><img :src='"../../assets/img/five/"+$store.state.image+".jpg"' alt=""></router-link>
+          <router-link to="/detail/datum" tag="p"><img :src='"@/assets/img/five/"+$store.state.image+".jpg"' alt=""></router-link>
         </div>
         <div class="five-top-right">
           <p>账号：
@@ -17,7 +17,7 @@
           </p>
         </div>
         <div class="five-top-right2" v-show="money" @click="F5money">
-          <img :class=" toF5money ? 'totransition' : ''" src="../../assets/img/five/ROLL.png" alt="">
+          <img :class=" toF5money ? 'totransition' : ''" src="@/assets/img/five/ROLL.png" alt="">
         </div>
       </div>
       <ul>
@@ -135,7 +135,7 @@
           this.getBalance();
           this.toF5money = !this.toF5money;
           this.$refs.money.innerHTML = this.balances+"元";
-        }, 2400);
+        }, 0);
         
       },
       //獲取安全中心狀態

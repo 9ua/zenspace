@@ -15,12 +15,12 @@ export default {
       lotteryListAll:'',
     }
   },
-  activated(){
-    this.lotteryAll();
-  },
-  // mounted(){
+  // activated(){
   //   this.lotteryAll();
   // },
+  mounted(){
+    this.lotteryAll();
+  },
   methods:{
     lotteryAll(){
       

@@ -4,7 +4,7 @@
       <li @click="show = !show">
         <p>头像</p>
         <div>
-          <img :src='"../../../assets/img/five/"+image+".jpg"' alt="" />
+          <img :src='"@/assets/img/five/"+image+".jpg"' alt="" />
           <i class="el-icon-arrow-right"></i>
         </div>
       </li>
@@ -108,19 +108,19 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
         birthday:'1988/11/11',//生日
         nicknameShow1:true,
         nicknameShow2:false,
-        imgsrc:require('../../../assets/img/five/0.jpg'),
+        imgsrc:require('@/assets/img/five/0.jpg'),
         sexlist:['保密','男','女'],
         imgs:[
-        	{name:'小姐姐',paths: require('../../../assets/img/five/0.jpg')},
-        	{name:'杰森斯坦森',paths: require('../../../assets/img/five/1.jpg')},
-        	{name:'金莎',paths:  require('../../../assets/img/five/2.jpg')},
-        	{name:'高圆圆',paths: require('../../../assets/img/five/3.jpg')},
-        	{name:'迪丽热巴',paths: require('../../../assets/img/five/4.jpg')},
-        	{name:'黄宗泽',paths: require('../../../assets/img/five/5.jpg')},
-        	{name:'肌肉男',paths: require('../../../assets/img/five/6.jpg')},
-        	{name:'刘德华',paths: require('../../../assets/img/five/7.jpg')},
-        	{name:'李冰冰',paths: require('../../../assets/img/five/8.jpg')},
-        	{name:'苏有朋',paths: require('../../../assets/img/five/9.jpg')},
+        	{name:'小姐姐',paths: require('@/assets/img/five/0.jpg')},
+        	{name:'杰森斯坦森',paths: require('@/assets/img/five/1.jpg')},
+        	{name:'金莎',paths:  require('@/assets/img/five/2.jpg')},
+        	{name:'高圆圆',paths: require('@/assets/img/five/3.jpg')},
+        	{name:'迪丽热巴',paths: require('@/assets/img/five/4.jpg')},
+        	{name:'黄宗泽',paths: require('@/assets/img/five/5.jpg')},
+        	{name:'肌肉男',paths: require('@/assets/img/five/6.jpg')},
+        	{name:'刘德华',paths: require('@/assets/img/five/7.jpg')},
+        	{name:'李冰冰',paths: require('@/assets/img/five/8.jpg')},
+        	{name:'苏有朋',paths: require('@/assets/img/five/9.jpg')},
         ]
       }
     },

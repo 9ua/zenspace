@@ -15,12 +15,12 @@ export default {
       lotteryListssc:'',
     }
   },
-  // mounted(){
-  //   this.lotteryssc();
-  // },
-  activated(){
+  mounted(){
     this.lotteryssc();
   },
+  // activated(){
+  //   this.lotteryssc();
+  // },
 
   methods:{
     lotteryssc(){

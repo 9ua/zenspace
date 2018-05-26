@@ -6,7 +6,7 @@
     </div>
     <div class="agency-content">
       <div class="agency-content-top">
-        <img src="../../assets/img/five/agent.png" />
+        <img src="@/assets/img/five/agent.png" />
       </div>
       <ul>
         <router-link to="/agentIntro" tag="li"><p>代理说明</p><i class="el-icon-arrow-right"></i></router-link>

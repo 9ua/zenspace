@@ -134,12 +134,10 @@ export default {
         
     }
   },
-  mounted(){
+
+  activated(){
       this.getTradeList();
   },
-  // activated(){
-  //     this.getTradeList();
-  // },
   methods: {
     //返回到上一次进来的页面
     banckto(){

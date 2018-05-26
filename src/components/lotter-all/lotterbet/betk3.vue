@@ -410,25 +410,18 @@ export default {
       ]
     };
   },
-  mounted(){
+  activated(){
         if(!this.$route.meta.isBack){
       this.getPlayTree();
       this.getLotteryList();
       this.geteServerTime();//获取彩種當前獎期時間
     }
     this.$route.meta.isBack=false;
-
   },
-  // deactivated() {
-
-  // },
-  destroyed(){
+  deactivated() {
     this.endCount();
     this.iscreat();
   },
-  // activated(){
-
-  // },
   watch:{
     money(newVal) {
       if (this.money === '') {

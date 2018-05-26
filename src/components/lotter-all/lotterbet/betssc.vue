@@ -244,18 +244,11 @@
         timer2:'',
       }
     },
-    // deactivated() {
-
-    // },
-    // activated(){
-    //   if(!this.$route.meta.isBack){
-    //     this.getPlayTree();
-    //     this.getLotteryList();
-    //     this.geteServerTime();//获取彩種當前獎期時間
-    //   }
-    //   this.$route.meta.isBack=false;
-    // },
-    mounted(){
+    deactivated() {
+      this.endCount();
+      this.iscreat();
+    },
+    activated(){
       if(!this.$route.meta.isBack){
         this.getPlayTree();
         this.getLotteryList();
@@ -263,10 +256,7 @@
       }
       this.$route.meta.isBack=false;
     },
-    destroyed(){
-      this.endCount();
-      this.iscreat();
-    },
+
     watch:{
       money(newVal) {
         if (this.money === '') {
@@ -1495,14 +1485,12 @@
     getPlayTree() {
       var now = new Date().getTime();
       //to check if localstorage exists
-      console.log(localStorage.getItem("playTree_" + this.$route.query.id));
       if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
         var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
-      
         if(null == setupTime || now-setupTime > this.cacheTime){
           localStorage.removeItem("playTree_" + this.$route.query.id);
           localStorage.removeItem("date_playTree_" + this.$route.query.id);
-
+            console.log(333);
           this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
           this.setupPlayTree( JSON.parse(JSON.stringify(res.data.data)));
           //set to local storage

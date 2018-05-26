@@ -38,9 +38,9 @@
 				title:'【欢迎光临】 欢迎来到宏發彩票，祝您，您的支持是我们最大的源动力。',
       };
 		},
-    mounted(){
-    	this.getLotterlist();
-		},
+    // mounted(){
+    // 	this.getLotterlist();
+		// },
 		activated(){
     	this.getLotterlist();
 		},

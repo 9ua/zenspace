@@ -92,7 +92,7 @@ export default new Router({
             name: 'registered',
             component: resolve => require(['@/components/login/registered.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -100,7 +100,7 @@ export default new Router({
             name: 'reset',
             component: resolve => require(['@/components/login/reset.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -108,7 +108,7 @@ export default new Router({
             name: 'resetpwd',
             component: resolve => require(['@/components/login/resetpwd.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -116,7 +116,7 @@ export default new Router({
             name: 'resetway',
             component: resolve => require(['@/components/login/resetway.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -124,7 +124,7 @@ export default new Router({
             name: 'verifyPwdSafe',
             component: resolve => require(['@/components/login/verifyPwdSafe.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -181,14 +181,14 @@ export default new Router({
             redirect: 'lotterList/lotterAll',
             component: resolve => require(['@/components/lotter-all/lotterList.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
             children: [{
                     path: 'lotterAll',
                     name: 'lotterAll',
                     component: lotterAll,
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
                 {
@@ -196,7 +196,7 @@ export default new Router({
                     name: 'k3s',
                     component: resolve => require(['@/components/lotter-all/k3.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     },
                 },
                 {
@@ -204,7 +204,7 @@ export default new Router({
                     name: 'sscs',
                     component: resolve => require(['@/components/lotter-all/ssc.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     },
                 },
                 {
@@ -212,7 +212,7 @@ export default new Router({
                     name: 'klcs',
                     component: resolve => require(['@/components/lotter-all/klc.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     },
                 },
                 {
@@ -220,7 +220,7 @@ export default new Router({
                     name: 'etfs',
                     component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     },
                 }
             ]
@@ -255,7 +255,7 @@ export default new Router({
                     redirect: 'four/winning',
                     component: resolve => require(['@/components/home/four.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     },
                     children: [{
                             path: 'winning',
@@ -280,7 +280,7 @@ export default new Router({
                     name: 'five',
                     component: resolve => require(['@/components/home/five.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
             ]
@@ -290,7 +290,7 @@ export default new Router({
             name: 'pop',
             component: resolve => require(['@/components/page-four/pop.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -299,7 +299,7 @@ export default new Router({
             component: safety,
             // component: resolve => require(['@/components/page-five/safety.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -307,7 +307,7 @@ export default new Router({
             name: 'verifyPwd',
             component: verifyPwd,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -315,7 +315,7 @@ export default new Router({
             name: 'setPwd',
             component: setPwd,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -323,7 +323,7 @@ export default new Router({
             name: 'verifySafePwd',
             component: verifySafePwd,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -331,7 +331,7 @@ export default new Router({
             name: 'changeSafePwd',
             component: changeSafePwd,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -339,7 +339,7 @@ export default new Router({
             name: 'safeMobile',
             component: safeMobile,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -347,7 +347,7 @@ export default new Router({
             name: 'safeEmail',
             component: safeEmail,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -355,7 +355,7 @@ export default new Router({
             name: 'setSafePwd',
             component: setSafePwd,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -363,7 +363,7 @@ export default new Router({
             name: 'resetWay',
             component: resetWay,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -371,7 +371,7 @@ export default new Router({
             name: 'setQuestion',
             component: setQuestion,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -379,7 +379,7 @@ export default new Router({
             name: 'safeQuestion',
             component: safeQuestion,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -387,7 +387,7 @@ export default new Router({
             name: 'profits',
             component: profits,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -396,14 +396,14 @@ export default new Router({
             redirect: 'mymsg/notice',
             component: mymsg,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
             children: [{
                     path: 'notice',
                     name: 'notice',
                     component: notice,
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
                 {
@@ -411,7 +411,7 @@ export default new Router({
                     name: 'letter',
                     component: letter,
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 }
             ]
@@ -422,14 +422,14 @@ export default new Router({
             redirect: 'detail/datum',
             component: detail,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
             children: [{
                     path: 'datum',
                     name: 'datum',
                     component: resolve => require(['@/components//page-five/details/datum.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
                 {
@@ -437,7 +437,7 @@ export default new Router({
                     name: 'title',
                     component: title,
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
 
@@ -448,7 +448,7 @@ export default new Router({
             name: 'agency',
             component: agency,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
         },
         {
@@ -456,7 +456,7 @@ export default new Router({
             name: 'agentIntro',
             component: agentIntro,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -464,7 +464,7 @@ export default new Router({
             name: 'agentReport',
             component: agentReport,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -472,7 +472,7 @@ export default new Router({
             name: 'lowerReport',
             component: lowerReport,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -480,7 +480,7 @@ export default new Router({
             name: 'manageInvite',
             component: manageInvite,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
             redirect: 'manageInvite/mInvite',
             children: [{
@@ -488,7 +488,7 @@ export default new Router({
                     name: 'mInvite',
                     component: mInvite,
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 },
                 {
@@ -496,7 +496,7 @@ export default new Router({
                     name: 'mIcode',
                     component: mIcode,
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     }
                 }
             ]
@@ -506,7 +506,7 @@ export default new Router({
             name: 'agentMember',
             component: agentMember,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -514,7 +514,7 @@ export default new Router({
             name: 'agentBetRecord',
             component: agentBetRecord,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -522,7 +522,7 @@ export default new Router({
             name: 'agentBillRecord',
             component: agentBillRecord,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -530,7 +530,7 @@ export default new Router({
             name: 'setmobile',
             component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -538,7 +538,7 @@ export default new Router({
             name: 'setemail',
             component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -546,7 +546,7 @@ export default new Router({
             name: 'setmobile',
             component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -554,7 +554,7 @@ export default new Router({
             name: 'setemail',
             component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve),
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -570,7 +570,7 @@ export default new Router({
             name: 'trade',
             component: trade,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
         },
         {
@@ -578,7 +578,7 @@ export default new Router({
             name: 'recharge',
             component: recharge,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
         },
         {
@@ -586,7 +586,7 @@ export default new Router({
             name: 'rechargeserch',
             component: rechargeserch,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
         },
         {
@@ -594,7 +594,7 @@ export default new Router({
             name: 'getCards',
             component: getCards,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -602,7 +602,7 @@ export default new Router({
             name: 'newCard',
             component: newCard,
             meta: {
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
@@ -610,7 +610,7 @@ export default new Router({
             name: 'cashOut',
             component: cashOut,
             meta: {
-                keepAlive: true
+                keepAlive: false
             },
         },
         {
@@ -618,7 +618,7 @@ export default new Router({
           name: 'service',
           component: service,
           meta: {
-              keepAlive: true
+              keepAlive: false
           },
       },
     ]

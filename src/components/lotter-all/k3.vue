@@ -15,10 +15,12 @@ export default {
       lotteryListk3:'',
     }
   },
-  mounted(){
+  // mounted(){
+  //   this.lotteryk3();
+  // },
+  activated(){
     this.lotteryk3();
-  },
-
+  }.
   methods:{
     lotteryk3(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {

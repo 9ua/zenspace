@@ -15,7 +15,10 @@ export default {
       lotteryListssc:'',
     }
   },
-  mounted(){
+  // mounted(){
+  //   this.lotteryssc();
+  // },
+  activated(){
     this.lotteryssc();
   },
 

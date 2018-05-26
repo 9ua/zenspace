@@ -181,14 +181,14 @@ export default new Router({
             redirect: 'lotterList/lotterAll',
             component: resolve => require(['@/components/lotter-all/lotterList.vue'], resolve),
             meta: {
-                keepAlive: false
+                keepAlive: true
             },
             children: [{
                     path: 'lotterAll',
                     name: 'lotterAll',
                     component: lotterAll,
                     meta: {
-                        keepAlive: false
+                        keepAlive: true
                     }
                 },
                 {
@@ -196,7 +196,7 @@ export default new Router({
                     name: 'k3s',
                     component: resolve => require(['@/components/lotter-all/k3.vue'], resolve),
                     meta: {
-                        keepAlive: false
+                        keepAlive: true
                     },
                 },
                 {
@@ -204,7 +204,7 @@ export default new Router({
                     name: 'sscs',
                     component: resolve => require(['@/components/lotter-all/ssc.vue'], resolve),
                     meta: {
-                        keepAlive: false
+                        keepAlive: true
                     },
                 },
                 {
@@ -212,7 +212,7 @@ export default new Router({
                     name: 'klcs',
                     component: resolve => require(['@/components/lotter-all/klc.vue'], resolve),
                     meta: {
-                        keepAlive: false
+                        keepAlive: true
                     },
                 },
                 {
@@ -220,7 +220,7 @@ export default new Router({
                     name: 'etfs',
                     component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
                     meta: {
-                        keepAlive: false
+                        keepAlive: true
                     },
                 }
             ]

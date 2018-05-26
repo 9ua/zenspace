@@ -15,7 +15,10 @@ export default {
       lotteryListetf:'',
     }
   },
-  mounted(){
+  // mounted(){
+  //   this.lotteryetf();
+  // },
+  activated(){
     this.lotteryetf();
   },
 

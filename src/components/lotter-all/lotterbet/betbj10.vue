@@ -1131,7 +1131,16 @@
       
       //右上获取彩种
       getLotteryList() {
+        if(localStorage.getItem('lotteryList') !== null){
+          this.LotteryList = JSON.parse(localStorage.getItem('lotteryList')).pk10;
+          for (let i = 0; i < this.LotteryList.length; i++) {
+            if(this.LotteryList[i].id === this.$route.query.id){
+              this.listname = this.LotteryList[i].name.substring(0, 2);
+            }
+          }
+        } else {
         this.$http.get(this.$store.state.url + 'api/lottery/getLotteryList').then((res) => {
+          localStorage.setItem('lotteryList',JSON.stringify(res.data.data)); 
           this.LotteryList = res.data.data.pk10;
           for (let i = 0; i < this.LotteryList.length; i++) {
             if(this.LotteryList[i].id === this.$route.query.id){
@@ -1141,6 +1150,7 @@
         }).catch((error) => {
           console.log("右上彩种No")
         })
+        }
       },
       //头部右->菜单点击
       listnames(e, index, into) {

@@ -251,7 +251,7 @@ export default {
       n1: 1,
       n2: 1,
       n3: 1,
-      cacheTime: 60000,
+      cacheTime: 600000,
       getPastOpens: "", //获取过去开奖号码10个
       getPastO: "", //获取过去开奖号码1个
       LotteryList: "",
@@ -410,10 +410,12 @@ export default {
       ]
     };
   },
+  created(){
+      this.getLotteryList();
+  },
   mounted(){
         if(!this.$route.meta.isBack){
       this.getPlayTree();
-      this.getLotteryList();
       this.geteServerTime();//获取彩種當前獎期時間
     }
     this.$route.meta.isBack=false;
@@ -492,7 +494,6 @@ export default {
     },
     //获取过去开奖号码10个
     getPastOpen() {
-      this.getLotteryList();
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
         this.getPastOpens = res.data.data;
       })
@@ -521,17 +522,27 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
-      this.$http.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
-        this.LotteryList = res.data.data.k3;
-        for (let i = 0; i < this.LotteryList.length; i++) {
-          if(this.LotteryList[i].id === this.$route.query.id){
-            this.listname = this.LotteryList[i].name.substring(0, 2);
-          }
+      if(localStorage.getItem('lotteryList') !== null){
+          this.LotteryList = JSON.parse(localStorage.getItem('lotteryList')).k3;
+          for (let i = 0; i < this.LotteryList.length; i++) {
+                if(this.LotteryList[i].id === this.$route.query.id){
+                  this.listname = this.LotteryList[i].name.substring(0, 2);
+                }
+              }
+				} else {
+            this.$http.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
+              localStorage.setItem('lotteryList',JSON.stringify(res.data.data)); 
+              this.LotteryList = res.data.data.k3;
+              for (let i = 0; i < this.LotteryList.length; i++) {
+                if(this.LotteryList[i].id === this.$route.query.id){
+                  this.listname = this.LotteryList[i].name.substring(0, 2);
+                }
+              }
+            })
+            .catch(error => {
+              console.log("右上彩种No");
+            });
         }
-      })
-      .catch(error => {
-        console.log("右上彩种No");
-      });
     },
     //头部菜单项
     k3Tab(e, index, into) {

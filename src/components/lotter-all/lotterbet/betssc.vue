@@ -1456,32 +1456,30 @@
         this.betGoshow = !this.betGoshow;
       },
     setupPlayTree(resData){
-    //console.log("resdatresData")
-    //console.log(resData)
-          this.playBonus = resData.playBonus;
-          this.playGroups = resData.playGroups;
-          for (let i = 0; i < this.playGroups.length; i++) {
-              this.splayGroups.push(this.playGroups[this.navlist])
-          }
-          for (let j = 0; j < this.splayGroups.length; j++) {
-            if(this.navlist === j){
-              this.sgroups.push(this.splayGroups[j].groups)
-            }
-          }
-          for (let k = 0; k < this.sgroups.length; k++) {
-            for (let j = 0; j < this.sgroups[k].length; j++) {
-              this.sgroups2.push(this.sgroups[k][j])
-            }
-          }
-          for (let i = 0; i < this.sgroups2.length; i++) {
-            this.splayers.push(this.sgroups2[i].players)
-          }
-          for (let h = 0; h < this.splayers.length; h++) {
-            for (let i = 0; i < this.splayers[h].length; i++) {
-              this.snumView.push(this.splayers[h][i].numView)
-            }
-          }
-          this.displayBonus = this.splayers[0][0].displayBonus
+      this.playBonus = resData.playBonus;
+      this.playGroups = resData.playGroups;
+      for (let i = 0; i < this.playGroups.length; i++) {
+          this.splayGroups.push(this.playGroups[this.navlist])
+      }
+      for (let j = 0; j < this.splayGroups.length; j++) {
+        if(this.navlist === j){
+          this.sgroups.push(this.splayGroups[j].groups)
+        }
+      }
+      for (let k = 0; k < this.sgroups.length; k++) {
+        for (let j = 0; j < this.sgroups[k].length; j++) {
+          this.sgroups2.push(this.sgroups[k][j])
+        }
+      }
+      for (let i = 0; i < this.sgroups2.length; i++) {
+        this.splayers.push(this.sgroups2[i].players)
+      }
+      for (let h = 0; h < this.splayers.length; h++) {
+        for (let i = 0; i < this.splayers[h].length; i++) {
+          this.snumView.push(this.splayers[h][i].numView)
+        }
+      }
+      this.displayBonus = this.splayers[0][0].displayBonus
     },
     getPlayTree() {
       var now = new Date().getTime();

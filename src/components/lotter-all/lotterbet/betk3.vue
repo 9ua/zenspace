@@ -7,7 +7,7 @@
       <li>
         <p class="wangfa">玩<br/>法</p>
         <div class="menu" @click="show = !show">{{titles}}
-          <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+          <!-- <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i> -->
         </div>
         <div class="menu-list">
           <van-popup v-model="show" position="top">
@@ -505,7 +505,7 @@ export default {
     getPastOp() {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
           this.getPastO = res.data.data;
-          console.log(res.data.data)
+          // console.log(res.data.data)
           if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
               this.reGetPastOp();
           }
@@ -796,8 +796,6 @@ export default {
       }
     },
     setupPlayTree(resData){
-    //console.log("resdatresData")
-    console.log(resData , 9999999999)
       this.playBonus = resData;
           let arrpeilv1 = [];
           let arrpeilv2 = [];
@@ -828,7 +826,6 @@ export default {
     getPlayTree() {
       var now = new Date().getTime();
       //to check if localstorage exists
-      console.log(localStorage.getItem("playTree_" + this.$route.query.id));
       if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
         var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
       
@@ -858,9 +855,7 @@ export default {
       }
       else{
         this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
-        console.log(res.data.data.playBonus);
           this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data.playBonus)));
-          console.log("開始塞玩法數localstorage")
           //set to local storage
           localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data.playBonus));
           localStorage.setItem("date_playTree_" + this.$route.query.id, now);      

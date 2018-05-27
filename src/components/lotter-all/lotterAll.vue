@@ -15,9 +15,6 @@ export default {
       lotteryListAll:'',
     }
   },
-  // activated(){
-  //   this.lotteryAll();
-  // },
   mounted(){
     this.lotteryAll();
   },
@@ -26,7 +23,6 @@ export default {
       
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
         this.lotteryListAll = res.data.data.all;
-        console.log(res.data.data.all);
       }).catch((error) => {
           console.log("No")
       })

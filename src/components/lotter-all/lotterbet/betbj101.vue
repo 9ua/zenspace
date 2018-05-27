@@ -96,10 +96,10 @@
         <div class="betk3-content-foot">
           <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
             <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
-              <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playGroupsId">{{itemabc.remark}}
+              <span v-for="(player,indexe) in group.players" :key="indexe" v-show="indexe === navlistf">{{player.remark}}
                 <b>。奖金
-                  <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
-                  <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                  <i v-show="Number(player.displayBonus)">{{player.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(player.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
                 <br/> </span>
               <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playGroupsId === player.id">
@@ -128,8 +128,9 @@
           <input type="number" v-model="money" onfocus="this.select()"/>
           <span v-show="money === '' ">请输入要投注的金额</span>
           <span v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'">单注最高可中
-            <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
-            <p v-show="isNaN(money*displayBonus)">{{youdashuang ? (money*parseInt(displayBonus2*1000))/1000 : (money*parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
+            <!-- <p>{{money * displayBonus | keepTwoNum}}</p>元</span> -->
+            <p v-show="! isNaN(money*displayBonus)">{{money*displayBonus | keepTwoNum}}</p>
+            <p v-show="isNaN(money*displayBonus)">{{youdashuang ? money*displayBonus2 : money*displayBonus1 | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betbj10-footer-buttom">
@@ -178,7 +179,6 @@
       </ul>
       </div>
     </van-popup>
-    
     <van-popup class="betshow" v-model="showpop">{{content}}</van-popup>
   </div>
 </template>
@@ -233,8 +233,7 @@
         con: '',
         zhu: 0,
         rates: 0, //最高可中
-        playBonus: '', //玩法树1
-        playGroups: '', //玩法树2
+        playGroups: '', //玩法树
         pk10star2dj:true,
         playGroupsId: 'pk10_side_lh', //点击选中后获取此玩法ID
         betsscContentTopPop: false,
@@ -249,7 +248,6 @@
         navlist: 0,
         navlistb: 0,
         navlistf: 0,
-        cacheTime: 60000,
         splayGroups:[],
         sgroups:[],//
         sgroups2:[],//
@@ -260,14 +258,26 @@
         timer2:'',
       }
     },
+    mounted() {
+      this.getPlayTree(); //玩法树
+      // this.getPastOpen(); //获取过去开奖号码10个
+      // this.getPastOp(); //获取过去开奖号码1个
+    },
+    created() {
+      // this.geteServerTime(); //input显示当前时间
+    },
+    // beforeUpdate() {
+    //   this.endCount();
+    // },
     destroyed() {
       this.endCount();
-      this.iscreat();
     },
-    mounted(){
+    activated(){
       if(!this.$route.meta.isBack){
         this.getPlayTree();
         this.getLotteryList();
+        this.getPastOpen();
+        this.getPastOp();
         this.geteServerTime();//获取彩種當前獎期時間
       }
       this.$route.meta.isBack=false;
@@ -1047,158 +1057,37 @@
           console.log("No");
         })
       },
-    //玩法树
-    getPlayTree() {
-        const now = new Date().getTime();
-        if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-          this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
-            this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
-            this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
-            for (let i = 0; i < this.playGroups.length; i++) {
-              this.splayGroups.push(this.playGroups[i])
-            }
-            for (let j = 0; j < this.splayGroups.length; j++) {
-              this.sgroups.push(this.splayGroups[j].groups)
-            }
-            for (let k = 0; k < this.sgroups.length; k++) {
-              for (let j = 0; j < this.sgroups[k].length; j++) {
-                this.sgroups2.push(this.sgroups[k][j])
-              }
-            }
-            for (let i = 0; i < this.sgroups2.length; i++) {
-              this.splayers.push(this.sgroups2[i].players)
-            }
-            for (let h = 0; h < this.splayers.length; h++) {
-              for (let i = 0; i < this.splayers[h].length; i++) {
-                this.snumView.push(this.splayers[h][i].numView)
-              }
-            }
-            this.displayBonus = this.splayers[0][0].displayBonus
-          }).catch((error) => {
-            console.log("玩法树No");
-          });
-        }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
-          this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
-            this.playBonus = res.data.data.playBonus;
-            this.playGroups = res.data.data.playGroups;
-            localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
-            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
-            for (let i = 0; i < this.playGroups.length; i++) {
-              this.splayGroups.push(this.playGroups[i])
-            }
-            for (let j = 0; j < this.splayGroups.length; j++) {
-              this.sgroups.push(this.splayGroups[j].groups)
-            }
-            for (let k = 0; k < this.sgroups.length; k++) {
-              for (let j = 0; j < this.sgroups[k].length; j++) {
-                this.sgroups2.push(this.sgroups[k][j])
-              }
-            }
-            for (let i = 0; i < this.sgroups2.length; i++) {
-              this.splayers.push(this.sgroups2[i].players)
-            }
-            for (let h = 0; h < this.splayers.length; h++) {
-              for (let i = 0; i < this.splayers[h].length; i++) {
-                this.snumView.push(this.splayers[h][i].numView)
-              }
-            }
-            this.displayBonus = this.splayers[0][0].displayBonus
-          }).catch((error) => {
-            console.log("玩法树No");
-          });
-        }
-      },
-    // getPlayTree() {
-    //   var now = new Date().getTime();
-    //   //to check if localstorage exists
-    //   console.log(localStorage.getItem("playTree_" + this.$route.query.id));
-    //   if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-    //     var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
-      
-    //     if(null == setupTime || now-setupTime > this.cacheTime){
-    //       localStorage.removeItem("playTree_" + this.$route.query.id);
-    //       localStorage.removeItem("date_playTree_" + this.$route.query.id);
-
-    //       this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
-    //       this.setupPlayTree( JSON.parse(JSON.stringify(res.data.data)));
-    //       //set to local storage
-    //       localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
-    //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
-    //       })
-    //       .catch(error => {
-    //         console.log(error);
-    //         this.$store.state.loginStatus = false;
-    //         this.betshow = !this.betshow;
-    //         this.content = "获取不成功!";
-    //         setTimeout(() => {
-    //           this.betshow = !this.betshow;
-    //         }, 1300);
-    //       });
-    //     }
-    //     else
-    //       this.setupPlayTree(JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)));
-    //   }
-    //   else{
-    //     this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
-    //       this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data)));
-    //       console.log("開始塞玩法數localstorage")
-    //       //set to local storage
-    //       localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
-    //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //       this.$store.state.loginStatus = false;
-    //       this.betshow = !this.betshow;
-    //       this.content = "获取不成功!";
-    //       setTimeout(() => {
-    //         this.betshow = !this.betshow;
-    //         this.$router.push("/login");
-    //       }, 1300);
-    //     });
-    //   }
-    // },
-
-    // setupPlayTree(resData){
-    //   this.playBonus = resData.playBonus;
-    //   this.playGroups = resData.playGroups;
-    //   for (let i = 0; i < this.playGroups.length; i++) {
-    //     this.splayGroups.push(this.playGroups[i])
-    //   }
-    //   for (let j = 0; j < this.splayGroups.length; j++) {
-    //     if(this.navlist === j){
-    //       this.sgroups.push(this.splayGroups[j].groups)
-    //     }
-    //   }
-    //   for (let k = 0; k < this.sgroups.length; k++) {
-    //     for (let j = 0; j < this.sgroups[k].length; j++) {
-    //       this.sgroups2.push(this.sgroups[k][j])
-    //     }
-    //   }
-    //   for (let i = 0; i < this.sgroups2.length; i++) {
-    //     this.splayers.push(this.sgroups2[i].players)
-    //   }
-    //   for (let h = 0; h < this.splayers.length; h++) {
-    //     for (let i = 0; i < this.splayers[h].length; i++) {
-    //       this.snumView.push(this.splayers[h][i].numView)
-    //     }
-    //   }
-    //   this.displayBonus = this.splayers[0][0].displayBonus
-    // },
-
-      
-      //右上获取彩种
-      getLotteryList() {
-        if(localStorage.getItem('lotteryList') !== null){
-          this.LotteryList = JSON.parse(localStorage.getItem('lotteryList')).pk10;
-          for (let i = 0; i < this.LotteryList.length; i++) {
-            if(this.LotteryList[i].id === this.$route.query.id){
-              this.listname = this.LotteryList[i].name.substring(0, 2);
+      //玩法树
+      getPlayTree() {
+        this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
+          this.playGroups = res.data.data.playGroups;
+          for (let i = 0; i < this.playGroups.length; i++) {
+            this.splayGroups.push(this.playGroups[i])
+          }
+          for (let j = 0; j < this.splayGroups.length; j++) {
+             this.sgroups.push(this.splayGroups[j].groups)
+          }
+          for (let k = 0; k < this.sgroups.length; k++) {
+            for (let j = 0; j < this.sgroups[k].length; j++) {
+              this.sgroups2.push(this.sgroups[k][j])
             }
           }
-        } else {
+          for (let i = 0; i < this.sgroups2.length; i++) {
+            this.splayers.push(this.sgroups2[i].players)
+          }
+          for (let h = 0; h < this.splayers.length; h++) {
+            for (let i = 0; i < this.splayers[h].length; i++) {
+              this.snumView.push(this.splayers[h][i].numView)
+            }
+          }
+          this.displayBonus = this.splayers[0][0].displayBonus
+        }).catch((error) => {
+          console.log("玩法树No");
+        })
+      },
+      //右上获取彩种
+      getLotteryList() {
         this.$http.get(this.$store.state.url + 'api/lottery/getLotteryList').then((res) => {
-          localStorage.setItem('lotteryList',JSON.stringify(res.data.data)); 
           this.LotteryList = res.data.data.pk10;
           for (let i = 0; i < this.LotteryList.length; i++) {
             if(this.LotteryList[i].id === this.$route.query.id){
@@ -1208,7 +1097,6 @@
         }).catch((error) => {
           console.log("右上彩种No")
         })
-        }
       },
       //头部右->菜单点击
       listnames(e, index, into) {

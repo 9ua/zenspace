@@ -410,20 +410,6 @@ export default {
       ]
     };
   },
-  created(){
-      this.getLotteryList();
-  },
-  mounted(){
-        if(!this.$route.meta.isBack){
-      this.getPlayTree();
-      this.geteServerTime();//获取彩種當前獎期時間
-    }
-    this.$route.meta.isBack=false;
-  },
-  destroyed() {
-    this.endCount();
-    this.iscreat();
-  },
   watch:{
     money(newVal) {
       if (this.money === '') {
@@ -436,6 +422,22 @@ export default {
         this.money = parseInt(newVal);
       }
     }
+  },
+
+  created(){
+      this.getLotteryList();
+  },
+  mounted(){
+    this.endCount();
+    if(!this.$route.meta.isBack){
+      this.getPlayTree();
+      this.geteServerTime();//获取彩種當前獎期時間
+    }
+    this.$route.meta.isBack=false;
+  },
+  destroyed() {
+    this.endCount();
+    this.iscreat();
   },
   methods: {
     endCount(){
@@ -503,9 +505,13 @@ export default {
     },
     //获取过去开奖号码1个
     getPastOp() {
-      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
-          this.getPastO = res.data.data;
-          // console.log(res.data.data)
+      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
+          this.getPastO = res.data.data[0];
+          
+          this.getPastOpens = res.data.data;
+          console.log(res.data.data)
+          console.log(res.data.data[0])
+          
           if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
               this.reGetPastOp();
           }
@@ -560,8 +566,6 @@ export default {
       this.showan = index;
       this.showa = !this.showa;
       this.$router.push({query:{id:into.id}})
-      this.getPastOpen();//获取过去开奖号码10个
-      this.getPastOp();//获取过去开奖号码1个
       this.geteServerTime();//获取彩種當前獎期時間
       this.getPlayTree();//玩法术
       this.iscreat();//清空
@@ -1205,4 +1209,12 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/lotter-list/lotterbet/betk3.scss";
 @import "../../../assets/scss/popcorn.scss";
+</style>
+<style>
+/* .menu-list.van-popup {
+  transition: 0s ease-out !important;
+} */
+.van-popup--top{
+  transition: 0s ease-out !important;
+}
 </style>

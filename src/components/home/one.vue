@@ -46,17 +46,18 @@
 		// },
     methods:{
     	getLotterlist(){
-				if(localStorage.getItem('indexInfo') !== null){
-					this.lotteryList = JSON.parse(localStorage.getItem('indexInfo')).hotLotterys;
-					this.bannerList = JSON.parse(localStorage.getItem('indexInfo')).banners;
-					for (let i = 0 ; i < JSON.parse(localStorage.getItem('indexInfo')).noticeList.length; i++) {
-									this.title = this.title +"   "+ JSON.parse(localStorage.getItem('indexInfo')).noticeList[i].title;
-								}
-				} else {
+				// if(localStorage.getItem('indexInfo') !== null){
+				// 	this.lotteryList = JSON.parse(localStorage.getItem('indexInfo')).hotLotterys;
+				// 	this.bannerList = JSON.parse(localStorage.getItem('indexInfo')).banners;
+				// 	for (let i = 0 ; i < res.data.data.noticeList.length; i++) {
+				// 		this.title = this.title +"   "+ res.data.data.noticeList[i].title;
+				// 	}
+				// } else {
 					this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
 								this.title = '';
-								localStorage.setItem('indexInfo',JSON.stringify(res.data.data)); 
+								// localStorage.setItem('indexInfo',JSON.stringify(res.data.data)); 
 								this.lotteryList = res.data.data.hotLotterys;
+								console.log(res.data.data)
 								this.bannerList = res.data.data.banners;
 								for (let i = 0 ; i < res.data.data.noticeList.length; i++) {
 									this.title = this.title +"   "+ res.data.data.noticeList[i].title;
@@ -65,7 +66,7 @@
 	      		console.log("No")
 	      })
 				}
-    	}
+    	// }
     },
     components:{
     	headers

@@ -249,10 +249,12 @@
       this.endCount();
       this.iscreat();
     },
+    created(){
+      this.getLotteryList();
+    },
     mounted(){
       if(!this.$route.meta.isBack){
         this.getPlayTree();
-        this.getLotteryList();
         this.geteServerTime();//获取彩種當前獎期時間
       }
       this.$route.meta.isBack=false;
@@ -1458,7 +1460,7 @@
       getPlayTree() {
         const now = new Date().getTime();
         if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-          console.log(156);
+          // this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
             this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
             for (let i = 0; i < this.playGroups.length; i++) {
@@ -1481,9 +1483,10 @@
               }
             }
             this.displayBonus = this.splayers[0][0].displayBonus
-         
-        }else {
-          console.log(189);
+          // }).catch((error) => {
+          //   console.log("玩法树No");
+          // });
+        }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
           this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;
@@ -1661,8 +1664,8 @@
         this.showan = index;
         this.showa = !this.showa;
         this.$router.push({query:{id:into.id}})
-        this.getPastOpen();//获取过去开奖号码10个
-        this.getPastOp();//获取过去开奖号码1个
+        // this.getPastOpen();//获取过去开奖号码10个
+        // this.getPastOp();//获取过去开奖号码1个
         this.geteServerTime();//获取彩種當前獎期時間
         this.getPlayTree();//玩法术
         this.iscreat();//清空
@@ -1794,4 +1797,12 @@
 <style lang="scss" scoped>
   @import '../../../assets/scss/lotter-list/lotterbet/betssc.scss';
   @import "../../../assets/scss/popcorn.scss";
+</style>
+<style>
+.menu-list.van-popup {
+  transition: 0s ease-out !important;
+}
+.van-popup--top{
+  transition: 0s ease-out !important;
+}
 </style>

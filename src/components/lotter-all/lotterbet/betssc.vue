@@ -298,11 +298,11 @@
       },
       //投注 ++++
       betssc_boxjia(indexff, indexg, num, numViews, player){
-        console.log(indexff);
-          console.log(indexg);
-               console.log(num);
-                 console.log(numViews);
-                   console.log(player);
+        // console.log(indexff);
+        //   console.log(indexg);
+        //        console.log(num);
+        //          console.log(numViews);
+        //            console.log(player);
 
 
 

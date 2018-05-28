@@ -52,6 +52,7 @@
               <p>{{item.n3}}</p>
               <p>{{item.n4}}</p>
               <p>{{item.n5}}</p>
+              
               <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
           </div>

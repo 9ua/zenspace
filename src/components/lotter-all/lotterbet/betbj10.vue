@@ -44,20 +44,20 @@
     <div class="betbj10-content">
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
-          <div class="content-left" v-for="(item,index) in getPastO" :key="index">
-            <p>{{item.seasonId}}期开奖号码<i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i></p>
-            
+          <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
+            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
             <div>
-              <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
-              <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>
-              <p>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</p>
-              <p>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</p>
-              <p>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</p>
-              <p>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</p>
-              <p>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</p>
-              <p>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</p>
-              <p>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</p>
-              <p>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</p>
+              <p>{{item.n1}}</p>
+              <p>{{item.n2}}</p>
+              <p>{{item.n3}}</p>
+              <p>{{item.n4}}</p>
+              <p>{{item.n5}}</p>
+              <p>{{item.n6}}</p>
+              <p>{{item.n7}}</p>
+              <p>{{item.n8}}</p>
+              <p>{{item.n9}}</p>
+              <p>{{item.n10}}</p>
+              <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
           </div>
           <div class="content-right">
@@ -72,24 +72,25 @@
             <li>
               <p>期号</p>
               <p>开奖号码</p>
-              <!-- <p>开奖时间</p> -->
+              <p>开奖时间</p>
             </li>
             <li v-for="(item,index) in getPastOpens" :key="index">
-              <p>{{item.seasonId}}
+              <p>{{item.seasonId.substring(4).split("-").join("")}}
                 <i class="el-icon-minus"></i>
               </p>
               <p>
-                <a>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</a>
-                <a>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</a>
-                <a>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</a>
-                <a>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</a>
-                <a>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</a>
-                <a>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</a>
-                <a>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</a>
-                <a>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</a>
-                <a>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</a>
-                <a>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</a>
+                <a>{{item.n1}}</a>
+                <a>{{item.n2}}</a>
+                <a>{{item.n3}}</a>
+                <a>{{item.n4}}</a>
+                <a>{{item.n5}}</a>
+                <a>{{item.n6}}</a>
+                <a>{{item.n7}}</a>
+                <a>{{item.n8}}</a>
+                <a>{{item.n9}}</a>
+                <a>{{item.n10}}</a>
               </p>
+              <p>{{item.addTime.substring(11)}}</p>
             </li>
           </ul>
         </div>

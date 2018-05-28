@@ -1692,8 +1692,8 @@
       getPastOp() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
-          console.log(res.data.data[0].seasonId,this.seasonId3,88888888)
-          if (res.data.data[0].seasonId !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
+          console.log(Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)
+          if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
                   this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);

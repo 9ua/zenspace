@@ -94,6 +94,16 @@
                   <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
                 <br/> </span>
               <ul class="fushi">
+                <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
+                  <p >
+                      <b>{{numViews.title}}</b>
+                      <span>
+                        <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
+                      </span>
+                    </p>
+                </li>
+              </ul>
+              <!-- <ul class="fushi"><ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
                   <p v-for="(numViews,indexff) in player.numView" :key="indexff">
                     <b>{{numViews.title}}</b>
@@ -102,7 +112,7 @@
                     </span>
                   </p>
                 </li>
-              </ul>
+              </ul> -->
             </div>
           </div>
         </div>
@@ -198,6 +208,7 @@
         zhu: 0, //注数
         rates: 0, //最高可中
         playBonus: '', //玩法树
+        current_player:{},
         playBonusId: 'ssc_star5', //点击选中后获取此玩法ID
         playGroups: '',
         navlist: 0,
@@ -1499,12 +1510,14 @@
       betCancel() {
         this.betGoshow = !this.betGoshow;
       },
+      //玩法术
       getPlayTree() {
         const now = new Date().getTime();
         if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
           // this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
             this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
+            this.current_player = this.playGroups[0].groups[0].players[0];
             for (let i = 0; i < this.playGroups.length; i++) {
               this.splayGroups.push(this.playGroups[i])
             }
@@ -1532,6 +1545,7 @@
           this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;
+            this.current_player = this.playGroups[0].groups[0].players[0];
             localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
             localStorage.setItem("date_playTree_" + this.$route.query.id, now);
             for (let i = 0; i < this.playGroups.length; i++) {
@@ -1720,6 +1734,7 @@
         this.navlistf = indexb;
         this.playBonusId = items.id;
         this.show = !this.show;
+        this.current_player = items;
         this.iscreat();
         this.displayBonus = items.displayBonus;
         if(isNaN(this.displayBonus)){

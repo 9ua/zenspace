@@ -435,6 +435,48 @@
             this.con = '-,-,-,' + this.con;
           }
           if(this.playBonusId === 'ssc_star1_dwd') {
+            if(indexff === 0) {
+              this.ka[indexg] = num.ball;
+              this.dd = this.ka.filter(function(n) {return n;});
+              this.an =  this.dd.join('');
+            }
+            if(indexff === 1) {
+              this.kb[indexg] = num.ball;
+              this.dd = this.kb.filter(function(n) {return n;});
+              this.bn =  this.dd.join('');
+            }
+            if(indexff === 2) {
+              this.kc[indexg] = num.ball;
+              this.dd = this.kc.filter(function(n) {return n;});
+              this.cn =  this.dd.join('');
+            }
+            if(indexff === 3) {
+              this.kd[indexg] = num.ball;
+              this.dd = this.kd.filter(function(n) {return n;});
+              this.dn =  this.dd.join('');
+            }
+            if(indexff === 4) {
+              this.ke[indexg] = num.ball;
+              this.dd = this.ke.filter(function(n) {return n;});
+              this.en = this.dd.join('');
+            }
+            if(this.playBonusId === 'ssc_star1_dwd') {
+              if(this.an === '') {
+                this.an = '-';
+              }
+              if(this.bn === '') {
+                this.bn = '-';
+              }
+              if(this.cn === '') {
+                this.cn = '-';
+              }
+              if(this.dn === '') {
+                this.dn = '-';
+              }
+              if(this.en === '') {
+                this.en = '-';
+              }
+            }
             this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
           }
           if(this.playBonusId === 'ssc_star5') {
@@ -1692,7 +1734,6 @@
       getPastOp() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
-          console.log(Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)
           if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
                   this.reGetPastOp();
           } else {

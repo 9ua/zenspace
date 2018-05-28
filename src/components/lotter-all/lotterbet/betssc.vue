@@ -1659,13 +1659,13 @@
       },
       //头部右->菜单点击
       listnames(e, index, into) {
+        this.getPlayTree();//玩法术
+        this.geteServerTime();//获取彩種當前獎期時間
         this.listname = into.name.substring(0, 2);
         this.lotteryId = into.id
         this.showan = index;
         this.showa = !this.showa;
         this.$router.push({query:{id:into.id}})
-        this.geteServerTime();//获取彩種當前獎期時間
-        this.getPlayTree();//玩法术
         this.iscreat();//清空
       },
       //头部菜单项

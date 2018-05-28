@@ -41,7 +41,7 @@
     <div class="betk3-content">
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
-          <div class="content-left" v-for="(item,index) in getPastO" :key="index">
+          <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
             <p>{{item.seasonId.slice(4)}}期开奖号码</p>
             <div>
               <p>{{item.n1}}</p>
@@ -253,7 +253,6 @@ export default {
       n3: 1,
       cacheTime: 600000,
       getPastOpens: "", //获取过去开奖号码10个
-      getPastO: "", //获取过去开奖号码1个
       LotteryList: "",
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
@@ -452,10 +451,8 @@ export default {
           if (res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId;
             this.seasonId3 = this.seasonId2 - 1;
-            // this.seasonId = this.seasonId2.substring(4).split("-").join("");
             this.seasonId = this.seasonId2.slice(4);
             this.today = res.data.data.restSeconds;
-            this.getPastOpen();
             this.getPastOp();
             this.initSetTimeout();
           }
@@ -495,23 +492,9 @@ export default {
       this.geteServerTime();
     },
     //获取过去开奖号码10个
-    getPastOpen() {
-      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
-        this.getPastOpens = res.data.data;
-      })
-      .catch(error => {
-        console.log("获取过去开奖号码No");
-      });
-    },
-    //获取过去开奖号码1个
     getPastOp() {
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
-          this.getPastO = res.data.data[0];
-          
           this.getPastOpens = res.data.data;
-          console.log(res.data.data)
-          console.log(res.data.data[0])
-          
           if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
               this.reGetPastOp();
           }

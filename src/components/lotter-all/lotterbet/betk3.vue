@@ -1035,7 +1035,7 @@ export default {
     },
     //投注
     betGo() {
-      this.betGoshow = !this.betGoshow;
+      this.betGoshow = false;
       let config = {headers: { "Content-Type": "application/x-www-form-urlencoded" },withCredentials: true};
       if (this.playId1 === "k3_star3_big_odd" || this.playId2 === "k3_star3_and" || this.playId === "k3_star3_and") {
         if (this.playId1 === "k3_star3_big_odd" && this.con1 !== '') {
@@ -1095,10 +1095,10 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.content = "投注成功!";
-                    this.betGoshow = !this.betGoshow;
+                    // this.betGoshow = !this.betGoshow;
                     this.iscreat();
                     setTimeout(() => {
-                      this.betshow = !this.betshow;
+                      this.betshow = false;
                       this.betsuccess = !this.betsuccess;
                     }, 1300);
                   }, 600);
@@ -1131,9 +1131,9 @@ export default {
                 setTimeout(() => {
                   this.betshow = !this.betshow;
                   this.content = "投注成功!";
-                  this.betGoshow = !this.betGoshow;
+                  // this.betGoshow = !this.betGoshow;
                   setTimeout(() => {
-                    this.betshow = !this.betshow;
+                    this.betshow = false;
                     this.betsuccess = !this.betsuccess;
                     this.iscreat();
                   }, 1300);

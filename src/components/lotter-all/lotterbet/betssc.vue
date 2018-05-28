@@ -92,20 +92,6 @@
                 <b>。奖金
                   <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
                   <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-<<<<<<< HEAD
-                <br/> </span>
-              <ul class="fushi">
-                <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
-                  <p >
-                      <b>{{numViews.title}}</b>
-                      <span>
-                        <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
-                      </span>
-                    </p>
-                </li>
-              </ul>
-              <!-- <ul class="fushi"><ul class="fushi">
-=======
                 <br/>
              </span>
              <ul class="fushi">
@@ -119,7 +105,6 @@
               </li>
              </ul>
              <!--  <ul class="fushi">
->>>>>>> 3de08873283ddf47e9d11c18568900dcb1def890
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
                   <p v-for="(numViews,indexff) in player.numView" :key="indexff">
                     <b>{{numViews.title}}</b>

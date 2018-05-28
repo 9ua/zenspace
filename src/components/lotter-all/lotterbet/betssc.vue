@@ -52,6 +52,7 @@
               <p>{{item.n3}}</p>
               <p>{{item.n4}}</p>
               <p>{{item.n5}}</p>
+              
               <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
           </div>
@@ -254,7 +255,6 @@
     mounted(){
       if(!this.$route.meta.isBack){
         this.getPlayTree();
-        // this.getLotteryList();
         this.geteServerTime();//获取彩種當前獎期時間
       }
       this.$route.meta.isBack=false;
@@ -435,6 +435,48 @@
             this.con = '-,-,-,' + this.con;
           }
           if(this.playBonusId === 'ssc_star1_dwd') {
+            if(indexff === 0) {
+              this.ka[indexg] = num.ball;
+              this.dd = this.ka.filter(function(n) {return n;});
+              this.an =  this.dd.join('');
+            }
+            if(indexff === 1) {
+              this.kb[indexg] = num.ball;
+              this.dd = this.kb.filter(function(n) {return n;});
+              this.bn =  this.dd.join('');
+            }
+            if(indexff === 2) {
+              this.kc[indexg] = num.ball;
+              this.dd = this.kc.filter(function(n) {return n;});
+              this.cn =  this.dd.join('');
+            }
+            if(indexff === 3) {
+              this.kd[indexg] = num.ball;
+              this.dd = this.kd.filter(function(n) {return n;});
+              this.dn =  this.dd.join('');
+            }
+            if(indexff === 4) {
+              this.ke[indexg] = num.ball;
+              this.dd = this.ke.filter(function(n) {return n;});
+              this.en = this.dd.join('');
+            }
+            if(this.playBonusId === 'ssc_star1_dwd') {
+              if(this.an === '') {
+                this.an = '-';
+              }
+              if(this.bn === '') {
+                this.bn = '-';
+              }
+              if(this.cn === '') {
+                this.cn = '-';
+              }
+              if(this.dn === '') {
+                this.dn = '-';
+              }
+              if(this.en === '') {
+                this.en = '-';
+              }
+            }
             this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
           }
           if(this.playBonusId === 'ssc_star5') {
@@ -1646,8 +1688,8 @@
         this.showan = index;
         this.showa = !this.showa;
         this.$router.push({query:{id:into.id}})
-        this.geteServerTime();//获取彩種當前獎期時間
         this.getPlayTree();//玩法术
+        this.geteServerTime();//获取彩種當前獎期時間
         this.iscreat();//清空
       },
       //头部菜单项
@@ -1674,10 +1716,10 @@
       getPastOp() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
-          if (res.data.data[0].seasonId != this.seasonId3) {
+          if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
                   this.reGetPastOp();
           } else {
-            clearInterval(this.timer2);
+            clearTimeout(this.timer2);
           }
         }).catch((error) => {
           console.log("获取过去开奖号码No")
@@ -1699,6 +1741,7 @@
             this.seasonId = this.seasonId2.substring(4).split("-").join("");
             this.seasonId3 = this.seasonId2-1;
             this.today = res.data.data.restSeconds;
+            this.setTimeMode();
             this.getPastOp(); //获取过去开奖号码10个
             this.initSetTimeout();
           }
@@ -1706,23 +1749,29 @@
           console.log("获取彩種當前獎期時間No");
         })
       },
+      //時間格式
+      setTimeMode(){
+            var hours = Math.floor(
+              (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
+            );
+            var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+            var seconds = Math.floor((this.today % (1 * 60)) / 1);
+            if (hours < 10) {
+              hours = "0" + hours;
+            }
+            if (minutes < 10) {
+              minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+              seconds = "0" + seconds;
+            }
+            this.countDown = hours + ":" + minutes + ":" + seconds;
+      },
       //倒计时
       initSetTimeout(today) {
         this.timer = setInterval(() => {
           this.today = this.today - 1;
-          var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
-          var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-          var seconds = Math.floor((this.today % (1 * 60)) / 1);
-          if(hours < 10) {
-            hours = "0" + hours
-          }
-          if(minutes < 10) {
-            minutes = "0" + minutes
-          }
-          if(seconds < 10) {
-            seconds = "0" + seconds
-          }
-          this.countDown = hours + ":" + minutes + ":" + seconds;
+          this.setTimeMode();
           if(this.today < 1) {
             clearInterval(this.timer);
             this.timesUp();

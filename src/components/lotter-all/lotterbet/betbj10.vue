@@ -46,7 +46,6 @@
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
             <p>{{item.seasonId}}期开奖号码<i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i></p>
-            
             <div>
               <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
               <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>
@@ -75,7 +74,7 @@
               <!-- <p>开奖时间</p> -->
             </li>
             <li v-for="(item,index) in getPastOpens" :key="index">
-              <p>{{item.seasonId}}
+              <p>{{item.seasonId.substring(4).split("-").join("")}}
                 <i class="el-icon-minus"></i>
               </p>
               <p>
@@ -147,7 +146,7 @@
       <ul class="betc">
         <li>投注确认</li>
         <li>
-          <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+          <p><span>{{listname}}PK10 ：</span>{{seasonId}}期</p>
           <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
           <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
         </li>
@@ -239,6 +238,7 @@
         playGroupsId: 'pk10_side_lh', //点击选中后获取此玩法ID
         betsscContentTopPop: false,
         getPastOpens: '', //获取过去开奖号码10个
+        getPastO: '', //获取过去开奖号码1个
         seasonId: '', //截取后的期号
         seasonId2: '', //当前期号
         seasonId3:'',
@@ -1048,8 +1048,8 @@
           console.log("No");
         })
       },
-      //玩法树
-      getPlayTree() {
+    //玩法树
+    getPlayTree() {
         const now = new Date().getTime();
         if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
           // this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
@@ -1218,8 +1218,8 @@
         this.showan = index;
         this.showa = !this.showa;
         this.$router.push({query:{id:into.id}})
-        this.geteServerTime();//获取彩種當前獎期時間
         this.getPlayTree();//玩法术
+        this.geteServerTime();//获取彩種當前獎期時間
         this.iscreat();
       },
       //头部菜单项
@@ -1310,9 +1310,8 @@
       getPastOp() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
-          if (res.data.data[0].seasonId != this.seasonId3) {
-              clearTimeout(this.timer2);
-              this.reGetPastOp();
+          if ( Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
+                  this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);
           }
@@ -1332,34 +1331,41 @@
         clearTimeout(this.timer2);
         this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.$route.query.id}}).then((res) => {
           if(res.data.code === 1) {
-            this.seasonId2 = res.data.data.seasonId
+            this.seasonId2 = res.data.data.seasonId;
             this.seasonId = this.seasonId2;
             this.seasonId3 = this.seasonId2-1;
             this.today = res.data.data.restSeconds;
-            this.getPastOp();//获取过去开奖号码1个
+            this.setTimeMode();
+            this.getPastOp();//获取过去开奖号码10个
             this.initSetTimeout();
           }
         }).catch((error) => {
           console.log("获取彩種當前獎期時間No");
         })
       },
+      //時間格式
+      setTimeMode(){
+            var hours = Math.floor(
+              (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
+            );
+            var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+            var seconds = Math.floor((this.today % (1 * 60)) / 1);
+            if (hours < 10) {
+              hours = "0" + hours;
+            }
+            if (minutes < 10) {
+              minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+              seconds = "0" + seconds;
+            }
+            this.countDown = hours + ":" + minutes + ":" + seconds;
+      },
       //倒计时
       initSetTimeout(today) {
         this.timer = setInterval(() => {
           this.today = this.today - 1;
-          var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
-          var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-          var seconds = Math.floor((this.today % (1 * 60)) / 1);
-          if(hours < 10) {
-            hours = "0" + hours
-          }
-          if(minutes < 10) {
-            minutes = "0" + minutes
-          }
-          if(seconds < 10) {
-            seconds = "0" + seconds
-          }
-          this.countDown = hours + ":" + minutes + ":" + seconds;
+          this.setTimeMode();
           if(this.today < 1) {
             clearInterval(this.timer);
             this.timesUp();

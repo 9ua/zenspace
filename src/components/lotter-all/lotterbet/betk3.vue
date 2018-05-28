@@ -7,7 +7,7 @@
       <li>
         <p class="wangfa">玩<br/>法</p>
         <div class="menu" @click="show = !show">{{titles}}
-          <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+          <!-- <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i> -->
         </div>
         <div class="menu-list">
           <van-popup v-model="show" position="top">
@@ -409,20 +409,6 @@ export default {
       ]
     };
   },
-  created(){
-      this.getLotteryList();
-  },
-  mounted(){
-    if(!this.$route.meta.isBack){
-      this.getPlayTree();
-      this.geteServerTime();//获取彩種當前獎期時間
-    }
-    this.$route.meta.isBack=false;
-  },
-  destroyed() {
-    this.endCount();
-    this.iscreat();
-  },
   watch:{
     money(newVal) {
       if (this.money === '') {
@@ -435,6 +421,22 @@ export default {
         this.money = parseInt(newVal);
       }
     }
+  },
+
+  created(){
+      this.getLotteryList();
+  },
+  mounted(){
+    this.endCount();
+    if(!this.$route.meta.isBack){
+      this.geteServerTime();//获取彩種當前獎期時間
+      this.getPlayTree();
+    }
+    this.$route.meta.isBack=false;
+  },
+  destroyed() {
+    this.endCount();
+    this.iscreat();
   },
   methods: {
     endCount(){
@@ -451,6 +453,8 @@ export default {
             this.seasonId3 = this.seasonId2 - 1;
             this.seasonId = this.seasonId2.slice(4);
             this.today = res.data.data.restSeconds;
+            // this.countDown = res.data.data.restSeconds;
+            this.setTimeMode();
             this.getPastOp();
             this.initSetTimeout();
           }
@@ -459,25 +463,29 @@ export default {
           console.log("获取彩種當前獎期時間No");
         });
     },
+    //時間格式轉換
+    setTimeMode(){
+            var hours = Math.floor(
+              (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
+            );
+            var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+            var seconds = Math.floor((this.today % (1 * 60)) / 1);
+            if (hours < 10) {
+              hours = "0" + hours;
+            }
+            if (minutes < 10) {
+              minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+              seconds = "0" + seconds;
+            }
+            this.countDown = hours + ":" + minutes + ":" + seconds;
+    },
     //倒计时
     initSetTimeout() {
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        var hours = Math.floor(
-          (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
-        );
-        var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-        var seconds = Math.floor((this.today % (1 * 60)) / 1);
-        if (hours < 10) {
-          hours = "0" + hours;
-        }
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
-        if (seconds < 10) {
-          seconds = "0" + seconds;
-        }
-        this.countDown = hours + ":" + minutes + ":" + seconds;
+        this.setTimeMode();
         if (this.today < 1) {
           clearInterval(this.timer);
           this.timesUp();
@@ -491,10 +499,13 @@ export default {
     },
     //获取过去开奖号码10个
     getPastOp() {
+      
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
           this.getPastOpens = res.data.data;
-          if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
+          if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2) {
               this.reGetPastOp();
+          } else {
+            clearTimeout(this.timer2);
           }
         })
         .catch(error => {
@@ -547,8 +558,8 @@ export default {
       this.showan = index;
       this.showa = !this.showa;
       this.$router.push({query:{id:into.id}})
-      this.geteServerTime();//获取彩種當前獎期時間
       this.getPlayTree();//玩法术
+      this.geteServerTime();//获取彩種當前獎期時間
       this.iscreat();//清空
     },
     //三同号全/反选

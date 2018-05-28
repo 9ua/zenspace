@@ -155,7 +155,7 @@
         }
       },
     	checkeds(){
-        console.log("Ver.1.0.0.2");
+        console.log("Ver.1.0.0.3");
         if ( this.$cookie.get('password')) {
           this.checked = true;
           this.newUserInfo.user = this.$cookie.get('username');

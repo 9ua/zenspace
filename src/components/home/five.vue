@@ -134,8 +134,8 @@
         setTimeout(() => {
           this.getBalance();
           this.toF5money = !this.toF5money;
-          this.$refs.money.innerHTML = this.balances+"元";
-        }, 0);
+          this.$refs.money.innerHTML = Number(this.balances).toFixed(2)+"元";
+        }, 800);
         
       },
       //獲取安全中心狀態

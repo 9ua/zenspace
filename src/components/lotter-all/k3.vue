@@ -25,7 +25,6 @@ export default {
     lotteryk3(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
         this.lotteryListk3 = res.data.data.k3;
-        console.log(this.lotteryListk3)
       }).catch((error) => {
           console.log("No")
       })

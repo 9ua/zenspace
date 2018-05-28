@@ -435,6 +435,48 @@
             this.con = '-,-,-,' + this.con;
           }
           if(this.playBonusId === 'ssc_star1_dwd') {
+            if(indexff === 0) {
+              this.ka[indexg] = num.ball;
+              this.dd = this.ka.filter(function(n) {return n;});
+              this.an =  this.dd.join('');
+            }
+            if(indexff === 1) {
+              this.kb[indexg] = num.ball;
+              this.dd = this.kb.filter(function(n) {return n;});
+              this.bn =  this.dd.join('');
+            }
+            if(indexff === 2) {
+              this.kc[indexg] = num.ball;
+              this.dd = this.kc.filter(function(n) {return n;});
+              this.cn =  this.dd.join('');
+            }
+            if(indexff === 3) {
+              this.kd[indexg] = num.ball;
+              this.dd = this.kd.filter(function(n) {return n;});
+              this.dn =  this.dd.join('');
+            }
+            if(indexff === 4) {
+              this.ke[indexg] = num.ball;
+              this.dd = this.ke.filter(function(n) {return n;});
+              this.en = this.dd.join('');
+            }
+            if(this.playBonusId === 'ssc_star1_dwd') {
+              if(this.an === '') {
+                this.an = '-';
+              }
+              if(this.bn === '') {
+                this.bn = '-';
+              }
+              if(this.cn === '') {
+                this.cn = '-';
+              }
+              if(this.dn === '') {
+                this.dn = '-';
+              }
+              if(this.en === '') {
+                this.en = '-';
+              }
+            }
             this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
           }
           if(this.playBonusId === 'ssc_star5') {
@@ -1457,61 +1499,43 @@
       betCancel() {
         this.betGoshow = !this.betGoshow;
       },
+      setupPlayTree(){
+        for (let i = 0; i < this.playGroups.length; i++) {
+          this.splayGroups.push(this.playGroups[i])
+        }
+        for (let j = 0; j < this.splayGroups.length; j++) {
+          this.sgroups.push(this.splayGroups[j].groups)
+        }
+        for (let k = 0; k < this.sgroups.length; k++) {
+          for (let j = 0; j < this.sgroups[k].length; j++) {
+            this.sgroups2.push(this.sgroups[k][j])
+          }
+        }
+        for (let i = 0; i < this.sgroups2.length; i++) {
+          this.splayers.push(this.sgroups2[i].players)
+        }
+        for (let h = 0; h < this.splayers.length; h++) {
+          for (let i = 0; i < this.splayers[h].length; i++) {
+            this.snumView.push(this.splayers[h][i].numView)
+          }
+        }
+        this.displayBonus = this.splayers[0][0].displayBonus
+      },
       getPlayTree() {
         const now = new Date().getTime();
         if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-          // this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
+        
             this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
             this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
-            for (let i = 0; i < this.playGroups.length; i++) {
-              this.splayGroups.push(this.playGroups[i])
-            }
-            for (let j = 0; j < this.splayGroups.length; j++) {
-              this.sgroups.push(this.splayGroups[j].groups)
-            }
-            for (let k = 0; k < this.sgroups.length; k++) {
-              for (let j = 0; j < this.sgroups[k].length; j++) {
-                this.sgroups2.push(this.sgroups[k][j])
-              }
-            }
-            for (let i = 0; i < this.sgroups2.length; i++) {
-              this.splayers.push(this.sgroups2[i].players)
-            }
-            for (let h = 0; h < this.splayers.length; h++) {
-              for (let i = 0; i < this.splayers[h].length; i++) {
-                this.snumView.push(this.splayers[h][i].numView)
-              }
-            }
-            this.displayBonus = this.splayers[0][0].displayBonus
-          // }).catch((error) => {
-          //   console.log("玩法树No");
-          // });
+            this.setupPlayTree();
+          
         }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
           this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;
             localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
             localStorage.setItem("date_playTree_" + this.$route.query.id, now);
-            for (let i = 0; i < this.playGroups.length; i++) {
-              this.splayGroups.push(this.playGroups[i])
-            }
-            for (let j = 0; j < this.splayGroups.length; j++) {
-              this.sgroups.push(this.splayGroups[j].groups)
-            }
-            for (let k = 0; k < this.sgroups.length; k++) {
-              for (let j = 0; j < this.sgroups[k].length; j++) {
-                this.sgroups2.push(this.sgroups[k][j])
-              }
-            }
-            for (let i = 0; i < this.sgroups2.length; i++) {
-              this.splayers.push(this.sgroups2[i].players)
-            }
-            for (let h = 0; h < this.splayers.length; h++) {
-              for (let i = 0; i < this.splayers[h].length; i++) {
-                this.snumView.push(this.splayers[h][i].numView)
-              }
-            }
-            this.displayBonus = this.splayers[0][0].displayBonus
+            this.setupPlayTree();
           }).catch((error) => {
             console.log("玩法树No");
           });
@@ -1692,7 +1716,6 @@
       getPastOp() {
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
-          console.log(Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)
           if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
                   this.reGetPastOp();
           } else {

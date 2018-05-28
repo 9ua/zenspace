@@ -1556,6 +1556,7 @@
      
       //投注
       betGo() {
+        this.betGoshow = false;
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials: true};
         let formData = new FormData();
         formData.append('order[0].content', this.con);
@@ -1576,10 +1577,10 @@
             setTimeout(() => {
               this.showpop = !this.showpop;
               this.content = "投注成功!";
-              this.betGoshow = !this.betGoshow;
+              // this.betGoshow = !this.betGoshow;
               this.iscreat();
               setTimeout(() => {
-                this.showpop = !this.showpop;
+                this.showpop = false;
                 this.betsuccess = !this.betsuccess;
               }, 800);
             }, 400);

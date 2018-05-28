@@ -15,7 +15,7 @@
               <li v-for="(into,index) in playBonus" :key="index" :class="{'active': index === navlist}" @click="k3Tab($event,index,into)">
                 <div class="title"> {{into.title}} </div>
                 <div class="xq" v-show=" index !== 3">赔率 {{into.displayBonus | keepTwoNum}}</div>
-                <div class="xq" v-show=" index === 3"></div>
+                <div class="xq" v-show=" index === 3">赔率 {{playBonus[4].displayBonus | keepTwoNum}}</div>
                 <div class="img">
                   <span class="img1"></span>
                   <span class="img2"></span>
@@ -433,6 +433,7 @@ export default {
       this.getPlayTree();
     }
     this.$route.meta.isBack=false;
+
   },
   destroyed() {
     this.endCount();
@@ -502,6 +503,7 @@ export default {
       
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
           this.getPastOpens = res.data.data;
+  
           if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2) {
               this.reGetPastOp();
           } else {

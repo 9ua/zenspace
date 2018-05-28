@@ -75,28 +75,6 @@ Vue.config.productionTip = false
 axios.defaults.timeout = 5000
 // http请求拦截器
 
-// axios.interceptors.request.use(data => {
-// if (localStorage.getItem('username') !== this.$cookie.get('username')) {
-//     Message.error({
-//         message: "帐号资讯错误，请勿同时登入多个帐号！"
-//     })
-//     router.push('/login');
-//     localStorage.clear();
-// }
-// return data
-// }, error => {
-//     return Promise.reject(error)
-// })
-// axios.interceptors.request.use(
-//     (config) => {
-
-//       return config;
-//     },
-//     (err) => {
-//       return Promise.reject(err);
-//     }
-//   );
-
 
 axios.interceptors.response.use(data => { // 响应成功关闭loading
     if (data.data.status === 302) {

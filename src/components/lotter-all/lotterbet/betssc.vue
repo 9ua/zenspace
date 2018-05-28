@@ -92,8 +92,19 @@
                 <b>。奖金
                   <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
                   <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-                <br/> </span>
-              <ul class="fushi">
+                <br/>
+             </span>
+             <ul class="fushi">
+              <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
+                 <p >
+                    <b>{{numViews.title}}</b>
+                    <span>
+                      <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
+                    </span>
+                  </p>
+              </li>
+             </ul>
+             <!--  <ul class="fushi">
                 <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playBonusId === player.id">
                   <p v-for="(numViews,indexff) in player.numView" :key="indexff">
                     <b>{{numViews.title}}</b>
@@ -102,7 +113,7 @@
                     </span>
                   </p>
                 </li>
-              </ul>
+              </ul> -->
             </div>
           </div>
         </div>
@@ -197,6 +208,7 @@
         con: '', //已选号码
         zhu: 0, //注数
         rates: 0, //最高可中
+        current_player:{},//當前玩法
         playBonus: '', //玩法树
         playBonusId: 'ssc_star5', //点击选中后获取此玩法ID
         playGroups: '',
@@ -297,6 +309,15 @@
       },
       //投注 ++++
       betssc_boxjia(indexff, indexg, num, numViews, player){
+        console.log(indexff);
+          console.log(indexg);
+               console.log(num);
+                 console.log(numViews);
+                   console.log(player);
+
+
+
+
         //大小单双 +
         if(this.playBonusId === 'ssc_dxds') {
           if(indexff === 0) {
@@ -1500,6 +1521,9 @@
         this.betGoshow = !this.betGoshow;
       },
       setupPlayTree(){
+        //預設當前玩法
+        this.current_player = this.playGroups[0].groups[0].players[0];
+        //console.log(this.current_player)
         for (let i = 0; i < this.playGroups.length; i++) {
           this.splayGroups.push(this.playGroups[i])
         }
@@ -1541,80 +1565,7 @@
           });
         }
       },
-      // setupPlayTree(resData){
-      //   this.playBonus = resData.playBonus;
-      //   this.playGroups = resData.playGroups;
-      //   for (let i = 0; i < this.playGroups.length; i++) {
-      //       this.splayGroups.push(this.playGroups[this.navlist])
-      //   }
-      //   for (let j = 0; j < this.splayGroups.length; j++) {
-      //     // if(this.navlist === j){
-      //       this.sgroups.push(this.splayGroups[j].groups)
-      //     // }
-      //   }
-      //   for (let k = 0; k < this.sgroups.length; k++) {
-      //     for (let j = 0; j < this.sgroups[k].length; j++) {
-      //       this.sgroups2.push(this.sgroups[k][j])
-      //     }
-      //   }
-      //   for (let i = 0; i < this.sgroups2.length; i++) {
-      //     this.splayers.push(this.sgroups2[i].players)
-      //   }
-      //   for (let h = 0; h < this.splayers.length; h++) {
-      //     for (let i = 0; i < this.splayers[h].length; i++) {
-      //       this.snumView.push(this.splayers[h][i].numView)
-      //     }
-      //   }
-      //   this.displayBonus = this.splayers[0][0].displayBonus
-      // },
-      // //玩法术
-      // getPlayTree() {
-      //   var now = new Date().getTime();
-      //   //to check if localstorage exists
-      //   if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-      //     var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
-      //     if(null == setupTime || (now - setupTime) > this.cacheTime){
-      //       localStorage.removeItem("playTree_" + this.$route.query.id);
-      //       localStorage.removeItem("date_playTree_" + this.$route.query.id);
-      //       this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
-      //         this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data)));
-      //         //set to local storage
-      //         localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
-      //         localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
-      //       })
-      //       .catch(error => {
-      //         console.log(error);
-      //         this.$store.state.loginStatus = false;
-      //         this.betshow = !this.betshow;
-      //         this.content = "获取不成功!";
-      //         setTimeout(() => {
-      //           this.betshow = !this.betshow;
-      //           this.$router.push("/login");
-      //         }, 1300);
-      //       });
-      //     }else{
-      //       this.setupPlayTree(JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)));
-      //     }
-      //   }
-      //   else{
-      //     this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
-      //       this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data)));
-      //       //set to local storage
-      //       localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data));
-      //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //       this.$store.state.loginStatus = false;
-      //       this.betshow = !this.betshow;
-      //       this.content = "获取不成功!";
-      //       setTimeout(() => {
-      //         this.betshow = !this.betshow;
-      //         this.$router.push("/login");
-      //       }, 1300);
-      //     });
-      //   }
-      // },
+     
       //投注
       betGo() {
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials: true};
@@ -1704,6 +1655,7 @@
         this.show = !this.show;
         this.iscreat();
         this.displayBonus = items.displayBonus;
+        this.current_player = items;
         if(isNaN(this.displayBonus)){
           let ar = [];
           ar = this.displayBonus.split('-');

@@ -3,13 +3,13 @@
     <headers></headers>
     <ul v-show="showFlag">
       <li v-for="(actives,index) in activitys" :key="index">
-        <img :src="'http://115.144.238.217'+actives.icon" @click="activeR($event,actives,index)"/>
+        <img :src="'http://chinahuiji.com'+actives.icon" @click="activeR($event,actives,index)"/>
       	<div class="three-box">
       		<p>活动时间：{{actives.beginPrizeTime}}</p>
       		<p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
       	</div>
         <div class="three-content" ref="pppop" v-if="activesremark === index" v-show="activesremarks">
-          <p v-html="actives.remark"></p>
+          <div><p v-html="actives.remark"></p></div>
         </div>
       </li>
     </ul>

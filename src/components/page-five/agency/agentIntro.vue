@@ -6,7 +6,7 @@
     </div>
     <div class="listStyle-content">
       <div class="listStyle-content-top">
-        <img src="../../../assets/img/five/agentIntro.png" />
+        <img src="@/assets/img/five/agentIntro.png" />
       </div>
       <ul class="intro">
         <p>当您能看到这个页面，说明您的账号即是玩家账号也是代理账号，即可以自己投注，也可以发展下级玩家，赚取返点佣金。</p>

@@ -41,7 +41,7 @@
     <div class="betk3-content">
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
-          <div class="content-left" v-for="(item,index) in getPastO" :key="index">
+          <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
             <p>{{item.seasonId.slice(4)}}期开奖号码</p>
             <div>
               <p>{{item.n1}}</p>
@@ -251,9 +251,8 @@ export default {
       n1: 1,
       n2: 1,
       n3: 1,
-      cacheTime: 60000000,
+      cacheTime: 600000,
       getPastOpens: "", //获取过去开奖号码10个
-      getPastO: "", //获取过去开奖号码1个
       LotteryList: "",
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
@@ -410,17 +409,19 @@ export default {
       ]
     };
   },
-  deactivated() {
-    this.endCount();
-    this.iscreat();
+  created(){
+      this.getLotteryList();
   },
-  activated(){
+  mounted(){
     if(!this.$route.meta.isBack){
       this.getPlayTree();
-      this.getLotteryList();
       this.geteServerTime();//获取彩種當前獎期時間
     }
     this.$route.meta.isBack=false;
+  },
+  destroyed() {
+    this.endCount();
+    this.iscreat();
   },
   watch:{
     money(newVal) {
@@ -448,10 +449,8 @@ export default {
           if (res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId;
             this.seasonId3 = this.seasonId2 - 1;
-            // this.seasonId = this.seasonId2.substring(4).split("-").join("");
             this.seasonId = this.seasonId2.slice(4);
             this.today = res.data.data.restSeconds;
-            this.getPastOpen();
             this.getPastOp();
             this.initSetTimeout();
           }
@@ -491,20 +490,9 @@ export default {
       this.geteServerTime();
     },
     //获取过去开奖号码10个
-    getPastOpen() {
-      this.getLotteryList();
-      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
-        this.getPastOpens = res.data.data;
-      })
-      .catch(error => {
-        console.log("获取过去开奖号码No");
-      });
-    },
-    //获取过去开奖号码1个
     getPastOp() {
-      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 1 }}).then(res => {
-          this.getPastO = res.data.data;
-          console.log(res.data.data)
+      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
+          this.getPastOpens = res.data.data;
           if (res.data.data[0].seasonId !== this.seasonId3 && (res.data.data[0].seasonId-this.seasonId3)<=2) {
               this.reGetPastOp();
           }
@@ -521,17 +509,27 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
-      this.$http.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
-        this.LotteryList = res.data.data.k3;
-        for (let i = 0; i < this.LotteryList.length; i++) {
-          if(this.LotteryList[i].id === this.$route.query.id){
-            this.listname = this.LotteryList[i].name.substring(0, 2);
-          }
+      if(localStorage.getItem('lotteryList') !== null){
+          this.LotteryList = JSON.parse(localStorage.getItem('lotteryList')).k3;
+          for (let i = 0; i < this.LotteryList.length; i++) {
+                if(this.LotteryList[i].id === this.$route.query.id){
+                  this.listname = this.LotteryList[i].name.substring(0, 2);
+                }
+              }
+				} else {
+            this.$http.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
+              localStorage.setItem('lotteryList',JSON.stringify(res.data.data)); 
+              this.LotteryList = res.data.data.k3;
+              for (let i = 0; i < this.LotteryList.length; i++) {
+                if(this.LotteryList[i].id === this.$route.query.id){
+                  this.listname = this.LotteryList[i].name.substring(0, 2);
+                }
+              }
+            })
+            .catch(error => {
+              console.log("右上彩种No");
+            });
         }
-      })
-      .catch(error => {
-        console.log("右上彩种No");
-      });
     },
     //头部菜单项
     k3Tab(e, index, into) {
@@ -549,8 +547,6 @@ export default {
       this.showan = index;
       this.showa = !this.showa;
       this.$router.push({query:{id:into.id}})
-      this.getPastOpen();//获取过去开奖号码10个
-      this.getPastOp();//获取过去开奖号码1个
       this.geteServerTime();//获取彩種當前獎期時間
       this.getPlayTree();//玩法术
       this.iscreat();//清空
@@ -785,8 +781,6 @@ export default {
       }
     },
     setupPlayTree(resData){
-    //console.log("resdatresData")
-    //console.log(resData)
       this.playBonus = resData;
           let arrpeilv1 = [];
           let arrpeilv2 = [];
@@ -846,9 +840,7 @@ export default {
       }
       else{
         this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => { 
-        console.log(res.data.data.playBonus);
           this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data.playBonus)));
-          console.log("開始塞玩法數localstorage")
           //set to local storage
           localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data.playBonus));
           localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
@@ -1030,6 +1022,7 @@ export default {
     },
     //投注
     betGo() {
+      this.betGoshow = !this.betGoshow;
       let config = {headers: { "Content-Type": "application/x-www-form-urlencoded" },withCredentials: true};
       if (this.playId1 === "k3_star3_big_odd" || this.playId2 === "k3_star3_and" || this.playId === "k3_star3_and") {
         if (this.playId1 === "k3_star3_big_odd" && this.con1 !== '') {
@@ -1053,7 +1046,7 @@ export default {
                 setTimeout(() => {
                   this.betshow = !this.betshow;
                   this.content = "投注成功!";
-                  this.betGoshow = !this.betGoshow;
+                  // this.betGoshow = !this.betGoshow;
                   this.iscreat();
                   setTimeout(() => {
                     this.betshow = false;
@@ -1198,8 +1191,11 @@ export default {
 @import "../../../assets/scss/lotter-list/lotterbet/betk3.scss";
 @import "../../../assets/scss/popcorn.scss";
 </style>
-<style type="text/css">
-.van-modal {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+<style>
+/* .menu-list.van-popup {
+  transition: 0s ease-out !important;
+} */
+.van-popup--top{
+  transition: 0s ease-out !important;
 }
 </style>

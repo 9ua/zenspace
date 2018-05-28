@@ -9,7 +9,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0px 15px;
+            padding: 0px 0px;
             margin-bottom: 10px;
             & img{
                 height: 90px;
@@ -25,6 +25,10 @@
             }
             & .three-content{
                 width: 100%;
+                & div {
+                    background: #fff;
+                    padding: 0 20px;
+                }
             }
         }
     }

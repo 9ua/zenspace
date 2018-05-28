@@ -2,7 +2,7 @@
   <div class="k3">
     <ul>
       <router-link v-for="(item,index) in lotteryListk3" :key="index" tag="li" :to="{path:'/k3',query:{id:item.id}}">
-        <img :src='"../../assets/img/one/"+item.image+".png"' alt="images"/>
+        <img :src='"@/assets/img/one/"+item.image+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
     </ul>
@@ -18,6 +18,9 @@ export default {
   mounted(){
     this.lotteryk3();
   },
+  // activated(){
+  //   this.lotteryk3();
+  // },
   methods:{
     lotteryk3(){
       this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
@@ -31,5 +34,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/k3.scss'
+@import '../../assets/scss/lotter-list/k3.scss';
 </style>

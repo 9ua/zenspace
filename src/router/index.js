@@ -255,7 +255,7 @@ export default new Router({
                     redirect: 'four/winning',
                     component: resolve => require(['@/components/home/four.vue'], resolve),
                     meta: {
-                        keepAlive: true
+                        keepAlive: false
                     },
                     children: [{
                             path: 'winning',
@@ -618,7 +618,7 @@ export default new Router({
           name: 'service',
           component: service,
           meta: {
-              keepAlive: true
+              keepAlive: false
           },
       },
     ]

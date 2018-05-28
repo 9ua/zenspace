@@ -134,10 +134,8 @@ export default {
         
     }
   },
+
   mounted(){
-      this.getTradeList();
-  },
-  activated(){
       this.getTradeList();
   },
   methods: {

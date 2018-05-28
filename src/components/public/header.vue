@@ -3,7 +3,7 @@
     <div class="pop-top">
       <!--<router-link class="el-icon-arrow-left" to="/one" tag="i" v-show="routerUrl === 'five'"></router-link>-->
       <p v-for="(contents,index) in content" :key="index">{{contents.show === routerUrl ? contents.title : ''}} </p>
-      <img v-show="routerUrl === 'one'" src="../../assets/img/one/logo.png" />
+      <img v-show="routerUrl === 'one'" src="@/assets/img/one/logo.png" />
       <router-link v-show="routerUrl === 'five'" class="dim" to="service" tag="li">客服</router-link>
       
       <!--<router-link to="/one" tag="span" v-show="routerUrl === 'five'">客服</router-link>-->

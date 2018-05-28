@@ -23,10 +23,10 @@
           <img :src="captchaCodeImg" @click="getCaptchaCode">
         </div>
         <div class="login-rememb">
-        		<yd-checkbox v-model="checked" colo="#419fd9">记住密码</yd-checkbox>
+        		<yd-checkbox v-model="checked" colo="#419fd9" @click="checked = !checked">记住密码</yd-checkbox>
         </div>
         <div class="login-go">
-          <button @click="login">立即登陆</button>
+          <button @click="login" v-show="loginReq">立即登陆</button>
         </div>
         <div class="login-live">
           <router-link to="registered">立即注册</router-link>
@@ -51,7 +51,8 @@
       return {
         pop: false,
         pwd: false,
-        checked: true,//记住密码否?
+        loginReq:true,
+        checked: false,//记住密码否?
         content: '',//弹窗内容
         newDate: null,//时间戳
         errorcode:false,//判断账号密码错误次数
@@ -61,19 +62,26 @@
           user: '',
           pwd: '',
           verification:'',
+          rempwd:'',
+          
         }
       }
     },
     created() {
+      localStorage.clear();
       this.checkeds();
-      this.getCaptchaCode();
     },
     methods: {
     	getCaptchaCode() {
         this.newDate = new Date().getTime();
-        this.captchaCodeImg = "http://115.144.238.217/code.jpg?_=" + this.newDate;
+        this.captchaCodeImg = this.$store.state.url+ "code.jpg?_=" + this.newDate;
+        console.log("獲取認證碼!!!");
       },
       login() {
+        this.loginReq = false;
+        setTimeout(() => {
+          this.loginReq = true;
+        }, 1200);
         const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
         const pwd_yz = /^[A-Za-z0-9]{6,120}$/;
         let yzuser = user_yz.test(this.newUserInfo.user);
@@ -92,40 +100,54 @@
           this.pop = true
         } else if (yzuser == true && yzpwd == true) {
           let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
-          let pwd = md5(this.newUserInfo.pwd)
+          let pwd = this.newUserInfo.pwd;
+          if (this.$cookie.get('password') && pwd === "PASSWORD") {
+              pwd = this.$cookie.get('password');
+          } else { pwd = md5(this.newUserInfo.pwd); }
           let formData = new FormData();
           formData.append('account', this.newUserInfo.user);
           formData.append('password', pwd);
           formData.append('code',this.newUserInfo.verification);
           this.$axios.post(this.$store.state.url+'api/user/login', formData, config).then((res) => {
+            // if(this.checked === false){this.$cookie.delete('username');this.$cookie.delete('password');}
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
             this.$store.state.userType = res.data.data.userType;
             setStore('JSESSIONICookie',this.$store.state.JSESSIONICookie);
             setStore('userType',this.$store.state.userType);
             this.loginSta = true;
+            this.$store.state.loginStatus = this.loginSta;
             setStore('loginSta',this.loginSta);
-            this.$store.state.loginStatus = getStore('loginSta');
           	if(res.data.code === 1){
-              this.$router.push({path:'/one'});
           		this.$store.state.Globalusername = res.data.data.account;
-	            this.$store.state.Globalpassword = this.newUserInfo.pwd;
+              this.$store.state.Globalpassword = this.newUserInfo.pwd;
               setStore('username',this.$store.state.Globalusername);
-              setStore('password',this.$store.state.Globalpassword);
+              setStore('password',pwd);
+              if ( this.checked === true) {
+                setStore('username',this.$store.state.Globalusername);
+                setStore('password',pwd);
+                this.$cookie.set('username', res.data.data.account , { expires: '1M' });
+                this.$cookie.set('password', pwd , { expires: '1M' });
+              } else {
+                this.$cookie.delete('username');
+                this.$cookie.delete('password');
+              }
+              this.$router.push({path:'/one'});
           	} else {
+              if (res.data.code === 0) {
+                this.$cookie.delete('username');
+                this.$cookie.delete('password');
+              }
               if (res.data.data.errCount >= 3) {
                 this.getCaptchaCode();
-                this.errorcode = true;
+                setTimeout(() => {
+                  this.errorcode = true;
+                }, 0);
               } else {
                 this.errorcode = false;
               }
-              // this.$store.state.errorcode ++;
-              // this.newUserInfo.user = '';
               this.newUserInfo.pwd = '';
               this.checked = false;
               removeStore('password');
-          		// if(this.$store.state.errorcode > 2 ){
-	          	// 	this.errorcode = !this.errorcode;
-	          	// }
             }
           }).catch((error) => {
           		console.log("No")
@@ -133,15 +155,29 @@
         }
       },
     	checkeds(){
-    		if(this.checked === true){
-          this.newUserInfo.user = getStore('username')
-          this.newUserInfo.pwd = getStore('password')
-    		}else{
-          removeStore('username','password');
-    			// VueCookie.delete('username',"password");
-    			this.newUserInfo.user = "";
-    			this.newUserInfo.pwd = "";
-    		}
+        console.log("Ver.1.0.0.2");
+        if ( this.$cookie.get('password')) {
+          this.checked = true;
+          this.newUserInfo.user = this.$cookie.get('username');
+          this.newUserInfo.pwd = "PASSWORD";
+          this.newUserInfo.rempwd = this.$cookie.get('password');
+        }
+    		// if(this.checked === true){
+        //   // this.newUserInfo.user = getStore('username')
+        //   // this.newUserInfo.pwd = getStore('password')
+        //   this.newUserInfo.user = this.$cookie.get('username');
+        //   this.newUserInfo.pwd = "PASSWORD";
+        //   this.newUserInfo.rempwd = this.$cookie.get('password');
+          
+    		// }else{
+        //   removeStore('username','password');
+        //   this.$cookie.delete('username');
+        //   this.$cookie.delete('password');
+    		// 	// VueCookie.delete('username',"password");
+    		// 	this.newUserInfo.user = "";
+        //   this.newUserInfo.pwd = "";
+        //   this.newUserInfo.rempwd = '';
+    		// }
     	},
     },
     components: {

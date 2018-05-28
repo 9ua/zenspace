@@ -13,7 +13,8 @@ const state = {
         // 'Content-Type': 'multipart/form-data'
     },
     JSESSIONICookie: '',
-    url: 'http://chinahuiji.com/',
+    // url: 'http://115.144.238.217/',
+    url:'http://chinahuiji.com/',
     loginStatus: getStore('loginSta'), //登陆状态
     Globalusername: getStore('username'), //全局账号
     Globalpassword: getStore('password'), //全局密码

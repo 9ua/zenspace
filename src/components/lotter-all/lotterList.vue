@@ -8,18 +8,22 @@
       <div class="lotterList-nav-box">
         <ul>
           <router-link :to="'/lotterList/'+navTitles.pathsrc" tag="li" v-for="(navTitles,index) in navTitle" :title="navTitles.name" :key="index">
-          <img :src='"../../assets/img/one/"+navTitles.pathsrc+".png"' alt="">
-          <h5>{{navTitles.name}}</h5>
+            <img :src='"@/assets/img/one/"+navTitles.pathsrc+".png"' alt="">
+            <h5>{{navTitles.name}}</h5>
           </router-link>
         </ul>
       </div>
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+      
     </div>
 </div>  
 </template>
 <script>
-  export default{
-    data() {
+
+  export default {
+    data(){
       return{
         navTitle:[
           {name:'全部彩种',pathsrc:'lotterAll'},
@@ -33,5 +37,5 @@
   }
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/lotterList.scss'
+@import '../../assets/scss/lotter-list/lotterList.scss';
 </style>

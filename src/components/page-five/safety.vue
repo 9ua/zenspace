@@ -119,8 +119,9 @@ import { setStore, getStore, removeStore } from '../../config/mutil'
     		this.$store.state.Globalusername = "";
 				this.$store.state.Globalpassword = "";
 				this.$store.state.JSESSIONICookie = '';
-				removeStore('loginSta');
-				removeStore('JSESSIONICookie');
+				// removeStore('loginSta');
+				// removeStore('JSESSIONICookie');
+				localStorage.clear();
     		this.$router.push('/one');
 				}).catch((error) =>{
 					console.log(error)

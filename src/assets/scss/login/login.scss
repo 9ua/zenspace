@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: linear-gradient(to right, #f75f5b, #fead50);
+    background: rgb(175,58,49);
     height: 100%;
     & .login-conter {
         margin-top: 46px;
@@ -28,7 +28,7 @@
             display: flex;
             flex-direction: column;
             padding: 0 20px;
-            background: linear-gradient(to right, #f75f5b, #fead50);
+            background: #AF3A31;
             >div {
                 display: flex;
                 align-items: center;
@@ -163,7 +163,7 @@
     top: 0px;
     height: 46px;
     width: 100%;
-    background: linear-gradient(to right, #f75f5b, #fead50);
+    background: #AF3A31;
     z-index: 12;
     & i {
         position: absolute;

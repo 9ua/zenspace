@@ -37,7 +37,7 @@ export default {
     top: 0px;
     height: 46px;
     width: 100%;
-    background: linear-gradient(to right, #f75f5b , #fead50);
+    background:  #AF3A31;
     z-index: 11;
     & i {
         position: absolute;

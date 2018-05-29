@@ -307,37 +307,27 @@
         if(this.playBonusId === 'ssc_dxds') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka;
             this.an = this.dd.join('+');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kb;
             this.bn = this.dd.join('+');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kc;
             this.cn = this.dd.join('+');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kd;
             this.dn = this.dd.join('+');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+             this.dd = this.ke;
             this.en = this.dd.join('+');
           }
           if(this.playBonusId === 'ssc_dxds') {
@@ -387,17 +377,17 @@
         if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;            
             this.bn = this.dd.join('');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {return n;});
+            this.dd = this.kc;
             this.cn = this.dd.join('');
           }
           if(indexff === 3) {
@@ -407,7 +397,7 @@
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {return n;});
+            this.dd = this.ke;
             this.en = this.dd.join('');
           }
           if(this.playBonusId === 'ssc_star4_front') {
@@ -443,17 +433,16 @@
           if(this.playBonusId === 'ssc_star1_dwd') {
             if(indexff === 0) {
               this.ka[indexg] = num.ball;
-              this.dd = this.ka.filter(function(n) {return n;});
+              this.dd = this.ka;
               this.an =  this.dd.join('');
             }
             if(indexff === 1) {
               this.kb[indexg] = num.ball;
-              this.dd = this.kb.filter(function(n) {return n;});
-              this.bn =  this.dd.join('');
+              this.dd = this.kb;              this.bn =  this.dd.join('');
             }
             if(indexff === 2) {
               this.kc[indexg] = num.ball;
-              this.dd = this.kc.filter(function(n) {return n;});
+              this.dd = this.kc;
               this.cn =  this.dd.join('');
             }
             if(indexff === 3) {
@@ -463,7 +452,7 @@
             }
             if(indexff === 4) {
               this.ke[indexg] = num.ball;
-              this.dd = this.ke.filter(function(n) {return n;});
+              this.dd = this.ke;
               this.en = this.dd.join('');
             }
             if(this.playBonusId === 'ssc_star1_dwd') {
@@ -494,17 +483,16 @@
         if(this.playBonusId === 'ssc_side_lhh') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = '[万千]' + this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = '[万百]' + this.dd.join('');
+            this.dd = this.kb;            this.bn = '[万百]' + this.dd.join('');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {return n;});
+            this.dd = this.kc;
             this.cn = '[万十]' + this.dd.join('');
           }
           if(indexff === 3) {
@@ -514,7 +502,7 @@
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {return n;});
+            this.dd = this.ke;
             this.en = '[千百]' + this.dd.join('');
           }
           if(indexff === 5) {
@@ -603,13 +591,12 @@
         if(this.playBonusId === 'ssc_star5_group5') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount5(this.con.split(','));
@@ -618,13 +605,12 @@
         if(this.playBonusId === 'ssc_star5_group10') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount10(this.con.split(','));
@@ -633,13 +619,12 @@
         if(this.playBonusId === 'ssc_star5_group20') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount20(this.con.split(','));
@@ -648,13 +633,12 @@
         if(this.playBonusId === 'ssc_star5_group30') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount30(this.con.split(','));
@@ -663,13 +647,12 @@
         if(this.playBonusId === 'ssc_star5_group60') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount60(this.con.split(','));
@@ -684,13 +667,12 @@
         if(this.playBonusId === 'ssc_star4_front_group4') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount4(this.con.split(','));
@@ -699,13 +681,12 @@
         if(this.playBonusId === 'ssc_star4_front_group12') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount12(this.con.split(','));
@@ -764,37 +745,27 @@
         if(this.playBonusId === 'ssc_dxds') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka
             this.an = this.dd.join('+');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kb;
             this.bn = this.dd.join('+');
           }
           if(indexff === 2) {
             this.kc.splice(indexg, 1, "");
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kc;
             this.cn = this.dd.join('+');
           }
           if(indexff === 3) {
             this.kd.splice(indexg, 1, "");
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kd;
             this.dn = this.dd.join('+');
           }
           if(indexff === 4) {
             this.ke.splice(indexg, 1, "");
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+             this.dd = this.ke;
             this.en = this.dd.join('+');
           }
           if(this.playBonusId === 'ssc_dxds') {
@@ -844,17 +815,16 @@
         if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           if(indexff === 2) {
             this.kc.splice(indexg, 1, "");
-            this.dd = this.kc.filter(function(n) {return n;});
+            this.dd = this.kc;
             this.cn = this.dd.join('');
           }
           if(indexff === 3) {
@@ -864,7 +834,7 @@
           }
           if(indexff === 4) {
             this.ke.splice(indexg, 1, "");
-            this.dd = this.ke.filter(function(n) {return n;});
+            this.dd = this.ke;
             this.en = this.dd.join('');
           }
           if(this.playBonusId === 'ssc_star4_front') {
@@ -896,9 +866,7 @@
         if(this.playBonusId === 'ssc_side_lhh') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka
             this.an = '[万千]' + this.dd.join('');
             if(this.an == '' || this.an == '-' || this.an == '[万千]') {
               this.an = this.dd.join('');
@@ -906,9 +874,7 @@
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kb;
             this.bn = '[万百]' + this.dd.join('');
             if(this.bn == '' || this.bn == '-' || this.bn == '[万百]') {
               this.bn = this.dd.join('');
@@ -916,9 +882,7 @@
           }
           if(indexff === 2) {
             this.kc.splice(indexg, 1, "");
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kc;
             this.cn = '[万十]' + this.dd.join('');
             if(this.cn == '' || this.cn == '-' || this.cn == '[万十]') {
               this.cn = this.dd.join('');
@@ -926,9 +890,7 @@
           }
           if(indexff === 3) {
             this.kd.splice(indexg, 1, "");
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+             this.dd = this.kd;
             this.dn = '[万个]' + this.dd.join('');
             if(this.dn == '' || this.dn == '-' || this.dn == '[万个]') {
               this.dn = this.dd.join('');
@@ -936,9 +898,7 @@
           }
           if(indexff === 4) {
             this.ke.splice(indexg, 1, "");
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+             this.dd = this.ke;
             this.en = '[千百]' + this.dd.join('');
             if(this.en == '' || this.en == '-' || this.en == '[千百]') {
               this.en = this.dd.join('');
@@ -1049,13 +1009,12 @@
         if(this.playBonusId === 'ssc_star5_group5') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount5(this.con.split(','));
@@ -1064,13 +1023,12 @@
         if(this.playBonusId === 'ssc_star5_group10') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount10(this.con.split(','));
@@ -1079,13 +1037,12 @@
         if(this.playBonusId === 'ssc_star5_group20') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount20(this.con.split(','));
@@ -1094,13 +1051,12 @@
         if(this.playBonusId === 'ssc_star5_group30') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount30(this.con.split(','));
@@ -1109,13 +1065,12 @@
         if(this.playBonusId === 'ssc_star5_group60') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount60(this.con.split(','));
@@ -1130,13 +1085,12 @@
         if(this.playBonusId === 'ssc_star4_front_group4') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount4(this.con.split(','));
@@ -1145,13 +1099,12 @@
         if(this.playBonusId === 'ssc_star4_front_group12') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {return n;});
-            this.bn = this.dd.join('');
+            this.dd = this.kb;            this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
           this.zhu = this.getzuCount12(this.con.split(','));

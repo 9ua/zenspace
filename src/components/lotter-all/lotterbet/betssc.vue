@@ -87,13 +87,14 @@
           </div>
           <div class="betk3-content-foot">
             <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
-              <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
-                <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playBonusId">{{itemabc.remark}}
+              <div v-for="(group,indexd) in item.groups" class="betssc-list-box"  :key="indexd" v-show="indexd === navlistb">
+                <span >{{current_player_bonus.remark}}
                   <b>。奖金
-                    <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
-                    <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-                    <br/> </span>
-                    <ul class="fushi">
+                    <i v-show="Number(current_player_bonus.displayBonus)">{{current_player_bonus.displayBonus | keepTwoNum}}</i>
+                    <i v-show="isNaN(current_player_bonus.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                    <br/> 
+                </span>
+                <ul class="fushi">
                       <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
                         <p >
                           <b>{{numViews.title}}</b>
@@ -198,6 +199,7 @@
         zhu: 0, //注数
         rates: 0, //最高可中
         current_player:{},//當前玩法
+        current_player_bonus:{},//當前玩法
         playBonus: '', //玩法树
         playBonusId: 'ssc_star5', //点击选中后获取此玩法ID
         playGroups: '',
@@ -1463,6 +1465,7 @@
       },
       setupPlayTree(){
        this.current_player = this.playGroups[0].groups[0].players[0];
+       this.current_player_bonus= this.current_player;
        for (let i = 0; i < this.playGroups.length; i++) {
           this.splayGroups.push(this.playGroups[i])
         }
@@ -1490,6 +1493,7 @@
         if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
           this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
           this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
+          this.setupPlayTree();
         }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
           this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = res.data.data.playBonus;
@@ -1497,12 +1501,13 @@
             this.current_player = this.playGroups[0].groups[0].players[0];
             localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
             localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+            this.setupPlayTree();
             
           }).catch((error) => {
             console.log("玩法树No");
           });
         }
-        this.setupPlayTree();
+        
       },
 
       //投注
@@ -1584,6 +1589,7 @@
       },
       //头部菜单项
       k3Tab(e, indexa, indexb, items, group, into, index) {
+        console.log(123)
         this.titles = into.title + ' ' + items.groupName + ' ' + items.title;
         this.intotitle = into.title;
         this.itemstitle = items.title;
@@ -1593,6 +1599,7 @@
         this.playBonusId = items.id;
         this.show = !this.show;
         this.current_player = items;
+        this.current_player_bonus = this.current_player;
         this.iscreat();
         this.displayBonus = items.displayBonus;
         if(isNaN(this.displayBonus)){

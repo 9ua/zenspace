@@ -285,13 +285,15 @@
         num.choose = !num.choose;
         if(num.choose === true) {
           this.d[indexg] = num.ball
-          this.dd = this.d.filter(function(n) {return n;});
+          //this.dd = this.d.filter(function(n) {return n;});
+          this.dd = this.d;
           this.con = this.dd.join(',');
           this.zhu++;
           this.betssc_boxjia(indexff, indexg, num, numViews, player);
         } else if(num.choose === false) {
           this.d.splice(indexg, 1, "");
-          this.dd = this.d.filter(function(n) {return n;});
+          //this.dd = this.d.filter(function(n) {return n;});
+          this.dd = this.d;
           this.con = this.dd.join(',');
           this.zhu--;
           this.betssc_boxjian(indexff, indexg, num, numViews, player);
@@ -303,37 +305,42 @@
         if(this.playBonusId === 'ssc_dxds') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.ka.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.ka;
             this.an = this.dd.join('+');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.kb.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.kb;
             this.bn = this.dd.join('+');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.kc.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.kc;
             this.cn = this.dd.join('+');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.kd.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.kd;
             this.dn = this.dd.join('+');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.ke.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.ke;
             this.en = this.dd.join('+');
           }
           if(this.playBonusId === 'ssc_dxds') {
@@ -506,52 +513,55 @@
         if(this.playBonusId === 'ssc_side_lhh') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            //this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = '[万千]' + this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            //this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;
             this.bn = '[万百]' + this.dd.join('');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc.filter(function(n) {return n;});
+            //this.dd = this.kc.filter(function(n) {return n;});
+            this.dd = this.kc;
             this.cn = '[万十]' + this.dd.join('');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-            this.dd = this.kd.filter(function(n) {return n;});
+           this.dd = this.kd;
             this.dn = '[万个]' + this.dd.join('');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke.filter(function(n) {return n;});
+            this.dd = this.ke;
             this.en = '[千百]' + this.dd.join('');
           }
           if(indexff === 5) {
             this.kf[indexg] = num.ball;
-            this.dd = this.kf.filter(function(n) {return n;});
+            this.dd = this.kf;
             this.fn = '[千十]' + this.dd.join('');
           }
           if(indexff === 6) {
             this.kg[indexg] = num.ball;
-            this.dd = this.kg.filter(function(n) {return n;});
+            this.dd = this.kg;
             this.gn = '[千个]' + this.dd.join('');
           }
           if(indexff === 7) {
             this.kh[indexg] = num.ball;
-            this.dd = this.kh.filter(function(n) {return n;});
+            this.dd = this.kh;
             this.hn = '[百十]' + this.dd.join('');
           }
           if(indexff === 8) {
             this.ki[indexg] = num.ball;
-            this.dd = this.ki.filter(function(n) {return n;});
+            this.dd = this.ki;
             this.in = '[百个]' + this.dd.join('');
           }
           if(indexff === 9) {
             this.kj[indexg] = num.ball;
-            this.dd = this.kj.filter(function(n) {return n;});
+            this.dd = this.kj;
             this.jn = '[十个]' + this.dd.join('');
           }
           if(this.playBonusId === 'ssc_side_lhh') {
@@ -615,12 +625,12 @@
         if(this.playBonusId === 'ssc_star5_group5') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -630,12 +640,12 @@
         if(this.playBonusId === 'ssc_star5_group10') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+           this.dd = this.kb;
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -645,12 +655,12 @@
         if(this.playBonusId === 'ssc_star5_group20') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            tthis.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -660,12 +670,12 @@
         if(this.playBonusId === 'ssc_star5_group30') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -675,12 +685,12 @@
         if(this.playBonusId === 'ssc_star5_group60') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -696,12 +706,12 @@
         if(this.playBonusId === 'ssc_star4_front_group4') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -711,12 +721,12 @@
         if(this.playBonusId === 'ssc_star4_front_group12') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka.filter(function(n) {return n;});
+            this.dd = this.ka;
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb.filter(function(n) {return n;});
+            this.dd = this.kb;
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -776,37 +786,36 @@
         if(this.playBonusId === 'ssc_dxds') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka.filter(function(n) {
-              return n;
-            });
+            this.dd = this.ka;
             this.an = this.dd.join('+');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb.filter(function(n) {
-              return n;
-            });
+            this.dd = this.kb;
             this.bn = this.dd.join('+');
           }
           if(indexff === 2) {
             this.kc.splice(indexg, 1, "");
-            this.dd = this.kc.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.kc.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.kc;
             this.cn = this.dd.join('+');
           }
           if(indexff === 3) {
             this.kd.splice(indexg, 1, "");
-            this.dd = this.kd.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.kd.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.kd;
             this.dn = this.dd.join('+');
           }
           if(indexff === 4) {
             this.ke.splice(indexg, 1, "");
-            this.dd = this.ke.filter(function(n) {
-              return n;
-            });
+            // this.dd = this.ke.filter(function(n) {
+            //   return n;
+            // });
+            this.dd = this.ke;
             this.en = this.dd.join('+');
           }
           if(this.playBonusId === 'ssc_dxds') {

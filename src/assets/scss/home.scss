@@ -54,15 +54,15 @@ a {
         }
     }
     & .home-footer {
-        height: 69px;
-        background: linear-gradient(to right, #f75f5b, #fead50);
+        height: 70px;
+        background: #AF3A31;
         & ul {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 3px solid #dedede;
+            border-top: 3px solid #e5e5e5;
             width: 100%;
-            background: #fff;
+            background: #AE9880;
             @for $i from 1 through 5 {
                 & li:nth-child(#{$i}) {
                     display: flex;
@@ -70,7 +70,7 @@ a {
                     height: 56px;
                     justify-content: center;
                     align-items: center;
-                    color: #999;
+                    color: #ddd;
                     flex-direction: column;
                     & i {
                         font-size: 25px;
@@ -85,14 +85,14 @@ a {
 }
 
 .router-link-exact-active.router-link-active {
-    background: #fff;
+    background: #AF3A31;
 }
 
 .router-link-exact-active.router-link-active i,
 .router-link-exact-active.router-link-active span,
 .router-link-active span,
 .router-link-active i {
-    color: #fd4f42;
+    color: #fff;
     font-size: 18px;
 }
 
@@ -100,9 +100,9 @@ a {
 .router-link-active span,
 .router-link-active i {
     font-size: 12px;
-    color: #fd4f42;
+    color: #fff;
 }
 
 .router-link-active {
-    background: #fff;
+    background: #AF3A31;
 }

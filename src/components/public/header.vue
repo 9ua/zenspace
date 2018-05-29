@@ -53,7 +53,7 @@
   .head-top {
     height: 50px;
     width: 100%;
-   	background: linear-gradient(to right, #f75f5b , #fead50);
+   	background:  #AF3A31;
     position: fixed;
     top: 0px;
     z-index: 11;

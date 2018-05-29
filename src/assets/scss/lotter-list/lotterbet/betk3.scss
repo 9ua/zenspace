@@ -7,11 +7,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 46px;
+        height: 56px;
         font-size: 16px;
         padding: 0px 16px;
-        background: linear-gradient(to right, #f75f5b, #fead50);
-        background: #333;
+        background: #AF3A31;
+        // background: #333;
         color: #fff;
         & li {
             width: 33.33%;
@@ -45,12 +45,12 @@
                 position: absolute;
                 background: hotpink;
                 left: 0px;
-                top: 43px;
+                top: 53px;
                 display: flex;
                 flex-direction: column;
                 width: 100%;
                 & .van-popup--top {
-                    top: 43px;
+                    top: 53px;
                     background: none !important;
                     & .menu-list-top {
                         display: flex;
@@ -117,7 +117,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 position: absolute;
-                top: 40px;
+                top: 46px;
                 right: 0px;
                 width: 170px;
                 background: rgba(220,220,220,0.8);
@@ -351,7 +351,7 @@
 .betk3-footer {
     position: relative;
     background: #333;
-    color: #ffaf36;
+    color: #AF3A31;
     width: 100%;
     & .betk3-footer-top {
         position: absolute;
@@ -369,7 +369,7 @@
             padding: 0px 16px;
             height: 50%;
             & span {
-                color: #ffaf36;
+                color: #f4c829;
                 width: 210px;
                 overflow: hidden;
                 white-space: nowrap;
@@ -404,7 +404,7 @@
                 align-items: center;
                 & p {
                     text-align: center;
-                    color: #ffaf36;
+                    color: #f4c829;
                     width: auto;
                 }
             }
@@ -414,8 +414,8 @@
         }
     }
     & .betk3-footer-buttom {
-        background: #333;
-        height: 50px;
+        background: #414141;
+        height: 56px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -426,7 +426,7 @@
             & button {
                 background: none;
                 border: none;
-                color: #ffaf36;
+                color: #f4c829;
                 font-size: 22px;
                 margin-right: 12px;
             }
@@ -443,11 +443,11 @@
             justify-content: center;
             align-items: center;
             font-size: 18px;
-            height: 30px;
+            height: 40px;
             width: 100px;
-            color: #000;
-            border-radius: 4px;
-            background: #ffaf36;
+            color: #efefef;
+            border-radius: 6px;
+            background: #AF3A31;
             // background: -webkit-linear-gradient(bottom, #ffdb01, #e07a06);
             // background: linear-gradient(bottom, #ffdb01, #e07a06);
         }
@@ -1583,7 +1583,7 @@
       height: 36px;
       color: #fff;
       font-size: 16px;
-      background:linear-gradient(to right, #f75f5b, #fead50);
+      background: #AF3A31;
   }
   & li:nth-child(2) {
     min-height: 54px;
@@ -1632,7 +1632,7 @@
   border-radius: 4px;
   max-width: 300px;
   min-width: 180px;
-  background: linear-gradient(to right, #f75f5b, #fead50);
+  background: #AF3A31;
 }
 
 .menu-list.van-popup{

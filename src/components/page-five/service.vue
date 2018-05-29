@@ -1,11 +1,11 @@
 <template>
   <div class="agent">
     <div class="agent-top">
-      <!-- <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link> -->
+      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
       <p>客服</p>
     </div>
 	<div class="content">
-		<iframe class="content-in" src="https://szzero.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=911218&configID=56705&jid=3470350618&s=1"></iframe>
+		<iframe class="content-in" src="https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=992821&configID=74605&jid=1218814689&s=1"></iframe>
 	</div>
   </div>
 </template>

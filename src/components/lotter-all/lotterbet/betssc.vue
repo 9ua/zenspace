@@ -1531,15 +1531,9 @@
       betCancel() {
         this.betGoshow = !this.betGoshow;
       },
-      //玩法术
-      getPlayTree() {
-        const now = new Date().getTime();
-        if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-        
-            this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
-            this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
-            this.current_player = this.playGroups[0].groups[0].players[0];
-            for (let i = 0; i < this.playGroups.length; i++) {
+      setupPlayTree(){
+        this.current_player = this.playGroups[0].groups[0].players[0];
+         for (let i = 0; i < this.playGroups.length; i++) {
               this.splayGroups.push(this.playGroups[i])
             }
             for (let j = 0; j < this.splayGroups.length; j++) {
@@ -1559,14 +1553,18 @@
               }
             }
             this.displayBonus = this.splayers[0][0].displayBonus
-          // }).catch((error) => {
-          //   console.log("玩法树No");
-          // });
+      },
+      //玩法术
+      getPlayTree() {
+        const now = new Date().getTime();
+        if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
+            this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
+            this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
+           this.setupPlayTree();
         }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
           this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;
-            this.current_player = this.playGroups[0].groups[0].players[0];
             localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
             localStorage.setItem("date_playTree_" + this.$route.query.id, now);
             this.setupPlayTree();

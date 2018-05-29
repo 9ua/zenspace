@@ -7,173 +7,172 @@
       <li>
         <p class="wangfa">玩
           <br/>法</p>
-        <div class="menu" @click="show = !show">{{titles}}
-          <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
-        </div>
-        <div class="menu-list">
-          <van-popup v-model="show" position="top">
-            <div class="popscroll">
-              <ul class="menu-list-top">
-                <li v-for="(into,index) in playGroups" :key="index">
-                  <div class="title">{{into.title}}</div>
-                  <div class="menu-list-list-box">
-                    <div class="menu-list-list" v-for="(group,indexa) in into.groups" :key="indexa">
-                      <span v-for="(player,indexb) in group.players" :key="indexb" @click="k3Tab($event,indexa,indexb,player,group,into,index)">
-                        <a>{{player.groupName}}{{player.title}}</a>
-                      </span>
+          <div class="menu" @click="show = !show">{{titles}}
+            <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+          </div>
+          <div class="menu-list">
+            <van-popup v-model="show" position="top">
+              <div class="popscroll">
+                <ul class="menu-list-top">
+                  <li v-for="(into,index) in playGroups" :key="index">
+                    <div class="title">{{into.title}}</div>
+                    <div class="menu-list-list-box">
+                      <div class="menu-list-list" v-for="(group,indexa) in into.groups" :key="indexa">
+                        <span v-for="(player,indexb) in group.players" :key="indexb" @click="k3Tab($event,indexa,indexb,player,group,into,index)">
+                          <a>{{player.groupName}}{{player.title}}</a>
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
+                  </li>
+                </ul>
+              </div>
+            </van-popup>
+          </div>
+        </li>
+        <li class="betssclist">
+          <span @click="showa = !showa">{{listname}}</span>
+          <i :class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' " @click="showa = !showa"></i>
+          <van-popup v-model=" showa" position="top">
+            <ul>
+              <li v-for="(listssc,index) in LotteryList" :key="index" @click="listnames($event,index,listssc)">
+                <a>{{listssc.name}}</a>
+              </li>
+            </ul>
           </van-popup>
-        </div>
-      </li>
-      <li class="betssclist">
-        <span @click="showa = !showa">{{listname}}</span>
-        <i :class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' " @click="showa = !showa"></i>
-        <van-popup v-model=" showa" position="top">
-          <ul>
-            <li v-for="(listssc,index) in LotteryList" :key="index" @click="listnames($event,index,listssc)">
-              <a>{{listssc.name}}</a>
-            </li>
-          </ul>
-        </van-popup>
-      </li>
-    </ul>
-    <div class="betssc-content">
-      <div v-show="!show">
-        <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
-          <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
-            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
-            <div>
-              <p>{{item.n1}}</p>
-              <p>{{item.n2}}</p>
-              <p>{{item.n3}}</p>
-              <p>{{item.n4}}</p>
-              <p>{{item.n5}}</p>
-              
-              <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
-            </div>
-          </div>
-          <div class="content-right">
-            <p>{{seasonId}}期投注截止</p>
-            <div>
-              <p>{{countDown}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="betk3-content-top-pop" v-show="betsscContentTopPop">
-          <ul>
-            <li>
-              <p>期号</p>
-              <p>开奖号码</p>
-              <p>开奖时间</p>
-            </li>
-            <li v-for="(item,index) in getPastOpens" :key="index">
-              <p>{{item.seasonId.substring(4).split("-").join("")}}
-                <i class="el-icon-minus"></i>
-              </p>
-              <p>
-                <a>{{item.n1}}</a>
-                <a>{{item.n2}}</a>
-                <a>{{item.n3}}</a>
-                <a>{{item.n4}}</a>
-                <a>{{item.n5}}</a>
-              </p>
-              <p>{{item.addTime.substring(11)}}</p>
-            </li>
-          </ul>
-        </div>
-        <div class="betk3-content-foot">
-          <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
-            <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
-              <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playBonusId">{{itemabc.remark}}
-                <b>。奖金
-                  <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
-                  <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-                <br/>
-              </span>
-              <ul class="fushi">
-                <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
-                  <p >
-                      <b>{{numViews.title}}</b>
-                      <span>
-                        <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
-                      </span>
-                    </p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="betssc-footer">
-      <div class="betssc-footer-top" v-show="zhu > 0">
-        <div class="betssc-footer-tops">
-          <p>当前选号</p>
-          <span>{{con}}</span>
-        </div>
-        <div class="betssc-footer-buttoms">
-          <p>每注金额</p>
-          <input type="number" v-model="money"  onfocus="this.select()"/>
-          <span v-if="money === ''">请输入要投注的金额</span>
-          <span v-else v-show="playBonusId !== 'ssc_dxds'">单注最高可中
-            <!-- (money* parseInt(displayBonus*1000))/1000 | keepTwoNum} -->
-            <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
-            <p v-show="isNaN(money*displayBonus)">{{youhezhi ? (money*parseInt(displayBonus2*1000))/1000 : (money* parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
-        </div>
-      </div>
-      <div class="betssc-footer-buttom">
-        <div class="betssc-footer-buttom-left">
-          <button @click="iscreat">清空</button>
-          <p>
-            <span v-if="zhu >0">共{{zhu}}注,</span>
-            <span v-if="this.money !== '' ">共{{zhu*money}}元</span>
-          </p>
-        </div>
-        <div class="betssc-footer-buttom-right" @click="betC">马上投注</div>
-      </div>
-    </div>
-    <ul class="betc" v-show="betGoshow">
-      <li>投注确认</li>
-      <li>
-        <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-        <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-        <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
-      </li>
-      <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
-    </ul>
-    <ul class="betc"  v-show="betsuccess">
-      <li>温馨提示！</li>
-      <li>
-        <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
-      </li>
-      <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
-    </ul>
-    <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
-      <div>
-      <ul>
-        <div class="title">
-          <p>温馨提示！</p>
-        </div>
-        <div class="cont">
-          <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
-        </div>
-        <div class="but">
-            <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
-        </div>
+        </li>
       </ul>
-      </div>
-    </van-popup>
-    <van-popup class="sscpop" v-model="showpop">{{content}}</van-popup>
-  </div>
-</template>
-<script>
-  export default {
-    data() {
-      return {
+      <div class="betssc-content">
+        <div v-show="!show">
+          <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
+            <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
+              <p>{{item.seasonId.slice(4)}}期开奖号码</p>
+              <div>
+                <p>{{item.n1}}</p>
+                <p>{{item.n2}}</p>
+                <p>{{item.n3}}</p>
+                <p>{{item.n4}}</p>
+                <p>{{item.n5}}</p>
+
+                <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+              </div>
+            </div>
+            <div class="content-right">
+              <p>{{seasonId}}期投注截止</p>
+              <div>
+                <p>{{countDown}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="betk3-content-top-pop" v-show="betsscContentTopPop">
+            <ul>
+              <li>
+                <p>期号</p>
+                <p>开奖号码</p>
+                <p>开奖时间</p>
+              </li>
+              <li v-for="(item,index) in getPastOpens" :key="index">
+                <p>{{item.seasonId.substring(4).split("-").join("")}}
+                  <i class="el-icon-minus"></i>
+                </p>
+                <p>
+                  <a>{{item.n1}}</a>
+                  <a>{{item.n2}}</a>
+                  <a>{{item.n3}}</a>
+                  <a>{{item.n4}}</a>
+                  <a>{{item.n5}}</a>
+                </p>
+                <p>{{item.addTime.substring(11)}}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="betk3-content-foot">
+            <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
+              <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
+                <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playBonusId">{{itemabc.remark}}
+                  <b>。奖金
+                    <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
+                    <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                    <br/> </span>
+                    <ul class="fushi">
+                      <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
+                        <p >
+                          <b>{{numViews.title}}</b>
+                          <span>
+                            <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
+                          </span>
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="betssc-footer">
+            <div class="betssc-footer-top" v-show="zhu > 0">
+              <div class="betssc-footer-tops">
+                <p>当前选号</p>
+                <span>{{con}}</span>
+              </div>
+              <div class="betssc-footer-buttoms">
+                <p>每注金额</p>
+                <input type="number" v-model="money"  onfocus="this.select()"/>
+                <span v-if="money === ''">请输入要投注的金额</span>
+                <span v-else v-show="playBonusId !== 'ssc_dxds'">单注最高可中
+                  <!-- (money* parseInt(displayBonus*1000))/1000 | keepTwoNum} -->
+                  <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
+                  <p v-show="isNaN(money*displayBonus)">{{youhezhi ? (money*parseInt(displayBonus2*1000))/1000 : (money* parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
+                </div>
+              </div>
+              <div class="betssc-footer-buttom">
+                <div class="betssc-footer-buttom-left">
+                  <button @click="iscreat">清空</button>
+                  <p>
+                    <span v-if="zhu >0">共{{zhu}}注,</span>
+                    <span v-if="this.money !== '' ">共{{zhu*money}}元</span>
+                  </p>
+                </div>
+                <div class="betssc-footer-buttom-right" @click="betC">马上投注</div>
+              </div>
+            </div>
+            <ul class="betc" v-show="betGoshow">
+              <li>投注确认</li>
+              <li>
+                <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+                <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+                <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+              </li>
+              <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
+            </ul>
+            <ul class="betc"  v-show="betsuccess">
+              <li>温馨提示！</li>
+              <li>
+                <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+              </li>
+              <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
+            </ul>
+            <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
+              <div>
+                <ul>
+                  <div class="title">
+                    <p>温馨提示！</p>
+                  </div>
+                  <div class="cont">
+                    <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+                  </div>
+                  <div class="but">
+                    <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
+                  </div>
+                </ul>
+              </div>
+            </van-popup>
+            <van-popup class="sscpop" v-model="showpop">{{content}}</van-popup>
+          </div>
+        </template>
+        <script>
+          export default {
+            data() {
+              return {
         youhezhi:false,//判断是否有‘和’
         showTimesUp: false,
         showpop: false, //弹窗
@@ -277,23 +276,21 @@
     },
     methods: {
       endCount(){
-          clearInterval(this.timer);
-          clearTimeout(this.timer2);
+        clearInterval(this.timer);
+        clearTimeout(this.timer2);
       },
       //中间->投注选号
       curBalls(indexff, indexg, num, numViews, player) {
         num.choose = !num.choose;
         if(num.choose === true) {
           this.d[indexg] = num.ball
-          //this.dd = this.d.filter(function(n) {return n;});
-          this.dd = this.d;
+          this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu++;
           this.betssc_boxjia(indexff, indexg, num, numViews, player);
         } else if(num.choose === false) {
           this.d.splice(indexg, 1, "");
-          //this.dd = this.d.filter(function(n) {return n;});
-          this.dd = this.d;
+          this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu--;
           this.betssc_boxjian(indexff, indexg, num, numViews, player);
@@ -301,46 +298,46 @@
       },
       //投注 ++++
       betssc_boxjia(indexff, indexg, num, numViews, player){
+        // console.log(indexff);
+        // console.log(indexg);
+        // console.log(num);
+        // console.log(numViews);
+        // console.log(player);
         //大小单双 +
         if(this.playBonusId === 'ssc_dxds') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            // this.dd = this.ka.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {
+              return n;
+            });
             this.an = this.dd.join('+');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            // this.dd = this.kb.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {
+              return n;
+            });
             this.bn = this.dd.join('+');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            // this.dd = this.kc.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.kc;
+            this.dd = this.kc.filter(function(n) {
+              return n;
+            });
             this.cn = this.dd.join('+');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-            // this.dd = this.kd.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.kd;
+            this.dd = this.kd.filter(function(n) {
+              return n;
+            });
             this.dn = this.dd.join('+');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            // this.dd = this.ke.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.ke;
+            this.dd = this.ke.filter(function(n) {
+              return n;
+            });
             this.en = this.dd.join('+');
           }
           if(this.playBonusId === 'ssc_dxds') {
@@ -390,38 +387,27 @@
         if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            //console.log(this.ka + "-----")
-            //this.dd = this.ka.filter(function(n) {return n;});
-            this.dd = this.ka;
-            //console.log(this.dd+ "+++++")
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
-            //console.log(this.an+ "!!!!!")
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            //console.log(this.kb + "@@@@@")
-            //this.dd = this.kb.filter(function(n) {return n;});
-            this.dd = this.kb;
-             //console.log(this.dd + "~~~")
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
-             //console.log(this.bn + "^^^^")
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            //this.dd = this.kc.filter(function(n) {return n;});
-            this.dd = this.kc;
+            this.dd = this.kc.filter(function(n) {return n;});
             this.cn = this.dd.join('');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-            //this.dd = this.kd.filter(function(n) {return n;});
-            this.dd = this.kd;
+            this.dd = this.kd.filter(function(n) {return n;});
             this.dn = this.dd.join('');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            //this.dd = this.ke.filter(function(n) {return n;});
-            this.dd = this.ke;
+            this.dd = this.ke.filter(function(n) {return n;});
             this.en = this.dd.join('');
           }
           if(this.playBonusId === 'ssc_star4_front') {
@@ -457,51 +443,46 @@
           if(this.playBonusId === 'ssc_star1_dwd') {
             if(indexff === 0) {
               this.ka[indexg] = num.ball;
-              //this.dd = this.ka.filter(function(n) {return n;});
-              this.dd = this.ka;
+              this.dd = this.ka.filter(function(n) {return n;});
               this.an =  this.dd.join('');
             }
             if(indexff === 1) {
               this.kb[indexg] = num.ball;
-              //this.dd = this.kb.filter(function(n) {return n;});
-              this.dd = this.kb;
+              this.dd = this.kb.filter(function(n) {return n;});
               this.bn =  this.dd.join('');
             }
             if(indexff === 2) {
               this.kc[indexg] = num.ball;
-              //this.dd = this.kc.filter(function(n) {return n;});
-              this.dd = this.kc;
+              this.dd = this.kc.filter(function(n) {return n;});
               this.cn =  this.dd.join('');
             }
             if(indexff === 3) {
               this.kd[indexg] = num.ball;
-              //this.dd = this.kd.filter(function(n) {return n;});
-              this.dd = this.kd;
+              this.dd = this.kd.filter(function(n) {return n;});
               this.dn =  this.dd.join('');
             }
             if(indexff === 4) {
               this.ke[indexg] = num.ball;
-              //this.dd = this.ke.filter(function(n) {return n;});
-              this.dd = this.ke;
+              this.dd = this.ke.filter(function(n) {return n;});
               this.en = this.dd.join('');
             }
-            //if(this.playBonusId === 'ssc_star1_dwd') {
-            if(this.an === '') {
-              this.an = '-';
+            if(this.playBonusId === 'ssc_star1_dwd') {
+              if(this.an === '') {
+                this.an = '-';
+              }
+              if(this.bn === '') {
+                this.bn = '-';
+              }
+              if(this.cn === '') {
+                this.cn = '-';
+              }
+              if(this.dn === '') {
+                this.dn = '-';
+              }
+              if(this.en === '') {
+                this.en = '-';
+              }
             }
-            if(this.bn === '') {
-              this.bn = '-';
-            }
-            if(this.cn === '') {
-              this.cn = '-';
-            }
-            if(this.dn === '') {
-              this.dn = '-';
-            }
-            if(this.en === '') {
-              this.en = '-';
-            }
-            //}
             this.con = this.an + ',' + this.bn + ',' + this.cn + ',' + this.dn + ',' + this.en;
           }
           if(this.playBonusId === 'ssc_star5') {
@@ -513,55 +494,52 @@
         if(this.playBonusId === 'ssc_side_lhh') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            //this.dd = this.ka.filter(function(n) {return n;});
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = '[万千]' + this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            //this.dd = this.kb.filter(function(n) {return n;});
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = '[万百]' + this.dd.join('');
           }
           if(indexff === 2) {
             this.kc[indexg] = num.ball;
-            //this.dd = this.kc.filter(function(n) {return n;});
-            this.dd = this.kc;
+            this.dd = this.kc.filter(function(n) {return n;});
             this.cn = '[万十]' + this.dd.join('');
           }
           if(indexff === 3) {
             this.kd[indexg] = num.ball;
-           this.dd = this.kd;
+            this.dd = this.kd.filter(function(n) {return n;});
             this.dn = '[万个]' + this.dd.join('');
           }
           if(indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke;
+            this.dd = this.ke.filter(function(n) {return n;});
             this.en = '[千百]' + this.dd.join('');
           }
           if(indexff === 5) {
             this.kf[indexg] = num.ball;
-            this.dd = this.kf;
+            this.dd = this.kf.filter(function(n) {return n;});
             this.fn = '[千十]' + this.dd.join('');
           }
           if(indexff === 6) {
             this.kg[indexg] = num.ball;
-            this.dd = this.kg;
+            this.dd = this.kg.filter(function(n) {return n;});
             this.gn = '[千个]' + this.dd.join('');
           }
           if(indexff === 7) {
             this.kh[indexg] = num.ball;
-            this.dd = this.kh;
+            this.dd = this.kh.filter(function(n) {return n;});
             this.hn = '[百十]' + this.dd.join('');
           }
           if(indexff === 8) {
             this.ki[indexg] = num.ball;
-            this.dd = this.ki;
+            this.dd = this.ki.filter(function(n) {return n;});
             this.in = '[百个]' + this.dd.join('');
           }
           if(indexff === 9) {
             this.kj[indexg] = num.ball;
-            this.dd = this.kj;
+            this.dd = this.kj.filter(function(n) {return n;});
             this.jn = '[十个]' + this.dd.join('');
           }
           if(this.playBonusId === 'ssc_side_lhh') {
@@ -625,12 +603,12 @@
         if(this.playBonusId === 'ssc_star5_group5') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -640,12 +618,12 @@
         if(this.playBonusId === 'ssc_star5_group10') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-           this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -655,12 +633,12 @@
         if(this.playBonusId === 'ssc_star5_group20') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            tthis.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -670,12 +648,12 @@
         if(this.playBonusId === 'ssc_star5_group30') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -685,12 +663,12 @@
         if(this.playBonusId === 'ssc_star5_group60') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -706,12 +684,12 @@
         if(this.playBonusId === 'ssc_star4_front_group4') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -721,12 +699,12 @@
         if(this.playBonusId === 'ssc_star4_front_group12') {
           if(indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           this.con = this.an + ',' + this.bn;
@@ -786,36 +764,37 @@
         if(this.playBonusId === 'ssc_dxds') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {
+              return n;
+            });
             this.an = this.dd.join('+');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {
+              return n;
+            });
             this.bn = this.dd.join('+');
           }
           if(indexff === 2) {
             this.kc.splice(indexg, 1, "");
-            // this.dd = this.kc.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.kc;
+            this.dd = this.kc.filter(function(n) {
+              return n;
+            });
             this.cn = this.dd.join('+');
           }
           if(indexff === 3) {
             this.kd.splice(indexg, 1, "");
-            // this.dd = this.kd.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.kd;
+            this.dd = this.kd.filter(function(n) {
+              return n;
+            });
             this.dn = this.dd.join('+');
           }
           if(indexff === 4) {
             this.ke.splice(indexg, 1, "");
-            // this.dd = this.ke.filter(function(n) {
-            //   return n;
-            // });
-            this.dd = this.ke;
+            this.dd = this.ke.filter(function(n) {
+              return n;
+            });
             this.en = this.dd.join('+');
           }
           if(this.playBonusId === 'ssc_dxds') {
@@ -865,32 +844,27 @@
         if(this.playBonusId === 'ssc_star5' || this.playBonusId === 'ssc_star4_front' || this.playBonusId === 'ssc_star3_front' || this.playBonusId === 'ssc_star3_mid' || this.playBonusId === 'ssc_star3_last' || this.playBonusId === 'ssc_star2_front' || this.playBonusId === 'ssc_star2_last' || this.playBonusId === 'ssc_star1_dwd') {
           if(indexff === 0) {
             this.ka.splice(indexg, 1, "");
-            //this.dd = this.ka.filter(function(n) {return n;});
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('');
           }
           if(indexff === 1) {
             this.kb.splice(indexg, 1, "");
-            //this.dd = this.kb.filter(function(n) {return n;});
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('');
           }
           if(indexff === 2) {
             this.kc.splice(indexg, 1, "");
-            //this.dd = this.kc.filter(function(n) {return n;});
-            this.dd = this.kc;
+            this.dd = this.kc.filter(function(n) {return n;});
             this.cn = this.dd.join('');
           }
           if(indexff === 3) {
             this.kd.splice(indexg, 1, "");
-            //this.dd = this.kd.filter(function(n) {return n;});
-            this.dd = this.kd;
+            this.dd = this.kd.filter(function(n) {return n;});
             this.dn = this.dd.join('');
           }
           if(indexff === 4) {
             this.ke.splice(indexg, 1, "");
-            //this.dd = this.ke.filter(function(n) {return n;});
-            this.dd = this.ke;
+            this.dd = this.ke.filter(function(n) {return n;});
             this.en = this.dd.join('');
           }
           if(this.playBonusId === 'ssc_star4_front') {
@@ -1467,7 +1441,7 @@
       //排列组合
       groupSplit(arr, size) {
         let maxSize = arr.length,
-          groupArr = [];
+        groupArr = [];
         if(size >= 1 && size <= maxSize) {
           getArr(arr, 0, []);
         }
@@ -1520,63 +1494,66 @@
         this.hn = '';
         this.in = '';
         this.jn = '';
-          for (let h = 0; h < this.snumView.length; h++) {
+
+        for (let h = 0; h < this.snumView.length; h++) {
+          if(null != this.snumView[h]){
             for (let j = 0; j < this.snumView[h].length; j++) {
-              for (let k = 0; k < this.snumView[h][j].nums.length; k++) {
-                this.snumView[h][j].nums[k].choose = false;
-              }
+                  for (let k = 0; k < this.snumView[h][j].nums.length; k++) {
+                    this.snumView[h][j].nums[k].choose = false;
+                  }
             }
           }
+        }
       },
       betCancel() {
         this.betGoshow = !this.betGoshow;
       },
       setupPlayTree(){
-        this.current_player = this.playGroups[0].groups[0].players[0];
-         for (let i = 0; i < this.playGroups.length; i++) {
-              this.splayGroups.push(this.playGroups[i])
-            }
-            for (let j = 0; j < this.splayGroups.length; j++) {
-              this.sgroups.push(this.splayGroups[j].groups)
-            }
-            for (let k = 0; k < this.sgroups.length; k++) {
-              for (let j = 0; j < this.sgroups[k].length; j++) {
-                this.sgroups2.push(this.sgroups[k][j])
-              }
-            }
-            for (let i = 0; i < this.sgroups2.length; i++) {
-              this.splayers.push(this.sgroups2[i].players)
-            }
-            for (let h = 0; h < this.splayers.length; h++) {
-              for (let i = 0; i < this.splayers[h].length; i++) {
-                this.snumView.push(this.splayers[h][i].numView)
-              }
-            }
-            this.displayBonus = this.splayers[0][0].displayBonus
+       this.current_player = this.playGroups[0].groups[0].players[0];
+       for (let i = 0; i < this.playGroups.length; i++) {
+          this.splayGroups.push(this.playGroups[i])
+        }
+        for (let j = 0; j < this.splayGroups.length; j++) {
+          this.sgroups.push(this.splayGroups[j].groups)
+        }
+        for (let k = 0; k < this.sgroups.length; k++) {
+          for (let j = 0; j < this.sgroups[k].length; j++) {
+            this.sgroups2.push(this.sgroups[k][j])
+          }
+        }
+        for (let i = 0; i < this.sgroups2.length; i++) {
+          this.splayers.push(this.sgroups2[i].players)
+        }
+        for (let h = 0; h < this.splayers.length; h++) {
+          for (let i = 0; i < this.splayers[h].length; i++) {
+            this.snumView.push(this.splayers[h][i].numView)
+          }
+        }
+        this.displayBonus = this.splayers[0][0].displayBonus
       },
       //玩法术
       getPlayTree() {
         const now = new Date().getTime();
         if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-            this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
-            this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
-           this.setupPlayTree();
+          this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
+          this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
         }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
           this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;
+            this.current_player = this.playGroups[0].groups[0].players[0];
             localStorage.setItem("playTree_" + this.$route.query.id,JSON.stringify(res.data.data));
             localStorage.setItem("date_playTree_" + this.$route.query.id, now);
-            this.setupPlayTree();
+            
           }).catch((error) => {
             console.log("玩法树No");
           });
         }
+        this.setupPlayTree();
       },
-     
+
       //投注
       betGo() {
-        this.betGoshow = false;
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials: true};
         let formData = new FormData();
         formData.append('order[0].content', this.con);
@@ -1597,10 +1574,10 @@
             setTimeout(() => {
               this.showpop = !this.showpop;
               this.content = "投注成功!";
-              // this.betGoshow = !this.betGoshow;
+              this.betGoshow = !this.betGoshow;
               this.iscreat();
               setTimeout(() => {
-                this.showpop = false;
+                this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
               }, 800);
             }, 400);
@@ -1628,17 +1605,17 @@
             }
           }
         } else {
-        this.$http.get(this.$store.state.url + 'api/lottery/getLotteryList').then((res) => {
-          localStorage.setItem('lotteryList',JSON.stringify(res.data.data)); 
-          this.LotteryList = res.data.data.ssc;
-          for (let i = 0; i < this.LotteryList.length; i++) {
-            if(this.LotteryList[i].id === this.$route.query.id){
-              this.listname = this.LotteryList[i].name.substring(0, 2);
+          this.$http.get(this.$store.state.url + 'api/lottery/getLotteryList').then((res) => {
+            localStorage.setItem('lotteryList',JSON.stringify(res.data.data)); 
+            this.LotteryList = res.data.data.ssc;
+            for (let i = 0; i < this.LotteryList.length; i++) {
+              if(this.LotteryList[i].id === this.$route.query.id){
+                this.listname = this.LotteryList[i].name.substring(0, 2);
+              }
             }
-          }
-        }).catch((error) => {
-          console.log("右上彩种No")
-        })
+          }).catch((error) => {
+            console.log("右上彩种No")
+          })
         }
       },
       //头部右->菜单点击
@@ -1678,7 +1655,7 @@
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
           if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
-                  this.reGetPastOp();
+            this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);
           }
@@ -1689,7 +1666,7 @@
       reGetPastOp(){
         clearTimeout(this.timer2);
         this.timer2 = setTimeout(() => {
-        this.getPastOp();
+          this.getPastOp();
         }, 10000);
       },
       //获取彩種當前獎期時間
@@ -1712,21 +1689,21 @@
       },
       //時間格式
       setTimeMode(){
-            var hours = Math.floor(
-              (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
-            );
-            var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-            var seconds = Math.floor((this.today % (1 * 60)) / 1);
-            if (hours < 10) {
-              hours = "0" + hours;
-            }
-            if (minutes < 10) {
-              minutes = "0" + minutes;
-            }
-            if (seconds < 10) {
-              seconds = "0" + seconds;
-            }
-            this.countDown = hours + ":" + minutes + ":" + seconds;
+        var hours = Math.floor(
+          (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
+          );
+        var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+        var seconds = Math.floor((this.today % (1 * 60)) / 1);
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        this.countDown = hours + ":" + minutes + ":" + seconds;
       },
       //倒计时
       initSetTimeout(today) {
@@ -1776,8 +1753,8 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/lotter-list/lotterbet/betssc.scss';
-  @import "../../../assets/scss/popcorn.scss";
+@import '../../../assets/scss/lotter-list/lotterbet/betssc.scss';
+@import "../../../assets/scss/popcorn.scss";
 </style>
 <style>
 .menu-list.van-popup {

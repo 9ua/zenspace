@@ -139,7 +139,7 @@
                 <h2>{{k3item.title}}</h2>
                 <span v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单'
                 || k3item.title==='双'">赔 {{k3item.rate | keepThreeNum}}</span>
-                 <span v-else>赔 {{k3item.rate | keepTwoNum}}</span>
+                <span v-else>赔 {{k3item.rate | keepTwoNum}}</span>
               </li>
             </ul>
             <!-- 大小单双 -->
@@ -489,7 +489,7 @@ export default {
         _this.i = Math.floor(Math.random() * 6+1);
         _this.j = Math.floor(Math.random() * 6+1);
         _this.k = Math.floor(Math.random() * 6+1);
-      }, 39)
+      }, 10)
     },
     end() {
       var _this = this;
@@ -1288,9 +1288,9 @@ export default {
 }
 
 .down-up-translate-fade-leave-active {
-  transform: translateY(-24px);
-  -webkit-transform: translateY(-24px);
-  -moz-transform: translateY(-24px);
-  -o-transform: translateY(-24px);
+  transform: translateY(-48px);
+  -webkit-transform: translateY(-48px);
+  -moz-transform: translateY(-48px);
+  -o-transform: translateY(-48px);
 }
 </style>

@@ -43,13 +43,10 @@
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
             <p>{{item.seasonId.slice(4)}}期开奖号码</p>
-            <div>
-              <p>{{item.n1}}</p>
-              <p>{{item.n2}}</p>
-              <p>{{item.n3}}</p>
-              <!-- <p><img src="../../../assets/img/one/diceK3.png" alt="" /></p>
-              <p><img src="../../../assets/img/one/diceK3.png" alt="" /></p>
-              <p><img src="../../../assets/img/one/diceK3.png" alt="" /></p> -->
+            <div class="contnet-left-num">
+              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
+              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
+              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n3 +'.png') + ')'}"></p>
               <i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
           </div>
@@ -74,12 +71,9 @@
                 <i class="el-icon-minus"></i>
               </p>
               <p>
-                <a>{{item.n1}}</a>
-                <a>{{item.n2}}</a>
-                <a>{{item.n3}}</a>
-                <!-- <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-                <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a>
-                <a><img src="../../../assets/img/one/diceK3.png" alt="" /></a> -->
+                <a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt="" /></a>
+                <a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt="" /></a>
+                <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
               <p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
@@ -92,10 +86,7 @@
         <!-- 单挑一骰 -->
         <ul class="yishai" v-show="index === 0">
           <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
-            <h2>
-              <!-- {{k3item.title}} -->
-              <span></span>
-            </h2>
+            <h2></h2>
           </li>
         </ul>
         <!-- 二同号 -->
@@ -116,9 +107,7 @@
         <!-- 二不同 -->
         <ul class="erbutong" v-show="index === 2">
           <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
-            <h2>
-              <span></span>
-            </h2>
+            <h2></h2>
           </li>
         </ul>
         <!-- 和值 -->
@@ -158,9 +147,7 @@
         <!-- 三不同 -->
         <ul class="sanbutong" v-show="index === 7">
           <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
-            <h2>
-              <span></span>
-            </h2>
+            <h2></h2>
           </li>
         </ul>
         </p>

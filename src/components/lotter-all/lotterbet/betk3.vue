@@ -76,132 +76,161 @@
                 <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
-              <p>{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</p><p>{{(item.n1+item.n2+item.n3)%2 === 0  ? '双' : '单'}}</p>
+              <p>{{item.n1+item.n2+item.n3
+                < 11 ? '小' : '大'}}</p>
+                  <p>{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</p>
             </li>
           </ul>
         </div>
-      <div class="betk3-content-foot">
-        <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
-          <span v-show="index !== 3">赔率 <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
-        <!-- 单挑一骰 -->
-        <ul class="yishai" v-show="index === 0">
-          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
-            <h2></h2>
-          </li>
-        </ul>
-        <!-- 二同号 -->
-        <ul class="ertonghao" v-show="index === 1">
-          <li>
-            <ul>
-              <li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)">
-                <span :class="ertongh.selected ? 'active' : ''">
-                  {{ertongh.title}}
-                  <!-- <a></a>
-                  <a></a>
-                  <a></a> -->
-                </span>
+        <div class="betk3-content-foot">
+          <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
+            <span v-show="index !== 3">赔率
+              <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
+            <!-- 单挑一骰 -->
+            <ul class="yishai" v-show="index === 0">
+              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
+                <h2></h2>
               </li>
             </ul>
-          </li>
-        </ul>
-        <!-- 二不同 -->
-        <ul class="erbutong" v-show="index === 2">
-          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
-            <h2></h2>
-          </li>
-        </ul>
-        <!-- 和值 -->
-        <ul class="hezhi" v-show="index === 3">
-          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
-            <h2>{{k3item.title}}</h2>
-            <span>赔 {{k3item.rate | keepTwoNum}}</span>
-          </li>
-        </ul>
-        <!-- 大小单双 -->
-        <ul class="daoxiaodanshuang" v-show="index === 4">
-          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in daxiaodanshuang" :key="index" @click="k3option($event,index,k3item)">
-            <h2>{{k3item.title}}</h2>
-          </li>
-        </ul>
-        <!-- 三连号 -->
-        <ul class="sanlianhao" v-show="index === 5">
-          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
-            <h2>
-              <a></a>
-              <a></a>
-              <a></a>
-            </h2>
-          </li>
-        </ul>
-        <!-- 三同号 -->
-        <ul class="santonghao" v-show="index === 6">
-          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
-            <h2>
-              <a></a>
-              <a></a>
-              <a></a>
-            </h2>
-          </li>
-          <p><span :class="issantonghao ? 'active' : ''" @click="tosantonghao">通选</span></p>
-        </ul>
-        <!-- 三不同 -->
-        <ul class="sanbutong" v-show="index === 7">
-          <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
-            <h2></h2>
-          </li>
-        </ul>
-        </p>
+            <!-- 二同号 -->
+            <ul class="ertonghao" v-show="index === 1">
+              <li>
+                <ul>
+                  <li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)">
+                    <span :class="ertongh.selected ? 'active' : ''">
+                      {{ertongh.title}}
+                      <!-- <a></a>
+                  <a></a>
+                  <a></a> -->
+                    </span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <!-- 二不同 -->
+            <ul class="erbutong" v-show="index === 2">
+              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
+                <h2></h2>
+              </li>
+            </ul>
+            <!-- 和值 -->
+            <ul class="hezhi" v-show="index === 3">
+              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
+                <h2>{{k3item.title}}</h2>
+                <span>赔 {{k3item.rate | keepTwoNum}}</span>
+              </li>
+            </ul>
+            <!-- 大小单双 -->
+            <ul class="daoxiaodanshuang" v-show="index === 4">
+              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in daxiaodanshuang" :key="index" @click="k3option($event,index,k3item)">
+                <h2>{{k3item.title}}</h2>
+              </li>
+            </ul>
+            <!-- 三连号 -->
+            <ul class="sanlianhao" v-show="index === 5">
+              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
+                <h2>
+                  <a></a>
+                  <a></a>
+                  <a></a>
+                </h2>
+              </li>
+            </ul>
+            <!-- 三同号 -->
+            <ul class="santonghao" v-show="index === 6">
+              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="k3option($event,index,k3item)">
+                <h2>
+                  <a></a>
+                  <a></a>
+                  <a></a>
+                </h2>
+              </li>
+              <p>
+                <span :class="issantonghao ? 'active' : ''" @click="tosantonghao">通选</span>
+              </p>
+            </ul>
+            <!-- 三不同 -->
+            <ul class="sanbutong" v-show="index === 7">
+              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
+                <h2></h2>
+              </li>
+            </ul>
+          </p>
+        </div>
       </div>
-    </div>
     </div>
     <div class="betk3-footer">
       <div class="betk3-footer-top" v-show="zhu > 0">
         <div class="betk3-footer-tops">
-          <p>当前选号</p><span>{{con}}</span>
+          <p>当前选号</p>
+          <span>{{con}}</span>
         </div>
         <div class="betk3-footer-buttoms">
-          <p>每注金额</p><input type="number" v-model="money" onfocus="this.select()"/>
+          <p>每注金额</p><input type="number" v-model="money" onfocus="this.select()" />
           <span v-if="money === '' ">请输入要投注的金额</span>
-          <span v-else>单注最高可中<p>{{navlist === 3 ? parseInt(rates*1000)*money/1000  : parseInt(rates*1000)*money/1000  | keepTwoNum}}</p>元</span>
+          <span v-else>单注最高可中
+            <p>{{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(rates*1000)*money/1000 | keepTwoNum}}</p>元</span>
         </div>
       </div>
       <div class="betk3-footer-buttom">
         <div class="betk3-footer-buttom-left">
           <button @click="iscreat">清空</button>
-          <p><span v-if="zhu >0">共{{zhu}}注,</span><span v-if="this.money !== '' ">共{{zhu*money}}元</span></p>
+          <p>
+            <span v-if="zhu >0">共{{zhu}}注,</span>
+            <span v-if="this.money !== '' ">共{{zhu*money}}元</span>
+          </p>
         </div>
         <div class="betk3-footer-buttom-right" @click="betC">马上投注</div>
       </div>
     </div>
-    <ul class="betc" v-show="betGoshow">
-      <li>投注确认</li>
-      <li>
-        <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
-        <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-        <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
-      </li>
-      <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
-    </ul>
-    <ul class="betc"  v-show="betsuccess">
-      <li>温馨提示！</li>
-      <li>
-        <p><b>投注成功,</b>您可以在我的账户查看注单详情</p>
-      </li>
-      <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
-    </ul>
+    <div class="betcBox" v-show="betGoshow">
+      <ul class="betc" v-show="betGoshow">
+        <li>投注确认</li>
+        <li>
+          <p>
+            <span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+          <p>
+            <span>投注金额：</span>
+            <b>{{money*zhu}}元</b>
+          </p>
+          <p>
+            <span>投注内容：</span>
+            <span class="popcon">{{con}}</span>
+          </p>
+        </li>
+        <li>
+          <button @click="betCancel">取消</button>
+          <button @click="betGo">确定</button>
+        </li>
+      </ul>
+    </div>
+    <div class="betcBox" v-show="betsuccess">
+      <ul class="betc" v-show="betsuccess">
+        <li>温馨提示！</li>
+        <li>
+          <p>
+            <b>投注成功,</b>您可以在我的账户查看注单详情</p>
+        </li>
+        <li>
+          <button @click="looksucc">查看注单</button>
+          <button @click="betsucc">继续投注</button>
+        </li>
+      </ul>
+    </div>
+
     <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
       <div>
-      <ul>
-        <div class="title">
-          <p>温馨提示！</p>
-        </div>
-        <div class="cont">
-          <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
-        </div>
-        <div class="but">
+        <ul>
+          <div class="title">
+            <p>温馨提示！</p>
+          </div>
+          <div class="cont">
+            <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+          </div>
+          <div class="but">
             <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
-        </div>
-      </ul>
+          </div>
+        </ul>
       </div>
     </van-popup>
     <van-popup class="betshow" v-model="betshow">{{content}}</van-popup>

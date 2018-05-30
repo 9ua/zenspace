@@ -76,7 +76,7 @@ export default {
       & .title{
         border-radius: 4px 4px 0 0;
         height: 30px;
-        background:linear-gradient(to right, #f75f5b, #fead50);
+        background: #AF3A31;
         color:#fff;
         font-size: 14px;
       }

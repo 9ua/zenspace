@@ -1,464 +1,470 @@
 .menu-list.van-popup {
   transition: 0s ease-out !important;
-
 }
+
 .betssc {
-    height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  & .betssc-top {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    & .betssc-top {
+    align-items: center;
+    height: 46px;
+    font-size: 16px;
+    padding: 0px 16px;
+    background: #AF3A31;
+    background: black;
+    color: #fff;
+    & li {
+      width: 18.33%;
+    }
+    & li:nth-child(2) {
+      width: 71%;
+      text-align: center;
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & .wangfa {
+        margin: 0px;
+        margin-right: 4px;
+      }
+      & .menu {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        height: 46px;
-        font-size: 16px;
-        padding: 0px 16px;
-        background: linear-gradient(to right, #f75f5b, #fead50);
-        background: black;
+        padding: 2px 6px;
+        border: 1px solid hsla(0, 0%, 100%, .5);
+        border-radius: 4px;
         color: #fff;
-        & li {
-            width: 18.33%;
-        }
-        & li:nth-child(2) {
-            width: 71%;
-            text-align: center;
-            font-size: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            & .wangfa {
-                margin: 0px;
-                margin-right: 4px;
-            }
-            & .menu {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 2px 6px;
-                border: 1px solid hsla(0, 0%, 100%, .5);
-                border-radius: 4px;
-                color: #fff;
-                & i {
-                    color: #f0c930;
-                    font-size: 24px;
-                }
-            }
-            & .menu-list {
-                position: absolute;
-                left: 0px;
-                top: 43px;
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                & .van-popup--top {
-                    top: 43px;
-                    background: none !important;
-                    height: 76%;
-                    overflow: hidden;
-                    & .popscroll {
-                        width: 100%;
-                        height: 100%;
-                        position: absolute;
-                        overflow-y: scroll;
-                        & .menu-list-top {
-                            width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            flex-wrap: wrap;
-                            & li {
-                                display: flex;
-                                flex-direction: row;
-                                font-size: 12px;
-                                width: 100%;
-                                padding: 4px 0px;
-                                border-bottom: 1px solid hsla(0, 0%, 100%, .3);
-                                & .title {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    height: 24px;
-                                    font-size: 16px;
-                                    width: 20%;
-                                }
-                                & .menu-list-list-box {
-                                    width: 80%;
-                                    & .menu-list-list {
-                                        display: flex;
-                                        align-items: center;
-                                        background: none;
-                                        flex-wrap: wrap;
-                                        overflow: hidden;
-                                        & span {
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            width: 80px;
-                                            height: 24px;
-                                            background: none;
-                                            border: 1px solid hsla(0, 0%, 100%, .3);
-                                            margin: 0px 6px 6px 0px;
-                                        }
-                                        & span.active {
-                                            border: 1px solid #f4c829;
-                                        }
-                                    }
-                                }
-                            }
-                            & li.active {
-                                border: 1px solid #f4c829;
-                            }
-                            & li:nth-child(2) {
-                                justify-content: flex-start;
-                                align-items: flex-start;
-                            }
-                            & li:nth-child(3),
-                            & li:nth-child(6),
-                            & li:nth-child(9) {
-                                margin-right: 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        & li:nth-child(3) {
-            text-align: right;
-            & ul {
-                display: flex;
-                flex-wrap: wrap;
-                position: absolute;
-                top: 44px;
-                right: 1px;
-                width: 160px;
-                background: #fff;
-                & li {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 50%;
-                    font-size: 14px;
-                    color: #000;
-                    border-bottom: 1px solid #ddd;
-                    padding: 6px 0px;
-                }
-            }
-        }
         & i {
-            color: #fff;
-            font-size: 20px;
+          color: #f0c930;
+          font-size: 24px;
         }
-    }
-}
-
-.betssc-content {
-    height: 100%;
-    background: #317455;
-    overflow: hidden;
-    >div {
-        height: 100%;
-        & .betk3-content-top {
-            display: flex;
-            justify-content: space-between;
-            background: #22563f;
-            color: #caebda;
-            & .content-left {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 50%;
-                border-right: 1px solid #164630;
-                & p {
-                    font-size: 16px;
-                    line-height: 28px;
-                }
-                & div {
-                    display: flex;
-                    align-items: center;
-                    margin-top: 4px;
-                    & p {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 22px;
-                        height: 22px;
-                        overflow: hidden;
-                        margin: 0px 2px;
-                        border-radius: 50%;
-                        background: #317455;
-                        & img {
-                            width: 200%;
-                            height: 600%;
-                        }
-                    }
-                    & i {
-                        font-size: 30px;
-                        color: #78ba9e;
-                    }
-                }
-            }
-            & .content-right {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 50%;
-                & p {
-                    font-size: 16px;
-                    line-height: 28px;
-                }
-                & div {
-                    & p {
-                        font-size: 26px;
-                    }
-                }
-            }
-        }
-        & .betk3-content-top-pop {
-            position: absolute;
-            width: 100%;
-            background: #22563f;
-            & ul {
-                & li {
-                    display: flex;
-                    & p {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 14px;
-                        color: #caebda;
-                        padding: 4px 0px;
-                        & a {
-                            width: 20px;
-                            height: 20px;
-                            overflow: hidden;
-                            color: #caebda;
-                            & img {
-                                width: 200%;
-                                height: 600%;
-                            }
-                        }
-                    }
-                    & p:nth-child(1) {
-                        width: 30%;
-                    }
-                    & p:nth-child(2) {
-                        width: 40%;
-                    }
-                    & p:nth-child(3) {
-                        width: 30%;
-                    }
-                    & p:nth-child(1) {
-                        position: relative;
-                        border-right: 1px solid #212121;
-                        & i {
-                            font-weight: 700;
-                            font-size: 16px;
-                            color: #212121;
-                            position: absolute;
-                            right: -8px;
-                        }
-                    }
-                }
-                & li:nth-child(1) {
-                    border-top: 1px solid hsla(0, 0%, 100%, .3);
-                    border-bottom: 1px solid #212121;
-                    & p:nth-child(1) {
-                        border: none;
-                    }
-                }
-            }
-        }
-        & .betk3-content-foot {
-            padding: 4px 16px 0px;
-            color: #caebda;
-            height: 100%;
-            >div {
-                overflow-y: scroll;
-                height: 100%;
-                >.betssc-list-box {
-                    width: 100%;
-                    padding-bottom: 130px;
-                    & b {
-                        & i {
-                            color: #f0c930;
-                            font-style: normal;
-                        }
-                    }
-                    & .fushi {
-                        margin-top: 10px;
-                        & li {
-                            display: flex;
-                            flex-direction: column;
-                            & p {
-                                display: flex;
-                                margin-bottom: 6px;
-                                //   border-bottom: 1px solid rgb(79, 170, 140);
-                                & b {
-                                    display: flex;
-                                    align-items: flex-start;
-                                    justify-content: center;
-                                    width: 14%;
-                                    padding-top: 6px;
-                                }
-                                & span {
-                                    display: flex;
-                                    width: 86%;
-                                    flex-wrap: wrap;
-                                    & a {
-                                        margin: 0px 26px 8px 0px;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        width: 30px;
-                                        height: 30px;
-                                        border-radius: 50%;
-                                        background: #caebda;
-                                        color: #212121;
-                                    }
-                                    & a.active {
-                                        background: #f0c930;
-                                        border: #f0c930;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    & .danshi {
-                        margin-top: 10px;
-                        & textarea {
-                            width: 90%;
-                            height: 200px;
-                            border: 0px;
-                            background: #fff;
-                            resize: none;
-                            padding: 4%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.betssc-footer {
-    position: relative;
-    background: #000;
-    color: #ffaf36;
-    width: 100%;
-    & .betssc-footer-top {
+      }
+      & .menu-list {
         position: absolute;
-        top: -60px;
-        background: #22563f;
-        height: 60px;
+        left: 0px;
+        top: 43px;
         display: flex;
         flex-direction: column;
-        color: #caebda;
-        font-size: 16px;
         width: 100%;
-        & .betssc-footer-tops {
-            display: flex;
-            align-items: center;
-            height: 50%;
-            & span {
-                color: #ffaf36;
-                width: 210px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                height: 20px;
-                padding-left: 2%;
-            }
-            & p {
-                width: 20%;
-                padding: 0 16px;
-            }
-        }
-        & .betssc-footer-buttoms {
-            height: 50%;
+        & .van-popup--top {
+          top: 43px;
+          background: none !important;
+          height: 76%;
+          overflow: hidden;
+          & .popscroll {
             width: 100%;
-            display: flex;
-            align-items: center;
-            & input {
-                width: 20%;
-                margin-left: 10px;
-                padding: 0px 4px;
-                text-align: center;
-                border: none;
-                border-radius: 2px;
-            }
-            & p {
-                width: 20%;
-                padding: 0 16px;
-            }
-            & span {
-                width: 45%;
+            height: 100%;
+            position: absolute;
+            overflow-y: scroll;
+            & .menu-list-top {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+              & li {
                 display: flex;
                 flex-direction: row;
                 font-size: 12px;
-                margin-left: 6px;
-                align-items: center;
-                & p {
-                    text-align: center;
-                    color: #ffaf36;
-                    padding: 0;
-                    width: auto;
+                width: 100%;
+                padding: 4px 0px;
+                border-bottom: 1px solid hsla(0, 0%, 100%, .3);
+                & .title {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  height: 24px;
+                  font-size: 16px;
+                  width: 20%;
                 }
+                & .menu-list-list-box {
+                  width: 80%;
+                  & .menu-list-list {
+                    display: flex;
+                    align-items: center;
+                    background: none;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    & span {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      width: 80px;
+                      height: 24px;
+                      background: none;
+                      border: 1px solid hsla(0, 0%, 100%, .3);
+                      margin: 0px 6px 6px 0px;
+                    }
+                    & span.active {
+                      border: 1px solid #f4c829;
+                    }
+                  }
+                }
+              }
+              & li.active {
+                border: 1px solid #f4c829;
+              }
+              & li:nth-child(2) {
+                justify-content: flex-start;
+                align-items: flex-start;
+              }
+              & li:nth-child(3),
+              & li:nth-child(6),
+              & li:nth-child(9) {
+                margin-right: 0;
+              }
             }
+          }
         }
+      }
     }
-    & .betssc-footer-buttom {
-        background: #000;
-        height: 50px;
+    & li:nth-child(3) {
+      text-align: right;
+      & ul {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 16px;
-        & .betssc-footer-buttom-left {
-            display: flex;
-            align-items: center;
-            & button {
-                background: none;
-                border: none;
-                color: #ffaf36;
-                font-size: 22px;
-                margin-right: 12px;
-            }
-            & p {
-                color: #fff;
-                font-size: 16px;
-                & span {
-                    margin: 0px 4px;
-                }
-            }
+        flex-wrap: wrap;
+        position: absolute;
+        top: 44px;
+        right: 1px;
+        width: 160px;
+        background: #fff;
+        & li {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 50%;
+          font-size: 14px;
+          color: #000;
+          border-bottom: 1px solid #ddd;
+          padding: 6px 0px;
         }
-        & .betssc-footer-buttom-right {
+      }
+    }
+    & i {
+      color: #fff;
+      font-size: 20px;
+    }
+  }
+}
+
+.betssc-content {
+  height: 100%;
+  background: #317455;
+  overflow: hidden;
+  >div {
+    height: 100%;
+    & .betk3-content-top {
+      display: flex;
+      justify-content: space-between;
+      background: #22563f;
+      color: #caebda;
+      & .content-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        border-right: 1px solid #164630;
+        & p {
+          font-size: 16px;
+          line-height: 28px;
+        }
+        & div {
+          display: flex;
+          align-items: center;
+          margin-top: 4px;
+          & p {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 18px;
-            height: 30px;
-            width: 100px;
-            color: #000;
-            border-radius: 4px;
-            background: #ffaf36;
+            width: 22px;
+            height: 22px;
+            overflow: hidden;
+            margin: 0px 2px;
+            border-radius: 50%;
+            background: #317455;
+            & img {
+              width: 200%;
+              height: 600%;
+            }
+          }
+          & i {
+            font-size: 30px;
+            color: #78ba9e;
+          }
         }
+      }
+      & .content-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        & p {
+          font-size: 16px;
+          line-height: 28px;
+        }
+        & div {
+          & p {
+            font-size: 26px;
+          }
+        }
+      }
     }
+    & .betk3-content-top-pop {
+      position: absolute;
+      width: 100%;
+      background: #22563f;
+      & ul {
+        & li {
+          display: flex;
+          & p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #caebda;
+            padding: 4px 0px;
+            & a {
+              width: 20px;
+              height: 20px;
+              overflow: hidden;
+              color: #caebda;
+              & img {
+                width: 200%;
+                height: 600%;
+              }
+            }
+          }
+          & p:nth-child(1) {
+            width: 30%;
+          }
+          & p:nth-child(2) {
+            width: 40%;
+          }
+          & p:nth-child(3) {
+            width: 30%;
+          }
+          & p:nth-child(1) {
+            position: relative;
+            border-right: 1px solid #212121;
+            & i {
+              font-weight: 700;
+              font-size: 16px;
+              color: #212121;
+              position: absolute;
+              right: -8px;
+            }
+          }
+        }
+        & li:nth-child(1) {
+          border-top: 1px solid hsla(0, 0%, 100%, .3);
+          border-bottom: 1px solid #212121;
+          & p:nth-child(1) {
+            border: none;
+          }
+        }
+      }
+    }
+    & .betk3-content-foot {
+      padding: 4px 16px 0px;
+      color: #caebda;
+      height: 100%;
+      >div {
+        overflow-y: scroll;
+        height: 100%;
+        >.betssc-list-box {
+          width: 100%;
+          padding-bottom: 130px;
+          & b {
+            & i {
+              color: #f0c930;
+              font-style: normal;
+            }
+          }
+          & .fushi {
+            margin-top: 10px;
+            & li {
+              display: flex;
+              flex-direction: column;
+              & p {
+                display: flex;
+                margin-bottom: 6px; //   border-bottom: 1px solid rgb(79, 170, 140);
+                & b {
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: center;
+                  width: 14%;
+                  padding-top: 6px;
+                }
+                & span {
+                  display: flex;
+                  width: 86%;
+                  flex-wrap: wrap;
+                  & a {
+                    margin: 0px 26px 8px 0px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background: #caebda;
+                    color: #212121;
+                  }
+                  & a.active {
+                    background: #f0c930;
+                    border: #f0c930;
+                  }
+                }
+              }
+            }
+          }
+          & .danshi {
+            margin-top: 10px;
+            & textarea {
+              width: 90%;
+              height: 200px;
+              border: 0px;
+              background: #fff;
+              resize: none;
+              padding: 4%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.betssc-footer {
+  position: relative;
+  background: #000;
+  color: #ffaf36;
+  width: 100%;
+  & .betssc-footer-top {
+    position: absolute;
+    top: -60px;
+    background: #22563f;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    color: #caebda;
+    font-size: 16px;
+    width: 100%;
+    & .betssc-footer-tops {
+      display: flex;
+      align-items: center;
+      height: 50%;
+      & span {
+        color: #ffaf36;
+        width: 210px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        height: 20px;
+        padding-left: 2%;
+      }
+      & p {
+        width: 20%;
+        padding: 0 16px;
+      }
+    }
+    & .betssc-footer-buttoms {
+      height: 50%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      & input {
+        width: 20%;
+        margin-left: 10px;
+        padding: 0px 4px;
+        text-align: center;
+        border: none;
+        border-radius: 2px;
+      }
+      & p {
+        width: 20%;
+        padding: 0 16px;
+      }
+      & span {
+        width: 45%;
+        display: flex;
+        flex-direction: row;
+        font-size: 12px;
+        margin-left: 6px;
+        align-items: center;
+        & p {
+          text-align: center;
+          color: #ffaf36;
+          padding: 0;
+          width: auto;
+        }
+      }
+    }
+  }
+  & .betssc-footer-buttom {
+    background: #000;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 16px;
+    & .betssc-footer-buttom-left {
+      display: flex;
+      align-items: center;
+      & button {
+        background: none;
+        border: none;
+        color: #ffaf36;
+        font-size: 22px;
+        margin-right: 12px;
+      }
+      & p {
+        color: #fff;
+        font-size: 16px;
+        & span {
+          margin: 0px 4px;
+        }
+      }
+    }
+    & .betssc-footer-buttom-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      height: 30px;
+      width: 100px;
+      color: #000;
+      border-radius: 4px;
+      background: #ffaf36;
+    }
+  }
 }
 
 .van-popup.sscpop {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 4px;
-    background: linear-gradient(to right, #f75f5b, #fead50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  background: #AF3A31;
 }
 
 .van-modal {
-    background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
+
+.betcBox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .betc {
   position: absolute;
   top: 50%;
@@ -467,7 +473,7 @@
   margin-top: -80px;
   display: flex;
   flex-direction: column;
-  width: 340px;
+  width: 320px;
   background: #fff;
   & li {
     display: flex;
@@ -481,7 +487,7 @@
     height: 36px;
     color: #fff;
     font-size: 16px;
-    background: linear-gradient(to right, #f75f5b, #fead50);
+    background: #AF3A31;
   }
   & li:nth-child(2) {
     min-height: 54px;

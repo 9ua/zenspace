@@ -45,18 +45,30 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
-            <p>{{item.seasonId}}期开奖号码<i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i></p>
+            <p>{{item.seasonId}}期开奖号码
+              <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+            </p>
             <div>
-              <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
-              <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>
-              <p>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</p>
-              <p>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</p>
-              <p>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</p>
-              <p>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</p>
-              <p>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</p>
-              <p>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</p>
-              <p>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</p>
-              <p>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</p>
+              <p>{{item.n1
+                < 10 ? '0'+item.n1 : item.n1}}</p>
+                  <p>{{item.n2
+                    < 10 ? '0'+item.n2 : item.n2}}</p>
+                      <p>{{item.n3
+                        < 10 ? '0'+item.n3 : item.n3}}</p>
+                          <p>{{item.n4
+                            < 10 ? '0'+item.n4 : item.n4}}</p>
+                              <p>{{item.n5
+                                < 10 ? '0'+item.n5 : item.n5}}</p>
+                                  <p>{{item.n6
+                                    < 10 ? '0'+item.n6 : item.n6}}</p>
+                                      <p>{{item.n7
+                                        < 10 ? '0'+item.n7 : item.n7}}</p>
+                                          <p>{{item.n8
+                                            < 10 ? '0'+item.n8 : item.n8}}</p>
+                                              <p>{{item.n9
+                                                < 10 ? '0'+item.n9 : item.n9}}</p>
+                                                  <p>{{item.n10
+                                                    < 10 ? '0'+item.n10 : item.n10}}</p>
             </div>
           </div>
           <div class="content-right">
@@ -78,16 +90,26 @@
                 <i class="el-icon-minus"></i>
               </p>
               <p>
-                <a>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</a>
-                <a>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</a>
-                <a>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</a>
-                <a>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</a>
-                <a>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</a>
-                <a>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</a>
-                <a>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</a>
-                <a>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</a>
-                <a>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</a>
-                <a>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</a>
+                <a>{{item.n1
+                  < 10 ? '0'+item.n1 : item.n1}}</a>
+                    <a>{{item.n2
+                      < 10 ? '0'+item.n2 : item.n2}}</a>
+                        <a>{{item.n3
+                          < 10 ? '0'+item.n3 : item.n3}}</a>
+                            <a>{{item.n4
+                              < 10 ? '0'+item.n4 : item.n4}}</a>
+                                <a>{{item.n5
+                                  < 10 ? '0'+item.n5 : item.n5}}</a>
+                                    <a>{{item.n6
+                                      < 10 ? '0'+item.n6 : item.n6}}</a>
+                                        <a>{{item.n7
+                                          < 10 ? '0'+item.n7 : item.n7}}</a>
+                                            <a>{{item.n8
+                                              < 10 ? '0'+item.n8 : item.n8}}</a>
+                                                <a>{{item.n9
+                                                  < 10 ? '0'+item.n9 : item.n9}}</a>
+                                                    <a>{{item.n10
+                                                      < 10 ? '0'+item.n10 : item.n10}}</a>
               </p>
             </li>
           </ul>
@@ -124,7 +146,7 @@
         </div>
         <div class="betbj10-footer-buttoms">
           <p>每注金额</p>
-          <input type="number" v-model="money" onfocus="this.select()"/>
+          <input type="number" v-model="money" onfocus="this.select()" />
           <span v-show="money === '' ">请输入要投注的金额</span>
           <span v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'">单注最高可中
             <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
@@ -142,42 +164,58 @@
         <div class="betbj10-footer-buttom-right" @click="betC">马上投注</div>
       </div>
     </div>
-    <van-popup  v-model="betGoshow">
-      <ul class="betc">
+    <div class="betcBox" v-show="betGoshow">
+      <ul class="betc" v-show="betGoshow">
         <li>投注确认</li>
         <li>
-          <p><span>{{listname}}PK10 ：</span>{{seasonId}}期</p>
-          <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
-          <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+          <p>
+            <span>{{listname}}PK10 ：</span>{{seasonId}}期</p>
+          <p>
+            <span>投注金额：</span>
+            <b>{{money*zhu}}元</b>
+          </p>
+          <p>
+            <span>投注内容：</span>
+            <span class="popcon">{{con}}</span>
+          </p>
         </li>
-        <li><button @click="betCancel">取消</button><button @click="betGo">确定</button></li>
+        <li>
+          <button @click="betCancel">取消</button>
+          <button @click="betGo">确定</button>
+        </li>
       </ul>
-    </van-popup>
-    <van-popup v-model="betsuccess">
-      <ul class="betc" >
+    </div>
+    <div class="betcBox" v-show="betsuccess">
+      <ul class="betc" v-show="betsuccess">
         <li>温馨提示！</li>
         <li>
-          <p><b>投注成功,</b><span>您可以在我的账户查看注单详情</span></p>
+          <p>
+            <b>投注成功,</b>
+            <span>您可以在我的账户查看注单详情</span>
+          </p>
         </li>
-        <li><button @click="looksucc">查看注单</button><button @click="betsucc">继续投注</button></li>
+        <li>
+          <button @click="looksucc">查看注单</button>
+          <button @click="betsucc">继续投注</button>
+        </li>
       </ul>
-    </van-popup>
+    </div>
     <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
       <div>
-      <ul>
-        <div class="title">
-          <p>温馨提示！</p>
-        </div>
-        <div class="cont">
-          <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
-        </div>
-        <div class="but">
+        <ul>
+          <div class="title">
+            <p>温馨提示！</p>
+          </div>
+          <div class="cont">
+            <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+          </div>
+          <div class="but">
             <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
-        </div>
-      </ul>
+          </div>
+        </ul>
       </div>
     </van-popup>
-    
+
     <van-popup class="betshow" v-model="showpop">{{content}}</van-popup>
   </div>
 </template>

@@ -83,6 +83,7 @@
         image:0,//用户头像
       	money:false,
         toF5money:false,//刷新动画
+        water:'',
         fiveNav: [{
           name: '个人信息',
           icon: 'fa-address-book-o',
@@ -150,8 +151,18 @@
             this.content = "请先绑定银行帐户，是否跳转至设定页？";
             this.show2 = !this.show2;
           } else {
-            this.$router.push({path:'/cashOut'});
+            this.waterFall();
           };
+        }).catch((error) => {
+            console.log("取安全中心状态No111")
+        })
+      },
+      waterFall(){
+        this.$axios.get(this.$store.state.url+'api/proxy/getWithdrawFlag').then((res) => {
+          this.water = res.data.code;
+          if (res.data.code=== 1) {
+            this.$router.push({path:'/cashOut'});
+          }
         }).catch((error) => {
             console.log("取安全中心状态No111")
         })
@@ -162,7 +173,7 @@
         } else if ( this.bankUserFlag == 0 ){
             this.$router.push({path:'/newCard'});
         } else {
-            this.$router.push({path:'/cashOut'});
+            this.waterFall();
         };
       },
       //获取头部个人信息

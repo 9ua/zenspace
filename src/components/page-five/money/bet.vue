@@ -26,8 +26,8 @@
                     </div>
                     <div class="mInvite-right">
                         <p>
-                        <span>{{item.statusName}}</span><br>
-                        <span></span>
+                        <span v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}">{{item.statusName}}</span><br>
+                        <span v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}">{{item.win}}</span>
                         </p>
                     </div>
                     <i class="el-icon-arrow-down"></i>
@@ -39,7 +39,7 @@
             <li>
               <span>{{selected.lotteryName}}</span>
             </li>
-            <li><p>第{{selected.seasonId}}期</p> <p>{{selected.statusName}}</p></li>
+            <li><p>第{{selected.seasonId}}期</p> <p v-bind:class="{'class-a': selected.status===1, 'class-b': selected.status===2}">{{selected.statusName}}</p></li>
             <li>
               <p>投注時間</p><span>{{selected.createTime}}</span>
             </li>
@@ -79,8 +79,6 @@ export default {
         changeAmount:'',
         changeTime:'',
         tradelist:[],
-
-
         usertype:2,
         highbet:0,
         rebateratio:0,
@@ -170,4 +168,10 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import '../../../assets/scss/listStyle.scss';
+  .class-a {
+    color: rgb(255, 74, 74) !important;
+  }
+  .class-b {
+    color: rgb(89, 168, 93) !important;
+  }
 </style>

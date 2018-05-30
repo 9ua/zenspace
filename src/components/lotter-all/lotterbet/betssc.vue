@@ -85,23 +85,24 @@
           </ul>
         </div>
         <div class="betk3-content-foot">
-          <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
-            <div v-for="(group,indexd) in item.groups" class="betssc-list-box" :key="indexd" v-show="indexd === navlistb">
-              <span>{{current_player_bonus.remark}}
-                <b>。奖金
-                  <i v-show="Number(current_player_bonus.displayBonus)">{{current_player_bonus.displayBonus | keepTwoNum}}</i>
-                  <i v-show="isNaN(current_player_bonus.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-                <br/> </span>
-              <ul class="fushi">
-                <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
-                  <p>
-                    <b>{{numViews.title}}</b>
-                    <span>
-                      <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
-                    </span>
-                  </p>
-                </li>
-              </ul>
+          <div>
+            <div  class="betssc-list-box" v-show="true" >
+                <span>{{current_player_bonus.remark}}
+                      <b>。奖金
+                        <i v-show="Number(current_player_bonus.displayBonus)">{{current_player_bonus.displayBonus | keepTwoNum}}</i>
+                        <i v-show="isNaN(current_player_bonus.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                      <br/> 
+                </span>
+                <ul class="fushi">
+                      <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
+                        <p>
+                          <b>{{numViews.title}}</b>
+                          <span>
+                            <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
+                          </span>
+                        </p>
+                      </li>
+                </ul>
             </div>
           </div>
         </div>

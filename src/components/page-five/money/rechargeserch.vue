@@ -108,11 +108,9 @@ export default {
 		getRechargeList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getRechargeList',{params:{start:0,limit:100}}).then((res) => {
                 this.rechargeList = res.data.data;
-
 			}).catch((error) => {
 					console.log("获取列表Error");
 			});
-				console.log(this.bankList);
 		},
 	}
 }

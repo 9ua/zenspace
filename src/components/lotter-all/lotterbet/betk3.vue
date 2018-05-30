@@ -42,7 +42,7 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
-            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
+            <p>{{seasonId-1}}期开奖号码</p>
             <div class="contnet-left-num" v-show="!shownum">
               <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
               <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
@@ -560,7 +560,7 @@ export default {
       this.shownum = true;
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
           this.getPastOpens = res.data.data;
-          if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-Number(res.data.data[0].seasonId))<= 2 ) {
+          if (Number(res.data.data[0].seasonId) !== this.seasonId3) {
               this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);

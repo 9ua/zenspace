@@ -482,18 +482,20 @@ export default {
     //筛子动画
     start() {
       var _this = this;
-      if (!this.interval) {
+      this.startyet = true;
+            console.log("STARTstill",this.startyet);
+      // if (!this.interval) {
         this.interval = setInterval(function() {
           _this.i = Math.floor(Math.random() * 6+1);
           _this.j = Math.floor(Math.random() * 6+1);
           _this.k = Math.floor(Math.random() * 6+1);
         }, 39)
-      }
+      // }
     },
     end() {
       var _this = this;
-      clearInterval(this.interval)
-      this.interval = null
+      clearInterval(this.interval);
+      // this.interval = null
     },
     endCount(){
         clearInterval(this.timer);
@@ -555,13 +557,17 @@ export default {
     },
     //获取过去开奖号码10个
     getPastOp() {
-      this.shownum = !this.shownum;
+            if (this.startyet == false) {
+              this.start();
+            console.log("START",this.startyet);
+            }
+      this.shownum = true;
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
           this.getPastOpens = res.data.data;
-          if (Number(res.data.data[0].seasonId) !== this.seasonId3 ) {
-              this.start();
+          if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-Number(res.data.data[0].seasonId))<= 2 ) {
               this.reGetPastOp();
-          } else if (Number(res.data.data[0].seasonId) === this.seasonId3){
+          } else {
+            console.log("STOP");
             clearTimeout(this.timer2);
             this.end();
             this.startyet = false;

@@ -137,7 +137,9 @@
             <ul class="hezhi" v-show="index === 3">
               <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" @click="hezhidaxiaodanshuang($event,index,k3item)">
                 <h2>{{k3item.title}}</h2>
-                <span>赔 {{k3item.rate | keepTwoNum}}</span>
+                <span v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单'
+                || k3item.title==='双'">赔 {{k3item.rate | keepThreeNum}}</span>
+                 <span v-else>赔 {{k3item.rate | keepTwoNum}}</span>
               </li>
             </ul>
             <!-- 大小单双 -->
@@ -1251,9 +1253,13 @@ export default {
       }
     }
   },
-  // 保留三个小数,不四舍五入
+  // 保留兩个小数,不四舍五入
   filters: {
     keepTwoNum(value) {
+      value = parseInt(value * 100) / 100;
+      return value;
+    },
+    keepThreeNum(value) {
       value = parseInt(value * 1000) / 1000;
       return value;
     }

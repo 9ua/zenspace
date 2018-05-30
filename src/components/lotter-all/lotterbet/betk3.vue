@@ -43,10 +43,30 @@
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
             <p>{{item.seasonId.slice(4)}}期开奖号码</p>
-            <div class="contnet-left-num">
+            <div class="contnet-left-num" v-show="!shownum">
               <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
               <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
               <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n3 +'.png') + ')'}"></p>
+              <i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+            </div>
+            <div class="contnet-left-num" v-show="shownum">
+              <div class="num">
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div :key="i" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ i +'.png') + ')'}"></div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div :key="j" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ j +'.png') + ')'}"></div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div :key="k" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ k +'.png') + ')'}"></div>
+                  </transition>
+                </div>
+              </div>
               <i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
           </div>
@@ -217,7 +237,6 @@
         </li>
       </ul>
     </div>
-
     <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
       <div>
         <ul>
@@ -241,6 +260,11 @@ import { setStore, getStore, removeStore } from '../../../config/mutil'
 export default {
   data() {
     return {
+      i:1,//动画
+      j:1,
+      k:1,
+      shownum:false,
+      interval: null,//动画
       showTimesUp: false,
       betshow: false, //投注弹窗
       content: "提示内容!", //弹窗内容
@@ -291,6 +315,7 @@ export default {
       con1: "",
       con2: "",
       cons: "",
+      startyet:false,
       playBonus: "", //玩法树
       timer2:'',
       // 单挑一骰
@@ -438,7 +463,6 @@ export default {
       }
     }
   },
-
   created(){
       this.getLotteryList();
   },
@@ -449,13 +473,27 @@ export default {
       this.getPlayTree();
     }
     this.$route.meta.isBack=false;
-
   },
   destroyed() {
     this.endCount();
     this.iscreat();
   },
   methods: {
+    //筛子动画
+    start() {
+      var _this = this;
+      this.startyet = true;
+      this.interval = setInterval(function() {
+        _this.i = Math.floor(Math.random() * 6+1);
+        _this.j = Math.floor(Math.random() * 6+1);
+        _this.k = Math.floor(Math.random() * 6+1);
+      }, 39)
+    },
+    end() {
+      var _this = this;
+      clearInterval(this.interval);
+      // this.interval = null
+    },
     endCount(){
         clearInterval(this.timer);
         clearTimeout(this.timer2);
@@ -482,21 +520,21 @@ export default {
     },
     //時間格式轉換
     setTimeMode(){
-            var hours = Math.floor(
-              (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
-            );
-            var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-            var seconds = Math.floor((this.today % (1 * 60)) / 1);
-            if (hours < 10) {
-              hours = "0" + hours;
-            }
-            if (minutes < 10) {
-              minutes = "0" + minutes;
-            }
-            if (seconds < 10) {
-              seconds = "0" + seconds;
-            }
-            this.countDown = hours + ":" + minutes + ":" + seconds;
+      var hours = Math.floor(
+        (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
+      );
+      var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+      var seconds = Math.floor((this.today % (1 * 60)) / 1);
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      this.countDown = hours + ":" + minutes + ":" + seconds;
     },
     //倒计时
     initSetTimeout() {
@@ -515,15 +553,20 @@ export default {
       this.geteServerTime();
     },
     //获取过去开奖号码10个
-    getPastOp() {
-      
+    getPastOp() { 
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
       this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
           this.getPastOpens = res.data.data;
-  
-          if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2) {
+          if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-Number(res.data.data[0].seasonId))<= 2 ) {
               this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
           }
         })
         .catch(error => {
@@ -533,8 +576,9 @@ export default {
     reGetPastOp(){
         clearTimeout(this.timer2);
         this.timer2 = setTimeout(() => {
-        this.getPastOp();
+          this.getPastOp();
         }, 10000);
+        
     },
     //右上获取彩种
     getLotteryList() {
@@ -1221,10 +1265,26 @@ export default {
 @import "../../../assets/scss/popcorn.scss";
 </style>
 <style>
-/* .menu-list.van-popup {
-  transition: 0s ease-out !important;
-} */
 .van-popup--top{
   transition: 0s ease-out !important;
+}
+.down-up-translate-fade-enter-active,
+.down-up-translate-fade-leave-active {
+  transition: all .1s;
+  -webkit-transition: all .1s;
+  -moz-transition: all .1s;
+  -o-transition: all .1s;
+}
+
+.down-up-translate-fade-enter,
+.down-up-translate-fade-leave-active {
+  opacity: 1;
+}
+
+.down-up-translate-fade-leave-active {
+  transform: translateY(-24px);
+  -webkit-transform: translateY(-24px);
+  -moz-transform: translateY(-24px);
+  -o-transform: translateY(-24px);
 }
 </style>

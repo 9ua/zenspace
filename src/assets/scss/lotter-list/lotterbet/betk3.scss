@@ -169,15 +169,40 @@
         & .contnet-left-num {
           display: flex;
           align-items: center;
-          margin-top: 4px;
+          margin-bottom: 4px;
           & p {
             width: 24px;
             height: 24px;
             overflow: hidden;
             margin: 0px 2px 4px;
-            background-size: 100% 100%;
-            transition: All 2.4s ease-in-out;
-            transform: rotate(3600deg);
+            background-size: 100% 100%; // transition: All 2.4s ease-in-out;// transform: rotate(3600deg);
+          }
+          & .num {
+            align-items: center;
+            width: 76px;
+            height: 24px;
+            line-height: 24px;
+            overflow: hidden;
+            background: #112B1F;
+            padding: 4px 6px;
+            border-radius: 0px 0px 6px 6px;
+            & .span {
+              color: #fff;
+              width: 24px;
+              height: 24px;
+              font-weight: bold;
+              float: left;
+              & div {
+                color: #fff;
+                width: 24px;
+                height: 24px;
+                font-weight: bold;
+                background-size: 100% 100%;
+              }
+            }
+            & .span:nth-child(2) {
+              margin: 0px 2px;
+            }
           }
           & i {
             font-size: 30px;
@@ -1286,7 +1311,6 @@
       width: 100% !important;
       height: 22px !important;
       overflow: hidden;
-      padding: 0px 2px !important;
       margin: 4px 0px;
       & a {
         margin: 0px 2px;

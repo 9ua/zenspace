@@ -57,12 +57,22 @@
         password2:'', //确认密码
         verification:'', //验证码
         captchaCodeImg:'', //验证码图
+        code:'',
       }
     },
     created() {
       this.getCaptchaCode();
+      this.serchCode();
     },
     methods: {
+      serchCode() {
+          if (!this.$route.query.code){
+
+          } else {
+          this.invitationCode = this.$route.query.code;
+          console.log(this.code);
+          }
+      },
       getCaptchaCode() {
         this.newDate = new Date().getTime();
         this.captchaCodeImg = this.$store.state.url+"code.jpg?_=" + this.newDate;

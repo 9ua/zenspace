@@ -29,6 +29,7 @@
 	            <div class="listStyle-II">
                     <li><span>{{this.selected.id}}</span></li>
                     <li><span>{{this.selected.code}}</span></li>
+                    <li><span>{{this.url}}</span></li>
                     <li><p>产生日期</p><span>{{this.selected.date}}</span></li>
                     <li><p>注册数</p><span>({{this.selected.count}})个帐户</span></li>
                     <li><div class="button"><button class="button2" @click="select2()">删除此邀请码</button><button class="button3" @click="show = !show">取消</button></div></li>
@@ -58,7 +59,8 @@ export default {
         extaddress:'',
         invitelist:'',
         selected:[],
-        showFlag: true
+        showFlag: true,
+        url:'',
         
     }
   },
@@ -79,6 +81,8 @@ export default {
         this.show = !this.show;
             console.log(a);
         this.selected = a;
+        this.url='https://' + location.hostname +'/#/registered?code='+ a.code;
+        console.log(this.url);
       },
     select2() {
         this.show2 = !this.show2;
@@ -104,6 +108,7 @@ export default {
             let formData = new FormData();
             formData.append('id',this.selected.id);
             this.$axios.post(this.$store.state.url+'api/agent/deleteInviteCode', formData,config).then((res) => {
+                console.log(res);
             this.getInviteList();
             this.show = !this.show;
             this.show2 = !this.show2;

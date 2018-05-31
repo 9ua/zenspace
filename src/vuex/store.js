@@ -17,7 +17,7 @@ const state = {
     // 'Content-Type': 'multipart/form-data'
   },
   JSESSIONICookie: '',
-  // url: 'http://115.144.238.217/',
+//   url: 'http://115.144.238.217/',
 //   url:'http://chinahuiji.com/',
   // url:'http://glorystudy.com/',
   url: 'https://'+location.hostname.replace('m.', '')+'/',  

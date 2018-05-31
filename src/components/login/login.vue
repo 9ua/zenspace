@@ -150,7 +150,7 @@
               removeStore('password');
             }
           }).catch((error) => {
-          		console.log("No")
+          		console.log(error)
           })
         }
       },

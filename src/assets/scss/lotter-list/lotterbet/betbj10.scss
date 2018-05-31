@@ -11,7 +11,6 @@
     font-size: 16px;
     padding: 0px 16px;
     background: rgb(175,58,49);
-    background: black;
     color: #fff;
     & li {
       width: 18.33%;
@@ -43,12 +42,12 @@
       & .menu-list {
         position: absolute;
         left: 0px;
-        top: 43px;
+        top: 53px;
         display: flex;
         flex-direction: column;
         width: 100%; // height: 100%;
         & .van-popup--top {
-          top: 43px;
+          top: 53px;
           background: none !important;
           height: 76%;
           overflow: hidden;
@@ -62,6 +61,7 @@
               display: flex;
               flex-direction: column;
               flex-wrap: wrap;
+              background: rgba(0,0,0,0.2);
               & li {
                 display: flex;
                 align-items: center;
@@ -75,6 +75,7 @@
                   align-items: center;
                   justify-content: center;
                   height: 24px;
+                  color: #f4c829;
                   font-size: 16px;
                   width: 20%;
                 }
@@ -94,13 +95,14 @@
                       align-items: center;
                       justify-content: center;
                       min-width: 60px;
-                      height: 24px;
+                      height: 26px;
                       background: none;
-                      border: 1px solid hsla(0, 0%, 100%, .3);
+                      border: 2px solid hsla(0, 0%, 100%, .4);
+                      border-radius: 4px;
                       margin: 0px 6px 6px 0px;
-                      padding: 0px 10px;
-                      & a {
-                        color: #caebda;
+                      > a {
+                          color:#eee;
+                          padding:0 5px;
                       }
                     }
                     & span.active {
@@ -132,19 +134,23 @@
         display: flex;
         flex-wrap: wrap;
         position: absolute;
-        top: 44px;
-        right: 1px;
-        width: 160px;
-        background: #fff;
+        top: 46px;
+        right: 0px;
+        width: 170px;
+        background: rgba(220, 220, 220, 0.8);
+        padding: 10px 0 10px 10px;
+        border-radius: 0 0 0 10px;
         & li {
           display: flex;
+          border-radius: 5px;
           justify-content: center;
           align-items: center;
-          width: 50%;
+          width: 45%;
           font-size: 14px;
-          color: #000;
-          border-bottom: 1px solid #ddd;
+          color: #666;
+          background: #fff;
           padding: 6px 0px;
+          margin: 2px;
         }
       }
     }
@@ -350,8 +356,8 @@
 
 .betbj10-footer {
   position: relative;
-  background: #414141;
-  color: #ffaf36;
+  background: #333;
+  color: rgb(175,58,49);
   width: 100;
   & .betbj10-footer-top {
     position: absolute;
@@ -410,8 +416,8 @@
     }
   }
   & .betbj10-footer-buttom {
-    background: #000;
-    height: 50px;
+    background: #414141;
+    height: 56px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -439,11 +445,11 @@
       justify-content: center;
       align-items: center;
       font-size: 18px;
-      height: 30px;
+      height: 40px;
       width: 100px;
-      color: #000;
-      border-radius: 4px;
-      background: #ffaf36;
+      color: #fff;
+      border-radius: 6px;
+      background: rgb(175,58,49);
     }
   }
 }

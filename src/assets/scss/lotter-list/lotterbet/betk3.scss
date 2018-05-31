@@ -42,7 +42,6 @@
       }
       & .menu-list {
         position: absolute;
-        background: hotpink;
         left: 0px;
         top: 53px;
         display: flex;
@@ -183,9 +182,9 @@
             height: 24px;
             line-height: 24px;
             overflow: hidden;
-            background: #112B1F;
-            padding: 4px 6px;
-            border-radius: 0px 0px 6px 6px;
+            background: rgb(26, 61, 45);
+            padding: 4px 8px;
+            border-radius: 0px 0px 0px 0px;
             & .span {
               color: #fff;
               width: 24px;
@@ -462,9 +461,9 @@
       font-size: 18px;
       height: 40px;
       width: 100px;
-      color: #000;
-      border-radius: 4px;
-      background: #ffaf36;
+      color: #fff;
+      border-radius: 6px;
+      background: rgb(175,58,49);
     }
   }
 }

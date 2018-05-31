@@ -86,23 +86,23 @@
         </div>
         <div class="betk3-content-foot">
           <div>
-            <div  class="betssc-list-box" v-show="true" >
-                <span>{{current_player_bonus.remark}}
-                      <b>。奖金
-                        <i v-show="Number(current_player_bonus.displayBonus)">{{current_player_bonus.displayBonus | keepTwoNum}}</i>
-                        <i v-show="isNaN(current_player_bonus.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-                      <br/> 
-                </span>
-                <ul class="fushi">
-                      <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
-                        <p>
-                          <b>{{numViews.title}}</b>
-                          <span>
-                            <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
-                          </span>
-                        </p>
-                      </li>
-                </ul>
+            <div class="betssc-list-box" v-show="true">
+              <span>{{current_player_bonus.remark}}
+                <b>。奖金
+                  <i v-show="Number(current_player_bonus.displayBonus)">{{current_player_bonus.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(current_player_bonus.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
+                <br/>
+              </span>
+              <ul class="fushi">
+                <li v-for="(numViews, indexff) in current_player.numView" :key="indexff">
+                  <p>
+                    <b>{{numViews.title}}</b>
+                    <span>
+                      <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,current_player)">{{num.ball}}</a>
+                    </span>
+                  </p>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -306,9 +306,7 @@
         num.choose = !num.choose;
         if (num.choose === true) {
           this.d[indexg] = num.ball
-          this.dd = this.d.filter(function(n) {
-            return n;
-          });
+          this.dd = this.d.filter(function(n) {return n;});
           this.con = this.dd.join(',');
           this.zhu++;
           this.betssc_boxjia(indexff, indexg, num, numViews, player);
@@ -328,27 +326,27 @@
         if (this.playBonusId === 'ssc_dxds') {
           if (indexff === 0) {
             this.ka[indexg] = num.ball;
-            this.dd = this.ka;
+            this.dd = this.ka.filter(function(n) {return n;});
             this.an = this.dd.join('+');
           }
           if (indexff === 1) {
             this.kb[indexg] = num.ball;
-            this.dd = this.kb;
+            this.dd = this.kb.filter(function(n) {return n;});
             this.bn = this.dd.join('+');
           }
           if (indexff === 2) {
             this.kc[indexg] = num.ball;
-            this.dd = this.kc;
+            this.dd = this.kc.filter(function(n) {return n;});
             this.cn = this.dd.join('+');
           }
           if (indexff === 3) {
             this.kd[indexg] = num.ball;
-            this.dd = this.kd;
+            this.dd = this.kd.filter(function(n) {return n;});
             this.dn = this.dd.join('+');
           }
           if (indexff === 4) {
             this.ke[indexg] = num.ball;
-            this.dd = this.ke;
+            this.dd = this.ke.filter(function(n) {return n;});
             this.en = this.dd.join('+');
           }
           if (this.playBonusId === 'ssc_dxds') {

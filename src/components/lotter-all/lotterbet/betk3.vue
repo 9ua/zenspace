@@ -906,7 +906,7 @@ export default {
             this.content = "获取不成功!";
             setTimeout(() => {
               this.betshow = !this.betshow;
-              this.$router.push("/login");
+              // this.$router.push("/login");
             }, 1300);
           });
         }
@@ -927,7 +927,7 @@ export default {
           this.content = "获取不成功!";
           setTimeout(() => {
             this.betshow = !this.betshow;
-            this.$router.push("/login");
+            // this.$router.push("/login");
           }, 1300);
         });
       }

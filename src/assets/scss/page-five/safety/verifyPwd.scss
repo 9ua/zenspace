@@ -10,7 +10,7 @@
     width: 100%;
     height: 46px;
     font-size: 20px;
-    background: #AF3A31;
+    background: rgb(175,58,49);
     & i {
         position: absolute;
         left: 16px;
@@ -45,7 +45,7 @@
     display: flex;
     justify-content: center;
     & button {
-        background: #AF3A31;
+        background: rgb(175,58,49);
         border: none;
         width: 86%;
         height: 36px;
@@ -63,5 +63,5 @@
     color: #fff;
     font-size: 14px;
     border-radius: 4px;
-    background: #AF3A31;
+    background: rgb(175,58,49);
 }

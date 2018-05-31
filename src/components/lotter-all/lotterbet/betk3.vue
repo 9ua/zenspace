@@ -7,7 +7,7 @@
       <li>
         <p class="wangfa">玩<br/>法</p>
         <div class="menu" @click="show = !show">{{titles}}
-          <!-- <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i> -->
+          <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
         </div>
         <div class="menu-list">
           <van-popup v-model="show" position="top">

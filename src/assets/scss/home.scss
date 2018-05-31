@@ -55,7 +55,7 @@ a {
     }
     & .home-footer {
         height: 70px;
-        background: #AF3A31;
+        background: rgb(175,58,49);
         & ul {
             display: flex;
             justify-content: space-between;
@@ -85,7 +85,7 @@ a {
 }
 
 .router-link-exact-active.router-link-active {
-    background: #AF3A31;
+    background: rgb(175,58,49);
 }
 
 .router-link-exact-active.router-link-active i,
@@ -104,5 +104,5 @@ a {
 }
 
 .router-link-active {
-    background: #AF3A31;
+    background: rgb(175,58,49);
 }

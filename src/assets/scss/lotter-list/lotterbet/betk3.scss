@@ -10,7 +10,7 @@
     height: 56px;
     font-size: 16px;
     padding: 0px 16px;
-    background: #AF3A31; // background: #333;
+    background: rgb(175,58,49); // background: #333;
     color: #fff;
     & li {
       width: 33.33%;
@@ -369,7 +369,7 @@
 .betk3-footer {
   position: relative;
   background: #333;
-  color: #AF3A31;
+  color: rgb(175,58,49);
   width: 100%;
   & .betk3-footer-top {
     position: absolute;
@@ -1552,7 +1552,7 @@
     height: 36px;
     color: #fff;
     font-size: 16px;
-    background: #AF3A31;
+    background: rgb(175,58,49);
   }
   & li:nth-child(2) {
     min-height: 54px;
@@ -1600,7 +1600,7 @@
   border-radius: 4px;
   max-width: 300px;
   min-width: 180px;
-  background: #AF3A31;
+  background: rgb(175,58,49);
 }
 
 .menu-list.van-popup {

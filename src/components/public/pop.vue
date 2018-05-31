@@ -76,7 +76,7 @@ export default {
       & .title{
         border-radius: 4px 4px 0 0;
         height: 30px;
-        background: #AF3A31;
+        background: rgb(175,58,49);
         color:#fff;
         font-size: 14px;
       }

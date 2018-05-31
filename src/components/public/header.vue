@@ -53,7 +53,7 @@
   .head-top {
     height: 50px;
     width: 100%;
-   	background:  #AF3A31;
+   	background:  rgb(175,58,49);
     position: fixed;
     top: 0px;
     z-index: 11;

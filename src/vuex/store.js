@@ -20,7 +20,7 @@ const state = {
   // url: 'http://115.144.238.217/',
   // url:'http://chinahuiji.com/',
   // url:'http://glorystudy.com/',
-  url: 'http://mtxflower.com/',
+  url: 'https://mtxflower.com/',
   loginStatus: getStore('loginSta'), //登陆状态
   Globalusername: getStore('username'), //全局账号
   Globalpassword: getStore('password'), //全局密码

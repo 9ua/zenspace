@@ -169,6 +169,7 @@
   background: #317455;
   overflow: hidden;
   >div {
+    height: 100%;
     & .betk3-content-top {
       display: flex;
       justify-content: space-between;
@@ -286,9 +287,10 @@
       padding: 4px 16px 0px;
       color: #caebda;
       height: 100%;
+      
       >div {
         height: 100%;
-        overflow-y: hidden;
+        overflow-y: scroll;
         >.betssc-list-box {
           width: 100%;
           padding-bottom: 120px;
@@ -300,7 +302,7 @@
           }
           & .fushi {
             margin-top: 10px;
-            margin-bottom: 140px;
+            // margin-bottom: 140px;
             & li {
               display: flex;
               flex-direction: column;

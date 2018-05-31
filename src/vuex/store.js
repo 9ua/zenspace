@@ -42,7 +42,7 @@ const state = {
 }
 //console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
-    state.url = 'http://'+location.hostname.replace('m.', '')+'/';
+    state.url = 'https://'+location.hostname.replace('m.', '')+'/';
 } else {
    state.url = 'http://115.144.238.217/';
 }

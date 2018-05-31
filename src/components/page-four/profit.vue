@@ -1,7 +1,8 @@
 <template>
   <div class="profit">
     <ul v-show="showFlag">
-      <li v-for="(item,index) in paishu" @click="selectFood(item,$event)" :key="index" v-show="index <10">
+      <li v-for="(item,index) in paishu" :key="index" v-show="index <10">
+      <!-- <li v-for="(item,index) in paishu" @click="selectFood(item,$event)" :key="index" v-show="index <10"> -->
         <div class="profit-left">
           <img :src="item.paths" />
           <div class="profit-xq">

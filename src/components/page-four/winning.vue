@@ -1,7 +1,8 @@
 <template>
   <div class="winning">
     <ul v-show="showFlag">
-      <li v-for="(item,index) in winpool" :key="index" v-show="index <10" @click="selectFood(item,$event)">
+      <li v-for="(item,index) in winpool" :key="index" v-show="index <10">
+      <!-- <li v-for="(item,index) in winpool" :key="index" v-show="index <10" @click="selectFood(item,$event)"> -->
         <div class="winning-left">
           <img :src="item.paths" />
           <div class="winning-xq">
@@ -16,7 +17,7 @@
           </div>
         </div>
         <div class="winning-right">
-          <span><i class="el-icon-arrow-right"></i></span>
+          <!-- <span><i class="el-icon-arrow-right"></i></span> -->
         </div>
       </li>
     </ul>

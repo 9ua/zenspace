@@ -70,6 +70,7 @@
     created() {
       localStorage.clear();
       this.checkeds();
+      //console.log(('m.'+location.hostname).replace('m.', '')+'.......');
     },
     methods: {
     	getCaptchaCode() {

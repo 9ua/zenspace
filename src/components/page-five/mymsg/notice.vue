@@ -8,5 +8,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/mymsg/notice.scss';
+ @import '../../../assets/scss/listStyle.scss';
 </style>

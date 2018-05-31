@@ -13,11 +13,14 @@ Vue.use(Vuex)
 const state = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
+            // 'Content-Type': 'multipart/form-data'
         },
         JSESSIONICookie: '',
-        // url: 'http://115.144.238.217/',
-        url: 'http://chinahuiji.com/',
+        //   url: 'http://115.144.238.217/',
+        //   url:'http://chinahuiji.com/',
         // url:'http://glorystudy.com/',
+
+        //url: 'http://115.144.238.217/',  
         loginStatus: getStore('loginSta'), //登陆状态
         Globalusername: getStore('username'), //全局账号
         Globalpassword: getStore('password'), //全局密码
@@ -36,11 +39,12 @@ const state = {
         playGroupsssc: null,
         // playBonusk3: JSON.parse(getStore('playBonusk3')),
     }
-    // if (process.env.NODE_ENV === 'production') {
-    //     state.url = 'https://' + location.hostname.replace('m.', '') + '/';
-    // } else {
-    //     state.url = 'http://115.144.238.217/';
-    // }
+    //console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV === 'production') {
+    state.url = 'http://' + location.hostname.replace('m.', '') + '/';
+} else {
+    state.url = 'http://115.144.238.217/';
+}
 
 export default new Vuex.Store({
     state,

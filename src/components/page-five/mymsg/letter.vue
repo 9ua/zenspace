@@ -1,10 +1,6 @@
 <template>
   <div class="listStyle">
-    <!-- <div class="listStyle-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-      <i class="el-icon-arrow-left" @click="banckto"></i>
-      <p>私信</p>
-    </div> -->
+
     <div class="listStyle-content">
 
 
@@ -25,33 +21,7 @@
                 </li>
         </ul>
       </div>
-        <!-- <van-actionsheet class="" v-model="show2">
-	            <ul class="listStyle-II">
-            <li>
-              <span>{{selected.lotteryName}}</span>
-            </li>
-            <li><p>第{{selected.seasonId}}期</p> <p v-bind:class="{'class-a': selected.status===1, 'class-b': selected.status===2}">{{selected.statusName}}</p></li>
-            <li>
-              <p>投注時間</p><span>{{selected.createTime}}</span>
-            </li>
-            <li>
-              <p>投注单号</p><span>{{selected.id}}</span>
-            </li>
-            <li>
-              <p>投注金额</p><span>￥ {{selected.amount}}</span>
-            </li>
-            <li>
-              <p>派送奖金</p><span>￥ {{selected.win}}</span>
-            </li>
-            <li>
-              <p>开奖号码</p><span>{{selected.openNum}}</span>
-            </li>
-            <li>
-              <p>我的投注</p>{{selected.content}}<p>玩法</p>{{selected.playName}}
-            </li>
-            <li><div class="button"><button class="button1" @click="show2 =! show2">确定</button></div></li>
-          </ul>
-	      </van-actionsheet> -->
+        
     </div>
   </div>
 </template>
@@ -85,11 +55,8 @@ export default {
     },
     getUserNoticeList(){
         this.$http.get(this.$store.state.url+'api/proxy/getUserNoticeList',{params:{type:2}}).then((res) => {
-        // this.userNoticeList = res;
-        console.log(res);
         this.letterlist = res.data.data;
 			}).catch((error) => {
-        console.log(error);
         console.log("获取彩種ratio ERROR");
 		});
     },

@@ -4,7 +4,7 @@
       <router-link to="/safety" tag="i" class="el-icon-arrow-left"></router-link>
       <p>银行卡管理</p>
     </div>
-    
+
     <div class="listStyle-content">
       <ul style="listStyle-I">
         <li class="row2" v-for="(item,index) in bankUserList" :key="index" @click="select(item,$event)">
@@ -16,112 +16,97 @@
           </div>
         </li>
         <li>
-          <div class="button"><button class="button1" @click="goCreate()">添加银行卡</button></div>
-        </li>     
+          <div class="button">
+            <button class="button1" @click="goCreate()">添加银行卡</button>
+          </div>
+        </li>
       </ul>
-        
-        <div class="warning"><p>{{content}}</p></div>
+
+      <div class="warning">
+        <p>{{content}}</p>
+      </div>
     </div>
     <van-actionsheet class="" v-model="show3">
-	    <ul class="listStyle-II">
+      <ul class="listStyle-II">
         <li>修改银行卡</li>
-      <li>
-				<p>银行</p><div  @click="show1 = ! show1">{{this.selectBank}}</div>
-			</li>
-			<li>
-				<p>开户地址</p>
-				<div>
-				<el-input 
-					placeholder="请输入开户地址" 
-					v-model="address" 
-					:value="address" 
-					clearable 
-				>
-				</el-input>
-				</div>
-			</li>
-			<li>
-				<p>开户人姓名</p>
-				<div>
-				<el-input 
-					placeholder="请输入银行卡的姓名" 
-					v-model="niceName" 
-					:value="niceName" 
-					clearable 
-				>
-				</el-input>
-				</div>
-			</li>
-            <li>
-				<p>银行卡号</p>
-				<div>
-				<el-input 
-					placeholder="请输入银行卡号" 
-					v-model="card" 
-					:value="card" 
-					clearable 
-				>
-				</el-input>
-				</div>
-			</li>
-            <li>
-				<p>确认卡号</p>
-				<div>
-				<el-input 
-					placeholder="请确认银行卡号" 
-					v-model="card2" 
-					:value="card2" 
-					clearable 
-				>
-				</el-input>
-				</div>
-			</li>
-            <li>
-				<p>安全密码</p>
-				<div>
-				<el-input 
-					placeholder="请输入安全密码" 
-					v-model="securityCode" 
-					:value="securityCode" 
-					clearable 
-				>
-				</el-input>
-				</div>
-			</li>
-			<li><div class="button"><button class="button2" @click="sendReq()">修改</button><button class="button3" @click="show3=!show3">取消</button></div></li>
-		</ul>
-	</van-actionsheet>
-		<van-popup class="pop2" v-model="show6" :close-on-click-overlay="false">
-		<div>
-		<ul>
-			<div class="title">
-			<p>温馨提示！</p>
-			</div>
-			<div class="cont">
-			<p>{{content2}}</p>
-			</div>
-			<div class="but">
-				<button class="nodel" @click="show6 = ! show6">确定</button>
-			</div>
-		</ul>
-		</div>
-		</van-popup>
-		<van-popup class="pop2" v-model="show5" :close-on-click-overlay="false">
-		<div>
-		<ul>
-			<div class="title">
-			<p>温馨提示！</p>
-			</div>
-			<div class="cont">
-			<p>{{content2}}</p>
-			</div>
-			<div class="but">
-				<button class="nodel" @click="show5 = !show5">确定</button>
-			</div>
-		</ul>
-		</div>
-		</van-popup>
-	<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
+        <li>
+          <p>银行</p>
+          <div @click="show1 = ! show1">{{this.selectBank}}</div>
+        </li>
+        <li>
+          <p>开户地址</p>
+          <div>
+            <el-input placeholder="请输入开户地址" v-model="address" :value="address" clearable>
+            </el-input>
+          </div>
+        </li>
+        <li>
+          <p>开户人姓名</p>
+          <div>
+            <el-input placeholder="请输入银行卡的姓名" v-model="niceName" :value="niceName" clearable>
+            </el-input>
+          </div>
+        </li>
+        <li>
+          <p>银行卡号</p>
+          <div>
+            <el-input placeholder="请输入银行卡号" v-model="card" :value="card" clearable>
+            </el-input>
+          </div>
+        </li>
+        <li>
+          <p>确认卡号</p>
+          <div>
+            <el-input placeholder="请确认银行卡号" v-model="card2" :value="card2" clearable>
+            </el-input>
+          </div>
+        </li>
+        <li>
+          <p>安全密码</p>
+          <div>
+            <el-input placeholder="请输入安全密码" v-model="securityCode" :value="securityCode" clearable>
+            </el-input>
+          </div>
+        </li>
+        <li>
+          <div class="button">
+            <button class="button2" @click="sendReq()">修改</button>
+            <button class="button3" @click="show3=!show3">取消</button>
+          </div>
+        </li>
+      </ul>
+    </van-actionsheet>
+    <van-popup class="pop2" v-model="show6" :close-on-click-overlay="false">
+      <div>
+        <ul>
+          <div class="title">
+            <p>温馨提示！</p>
+          </div>
+          <div class="cont">
+            <p>{{content2}}</p>
+          </div>
+          <div class="but">
+            <button class="nodel" @click="show6 = ! show6">确定</button>
+          </div>
+        </ul>
+      </div>
+    </van-popup>
+    <van-popup class="pop2" v-model="show5" :close-on-click-overlay="false">
+      <div>
+        <ul>
+          <div class="title">
+            <p>温馨提示！</p>
+          </div>
+          <div class="cont">
+            <p>{{content2}}</p>
+          </div>
+          <div class="but">
+            <button class="nodel" @click="show5 = !show5">确定</button>
+          </div>
+        </ul>
+      </div>
+    </van-popup>
+    <van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
     </van-actionsheet>
   </div>
 </template>
@@ -250,11 +235,9 @@ export default {
                 }
             this.getBankUserList();
           }).catch((error) => {
-          		console.log("No")
+          		console.log("setBankUserNo")
           });   
             }
-
-
   },
   filters: {
       lastFive(value) {

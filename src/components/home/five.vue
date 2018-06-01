@@ -22,19 +22,27 @@
       </div>
       <ul>
         <router-link to="/recharge" tag="li">
-          <div class="icon-top top-1"><i class="fa fa-credit-card" aria-hidden="true"></i></div>
+          <div class="icon-top top-1">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>
+          </div>
           <span>我要充值</span>
         </router-link>
         <li @click="safeCenter()">
-          <div class="icon-top top-2"><i class="fa fa-money" aria-hidden="true"></i></div>
+          <div class="icon-top top-2">
+            <i class="fa fa-money" aria-hidden="true"></i>
+          </div>
           <span>我要提现</span>
         </li>
         <router-link to="/trade" tag="li">
-          <div class="icon-top top-3"><i class="fa fa-book" aria-hidden="true"></i></div>
+          <div class="icon-top top-3">
+            <i class="fa fa-book" aria-hidden="true"></i>
+          </div>
           <span>交易记录</span>
         </router-link>
         <router-link to="/bet" tag="li">
-          <div class="icon-top top-4"><i class="fa fa-star" aria-hidden="true"></i></div>
+          <div class="icon-top top-4">
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </div>
           <span>投注记录</span>
         </router-link>
       </ul>
@@ -52,17 +60,18 @@
     </div>
     <van-popup class="pop2" v-model="show2" :close-on-click-overlay="false">
       <div>
-      <ul>
-        <div class="title">
-          <p>温馨提示！</p>
-        </div>
-        <div class="cont">
-          <p>{{content}}</p>
-        </div>
-        <div class="but">
-            <button class="del" @click="goToSet()">确定</button><button class="nodel" @click="show2 = !show2">取消</button>
-        </div>
-      </ul>
+        <ul>
+          <div class="title">
+            <p>温馨提示！</p>
+          </div>
+          <div class="cont">
+            <p>{{content}}</p>
+          </div>
+          <div class="but">
+            <button class="del" @click="goToSet()">确定</button>
+            <button class="nodel" @click="show2 = !show2">取消</button>
+          </div>
+        </ul>
       </div>
     </van-popup>
 
@@ -154,7 +163,7 @@
             this.waterFall();
           };
         }).catch((error) => {
-            console.log("取安全中心状态No111")
+            console.log("獲取安全中心狀態")
         })
       },
       waterFall(){
@@ -199,7 +208,7 @@
 	      this.$http.get(this.$store.state.url+'api/userCenter/getBalance').then((res) => {
           this.balances = res.data.data.balance;
 	      }).catch((error) => {
-	      		console.log("No11")
+	      		console.log("获取用户余额")
 	      })
     	}
     },

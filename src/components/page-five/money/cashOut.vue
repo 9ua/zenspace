@@ -1,80 +1,80 @@
 <template>
-  <div class="listStyle">
-    <div class="listStyle-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>我要提现</p>
-    </div>
-	<div class="listStyle-content">
-		  <ul class="listStyle-III">
-			<li><p>最高提现额度    </p>{{moneyDepositMax}}</li>
-			<li><p>最低提现额度    </p>{{moneyDepositMin}}</li>
-			<li><p>可提现余额    </p>{{myAmount}}</li>
-			<li><p>今日余提现次数    </p>{{countMax}}</li>
-			<li>
-				<p>申请金额</p>
-				<div>
-				<el-input 
-					placeholder="请输入充值金额" 
-					v-model="amount" 
-					:value="amount" 
-					clearable 
-				>
-				</el-input>
-				</div>
-			</li>
-			<li>
-				<p>账号</p>
-				<div @click="show1 = ! show1">{{selectBank}}<span class="el-icon-arrow-down"></span></div>
-				
-			</li>
-			<li>
-				<p>账户安全码</p>
-				<div>
-				<el-input 
-					placeholder="请输入安全码" 
-					v-model="securityCode" 
-					:value="securityCode" 
-					clearable 
-				>
-				</el-input>
-				</div>
-			</li>
-			<li><div class="button"><button class="button1" @click="sendReq()">提现申请</button></div></li>
-		</ul>
-	</div>
-		<van-popup class="pop2" v-model="show2" :close-on-click-overlay="false">
-		<div>
-		<ul>
-			<div class="title">
-			<p>温馨提示！</p>
-			</div>
-			<div class="cont">
-			<p>{{content}}</p>
-			</div>
-			<div class="but">
-				<button class="nodel" @click="show2 = ! show2">确定</button>
-			</div>
-		</ul>
+	<div class="listStyle">
+		<div class="listStyle-top">
+			<router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
+			<p>我要提现</p>
 		</div>
+		<div class="listStyle-content">
+			<ul class="listStyle-III">
+				<li>
+					<p>最高提现额度 </p>{{moneyDepositMax}}</li>
+				<li>
+					<p>最低提现额度 </p>{{moneyDepositMin}}</li>
+				<li>
+					<p>可提现余额 </p>{{myAmount}}</li>
+				<li>
+					<p>今日余提现次数 </p>{{countMax}}</li>
+				<li>
+					<p>申请金额</p>
+					<div>
+						<el-input placeholder="请输入充值金额" v-model="amount" :value="amount" clearable>
+						</el-input>
+					</div>
+				</li>
+				<li>
+					<p>账号</p>
+					<div @click="show1 = ! show1">{{selectBank}}
+						<span class="el-icon-arrow-down"></span>
+					</div>
+
+				</li>
+				<li>
+					<p>账户安全码</p>
+					<div>
+						<el-input placeholder="请输入安全码" v-model="securityCode" :value="securityCode" clearable>
+						</el-input>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<button class="button1" @click="sendReq()">提现申请</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<van-popup class="pop2" v-model="show2" :close-on-click-overlay="false">
+			<div>
+				<ul>
+					<div class="title">
+						<p>温馨提示！</p>
+					</div>
+					<div class="cont">
+						<p>{{content}}</p>
+					</div>
+					<div class="but">
+						<button class="nodel" @click="show2 = ! show2">确定</button>
+					</div>
+				</ul>
+			</div>
 		</van-popup>
 		<van-popup class="pop2" v-model="show3" :close-on-click-overlay="false">
-		<div>
-		<ul>
-			<div class="title">
-			<p>温馨提示！</p>
+			<div>
+				<ul>
+					<div class="title">
+						<p>温馨提示！</p>
+					</div>
+					<div class="cont">
+						<p>{{content}}</p>
+					</div>
+					<div class="but">
+						<button class="nodel" @click="goBack()">确定</button>
+					</div>
+				</ul>
 			</div>
-			<div class="cont">
-			<p>{{content}}</p>
-			</div>
-			<div class="but">
-				<button class="nodel" @click="goBack()">确定</button>
-			</div>
-		</ul>
-		</div>
 		</van-popup>
 		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
-        </van-actionsheet>
-  </div>
+		</van-actionsheet>
+	</div>
 </template>
 <script>
 import md5 from 'js-md5';
@@ -147,7 +147,7 @@ export default {
                     this.show2 = true;
                 }
           }).catch((error) => {
-          		console.log("No")
+          		console.log("setWithdrawNo")
           }); 
 
 

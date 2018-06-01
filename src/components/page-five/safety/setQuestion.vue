@@ -24,7 +24,7 @@
       </div>
       <div>
         <p>答案：</p>
-        <input type="text" v-model="answer2"/> </div>
+        <input type="text" v-model="answer2" /> </div>
     </div>
     <div class="setQuestion-but">
       <button @click="setQuestion">确定</button>
@@ -63,7 +63,6 @@
       setQuestion() {
         let md5answer1 = md5(this.answer1);
         let md5answer2 = md5(this.answer2);
-        console.log('answer1----',md5answer1,'answer2----',md5answer2,'title1-----',this.title1,'title2-----',this.title2)
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
         let formData = new FormData();
         formData.append('title1', this.title1);
@@ -72,7 +71,6 @@
         formData.append('answer2', md5answer2);
         if(this.title1 != this.title2){
           this.$axios.post(this.$store.state.url+'api/userCenter/setSecurityQuestion', formData, config).then((res) => {
-            console.log(res)
             this.show = !this.show;
             this.content = res.data.data.message;
             setTimeout(() => {

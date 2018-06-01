@@ -3,13 +3,15 @@
     <headers></headers>
     <ul v-show="showFlag">
       <li v-for="(actives,index) in activitys" :key="index">
-        <img :src="'https://mtxflower.com/'+actives.icon" @click="activeR($event,actives,index)"/>
-      	<div class="three-box">
-      		<p>活动时间：{{actives.beginPrizeTime}}</p>
-      		<p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
-      	</div>
+        <img :src="'https://mtxflower.com/'+actives.icon" @click="activeR($event,actives,index)" />
+        <div class="three-box">
+          <p>活动时间：{{actives.beginPrizeTime}}</p>
+          <p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
+        </div>
         <div class="three-content" ref="pppop" v-if="activesremark === index" v-show="activesremarks">
-          <div><p v-html="actives.remark"></p></div>
+          <div>
+            <p v-html="actives.remark"></p>
+          </div>
         </div>
       </li>
     </ul>
@@ -47,7 +49,7 @@ export default {
       this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
         this.activitys = res.data.data;
       }).catch((error) => {
-          console.log("No")
+          console.log("getListNo")
       })
     },
     selectFood(threeC, event,index) {

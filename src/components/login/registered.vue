@@ -70,7 +70,6 @@
 
           } else {
           this.invitationCode = this.$route.query.code;
-          console.log(this.code);
           }
       },
       getCaptchaCode() {
@@ -121,7 +120,6 @@
                   this.getCaptchaCode();
                   this.content = res.data.data;
                   this.pop = true;
-
                 }
             }).catch((error) => {
                 console.log("No","post失败")

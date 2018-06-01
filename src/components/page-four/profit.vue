@@ -2,7 +2,7 @@
   <div class="profit">
     <ul v-show="showFlag">
       <li v-for="(item,index) in paishu" :key="index" v-show="index <10">
-      <!-- <li v-for="(item,index) in paishu" @click="selectFood(item,$event)" :key="index" v-show="index <10"> -->
+        <!-- <li v-for="(item,index) in paishu" @click="selectFood(item,$event)" :key="index" v-show="index <10"> -->
         <div class="profit-left">
           <img :src="item.paths" />
           <div class="profit-xq">
@@ -103,22 +103,8 @@
         if(this.paishu === ''){
           if(JSON.parse(getStore('paixuArry')) === null){
             this.paixu();
-            // console.log(this.paishu,'--',JSON.parse(getStore('paixuArry')))
           }
-          
-          
-        }
-        // else{
-        //   setInterval(() => {
-        //     if(this.time59-this.newdata < 360000){
-        //       this.paixu();
-        //       this.daojishi();
-        //     }else{
-        //       this.daojishi();
-        //     }
-        //   },360000)
-        // }
-         
+        }         
       },
       //随机打乱数组
       shuffle(a) {

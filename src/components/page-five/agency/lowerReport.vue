@@ -3,9 +3,11 @@
     <div class="listStyle-top" v-bind:class="{ blur: show2 }">
       <router-link to="/agency" tag="i" class="el-icon-arrow-left"></router-link>
       <p>下级报表</p>
-      <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
+      <div class="dim" @click="show = ! show">{{timeline}}
+        <span class="el-icon-arrow-down"></span>
+      </div>
     </div>
-    
+
     <div class="listStyle-content" v-bind:class="{ blur: show2 }">
       <div class="listStyle-content-top">
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
@@ -20,7 +22,7 @@
         <div class="title">报表人数</div>
         <div class="title">盈利</div>
       </div>
-      
+
       <ul style="padding:0">
         <li class="row2" v-for="(item,index) in underLevelReport" :key="index" @click="select(item,$event)">
           <div class="title">
@@ -35,22 +37,30 @@
           <div class="title">
             <p>{{item.count}}</p>
           </div>
-        </li>         
+        </li>
       </ul>
     </div>
     <van-actionsheet class="" v-model="show2">
-	      <ul class="listStyle-II">
-            <li>
-              <span>{{selected.account}}</span>
-            </li>
-            <li v-show="this.show3" @click="getUnderLevelReport2()">
-              <p>查看下级</p><i class="el-icon-arrow-right"></i>
-            </li>
-            <router-link :to="{path:'/agentReport',query: {id: this.selected.account}}" tag="li"><p>查看报表</p><i class="el-icon-arrow-right"></i></router-link>
-            
-            <li><div class="button"><button class="button1" @click="show2 =! show2">确定</button></div></li>
-        </ul>
-	  </van-actionsheet>
+      <ul class="listStyle-II">
+        <li>
+          <span>{{selected.account}}</span>
+        </li>
+        <li v-show="this.show3" @click="getUnderLevelReport2()">
+          <p>查看下级</p>
+          <i class="el-icon-arrow-right"></i>
+        </li>
+        <router-link :to="{path:'/agentReport',query: {id: this.selected.account}}" tag="li">
+          <p>查看报表</p>
+          <i class="el-icon-arrow-right"></i>
+        </router-link>
+
+        <li>
+          <div class="button">
+            <button class="button1" @click="show2 =! show2">确定</button>
+          </div>
+        </li>
+      </ul>
+    </van-actionsheet>
 
   </div>
 </template>
@@ -108,7 +118,6 @@ export default {
   },
   methods: {
     select(a) {
-        console.log(a);
         this.selected = a;
         this.childCount= a.childCount;
         if (a.childCount > 0) {

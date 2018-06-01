@@ -7,33 +7,24 @@
     </div> -->
     <div class="listStyle-content">
 
-      123456
-      <!-- <div class="listStyle-content-top">
-        <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
-        </van-actionsheet>
-      </div> -->
-	  <!-- <van-tabs v-model="accountChangeType" @click="print">
-  		<van-tab class="typeo" v-for="(item,index) in pagelist" :key="index" :title="item.name">
-  		</van-tab>
-	  </van-tabs> -->
-      <!-- <div>
-        <ul v-show="showFlag" class="listStyle-I">
-                <li v-for="(item,index) in tradelist" :key="index" @click="select(item,$event)">
+
+      <div>
+        <ul v-show="showFlag" class="listStyle-IV">
+                <li v-for="(item,index) in letterlist" :key="index">
                     <div class="mInvite-left">
-                        <p><span>{{item.lotteryName}} - ￥{{item.amount}}</span><br>
-                        <span></span>{{item.createTime}}
-                        </p>
+                       <p><a> <span>[ {{item.id}} ]</span> <br>发送时间 {{item.createTime}} </a> <br>
+                        <!-- {{item.id}}<br> -->
+                        {{item.title}}</p>
+                        
                     </div>
                     <div class="mInvite-right">
                         <p>
-                        <span v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}">{{item.statusName}}</span><br>
-                        <span v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}">{{item.win}}</span>
+                        <span></span>
                         </p>
                     </div>
-                    <i class="el-icon-arrow-down"></i>
                 </li>
         </ul>
-      </div> -->
+      </div>
         <!-- <van-actionsheet class="" v-model="show2">
 	            <ul class="listStyle-II">
             <li>
@@ -69,7 +60,8 @@
 export default {
   data(){
     return {
-
+      letterlist:[],
+      showFlag:true,
     }
   },
 
@@ -95,6 +87,7 @@ export default {
         this.$http.get(this.$store.state.url+'api/proxy/getUserNoticeList',{params:{type:2}}).then((res) => {
         // this.userNoticeList = res;
         console.log(res);
+        this.letterlist = res.data.data;
 			}).catch((error) => {
         console.log(error);
         console.log("获取彩種ratio ERROR");

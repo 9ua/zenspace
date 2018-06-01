@@ -69,357 +69,557 @@ import betssc from '@/components/lotter-all/lotterbet/betssc'
 
 Vue.use(Router)
 export default new Router({
-  mode: 'history',
-  routes: [{
-      path: '/ErrorPage',
-      name: 'ErrorPage',
-      component: ErrorPage,
-      meta: {
-        title: '操作失败'
-      }
-    },
-    {
-      path: "/login",
-      name: 'login',
-      component: resolve => require(['@/components/login/login.vue'], resolve),
-      meta: {
-        title: '登陆',
-        keepAlive: false
-      }
-    },
-    {
-      path: "/registered",
-      name: 'registered',
-      component: resolve => require(['@/components/login/registered.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: "/reset",
-      name: 'reset',
-      component: resolve => require(['@/components/login/reset.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: "/resetpwd",
-      name: 'resetpwd',
-      component: resolve => require(['@/components/login/resetpwd.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: "/resetway",
-      name: 'resetway',
-      component: resolve => require(['@/components/login/resetway.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: "/verifyPwdSafe",
-      name: 'verifyPwdSafe',
-      component: resolve => require(['@/components/login/verifyPwdSafe.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: "/pk10",
-      name: 'betbj10',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve),
-      meta: {
-        keepAlive: true
-      }
-    },
-    {
-      path: 'k3s',
-      name: 'k3s',
-      component: resolve => require(['@/components/lotter-all/k3.vue'], resolve),
-      meta: {
-        keepAlive: true
-      },
-    },
-    {
-      path: 'sscs',
-      name: 'sscs',
-      component: resolve => require(['@/components/lotter-all/ssc.vue'], resolve),
-      meta: {
-        keepAlive: true
-      },
-    },
-    {
-      path: 'klcs',
-      name: 'klcs',
-      component: resolve => require(['@/components/lotter-all/klc.vue'], resolve),
-      meta: {
-        keepAlive: true
-      },
-    },
-    {
-      path: 'etfs',
-      name: 'etfs',
-      component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
-      meta: {
-        keepAlive: true
-      },
-    }
-  ]
-}, {
-  path: '/',
-  name: 'home',
-  redirect: 'one',
-  component: home,
-  meta: {
-    keepAlive: true
-  },
-  children: [{
-      path: 'one',
-      name: 'one',
-      component: resolve => require(['@/components/home/one.vue'], resolve),
-      meta: {
-        keepAlive: true
-      },
-    },
-    {
-      path: 'three',
-      name: 'three',
-      component: resolve => require(['@/components/home/three.vue'], resolve),
-      meta: {
-        keepAlive: true
-      }
-    },
-    {
-      path: 'four',
-      name: 'four',
-      redirect: 'four/winning',
-      component: resolve => require(['@/components/home/four.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-      children: [{
-          path: 'winning',
-          name: 'winning',
-          component: winning,
-          meta: {
-            keepAlive: true
-          }
+    mode: 'history',
+    routes: [{
+            path: '/ErrorPage',
+            name: 'ErrorPage',
+            component: ErrorPage,
+            meta: {
+                title: '操作失败'
+            }
         },
         {
-          path: 'profit',
-          name: 'profit',
-          component: profit,
-          meta: {
-            keepAlive: true
-          }
-        }
-      ]
-    },
-    {
-      path: 'five',
-      name: 'five',
-      component: resolve => require(['@/components/home/five.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-  ]
-}, {
-  path: '/pop',
-  name: 'pop',
-  component: resolve => require(['@/components/page-four/pop.vue'], resolve),
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/safety',
-  name: 'safety',
-  component: safety,
-  // component: resolve => require(['@/components/page-five/safety.vue'], resolve),
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/verifyPwd',
-  name: 'verifyPwd',
-  component: verifyPwd,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/setPwd',
-  name: 'setPwd',
-  component: setPwd,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/verifySafePwd',
-  name: 'verifySafePwd',
-  component: verifySafePwd,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/changeSafePwd',
-  name: 'changeSafePwd',
-  component: changeSafePwd,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/safeMobile',
-  name: 'safeMobile',
-  component: safeMobile,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/safeEmail',
-  name: 'safeEmail',
-  component: safeEmail,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/setSafePwd',
-  name: 'setSafePwd',
-  component: setSafePwd,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/resetWay',
-  name: 'resetWay',
-  component: resetWay,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/setQuestion',
-  name: 'setQuestion',
-  component: setQuestion,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/safeQuestion',
-  name: 'safeQuestion',
-  component: safeQuestion,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/profits',
-  name: 'profits',
-  component: profits,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/mymsg',
-  name: 'mymsg',
-  redirect: 'mymsg/notice',
-  component: mymsg,
-  meta: {
-    keepAlive: false
-  },
-  children: [{
-      path: 'notice',
-      name: 'notice',
-      component: notice,
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: 'letter',
-      name: 'letter',
-      component: letter,
-      meta: {
-        keepAlive: false
-      }
-    }
-  ]
-}, {
-  path: '/detail',
-  name: 'detail',
-  redirect: 'detail/datum',
-  component: detail,
-  meta: {
-    keepAlive: false
-  },
-  children: [{
-      path: 'datum',
-      name: 'datum',
-      component: resolve => require(['@/components//page-five/details/datum.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: 'title',
-      name: 'title',
-      component: title,
-      meta: {
-        keepAlive: false
-      }
-    },
-  ]
-}, {
-  path: '/agency',
-  name: 'agency',
-  component: agency,
-  meta: {
-    keepAlive: false
-  },
-}, {
-  path: '/agentIntro',
-  name: 'agentIntro',
-  component: agentIntro,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/agentReport',
-  name: 'agentReport',
-  component: agentReport,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/lowerReport',
-  name: 'lowerReport',
-  component: lowerReport,
-  meta: {
-    keepAlive: false
-  }
-}, {
-  path: '/manageInvite',
-  name: 'manageInvite',
-  component: manageInvite,
-  meta: {
-    keepAlive: false
-  },
-  redirect: 'manageInvite/mInvite',
-  children: [{
-      path: 'mInvite',
-      name: 'mInvite',
-      component: mInvite,
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: '/service',
-      name: 'service',
-      component: service,
-      meta: {
-        keepAlive: false
-      },
-    },
-  ]
+            path: "/login",
+            name: 'login',
+            component: resolve => require(['@/components/login/login.vue'], resolve),
+            meta: {
+                title: '登陆',
+                keepAlive: false
+            }
+        },
+        {
+            path: "/registered",
+            name: 'registered',
+            component: resolve => require(['@/components/login/registered.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: "/reset",
+            name: 'reset',
+            component: resolve => require(['@/components/login/reset.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: "/resetpwd",
+            name: 'resetpwd',
+            component: resolve => require(['@/components/login/resetpwd.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: "/resetway",
+            name: 'resetway',
+            component: resolve => require(['@/components/login/resetway.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: "/verifyPwdSafe",
+            name: 'verifyPwdSafe',
+            component: resolve => require(['@/components/login/verifyPwdSafe.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: "/pk10",
+            name: 'betbj10',
+            component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve),
+            meta: {
+                keepAlive: true
+            }
+        },
+        {
+            path: "/betbjkl8",
+            name: 'betbjkl8',
+            component: resolve => require(['@/components/lotter-all/lotterbet/betbjkl8.vue'], resolve),
+            meta: {
+                keepAlive: true
+            }
+        },
+        {
+            path: "/x11x5",
+            name: 'betetf',
+            component: resolve => require(['@/components/lotter-all/lotterbet/betetf.vue'], resolve),
+            meta: {
+                keepAlive: true
+            }
+        },
+        {
+            path: "/k3",
+            name: 'betk3',
+            component: resolve => require(['@/components/lotter-all/lotterbet/betk3.vue'], resolve),
+            meta: {
+                keepAlive: true
+            }
+        },
+        {
+            path: "/betlhc",
+            name: 'betlhc',
+            component: resolve => require(['@/components/lotter-all/lotterbet/betlhc.vue'], resolve),
+            meta: {
+                keepAlive: true
+            }
+        },
+        {
+            path: "/ssc",
+            name: 'betssc',
+            component: resolve => require(['@/components/lotter-all/lotterbet/betssc.vue'], resolve),
+            meta: {
+                keepAlive: true
+            }
+        },
+        {
+            path: '/lotterList',
+            name: 'lotterList',
+            redirect: 'lotterList/lotterAll',
+            component: resolve => require(['@/components/lotter-all/lotterList.vue'], resolve),
+            meta: {
+                keepAlive: true
+            },
+            children: [{
+                    path: 'lotterAll',
+                    name: 'lotterAll',
+                    component: lotterAll,
+                    meta: {
+                        keepAlive: true
+                    }
+                },
+                {
+                    path: 'k3s',
+                    name: 'k3s',
+                    component: resolve => require(['@/components/lotter-all/k3.vue'], resolve),
+                    meta: {
+                        keepAlive: true
+                    },
+                },
+                {
+                    path: 'sscs',
+                    name: 'sscs',
+                    component: resolve => require(['@/components/lotter-all/ssc.vue'], resolve),
+                    meta: {
+                        keepAlive: true
+                    },
+                },
+                {
+                    path: 'klcs',
+                    name: 'klcs',
+                    component: resolve => require(['@/components/lotter-all/klc.vue'], resolve),
+                    meta: {
+                        keepAlive: true
+                    },
+                },
+                {
+                    path: 'etfs',
+                    name: 'etfs',
+                    component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
+                    meta: {
+                        keepAlive: true
+                    },
+                }
+            ]
+        },
+        {
+            path: '/',
+            name: 'home',
+            redirect: 'one',
+            component: home,
+            meta: {
+                keepAlive: true
+            },
+            children: [{
+                    path: 'one',
+                    name: 'one',
+                    component: resolve => require(['@/components/home/one.vue'], resolve),
+                    meta: {
+                        keepAlive: true
+                    },
+                },
+                {
+                    path: 'three',
+                    name: 'three',
+                    component: resolve => require(['@/components/home/three.vue'], resolve),
+                    meta: {
+                        keepAlive: true
+                    }
+                },
+                {
+                    path: 'four',
+                    name: 'four',
+                    redirect: 'four/winning',
+                    component: resolve => require(['@/components/home/four.vue'], resolve),
+                    meta: {
+                        keepAlive: false
+                    },
+                    children: [{
+                            path: 'winning',
+                            name: 'winning',
+                            component: winning,
+                            meta: {
+                                keepAlive: true
+                            }
+                        },
+                        {
+                            path: 'profit',
+                            name: 'profit',
+                            component: profit,
+                            meta: {
+                                keepAlive: true
+                            }
+                        }
+                    ]
+                },
+                {
+                    path: 'five',
+                    name: 'five',
+                    component: resolve => require(['@/components/home/five.vue'], resolve),
+                    meta: {
+                        keepAlive: false
+                    }
+                },
+            ]
+        },
+        {
+            path: '/pop',
+            name: 'pop',
+            component: resolve => require(['@/components/page-four/pop.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/safety',
+            name: 'safety',
+            component: safety,
+            // component: resolve => require(['@/components/page-five/safety.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/verifyPwd',
+            name: 'verifyPwd',
+            component: verifyPwd,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/setPwd',
+            name: 'setPwd',
+            component: setPwd,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/verifySafePwd',
+            name: 'verifySafePwd',
+            component: verifySafePwd,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/changeSafePwd',
+            name: 'changeSafePwd',
+            component: changeSafePwd,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/safeMobile',
+            name: 'safeMobile',
+            component: safeMobile,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/safeEmail',
+            name: 'safeEmail',
+            component: safeEmail,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/setSafePwd',
+            name: 'setSafePwd',
+            component: setSafePwd,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/resetWay',
+            name: 'resetWay',
+            component: resetWay,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/setQuestion',
+            name: 'setQuestion',
+            component: setQuestion,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/safeQuestion',
+            name: 'safeQuestion',
+            component: safeQuestion,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/profits',
+            name: 'profits',
+            component: profits,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/mymsg',
+            name: 'mymsg',
+            redirect: 'mymsg/notice',
+            component: mymsg,
+            meta: {
+                keepAlive: false
+            },
+            children: [{
+                    path: 'notice',
+                    name: 'notice',
+                    component: notice,
+                    meta: {
+                        keepAlive: false
+                    }
+                },
+                {
+                    path: 'letter',
+                    name: 'letter',
+                    component: letter,
+                    meta: {
+                        keepAlive: false
+                    }
+                }
+            ]
+        },
+        {
+            path: '/detail',
+            name: 'detail',
+            redirect: 'detail/datum',
+            component: detail,
+            meta: {
+                keepAlive: false
+            },
+            children: [{
+                    path: 'datum',
+                    name: 'datum',
+                    component: resolve => require(['@/components//page-five/details/datum.vue'], resolve),
+                    meta: {
+                        keepAlive: false
+                    }
+                },
+                {
+                    path: 'title',
+                    name: 'title',
+                    component: title,
+                    meta: {
+                        keepAlive: false
+                    }
+                },
+
+            ]
+        },
+        {
+            path: '/agency',
+            name: 'agency',
+            component: agency,
+            meta: {
+                keepAlive: false
+            },
+        },
+        {
+            path: '/agentIntro',
+            name: 'agentIntro',
+            component: agentIntro,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/agentReport',
+            name: 'agentReport',
+            component: agentReport,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/lowerReport',
+            name: 'lowerReport',
+            component: lowerReport,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/manageInvite',
+            name: 'manageInvite',
+            component: manageInvite,
+            meta: {
+                keepAlive: false
+            },
+            redirect: 'manageInvite/mInvite',
+            children: [{
+                    path: 'mInvite',
+                    name: 'mInvite',
+                    component: mInvite,
+                    meta: {
+                        keepAlive: false
+                    }
+                },
+                {
+                    path: 'mIcode',
+                    name: 'mIcode',
+                    component: mIcode,
+                    meta: {
+                        keepAlive: false
+                    }
+                }
+            ]
+        },
+        {
+            path: '/agentMember',
+            name: 'agentMember',
+            component: agentMember,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/agentBetRecord',
+            name: 'agentBetRecord',
+            component: agentBetRecord,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/agentBillRecord',
+            name: 'agentBillRecord',
+            component: agentBillRecord,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/detail/setmobile',
+            name: 'setmobile',
+            component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/detail/setemail',
+            name: 'setemail',
+            component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/detail/setmobile',
+            name: 'setmobile',
+            component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/detail/setemail',
+            name: 'setemail',
+            component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve),
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/bet',
+            name: 'bet',
+            component: bet,
+            meta: {
+                keepAlive: true
+            },
+        },
+        {
+            path: '/trade',
+            name: 'trade',
+            component: trade,
+            meta: {
+                keepAlive: false
+            },
+        },
+        {
+            path: '/recharge',
+            name: 'recharge',
+            component: recharge,
+            meta: {
+                keepAlive: false
+            },
+        },
+        {
+            path: '/rechargeserch',
+            name: 'rechargeserch',
+            component: rechargeserch,
+            meta: {
+                keepAlive: false
+            },
+        },
+        {
+            path: '/getCards',
+            name: 'getCards',
+            component: getCards,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/newCard',
+            name: 'newCard',
+            component: newCard,
+            meta: {
+                keepAlive: false
+            }
+        },
+        {
+            path: '/cashOut',
+            name: 'cashOut',
+            component: cashOut,
+            meta: {
+                keepAlive: false
+            },
+        },
+        {
+            path: '/service',
+            name: 'service',
+            component: service,
+            meta: {
+                keepAlive: false
+            },
+        },
+    ]
 })

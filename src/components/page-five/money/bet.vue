@@ -66,14 +66,18 @@
             <p>开奖号码</p>
             <span>{{selected.openNum}}</span>
           </li>
-          <li class="betDeta">
-            <p>我的投注:
-              <i>{{selected.content}}</i>
-            </p>
-            <p>玩&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法:
-              <span>{{selected.playName}}</span>
-            </p>
-
+          <li>
+            <p>我的投注</p>
+            <span>{{selected.content}}</span>
+          </li>
+          <li>
+            <p>玩法</p>
+            <span>{{selected.playName}}</span>
+          </li>
+          <li>
+            <div class="button">
+              <button class="button4" @click="show3 =! show3">撤单</button>
+            </div>
           </li>
           <li>
             <div class="button">
@@ -82,8 +86,23 @@
           </li>
         </ul>
       </van-actionsheet>
-
     </div>
+    <van-popup class="pop2" v-model="show3" :close-on-click-overlay="false">
+      <div>
+        <ul>
+          <div class="title">
+            <p>温馨提示！</p>
+          </div>
+          <div class="cont">
+            <p>确定要将此单撤回?</p>
+          </div>
+          <div class="but">
+            <button class="del" @click="cancelLottery(selected.id,selected.lotteryId)">确定</button>
+            <button class="nodel" @click="show3 = !show3">取消</button>
+          </div>
+        </ul>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script>
@@ -94,6 +113,7 @@ export default {
         timeline:'今天',
         show:false,
         show2:false,
+        show3:false,
         accountChangeType:100,
         betweenType:1,
         status:100,
@@ -106,6 +126,7 @@ export default {
         betlist:[],
         validtime:0,
         extaddress:'',
+        content:'',
         invitelist:'',
         selected:[],
 		showFlag: true,
@@ -176,6 +197,20 @@ export default {
       this.status = this.pagelist[index].Type;
       this.getTradeList();
     },
+    cancelLottery(a,b){
+          let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+          let formData = new FormData();
+          formData.append('lotteryId', b);
+          formData.append('ids', a);
+          this.$axios.post(this.$store.state.url+'api/lottery/cancel', formData, config).then((res) => {
+             this.getTradeList();
+             this.show3 =false;
+             this.show2 =false;
+          }).catch((error) => {
+            console.log(error);
+            console.log("撤單ERROR");
+		    });
+    },
     getTradeList(){
         this.$http.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.$store.state.Globalusername,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
         this.tradelist = res.data.data.list;
@@ -188,6 +223,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import '../../../assets/scss/listStyle.scss';
+  @import '../../../assets/scss/popcorn.scss';
   .class-a {
     color: rgb(255, 74, 74) !important;
   }

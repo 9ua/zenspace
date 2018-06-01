@@ -466,10 +466,19 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 6px;
+  & .button4 {
+    width: 40%;
+    border: none;
+    height: 36px;
+    background: #bbb;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
+  }
   & .button3 {
     width: 47%;
     border: none;
-    height: 45px;
+    height: 46px;
     background: #bbb;
     font-size: 16px;
     color: #fff;
@@ -478,7 +487,7 @@
   & .button2 {
     width: 47%;
     border: none;
-    height: 45px;
+    height: 46px;
     background: #F94E4E;
     font-size: 16px;
     padding-right: 10px;
@@ -488,7 +497,7 @@
   & .button1 {
     width: 100%;
     border: none;
-    height: 45px;
+    height: 46px;
     background: #F94E4E;
     font-size: 16px;
     color: #fff;

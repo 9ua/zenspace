@@ -68,7 +68,7 @@
           </li>
           <li>
             <p>我的投注</p>
-            <span>{{selected.content}}</span>
+            <span class="selectedplayName">{{selected.content}}</span>
           </li>
           <li>
             <p>玩法</p>

@@ -40,7 +40,7 @@
             }
           }, 2000);
         }).catch((error) => {
-            console.log("No")
+            console.log("验证安全密码No")
         })
       }
     },

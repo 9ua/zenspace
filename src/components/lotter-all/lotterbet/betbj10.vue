@@ -1083,14 +1083,13 @@
             }, 100);
           }
         }).catch((error) => {
-          console.log("No");
+          console.log("投注No");
         })
       },
     //玩法树
     getPlayTree() {
         const now = new Date().getTime();
         if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
-          // this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
             this.playGroups = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playGroups;
             for (let i = 0; i < this.playGroups.length; i++) {
@@ -1113,9 +1112,6 @@
               }
             }
             this.displayBonus = this.splayers[0][0].displayBonus
-          // }).catch((error) => {
-          //   console.log("玩法树No");
-          // });
         }else if(localStorage.getItem("playTree_" + this.$route.query.id) === null){
           this.$http.get(this.$store.state.url + 'api/lottery/getPlayTree', {params: {lotteryId: this.lotteryId}}).then((res) => {
             this.playBonus = res.data.data.playBonus;

@@ -5,34 +5,34 @@
       <p>修改安全密码</p>
     </div>
     <div class="setSafePwd-input">
-    	<div>
-    	  <p>安全密码</p>
-        <input type="password" v-model="newPassword" placeholder="请输入6位数密码" v-focus/> 
-    	</div>
-    	<div>
-    		<p>确认密码</p>
-      <input type="password" v-model="newPassword2" placeholder="请输入6位数密码"/> 
-    	</div>
+      <div>
+        <p>安全密码</p>
+        <input type="password" v-model="newPassword" placeholder="请输入6位数密码" v-focus/>
+      </div>
+      <div>
+        <p>确认密码</p>
+        <input type="password" v-model="newPassword2" placeholder="请输入6位数密码" />
+      </div>
     </div>
     <div class="setSafePwd-but">
       <button @click="setSecurityCodes">确定</button>
     </div>
     <div class="setSafePwd-tisi">
-    	安全密码用于提现、绑定银行卡等操作，可保障资金安全。
+      安全密码用于提现、绑定银行卡等操作，可保障资金安全。
     </div>
     <van-popup class="pop2" v-model="show" :close-on-click-overlay="false">
       <div>
-      <ul>
-        <div class="title">
-          <p>温馨提示！</p>
-        </div>
-        <div class="cont">
-          <p>{{content}}</p>
-        </div>
-        <div class="but">
+        <ul>
+          <div class="title">
+            <p>温馨提示！</p>
+          </div>
+          <div class="cont">
+            <p>{{content}}</p>
+          </div>
+          <div class="but">
             <button class="nodel" @click="show = ! show">确定</button>
-        </div>
-      </ul>
+          </div>
+        </ul>
       </div>
     </van-popup>
   </div>
@@ -78,7 +78,7 @@
               }
             }, 1500);
           }).catch((error) => {
-              console.log("No")
+              console.log("setSecurityCodesNo")
           })
         }else{
           this.show = !this.show;

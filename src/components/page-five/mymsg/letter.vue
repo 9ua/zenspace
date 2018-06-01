@@ -12,7 +12,7 @@
         <van-actionsheet class="mIcode-go" v-model="show" :actions="actions" cancel-text="取消">
         </van-actionsheet>
       </div> -->
-	  <!-- <van-tabs v-model="accountChangeType" @click="print">
+      <!-- <van-tabs v-model="accountChangeType" @click="print">
   		<van-tab class="typeo" v-for="(item,index) in pagelist" :key="index" :title="item.name">
   		</van-tab>
 	  </van-tabs> -->
@@ -34,7 +34,7 @@
                 </li>
         </ul>
       </div> -->
-        <!-- <van-actionsheet class="" v-model="show2">
+      <!-- <van-actionsheet class="" v-model="show2">
 	            <ul class="listStyle-II">
             <li>
               <span>{{selected.lotteryName}}</span>
@@ -93,10 +93,7 @@ export default {
     },
     getUserNoticeList(){
         this.$http.get(this.$store.state.url+'api/proxy/getUserNoticeList',{params:{type:2}}).then((res) => {
-        // this.userNoticeList = res;
-        console.log(res);
 			}).catch((error) => {
-        console.log(error);
         console.log("获取彩種ratio ERROR");
 		});
     },

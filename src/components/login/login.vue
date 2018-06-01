@@ -23,7 +23,7 @@
           <img :src="captchaCodeImg" @click="getCaptchaCode">
         </div>
         <div class="login-rememb">
-        		<yd-checkbox v-model="checked" colo="#419fd9" @click="checked = !checked">记住密码</yd-checkbox>
+          <yd-checkbox v-model="checked" colo="#419fd9" @click="checked = !checked">记住密码</yd-checkbox>
         </div>
         <div class="login-go">
           <button @click="login" v-show="loginReq">立即登陆</button>
@@ -70,13 +70,11 @@
     created() {
       localStorage.clear();
       this.checkeds();
-      //console.log(('m.'+location.hostname).replace('m.', '')+'.......');
     },
     methods: {
     	getCaptchaCode() {
         this.newDate = new Date().getTime();
         this.captchaCodeImg = this.$store.state.url+ "code.jpg?_=" + this.newDate;
-        console.log("獲取認證碼!!!");
       },
       login() {
         this.loginReq = false;
@@ -110,7 +108,6 @@
           formData.append('password', pwd);
           formData.append('code',this.newUserInfo.verification);
           this.$axios.post(this.$store.state.url+'api/user/login', formData, config).then((res) => {
-            // if(this.checked === false){this.$cookie.delete('username');this.$cookie.delete('password');}
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
             this.$store.state.userType = res.data.data.userType;
             setStore('JSESSIONICookie',this.$store.state.JSESSIONICookie);
@@ -156,29 +153,12 @@
         }
       },
     	checkeds(){
-        console.log("Ver.1.0.0.3");
         if ( this.$cookie.get('password')) {
           this.checked = true;
           this.newUserInfo.user = this.$cookie.get('username');
           this.newUserInfo.pwd = "PASSWORD";
           this.newUserInfo.rempwd = this.$cookie.get('password');
         }
-    		// if(this.checked === true){
-        //   // this.newUserInfo.user = getStore('username')
-        //   // this.newUserInfo.pwd = getStore('password')
-        //   this.newUserInfo.user = this.$cookie.get('username');
-        //   this.newUserInfo.pwd = "PASSWORD";
-        //   this.newUserInfo.rempwd = this.$cookie.get('password');
-          
-    		// }else{
-        //   removeStore('username','password');
-        //   this.$cookie.delete('username');
-        //   this.$cookie.delete('password');
-    		// 	// VueCookie.delete('username',"password");
-    		// 	this.newUserInfo.user = "";
-        //   this.newUserInfo.pwd = "";
-        //   this.newUserInfo.rempwd = '';
-    		// }
     	},
     },
     components: {

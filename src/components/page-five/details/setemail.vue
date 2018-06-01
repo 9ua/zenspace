@@ -13,8 +13,7 @@
         <li>
           <p>验证码：</p>
           <input type="text" v-model="validCode" placeholder="请输入验证码">
-          <yd-sendcode v-model="start1" @click.native="sendEmailCode" second="5" init-str="发送验证码"
-            run-str="{%s}秒后重新获取" reset-str="你可以重新获取验证码啦" size="large" type="primary"></yd-sendcode>
+          <yd-sendcode v-model="start1" @click.native="sendEmailCode" second="5" init-str="发送验证码" run-str="{%s}秒后重新获取" reset-str="你可以重新获取验证码啦" size="large" type="primary"></yd-sendcode>
         </li>
         <li>
           <p>安全密码：</p>
@@ -55,7 +54,6 @@ export default {
         let formData = new FormData();
         formData.append('email', this.email);
         this.$axios.post(this.$store.state.url+'api/userCenter/sendEmailCode', formData, config).then((res) => {
-          console.log(res)
         }).catch((error) => {
             console.log("取验证码No")
         })

@@ -940,22 +940,18 @@ export default {
     // 玩法树
     getPlayTree() {
       var now = new Date().getTime();
-      //to check if localstorage exists
       if(localStorage.getItem("playTree_" + this.$route.query.id) !== null){
         var setupTime = localStorage.getItem("date_playTree_" + this.$route.query.id);
-      
         if(null == setupTime || now-setupTime > this.cacheTime){
           localStorage.removeItem("playTree_" + this.$route.query.id);
           localStorage.removeItem("date_playTree_" + this.$route.query.id);
-
           this.$http.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }}).then(res => {
           this.setupPlayTree( JSON.parse(JSON.stringify(res.data.data.playBonus)));
-          //set to local storage
           localStorage.setItem("playTree_" + this.$route.query.id, JSON.stringify(res.data.data.playBonus));
           localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
           })
           .catch(error => {
-            console.log(error);
+            console.log("玩法树No");
             this.$store.state.loginStatus = false;
             this.betshow = !this.betshow;
             this.content = "获取不成功!";
@@ -976,7 +972,7 @@ export default {
           localStorage.setItem("date_playTree_" + this.$route.query.id, now);      
         })
         .catch(error => {
-          console.log(error);
+          console.log("玩法树No");
           this.$store.state.loginStatus = false;
           this.betshow = !this.betshow;
           this.content = "获取不成功!";
@@ -1186,7 +1182,7 @@ export default {
               }
             })
             .catch(error => {
-              console.log("No");
+              console.log("大小单双投注No");
             });
         }
         if (this.playId2 === "k3_star3_and" && this.con2 !== '') {
@@ -1223,7 +1219,7 @@ export default {
               }
             })
             .catch(error => {
-              console.log("No");
+              console.log("和值投注No");
             });
         }
       } else 
@@ -1258,7 +1254,7 @@ export default {
               }
             })
             .catch(error => {
-              console.log("No");
+              console.log("投注No");
             });
         }
       

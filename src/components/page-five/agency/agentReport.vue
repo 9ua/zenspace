@@ -3,7 +3,9 @@
     <div class="listStyle-top">
       <router-link to="/agency" tag="i" class="el-icon-arrow-left"></router-link>
       <p>代理报表</p>
-      <div class="dim" @click="show = ! show">{{timeline}} <span class="el-icon-arrow-down"></span></div>
+      <div class="dim" @click="show = ! show">{{timeline}}
+        <span class="el-icon-arrow-down"></span>
+      </div>
     </div>
     <div class="listStyle-content">
       <div class="listStyle-content-top">
@@ -11,18 +13,13 @@
         </van-actionsheet>
       </div>
       <ul class="listStyle-check-top">
-            <li>
-              <el-input 
-                size="medium"
-                class="input-top"
-                placeholder="请输入用户帐号名称" 
-                v-model="accountName" 
-                :value="accountName" 
-                clearable 
-              >
-              </el-input>
-              <button @click="getUserTeam()"><i class="el-icon-arrow-right"></i></button>
-            </li>
+        <li>
+          <el-input size="medium" class="input-top" placeholder="请输入用户帐号名称" v-model="accountName" :value="accountName" clearable>
+          </el-input>
+          <button @click="getUserTeam()">
+            <i class="el-icon-arrow-right"></i>
+          </button>
+        </li>
       </ul>
       <div class="listStyle-content-list">
         <ul>
@@ -89,7 +86,7 @@
         </ul>
       </div>
     </div>
-    
+
   </div>
 </template>
 <script>
@@ -161,14 +158,12 @@ export default {
  
       if (this.accountName == '') {
             this.$http.get(this.$store.state.url+'api/proxy/getUserTeam',{params:{account:this.$store.state.Globalusername,dateFlag:this.dateFlag}}).then((res) => {
-            console.log(res);
             this.userTeam = res.data.data;
           }).catch((error) => {
               console.log("获取列表Error");
           });
       } else if (this.accountName !== '') {
           this.$http.get(this.$store.state.url+'api/proxy/getUserTeam',{params:{account:this.accountName,dateFlag:this.dateFlag}}).then((res) => {
-            console.log(res);
             this.userTeam = res.data.data;
           }).catch((error) => {
               console.log("获取列表Error");

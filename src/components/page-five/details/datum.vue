@@ -11,16 +11,8 @@
       <li>
         <p>昵称</p>
         <div>
-          <el-input 
-            placeholder="请设置昵称" 
-            v-model="nickname" 
-            :value="nickname" 
-            clearable 
-            ref="isnickname" 
-            @blur="nickNameFocus"
-            v-show="isnicknameto"
-          >
-          <!-- v-show="nickname === '' ? true : false" -->
+          <el-input placeholder="请设置昵称" v-model="nickname" :value="nickname" clearable ref="isnickname" @blur="nickNameFocus" v-show="isnicknameto">
+            <!-- v-show="nickname === '' ? true : false" -->
           </el-input>
           <p>{{nickname}}</p>
           <i v-show="!nickname" class="el-icon-arrow-right"></i>
@@ -34,22 +26,23 @@
       </li>
     </ul>
     <van-actionsheet v-model="show" title="修改头像">
-		  <div class="datum-img">
-		  	<p>预览</p>
-		  	<img :src="imgUrl ? imgUrl : imgsrc"/>
-		  	<p>{{imgName ? imgName : '小姐姐'}}</p>
-		  </div>
-		  <div class="datum-img-box">
-		  	<div class="datum-hide">
-		  		<ul class="datum-imgs">
-				  	<li v-for="(img,index) in imgs" :key="index"><img :src="img.paths" @click="tonickname(img,$event,index)"/></li>
-				  </ul>
-		  	</div>
-		  </div>
-		  <div class="datum-but">
-		  	<button @click="saveImg">保存头像</button><button @click="show = !show">取消</button>
-		  </div>
-		</van-actionsheet>
+      <div class="datum-img">
+        <p>预览</p>
+        <img :src="imgUrl ? imgUrl : imgsrc" />
+        <p>{{imgName ? imgName : '小姐姐'}}</p>
+      </div>
+      <div class="datum-img-box">
+        <div class="datum-hide">
+          <ul class="datum-imgs">
+            <li v-for="(img,index) in imgs" :key="index"><img :src="img.paths" @click="tonickname(img,$event,index)" /></li>
+          </ul>
+        </div>
+      </div>
+      <div class="datum-but">
+        <button @click="saveImg">保存头像</button>
+        <button @click="show = !show">取消</button>
+      </div>
+    </van-actionsheet>
     <ul class="datum-btn">
       <li>
         <p>手机</p>
@@ -70,7 +63,7 @@
       <li>
         <p>性别</p>
         <div>
-          <select v-model="sex"  @change="selecteds($event)">
+          <select v-model="sex" @change="selecteds($event)">
             <option v-for="(sexs,index) in sexlist" :key="index" :value="index">{{sexs}}</option>
           </select>
           <i class="el-icon-arrow-right"></i>
@@ -138,9 +131,6 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
       //性别选择
       selecteds(e){
         this.sex = e.target.value;
-        console.log(
-          this.sex
-        )
         this.$store.state.sex = this.sex;
         setStore('sex',this.$store.state.sex)
         this.saveUserData();

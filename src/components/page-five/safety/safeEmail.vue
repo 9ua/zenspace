@@ -53,7 +53,7 @@ export default {
           }
         }, 2000);
       }).catch((error) => {
-          console.log("No")
+          console.log("验证安全码No")
       })
     },
     //取验证码

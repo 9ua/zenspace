@@ -1,17 +1,19 @@
 <template>
-  <div class="agent">
-    <div class="agent-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>客服</p>
-    </div>
-	<div class="content">
-		<iframe class="content-in" src="https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=992821&configID=74605&jid=1218814689&s=1"></iframe>
+	<div class="agent">
+		<div class="agent-top">
+			<router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
+			<p>客服</p>
+		</div>
+		<div class="content">
+			<iframe class="content-in" src="https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=992821&configID=74605&jid=1218814689&s=1"></iframe>
+		</div>
 	</div>
-  </div>
 </template>
 
 <style lang="scss" scoped>
   @import '../../assets/scss/page-five/agency/agent.scss';
+</style>
+<style>
 	.content {
 		height: 100%;
 		width: 100%;

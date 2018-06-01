@@ -1630,7 +1630,7 @@
             }, 400);
           }
         }).catch((error) => {
-          console.log("No");
+          console.log("投注No");
         })
       },
       //查看注单

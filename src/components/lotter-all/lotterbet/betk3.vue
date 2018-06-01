@@ -38,6 +38,40 @@
         </van-popup>
       </li>
     </ul>
+    <div class="lookAllDiv" v-show="lookAllUl">
+      <p class="lookAllDivTitle">
+        <i class="el-icon-arrow-left" @click="lookAllDivTitle"></i>
+        查看更多
+      </p>
+      <ul class="lookAllUl">
+        <li>
+          <p>期号</p>
+          <p>开奖号码</p>
+          <p>和值</p>
+          <p>大小</p>
+          <p>单双 </p>
+        </li>
+        <li v-for="(item,index) in getPastOpens" :key="index">
+          <p>{{item.seasonId.substring(4).split("-").join("")}}
+            <i class="el-icon-minus"></i>
+          </p>
+          <p>
+            <a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt="" /></a>
+            <a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt="" /></a>
+            <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
+          </p>
+          <p>{{item.n1+item.n2+item.n3}}</p>
+          <p>
+            <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodluck' : 'goodidea'">{{item.n1+item.n2+item.n3
+              < 11 ? '小' : '大'}}</span>
+          </p>
+          <p>
+            <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodluck' : 'goodidea'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+
     <div class="betk3-content">
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
@@ -53,17 +87,20 @@
               <div class="num">
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :key="i" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ i +'.png') + ')'}"></div>
+                    <!-- <div :key="i" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ i +'.png') + ')'}"></div> -->
+                    <div :key="i">{{i}}</div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :key="j" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ j +'.png') + ')'}"></div>
+                    <!-- <div :key="j" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ j +'.png') + ')'}"></div> -->
+                    <div :key="j">{{j}}</div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :key="k" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ k +'.png') + ')'}"></div>
+                    <!-- <div :key="k" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ k +'.png') + ')'}"></div> -->
+                    <div :key="k">{{k}}</div>
                   </transition>
                 </div>
               </div>
@@ -78,7 +115,7 @@
           </div>
         </div>
         <div class="betk3-content-top-pop" v-show="betk3ContentTopPop">
-          <ul>
+          <ul class="look">
             <li>
               <p>期号</p>
               <p>开奖号码</p>
@@ -86,7 +123,7 @@
               <p>大小</p>
               <p>单双 </p>
             </li>
-            <li v-for="(item,index) in getPastOpens" :key="index">
+            <li v-for="(item,index) in getPastOpens" :key="index" v-if="index < 10">
               <p>{{item.seasonId.substring(4).split("-").join("")}}
                 <i class="el-icon-minus"></i>
               </p>
@@ -96,11 +133,18 @@
                 <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
-              <p>{{item.n1+item.n2+item.n3
-                < 11 ? '小' : '大'}}</p>
-                  <p>{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</p>
+              <p>
+                <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodluck' : 'goodidea'">{{item.n1+item.n2+item.n3
+                  < 11 ? '小' : '大'}}</span>
+              </p>
+              <p>
+                <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodluck' : 'goodidea'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
+              </p>
             </li>
           </ul>
+          <p class="lookAll">
+            <button @click="lookAll">查看更多</button>
+          </p>
         </div>
         <div class="betk3-content-foot">
           <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
@@ -180,6 +224,7 @@
           </p>
         </div>
       </div>
+
     </div>
     <div class="betk3-footer">
       <div class="betk3-footer-top" v-show="zhu > 0">
@@ -267,6 +312,7 @@ export default {
       k:1,
       shownum:false,
       interval: null,//动画
+      lookAllUl:false,
       showTimesUp: false,
       betshow: false, //投注弹窗
       content: "提示内容!", //弹窗内容
@@ -481,6 +527,15 @@ export default {
     this.iscreat();
   },
   methods: {
+    //查看更多记录
+    lookAll(){
+      this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
+
+    },
+    lookAllDivTitle(){
+      this.lookAllUl = !this.lookAllUl;
+    },
     //筛子动画
     start() {
       var _this = this;
@@ -560,7 +615,7 @@ export default {
         this.start();
       }
       this.shownum = true;
-      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 10 }}).then(res => {
+      this.$http.get(this.$store.state.url + "api/lottery/getPastOpen", {params: { lotteryId: this.$route.query.id, count: 20 }}).then(res => {
           this.getPastOpens = res.data.data;
           if (Number(res.data.data[0].seasonId) !== this.seasonId3) {
               this.reGetPastOp();

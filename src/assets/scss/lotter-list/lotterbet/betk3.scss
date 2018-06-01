@@ -10,7 +10,7 @@
     height: 56px;
     font-size: 16px;
     padding: 0px 16px;
-    background: rgb(175,58,49); // background: #333;
+    background: rgb(175, 58, 49);
     color: #fff;
     & li {
       width: 33.33%;
@@ -141,6 +141,7 @@
 }
 
 .betk3-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -181,8 +182,7 @@
             width: 76px;
             height: 24px;
             line-height: 24px;
-            overflow: hidden;
-            background: rgb(26, 61, 45);
+            overflow: hidden; // background: rgb(26, 61, 45);
             padding: 4px 8px;
             border-radius: 0px 0px 0px 0px;
             & .span {
@@ -308,11 +308,40 @@
   }
 }
 
-.betk3-content-top-pop {
+.lookAllDiv {
+  display: flex;
   position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100%;
+  height: 100%;
   background: #22563f;
-  & ul {
+  & .lookAllDivTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 6%;
+    line-height: 1.493333rem;
+    background: rgb(175, 58, 49);
+    color: #FFF;
+    font-size: 18px;
+    & i {
+      position: absolute;
+      left: 15px;
+      font-size: 20px;
+      color: #FFF;
+      margin-left: 15px;
+    }
+  }
+  & .lookAllUl {
+    width: 100%;
+    height: 94%;
+    background: #22563f;
+    position: absolute;
+    z-index: 1000;
+    top: 6%;
+    left: 0px;
     & li {
       display: flex;
       & p {
@@ -354,6 +383,48 @@
           right: -8px;
         }
       }
+      & .goodluck {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        -o-justify-content: center;
+        justify-content: center;
+        width: 19px;
+        height: 19px;
+        background: #5691D7;
+        color: #FFF;
+        border-radius: 2px;
+      }
+      & .goodidea {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        -o-justify-content: center;
+        justify-content: center;
+        width: 19px;
+        height: 19px;
+        background: #FF961F;
+        color: #FFF;
+        border-radius: 2px;
+      }
     }
     & li:nth-child(1) {
       border-top: 1px solid hsla(0, 0%, 100%, .3);
@@ -365,10 +436,133 @@
   }
 }
 
+.betk3-content-top-pop {
+  position: absolute;
+  width: 100%;
+  background: #22563f;
+  & .look {
+    & li {
+      display: flex;
+      & p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #caebda;
+        padding: 4px 0px;
+        & a {
+          width: 20px;
+          height: 20px;
+          overflow: hidden;
+          color: #caebda;
+          margin-right: 4px;
+          & img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+      & p:nth-child(1),
+      & p:nth-child(2) {
+        width: 30%;
+      }
+      & p:nth-child(3),
+      & p:nth-child(4),
+      & p:nth-child(5) {
+        width: 12%;
+      }
+      & p:nth-child(1) {
+        position: relative;
+        border-right: 1px solid #212121;
+        & i {
+          font-weight: 700;
+          font-size: 16px;
+          color: #212121;
+          position: absolute;
+          right: -8px;
+        }
+      }
+      & .goodluck {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        -o-justify-content: center;
+        justify-content: center;
+        width: 19px;
+        height: 19px;
+        background: #5691D7;
+        color: #FFF;
+        border-radius: 2px;
+      }
+      & .goodidea {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        -o-justify-content: center;
+        justify-content: center;
+        width: 19px;
+        height: 19px;
+        background: #FF961F;
+        color: #FFF;
+        border-radius: 2px;
+      }
+    }
+    & li:nth-child(1) {
+      border-top: 1px solid hsla(0, 0%, 100%, .3);
+      border-bottom: 1px solid #212121;
+      & p:nth-child(1) {
+        border: none;
+      }
+    }
+  }
+  .lookAll {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    margin: 8px 0px 4px;
+    & button {
+      border: 1px solid #caebda;
+      background: none;
+      color: #caebda;
+      padding: 4px 20px;
+      border-radius: 4px;
+    }
+  }
+}
+
 .betk3-footer {
   position: relative;
   background: #333;
-  color: rgb(175,58,49);
+  color: rgb(175, 58, 49);
   width: 100%;
   & .betk3-footer-top {
     position: absolute;
@@ -463,7 +657,7 @@
       width: 100px;
       color: #fff;
       border-radius: 6px;
-      background: rgb(175,58,49);
+      background: rgb(175, 58, 49);
     }
   }
 }
@@ -1553,7 +1747,7 @@
     height: 36px;
     color: #fff;
     font-size: 16px;
-    background: rgb(175,58,49);
+    background: rgb(175, 58, 49);
   }
   & li:nth-child(2) {
     min-height: 54px;
@@ -1601,7 +1795,7 @@
   border-radius: 4px;
   max-width: 300px;
   min-width: 180px;
-  background: rgb(175,58,49);
+  background: rgb(175, 58, 49);
 }
 
 .menu-list.van-popup {

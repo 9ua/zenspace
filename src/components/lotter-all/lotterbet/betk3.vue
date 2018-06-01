@@ -43,33 +43,36 @@
         <i class="el-icon-arrow-left" @click="lookAllDivTitle"></i>
         查看更多
       </p>
-      <ul class="lookAllUl">
-        <li>
-          <p>期号</p>
-          <p>开奖号码</p>
-          <p>和值</p>
-          <p>大小</p>
-          <p>单双 </p>
-        </li>
-        <li v-for="(item,index) in getPastOpens" :key="index">
-          <p>{{item.seasonId.substring(4).split("-").join("")}}
-            <i class="el-icon-minus"></i>
-          </p>
-          <p>
-            <a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt="" /></a>
-            <a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt="" /></a>
-            <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
-          </p>
-          <p>{{item.n1+item.n2+item.n3}}</p>
-          <p>
-            <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodluck' : 'goodidea'">{{item.n1+item.n2+item.n3
-              < 11 ? '小' : '大'}}</span>
-          </p>
-          <p>
-            <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodluck' : 'goodidea'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
-          </p>
-        </li>
-      </ul>
+      <div class="lookAllUlBox">
+        <ul class="lookAllUl">
+          <li>
+            <p>期号</p>
+            <p>开奖号码</p>
+            <p>和值</p>
+            <p>大小</p>
+            <p>单双 </p>
+          </li>
+          <li v-for="(item,index) in getPastOpens" :key="index">
+            <p>{{item.seasonId.substring(4).split("-").join("")}}
+              <i class="el-icon-minus"></i>
+            </p>
+            <p>
+              <a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt="" /></a>
+              <a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt="" /></a>
+              <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
+            </p>
+            <p>{{item.n1+item.n2+item.n3}}</p>
+            <p>
+              <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodluck' : 'goodidea'">{{item.n1+item.n2+item.n3
+                < 11 ? '小' : '大'}}</span>
+            </p>
+            <p>
+              <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodluck' : 'goodidea'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
+            </p>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
     <div class="betk3-content">

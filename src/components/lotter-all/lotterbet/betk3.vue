@@ -87,20 +87,17 @@
               <div class="num">
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <!-- <div :key="i" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ i +'.png') + ')'}"></div> -->
-                    <div :key="i">{{i}}</div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ i +'.png') + ')'}"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <!-- <div :key="j" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ j +'.png') + ')'}"></div> -->
-                    <div :key="j">{{j}}</div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ j +'.png') + ')'}"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <!-- <div :key="k" :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ k +'.png') + ')'}"></div> -->
-                    <div :key="k">{{k}}</div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ k +'.png') + ')'}"></div>
                   </transition>
                 </div>
               </div>

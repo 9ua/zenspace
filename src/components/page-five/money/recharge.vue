@@ -46,7 +46,7 @@
 					<span>{{chargeamount}}</span>
 				</li>
 				<li>
-					<p>选择预充值银行</p>
+					<p>选择银行</p>
 					<span>{{selectBank}}</span>
 				</li>
 				<li>

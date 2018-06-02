@@ -46,7 +46,7 @@
 					<span>{{chargeamount}}</span>
 				</li>
 				<li>
-					<p>账号</p>
+					<p>选择银行</p>
 					<span>{{selectBank}}</span>
 				</li>
 				<li>
@@ -168,9 +168,7 @@ export default {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
 				this.bankList = res.data.data;
 				for(let i=0;i<res.data.data.length;i++) {
-					if(i >= 3){
 						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
-					};
 				};
 			}).catch((error) => {
 					console.log("获取列表Error");

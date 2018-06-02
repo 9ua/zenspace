@@ -191,9 +191,7 @@ export default {
     getBankNameList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
 				for(let i=0;i<res.data.data.length;i++) {
-					if(i >= 3){
 						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
-					};
 				};
 			}).catch((error) => {
 					console.log("获取列表Error");

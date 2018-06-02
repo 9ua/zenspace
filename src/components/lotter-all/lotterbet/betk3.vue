@@ -81,9 +81,9 @@
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
             <p>{{seasonId-1}}期开奖号码</p>
             <div class="contnet-left-num" v-show="!shownum">
-              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
-              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
-              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n3 +'.png') + ')'}"></p>
+              <p :style="{backgroundImage: 'url(' + require('../../../assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
+              <p :style="{backgroundImage: 'url(' + require('../../../assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
+              <p :style="{backgroundImage: 'url(' + require('../../../assets/img/one/n'+ item.n3 +'.png') + ')'}"></p>
               <i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
             <div class="contnet-left-num" v-show="shownum">

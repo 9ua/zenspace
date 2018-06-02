@@ -234,7 +234,7 @@
           <p>每注金额</p><input type="number" v-model="money" onfocus="this.select()" />
           <span v-if="money === '' ">请输入要投注的金额</span>
           <span v-else>单注最高可中
-            <p>{{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(rates*1000)*money/1000 | keepTwoNum}}</p>元</span>
+            <p>{{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(rates*1000)*money/1000 | keepThreeNum}}</p>元</span>
         </div>
       </div>
       <div class="betk3-footer-buttom">

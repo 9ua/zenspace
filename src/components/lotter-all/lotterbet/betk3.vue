@@ -72,9 +72,7 @@
           </li>
         </ul>
       </div>
-
     </div>
-
     <div class="betk3-content">
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">

@@ -90,17 +90,17 @@
               <div class="num">
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ i +'.png') + ')'}"></div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/D'+ i +'.png') + ')'}"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ j +'.png') + ')'}"></div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/D'+ j +'.png') + ')'}"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ k +'.png') + ')'}"></div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/D'+ k +'.png') + ')'}"></div>
                   </transition>
                 </div>
               </div>
@@ -541,10 +541,10 @@ export default {
       var _this = this;
       this.startyet = true;
       this.interval = setInterval(function() {
-        _this.i = Math.floor(Math.random() * 6+1);
-        _this.j = Math.floor(Math.random() * 6+1);
-        _this.k = Math.floor(Math.random() * 6+1);
-      }, 10)
+        _this.i = Math.floor(Math.random() * 3+1);
+        _this.j = Math.floor(Math.random() * 3+1);
+        _this.k = Math.floor(Math.random() * 3+1);
+      }, 39)
     },
     end() {
       var _this = this;

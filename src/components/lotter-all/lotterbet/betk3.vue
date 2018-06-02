@@ -90,17 +90,17 @@
               <div class="num">
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/D'+ i +'.png') + ')'}"></div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ i +'.png') + ')'}"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/D'+ j +'.png') + ')'}"></div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ j +'.png') + ')'}"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/D'+ k +'.png') + ')'}"></div>
+                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ k +'.png') + ')'}"></div>
                   </transition>
                 </div>
               </div>

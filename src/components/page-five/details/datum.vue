@@ -11,8 +11,7 @@
       <li>
         <p>昵称</p>
         <div>
-          <el-input placeholder="请设置昵称" v-model="nickname" :value="nickname" clearable ref="isnickname" @blur="nickNameFocus" v-show="isnicknameto">
-            <!-- v-show="nickname === '' ? true : false" -->
+          <el-input placeholder="请设置昵称" v-model="nickname" :value="nickname" clearable ref="isnickname" @blur="nickNameFocus" @focus="nickNameFocus" v-show="isnicknameto">
           </el-input>
           <p>{{nickname}}</p>
           <i v-show="!nickname" class="el-icon-arrow-right"></i>
@@ -137,9 +136,14 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
       },
       //昵称
       nickNameFocus(){
-        this.nickname = this.$refs.isnickname.value;
-        this.$store.state.nickname = this.nickname;
-        setStore('nickname',this.$store.state.nickname);
+        if(this.$refs.isnickname.value === ""){
+          this.isnicknameto = true;
+        }else if(this.$refs.isnickname.value !== ""){
+          this.nickname = this.$refs.isnickname.value;
+          this.$store.state.nickname = this.nickname;
+          setStore('nickname',this.$store.state.nickname);
+          this.saveUserData();
+        }
       },
       //提交个人信息
       saveUserData(){
@@ -150,6 +154,10 @@ import { setStore, getStore,removeStore } from '../../../config/mutil'
           formData.append('sex', this.sex);
           formData.append('birthday', this.birthday);
           this.$axios.post(this.$store.state.url+'api/userCenter/saveUserData', formData, config).then((res) => {
+            if(this.$refs.isnickname.value !== ""){
+              this.isnicknameto = false;
+            }
+            
           }).catch((error) => {
           		console.log("用户信息保存失败")
           })

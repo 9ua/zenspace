@@ -63,11 +63,11 @@
             </p>
             <p>{{item.n1+item.n2+item.n3}}</p>
             <p>
-              <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodluck' : 'goodidea'">{{item.n1+item.n2+item.n3
+              <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'">{{item.n1+item.n2+item.n3
                 < 11 ? '小' : '大'}}</span>
             </p>
             <p>
-              <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodluck' : 'goodidea'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
+              <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
             </p>
           </li>
         </ul>
@@ -132,11 +132,11 @@
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
               <p>
-                <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodluck' : 'goodidea'">{{item.n1+item.n2+item.n3
+                <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'">{{item.n1+item.n2+item.n3
                   < 11 ? '小' : '大'}}</span>
               </p>
               <p>
-                <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodluck' : 'goodidea'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
+                <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
               </p>
             </li>
           </ul>

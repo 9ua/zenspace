@@ -83,14 +83,16 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
         this.$store.state.loginStatus = false;
     }
     if (data.data.pup === true) {
-        if (data.data.data.message){
+        if (data.data.data.message && data.data.data.message !=="参数错误"){
             Message.error({
                 message: data.data.data.message
             })
         } else {
+            if (data.data.data !=="参数错误"){
             Message.error({
                 message: data.data.data
             })
+            }
         }
     }
 

@@ -519,6 +519,7 @@ export default {
       this.getPlayTree();
     }
     this.$route.meta.isBack=false;
+    console.log(this.playBonus);
   },
   destroyed() {
     this.endCount();

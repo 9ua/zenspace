@@ -1422,6 +1422,10 @@
     // 保留三个小数,不四舍五入
     filters: {
       keepTwoNum(value) {
+        value = parseInt(value * 100) / 100;
+        return value;
+      },
+      keepThreeNum(value) {
         value = parseInt(value * 1000) / 1000;
         return value;
       }

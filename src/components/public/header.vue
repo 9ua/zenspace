@@ -5,7 +5,7 @@
       <p v-for="(contents,index) in content" :key="index">{{contents.show === routerUrl ? contents.title : ''}} </p>
       <img v-show="routerUrl === 'one'" src="@/assets/img/one/logo.png" />
       <router-link v-show="routerUrl === 'five'" class="dim" to="service" tag="li">客服</router-link>
-      <a href="$store.state.url+'app/android.apk'" v-show="routerUrl === 'one'" target="_top"><b>APP</b><b class="el-icon-download"></b></a>
+      <a :href="$store.state.url+'app/android.apk'" v-show="routerUrl === 'one'" target="_top"><b>APP</b><b class="el-icon-download"></b></a>
     </div>
   </div>
 </template>

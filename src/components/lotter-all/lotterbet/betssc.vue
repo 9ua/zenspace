@@ -46,12 +46,42 @@
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
             <p>{{item.seasonId.slice(4)}}期开奖号码</p>
-            <div>
+            <div v-show="!shownum">
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
               <p>{{item.n3}}</p>
               <p>{{item.n4}}</p>
               <p>{{item.n5}}</p>
+              <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+            </div>
+            <div class="contnet-left-num" v-show="shownum">
+              <div class="num">
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{i}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{j}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{k}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{l}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{h}}</div>
+                  </transition>
+                </div>
+              </div>
               <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </div>
           </div>
@@ -195,6 +225,13 @@
   export default {
     data() {
       return {
+      	i:0,//动画
+	      j:0,
+	      k:0,
+	      l:0,
+	      h:0,
+	      shownum:false,
+	      interval: null,//动画
         youhezhi: false, //判断是否有‘和’
         showTimesUp: false,
         showpop: false, //弹窗
@@ -297,6 +334,22 @@
       }
     },
     methods: {
+    	//筛子动画
+	    start() {
+	      var _this = this;
+	      this.startyet = true;
+	      this.interval = setInterval(function() {
+	        _this.i = Math.floor(Math.random() * 9+1);
+	        _this.j = Math.floor(Math.random() * 9+1);
+	        _this.k = Math.floor(Math.random() * 9+1);
+	        _this.l = Math.floor(Math.random() * 9+1);
+	        _this.h = Math.floor(Math.random() * 9+1);
+	      }, 39)
+	    },
+	    end() {
+	      var _this = this;
+	      clearInterval(this.interval);
+	    },
       endCount() {
         clearInterval(this.timer);
         clearTimeout(this.timer2);
@@ -1700,12 +1753,19 @@
       },
       //获取过去开奖号码10个
       getPastOp() {
+      	if (this.startyet == false) {
+	        this.start();
+	      }
+	      this.shownum = true;
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', { params: { lotteryId: this.$route.query.id, count: 10 } }).then((res) => {
           this.getPastOpens = res.data.data;
           if (Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3 - res.data.data[0].seasonId) <= 2) {
             this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
           }
         }).catch((error) => {
           console.log("获取过去开奖号码No")

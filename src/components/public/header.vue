@@ -5,8 +5,7 @@
       <p v-for="(contents,index) in content" :key="index">{{contents.show === routerUrl ? contents.title : ''}} </p>
       <img v-show="routerUrl === 'one'" src="@/assets/img/one/logo.png" />
       <router-link v-show="routerUrl === 'five'" class="dim" to="service" tag="li">客服</router-link>
-      
-      <!--<router-link to="/one" tag="span" v-show="routerUrl === 'five'">客服</router-link>-->
+      <a href="$store.state.url+'app/android.apk'" v-show="routerUrl === 'one'" target="_top"><b>APP</b><b class="el-icon-download"></b></a>
     </div>
   </div>
 </template>
@@ -45,7 +44,6 @@
     position: absolute;
     right: 16px;
     padding: 3px 8px 6px;
-    // padding: 12px;
     & span {
         padding: 3px;
     }
@@ -70,9 +68,18 @@
         position: absolute;
         left: 16px;
       }
-      & span{
+      & a{
+      	display: flex;
+      	justify-content: space-between;
+      	align-items: center;
         position: absolute;
-        right: 12px;
+        right: 16px;
+        font-size: 20px;
+        width: 60px;
+        color: #FFFFFF;
+        & b:nth-child(2){
+        	font-size: 26px;
+        }
       }
     }
   }

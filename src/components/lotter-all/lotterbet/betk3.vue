@@ -519,7 +519,6 @@ export default {
       this.getPlayTree();
     }
     this.$route.meta.isBack=false;
-    console.log(this.playBonus);
   },
   destroyed() {
     this.endCount();
@@ -548,7 +547,6 @@ export default {
     end() {
       var _this = this;
       clearInterval(this.interval);
-      // this.interval = null
     },
     endCount(){
         clearInterval(this.timer);

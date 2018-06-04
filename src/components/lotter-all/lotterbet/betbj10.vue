@@ -48,27 +48,71 @@
             <p>{{item.seasonId}}期开奖号码
               <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </p>
-            <div>
-              <p>{{item.n1
-                < 10 ? '0'+item.n1 : item.n1}}</p>
-                  <p>{{item.n2
-                    < 10 ? '0'+item.n2 : item.n2}}</p>
-                      <p>{{item.n3
-                        < 10 ? '0'+item.n3 : item.n3}}</p>
-                          <p>{{item.n4
-                            < 10 ? '0'+item.n4 : item.n4}}</p>
-                              <p>{{item.n5
-                                < 10 ? '0'+item.n5 : item.n5}}</p>
-                                  <p>{{item.n6
-                                    < 10 ? '0'+item.n6 : item.n6}}</p>
-                                      <p>{{item.n7
-                                        < 10 ? '0'+item.n7 : item.n7}}</p>
-                                          <p>{{item.n8
-                                            < 10 ? '0'+item.n8 : item.n8}}</p>
-                                              <p>{{item.n9
-                                                < 10 ? '0'+item.n9 : item.n9}}</p>
-                                                  <p>{{item.n10
-                                                    < 10 ? '0'+item.n10 : item.n10}}</p>
+            <div v-show="!shownum">
+              <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
+              <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>
+              <p>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</p>
+              <p>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</p>
+              <p>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</p>
+              <p>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</p>
+              <p>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</p>
+              <p>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</p>
+              <p>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</p>
+              <p>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</p>
+            </div>
+            <div class="contnet-left-num" v-show="shownum">
+              <div class="num">
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{i}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{j}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{k}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{l}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{h}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{q}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{w}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{e}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{r}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{t}}</div>
+                  </transition>
+                </div>
+              </div>
             </div>
           </div>
           <div class="content-right">
@@ -223,6 +267,18 @@
   export default {
     data() {
       return {
+      	i:1,//动画
+	      j:1,
+	      k:1,
+	      l:1,
+	      h:1,
+	      q:1,
+	      w:1,
+	      e:1,
+	      r:1,
+	      t:1,
+	      shownum:false,
+	      interval: null,//动画
         youdashuang:false,//判断是否有‘大双’
         showTimesUp: false,
         showpop: false, //弹窗
@@ -325,6 +381,27 @@
       }
     },
     methods: {
+    	//筛子动画
+	    start() {
+	      var _this = this;
+	      this.startyet = true;
+	      this.interval = setInterval(function() {
+	        _this.i = Math.floor(Math.random() * 10+1);
+	        _this.j = Math.floor(Math.random() * 10+1);
+	        _this.k = Math.floor(Math.random() * 10+1);
+	        _this.l = Math.floor(Math.random() * 10+1);
+	        _this.h = Math.floor(Math.random() * 10+1);
+	        _this.q = Math.floor(Math.random() * 10+1);
+	        _this.w = Math.floor(Math.random() * 10+1);
+	        _this.e = Math.floor(Math.random() * 10+1);
+	        _this.r = Math.floor(Math.random() * 10+1);
+	        _this.t = Math.floor(Math.random() * 10+1);
+	      }, 39)
+	    },
+	    end() {
+	      var _this = this;
+	      clearInterval(this.interval);
+	    },
       endCount(){
         clearInterval(this.timer);
         clearTimeout(this.timer2);
@@ -1342,12 +1419,19 @@
       },
       //获取过去开奖号码10个
       getPastOp() {
+      	if (this.startyet == false) {
+	        this.start();
+	      }
+	      this.shownum = true;
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
           if ( Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
                   this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
           }
         }).catch((error) => {
           console.log("获取过去开奖号码No")

@@ -24,6 +24,7 @@ import {
 } from 'vant';
 import 'vant/lib/vant-css/index.css'
 import 'lib-flexible/flexible.js'
+import { Picker } from 'vant';
 import './assets/iconfont/iconfont.css'
 import './assets/font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
@@ -68,6 +69,7 @@ Vue.use(Icon);
 Vue.component(Radio.name, Radio);
 Vue.component(RadioGroup.name, RadioGroup);
 Vue.use(Carousel);
+Vue.use(Picker);
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 

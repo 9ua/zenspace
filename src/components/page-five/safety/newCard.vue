@@ -84,8 +84,9 @@
 				</ul>
 			</div>
 		</van-popup>
-		<van-actionsheet class="mIcode-go" v-model="show1" :actions="payway" cancel-text="取消">
-		</van-actionsheet>
+		<van-popup v-model="show1" position="bottom" :overlay="true" >
+			<van-picker show-toolbar title="请选择银行" :columns="payway2" @cancel="onCancel"  @confirm="onConfirm" />
+		</van-popup>
 	</div>
 </template>
 <script>
@@ -105,7 +106,8 @@ export default {
 					show3:false,
 					selectBank:'请选择银行',
 					bankList:[],
-          payway:[],
+		  payway:[],
+		  payway2:[],
           content:'',
 	  }
 	},
@@ -117,7 +119,8 @@ export default {
 			this.$http.get(this.$store.state.url+'api/proxy/getBankNameList').then((res) => {
 				this.bankList = res.data.data;
 				for(let i=0;i<res.data.data.length;i++) {
-						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id,callback: this.onClick});
+						this.payway.push({name:res.data.data[i].title,id:res.data.data[i].id});
+						this.payway2.push(res.data.data[i].title);
 				};
 			}).catch((error) => {
 					console.log("获取列表Error");
@@ -130,6 +133,15 @@ export default {
 		onClick(item){
 			this.selectBank = item.name;
 			this.bankNameId = item.id;
+			this.show1 = ! this.show1;
+		},
+		onConfirm(item , index){
+			console.log(item,index,this.payway[index].id);
+			this.bankNameId = this.payway[index].id;
+			this.selectBank = this.payway[index].name;
+			this.show1 = ! this.show1;
+		},
+		onCancel(){
 			this.show1 = ! this.show1;
 		},
 		sendReq(){

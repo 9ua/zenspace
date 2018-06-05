@@ -1,16 +1,15 @@
 <template>
   <div class="profit">
     <ul v-show="showFlag">
-      <li v-for="(item,index) in paishu" :key="index" v-show="index < 10">
-        <!-- <li v-for="(item,index) in paishu" @click="selectFood(item,$event)" :key="index" v-show="index <10"> -->
+      <li v-for="(item,index) in getLastDay" :key="index" v-show="index < 10">
         <div class="profit-left">
-          <img :src="item.paths" />
+          <img :src='"@/assets/img/five/"+item.img+".jpg"' />
           <div class="profit-xq">
             <p>账号昵称：
-              <span>{{item.name | capitalize}}</span>
+              <span>{{item.account | capitalize}}</span>
             </p>
             <p>昨日盈利：
-              <span>￥{{item.money}}</span>
+              <span>￥{{item.bonus}}</span>
             </p>
           </div>
         </div>
@@ -76,11 +75,12 @@
         kk:[],
         time59:'',
         newdata:new Date(),
-
+        getLastDay:0,
       }
     },
     mounted(){
       this.daojishi();
+      this.getLastDayWinList();
     },
     methods: {
       selectFood(item, event) {
@@ -92,9 +92,10 @@
       	this.showFlag = !isshow.showPage;
       },
       //获取昨日盈利数据
-      gitdata(){
-        this.$http .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", { params: { count:10 } }).then(res => {
-          console.log("haaa");
+      getLastDayWinList(){
+        this.$http .get(this.$store.state.url + "api/lottery/getLastDayWinList").then(res => {
+          this.getLastDay = res.data.data;
+          console.log(this.getLastDay);
         }) .catch(error => {
           console.log("获取昨日盈利数据No");
         });

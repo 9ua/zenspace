@@ -1,7 +1,7 @@
 <template>
   <div class="profit">
     <ul v-show="showFlag">
-      <li v-for="(item,index) in paishu" :key="index" v-show="index <10">
+      <li v-for="(item,index) in paishu" :key="index" v-show="index < 10">
         <!-- <li v-for="(item,index) in paishu" @click="selectFood(item,$event)" :key="index" v-show="index <10"> -->
         <div class="profit-left">
           <img :src="item.paths" />
@@ -80,7 +80,6 @@
       }
     },
     mounted(){
-      // this.paixu();
       this.daojishi();
     },
     methods: {
@@ -91,6 +90,14 @@
       },
       haashow(isshow){
       	this.showFlag = !isshow.showPage;
+      },
+      //获取昨日盈利数据
+      gitdata(){
+        this.$http .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", { params: { count:10 } }).then(res => {
+          console.log("haaa");
+        }) .catch(error => {
+          console.log("获取昨日盈利数据No");
+        });
       },
       paixu(){
         setStore('paixuArry',this.shuffle(this.haa).slice(0,10));

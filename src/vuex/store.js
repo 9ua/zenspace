@@ -33,12 +33,12 @@ const state = {
   playGroupsssc: null,
 }
 if (process.env.NODE_ENV === 'production') {
-if (location.hostname === '115.144.238.217')
+  if (location.hostname === '115.144.238.217')
     state.url = 'http://' + location.hostname + '/';
-else
+  else
     state.url = 'https://' + location.hostname.replace('m.', '') + '/';
 } else {
-state.url = 'http://115.144.238.217/';
+  state.url = 'http://115.144.238.217/';
 }
 
 export default new Vuex.Store({

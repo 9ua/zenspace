@@ -14,6 +14,7 @@ const state = {
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
   },
+  hostname:location.hostname,
   JSESSIONICookie: '',
   loginStatus: getStore('loginSta'), //登陆状态
   Globalusername: getStore('username'), //全局账号

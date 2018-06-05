@@ -95,7 +95,6 @@
       getLastDayWinList(){
         this.$http .get(this.$store.state.url + "api/lottery/getLastDayWinList").then(res => {
           this.getLastDay = res.data.data;
-          console.log(this.getLastDay);
         }) .catch(error => {
           console.log("获取昨日盈利数据No");
         });

@@ -41,99 +41,108 @@
   </div>
 </template>
 <script>
-  import md5 from 'js-md5';
-  import headers from '../public/header';
-  import VueCookie from "vue-cookie";
-  import { setStore, getStore,removeStore } from '../../config/mutil'
-  import { mapGetters, mapActions } from 'vuex'
-  export default {
-    data() {
-      return {
-        pop: false,
-        pwd: false,
-        loginReq:true,
-        checked: false,//记住密码否?
-        content: '',//弹窗内容
-        newDate: null,//时间戳
-        errorcode:false,//判断账号密码错误次数
-        loginStatus:false,//当前登陆状态
-        captchaCodeImg:'',
-        newUserInfo: {
-          user: '',
-          pwd: '',
-          verification:'',
-          rempwd:'',
-          
-        }
+import md5 from "js-md5";
+import headers from "../public/header";
+import VueCookie from "vue-cookie";
+import { setStore, getStore, removeStore } from "../../config/mutil";
+import { mapGetters, mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      pop: false,
+      pwd: false,
+      loginReq: true,
+      checked: false, //记住密码否?
+      content: "", //弹窗内容
+      newDate: null, //时间戳
+      errorcode: false, //判断账号密码错误次数
+      loginStatus: false, //当前登陆状态
+      captchaCodeImg: "",
+      newUserInfo: {
+        user: "",
+        pwd: "",
+        verification: "",
+        rempwd: ""
       }
+    };
+  },
+  created() {
+    localStorage.clear();
+    this.checkeds();
+  },
+  methods: {
+    getCaptchaCode() {
+      this.newDate = new Date().getTime();
+      this.captchaCodeImg =
+        this.$store.state.url + "code.jpg?_=" + this.newDate;
     },
-    created() {
-      localStorage.clear();
-      this.checkeds();
-    },
-    methods: {
-    	getCaptchaCode() {
-        this.newDate = new Date().getTime();
-        this.captchaCodeImg = this.$store.state.url+ "code.jpg?_=" + this.newDate;
-      },
-      login() {
-        this.loginReq = false;
-        setTimeout(() => {
-          this.loginReq = true;
-        }, 1200);
-        const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
-        const pwd_yz = /^[A-Za-z0-9]{6,120}$/;
-        let yzuser = user_yz.test(this.newUserInfo.user);
-        let yzpwd = pwd_yz.test(this.newUserInfo.pwd);
-        if (this.newUserInfo.user === '') {
-          this.content = '用户名不能为空';
-          this.pop = true;
-        } else if (this.newUserInfo.pwd === '') {
-          this.content = '密码不能为空';
-          this.pop = true;
-        } else if (yzuser == false) {
-          this.content = '用户名：字母开头，6-20位，包括大小字母、数字'
-          this.pop = true
-        } else if (yzpwd == false) {
-          this.content = '密码：6-20位，包括大小字母、数字'
-          this.pop = true
-        } else if (yzuser == true && yzpwd == true) {
-          let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
-          let pwd = this.newUserInfo.pwd;
-          if (this.$cookie.get('password') && pwd === "PASSWORD") {
-              pwd = this.$cookie.get('password');
-          } else { pwd = md5(this.newUserInfo.pwd); }
-          let formData = new FormData();
-          formData.append('account', this.newUserInfo.user);
-          formData.append('password', pwd);
-          formData.append('code',this.newUserInfo.verification);
-          this.$axios.post(this.$store.state.url+'api/user/login', formData, config).then((res) => {
+    login() {
+      this.loginReq = false;
+      setTimeout(() => {
+        this.loginReq = true;
+      }, 1200);
+      const user_yz = /^[A-Za-z][A-Za-z0-9]{5,20}$/;
+      const pwd_yz = /^[A-Za-z0-9]{6,120}$/;
+      let yzuser = user_yz.test(this.newUserInfo.user);
+      let yzpwd = pwd_yz.test(this.newUserInfo.pwd);
+      if (this.newUserInfo.user === "") {
+        this.content = "用户名不能为空";
+        this.pop = true;
+      } else if (this.newUserInfo.pwd === "") {
+        this.content = "密码不能为空";
+        this.pop = true;
+      } else if (yzuser == false) {
+        this.content = "用户名：字母开头，6-20位，包括大小字母、数字";
+        this.pop = true;
+      } else if (yzpwd == false) {
+        this.content = "密码：6-20位，包括大小字母、数字";
+        this.pop = true;
+      } else if (yzuser == true && yzpwd == true) {
+        let config = {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true
+        };
+        let pwd = this.newUserInfo.pwd;
+        if (this.$cookie.get("password") && pwd === "PASSWORD") {
+          pwd = this.$cookie.get("password");
+        } else {
+          pwd = md5(this.newUserInfo.pwd);
+        }
+        let formData = new FormData();
+        formData.append("account", this.newUserInfo.user);
+        formData.append("password", pwd);
+        formData.append("code", this.newUserInfo.verification);
+        this.$axios
+          .post(this.$store.state.url + "api/user/login", formData, config)
+          .then(res => {
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
             this.$store.state.userType = res.data.data.userType;
-            setStore('JSESSIONICookie',this.$store.state.JSESSIONICookie);
-            setStore('userType',this.$store.state.userType);
+            setStore("JSESSIONICookie", this.$store.state.JSESSIONICookie);
+            setStore("userType", this.$store.state.userType);
             this.loginSta = true;
             this.$store.state.loginStatus = this.loginSta;
-            setStore('loginSta',this.loginSta);
-          	if(res.data.code === 1){
-          		this.$store.state.Globalusername = res.data.data.account;
+            setStore("loginSta", this.loginSta);
+            if (res.data.code === 1) {
+              this.$store.state.Globalusername = res.data.data.account;
               this.$store.state.Globalpassword = this.newUserInfo.pwd;
-              setStore('username',this.$store.state.Globalusername);
-              setStore('password',pwd);
-              if ( this.checked === true) {
-                setStore('username',this.$store.state.Globalusername);
-                setStore('password',pwd);
-                this.$cookie.set('username', res.data.data.account , { expires: '1M' });
-                this.$cookie.set('password', pwd , { expires: '1M' });
+              setStore("username", this.$store.state.Globalusername);
+              setStore("password", pwd);
+              if (this.checked === true) {
+                setStore("username", this.$store.state.Globalusername);
+                setStore("password", pwd);
+                this.$cookie.set("username", res.data.data.account, {
+                  expires: "1M"
+                });
+                this.$cookie.set("password", pwd, { expires: "1M" });
               } else {
-                this.$cookie.delete('username');
-                this.$cookie.delete('password');
+                this.$cookie.delete("username");
+                this.$cookie.delete("password");
               }
-              this.$router.push({path:'/one'});
-          	} else {
+              this.$router.push({ path: "/one" });
+            } else {
               if (res.data.code === 0) {
-                this.$cookie.delete('username');
-                this.$cookie.delete('password');
+                this.$cookie.delete("username");
+                this.$cookie.delete("password");
               }
               if (res.data.data.errCount >= 3) {
                 this.getCaptchaCode();
@@ -143,37 +152,39 @@
               } else {
                 this.errorcode = false;
               }
-              this.newUserInfo.pwd = '';
+              this.newUserInfo.pwd = "";
               this.checked = false;
-              removeStore('password');
+              removeStore("password");
             }
-          }).catch((error) => {
-          		console.log(error)
           })
-        }
-      },
-    	checkeds(){
-        console.log("Ver.1.0.0.6");
-        if ( this.$cookie.get('password')) {
-          this.checked = true;
-          this.newUserInfo.user = this.$cookie.get('username');
-          this.newUserInfo.pwd = "PASSWORD";
-          this.newUserInfo.rempwd = this.$cookie.get('password');
-        }
-    	},
+          .catch(error => {
+            console.log(error);
+          });
+      }
     },
-    components: {
-      headers
-    },
-    directives: {
-      focus: {
-        inserted: function(el) {
-          el.focus()
-        }
+    checkeds() {
+      console.log("Ver.1.0.0.6");
+
+      if (this.$cookie.get("password")) {
+        this.checked = true;
+        this.newUserInfo.user = this.$cookie.get("username");
+        this.newUserInfo.pwd = "PASSWORD";
+        this.newUserInfo.rempwd = this.$cookie.get("password");
+      }
+    }
+  },
+  components: {
+    headers
+  },
+  directives: {
+    focus: {
+      inserted: function(el) {
+        el.focus();
       }
     }
   }
+};
 </script>
 <style lang="scss" scopde>
-  @import '../../assets/scss/login/login.scss';
+@import "../../assets/scss/login/login.scss";
 </style>

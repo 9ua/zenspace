@@ -43,7 +43,6 @@
 		},
     methods:{
     	getLotterlist(){
-				// console.log(navigator.userAgent);
 
 				this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
 							this.title = '';

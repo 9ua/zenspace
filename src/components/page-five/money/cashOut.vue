@@ -114,7 +114,7 @@ export default {
 		  		this.moneyDepositMin = res.data.data.moneyDepositMin;
 		  		this.countMax = res.data.data.countMax;
 				for(let i=0;i<res.data.data.bankUserList.length;i++) {
-					this.payway.push({name:"["+res.data.data.bankUserList[i].id+"]  "+res.data.data.bankUserList[i].bankTitle,id:res.data.data.bankUserList[i].id,callback: this.onClick});
+					this.payway.push({name:res.data.data.bankUserList[i].bankTitle,id:res.data.data.bankUserList[i].id,callback: this.onClick});
 				};
 			}).catch((error) => {
 					console.log("获取列表Error");

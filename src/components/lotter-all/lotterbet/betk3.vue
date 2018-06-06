@@ -286,7 +286,7 @@
             <p>温馨提示！</p>
           </div>
           <div class="cont">
-            <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+            <p>{{seasonId3}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
           </div>
           <div class="but">
             <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
@@ -583,9 +583,15 @@ export default {
         })
         .then(res => {
           if (res.data.code === 1) {
-            this.seasonId2 = res.data.data.seasonId;
-            this.seasonId3 = this.seasonId2 - 1;
-            this.seasonId = this.seasonId2.slice(4);
+            if (this.$route.query.id === "bjk3") {
+              this.seasonId2 = res.data.data.seasonId;
+              this.seasonId3 = this.seasonId2 - 1;
+              this.seasonId = this.seasonId2 *1 ;
+            } else {
+              this.seasonId2 = res.data.data.seasonId;
+              this.seasonId3 = this.seasonId2 - 1;
+              this.seasonId = this.seasonId2.slice(4) *1;
+            }
             this.today = res.data.data.restSeconds;
             // this.countDown = res.data.data.restSeconds;
             this.setTimeMode();

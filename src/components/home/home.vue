@@ -1,9 +1,7 @@
 <template>
   <div class="home">
-    <iscroll-view class="scroll-view">
-      <div class="home-cneter">
+    <iscroll-view class="home-cneter scroll-view">
         <router-view></router-view>
-      </div>
     </iscroll-view>
     <div class="home-footer">
       <ul>

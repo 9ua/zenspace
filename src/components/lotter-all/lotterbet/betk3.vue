@@ -80,7 +80,8 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
-            <p>{{seasonId-1}}期开奖号码</p>
+            <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期开奖号码</p>
+            <p v-else>{{lastSeasonId.slice(4)*1}}期开奖号码</p>
             <div class="contnet-left-num" v-show="!shownum">
               <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
               <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
@@ -292,7 +293,8 @@
             <p>温馨提示！</p>
           </div>
           <div class="cont">
-            <p>{{seasonId-1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+            <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+            <p v-else>{{lastSeasonId.slice(4)*1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
           </div>
           <div class="but">
             <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
@@ -346,6 +348,7 @@ export default {
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
       seasonId3: "", //当前期号-1
+      lastSeasonId:'',
       betsuccess: false,
       betGoshow: false,
       betk3ContentTopPop: false,
@@ -593,10 +596,12 @@ export default {
               this.seasonId2 = res.data.data.seasonId;
               this.seasonId3 = this.seasonId2 - 1;
               this.seasonId = this.seasonId2 *1 ;
+              this.lastSeasonId = res.data.data.lastSeasonId;
             } else {
               this.seasonId2 = res.data.data.seasonId;
               this.seasonId3 = this.seasonId2 - 1;
               this.seasonId = this.seasonId2.slice(4) *1;
+              this.lastSeasonId = res.data.data.lastSeasonId;
             }
             this.today = res.data.data.restSeconds;
             // this.countDown = res.data.data.restSeconds;
@@ -653,7 +658,7 @@ export default {
         })
         .then(res => {
           this.getPastOpens = res.data.data;
-          if (Number(res.data.data[0].seasonId) !== this.seasonId3) {
+          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
             this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);

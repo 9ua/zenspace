@@ -45,7 +45,10 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
-            <p>{{item.seasonId}}期开奖号码
+            <p v-if="$route.query.id === 'pk10'">{{lastSeasonId*1}}期开奖号码
+              <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+            </p>
+            <p v-else>{{lastSeasonId.slice(4)*1}}期开奖号码
               <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </p>
             <div v-show="!shownum">
@@ -254,7 +257,8 @@
             <p>温馨提示！</p>
           </div>
           <div class="cont">
-            <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+            <p v-if="$route.query.id === 'pk10'">{{lastSeasonId*1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+            <p v-else>{{lastSeasonId.slice(4)*1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
           </div>
           <div class="but">
             <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
@@ -340,6 +344,7 @@
         seasonId: '', //截取后的期号
         seasonId2: '', //当前期号
         seasonId3:'',
+        lastSeasonId:'',
         countDown: '',
         players: '',
         intotitle: '',
@@ -1429,7 +1434,7 @@
 	      this.shownum = true;
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', {params: {lotteryId: this.$route.query.id,count: 10}}).then((res) => {
           this.getPastOpens = res.data.data;
-          if ( Number(res.data.data[0].seasonId) !== this.seasonId3 && (this.seasonId3-res.data.data[0].seasonId)<=2)  {
+          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId))  {
                   this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);
@@ -1456,6 +1461,7 @@
             this.seasonId2 = res.data.data.seasonId;
             this.seasonId = this.seasonId2*1;
             this.seasonId3 = this.seasonId2-1;
+            this.lastSeasonId = res.data.data.lastSeasonId;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
             this.getPastOp();//获取过去开奖号码10个

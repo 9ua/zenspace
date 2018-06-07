@@ -1454,7 +1454,7 @@
         this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', {params: {lotteryId: this.$route.query.id}}).then((res) => {
           if(res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId;
-            this.seasonId = this.seasonId2;
+            this.seasonId = this.seasonId2*1;
             this.seasonId3 = this.seasonId2-1;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();

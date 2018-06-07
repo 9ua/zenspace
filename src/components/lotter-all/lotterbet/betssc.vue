@@ -45,7 +45,7 @@
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
           <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
-            <p>{{item.seasonId.slice(4)}}期开奖号码</p>
+            <p>{{item.seasonId.slice(4)*1}}期开奖号码</p>
             <div v-show="!shownum">
               <p>{{item.n1}}</p>
               <p>{{item.n2}}</p>
@@ -1785,7 +1785,7 @@
         this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', { params: { lotteryId: this.$route.query.id } }).then((res) => {
           if (res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId
-            this.seasonId = this.seasonId2.substring(4).split("-").join("");
+            this.seasonId = this.seasonId2.substring(4).split("-").join("")*1;
             this.seasonId3 = this.seasonId2 - 1;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();

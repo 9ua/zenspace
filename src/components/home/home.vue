@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="home-cneter">
+    <div class="home-cneter" id="wrapper">
       <router-view></router-view>
     </div>
     <div class="home-footer">

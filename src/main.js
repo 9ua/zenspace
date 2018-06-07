@@ -30,7 +30,6 @@ import './assets/font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './vuex/store'
-import './assets/iscroll.js'
 import {
     Tab,
     Tabs

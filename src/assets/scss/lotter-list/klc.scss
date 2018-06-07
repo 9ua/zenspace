@@ -1,6 +1,7 @@
 .klc {
     height: 100%;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     ul {
         display: flex;
         flex-wrap: wrap;

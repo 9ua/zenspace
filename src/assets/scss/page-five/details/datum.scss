@@ -119,6 +119,7 @@
         width: 80%;
         overflow: hidden;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         & .datum-imgs {
             position: absolute;
             left: 0;

@@ -56,6 +56,7 @@
                         height: 100%;
                         position: absolute;
                         overflow-y: scroll;
+                        -webkit-overflow-scrolling: touch;
                         & .menu-list-top {
                             width: 100%;
                             display: flex;
@@ -325,6 +326,7 @@
             >div {
                 height: 100%;
                 overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
                 >.betssc-list-box {
                     width: 100%;
                     padding-bottom: 120px;

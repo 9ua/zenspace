@@ -114,6 +114,7 @@
             flex-direction: column;
             justify-content: space-between;
             overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
             & .lottery-top {
                 position: absolute;
                 width: 100%;

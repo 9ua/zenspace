@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <iscroll-view class="home-cneter">
+    <iscroll-view class="home-cneter scroll-view">
       <router-view></router-view>
     </iscroll-view>
     <div class="home-footer">

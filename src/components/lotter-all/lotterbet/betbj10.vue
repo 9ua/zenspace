@@ -130,7 +130,10 @@
               <!-- <p>开奖时间</p> -->
             </li>
             <li v-for="(item,index) in getPastOpens" :key="index">
-              <p>{{item.seasonId.substring(4).split("-").join("")}}
+              <p v-if="$route.query.id === 'pk10'">{{item.seasonId}}
+                <i class="el-icon-minus"></i>
+              </p>
+              <p v-else>{{item.seasonId.substring(4).split("-").join("")}}
                 <i class="el-icon-minus"></i>
               </p>
               <p>
@@ -278,6 +281,7 @@
 	      r:1,
 	      t:1,
 	      shownum:false,
+        startyet: false,
 	      interval: null,//动画
         youdashuang:false,//判断是否有‘大双’
         showTimesUp: false,

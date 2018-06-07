@@ -231,6 +231,7 @@
 	      l:0,
 	      h:0,
 	      shownum:false,
+        startyet: false,
 	      interval: null,//动画
         youhezhi: false, //判断是否有‘和’
         showTimesUp: false,

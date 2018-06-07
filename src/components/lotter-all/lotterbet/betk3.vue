@@ -53,7 +53,10 @@
             <p>单双 </p>
           </li>
           <li v-for="(item,index) in getPastOpens" :key="index">
-            <p>{{item.seasonId.substring(4).split("-").join("")}}
+            <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}
+              <i class="el-icon-minus"></i>
+            </p>
+            <p v-else>{{item.seasonId.substring(4).split("-").join("")}}
               <i class="el-icon-minus"></i>
             </p>
             <p>
@@ -122,7 +125,10 @@
               <p>单双 </p>
             </li>
             <li v-for="(item,index) in getPastOpens" :key="index" v-if="index < 10">
-              <p>{{item.seasonId.substring(4).split("-").join("")}}
+              <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}
+                <i class="el-icon-minus"></i>
+              </p>
+              <p v-else>{{item.seasonId.substring(4).split("-").join("")}}
                 <i class="el-icon-minus"></i>
               </p>
               <p>
@@ -286,7 +292,7 @@
             <p>温馨提示！</p>
           </div>
           <div class="cont">
-            <p>{{seasonId3}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
+            <p>{{seasonId-1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
           </div>
           <div class="but">
             <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>

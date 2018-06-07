@@ -1,6 +1,7 @@
 <template>
 	<div class="one">
 		<headers></headers>
+    <iscroll-view class="scroll-view">
 		<div class="one-center">
 			<van-swipe :autoplay="2200" :show-indicators="false">
 				<van-swipe-item v-for="(item,index) in bannerList" :key="index">
@@ -24,6 +25,7 @@
 				</router-link>
 			</ul>
 		</div>
+    </iscroll-view>
 	</div>
 </template>
 <script>

@@ -1,7 +1,7 @@
 <template>
 	<div class="one">
 		<headers></headers>
-    <iscroll-view class="scroll-view">
+    <iscroll-view class="scroll-view" :options="{preventDefault: false}">
 		<div class="one-center">
 			<van-swipe :autoplay="2200" :show-indicators="false">
 				<van-swipe-item v-for="(item,index) in bannerList" :key="index">
@@ -65,4 +65,17 @@
 </script>
 <style lang="scss">
 @import '../../assets/scss/one.scss';
+</style>
+<style>
+.scroll-view {
+  /* -- Attention: This line is extremely important in chrome 55+! -- */
+  touch-action: none;
+  /* -- Attention-- */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
 </style>

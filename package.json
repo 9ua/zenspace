@@ -13,6 +13,7 @@
 		"axios": "^0.18.0",
 		"babel-polyfill": "^6.26.0",
 		"element-ui": "^2.2.2",
+		"iscroll": "^5.2.0",
 		"js-md5": "^0.7.3",
 		"lib-flexible": "^0.3.2",
 		"px2rem-loader": "^0.1.8",
@@ -20,6 +21,7 @@
 		"vue": "^2.5.2",
 		"vue-axios": "^2.1.1",
 		"vue-cookie": "^1.1.4",
+		"vue-iscroll-view": "^1.0.3",
 		"vue-router": "^3.0.1",
 		"vue-ydui": "^1.2.2",
 		"vuex": "^3.0.1"

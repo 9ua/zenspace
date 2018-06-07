@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <div class="home-cneter" id="wrapper">
+    <iscroll-view class="home-cneter">
       <router-view></router-view>
-    </div>
+    </iscroll-view>
     <div class="home-footer">
       <ul>
         <router-link v-for="(navs,index) in navbat" :to="'/'+navs.pathbat" tag="li" :key="index">

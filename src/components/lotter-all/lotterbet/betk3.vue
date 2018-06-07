@@ -56,7 +56,7 @@
             <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}
               <i class="el-icon-minus"></i>
             </p>
-            <p v-else>{{item.seasonId.substring(4).split("-").join("")}}
+            <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}
               <i class="el-icon-minus"></i>
             </p>
             <p>
@@ -128,7 +128,7 @@
               <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}
                 <i class="el-icon-minus"></i>
               </p>
-              <p v-else>{{item.seasonId.substring(4).split("-").join("")}}
+              <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}
                 <i class="el-icon-minus"></i>
               </p>
               <p>

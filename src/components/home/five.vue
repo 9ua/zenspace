@@ -88,7 +88,7 @@
         securityCoe:'',
         content:'',
         show2:false,
-        balances:0.00,//用户余额
+        balances:'',//用户余额
         image:0,//用户头像
       	money:false,
         toF5money:false,//刷新动画

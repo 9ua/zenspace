@@ -1,17 +1,20 @@
 <template>
   <div class="three">
     <headers></headers>
-      <section class="ac-container">
-				<div v-for="(actives,index) in activitys" :key="index">
-					<input :id="index" name="accordion-1" type="radio">
-					<label :for="index"><img :src="'https://mtxflower.com/'+actives.icon" @click="activeR($event,actives,index)" /><br>
-          <p>活动时间：{{actives.beginPrizeTime}}</p><p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
-          </label>
-					<article class="ac-large">
+    <ul v-show="showFlag">
+      <li v-for="(actives,index) in activitys" :key="index">
+        <img :src="'https://mtxflower.com/'+actives.icon" @click="activeR($event,actives,index)" />
+        <div class="three-box">
+          <p>活动时间：{{actives.beginPrizeTime}}</p>
+          <p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
+        </div>
+        <div class="three-content" ref="pppop" v-if="activesremark === index" v-show="activesremarks">
+          <div>
             <p v-html="actives.remark"></p>
-					</article>
-				</div>
-			</section>
+          </div>
+        </div>
+      </li>
+    </ul>
     <promote :promote="selectedFood" ref="promote" @sonclick="haashow"></promote>
     <days :days="selectedFood" ref="days" @sonclick="haashow"></days>
     <happy :happy="selectedFood" ref="happy" @sonclick="haashow"></happy>
@@ -73,80 +76,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// @import "../../assets/scss/three.scss";
-</style>
-<style>
-.ac-container {
-    margin: 50px auto 30px;
-    text-align: left;
-    width: 100%;
-}
-.ac-container label {
-    background: -moz-linear-gradient(center top , #FFFFFF 1%, #EAEAEA 100%) repeat scroll 0 0 transparent;
-    box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.3), 1px 0 0 0 rgba(255, 255, 255, 0.9) inset, 0 2px 2px rgba(0, 0, 0, 0.1);
-    color: #777777;
-    cursor: pointer;
-    background: rgb(255, 171, 171);
-    display: block;
-    font-size: 12px;
-    text-align: center;
-    height: auto;
-    padding: 5px 20px;
-    position: relative;
-    z-index: 2;
-}
-.ac-container label:hover {
-    background: none repeat scroll 0 0 rgb(255, 171, 171);
-}
-.ac-container input:checked + label, .ac-container input:checked + label:hover {
-    background: none repeat scroll 0 0 rgb(255, 90, 90);
-    box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.3), 0 2px 2px rgba(0, 0, 0, 0.1);
-    color: #fff;
-    height: auto;
-}
-.ac-container label:hover:after, .ac-container input:checked + label:hover:after {
-    /* background: url("../images/arrow_down.png") no-repeat scroll center center transparent; */
-    content: "";
-    height: auto;
-    position: absolute;
-    right: 13px;
-    top: 7px;
-    width: 24px;
-}
-.ac-container input:checked + label:hover:after {
-    /* background-image: url("../images/arrow_up.png"); */
-}
-.ac-container input {
-    display: none;
-}
-.ac-container article {
-    -moz-transition: height 0.3s ease-in-out 0s, box-shadow 0.6s linear 0s;
-    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.5);
-    height: 0;
-    margin-top: -1px;
-    overflow: hidden;
-    position: relative;
-    z-index: 10;
-}
-.ac-container article p {
-    color: #777777;
-    font-size: 14px;
-    padding: 5px 10px;
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
-}
-.ac-container input:checked ~ article {
-    -moz-transition: height 0.5s ease-in-out 0s, box-shadow 0.1s linear 0s;
-    box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.3);
-}
-.ac-container input:checked ~ article.ac-small {
-    height: 140px;
-}
-.ac-container input:checked ~ article.ac-medium {
-    height: 180px;
-}
-.ac-container input:checked ~ article.ac-large {
-    height: auto;
-    overflow: auto;
-    background: #fff;
-}
+@import "../../assets/scss/three.scss";
 </style>

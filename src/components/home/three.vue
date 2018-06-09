@@ -3,7 +3,7 @@
     <headers></headers>
       <section class="ac-container">
 				<div v-for="(actives,index) in activitys" :key="index">
-					<input :id="index" name="accordion-1" type="checkbox">
+					<input :id="index" name="accordion-1" type="radio">
 					<label :for="index"><img :src="'https://mtxflower.com/'+actives.icon" @click="activeR($event,actives,index)" /><br>
           <p>活动时间：{{actives.beginPrizeTime}}</p><p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
           </label>

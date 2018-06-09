@@ -11,9 +11,7 @@
             <p v-html="actives.remark"></p>
 					</article>
 				</div>
-				
 			</section>
-    
     <promote :promote="selectedFood" ref="promote" @sonclick="haashow"></promote>
     <days :days="selectedFood" ref="days" @sonclick="haashow"></days>
     <happy :happy="selectedFood" ref="happy" @sonclick="haashow"></happy>
@@ -148,6 +146,7 @@ export default {
 }
 .ac-container input:checked ~ article.ac-large {
     height: auto;
+    overflow: auto;
     background: #fff;
 }
 </style>

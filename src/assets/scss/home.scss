@@ -54,9 +54,6 @@ a {
             // overflow: hidden;
         }
     }
-    & .home-cneter:after {
-        min-height: calc(100% + 1px);
-    }
     & .home-footer {
         height: 70px;
         background: rgb(175,58,49);

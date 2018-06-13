@@ -15,18 +15,10 @@
         </div>
       </li>
     </ul>
-    <promote :promote="selectedFood" ref="promote" @sonclick="haashow"></promote>
-    <days :days="selectedFood" ref="days" @sonclick="haashow"></days>
-    <happy :happy="selectedFood" ref="happy" @sonclick="haashow"></happy>
-    <lucky :lucky="selectedFood" ref="lucky" @sonclick="haashow"></lucky>
   </div>
 </template>
 <script>
 import headers from "../public/header";
-import promote from "../page-three/promote";
-import days from "../page-three/days";
-import happy from "../page-three/happy";
-import lucky from "../page-three/lucky";
 export default {
   data() {
     return {
@@ -68,10 +60,6 @@ export default {
   },
   components: {
     headers,
-    promote,
-    days,
-    happy,
-    lucky
   }
 };
 </script>

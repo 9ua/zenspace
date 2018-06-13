@@ -43,16 +43,19 @@ a {
         display: flex;
         flex-direction: column;
         height: 100%;
-        overflow: scroll !important;
+        overflow-y: scroll !important;
+        -webkit-overflow-scrolling: touch;
         & .one {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            -webkit-overflow-scrolling: touch;
             width: 100%;
             height: 100%;
             // overflow: hidden;
         }
+    }
+    & .home-cneter:after {
+        min-height: calc(100% + 1px);
     }
     & .home-footer {
         height: 70px;

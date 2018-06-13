@@ -36,6 +36,8 @@
 				getimgurl:'',
 				titlelist:[],
 				indexInfo:'',
+				// cacheTime:7200000,
+				cacheTime:10000,
 				title:'【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。',
       };
 		},
@@ -44,7 +46,26 @@
 		},
     methods:{
     	getLotterlist(){
+				var now = new Date().getTime();
       if (localStorage.getItem("indexInfo") !== null) {
+					var setupTime = localStorage.getItem("date_indexInfo");
+
+					if (null == setupTime || now - setupTime > this.cacheTime) {
+						  localStorage.removeItem("indexInfo");
+							localStorage.removeItem("date_indexInfo");
+							this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
+            	localStorage.setItem("indexInfo", JSON.stringify(res.data.data));
+            	localStorage.setItem("date_indexInfo", now);
+							this.title = '';
+							this.lotteryList = res.data.data.hotLotterys;
+							this.bannerList = res.data.data.banners;
+							for (let i = 0 ; i < res.data.data.noticeList.length; i++) {
+								this.title = this.title +"   "+ res.data.data.noticeList[i].title;
+							}
+						}).catch((error) => {
+							console.log("获取广告No")
+					})
+					} else{
 							this.indexInfo = JSON.parse(localStorage.getItem("indexInfo"));
 							this.title = '';
 							this.lotteryList = this.indexInfo.hotLotterys;
@@ -52,9 +73,11 @@
 							for (let i = 0 ; i < this.indexInfo.noticeList.length; i++) {
 								this.title = this.title +"   "+ this.indexInfo.noticeList[i].title;
 							}
+						}
 			} else {
 					this.$http.get(this.$store.state.url+'api/index/getIndexInfo').then((res) => {
             	localStorage.setItem("indexInfo", JSON.stringify(res.data.data));
+            	localStorage.setItem("date_indexInfo", now);
 							this.title = '';
 							this.lotteryList = res.data.data.hotLotterys;
 							this.bannerList = res.data.data.banners;

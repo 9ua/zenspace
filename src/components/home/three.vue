@@ -22,7 +22,7 @@ import headers from "../public/header";
 export default {
   data() {
     return {
-      activesremark:0,
+      activesremark:'',
       activesremarks:false,
       activitys:'',
       selectedFood: {},
@@ -34,8 +34,11 @@ export default {
   },
   methods: {
     activeR(e,actives,index){
-      this.activesremark = index;
-      this.activesremarks = !this.activesremarks;
+      if (this.activesremark !== index) {
+        this.activesremark = index;
+      } else {
+        this.activesremarks = false;
+      }
     },
     activity(){
       this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {

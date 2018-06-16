@@ -47,8 +47,9 @@
       padding: 0px 0 5px;
       & img {
         margin: 10px 0px 5px;
-        width: 48px;
-        height: 48px;
+        width: 50%;
+        height: auto;
+        padding: 10px 0px;
         border-radius: 50%;
       }
       & h5 {
@@ -60,7 +61,7 @@
     }
     & .lotter-list {
       & i {
-        padding: 35.7px 0px;
+        padding: 20px 0px;
         color: #fa7e00;
         font-size: 50px !important;
       }

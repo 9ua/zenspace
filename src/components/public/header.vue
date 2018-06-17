@@ -44,7 +44,7 @@
 						console.log(navigator.userAgent,999);
 						if (/Android/i.test(userAgent)) {
 							//是否為Android
-              this.os ='/app/android.apk';
+              this.os ='/app/hongfayule.apk';
 							console.log("android99");
 						} else if (/iPhone|iPad/i.test(userAgent)) {
 							//是否為iPhone或iPad
@@ -52,7 +52,7 @@
 							console.log("iphone/pad99");
 						} else if (/Windows/i.test(userAgent)) {
 							//使否是用電腦觀看
-              this.os ='/app/android.apk';
+              this.os ='/app/hongfayule.apk';
 							console.log("windows99");
 						}
 

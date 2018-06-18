@@ -115,8 +115,8 @@ export default {
             this.receiveAddress = a.receiveAddress;
             this.checkCode = a.checkCode;
             this.show2 = !this.show2;
-            this.this.bankName = a.bankName;
-            this.this.bankNameCode = a.bankNameCode;
+            this.bankName = a.bankName;
+            this.bankNameCode = a.bankNameCode;
             this.selected = a;
             this.QRCodeUrl = a.QRCodeUrl;
         },

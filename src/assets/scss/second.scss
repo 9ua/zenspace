@@ -45,6 +45,9 @@
       border-radius: 6px;
       padding: 0px 6px;
       font-size: 12px;
+      & i {
+        font-style: inherit;
+      }
     }
   }
 }
@@ -66,7 +69,7 @@
     @extend %faj;
     width: 36px;
     height: 36px;
-    border: 1px solid #eee;
+    border: 1px solid #999;
     border-radius: 50%;
     margin: 0px 4px;
   }
@@ -78,7 +81,7 @@
     @extend %faj;
     width: 26px;
     height: 26px;
-    border: 1px solid #eee;
+    border: 1px solid #999;
     border-radius: 50%;
     margin: 0px 4px;
   }
@@ -234,7 +237,7 @@
       @extend %faj;
       width: 20px;
       height: 20px;
-      border: 1px solid #eee;
+      border: 1px solid #999;
       border-radius: 50%;
       margin: 0px 4px;
     }
@@ -257,7 +260,7 @@
       @extend %faj;
       width: 36px;
       height: 36px;
-      border: 1px solid #eee;
+      border: 1px solid #999;
       border-radius: 50%;
       margin: 0px 2px;
       font-size: 16px;

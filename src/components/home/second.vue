@@ -9,7 +9,9 @@
             <p>
               <span>第
                 <i>{{all.seasonId}}</i>期</span>
-              <span>00:00:00</span>
+              <span>
+                <i v-for="(cd,indexa) in times" :key="indexa" v-if="indexa === index">{{cd | setTime}}</i>
+              </span>
             </p>
           </div>
           <div class="conter" :class="all.groupName" v-if="all.groupName === 'k3'">
@@ -37,7 +39,7 @@
             <span>{{all.n10}}</span>
           </div>
           <div class="btn">
-            <router-link :to="{path:'/second/past',query:{id:all.id,name:all.name,group:all.groupName}}" tag="button">往期开奖</router-link>
+            <router-link :to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:all.groupName}}" tag="button">往期开奖</router-link>
             <button @click="looksucc($event,all)">立即投注</button>
           </div>
         </li>
@@ -50,15 +52,19 @@ import headers from "../public/header";
 export default {
   data() {
     return {
-      lotteryAll: null,
       getPastOpens: "",
-      today:"",
-      times:[],
-      countDown: "",
+      today: "",
+      times: [],
+      timesAll: [],
+      timer: ""
     };
   },
   mounted() {
     this.getPastOp();
+    // this.initSetTimeout();
+  },
+  destroyed() {
+    clearInterval(this.timer);
   },
   watch: {
     //监听路由变化后
@@ -73,11 +79,46 @@ export default {
       this.$router.push({ path: all.groupName, query: { id: all.lotteryId } });
       this.betsuccess = !this.betsuccess;
     },
-    //時間格式轉換
-    setTimeMode() {
-      var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
-      var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-      var seconds = Math.floor((this.today % (1 * 60)) / 1);
+    //获取全部彩种
+    getPastOp() {
+      this.$http
+        .get(this.$store.state.url + "api/lottery/getPastOpen", {
+          params: { lotteryId: -1 }
+        })
+        .then(res => {
+          this.getPastOpens = res.data.data;
+          for (let i = 0; i < this.getPastOpens.length; i++) {
+            this.times[i] = this.getPastOpens[i].restSeconds;
+          }
+        })
+        .catch(error => {
+          console.log("获取全部彩种No");
+        });
+    },
+    //倒计时
+    initSetTimeout() {
+      this.timer = setInterval(() => {
+        for (let k = 0; k < this.times.length; k++) {
+          this.times[k] = this.times[k] - 1;
+          if (this.times[k] < 1) {
+            clearInterval(this.timer);
+            this.getPastOp();
+            this.initSetTimeout();
+          }
+        }
+        console.log(this.times, "-----------");
+      }, 1000);
+      console.log(this.times, "...............");
+    }
+  },
+  components: {
+    headers
+  },
+  filters: {
+    setTime(value) {
+      var hours = Math.floor((value % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
+      var minutes = Math.floor((value % (1 * 60 * 60)) / (1 * 60));
+      var seconds = Math.floor((value % (1 * 60)) / 1);
       if (hours < 10) {
         hours = "0" + hours;
       }
@@ -87,37 +128,9 @@ export default {
       if (seconds < 10) {
         seconds = "0" + seconds;
       }
-      this.countDown = hours + ":" + minutes + ":" + seconds;
-    },
-    //倒计时
-    initSetTimeout() {
-      this.timer = setInterval(() => {
-        this.today = this.today - 1;
-        this.setTimeMode();
-        if (this.today < 1) {
-          clearInterval(this.timer);
-          this.timesUp();
-        }
-      }, 1000);
-    },
-    //获取全部彩种
-    getPastOp() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: -1 }
-        })
-        .then(res => {
-          this.getPastOpens = res.data.data;
-          for(let i=0;i<this.getPastOpens.length;i++){
-            this.times[i] = this.getPastOpens[i].restSeconds;
-          }
-          console.log(this.times);
-        })
-        .catch(error => {});
+      value = hours + ":" + minutes + ":" + seconds;
+      return value;
     }
-  },
-  components: {
-    headers
   }
 };
 </script>

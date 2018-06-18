@@ -610,7 +610,6 @@ export default {
               this.lastSeasonId = res.data.data.lastSeasonId;
             }
             this.today = res.data.data.restSeconds;
-            // this.countDown = res.data.data.restSeconds;
             this.setTimeMode();
             this.getPastOp();
             this.initSetTimeout();

@@ -2,7 +2,7 @@
   <div class="k3">
     <ul>
       <router-link v-for="(item,index) in lotteryListk3" :key="index" tag="li" :to="{path:'/k3',query:{id:item.id}}">
-        <img :src='"@/assets/img/one/"+item.image+".png"' alt="images" />
+        <img :src='"@/assets/img/one/"+item.groupId+".png"' alt="images" />
         <h5>{{item.name}}</h5>
       </router-link>
     </ul>

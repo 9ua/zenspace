@@ -32,6 +32,7 @@ import lowerReport from '@/components/page-five/agency/lowerReport'
 import manageInvite from '@/components/page-five/agency/manageInvite'
 import mIcode from '@/components/page-five/agency/manageInvite/mIcode'
 import mInvite from '@/components/page-five/agency/manageInvite/mInvite'
+import payway from '@/components/page-five/money/payway'
 import detail from '@/components/page-five/detail'
 import datum from '@/components/page-five/details/datum'
 import setmobile from '@/components/page-five/details/setmobile'
@@ -635,6 +636,14 @@ export default new Router({
       path: '/service',
       name: 'service',
       component: service,
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/payway',
+      name: 'payway',
+      component: payway,
       meta: {
         keepAlive: false
       },

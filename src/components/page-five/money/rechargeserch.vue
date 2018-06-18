@@ -62,7 +62,7 @@
 						<p>请务必于打款备注栏输入识别码</p>
 					    </li>
                     </div>
-                    <div class="cards" v-if="this.status == '0'&& this.bankName === '微信支付'">
+                    <div class="cards" v-if="this.status == '0'&& this.bankName == '微信支付'">
 						<img :src='$store.state.url+this.QRCodeUrl' style="width:50%;height:auto"/>
                         <li>
                             <p>识别码</p><span>{{this.checkCode}}</span>

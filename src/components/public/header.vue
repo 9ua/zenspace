@@ -19,7 +19,7 @@
           show: 'one',
           check:false,
         }, {
-          title: 'UU直播',
+          title: '往期开奖',
           show: 'second',
           check:false,
         }, {
@@ -39,32 +39,30 @@
     },
     methods:{
       checkOs(){
-        		// console.log(navigator.userAgent);
 				  	var userAgent = navigator.userAgent;
-						console.log(navigator.userAgent,999);
+						// console.log(navigator.userAgent,999);
 						if (/Android/i.test(userAgent)) {
 							//是否為Android
               this.os ='/app/android.apk';
-							console.log("android99");
+							// console.log("android99");
 						} else if (/iPhone|iPad/i.test(userAgent)) {
 							//是否為iPhone或iPad
               this.os = 'http://www.pgyer.com/mjn2';
-							console.log("iphone/pad99");
+							// console.log("iphone/pad99");
 						} else if (/Windows/i.test(userAgent)) {
 							//使否是用電腦觀看
               this.os ='/app/android.apk';
-							console.log("windows99");
+							// console.log("windows99");
 						}
-
 						//判斷瀏覽器
 						if (/Chrome/i.test(userAgent)) {
 							//是否為Chrome
 							console.log("chrome99")
 						} else if (/Firefox/i.test(userAgent)) {
 							//是否為Chrome
-							console.log("firefox99")
+							// console.log("firefox99")
 						}
-            console.log(this.os,888);
+            // console.log(this.os,888);
       }
     }
   }

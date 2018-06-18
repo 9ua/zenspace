@@ -1,3 +1,4 @@
+@import '../../main.scss';
 .betk3 {
   height: 100%;
   display: flex;
@@ -447,11 +448,9 @@
   background: #22563f;
   & .look {
     & li {
-      display: flex;
+      @extend %flex;
       & p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @extend %faj;
         font-size: 14px;
         color: #caebda;
         padding: 4px 0px;
@@ -488,20 +487,7 @@
         }
       }
       & .goodluck {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        -o-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        -moz-justify-content: center;
-        -ms-justify-content: center;
-        -o-justify-content: center;
-        justify-content: center;
+        @extend %faj;
         width: 19px;
         height: 19px;
         background: #5691D7;
@@ -509,20 +495,7 @@
         border-radius: 2px;
       }
       & .goodidea {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        -o-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        -moz-justify-content: center;
-        -ms-justify-content: center;
-        -o-justify-content: center;
-        justify-content: center;
+        @extend %faj;
         width: 19px;
         height: 19px;
         background: #FF961F;
@@ -539,20 +512,7 @@
     }
   }
   .lookAll {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
-    -o-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
-    -o-justify-content: center;
-    justify-content: center;
+    @extend %faj;
     margin: 8px 0px 4px;
     & button {
       border: 1px solid #caebda;

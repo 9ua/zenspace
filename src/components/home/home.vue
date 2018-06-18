@@ -26,6 +26,11 @@ export default {
         },
         {
         	icon:'fa-calendar-check-o',
+          name: '往期开奖',
+          pathbat: 'second'
+        },
+        {
+        	icon:'fa-calendar-check-o',
           name: '活动',
           pathbat: 'three'
         },

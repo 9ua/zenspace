@@ -2,7 +2,7 @@
   <div class="betssc">
     <ul class="betssc-top">
       <li>
-        <router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link>
+        <i class="el-icon-arrow-left" @click="banckto"></i>
       </li>
       <li>
         <p class="wangfa">玩
@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="betk3-content-top-pop" v-show="betsscContentTopPop">
-          <ul>
+          <ul class="look">
             <li>
               <p>期号</p>
               <p>开奖号码</p>
@@ -113,6 +113,9 @@
               <p>{{item.addTime.substring(11)}}</p>
             </li>
           </ul>
+          <p class="lookAll">
+            <button @click="lookAll">查看更多</button>
+          </p>
         </div>
         <div class="betk3-content-foot">
           <div>
@@ -249,6 +252,7 @@
         lotteryId: 'cqssc',
         LotteryList: '',
         money: 1, //投注金额
+        groupId:'',
         displayBonus: 0,
         displayBonus1: 0,
         displayBonus2: 0,
@@ -336,6 +340,14 @@
       }
     },
     methods: {
+      //返回到上一次进来的页面
+      banckto(){
+        this.$router.go(-1)
+      },
+      //查看更多记录
+      lookAll() {
+        this.$router.push({path:'second/past',query:{id:this.$route.query.id,name:this.$route.query.name,group:this.groupId}});
+      },
     	//筛子动画
 	    start() {
 	      var _this = this;
@@ -1656,6 +1668,7 @@
       },
       //投注
       betGo() {
+        this.betGoshow = !this.betGoshow;
         let config = { headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials: true};
         let formData = new FormData();
         formData.append('order[0].content', this.con);
@@ -1676,7 +1689,6 @@
             setTimeout(() => {
               this.showpop = !this.showpop;
               this.content = "投注成功!";
-              this.betGoshow = !this.betGoshow;
               this.iscreat();
               setTimeout(() => {
                 this.showpop = !this.showpop;
@@ -1701,6 +1713,7 @@
       getLotteryList() {
         if (localStorage.getItem('lotteryList') !== null) {
           this.LotteryList = JSON.parse(localStorage.getItem('lotteryList')).ssc;
+          this.groupId = this.LotteryList[0].groupId;
           for (let i = 0; i < this.LotteryList.length; i++) {
             if (this.LotteryList[i].id === this.$route.query.id) {
               this.listname = this.LotteryList[i].name.substring(0, 2);
@@ -1710,6 +1723,7 @@
           this.$http.get(this.$store.state.url + 'api/lottery/getLotteryList').then((res) => {
             localStorage.setItem('lotteryList', JSON.stringify(res.data.data));
             this.LotteryList = res.data.data.ssc;
+            this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
                 this.listname = this.LotteryList[i].name.substring(0, 2);
@@ -1730,6 +1744,7 @@
         this.getPlayTree(); //玩法术
         this.geteServerTime(); //获取彩種當前獎期時間
         this.iscreat(); //清空
+        this.$router.push({query:{id:this.$route.query.id,name:into.name,group:this.groupId}});
       },
       //头部菜单项
       k3Tab(e, indexa, indexb, items, group, into, index) {
@@ -1761,11 +1776,9 @@
 	      this.shownum = true;
         this.$http.get(this.$store.state.url + 'api/lottery/getPastOpen', { params: { lotteryId: this.$route.query.id, count: 10 } }).then((res) => {
           this.getPastOpens = res.data.data;
-          console.log(res.data.data[0].seasonId,this.lastSeasonId);
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
             this.reGetPastOp();
           } else {
-            console.log("xxx");
             clearTimeout(this.timer2);
             this.end();
             this.startyet = false;
@@ -1787,7 +1800,6 @@
         clearTimeout(this.timer2);
         this.$http.get(this.$store.state.url + 'api/lottery/getCurrentSaleTime', { params: { lotteryId: this.$route.query.id } }).then((res) => {
           if (res.data.code === 1) {
-            console.log(res);
             this.seasonId2 = res.data.data.seasonId
             this.seasonId = this.seasonId2.substring(4).split("-").join("")*1;
             this.seasonId3 = this.seasonId2 - 1;

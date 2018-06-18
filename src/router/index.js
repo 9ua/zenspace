@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/components/home/home'
 import one from '@/components/home/one'
+import second from '@/components/home/second'
+import past from '@/components/page-second/past'
 import three from '@/components/home/three'
 import four from '@/components/home/four'
 import five from '@/components/home/five'
@@ -69,7 +71,7 @@ import betssc from '@/components/lotter-all/lotterbet/betssc'
 
 Vue.use(Router)
 export default new Router({
-     mode: 'history',
+  mode: 'history',
   routes: [{
       path: '/ErrorPage',
       name: 'ErrorPage',
@@ -237,6 +239,22 @@ export default new Router({
           path: 'one',
           name: 'one',
           component: resolve => require(['@/components/home/one.vue'], resolve),
+          meta: {
+            keepAlive: true
+          },
+        },
+        {
+          path: 'second',
+          name: 'second',
+          component: resolve => require(['@/components/home/second.vue'], resolve),
+          meta: {
+            keepAlive: true
+          },
+        },
+        {
+          path: 'second/past',
+          name: 'past',
+          component: resolve => require(['@/components/page-second/past.vue'], resolve),
           meta: {
             keepAlive: true
           },

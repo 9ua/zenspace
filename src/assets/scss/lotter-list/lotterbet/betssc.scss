@@ -1,571 +1,577 @@
+@import '../../main.scss';
 .betssc {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    & .betssc-top {
+  height: 100%;
+  @extend %flex;
+  @extend %fdc;
+  @extend %sbetween;
+  & .betssc-top {
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
+    height: 56px;
+    font-size: 16px;
+    padding: 0px 16px;
+    background: rgb(175, 58, 49);
+    color: #fff;
+    & li {
+      width: 33.33%;
+    }
+    & li:nth-child(2) {
+      width: 60%;
+      text-align: center;
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & .wangfa {
+        margin: 0px;
+        margin-right: 4px;
+      }
+      & .menu {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        height: 56px;
-        font-size: 16px;
-        padding: 0px 16px;
-        background: rgb(175, 58, 49);
+        padding: 2px 6px;
+        font-size: 14px;
+        border: 1px solid hsla(0, 0%, 100%, .5);
+        border-radius: 4px;
         color: #fff;
-        & li {
-            width: 33.33%;
-        }
-        & li:nth-child(2) {
-            width: 60%;
-            text-align: center;
-            font-size: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            & .wangfa {
-                margin: 0px;
-                margin-right: 4px;
-            }
-            & .menu {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 2px 6px;
-                font-size: 14px;
-                border: 1px solid hsla(0, 0%, 100%, .5);
-                border-radius: 4px;
-                color: #fff;
-                & i {
-                    color: #f0c930;
-                    font-size: 24px;
-                }
-            }
-            & .menu-list {
-                position: absolute;
-                left: 0px;
-                top: 53px;
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                & .van-popup--top {
-                    top: 53px;
-                    background: none !important;
-                    height: 76%;
-                    overflow: hidden;
-                    & .popscroll {
-                        width: 100%;
-                        height: 100%;
-                        position: absolute;
-                        overflow-y: scroll;
-                        -webkit-overflow-scrolling: touch;
-                        & .menu-list-top {
-                            width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            flex-wrap: wrap;
-                            background: rgba(0, 0, 0, 0.2);
-                            & li {
-                                display: flex;
-                                flex-direction: row;
-                                font-size: 12px;
-                                width: 100%;
-                                padding: 4px 0px;
-                                border-bottom: 1px solid hsla(0, 0%, 100%, .3);
-                                & .title {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    height: 24px;
-                                    color: #f4c829;
-                                    font-size: 16px;
-                                    width: 20%;
-                                }
-                                & .menu-list-list-box {
-                                    width: 80%;
-                                    & .menu-list-list {
-                                        display: flex;
-                                        align-items: center;
-                                        background: none;
-                                        flex-wrap: wrap;
-                                        overflow: hidden;
-                                        & span {
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            width: 80px;
-                                            height: 26px;
-                                            background: none;
-                                            border: 2px solid hsla(0, 0%, 100%, .4);
-                                            border-radius: 4px;
-                                            margin: 0px 6px 6px 0px;
-                                            >a {
-                                                color: #eee;
-                                            }
-                                        }
-                                        & span.active {
-                                            border: 1px solid #f4c829;
-                                        }
-                                    }
-                                }
-                            }
-                            & li.active {
-                                border: 1px solid #f4c829;
-                            }
-                            & li:nth-child(2) {
-                                justify-content: flex-start;
-                                align-items: flex-start;
-                            }
-                            & li:nth-child(3),
-                            & li:nth-child(6),
-                            & li:nth-child(9) {
-                                margin-right: 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        & li:nth-child(3) {
-            text-align: right;
-            & ul {
-                display: flex;
-                flex-wrap: wrap;
-                position: absolute;
-                top: 46px;
-                right: 0px;
-                width: 170px;
-                background: rgba(220, 220, 220, 0.8);
-                padding: 10px 0 10px 10px;
-                border-radius: 0 0 0 10px;
-                & li {
-                    display: flex;
-                    border-radius: 5px;
-                    justify-content: center;
-                    align-items: center;
-                    width: 45%;
-                    font-size: 14px;
-                    color: #666;
-                    background: #fff;
-                    padding: 6px 0px;
-                    margin: 2px;
-                }
-            }
-        }
         & i {
-            color: #fff;
-            font-size: 20px;
+          color: #f0c930;
+          font-size: 24px;
         }
-    }
-}
-
-.betssc-content {
-    height: 100%;
-    background: #317455;
-    overflow: hidden;
-    >div {
-        height: 100%;
-        & .betk3-content-top {
-            display: flex;
-            justify-content: space-between;
-            background: #22563f;
-            color: #caebda;
-            & .content-left {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 50%;
-                border-right: 1px solid #164630;
-                & p {
-                    font-size: 16px;
-                    line-height: 28px;
-                }
-                & div {
-                    display: flex;
-                    align-items: center;
-                    margin-top: 4px;
-                    & p {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 22px;
-                        height: 22px;
-                        overflow: hidden;
-                        margin: 0px 2px;
-                        border-radius: 50%;
-                        background: #317455;
-                        & img {
-                            width: 200%;
-                            height: 600%;
-                        }
-                    }
-                    & i {
-                        font-size: 30px;
-                        color: #78ba9e;
-                    }
-                }
-                & .contnet-left-num {
-                    display: flex;
-                    width: 100%;
-                    height: 30px;
-                    align-items: center;
-                    justify-content: center;
-                    & .num {
-                        display: flex;
-                        align-items: center;
-                        height: 30px;
-                        & .span {
-                            color: #fff;
-                            width: 22px;
-                            height: 22px;
-                            margin: 0px 2px;
-                            & div {
-                                margin: 0px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                color: #caebda;
-                                width: 22px;
-                                height: 22px;
-                                font-size: 16px;
-                                border-radius: 50%;
-                                background: #317455;
-                            }
-                        }
-                    }
-                    & i {
-                        font-size: 30px;
-                        color: #78ba9e;
-                    }
-                }
-            }
-            & .content-right {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 50%;
-                & p {
-                    font-size: 16px;
-                    line-height: 28px;
-                }
-                & div {
-                    & p {
-                        font-size: 26px;
-                    }
-                }
-            }
-        }
-        & .betk3-content-top-pop {
-            position: absolute;
-            width: 100%;
-            background: #22563f;
-            z-index: 2002;
-            & ul {
-                & li {
-                    display: flex;
-                    & p {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 14px;
-                        color: #caebda;
-                        padding: 4px 0px;
-                        & a {
-                            width: 20px;
-                            height: 20px;
-                            overflow: hidden;
-                            color: #caebda;
-                            & img {
-                                width: 200%;
-                                height: 600%;
-                            }
-                        }
-                    }
-                    & p:nth-child(1) {
-                        width: 30%;
-                    }
-                    & p:nth-child(2) {
-                        width: 40%;
-                    }
-                    & p:nth-child(3) {
-                        width: 30%;
-                    }
-                    & p:nth-child(1) {
-                        position: relative;
-                        border-right: 1px solid #212121;
-                        & i {
-                            font-weight: 700;
-                            font-size: 16px;
-                            color: #212121;
-                            position: absolute;
-                            right: -8px;
-                        }
-                    }
-                }
-                & li:nth-child(1) {
-                    border-top: 1px solid hsla(0, 0%, 100%, .3);
-                    border-bottom: 1px solid #212121;
-                    & p:nth-child(1) {
-                        border: none;
-                    }
-                }
-            }
-        }
-        & .betk3-content-foot {
-            padding: 4px 16px 0px;
-            color: #caebda;
-            height: 100%;
-            >div {
-                overflow-y: scroll;
-                -webkit-overflow-scrolling: touch;
-                height: 100%;
-                >.betssc-list-box {
-                    width: 100%;
-                    padding-bottom: 130px;
-                    & b {
-                        & i {
-                            color: #f0c930;
-                            font-style: normal;
-                        }
-                    }
-                    & .fushi {
-                        margin-top: 10px;
-                        & li {
-                            display: flex;
-                            flex-direction: column;
-                            & p {
-                                display: flex;
-                                margin-bottom: 6px; //   border-bottom: 1px solid rgb(79, 170, 140);
-                                & b {
-                                    display: flex;
-                                    align-items: flex-start;
-                                    justify-content: center;
-                                    width: 14%;
-                                    padding-top: 6px;
-                                }
-                                & span {
-                                    display: flex;
-                                    width: 86%;
-                                    flex-wrap: wrap;
-                                    & a {
-                                        margin: 0px 26px 8px 0px;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        width: 30px;
-                                        height: 30px;
-                                        border-radius: 50%;
-                                        background: #caebda;
-                                        color: #212121;
-                                    }
-                                    & a.active {
-                                        background: #f0c930;
-                                        border: #f0c930;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    & .danshi {
-                        margin-top: 10px;
-                        & textarea {
-                            width: 90%;
-                            height: 200px;
-                            border: 0px;
-                            background: #fff;
-                            resize: none;
-                            padding: 4%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.betssc-footer {
-    position: relative;
-    background: #333;
-    color: rgb(175, 58, 49);
-    width: 100%;
-    & .betssc-footer-top {
+      }
+      & .menu-list {
         position: absolute;
-        top: -60px;
-        background: #22563f;
-        height: 60px;
+        left: 0px;
+        top: 53px;
         display: flex;
         flex-direction: column;
-        color: #caebda;
-        font-size: 16px;
         width: 100%;
-        & .betssc-footer-tops {
-            display: flex;
-            align-items: center;
-            height: 50%;
-            & span {
-                color: #ffaf36;
-                width: 210px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                height: 20px;
-                padding-left: 2%;
-            }
-            & p {
-                width: 20%;
-                padding: 0 16px;
-            }
-        }
-        & .betssc-footer-buttoms {
-            height: 50%;
+        & .van-popup--top {
+          top: 53px;
+          background: none !important;
+          height: 76%;
+          overflow: hidden;
+          & .popscroll {
             width: 100%;
-            display: flex;
-            align-items: center;
-            & input {
-                width: 20%;
-                margin-left: 10px;
-                padding: 0px 4px;
-                text-align: center;
-                border: none;
-                border-radius: 2px;
-            }
-            & p {
-                width: 20%;
-                padding: 0 16px;
-            }
-            & span {
-                width: 45%;
+            height: 100%;
+            position: absolute;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            & .menu-list-top {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+              background: rgba(0, 0, 0, 0.2);
+              & li {
                 display: flex;
                 flex-direction: row;
                 font-size: 12px;
-                margin-left: 6px;
-                align-items: center;
-                & p {
-                    text-align: center;
-                    color: #ffaf36;
-                    padding: 0;
-                    width: auto;
+                width: 100%;
+                padding: 4px 0px;
+                border-bottom: 1px solid hsla(0, 0%, 100%, .3);
+                & .title {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  height: 24px;
+                  color: #f4c829;
+                  font-size: 16px;
+                  width: 20%;
                 }
+                & .menu-list-list-box {
+                  width: 80%;
+                  & .menu-list-list {
+                    display: flex;
+                    align-items: center;
+                    background: none;
+                    flex-wrap: wrap;
+                    overflow: hidden;
+                    & span {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      width: 80px;
+                      height: 26px;
+                      background: none;
+                      border: 2px solid hsla(0, 0%, 100%, .4);
+                      border-radius: 4px;
+                      margin: 0px 6px 6px 0px;
+                      >a {
+                        color: #eee;
+                      }
+                    }
+                    & span.active {
+                      border: 1px solid #f4c829;
+                    }
+                  }
+                }
+              }
+              & li.active {
+                border: 1px solid #f4c829;
+              }
+              & li:nth-child(2) {
+                justify-content: flex-start;
+                align-items: flex-start;
+              }
+              & li:nth-child(3),
+              & li:nth-child(6),
+              & li:nth-child(9) {
+                margin-right: 0;
+              }
             }
+          }
         }
+      }
     }
-    & .betssc-footer-buttom {
-        background: #414141;
-        height: 56px;
+    & li:nth-child(3) {
+      text-align: right;
+      & ul {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 16px;
-        & .betssc-footer-buttom-left {
-            display: flex;
-            align-items: center;
-            & button {
-                background: none;
-                border: none;
-                color: #ffaf36;
-                font-size: 22px;
-                margin-right: 12px;
-            }
-            & p {
-                color: #fff;
-                font-size: 16px;
-                & span {
-                    margin: 0px 4px;
-                }
-            }
+        flex-wrap: wrap;
+        position: absolute;
+        top: 46px;
+        right: 0px;
+        width: 170px;
+        background: rgba(220, 220, 220, 0.8);
+        padding: 10px 0 10px 10px;
+        border-radius: 0 0 0 10px;
+        & li {
+          display: flex;
+          border-radius: 5px;
+          justify-content: center;
+          align-items: center;
+          width: 45%;
+          font-size: 14px;
+          color: #666;
+          background: #fff;
+          padding: 6px 0px;
+          margin: 2px;
         }
-        & .betssc-footer-buttom-right {
+      }
+    }
+    & i {
+      color: #fff;
+      font-size: 20px;
+    }
+  }
+}
+
+.betssc-content {
+  height: 100%;
+  background: #317455;
+  overflow: hidden;
+  >div {
+    height: 100%;
+    & .betk3-content-top {
+      display: flex;
+      justify-content: space-between;
+      background: #22563f;
+      color: #caebda;
+      & .content-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        border-right: 1px solid #164630;
+        & p {
+          font-size: 16px;
+          line-height: 28px;
+        }
+        & div {
+          display: flex;
+          align-items: center;
+          margin-top: 4px;
+          & p {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 18px;
-            height: 40px;
-            width: 100px;
-            color: #fff;
-            border-radius: 6px;
-            background: rgb(175, 58, 49);
+            width: 22px;
+            height: 22px;
+            overflow: hidden;
+            margin: 0px 2px;
+            border-radius: 50%;
+            background: #317455;
+            & img {
+              width: 200%;
+              height: 600%;
+            }
+          }
+          & i {
+            font-size: 30px;
+            color: #78ba9e;
+          }
         }
+        & .contnet-left-num {
+          display: flex;
+          width: 100%;
+          height: 30px;
+          align-items: center;
+          justify-content: center;
+          & .num {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            & .span {
+              color: #fff;
+              width: 22px;
+              height: 22px;
+              margin: 0px 2px;
+              & div {
+                margin: 0px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #caebda;
+                width: 22px;
+                height: 22px;
+                font-size: 16px;
+                border-radius: 50%;
+                background: #317455;
+              }
+            }
+          }
+          & i {
+            font-size: 30px;
+            color: #78ba9e;
+          }
+        }
+      }
+      & .content-right {
+        @extend %flex;
+        @extend %fdc;
+        @extend %aitems;
+        width: 50%;
+        & p {
+          font-size: 16px;
+          line-height: 28px;
+        }
+        & div {
+          & p {
+            font-size: 26px;
+          }
+        }
+      }
     }
+    & .betk3-content-top-pop {
+      position: absolute;
+      width: 100%;
+      background: #22563f;
+      z-index: 2002;
+      & .look {
+        & li {
+          display: flex;
+          & p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #caebda;
+            padding: 4px 0px;
+            & a {
+              width: 20px;
+              height: 20px;
+              overflow: hidden;
+              color: #caebda;
+              & img {
+                width: 200%;
+                height: 600%;
+              }
+            }
+          }
+          & p:nth-child(1) {
+            width: 30%;
+          }
+          & p:nth-child(2) {
+            width: 40%;
+          }
+          & p:nth-child(3) {
+            width: 30%;
+          }
+          & p:nth-child(1) {
+            position: relative;
+            border-right: 1px solid #212121;
+            & i {
+              font-weight: 700;
+              font-size: 16px;
+              color: #212121;
+              position: absolute;
+              right: -8px;
+            }
+          }
+        }
+        & li:nth-child(1) {
+          border-top: 1px solid hsla(0, 0%, 100%, .3);
+          border-bottom: 1px solid #212121;
+          & p:nth-child(1) {
+            border: none;
+          }
+        }
+      }
+      .lookAll {
+        @extend %faj;
+        margin: 8px 0px 4px;
+        & button {
+          border: 1px solid #caebda;
+          background: none;
+          color: #caebda;
+          padding: 4px 20px;
+          border-radius: 4px;
+        }
+      }
+    }
+    & .betk3-content-foot {
+      padding: 4px 16px 0px;
+      color: #caebda;
+      height: 100%;
+      >div {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+        >.betssc-list-box {
+          width: 100%;
+          padding-bottom: 130px;
+          & b {
+            & i {
+              color: #f0c930;
+              font-style: normal;
+            }
+          }
+          & .fushi {
+            margin-top: 10px;
+            & li {
+              @extend %flex;
+              @extend %fdc;
+              & p {
+                @extend %flex;
+                margin-bottom: 6px;
+                & b {
+                  @extend %flex;
+                  align-items: flex-start;
+                  @extend %jcontent;
+                  width: 14%;
+                  padding-top: 6px;
+                }
+                & span {
+                  display: flex;
+                  width: 86%;
+                  flex-wrap: wrap;
+                  & a {
+                    margin: 0px 26px 8px 0px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background: #caebda;
+                    color: #212121;
+                  }
+                  & a.active {
+                    background: #f0c930;
+                    border: #f0c930;
+                  }
+                }
+              }
+            }
+          }
+          & .danshi {
+            margin-top: 10px;
+            & textarea {
+              width: 90%;
+              height: 200px;
+              border: 0px;
+              background: #fff;
+              resize: none;
+              padding: 4%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.betssc-footer {
+  position: relative;
+  background: #333;
+  color: rgb(175, 58, 49);
+  width: 100%;
+  & .betssc-footer-top {
+    position: absolute;
+    top: -60px;
+    background: #22563f;
+    height: 60px;
+    @extend %flex;
+    @extend %fdc;
+    color: #caebda;
+    font-size: 16px;
+    width: 100%;
+    & .betssc-footer-tops {
+      @extend %flex;
+      @extend %aitems;
+      height: 50%;
+      & span {
+        color: #ffaf36;
+        width: 210px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        height: 20px;
+        padding-left: 2%;
+      }
+      & p {
+        width: 20%;
+        padding: 0 16px;
+      }
+    }
+    & .betssc-footer-buttoms {
+      height: 50%;
+      width: 100%;
+      @extend %flex;
+      @extend %aitems;
+      & input {
+        width: 20%;
+        margin-left: 10px;
+        padding: 0px 4px;
+        text-align: center;
+        border: none;
+        border-radius: 2px;
+      }
+      & p {
+        width: 20%;
+        padding: 0 16px;
+      }
+      & span {
+        width: 45%;
+        @extend %flex;
+        @extend %aitems;
+        @extend %fdr;
+        font-size: 12px;
+        margin-left: 6px;
+        & p {
+          text-align: center;
+          color: #ffaf36;
+          padding: 0;
+          width: auto;
+        }
+      }
+    }
+  }
+  & .betssc-footer-buttom {
+    background: #414141;
+    height: 56px;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
+    padding: 0px 16px;
+    & .betssc-footer-buttom-left {
+      @extend %flex;
+      @extend %aitems;
+      & button {
+        background: none;
+        border: none;
+        color: #ffaf36;
+        font-size: 22px;
+        margin-right: 12px;
+      }
+      & p {
+        color: #fff;
+        font-size: 16px;
+        & span {
+          margin: 0px 4px;
+        }
+      }
+    }
+    & .betssc-footer-buttom-right {
+      @extend %faj;
+      font-size: 18px;
+      height: 40px;
+      width: 100px;
+      color: #fff;
+      border-radius: 6px;
+      background: rgb(175, 58, 49);
+    }
+  }
 }
 
 .van-popup.sscpop {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 4px;
-    background: rgb(175, 58, 49);
+  @extend %faj;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  background: rgb(175, 58, 49);
 }
 
 .van-modal {
-    background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .betcBox {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
 }
 
 .betc {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -170px;
-    margin-top: -80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -170px;
+  margin-top: -80px;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  background: #fff;
+  & li {
+    @extend %faj;
+    border-bottom: 1px solid #DFE4ED;
+    min-height: 30px;
+    font-size: 14px;
+  }
+  & li:nth-child(1) {
+    height: 36px;
+    color: #fff;
+    font-size: 16px;
+    background: rgb(175, 58, 49);
+  }
+  & li:nth-child(2) {
+    min-height: 54px;
     display: flex;
     flex-direction: column;
-    width: 320px;
-    background: #fff;
-    & li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid #DFE4ED;
-        min-height: 30px;
-        font-size: 14px;
+    padding: 4px 0px;
+    & p {
+      display: flex;
+      align-items: center;
+      padding: 4px 0px 4px 60px;
+      width: 100%;
+      & span {
+        width: 30%;
+      }
+      & span.popcon {
+        word-wrap: break-word;
+        width: 178px;
+      }
+      & b {
+        color: red;
+        font-weight: 400;
+      }
     }
-    & li:nth-child(1) {
-        height: 36px;
-        color: #fff;
-        font-size: 16px;
-        background: rgb(175, 58, 49);
+  }
+  & li:nth-child(3) {
+    & button {
+      width: 50%;
+      border: none;
+      color: #22563f;
+      background: none;
     }
-    & li:nth-child(2) {
-        min-height: 54px;
-        display: flex;
-        flex-direction: column;
-        padding: 4px 0px;
-        & p {
-            display: flex;
-            align-items: center;
-            padding: 4px 0px 4px 60px;
-            width: 100%;
-            & span {
-                width: 30%;
-            }
-            & span.popcon {
-                word-wrap: break-word;
-                width: 178px;
-            }
-            & b {
-                color: red;
-                font-weight: 400;
-            }
-        }
+    & button:nth-child(2) {
+      color: #dc3b40;
     }
-    & li:nth-child(3) {
-        & button {
-            width: 50%;
-            border: none;
-            color: #22563f;
-            background: none;
-        }
-        & button:nth-child(2) {
-            color: #dc3b40;
-        }
-    }
+  }
 }

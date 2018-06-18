@@ -2,7 +2,7 @@
   <div class="betk3">
     <ul class="betk3-top">
       <li>
-        <router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link>
+        <i class="el-icon-arrow-left" @click="banckto"></i>
       </li>
       <li>
         <p class="wangfa">玩<br/>法</p>
@@ -38,7 +38,7 @@
         </van-popup>
       </li>
     </ul>
-    <div class="lookAllDiv" v-show="lookAllUl">
+    <!-- <div class="lookAllDiv" v-show="lookAllUl">
       <p class="lookAllDivTitle">
         <i class="el-icon-arrow-left" @click="lookAllDivTitle"></i>
         查看更多
@@ -75,7 +75,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="betk3-content">
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
@@ -345,6 +345,7 @@ export default {
       cacheTime: 600000,
       getPastOpens: "", //获取过去开奖号码10个
       LotteryList: "",
+      groupId:'',
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
       seasonId3: "", //当前期号-1
@@ -556,10 +557,15 @@ export default {
     this.iscreat();
   },
   methods: {
+    //返回到上一次进来的页面
+    banckto(){
+      this.$router.go(-1)
+    },
     //查看更多记录
     lookAll() {
-      this.betk3ContentTopPop = !this.betk3ContentTopPop;
-      this.lookAllUl = !this.lookAllUl;
+      this.$router.push({path:'second/past',query:{id:this.$route.query.id,name:this.$route.query.name,group:this.groupId}});
+      // this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      // this.lookAllUl = !this.lookAllUl;
     },
     lookAllDivTitle() {
       this.lookAllUl = !this.lookAllUl;
@@ -681,6 +687,7 @@ export default {
     getLotteryList() {
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
+        this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
             this.listname = this.LotteryList[i].name.substring(0, 2);
@@ -692,6 +699,7 @@ export default {
           .then(res => {
             localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
             this.LotteryList = res.data.data.k3;
+            this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
                 this.listname = this.LotteryList[i].name.substring(0, 2);
@@ -722,6 +730,7 @@ export default {
       this.getPlayTree(); //玩法术
       this.geteServerTime(); //获取彩種當前獎期時間
       this.iscreat(); //清空
+      this.$router.push({query:{id:this.$route.query.id,name:into.name,group:this.groupId}});
     },
     //三同号全/反选
     tosantonghao() {
@@ -1303,6 +1312,7 @@ export default {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
       };
+      
       if (
         this.playId1 === "k3_star3_big_odd" ||
         this.playId2 === "k3_star3_and" ||

@@ -42,7 +42,7 @@
 					<li>
 						<p>申请充值金额</p><span>{{this.amount}}</span>
 					</li>
-                    <div class="cards" v-if="this.status == '0' && this.bankName !== '微信支付'">
+                    <div class="cards" v-if="this.status == '0' && this.bankName !== '47'">
                         <li >
 						<p>收款人姓名</p><span>{{this.receiveNickName}}</span>
                         </li>
@@ -62,7 +62,7 @@
 						<p>请务必于打款备注栏输入识别码</p>
 					    </li>
                     </div>
-                    <div class="cards" v-if="this.status == '0'&& this.bankName == '微信支付'">
+                    <div class="cards" v-if="this.status == '0' && this.bankNameId == '47' ">
 						<img :src='$store.state.url+this.QRCodeUrl' style="width:50%;height:auto"/>
                         <li>
                             <p>识别码</p><span>{{this.checkCode}}</span>
@@ -96,6 +96,7 @@ export default {
           rechargeList:[],
           checkCode:'',
           QRCodeUrl:'',
+          bankNameId:'',
 	  }
 	},
 	mounted(){
@@ -115,6 +116,7 @@ export default {
             this.checkCode = a.checkCode;
             this.show2 = !this.show2;
             this.this.bankName = a.bankName;
+            this.this.bankNameId = a.bankNameId;
             this.selected = a;
             this.QRCodeUrl = a.QRCodeUrl;
         },

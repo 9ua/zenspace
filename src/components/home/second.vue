@@ -61,7 +61,7 @@ export default {
   },
   mounted() {
     this.getPastOp();
-    // this.initSetTimeout();
+    this.initSetTimeout();
   },
   destroyed() {
     clearInterval(this.timer);
@@ -83,7 +83,7 @@ export default {
     getPastOp() {
       this.$http
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: -1 }
+          params: { lotteryId: -1}
         })
         .then(res => {
           this.getPastOpens = res.data.data;
@@ -101,14 +101,13 @@ export default {
         for (let k = 0; k < this.times.length; k++) {
           this.times[k] = this.times[k] - 1;
           if (this.times[k] < 1) {
-            clearInterval(this.timer);
+            // clearInterval(this.timer);
             this.getPastOp();
-            this.initSetTimeout();
           }
         }
-        console.log(this.times, "-----------");
+        // console.log(this.times, "-----------");
       }, 1000);
-      console.log(this.times, "...............");
+      // console.log(this.times, "...............");
     }
   },
   components: {

@@ -40,6 +40,7 @@
     methods:{
       checkOs(){
 				  	var userAgent = navigator.userAgent;
+<<<<<<< HEAD
 						// console.log(navigator.userAgent,999);
 						if (/Android/i.test(userAgent)) {
 							//是否為Android
@@ -53,16 +54,30 @@
 							//使否是用電腦觀看
               this.os ='/app/android.apk';
 							// console.log("windows99");
+=======
+						if (/Android/i.test(userAgent)) {
+							//是否為Android
+              this.os ='/app/hongfayule.apk';
+						} else if (/iPhone|iPad/i.test(userAgent)) {
+							//是否為iPhone或iPad
+              this.os = 'http://www.pgyer.com/mjn2';
+						} else if (/Windows/i.test(userAgent)) {
+							//使否是用電腦觀看
+              this.os ='/app/hongfayule.apk';
+>>>>>>> 1943b86ae7bffbe2f731279b8055ab8c3b216dd6
 						}
 						//判斷瀏覽器
 						if (/Chrome/i.test(userAgent)) {
 							//是否為Chrome
-							console.log("chrome99")
 						} else if (/Firefox/i.test(userAgent)) {
 							//是否為Chrome
+<<<<<<< HEAD
 							// console.log("firefox99")
 						}
             // console.log(this.os,888);
+=======
+						}
+>>>>>>> 1943b86ae7bffbe2f731279b8055ab8c3b216dd6
       }
     }
   }

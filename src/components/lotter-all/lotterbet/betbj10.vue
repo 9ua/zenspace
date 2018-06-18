@@ -173,9 +173,9 @@
               </p>
             </li>
           </ul>
-          <p class="lookAll">
+          <!-- <p class="lookAll">
             <button @click="lookAll">查看更多</button>
-          </p>
+          </p> -->
         </div>
         <div class="betk3-content-foot">
           <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">

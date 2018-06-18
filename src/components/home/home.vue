@@ -25,7 +25,7 @@ export default {
           pathbat: 'one'
         },
         {
-        	icon:'fa-calendar-check-o',
+        	icon:'fa-pencil-square-o',
           name: '往期开奖',
           pathbat: 'second'
         },

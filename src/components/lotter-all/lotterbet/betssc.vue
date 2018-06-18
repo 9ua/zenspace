@@ -1689,7 +1689,6 @@
             setTimeout(() => {
               this.showpop = !this.showpop;
               this.content = "投注成功!";
-              
               this.iscreat();
               setTimeout(() => {
                 this.showpop = !this.showpop;

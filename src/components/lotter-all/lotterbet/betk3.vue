@@ -2,7 +2,8 @@
   <div class="betk3">
     <ul class="betk3-top">
       <li>
-        <i class="el-icon-arrow-left" @click="banckto"></i>
+        <router-link class="el-icon-arrow-left" to="one" tag="i"></router-link>
+        <!-- <i class="el-icon-arrow-left" @click="banckto"></i> -->
       </li>
       <li>
         <p class="wangfa">玩<br/>法</p>
@@ -38,7 +39,7 @@
         </van-popup>
       </li>
     </ul>
-    <!-- <div class="lookAllDiv" v-show="lookAllUl">
+    <div class="lookAllDiv" v-show="lookAllUl">
       <p class="lookAllDivTitle">
         <i class="el-icon-arrow-left" @click="lookAllDivTitle"></i>
         查看更多
@@ -75,7 +76,7 @@
           </li>
         </ul>
       </div>
-    </div> -->
+    </div>
     <div class="betk3-content">
       <div v-show="!show">
         <div class="betk3-content-top" @click=" betk3ContentTopPop = !betk3ContentTopPop">
@@ -563,9 +564,9 @@ export default {
     },
     //查看更多记录
     lookAll() {
-      this.$router.push({path:'second/past',query:{id:this.$route.query.id,name:this.$route.query.name,group:this.groupId}});
-      // this.betk3ContentTopPop = !this.betk3ContentTopPop;
-      // this.lookAllUl = !this.lookAllUl;
+      // this.$router.push({path:'second/past',query:{id:this.$route.query.id,name:this.$route.query.name,group:this.groupId}});
+      this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
     },
     lookAllDivTitle() {
       this.lookAllUl = !this.lookAllUl;

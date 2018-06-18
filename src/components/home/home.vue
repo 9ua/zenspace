@@ -24,11 +24,11 @@ export default {
           name: '首页',
           pathbat: 'one'
         },
-        {
-        	icon:'fa-pencil-square-o',
-          name: '往期开奖',
-          pathbat: 'second'
-        },
+        // {
+        // 	icon:'fa-pencil-square-o',
+        //   name: '往期开奖',
+        //   pathbat: 'second'
+        // },
         {
         	icon:'fa-calendar-check-o',
           name: '活动',

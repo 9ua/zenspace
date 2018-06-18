@@ -18,7 +18,8 @@ import profit from '@/components/page-four/profit'
 import pop from '@/components/page-four/pop'
 import bet from '@/components/page-five/money/bet'
 import service from '@/components/page-five/service'
-import recharge from '@/components/page-five/money/recharge'
+import bankcharge from '@/components/page-five/money/bankcharge'
+import weixincharge from '@/components/page-five/money/weixincharge'
 import rechargeserch from '@/components/page-five/money/rechargeserch'
 import cashOut from '@/components/page-five/money/cashOut'
 import trade from '@/components/page-five/money/trade'
@@ -32,6 +33,7 @@ import lowerReport from '@/components/page-five/agency/lowerReport'
 import manageInvite from '@/components/page-five/agency/manageInvite'
 import mIcode from '@/components/page-five/agency/manageInvite/mIcode'
 import mInvite from '@/components/page-five/agency/manageInvite/mInvite'
+import payway from '@/components/page-five/money/payway'
 import detail from '@/components/page-five/detail'
 import datum from '@/components/page-five/details/datum'
 import setmobile from '@/components/page-five/details/setmobile'
@@ -592,9 +594,17 @@ export default new Router({
       },
     },
     {
-      path: '/recharge',
-      name: 'recharge',
-      component: recharge,
+      path: '/bankcharge',
+      name: 'bankcharge',
+      component: bankcharge,
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/weixincharge',
+      name: 'weixincharge',
+      component: weixincharge,
       meta: {
         keepAlive: false
       },
@@ -635,6 +645,14 @@ export default new Router({
       path: '/service',
       name: 'service',
       component: service,
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/payway',
+      name: 'payway',
+      component: payway,
       meta: {
         keepAlive: false
       },

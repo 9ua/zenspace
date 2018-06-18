@@ -95,14 +95,18 @@ export default {
           console.log("获取全部彩种No");
         });
     },
+    reset(){
+          this.getPastOp();
+          this.initSetTimeout();
+    },
     //倒计时
     initSetTimeout() {
       this.timer = setInterval(() => {
         for (let k = 0; k < this.times.length; k++) {
-          this.times[k] = this.times[k] - 1;
-          if (this.times[k] < 1) {
-            // clearInterval(this.timer);
-            this.getPastOp();
+          this.times[0] = this.times[0] - 1;
+          if (this.times[0] < 1) {
+            clearInterval(this.timer);
+              this.reset();
           }
         }
         // console.log(this.times, "-----------");

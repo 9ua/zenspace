@@ -14,7 +14,7 @@
       </div>
       <ul>
         <router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name}}">
-          <img :src='"@/assets/img/one/"+item.image+".png"' alt="images" />
+          <img :src='"@/assets/img/one/"+item.groupId+".png"' alt="images" />
           <h5>{{item.name}}</h5>
         </router-link>
         <router-link class="lotter-list" to="/lotterList" tag="li">
@@ -94,6 +94,7 @@ export default {
             console.log("获取广告No");
           });
       }
+      console.log(this.lotteryList);
     }
   },
   components: {

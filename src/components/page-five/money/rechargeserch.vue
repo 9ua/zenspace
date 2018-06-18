@@ -29,7 +29,7 @@
             
             
             <van-actionsheet v-model="show2">
-	            <ul class="listStyle-II">
+	            <ul class="listStyle-II" style="text-align:center">
                     <li>
 						<p>订单编号</p><span>{{this.id}}</span>
 					</li>
@@ -42,7 +42,7 @@
 					<li>
 						<p>申请充值金额</p><span>{{this.amount}}</span>
 					</li>
-                    <div class="cards" v-if="this.status == '0'">
+                    <div class="cards" v-if="this.status == '0' && this.bankNameCode !== 'weixin'">
                         <li >
 						<p>收款人姓名</p><span>{{this.receiveNickName}}</span>
                         </li>
@@ -59,7 +59,16 @@
                             <p>识别码</p><span>{{this.checkCode}}</span>
                         </li>
                         <li>
-						<p>打款时请务必于打款备注栏输入识别码</p>
+						<p>请务必于打款备注栏输入识别码</p>
+					    </li>
+                    </div>
+                    <div class="cards" v-if="this.status == '0' && this.bankNameCode == 'weixin' ">
+						<img :src='$store.state.url+this.QRCodeUrl' style="width:50%;height:auto"/>
+                        <li>
+                            <p>识别码</p><span>{{this.checkCode}}</span>
+                        </li>
+                        <li>
+						<p>请务必于备注栏输入识别码</p>
 					    </li>
                     </div>
                     
@@ -77,7 +86,8 @@ export default {
           id:'',
           status:'',
 		  statusName:'',
-		  amount:'',
+          amount:'',
+          bankName:'',
 		  receiveNickName:'',
 		  receiveBankName:'',
 		  receiveCard:'',
@@ -85,6 +95,8 @@ export default {
           receiveAddress:'',
           rechargeList:[],
           checkCode:'',
+          QRCodeUrl:'',
+          bankNameCode:'',
 	  }
 	},
 	mounted(){
@@ -103,7 +115,10 @@ export default {
             this.receiveAddress = a.receiveAddress;
             this.checkCode = a.checkCode;
             this.show2 = !this.show2;
+            this.bankName = a.bankName;
+            this.bankNameCode = a.bankNameCode;
             this.selected = a;
+            this.QRCodeUrl = a.QRCodeUrl;
         },
 		getRechargeList() {
 			this.$http.get(this.$store.state.url+'api/proxy/getRechargeList',{params:{start:0,limit:100}}).then((res) => {

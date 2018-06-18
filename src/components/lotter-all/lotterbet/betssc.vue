@@ -2,7 +2,8 @@
   <div class="betssc">
     <ul class="betssc-top">
       <li>
-        <i class="el-icon-arrow-left" @click="banckto"></i>
+        <router-link class="el-icon-arrow-left" to="one" tag="i"></router-link>
+        <!-- <i class="el-icon-arrow-left" @click="banckto"></i> -->
       </li>
       <li>
         <p class="wangfa">玩
@@ -113,9 +114,9 @@
               <p>{{item.addTime.substring(11)}}</p>
             </li>
           </ul>
-          <p class="lookAll">
+          <!-- <p class="lookAll">
             <button @click="lookAll">查看更多</button>
-          </p>
+          </p> -->
         </div>
         <div class="betk3-content-foot">
           <div>

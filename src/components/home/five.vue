@@ -21,7 +21,7 @@
         </div>
       </div>
       <ul>
-        <router-link to="/recharge" tag="li">
+        <router-link to="/payway" tag="li">
           <div class="icon-top top-1">
             <i class="fa fa-credit-card" aria-hidden="true"></i>
           </div>

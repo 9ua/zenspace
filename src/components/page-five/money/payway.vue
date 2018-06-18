@@ -6,7 +6,7 @@
 		</div>
 		<div class="listStyle-content">
 			<ul class="listStyle-I">
-				<router-link :to="payw.alino" tag="li" v-for="(payw,index) in paywaylist" :key="index" v-if="payw.opentype === 0">
+				<router-link :to="payw.alino+'charge'" tag="li" v-for="(payw,index) in paywaylist" :key="index" v-if="payw.opentype === 0">
 				<div class="mInvite-left">
 					<i class="fa fa-credit-card" style="padding-right:10px"></i>
 					<p>
@@ -44,6 +44,7 @@ export default {
 	data() {
       return {
 		  content:'',
+		  receiveAddress:'',
 		  show3:false,
 		  paywaylist:'',
 	

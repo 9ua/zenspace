@@ -1,8 +1,8 @@
 <template>
 	<div class="listStyle">
 		<div class="listStyle-top">
-			<router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-			<p>我要充值</p>
+			<router-link to="/payway" tag="i" class="el-icon-arrow-left"></router-link>
+			<p>银行转账充值</p>
 		</div>
 		<div class="listStyle-content">
 			<ul class="listStyle-III">

@@ -39,8 +39,8 @@
 					<span>{{chargeamount}}</span>
 				</li>
 				<li>
-					<p>账号</p>
-					<span>{{selectBank}}</span>
+					<p>方式</p>
+					<span>微信支付</span>
 				</li>
 				<li>
 					<p>充值人姓名</p>
@@ -75,10 +75,10 @@
 			</div>
 		</van-popup>
 		<van-actionsheet class="" v-model="show4">
-			<ul class="listStyle-II">
+			<ul class="listStyle-II" style="text-align:center">
 				<li>
 					<div class="center">
-						<p>申请完成，请依据以下资讯完成微信支付</p>
+						<p>申请完成，请依以下资讯完成支付</p>
 					</div>
 				</li>
 				<div class="cards">
@@ -87,7 +87,7 @@
 							<p>应打入金额</p>
 							<span>{{chargeamount}}</span>
 						</li>
-						<img :src='$store.state.url+this.QRCodeUrl' style="width:100%;height:auto"/>
+						<img :src='$store.state.url+this.QRCodeUrl' style="width:50%;height:auto"/>
 						<li>
 							<p>！识别码</p>
 							<span>{{checkCode}}</span>

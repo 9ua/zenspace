@@ -32,6 +32,7 @@ const state = {
   userType: getStore('userType'), //member type
   playBonusk3: null,
   playGroupsssc: null,
+  historyNum: "/one"
 }
 if (process.env.NODE_ENV === 'production') {
   if (location.hostname === '115.144.238.217')

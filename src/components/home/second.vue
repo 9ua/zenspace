@@ -2,6 +2,7 @@
   <div class="second">
     <headers></headers>
     <div class="second-conter">
+      <p v-show="false">{{h}}</p>
       <ul class="secondBox">
         <li v-for="(all,index) in getPastOpens" :key="index">
           <div class="title">
@@ -53,10 +54,14 @@ export default {
   data() {
     return {
       getPastOpens: "",
+      getPastOpens2: "",
       today: "",
       times: [],
-      timesAll: [],
-      timer: ""
+      h:'',
+      h2:'',
+      timer: "",
+      lotteryId: -1,
+      count: ""
     };
   },
   mounted() {
@@ -76,14 +81,17 @@ export default {
   methods: {
     //立即投注
     looksucc(e, all) {
-      this.$router.push({ path: all.groupName, query: { id: all.lotteryId } });
+      this.$router.push({
+        path: all.groupName,
+        query: { id: all.lotteryId, name: all.name, group: all.groupId }
+      });
       this.betsuccess = !this.betsuccess;
     },
     //获取全部彩种
     getPastOp() {
       this.$http
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: -1}
+          params: { lotteryId: this.lotteryId, count: this.count }
         })
         .then(res => {
           this.getPastOpens = res.data.data;
@@ -95,23 +103,48 @@ export default {
           console.log("获取全部彩种No");
         });
     },
-    reset(){
-          this.getPastOp();
-          this.initSetTimeout();
+    getPastOps() {
+      this.$http
+        .get(this.$store.state.url + "api/lottery/getPastOpen", {
+          params: { lotteryId: this.lotteryId, count: 1 }
+        })
+        .then(res => {
+          this.times[this.h2] = res.data.data[0].restSeconds;
+          this.getPastOpens[this.h2].seasonId = res.data.data[0].seasonId;
+          this.getPastOpens[this.h2].n1 = res.data.data[0].n1;
+          this.getPastOpens[this.h2].n2 = res.data.data[0].n2;
+          this.getPastOpens[this.h2].n3 = res.data.data[0].n3;
+          this.getPastOpens[this.h2].n4 = res.data.data[0].n4;
+          this.getPastOpens[this.h2].n5 = res.data.data[0].n5;
+          this.getPastOpens[this.h2].n6 = res.data.data[0].n6;
+          this.getPastOpens[this.h2].n7 = res.data.data[0].n7;
+          this.getPastOpens[this.h2].n8 = res.data.data[0].n8;
+          this.getPastOpens[this.h2].n9 = res.data.data[0].n9;
+          this.getPastOpens[this.h2].n10 = res.data.data[0].n10;
+        })
+        .catch(error => {
+          console.log("获取全部彩种No");
+        });
+    },
+    reset() {
+      this.getPastOps();
+      this.initSetTimeout();
     },
     //倒计时
     initSetTimeout() {
       this.timer = setInterval(() => {
         for (let k = 0; k < this.times.length; k++) {
-          this.times[0] = this.times[0] - 1;
-          if (this.times[0] < 1) {
+          this.times[k] = this.times[k] - 1;
+          this.h = this.times[0];
+          
+          if (this.times[k] < 0) {
+            this.lotteryId = this.getPastOpens[k].lotteryId;
+            this.h2 = k;
             clearInterval(this.timer);
-              this.reset();
+            this.reset();
           }
         }
-        // console.log(this.times, "-----------");
       }, 1000);
-      // console.log(this.times, "...............");
     }
   },
   components: {

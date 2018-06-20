@@ -94,7 +94,6 @@ export default {
             console.log("获取广告No");
           });
       }
-      console.log(this.lotteryList);
     }
   },
   components: {

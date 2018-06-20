@@ -2,8 +2,8 @@
   <div class="betssc">
     <ul class="betssc-top">
       <li>
-        <router-link class="el-icon-arrow-left" to="one" tag="i"></router-link>
-        <!-- <i class="el-icon-arrow-left" @click="banckto"></i> -->
+        <!-- <router-link class="el-icon-arrow-left" to="one" tag="i"></router-link> -->
+        <i class="el-icon-arrow-left" @click="banckto"></i>
       </li>
       <li>
         <p class="wangfa">玩
@@ -114,9 +114,9 @@
               <p>{{item.addTime.substring(11)}}</p>
             </li>
           </ul>
-          <!-- <p class="lookAll">
+          <p class="lookAll">
             <button @click="lookAll">查看更多</button>
-          </p> -->
+          </p>
         </div>
         <div class="betk3-content-foot">
           <div>
@@ -311,6 +311,7 @@
         timer: '',
         timer2: '',
         cacheTime: 600000,
+        historyNum:0,
       }
     },
     destroyed() {
@@ -343,7 +344,7 @@
     methods: {
       //返回到上一次进来的页面
       banckto(){
-        this.$router.go(-1)
+        this.$router.push(this.$store.state.historyNum);
       },
       //查看更多记录
       lookAll() {
@@ -1737,6 +1738,7 @@
       },
       //头部右->菜单点击
       listnames(e, index, into) {
+        this.historyNum ++;
         this.listname = into.name.substring(0, 2);
         this.lotteryId = into.id
         this.showan = index;

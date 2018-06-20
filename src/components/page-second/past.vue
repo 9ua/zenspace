@@ -119,9 +119,10 @@ export default {
   watch: {
     //监听路由变化后
     $route(to, from, next) {
-      // console.log(to.fullPath,"-----------");
-      // console.log("to:",to);
-      // console.log("2222222222222",this.$route.name)
+      console.log(to.fullPath,"-----------");
+      console.log("to:",to);
+      console.log("from:",from);
+      console.log("2222222222222",this.$route.name)
     }
   },
   mounted() {

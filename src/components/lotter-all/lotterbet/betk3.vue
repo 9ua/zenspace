@@ -2,8 +2,8 @@
   <div class="betk3">
     <ul class="betk3-top">
       <li>
-        <router-link class="el-icon-arrow-left" to="one" tag="i"></router-link>
-        <!-- <i class="el-icon-arrow-left" @click="banckto"></i> -->
+        <!-- <router-link class="el-icon-arrow-left" to="one" tag="i"></router-link> -->
+        <i class="el-icon-arrow-left" @click="banckto"></i>
       </li>
       <li>
         <p class="wangfa">玩<br/>法</p>
@@ -44,7 +44,7 @@
         <i class="el-icon-arrow-left" @click="lookAllDivTitle"></i>
         查看更多
       </p>
-      <div class="lookAllUlBox">
+      <!-- <div class="lookAllUlBox">
         <ul class="lookAllUl">
           <li>
             <p>期号</p>
@@ -75,7 +75,7 @@
             </p>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <div class="betk3-content">
       <div v-show="!show">
@@ -365,6 +365,7 @@ export default {
       dd1: [], //选中的号码的下标
       dd2: [], //选中的号码的下标
       hezhiitem: [], //和值时选中的号码的下标
+      historyNum:0,
       con: "",
       con1: "",
       con2: "",
@@ -540,7 +541,7 @@ export default {
       } else {
         this.money = parseInt(newVal);
       }
-    }
+    },
   },
   created() {
     this.getLotteryList();
@@ -560,13 +561,13 @@ export default {
   methods: {
     //返回到上一次进来的页面
     banckto(){
-      this.$router.go(-1)
+      this.$router.push(this.$store.state.historyNum);     
     },
     //查看更多记录
     lookAll() {
-      // this.$router.push({path:'second/past',query:{id:this.$route.query.id,name:this.$route.query.name,group:this.groupId}});
-      this.betk3ContentTopPop = !this.betk3ContentTopPop;
-      this.lookAllUl = !this.lookAllUl;
+      this.$router.push({path:'second/past',query:{id:this.$route.query.id,name:this.$route.query.name,group:this.groupId}});
+      // this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      // this.lookAllUl = !this.lookAllUl;
     },
     lookAllDivTitle() {
       this.lookAllUl = !this.lookAllUl;
@@ -722,6 +723,7 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
+      this.historyNum ++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;

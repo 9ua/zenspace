@@ -1,104 +1,84 @@
-<template>
-  <div class="past">
-    <header>
-      <i class="el-icon-arrow-left" @click="past"></i>
-      <p class="pastTitle">
-        <span>{{this.$route.query.name}}</span>开奖记录</p>
-      <span @click="checkListBtn">彩种</span>
-    </header>
-    <div class="pastBox">
-      <ul>
-        <li :class="{'active': index === nums}" v-for="(num,index) in datas" :key="index" @click="pastBox($event,index)">{{num}}</li>
-      </ul>
-    </div>
-    <div class="pastList">
-      <ul>
-        <li v-for="(getopen,index) in getPastOpens" :key="index">
-          <div class="pastListTitle">
-            <p>
-              <i>{{getopen.seasonId}}</i>期</p>
-            <p v-if="$route.query.group === 'k3'">
-              <span>和值</span>
-              <span>大/小</span>
-              <span>单/双</span>
-            </p>
-            <p :class="'pastListTitle'+$route.query.group" v-if="$route.query.group === 'ssc'">
-              <span></span>
-              <span></span>
-              <span></span>
-            </p>
-            <p v-if="$route.query.group === 'pk10'">
-              <span>冠亚和值</span>
-              <span>大/小</span>
-              <span>单/双</span>
-            </p>
-          </div>
-          <div class="pastListCenter" :class="$route.query.group">
-            <div :class="$route.query.group" v-if="$route.query.group === 'k3'">
-              <span>{{getopen.n1}}</span>
-              <span>{{getopen.n2}}</span>
-              <span>{{getopen.n3}}</span>
-            </div>
-            <div :class="$route.query.group" v-if="$route.query.group === 'ssc'">
-              <span>{{getopen.n1}}</span>
-              <span>{{getopen.n2}}</span>
-              <span>{{getopen.n3}}</span>
-              <span>{{getopen.n4}}</span>
-              <span>{{getopen.n5}}</span>
-            </div>
-            <div :class="$route.query.group" v-if="$route.query.group === 'pk10'">
-              <span>{{getopen.n1}}</span>
-              <span>{{getopen.n2}}</span>
-              <span>{{getopen.n3}}</span>
-              <span>{{getopen.n4}}</span>
-              <span>{{getopen.n5}}</span>
-              <span>{{getopen.n6}}</span>
-              <span>{{getopen.n7}}</span>
-              <span>{{getopen.n8}}</span>
-              <span>{{getopen.n9}}</span>
-              <span>{{getopen.n10}}</span>
-            </div>
-            <div v-if="$route.query.group === 'k3'">
-              <span>{{getopen.n1+getopen.n2+getopen.n3}}</span>
-              <span>
-                <i :class="(getopen.n1+getopen.n2+getopen.n3) < 11 ? 'goodidea' : 'goodluck'">{{(getopen.n1+getopen.n2+getopen.n3)
-                  < 11 ? '小' : '大'}}</i>
-              </span>
-              <span>
-                <i :class="(getopen.n1+getopen.n2+getopen.n3) % 2 === 0 ? 'goodidea' : 'goodluck'">{{(getopen.n1+getopen.n2+getopen.n3) %2 === 0 ? '双' : '单'}}</i>
-              </span>
-            </div>
-            <div v-if="$route.query.group === 'ssc'" v-show="false">
-              <span>{{getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5}}</span>
-              <span>
-                <i :class="(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5) < 11 ? 'goodidea' : 'goodluck'">{{(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5)
-                  < 11 ? '小' : '大'}}</i>
-              </span>
-              <span>
-                <i :class="(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5) % 2 === 0 ? 'goodidea' : 'goodluck'">{{(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5) %2 === 0 ? '双' : '单'}}</i>
-              </span>
-            </div>
-            <div v-if="$route.query.group === 'pk10'">
-              <span>{{getopen.n1+getopen.n2}}</span>
-              <span>
-                <i :class="(getopen.n1+getopen.n2) < 12 ? 'goodidea' : 'goodluck'">{{(getopen.n1+getopen.n2)
-                  < 12 ? '小' : '大'}}</i>
-              </span>
-              <span>
-                <i :class="(getopen.n1+getopen.n2) % 2 === 0 ? 'goodidea' : 'goodluck'">{{(getopen.n1+getopen.n2) %2 === 0 ? '双' : '单'}}</i>
-              </span>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="checkList" v-show="isCheckList">
-      <p class="checkLisTitle">游戏筛选</p>
-      <ul>
-        <li :class="{'active': indexx === allName}" v-for="(all,indexx) in lotteryAll" :key="indexx" @click="checkList($event,indexx,all)">{{all.name}}</li>
-      </ul>
-    </div>
-  </div>
+<template lang="jade">
+.past
+  header
+    i.el-icon-arrow-left(@click='past')
+    p.pastTitle
+      span {{this.$route.query.name}}
+      | 开奖记录
+    span(@click='checkListBtn') 彩种
+  .pastBox
+    ul
+      li(:class="{'active': index === nums}", v-for='(num,index) in datas', :key='index', @click='pastBox($event,index)') {{num}}
+  .pastList
+    ul
+      li(v-for='(getopen,index) in getPastOpens', :key='index')
+        .pastListTitle
+          p
+            i {{getopen.seasonId}}
+            | 期
+          p(v-if="$route.query.group === 'k3'")
+            span 和值
+            span 大/小
+            span 单/双
+          p(:class="'pastListTitle'+$route.query.group", v-if="$route.query.group === 'ssc'")
+            span
+            span
+            span
+          p(v-if="$route.query.group === 'pk10'")
+            span 冠亚和值
+            span 大/小
+            span 单/双
+        .pastListCenter(:class='$route.query.group')
+          div(:class='$route.query.group', v-if="$route.query.group === 'k3'")
+            span {{getopen.n1}}
+            span {{getopen.n2}}
+            span {{getopen.n3}}
+          div(:class='$route.query.group', v-if="$route.query.group === 'ssc'")
+            span {{getopen.n1}}
+            span {{getopen.n2}}
+            span {{getopen.n3}}
+            span {{getopen.n4}}
+            span {{getopen.n5}}
+          div(:class='$route.query.group', v-if="$route.query.group === 'pk10'")
+            span {{getopen.n1}}
+            span {{getopen.n2}}
+            span {{getopen.n3}}
+            span {{getopen.n4}}
+            span {{getopen.n5}}
+            span {{getopen.n6}}
+            span {{getopen.n7}}
+            span {{getopen.n8}}
+            span {{getopen.n9}}
+            span {{getopen.n10}}
+          div(v-if="$route.query.group === 'k3'")
+            span {{getopen.n1+getopen.n2+getopen.n3}}
+            span
+              i(:class="(getopen.n1+getopen.n2+getopen.n3) < 11 ? 'goodidea' : 'goodluck'")
+                | {{(getopen.n1+getopen.n2+getopen.n3)
+                | < 11 ? '小' : '大'}}
+            span
+              i(:class="(getopen.n1+getopen.n2+getopen.n3) % 2 === 0 ? 'goodidea' : 'goodluck'") {{(getopen.n1+getopen.n2+getopen.n3) %2 === 0 ? '双' : '单'}}
+          div(v-if="$route.query.group === 'ssc'", v-show='false')
+            span {{getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5}}
+            span
+              i(:class="(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5) < 11 ? 'goodidea' : 'goodluck'")
+                | {{(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5)
+                | < 11 ? '小' : '大'}}
+            span
+              i(:class="(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5) % 2 === 0 ? 'goodidea' : 'goodluck'")
+                | {{(getopen.n1+getopen.n2+getopen.n3+getopen.n4+getopen.n5) %2 === 0 ? '双' : '单'}}
+          div(v-if="$route.query.group === 'pk10'")
+            span {{getopen.n1+getopen.n2}}
+            span
+              i(:class="(getopen.n1+getopen.n2) < 12 ? 'goodidea' : 'goodluck'")
+                | {{(getopen.n1+getopen.n2)
+                | < 12 ? '小' : '大'}}
+            span
+              i(:class="(getopen.n1+getopen.n2) % 2 === 0 ? 'goodidea' : 'goodluck'") {{(getopen.n1+getopen.n2) %2 === 0 ? '双' : '单'}}
+  .checkList(v-show='isCheckList')
+    p.checkLisTitle 游戏筛选
+    ul
+      li(:class="{'active': indexx === allName}", v-for='(all,indexx) in lotteryAll', :key='indexx', @click='checkList($event,indexx,all)') {{all.name}}
 </template>
 <script>
 export default {
@@ -131,10 +111,7 @@ export default {
   },
   methods: {
     past() {
-      if(this.$route.path === "/second/past"){
-        this.$router.push("/second");
-      }
-      // this.$router.go(-1);
+      this.$router.go(-1);
     },
     //期数选择
     pastBox(e, index) {

@@ -1,52 +1,46 @@
-<template>
-  <div class="second">
-    <headers></headers>
-    <div class="second-conter">
-      <p v-show="false">{{h}}</p>
-      <ul class="secondBox">
-        <li v-for="(all,index) in getPastOpens" :key="index">
-          <div class="title">
-            <h2>{{all.name}}</h2>
-            <p>
-              <span>第
-                <i>{{all.seasonId}}</i>期</span>
-              <span>
-                <i v-for="(cd,indexa) in times" :key="indexa" v-if="indexa === index">{{cd | setTime}}</i>
-              </span>
-            </p>
-          </div>
-          <div class="conter" :class="all.groupName" v-if="all.groupName === 'k3'">
-            <span><img :src='"../../assets/img/one/n"+all.n1+".png"' alt="" /></span>
-            <span><img :src='"../../assets/img/one/n"+all.n2+".png"' alt="" /></span>
-            <span><img :src='"../../assets/img/one/n"+all.n3+".png"' alt="" /></span>
-          </div>
-          <div class="conter" :class="all.groupName" v-if="all.groupName === 'ssc'">
-            <span>{{all.n1}}</span>
-            <span>{{all.n2}}</span>
-            <span>{{all.n3}}</span>
-            <span>{{all.n4}}</span>
-            <span>{{all.n5}}</span>
-          </div>
-          <div class="conter" :class="all.groupName" v-if="all.groupName === 'pk10'">
-            <span>{{all.n1}}</span>
-            <span>{{all.n2}}</span>
-            <span>{{all.n3}}</span>
-            <span>{{all.n4}}</span>
-            <span>{{all.n5}}</span>
-            <span>{{all.n6}}</span>
-            <span>{{all.n7}}</span>
-            <span>{{all.n8}}</span>
-            <span>{{all.n9}}</span>
-            <span>{{all.n10}}</span>
-          </div>
-          <div class="btn">
-            <router-link :to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:all.groupName}}" tag="button">往期开奖</router-link>
-            <button @click="looksucc($event,all)">立即投注</button>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+<template lang="jade">
+.second
+  headers
+  .second-conter
+    p(v-show='false') {{h}}
+    ul.secondBox
+      li(v-for='(all,index) in getPastOpens', :key='index')
+        .title
+          h2 {{all.name}}
+          p
+            span
+              | 第
+              i {{all.seasonId}}
+              | 期
+            span
+              i(v-for='(cd,indexa) in times', :key='indexa', v-if='indexa === index') {{cd | setTime}}
+        .conter(:class='all.groupName', v-if="all.groupName === 'k3'")
+          span
+            img(:src='"../../assets/img/one/n"+all.n1+".png"', alt='')
+          span
+            img(:src='"../../assets/img/one/n"+all.n2+".png"', alt='')
+          span
+            img(:src='"../../assets/img/one/n"+all.n3+".png"', alt='')
+        .conter(:class='all.groupName', v-if="all.groupName === 'ssc'")
+          span {{all.n1}}
+          span {{all.n2}}
+          span {{all.n3}}
+          span {{all.n4}}
+          span {{all.n5}}
+        .conter(:class='all.groupName', v-if="all.groupName === 'pk10'")
+          span {{all.n1}}
+          span {{all.n2}}
+          span {{all.n3}}
+          span {{all.n4}}
+          span {{all.n5}}
+          span {{all.n6}}
+          span {{all.n7}}
+          span {{all.n8}}
+          span {{all.n9}}
+          span {{all.n10}}
+        .btn
+          router-link(:to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:all.groupName}}", tag='button') 往期开奖
+          button(@click='looksucc($event,all)') 立即投注
 </template>
 <script>
 import headers from "../public/header";

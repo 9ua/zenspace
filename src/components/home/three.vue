@@ -1,21 +1,15 @@
-<template>
-  <div class="three">
-    <headers></headers>
-    <ul v-show="showFlag">
-      <li v-for="(actives,index) in activitys" :key="index">
-        <img :src="'https://mtxflower.com/'+actives.icon" @click="activeR($event,actives,index)" />
-        <div class="three-box">
-          <p>活动时间：{{actives.beginPrizeTime}}</p>
-          <p>{{actives.status === 0 ? '进行中' : '结束'}}</p>
-        </div>
-        <div class="three-content" ref="pppop" v-if="activesremark === index" v-show="activesremarks">
-          <div>
-            <p v-html="actives.remark"></p>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
+<template lang="jade">
+.three
+  headers
+  ul(v-show='showFlag')
+    li(v-for='(actives,index) in activitys', :key='index')
+      img(:src="'https://mtxflower.com/'+actives.icon", @click='activeR($event,actives,index)')
+      .three-box
+        p 活动时间：{{actives.beginPrizeTime}}
+        p {{actives.status === 0 ? '进行中' : '结束'}}
+      .three-content(ref='pppop', v-if='activesremark === index', v-show='activesremarks')
+        div
+          p(v-html='actives.remark')
 </template>
 <script>
 import headers from "../public/header";

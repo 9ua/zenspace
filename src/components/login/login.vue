@@ -1,44 +1,34 @@
-<template>
-  <div class="login" v-show="loginStatus === false">
-    <div class="login-title">
-      <router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>用户登录</p>
-    </div>
-    <div class="login-conter">
-      <div class="login-center-img">
-        <div></div>
-      </div>
-      <div class="login-form">
-        <div class="login-user">
-          <i class="fa fa-user"></i>
-          <input type="text" v-model="newUserInfo.user" placeholder="请输入用户名" onfocus="this.select()"> </div>
-        <div class="login-pwd">
-          <i class="fa fa-lock"></i>
-          <input :type="pwd ? 'text' : 'password'" v-model="newUserInfo.pwd" placeholder="请输入密码" onfocus="this.select()" v-focus @keyup.enter="login">
-          <i class="iconfont" :class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'" @click="pwd = !pwd"></i>
-        </div>
-        <div class="login-captchaCodeImg" v-show="errorcode">
-          <i class="fa fa-lock"></i>
-          <input type="text" onfocus="this.select()" v-model="newUserInfo.verification" placeholder="请输入验证码" />
-          <img :src="captchaCodeImg" @click="getCaptchaCode">
-        </div>
-        <div class="login-rememb">
-          <yd-checkbox v-model="checked" colo="#419fd9" @click="checked = !checked">记住密码</yd-checkbox>
-        </div>
-        <div class="login-go">
-          <button @click="login" v-show="loginReq">立即登陆</button>
-        </div>
-        <div class="login-live">
-          <router-link to="registered">立即注册</router-link>
-          <router-link to="reset">忘记密码</router-link>
-        </div>
-      </div>
-    </div>
-    <div class="login-pop" v-show="pop" @click="pop = false">
-      <div>
-        <i class="iconfont icon-information"></i>{{content}}</div>
-    </div>
-  </div>
+<template lang="jade">
+.login(v-show='loginStatus === false')
+  .login-title
+    router-link.el-icon-arrow-left(to='/one', tag='i')
+    p 用户登录
+  .login-conter
+    .login-center-img
+      div
+    .login-form
+      .login-user
+        i.fa.fa-user
+        input(type='text', v-model='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()')
+      .login-pwd
+        i.fa.fa-lock
+        input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', v-focus='', @keyup.enter='login')
+        i.iconfont(:class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'", @click='pwd = !pwd')
+      .login-captchaCodeImg(v-show='errorcode')
+        i.fa.fa-lock
+        input(type='text', onfocus='this.select()', v-model='newUserInfo.verification', placeholder='请输入验证码')
+        img(:src='captchaCodeImg', @click='getCaptchaCode')
+      .login-rememb
+        yd-checkbox(v-model='checked', colo='#419fd9', @click='checked = !checked') 记住密码
+      .login-go
+        button(@click='login', v-show='loginReq') 立即登陆
+      .login-live
+        router-link(to='registered') 立即注册
+        router-link(to='reset') 忘记密码
+  .login-pop(v-show='pop', @click='pop = false')
+    div
+      i.iconfont.icon-information
+      | {{content}}
 </template>
 <script>
 import md5 from "js-md5";

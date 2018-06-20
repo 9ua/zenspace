@@ -1,17 +1,12 @@
-<template>
-  <div class="home">
-    <div class="home-cneter">
-      <router-view></router-view>
-    </div>
-    <div class="home-footer">
-      <ul  @click="historyNum">
-        <router-link v-for="(navs,index) in navbat" :to="'/'+navs.pathbat" tag="li" :key="index">
-          <i class="fa" :class="navs.icon"></i>
-          <span>{{navs.name}}</span>
-        </router-link>
-      </ul>
-    </div>
-  </div>
+<template lang="jade">
+.home
+  .home-cneter
+    router-view
+  .home-footer
+    ul(@click='historyNum')
+      router-link(v-for='(navs,index) in navbat', :to="'/'+navs.pathbat", tag='li', :key='index')
+        i.fa(:class='navs.icon')
+        span {{navs.name}}
 </template>
 <script>
 export default {

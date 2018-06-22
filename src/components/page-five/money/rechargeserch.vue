@@ -42,35 +42,6 @@
 					<li>
 						<p>申请充值金额</p><span>{{this.amount}}</span>
 					</li>
-                    <div class="cards" v-if="this.status == '0' && this.bankNameCode !== 'weixin'">
-                        <li >
-						<p>收款人姓名</p><span>{{this.receiveNickName}}</span>
-                        </li>
-                        <li>
-                            <p>收款银行</p><span>{{this.receiveBankName}}</span>
-                        </li>
-                        <li >
-                            <p>收款卡号</p><span>{{this.receiveCard}}</span>
-                        </li>
-                        <li>
-                            <p>收款银行地址</p><span>{{this.receiveAddress}}</span>
-                        </li>
-                        <li>
-                            <p>识别码</p><span>{{this.checkCode}}</span>
-                        </li>
-                        <li>
-						<p>请务必于打款备注栏输入识别码</p>
-					    </li>
-                    </div>
-                    <div class="cards" v-if="this.status == '0' && this.bankNameCode == 'weixin' ">
-						<img :src='$store.state.url+this.QRCodeUrl' style="width:50%;height:auto"/>
-                        <li>
-                            <p>识别码</p><span>{{this.checkCode}}</span>
-                        </li>
-                        <li>
-						<p>请务必于备注栏输入识别码</p>
-					    </li>
-                    </div>
                     
 					<li><div class="button"><button class="button1" @click="show2=!show2">确定</button></div></li>
 				</ul>

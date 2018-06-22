@@ -5,7 +5,10 @@
 			<p>微信支付</p>
 		</div>
 		<div class="listStyle-content">
-			<ul class="listStyle-III">
+			<ul class="listStyle-VI">
+				<div style="text-align:center;height:auto;">
+					<img :src='$store.state.url+this.QRCodeUrl' style="width:40%;height:auto"/>
+				</div>
 				<li>
 					<p>充值金额</p>
 					<div>
@@ -21,10 +24,23 @@
 					</div>
 				</li>
 				<li>
+					<p>订单号后6位</p>
+					<div>
+						<el-input placeholder="请输入订单号后6位" v-model="checkCode" :value="checkCode" clearable>
+						</el-input>
+					</div>
+				</li>
+				<li>
 					<div class="button">
 						<button class="button1" @click="show2 = !show2">充值申请</button>
 					</div>
 				</li>
+			<div class="warning" >
+        		<p>1、请务必填写正确订单号后6位！</p><br>
+        		<p>2、请正确填写姓名和充值金额，以便及时核对。</p><br>
+        		<p>3、转账1笔提交1次，请勿重复提交订单。</p><br>
+        		<p>4、请务必转账后再提交订单，否则无法及时查到您的款项！</p><br>
+     		</div>
 			</ul>
 		</div>
 		<van-actionsheet v-model="show2">
@@ -39,16 +55,16 @@
 					<span>{{chargeamount}}</span>
 				</li>
 				<li>
-					<p>方式</p>
-					<span>微信支付</span>
-				</li>
-				<li>
 					<p>充值人姓名</p>
 					<span>{{niceName}}</span>
 				</li>
 				<li>
+					<p>订单号后6位</p>
+					<span>{{checkCode}}</span>
+				</li>
+				<li style="text-align:center;background:#fff;">
 					<div class="center">
-						<p>请确认上列信息正确</p>
+						<p>请确认上列信息正确！</p>
 					</div>
 				</li>
 				<li>
@@ -74,42 +90,21 @@
 				</ul>
 			</div>
 		</van-popup>
-		<van-actionsheet class="" v-model="show4">
-			<ul class="listStyle-II" style="text-align:center">
-				<li>
-					<div class="center">
-						<p>申请完成，请依以下资讯完成支付</p>
+				<van-popup class="pop2" v-model="show4" :close-on-click-overlay="false">
+			<div>
+				<ul>
+					<div class="title">
+						<p>温馨提示！</p>
 					</div>
-				</li>
-				<div class="cards">
-					<ul>
-						<li>
-							<p>应打入金额</p>
-							<span>{{chargeamount}}</span>
-						</li>
-						<img :src='$store.state.url+this.QRCodeUrl' style="width:50%;height:auto"/>
-						<li>
-							<p>！识别码</p>
-							<span>{{checkCode}}</span>
-						</li>
-						<li>
-							<p>微信支付时请务必于备注栏输入识别码</p>
-						</li>
-					</ul>
-				</div>
-				<li>
-					<p>此画面资讯可至 "充值信息" 页面查询。</p>
-				</li>
-				<li>
-					<div class="button">
-						<button class="button1" @click="goBack()">确定</button>
+					<div class="cont">
+						<p>{{content}}</p>
 					</div>
-				</li>
-			</ul>
-		</van-actionsheet>
-		<!-- <van-actionsheet style="" class="mIcode-go" v-model="show1" :actions="payway" title="请选择银行">
-		</van-actionsheet> -->
-
+					<div class="but">
+						<button @click="goBack()">确定</button>
+					</div>
+				</ul>
+			</div>
+		</van-popup>
 	
 	</div>
 </template>
@@ -126,47 +121,54 @@ export default {
 		  niceName:'',
 		  content:'',
 		  checkCode:'',
-		  receiveNickName:'',
-		  receiveBankName:'',
-		  receiveCard:'',
-		  receiveAddress:'',
-		  QRCodeUrl:'',
 		  show1:false,
 		  show2:false,
 		  show3:false,
 		  show4:false,
-		  selectBank:'请选择银行',
-		  bankList:[],
-		  payway:[],
-		  payway2:[],
+
+			QRCodeUrl:'',
+			receiveAddress:'',
+			receiveBankId:'',
+			receiveBankName:'',
+			receiveCard:'',
+			receiveNiceName:'',
 	  }
 	},
 	mounted(){
-	
+		this.rechargeEntrance();
     },
 	methods :{
+		rechargeEntrance() {
+			this.$http.get(this.$store.state.url+'api/proxy/rechargeEntrance',{params: { rechargeWay:1 }}).then((res) => {
+				this.QRCodeUrl = res.data.data.QRCodeUrl;
+				this.receiveAddress = res.data.data.receiveAddress;
+				this.receiveBankId = res.data.data.receiveBankId;
+				this.receiveBankName = res.data.data.receiveBankName;
+				this.receiveCard = res.data.data.receiveCard;
+				this.receiveNiceName = res.data.data.receiveNiceName;
+			}).catch((error) => {
+					console.log("获取列表Error");
+			});
+		},
 		goBack(){
 			this.$router.push({path:'/five'});
 		},
-		onClick(item){
-			this.selectBank = item.name;
-			this.bankNameId = item.id;
-			this.show1 = ! this.show1;
-		},
-	
-		onCancel(){
-			this.show1 = ! this.show1;
-		},
 		sendReq(){
+			if (this.checkCode == '') {
+				this.content = '订单号不能為空！';
+				this.show2 = !this.show2;
+				this.show3 = !this.show3;
+			} else {
             let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
-            let formData = new FormData();
-            formData.append('bankNameId','47');
+			let formData = new FormData();
+            formData.append('rechargeWay',1);
+            formData.append('receiveBankId',this.receiveBankId);
             formData.append('chargeamount',this.chargeamount);
             formData.append('niceName',this.niceName);
-            this.$axios.post(this.$store.state.url+'api/proxy/setPayApplication', formData,config).then((res) => {
+            formData.append('checkCode',this.checkCode);
+            this.$axios.post(this.$store.state.url+'api/proxy/setPayRequest', formData,config).then((res) => {
 				if(res.data.code === 1) {
-					this.QRCodeUrl = res.data.data.QRCodeUrl;
-					this.checkCode = res.data.data.checkCode;
+					this.content = "申请完成，资讯可至充值信息页面查询。";
 					this.show2 = !this.show2;
 					this.show4 = !this.show4;
 				} else if ( res.data.code === 0 ) {
@@ -182,7 +184,8 @@ export default {
           }).catch((error) => {
           		console.log("setPayApplicationNo")
           });   
-    }
+			}
+	}
 	}
 }
 </script>

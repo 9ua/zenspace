@@ -1,87 +1,96 @@
-<template>
-  <div class="setmobile">
-    <div class="setmobile-top">
-      <router-link to="/safety" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>绑定密保手机</p>
-    </div>
-    <div class="setmobile-content">
-      <ul>
-        <li>
-          <p>手机号：</p>
-          <input type="number" v-model="mobile" placeholder="请输入您要绑定的手机号码">
-        </li>
-        <li>
-          <p>验证码：</p>
-          <input v-model="validCode" type="text" placeholder="请输入验证码">
-          <yd-sendcode v-model="start1" @click.native="sendMobilCode" second="5" init-str="发送验证码"
-            run-str="{%s}秒后重新获取" reset-str="你可以重新获取验证码啦" size="large" type="primary"></yd-sendcode>
-        </li>
-        <li>
-          <p>安全密码：</p>
-          <input type="password" v-model="securityCode" placeholder="请输入您的安全码">
-        </li>
-      </ul>
-      <div class="setmobile-but">
-        <el-button type="primary" @click="saveBindPhone">确定</el-button>
-      </div>
-    </div>
-    <van-popup v-model="show">{{content}}</van-popup>
-  </div>
+<template lang="jade">
+.setmobile
+  .setmobile-top
+    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    p 绑定密保手机
+  .setmobile-content
+    ul
+      li
+        p 手机号：
+        input(type='number', v-model='mobile', placeholder='请输入您要绑定的手机号码')
+      li
+        p 验证码：
+        input(v-model='validCode', type='text', placeholder='请输入验证码')
+        yd-sendcode(v-model='start1', @click.native='sendMobilCode', second='5', init-str='发送验证码', run-str='{%s}秒后重新获取', reset-str='你可以重新获取验证码啦', size='large', type='primary')
+      li
+        p 安全密码：
+        input(type='password', v-model='securityCode', placeholder='请输入您的安全码')
+    .setmobile-but
+      el-button(type='primary', @click='saveBindPhone') 确定
+  van-popup(v-model='show') {{content}}
 </template>
 <script>
-import md5 from 'js-md5';
+import md5 from "js-md5";
 export default {
   data() {
     return {
-      show:false,//弹窗
-      content:'提示内容!',//弹窗内容
+      show: false, //弹窗
+      content: "提示内容!", //弹窗内容
       start1: false,
-      mobile:null,//手机号
-      validCode:'',//验证码
-      securityCode:'',//安全码
-      
-    }
+      mobile: null, //手机号
+      validCode: "", //验证码
+      securityCode: "" //安全码
+    };
   },
   methods: {
     //取验证码
-    sendMobilCode(){
+    sendMobilCode() {
       const mobile_yz = /^[1][3,4,5,7,8][0-9]{9}$/;
       let yzmobile = mobile_yz.test(this.mobile);
-      if(!this.mobile){
+      if (!this.mobile) {
         this.show = !this.show;
-        this.content = '手机号码不能为空！'
-      }else if(yzmobile){
+        this.content = "手机号码不能为空！";
+      } else if (yzmobile) {
         this.start1 = true;
-        let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+        let config = {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true
+        };
         let formData = new FormData();
-        formData.append('mobil', Number(this.mobile));
-        this.$axios.post(this.$store.state.url+'api/userCenter/sendMobilCode', formData, config).then((res) => {
-        }).catch((error) => {
-            console.log("取验证码No")
-        })
+        formData.append("mobil", Number(this.mobile));
+        this.$axios
+          .post(
+            this.$store.state.url + "api/userCenter/sendMobilCode",
+            formData,
+            config
+          )
+          .then(res => {})
+          .catch(error => {
+            console.log("取验证码No");
+          });
       }
     },
     //绑定手机号码
-    saveBindPhone(){
+    saveBindPhone() {
       let securityCode = md5(this.securityCode);
-      let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
+      let config = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        withCredentials: true
+      };
       let formData = new FormData();
-      formData.append('mobil', Number(this.mobile));
-      formData.append('validCode', this.validCode);
-      formData.append('securityCode', securityCode);
-      this.$axios.post(this.$store.state.url+'api/userCenter/saveBindPhone', formData, config).then((res) => {
-        this.show = !this.show;
-        this.content = res.data.data.message
-        if(this.content === '绑定成功！'){
-          this.$router.push({path: '/five'});
-        }
-      }).catch((error) => {
-          console.log("取验证码No")
-      })
+      formData.append("mobil", Number(this.mobile));
+      formData.append("validCode", this.validCode);
+      formData.append("securityCode", securityCode);
+      this.$axios
+        .post(
+          this.$store.state.url + "api/userCenter/saveBindPhone",
+          formData,
+          config
+        )
+        .then(res => {
+          this.show = !this.show;
+          this.content = res.data.data.message;
+          if (this.content === "绑定成功！") {
+            this.$router.push({ path: "/five" });
+          }
+        })
+        .catch(error => {
+          console.log("取验证码No");
+        });
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/page-five/details/setmobile.scss';
+@import "../../../assets/scss/page-five/details/setmobile.scss";
 </style>

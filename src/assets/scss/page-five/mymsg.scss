@@ -1,41 +1,40 @@
+@import "../main.scss";
 .mymsg {
-    .mymsg-top {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 46px;
-        background:  rgb(175,58,49);
-        position: fixed;
-        top: 0px;
-        z-index: 100;
-        & i{
-            position: absolute;
-            left: 16px;
-            color: #fff;
-            font-size: 20px;
-        }
-        & ul {
-            border: 1px solid #fff;
-            display: flex;
-            height: 32px;
-            border-radius: 4px;
-            align-items: center;
-            & li {
-                font-size: 16px;
-                padding: 0px 14px;
-                height: 32px;
-                line-height: 32px;
-                color: #fff;
-            }
-            & .router-link-exact-active.router-link-active{
-                background: #fff;
-                color: #dc3b40;
-            }
-        }
+  .mymsg-top {
+    @extend %faj;
+    width: 100%;
+    height: 46px;
+    background: rgb(175, 58, 49);
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    & i {
+      position: absolute;
+      left: 16px;
+      color: #fff;
+      font-size: 20px;
     }
-    & .mymsg-conter{
-        margin-top: 46px;
-        height: 100%;
+    & ul {
+      @extend %flex;
+      @extend %aitems;
+      border: 1px solid #fff;
+      height: 32px;
+      border-radius: 4px;
+      & li {
+        font-size: 16px;
+        padding: 0px 14px;
+        height: 32px;
+        line-height: 32px;
+        color: #fff;
+      }
+      & .router-link-exact-active.router-link-active {
+        background: #fff;
+        color: #dc3b40;
+      }
     }
+  }
+  & .mymsg-conter {
+    margin-top: 46px;
+    height: 100%;
+  }
 }

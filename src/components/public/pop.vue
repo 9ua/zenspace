@@ -1,119 +1,94 @@
-<template>
-  <div class="pop" v-show="show">
-      <div>
-        <ul>
-          <li class="title">{{title}}</li>
-          <li class="cont">
-            <div class="contBox">
-              <ul>
-                <li v-show="betshow">
-                  {{content}}
-                </li>
-                <!-- <li v-show="zhu > 0">
-                  <div class="betk3-footer-top" v-show="zhu > 0">
-                    <div class="betk3-footer-tops">
-                      <p>当前选号</p><span>{{con}}</span>
-                    </div>
-                    <div class="betk3-footer-buttoms">
-                      <p>每注金额</p><input type="text" v-model="money"/>
-                      <span v-if="money === '' ">请输入要投注的金额</span>
-                      <span v-else>单注最高可中<p>{{navlist === 3 ? rates * money : rates * money  | keepTwoNum}}</p>元</span>
-                    </div>
-                  </div>
-                </li> -->
-              </ul>
-            </div>
-          </li>
-          <li class="but"><button>确定</button><button @click="show = !show">取消</button></li>
-        </ul>
-      </div>
-  </div>
+<template lang="jade">
+.pop(v-show='show')
+  div
+    ul
+      li.title {{title}}
+      li.cont
+        .contBox
+          ul
+            li(v-show='betshow')
+              | {{content}}
+      li.but
+        button 确定
+        button(@click='show = !show') 取消
 </template>
 <script>
 export default {
-  data(){
-    return{
-      show:true,
-      title:'温馨提示！',
-      // content:'投注成功！',
-      nums:1,
-    }
+  data() {
+    return {
+      show: true,
+      title: "温馨提示！",
+      nums: 1
+    };
   },
   props: {
     pop: {
-     type:String
+      type: String
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-.pop{
+@import "../../assets/scss/main.scss";
+.pop {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  & div{
+  @extend %faj;
+  & div {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    & ul{
+    @extend %faj;
+    & ul {
       width: 76%;
       border-radius: 4px;
       background: #fff;
-      & li{
-        display: flex;
-        justify-content: center;
-        flex-direction:column;
-        align-items: center;
+      & li {
+        @extend %faj;
+        @extend %fdc;
         width: 100%;
       }
-      & .title{
+      & .title {
         border-radius: 4px 4px 0 0;
         height: 30px;
-        background: rgb(175,58,49);
-        color:#fff;
+        background: rgb(175, 58, 49);
+        color: #fff;
         font-size: 14px;
       }
-      & .cont{
-        & .contBox{
+      & .cont {
+        & .contBox {
           width: 90%;
-          display: flex;
+          @extend %flex;
           justify-content: flex-start;
           align-items: flex-start;
           min-height: 30px;
-          & ul{
+          & ul {
             width: 100%;
-            & li{
+            & li {
               height: 36px;
             }
           }
         }
-        
       }
-      & .but{
-        display: flex;
-        flex-direction: row;
-        & button{
+      & .but {
+        @extend %flex;
+        @extend %fdr;
+        & button {
           height: 30px;
           width: 50%;
-          border:none;
+          border: none;
           background: #fff;
-          border-top:1px solid #eee;
+          border-top: 1px solid #eee;
           font-size: 14px;
         }
-        & button:nth-child(1){
-          color:#dc3b40;
+        & button:nth-child(1) {
+          color: #dc3b40;
         }
       }
     }
   }
-  
 }
 </style>
 

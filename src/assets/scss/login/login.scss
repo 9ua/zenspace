@@ -1,38 +1,34 @@
+@import "../main.scss";
 .login {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    @extend %flex;
+    @extend %fdc;
+    @extend %sbetween;
     background: rgb(175,58,49);
     height: 100%;
     & .login-conter {
         margin-top: 46px;
         height: 100%;
         & .login-center-img {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @extend %faj;
             margin: 30px 0px;
             & div {
-                display: flexl;
-                justify-content: center;
-                align-items: center;
+                @extend %faj;
                 height: 220px;
                 width: 250px;
                 background: pink;
-                // border-radius: 50%;
                 background: url(../../assets/img/home/game.png) no-repeat center center;
                 background-size: 100% 100%;
             }
         }
         & .login-form {
-            display: flex;
-            flex-direction: column;
+            @extend %flex;
+            @extend %fdc;
             padding: 0 20px;
             background: rgb(175,58,49);
             >div {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+                @extend %flex;
+                @extend %aitems;
+                @extend %sbetween;
                 height: 40px;
                 border: 1px solid #c6c6c6;
                 background: #fff;
@@ -88,9 +84,7 @@
             }
             & .login-live {
                 margin-top: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @extend %faj;
                 border: none;
                 background: none;
                 & a {
@@ -113,9 +107,7 @@
 }
 
 .login-pop {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %faj;
     width: 100%;
     height: 100%;
     top:0px;
@@ -124,8 +116,8 @@
     z-index: 15;
     background: rgba(0, 0, 0, 0.2);
     >div {
-        display: flex;
-        align-items: center;
+        @extend %flex;
+        @extend %aitems;
         line-height: 32px;
         background: #fff;
         border-radius: 6px;
@@ -141,8 +133,8 @@
 }
 
 .el-form-item__content {
-    display: flex;
-    justify-content: center;
+    @extend %flex;
+    @extend %jcontent;
     margin-top: 30px;
 }
 
@@ -156,9 +148,7 @@
 }
 
 .login-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %faj;
     font-size: 20px;
     color: #fff;
     position: fixed;

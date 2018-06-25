@@ -1,34 +1,34 @@
-<template>
-  <div class="ssc">
-    <ul>
-      <router-link v-for="(item,index) in lotteryListssc" :key="index" tag="li" :to="{path:'/ssc',query:{id:item.id}}">
-        <img :src='"@/assets/img/one/"+item.groupId+".png"' alt="images" />
-        <h5>{{item.name}}</h5>
-      </router-link>
-    </ul>
-  </div>
+<template lang="jade">
+.ssc
+  ul
+    router-link(v-for='(item,index) in lotteryListssc', :key='index', tag='li', :to="{path:'/ssc',query:{id:item.id}}")
+      img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
+      h5 {{item.name}}
 </template>
 <script>
 export default {
-  data(){
-    return{
-      lotteryListssc:'',
-    }
+  data() {
+    return {
+      lotteryListssc: ""
+    };
   },
-  mounted(){
+  mounted() {
     this.lotteryssc();
   },
-  methods:{
-    lotteryssc(){
-      this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
-        this.lotteryListssc = res.data.data.ssc;
-      }).catch((error) => {
-          console.log("getLotteryListNo")
-      })
+  methods: {
+    lotteryssc() {
+      this.$http
+        .get(this.$store.state.url + "api/lottery/getLotteryList")
+        .then(res => {
+          this.lotteryListssc = res.data.data.ssc;
+        })
+        .catch(error => {
+          console.log("getLotteryListNo");
+        });
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/lotter-list/ssc.scss';
+@import "../../assets/scss/lotter-list/ssc.scss";
 </style>

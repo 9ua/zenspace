@@ -1,21 +1,18 @@
-<template>
-  <div class="detail">
-    <div class="detail-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>个人资料</p>
-    </div>
-    <div class="detail-content">
-      <router-view></router-view>
-    </div>
-  </div>
+<template lang="jade">
+.detail
+  .detail-top
+    router-link.el-icon-arrow-left(to='/five', tag='i')
+    p 个人资料
+  .detail-content
+    router-view
 </template>
 <script>
-  export default {
-    data() {
-      return {}
-    }
+export default {
+  data() {
+    return {};
   }
+};
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/scss/page-five/detail.scss';
+@import "../../assets/scss/page-five/detail.scss";
 </style>

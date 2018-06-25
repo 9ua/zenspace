@@ -1,141 +1,135 @@
-<template>
-    <div class="mInvite">
-        <div class="mInvite-top" @change="typechange">
-            <input v-model="usertype" type="radio" value="2" id="member" class="magic-radio">
-            <label for="member">会员邀请码</label>
-            <input v-model="usertype" type="radio" value="1" id="member2" class="magic-radio">
-            <label for="member2">代理邀请码</label>
-        </div>
-        <div class="mInvite-content">
-            <ul v-show="showFlag">
-                <li v-for="(item,index) in invitelist" :key="index" @click="select(item,$event)">
-                    <div class="mInvite-left">
-                        <p>
-                            <span>{{item.id}} 邀请码</span><br> {{item.code}}
-                            <br>
-                            <span>产生日期</span>{{item.date}}
-                        </p>
-                    </div>
-                    <div class="mInvite-right">
-                        <p>
-                            <span>注册数</span><br>
-                            <span>({{item.count}})</span>
-                        </p>
-                    </div>
-                    <i class="el-icon-arrow-down"></i>
-                </li>
-            </ul>
-        </div>
-        <van-actionsheet v-model="show">
-            <div class="listStyle-II">
-                <li>
-                    <span>{{this.selected.id}}</span>
-                </li>
-                <li>
-                    <span>{{this.selected.code}}</span>
-                </li>
-                <li>
-                    <span>{{this.url}}</span>
-                </li>
-                <li>
-                    <p>产生日期</p>
-                    <span>{{this.selected.date}}</span>
-                </li>
-                <li>
-                    <p>注册数</p>
-                    <span>({{this.selected.count}})个帐户</span>
-                </li>
-                <li>
-                    <div class="button">
-                        <button class="button2" @click="select2()">删除此邀请码</button>
-                        <button class="button3" @click="show = !show">取消</button>
-                    </div>
-                </li>
-            </div>
-        </van-actionsheet>
-        <van-popup v-model="show2" position="bottom">
-            <div class="listStyle-II">
-                <li>
-                    <p>确定要删除此邀请码?</p>
-                </li>
-                <li>
-                    <div class="button">
-                        <button class="button2" @click="delInviteCode()">删除</button>
-                        <button class="button3" @click="select2()">取消</button>
-                    </div>
-                </li>
-
-            </div>
-        </van-popup>
-    </div>
+<template lang="jade">
+.mInvite
+  .mInvite-top(@change='typechange')
+    input#member.magic-radio(v-model='usertype', type='radio', value='2')
+    label(for='member') 会员邀请码
+    input#member2.magic-radio(v-model='usertype', type='radio', value='1')
+    label(for='member2') 代理邀请码
+  .mInvite-content
+    ul(v-show='showFlag')
+      li(v-for='(item,index) in invitelist', :key='index', @click='select(item,$event)')
+        .mInvite-left
+          p
+            span {{item.id}} 邀请码
+            br
+            |  {{item.code}}
+            br
+            span 产生日期
+            | {{item.date}}
+        .mInvite-right
+          p
+            span 注册数
+            br
+            span ({{item.count}})
+        i.el-icon-arrow-down
+  van-actionsheet(v-model='show')
+    .listStyle-II
+      li
+        span {{this.selected.id}}
+      li
+        span {{this.selected.code}}
+      li
+        span {{this.url}}
+      li
+        p 产生日期
+        span {{this.selected.date}}
+      li
+        p 注册数
+        span ({{this.selected.count}})个帐户
+      li
+        .button
+          button.button2(@click='select2()') 删除此邀请码
+          button.button3(@click='show = !show') 取消
+  van-popup(v-model='show2', position='bottom')
+    .listStyle-II
+      li
+        p 确定要删除此邀请码?
+      li
+        .button
+          button.button2(@click='delInviteCode()') 删除
+          button.button3(@click='select2()') 取消
 </template>
 <script>
-import { setStore, getStore,removeStore } from '../../../../config/mutil'
+import { setStore, getStore, removeStore } from "../../../../config/mutil";
 export default {
-  data(){
+  data() {
     return {
-        show:false,
-        show2:false,
-        usertype:2,
-        highbet:0,
-        rebateratio:0,
-        betlist:[],
-        validtime:0,
-        extaddress:'',
-        invitelist:'',
-        selected:[],
-        showFlag: true,
-        url:'',
-        
-    }
+      show: false,
+      show2: false,
+      usertype: 2,
+      highbet: 0,
+      rebateratio: 0,
+      betlist: [],
+      validtime: 0,
+      extaddress: "",
+      invitelist: "",
+      selected: [],
+      showFlag: true,
+      url: ""
+    };
   },
-  mounted(){
-      this.getInviteList();
+  mounted() {
+    this.getInviteList();
   },
   filters: {
-      keepTwoNum(value) {
-        value = Number(value);
-        return value.toFixed(2);
-      }
-    },
+    keepTwoNum(value) {
+      value = Number(value);
+      return value.toFixed(2);
+    }
+  },
   methods: {
     select(a) {
-        this.show = !this.show;
-        this.selected = a;
-        this.url='https://' + location.hostname +'/#/registered?code='+ a.code;
-      },
+      this.show = !this.show;
+      this.selected = a;
+      this.url =
+        "https://" + location.hostname + "/#/registered?code=" + a.code;
+    },
     select2() {
-        this.show2 = !this.show2;
-      },
+      this.show2 = !this.show2;
+    },
     typechange() {
-        this.getInviteList();
-        },
-    getInviteList(){
-        this.$http.get(this.$store.state.url+'api/agent/inviteCode',{params:{type:this.usertype}}).then((res) => {
-            this.invitelist = res.data.data;
-        }).catch((error) => {
-            console.log("获取邀请码列表Err");
-		});
+      this.getInviteList();
     },
-    setrebet(b){
-        this.rebateratio = b.target.value;
+    getInviteList() {
+      this.$http
+        .get(this.$store.state.url + "api/agent/inviteCode", {
+          params: { type: this.usertype }
+        })
+        .then(res => {
+          this.invitelist = res.data.data;
+        })
+        .catch(error => {
+          console.log("获取邀请码列表Err");
+        });
     },
-    delInviteCode(){
-            let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
-            let formData = new FormData();
-            formData.append('id',this.selected.id);
-            this.$axios.post(this.$store.state.url+'api/agent/deleteInviteCode', formData,config).then((res) => {
-            this.getInviteList();
-            this.show = !this.show;
-            this.show2 = !this.show2;
-          }).catch((error) => {
-            console.log("deleteInviteCodeNo")
-          });   
+    setrebet(b) {
+      this.rebateratio = b.target.value;
     },
-    
+    delInviteCode() {
+      let config = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        withCredentials: true
+      };
+      let formData = new FormData();
+      formData.append("id", this.selected.id);
+      this.$axios
+        .post(
+          this.$store.state.url + "api/agent/deleteInviteCode",
+          formData,
+          config
+        )
+        .then(res => {
+          this.getInviteList();
+          this.show = !this.show;
+          this.show2 = !this.show2;
+        })
+        .catch(error => {
+          console.log("deleteInviteCodeNo");
+        });
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
-    @import '../../../../assets/scss/page-five/agency/mInvite.scss';
+@import "../../../../assets/scss/page-five/agency/mInvite.scss";
 </style>

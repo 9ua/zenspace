@@ -1,27 +1,25 @@
-<template>
-  <div id="app">
-    <!-- <keep-alive v-if="$route.meta.keepAlive"> -->
-    <!-- <keep-alive> -->
-      <router-view/>
-    <!-- </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view> -->
-  </div>
+<template lang="jade">
+#app
+  router-view
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
-body,html,#app,.login{
+body,
+html,
+#app,
+.login {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
 }
-p{
+p {
   margin: 0;
 }
 </style>

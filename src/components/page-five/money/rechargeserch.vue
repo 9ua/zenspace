@@ -1,107 +1,98 @@
-<template>
-  <div class="listStyle">
-    <div class="listStyle-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>充值信息</p>
-    </div>
-        <div class="listStyle-content">
-             <ul class="listStyle-I">
-                <li v-for="(item,index) in rechargeList" :key="index" @click="select(item,$event)">
-                    <div class="mInvite-left">
-                        <p>金额 <b>{{item.amount}}</b> 
-                        <span>{{item.bankName}}</span><br>
-                        <a>产生日期{{item.createTime}}</a> 
-                        </p>
-                    </div>
-                    <div class="mInvite-right">
-                        <p>
-                        <span>({{item.statusName}})</span>
-                        </p>
-                    </div>
-                    <i class="el-icon-arrow-down"></i>
-                    
-                    
-                    
-                </li>
-             </ul>
-        </div>
-            
-            
-            
-            <van-actionsheet v-model="show2">
-	            <ul class="listStyle-II" style="text-align:center">
-                    <li>
-						<p>订单编号</p><span>{{this.id}}</span>
-					</li>
-                    <li>
-                        <p>订单时间</p><span>{{this.createTime}}</span>
-                    </li>
-					<li>
-						<p>目前处理状况</p><span>{{this.statusName}}</span>
-					</li>
-					<li>
-						<p>申请充值金额</p><span>{{this.amount}}</span>
-					</li>
-                    
-					<li><div class="button"><button class="button1" @click="show2=!show2">确定</button></div></li>
-				</ul>
-	        </van-actionsheet>
-  </div>
+<template lang="jade">
+.listStyle
+  .listStyle-top
+    router-link.el-icon-arrow-left(to='/five', tag='i')
+    p 充值信息
+  .listStyle-content
+    ul.listStyle-I
+      li(v-for='(item,index) in rechargeList', :key='index', @click='select(item,$event)')
+        .mInvite-left
+          p
+            | 金额
+            b {{item.amount}}
+            span {{item.bankName}}
+            br
+            a 产生日期{{item.createTime}}
+        .mInvite-right
+          p
+            span ({{item.statusName}})
+        i.el-icon-arrow-down
+  van-actionsheet(v-model='show2')
+    ul.listStyle-II(style='text-align:center')
+      li
+        p 订单编号
+        span {{this.id}}
+      li
+        p 订单时间
+        span {{this.createTime}}
+      li
+        p 目前处理状况
+        span {{this.statusName}}
+      li
+        p 申请充值金额
+        span {{this.amount}}
+      li
+        .button
+          button.button1(@click='show2=!show2') 确定
 </template>
 <script>
-import { setStore, getStore,removeStore } from '../../../config/mutil'
+import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
-	data() {
-      return {
-          show2:false,
-          id:'',
-          status:'',
-		  statusName:'',
-          amount:'',
-          bankName:'',
-		  receiveNickName:'',
-		  receiveBankName:'',
-		  receiveCard:'',
-		  createTime:'',
-          receiveAddress:'',
-          rechargeList:[],
-          checkCode:'',
-          QRCodeUrl:'',
-          bankNameCode:'',
-	  }
-	},
-	mounted(){
-		this.getRechargeList();
+  data() {
+    return {
+      show2: false,
+      id: "",
+      status: "",
+      statusName: "",
+      amount: "",
+      bankName: "",
+      receiveNickName: "",
+      receiveBankName: "",
+      receiveCard: "",
+      createTime: "",
+      receiveAddress: "",
+      rechargeList: [],
+      checkCode: "",
+      QRCodeUrl: "",
+      bankNameCode: ""
+    };
+  },
+  mounted() {
+    this.getRechargeList();
+  },
+  methods: {
+    select(a) {
+      this.id = a.id;
+      this.status = a.status;
+      this.statusName = a.statusName;
+      this.amount = a.amount;
+      this.receiveNickName = a.receiveNickName;
+      this.receiveBankName = a.receiveBankName;
+      this.receiveCard = a.receiveCard;
+      this.createTime = a.createTime;
+      this.receiveAddress = a.receiveAddress;
+      this.checkCode = a.checkCode;
+      this.show2 = !this.show2;
+      this.bankName = a.bankName;
+      this.bankNameCode = a.bankNameCode;
+      this.selected = a;
+      this.QRCodeUrl = a.QRCodeUrl;
     },
-	methods :{
-        select(a) {
-            this.id = a.id;
-            this.status=a.status;
-		    this.statusName = a.statusName;
-            this.amount = a.amount;
-            this.receiveNickName = a.receiveNickName;
-            this.receiveBankName = a.receiveBankName;
-            this.receiveCard = a.receiveCard;
-            this.createTime = a.createTime;
-            this.receiveAddress = a.receiveAddress;
-            this.checkCode = a.checkCode;
-            this.show2 = !this.show2;
-            this.bankName = a.bankName;
-            this.bankNameCode = a.bankNameCode;
-            this.selected = a;
-            this.QRCodeUrl = a.QRCodeUrl;
-        },
-		getRechargeList() {
-			this.$http.get(this.$store.state.url+'api/proxy/getRechargeList',{params:{start:0,limit:100}}).then((res) => {
-                this.rechargeList = res.data.data;
-			}).catch((error) => {
-					console.log("获取列表Error");
-			});
-		},
-	}
-}
+    getRechargeList() {
+      this.$http
+        .get(this.$store.state.url + "api/proxy/getRechargeList", {
+          params: { start: 0, limit: 100 }
+        })
+        .then(res => {
+          this.rechargeList = res.data.data;
+        })
+        .catch(error => {
+          console.log("获取列表Error");
+        });
+    }
+  }
+};
 </script>
-
 <style lang="scss" scoped>
-  @import '../../../assets/scss/listStyle.scss';
+@import "../../../assets/scss/listStyle.scss";
 </style>

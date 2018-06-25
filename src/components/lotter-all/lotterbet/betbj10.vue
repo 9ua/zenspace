@@ -2,7 +2,6 @@
   <div class="betbj10">
     <ul class="betbj10-top">
       <li>
-        <!-- <router-link class="el-icon-arrow-left" to="one" tag="i"></router-link> -->
         <i class="el-icon-arrow-left" @click="banckto"></i>
       </li>
       <li>
@@ -53,26 +52,16 @@
               <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
             </p>
             <div v-show="!shownum">
-              <p>{{item.n1
-                < 10 ? '0'+item.n1 : item.n1}}</p>
-                  <p>{{item.n2
-                    < 10 ? '0'+item.n2 : item.n2}}</p>
-                      <p>{{item.n3
-                        < 10 ? '0'+item.n3 : item.n3}}</p>
-                          <p>{{item.n4
-                            < 10 ? '0'+item.n4 : item.n4}}</p>
-                              <p>{{item.n5
-                                < 10 ? '0'+item.n5 : item.n5}}</p>
-                                  <p>{{item.n6
-                                    < 10 ? '0'+item.n6 : item.n6}}</p>
-                                      <p>{{item.n7
-                                        < 10 ? '0'+item.n7 : item.n7}}</p>
-                                          <p>{{item.n8
-                                            < 10 ? '0'+item.n8 : item.n8}}</p>
-                                              <p>{{item.n9
-                                                < 10 ? '0'+item.n9 : item.n9}}</p>
-                                                  <p>{{item.n10
-                                                    < 10 ? '0'+item.n10 : item.n10}}</p>
+              <p>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</p>
+              <p>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</p>
+              <p>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</p>
+              <p>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</p>
+              <p>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</p>
+              <p>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</p>
+              <p>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</p>
+              <p>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</p>
+              <p>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</p>
+              <p>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</p>
             </div>
             <div class="contnet-left-num" v-show="shownum">
               <div class="num">
@@ -151,26 +140,16 @@
                 <i class="el-icon-minus"></i>
               </p>
               <p>
-                <a>{{item.n1
-                  < 10 ? '0'+item.n1 : item.n1}}</a>
-                    <a>{{item.n2
-                      < 10 ? '0'+item.n2 : item.n2}}</a>
-                        <a>{{item.n3
-                          < 10 ? '0'+item.n3 : item.n3}}</a>
-                            <a>{{item.n4
-                              < 10 ? '0'+item.n4 : item.n4}}</a>
-                                <a>{{item.n5
-                                  < 10 ? '0'+item.n5 : item.n5}}</a>
-                                    <a>{{item.n6
-                                      < 10 ? '0'+item.n6 : item.n6}}</a>
-                                        <a>{{item.n7
-                                          < 10 ? '0'+item.n7 : item.n7}}</a>
-                                            <a>{{item.n8
-                                              < 10 ? '0'+item.n8 : item.n8}}</a>
-                                                <a>{{item.n9
-                                                  < 10 ? '0'+item.n9 : item.n9}}</a>
-                                                    <a>{{item.n10
-                                                      < 10 ? '0'+item.n10 : item.n10}}</a>
+                <a>{{item.n1 < 10 ? '0'+item.n1 : item.n1}}</a>
+                <a>{{item.n2 < 10 ? '0'+item.n2 : item.n2}}</a>
+                <a>{{item.n3 < 10 ? '0'+item.n3 : item.n3}}</a>
+                <a>{{item.n4 < 10 ? '0'+item.n4 : item.n4}}</a>
+                <a>{{item.n5 < 10 ? '0'+item.n5 : item.n5}}</a>
+                <a>{{item.n6 < 10 ? '0'+item.n6 : item.n6}}</a>
+                <a>{{item.n7 < 10 ? '0'+item.n7 : item.n7}}</a>
+                <a>{{item.n8 < 10 ? '0'+item.n8 : item.n8}}</a>
+                <a>{{item.n9 < 10 ? '0'+item.n9 : item.n9}}</a>
+                <a>{{item.n10 < 10 ? '0'+item.n10 : item.n10}}</a>
               </p>
             </li>
           </ul>
@@ -201,7 +180,6 @@
         </div>
       </div>
     </div>
-
     <div class="betbj10-footer">
       <div class="betbj10-footer-top" v-show="zhu > 0">
         <div class="betbj10-footer-tops">
@@ -280,7 +258,6 @@
         </ul>
       </div>
     </van-popup>
-
     <van-popup class="betshow" v-model="showpop">{{content}}</van-popup>
   </div>
 </template>

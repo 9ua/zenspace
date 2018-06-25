@@ -1,8 +1,8 @@
 <template lang="jade">
-.betbjkl8
-  ul.betbjkl8-top
+.betbj10
+  ul.betbj10-top
     li
-      router-link.el-icon-arrow-left(to='/one', tag='i')
+      i.el-icon-arrow-left(@click='banckto')
     li
       p.wangfa
         | 玩
@@ -13,209 +13,190 @@
         i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
       .menu-list
         van-popup(v-model='show', position='top')
-          .menu-list-top(v-for='(val,index) in renxuan', :key='index')
-            p(:class="{'active': index === navs}", v-for='(muens,index) in val.a', :key='index', @click='menunav($event,index,muens)') {{muens}}
-          ul
-            li(v-for='(val,index) in renxuan', :key='index', v-show='navs === 0')
-              p(:class="{'active': index === renxuanlist}", v-for='(item,index) in val.valus', :key='index', @click='showrenxuan($event,item,index)') {{item}}
-            li(v-show='navs === 1')
-              p(:class="{'active': index === quweilist}", v-for='(item,index) in quwei', :key='index', @click='showquwei($event,item,index)') {{item}}
-    li
-      p 北京快乐8
-  .betbjkl8-content
-    .lottery-box
-      .lottery-top(@click='lottery = !lottery')
-        p
-          | 888888开奖：
-          ul
-            li(v-for='(item,index) in 10', :key='index')
-              yd-countup(:endnum='item', duration='1', decimals='0', separator='', suffix='')
-            | ...
-        p
-          | 888888投注：
-          span
-            yd-countdown(time='2018/04/13 22:00:00')
-              span
-                | {%h}
-                i :
-              span
-                | {%m}
-                i :
-              span {%s}
-          i(:class=" lottery ? 'el-icon-arrow-down' :'el-icon-arrow-up'")
-        .lottery-ms(v-show=' !lottery')
-          p
-            span 期号
-            span 开奖号码
-          ul
-            li(v-for=' (item,index) in 10', :key='index')
-              div
-                span 888888
-                span 00:00:00
+          .popscroll
+            ul.menu-list-top
+              li(v-for='(into,index) in playGroups', :key='index')
+                .title {{into.title}}
+                .menu-list-list-box
+                  .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
+                    span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
+                      a {{player.groupName}}{{player.title}}
+    li.betbj10list
+      span(@click='showa = !showa') {{listname}}
+      i(:class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' ", @click='showa = !showa')
+      van-popup(v-model=' showa', position='top')
+        ul
+          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
+            a {{listk3.name}}
+  .betbj10-content
+    div(v-show='!show')
+      .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
+        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
+          p(v-if="$route.query.id === 'pk10'")
+            | {{lastSeasonId*1}}期开奖号码
+            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+          p(v-else='')
+            | {{lastSeasonId.slice(4)*1}}期开奖号码
+            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+          div(v-show='!shownum')
+            p {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
+            p {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
+            p {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
+            p {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
+            p {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
+            p {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
+            p {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
+            p {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
+            p {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
+            p {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
+          .contnet-left-num(v-show='shownum')
+            .num
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{i}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{j}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{k}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{l}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{h}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{q}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{w}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{e}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{r}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{t}}
+        .content-right
+          p {{seasonId}}期投注截止
+          div
+            p {{countDown}}
+      .betk3-content-top-pop(v-show='betsscContentTopPop')
+        ul.look
+          li
+            p 期号
+            p 开奖号码
+            // <p>开奖时间</p>
+          li(v-for='(item,index) in getPastOpens', :key='index')
+            p(v-if="$route.query.id === 'pk10'")
+              | {{item.seasonId}}
               i.el-icon-minus
-              div
-                ul
-                  li(v-for='(item,index) in 20', :key='index') 02
-      .lottery-content
-        .lottery-scoll-box
-          p(v-for='(annotations,index) in annotation', :key='index', v-show='index === renxuanlist')
-            | {{annotations.title}}
-            ul
-              li(v-show='index===0')
-                | 奖金
-                span 7.80
-                | 元
-              li(v-show='index===1')
-                | 奖金
-                span 32.43
-                | 元
-              li(v-show='index===2')
-                span(@click='pop3=!pop3') 奖金详情
-              li(v-show='index===3')
-                span(@click='pop4=!pop4') 奖金详情
-              li(v-show='index===4')
-                span(@click='pop5=!pop5') 奖金详情
-              li(v-show='index===5')
-                span(@click='pop6=!pop6') 奖金详情
-              li(v-show='index===6')
-                span(@click='pop7=!pop7') 奖金详情
-          .lottery-scoll.lottery-scoll1
+            p(v-else='')
+              | {{item.seasonId.substring(4).split("-").join("")}}
+              i.el-icon-minus
             p
-              span 上盘
-            ul
-              li.choose1(v-for='(val,shang) in 40', :key='shang', @click='selecNumShang($event,shang,val)') {{ shang < 9 ? '0'+(shang+1) : (shang+1) }}
-          .lottery-scoll.lottery-scoll2
-            p
-              span 下盘
-            ul
-              li.choose2(v-for='(val,xia) in 40', :key='xia', @click='selecNumXia($event,xia,val)') {{xia+41}}
-      .bjkl8popup
-        van-popup(v-model='pop3')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 3
-                span
-                  b 70.26
-                  | 元
-              li
-                span 2
-                span
-                  b 7.02
-                  | 元
-            .popBut
-              button(@click='pop3=!pop3') 确定
-        van-popup(v-model='pop4')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 4
-                span
-                  b 212.28
-                  | 元
-              li
-                span 3
-                span
-                  b 15.02
-                  | 元
-              li
-                span 2
-                span
-                  b 3.05
-                  | 元
-            .popBut
-              button(@click='pop4=!pop4') 确定
-        van-popup(v-model='pop5')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 5
-                span
-                  b 1007.86
-                  | 元
-              li
-                span 4
-                span
-                  b 53.75
-                  | 元
-              li
-                span 3
-                span
-                  b 7.74
-                  | 元
-            .popBut
-              button(@click='pop5=!pop5') 确定
-        van-popup(v-model='pop6')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 6
-                span
-                  b 3779.51
-                  | 元
-              li
-                span 5
-                span
-                  b 157.47
-                  | 元
-              li
-                span 4
-                span
-                  b 17.08
-                  | 元
-              li
-                span 3
-                span
-                  b 3.75
-                  | 元
-            .popBut
-              button(@click='pop6=!pop6') 确定
-        van-popup(v-model='pop7')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 7
-                span
-                  b 15981.93
-                  | 元
-              li
-                span 6
-                span
-                  b 532.73
-                  | 元
-              li
-                span 5
-                span
-                  b 45.14
-                  | 元
-              li
-                span 4
-                span
-                  b 7.47
-                  | 元
-              li
-                span 0
-                span
-                  b 3.20
-                  | 元
-            .popBut
-              button(@click='pop7=!pop7') 确定
-      cart(:cart='con,selected', ref='cart')
+              a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
+              a {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
+              a {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
+              a {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
+              a {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
+              a {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
+              a {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
+              a {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
+              a {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
+              a {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
+        p.lookAll
+          button(@click='lookAll') 查看更多
+      .betk3-content-foot
+        div(v-for='(item,indexc) in playGroups', :key='indexc', v-show='indexc === navlist')
+          .betssc-list-box(v-for='(group,indexd) in item.groups', :key='indexd', v-show='indexd === navlistb')
+            span(v-for='(itemabc,indexabc) in playBonus', :key='indexabc', v-show='itemabc.id === playGroupsId')
+              | {{itemabc.remark}}
+              b
+                | 。奖金
+                i(v-show='Number(itemabc.displayBonus)') {{itemabc.displayBonus | keepTwoNum}}
+                i(v-show='isNaN(itemabc.displayBonus)') {{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}
+                |  元
+              br
+            ul.fushi
+              li(v-for='(player,indexf) in group.players', :key='indexf', v-show='playGroupsId === player.id')
+                p(v-for='(numViews,indexff) in player.numView', :key='indexff')
+                  b {{numViews.title}}
+                  span
+                    a(v-for='(num,indexg) in numViews.nums', :key='indexg', :class="num.choose ? 'active' : '' ", @click='curBalls(indexff,indexg,num,numViews,player)') {{num.ball}}
+  .betbj10-footer
+    .betbj10-footer-top(v-show='zhu > 0')
+      .betbj10-footer-tops
+        p 当前选号
+        span {{con}}
+      .betbj10-footer-buttoms
+        p 每注金额
+        input(type='number', v-model='money', onfocus='this.select()')
+        span(v-show="money === '' ") 请输入要投注的金额
+        span(v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'")
+          | 单注最高可中
+          p(v-show='! isNaN(money*displayBonus)') {{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
+          p(v-show='isNaN(money*displayBonus)')
+            | {{youdashuang ? (money*parseInt(displayBonus2*1000))/1000 : (money*parseInt(displayBonus1*1000))/1000 | keepTwoNum}}
+          | 元
+    .betbj10-footer-buttom
+      .betbj10-footer-buttom-left
+        button(@click='iscreat') 清空
+        p
+          span(v-if='zhu >0') 共{{zhu}}注,
+          span(v-if="this.money !== '' ") 共{{zhu*money}}元
+      .betbj10-footer-buttom-right(@click='betC') 马上投注
+  .betcBox(v-show='betGoshow')
+    ul.betc(v-show='betGoshow')
+      li 投注确认
+      li
+        p
+          span {{listname}}PK10 ：
+          | {{seasonId}}期
+        p
+          span 投注金额：
+          b {{money*zhu}}元
+        p
+          span 投注内容：
+          span.popcon {{con}}
+      li
+        button(@click='betCancel') 取消
+        button(@click='betGo') 确定
+  .betcBox(v-show='betsuccess')
+    ul.betc(v-show='betsuccess')
+      li 温馨提示！
+      li
+        p
+          b 投注成功,
+          span 您可以在我的账户查看注单详情
+      li
+        button(@click='looksucc') 查看注单
+        button(@click='betsucc') 继续投注
+  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
+    div
+      ul
+        .title
+          p 温馨提示！
+        .cont
+          p(v-if="$route.query.id === 'pk10'")
+            | {{lastSeasonId*1}}期已截止
+            br
+            | 当前期号{{seasonId}}
+            br
+            | 投注时请注意期号
+          p(v-else='')
+            | {{lastSeasonId.slice(4)*1}}期已截止
+            br
+            | 当前期号{{seasonId}}
+            br
+            | 投注时请注意期号
+        .but
+          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
+  van-popup.betshow(v-model='showpop') {{content}}
 </template>
 <script>
 export default {

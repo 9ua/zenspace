@@ -84,21 +84,22 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+@import "../../assets/scss/main.scss";
 .cart {
   position: fixed;
   z-index: 21;
   bottom: 0;
   width: 100%;
   & .cart-num {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
     height: 50px;
     background: #fff;
     padding: 0px 16px;
     > div {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       & .van-stepper {
         margin-right: 8px;
       }
@@ -108,9 +109,7 @@ export default {
     }
     > div:nth-child(2) {
       & span {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @extend %faj;
         border: 1px solid #d2d2d2;
         background: #fff;
         width: 28px;
@@ -125,15 +124,15 @@ export default {
     }
   }
   & .basket {
-    display: flex;
+    @extend %flex;
     height: 50px;
     background: #000;
     color: #fff;
     & .basket-left {
       padding-left: 16px;
       width: 70%;
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       background: #fb6a6f;
       & i {
         font-size: 22px;
@@ -161,9 +160,7 @@ export default {
     }
     & .basket-right {
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @extend %faj;
       width: 30%;
       background: #a4a4a4;
       font-size: 18px;

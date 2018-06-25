@@ -26,10 +26,9 @@ export default {
 };
 </script>
 <style lang="scss">
+@import "../../assets/scss/main.scss";
 .three-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %faj;
   font-size: 20px;
   color: #fff;
   position: fixed;

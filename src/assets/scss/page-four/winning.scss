@@ -1,74 +1,73 @@
-.winning{
-    margin-top: 46px;
+@import "../main.scss";
+.winning {
+  margin-top: 46px;
+  background: #fff;
+  height: 100%;
+  & ul {
     background: #fff;
-    height: 100%;
-    & ul{
-        background: #fff;
-        & li:nth-child(1) {
-            background: rgba(250, 150, 80, 0.15);
-            font-weight: 600;
-            height: 66px;
-            border: 3px solid #ff906e;
-            font-size: 24px;
-            & span {
-                font-size: 20px;
-                color: rgb(179, 35, 35);
-                line-height: 32px;
-            }
-        }
-        & li:nth-child(even) {
-            background: #fff;
-        }
-        & li{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0px 20px;
-            height: 60px;
-            border-bottom: 1px solid #e8e8e8;
-            & .winning-left{
-                display: flex;
-                align-items: center;
-                & img{
-                    width: 36px;
-                    height: 36px;
-                    padding-left:  20px;
-                    margin-right: 20px;
-                    border-radius: 4px;
-                }
-                & .winning-xq{
-                    & p {
-                        font-size: 14px;
-                    }
-                }
-                & .winning-xq p:nth-child(1) {
-                    & :nth-child(1) {
-                        display: inline-block;
-                        width: 60px;
-                        font-size: 16px;
-                        color: #666;
-                    }
-                }
-                & .winning-xq p:nth-child(2) {
-                    font-size:16px;
-                    & :nth-child(1) {
-                        display: inline-block;
-                        width: 40px;
-                        color: red;
-                    }
-                    & :nth-child(2) {
-                        color: red;
-                    }
-                }
-            }
-            & .winning-right{
-                display: flex;
-                width: 30px;
-                height: 30px;
-                justify-content: center;
-                align-items: center;
-                font-size: 16px;
-            }
-        }
+    & li:nth-child(1) {
+      background: rgba(250, 150, 80, 0.15);
+      font-weight: 600;
+      height: 66px;
+      border: 3px solid #ff906e;
+      font-size: 24px;
+      & span {
+        font-size: 20px;
+        color: rgb(179, 35, 35);
+        line-height: 32px;
+      }
     }
+    & li:nth-child(even) {
+      background: #fff;
+    }
+    & li {
+      @extend %flex;
+      @extend %aitems;
+      @extend %sbetween;
+      padding: 0px 20px;
+      height: 60px;
+      border-bottom: 1px solid #e8e8e8;
+      & .winning-left {
+        @extend %flex;
+        @extend %aitems;
+        & img {
+          width: 36px;
+          height: 36px;
+          padding-left: 20px;
+          margin-right: 20px;
+          border-radius: 4px;
+        }
+        & .winning-xq {
+          & p {
+            font-size: 14px;
+          }
+        }
+        & .winning-xq p:nth-child(1) {
+          & :nth-child(1) {
+            display: inline-block;
+            width: 60px;
+            font-size: 16px;
+            color: #666;
+          }
+        }
+        & .winning-xq p:nth-child(2) {
+          font-size: 16px;
+          & :nth-child(1) {
+            display: inline-block;
+            width: 40px;
+            color: red;
+          }
+          & :nth-child(2) {
+            color: red;
+          }
+        }
+      }
+      & .winning-right {
+        @extend %faj;
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+      }
+    }
+  }
 }

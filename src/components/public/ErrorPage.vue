@@ -8,14 +8,12 @@ export default {
   }
 };
 </script>
-
-<style>
+<style lang="scss">
+@import "../../assets/scss/main.scss";
 .ErrorPage {
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %faj;
   font-weight: 700;
   font-size: 200px;
 }

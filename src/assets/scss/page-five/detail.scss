@@ -1,39 +1,39 @@
+@import "../main.scss";
 .detail {
-    .detail-top {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 46px;
-        font-size: 20px;
-        background:  rgb(175,58,49);
-        & i{
-            position: absolute;left: 16px;
-            color: #fff;
-        }
-        & p{
-            color: #fff;
-        }
-        & ul {
-            border: 1px solid #fff;
-            display: flex;
-            height: 32px;
-            border-radius: 4px;
-            align-items: center;
-            & li {
-                font-size: 16px;
-                padding: 0px 14px;
-                height: 32px;
-                line-height: 32px;
-                color: #fff;
-            }
-            & .router-link-exact-active.router-link-active{
-                background: #fff;
-                color: #dc3b40;
-            }
-        }
+  .detail-top {
+    @extend %faj;
+    width: 100%;
+    height: 46px;
+    font-size: 20px;
+    background: rgb(175, 58, 49);
+    & i {
+      position: absolute;
+      left: 16px;
+      color: #fff;
     }
-    & .detail-content{
-        height: 100%;
+    & p {
+      color: #fff;
     }
+    & ul {
+      @extend %flex;
+      @extend %aitems;
+      border: 1px solid #fff;
+      height: 32px;
+      border-radius: 4px;
+      & li {
+        font-size: 16px;
+        padding: 0px 14px;
+        height: 32px;
+        line-height: 32px;
+        color: #fff;
+      }
+      & .router-link-exact-active.router-link-active {
+        background: #fff;
+        color: #dc3b40;
+      }
+    }
+  }
+  & .detail-content {
+    height: 100%;
+  }
 }

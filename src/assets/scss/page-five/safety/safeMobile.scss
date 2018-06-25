@@ -1,12 +1,11 @@
+@import "../../main.scss";
 .safeMobile {
   .safeMobile-top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %faj;
     width: 100%;
     height: 46px;
     font-size: 20px;
-    background: rgb(175,58,49);
+    background: rgb(175, 58, 49);
     & i {
       position: absolute;
       left: 16px;
@@ -16,11 +15,11 @@
       color: #fff;
     }
     & ul {
+      @extend %flex;
+      @extend %aitems;
       border: 1px solid #fff;
-      display: flex;
       height: 32px;
       border-radius: 4px;
-      align-items: center;
       & li {
         font-size: 16px;
         padding: 0px 14px;
@@ -35,13 +34,12 @@
     }
   }
   & .safeMobile-content {
-
     height: 100%;
     & ul {
       background: #fff;
       & li {
-        display: flex;
-        align-items: center;
+        @extend %flex;
+        @extend %aitems;
         height: 56px;
         padding: 0px 20px;
         line-height: 52px;
@@ -66,14 +64,13 @@
 }
 
 .safeMobile-but {
-
+  @extend %flex;
+  @extend %jcontent;
   margin-top: 40px;
-  display: flex;
-  justify-content: center;
   height: 36px;
   & button {
     padding: 0px;
-    background: rgb(175,58,49);
+    background: rgb(175, 58, 49);
     border: none;
     width: 86%;
     height: 36px;
@@ -93,7 +90,7 @@
   height: 40px;
   line-height: 40px;
   width: 140px;
-  background: rgb(175,58,49);
+  background: rgb(175, 58, 49);
   color: #000;
   border: 1px solid linear-gradient(to right, #f75f5b, #fead50);
 }
@@ -108,12 +105,10 @@
 }
 
 .van-popup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %faj;
   padding: 8px 16px;
   color: #fff;
   font-size: 14px;
   border-radius: 4px;
-  background: rgb(175,58,49);
+  background: rgb(175, 58, 49);
 }

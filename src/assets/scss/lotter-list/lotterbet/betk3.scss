@@ -1,13 +1,13 @@
 @import '../../main.scss';
 .betk3 {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @extend %flex;
+  @extend %fdc;
+  @extend %sbetween;
   & .betk3-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
     height: 56px;
     font-size: 16px;
     padding: 0px 16px;
@@ -17,20 +17,16 @@
       width: 33.33%;
     }
     & li:nth-child(2) {
+      @extend %faj;
       width: 46%;
       text-align: center;
       font-size: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       & .wangfa {
         margin: 0px;
         margin-right: 4px;
       }
       & .menu {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @extend %faj;
         font-size: 16px;
         padding: 2px 6px;
         border: 1px solid hsla(0, 0%, 100%, .5);
@@ -42,24 +38,24 @@
         }
       }
       & .menu-list {
+        @extend %flex;
+        @extend %fdc;
         position: absolute;
         left: 0px;
         top: 53px;
-        display: flex;
-        flex-direction: column;
         width: 100%;
         & .van-popup--top {
           top: 53px;
           background: none !important;
           & .menu-list-top {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+            @extend %flex;
+            @extend %fdr;
+            @extend %fr;
             padding: 30px 26px 0px;
             & li {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
+              @extend %flex;
+              @extend %aitems;
+              @extend %fdc;
               background: #317455;
               border-radius: 5%;
               border: 1px solid hsla(0, 0%, 100%, .3);
@@ -68,8 +64,8 @@
               padding: 4px;
               width: 90px;
               >div {
-                display: flex;
-                align-items: center;
+                @extend %flex;
+                @extend %aitems;
                 height: 24px;
               }
               & .title {
@@ -80,7 +76,7 @@
                 height: 30px;
               }
               & .img {
-                display: flex;
+                @extend %flex;
                 & span {
                   width: 24px;
                   height: 24px;
@@ -111,8 +107,8 @@
     & li:nth-child(3) {
       text-align: right;
       & ul {
-        display: flex;
-        flex-wrap: wrap;
+        @extend %flex;
+        @extend %fr;
         position: absolute;
         top: 46px;
         right: 0px;
@@ -121,10 +117,8 @@
         padding: 10px 0 10px 10px;
         border-radius: 0 0 0 10px;
         & li {
-          display: flex;
+          @extend %faj;
           border-radius: 5px;
-          justify-content: center;
-          align-items: center;
           width: 45%;
           font-size: 14px;
           color: #666;
@@ -142,24 +136,24 @@
 }
 
 .betk3-content {
+  @extend %flex;
+  @extend %fdc;
+  @extend %sbetween;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   height: 100%;
   background: #317455;
   overflow: hidden;
   >div {
     height: 100%;
     & .betk3-content-top {
-      display: flex;
-      justify-content: space-between;
+      @extend %flex;
+      @extend %sbetween;
       background: #22563f;
       color: #caebda;
       & .content-left {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @extend %flex;
+        @extend %fdc;
+        @extend %aitems;
         width: 50%;
         border-right: 1px solid #164630;
         & p {
@@ -168,8 +162,8 @@
           line-height: 28px;
         }
         & .contnet-left-num {
-          display: flex;
-          align-items: center;
+          @extend %flex;
+          @extend %aitems;
           margin-bottom: 4px;
           & p {
             width: 24px;
@@ -208,9 +202,9 @@
         }
       }
       & .content-right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @extend %flex;
+        @extend %aitems;
+        @extend %fdc;
         width: 50%;
         & p {
           font-size: 16px;
@@ -225,10 +219,10 @@
       }
     }
     & .betk3-content-foot {
+      @extend %flex;
+      @extend %aitems;
+      @extend %fdc;
       padding: 20px 15px 0px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       overflow: hidden;
       height: 100%;
       >p {
@@ -240,15 +234,13 @@
           color: #f0c930;
         }
         >ul {
-          display: flex;
-          flex-wrap: wrap;
+          @extend %flex;
+          @extend %fr;
           margin-top: 10px;
           margin-bottom: 140px;
           & li {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            @extend %faj;
+            @extend %fdc;
             width: 22%;
             margin: 3px;
             border-radius: 5px;
@@ -267,10 +259,8 @@
             }
           }
           & li.active {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            @extend %faj;
+            @extend %fdc;
             width: 22%;
             margin: 3px;
             border: 1px solid #f4c829;
@@ -307,8 +297,8 @@
 }
 
 .lookAllDiv {
-  display: flex;
-  flex-direction: column;
+  @extend %flex;
+  @extend %fdc;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -318,9 +308,7 @@
   overflow: hidden;
   background: #22563f;
   & .lookAllDivTitle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend %faj;
     width: 100%;
     height: 7%;
     line-height: 1.493333rem;
@@ -348,11 +336,9 @@
       background: #22563f;
       padding-bottom: 20px;
       & li {
-        display: flex;
+        @extend %flex;
         & p {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          @extend %faj;
           font-size: 14px;
           color: #caebda;
           padding: 4px 0px;
@@ -389,20 +375,7 @@
           }
         }
         & .goodluck {
-          display: -webkit-box;
-          display: -webkit-flex;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-align-items: center;
-          -moz-align-items: center;
-          -ms-align-items: center;
-          -o-align-items: center;
-          align-items: center;
-          -webkit-justify-content: center;
-          -moz-justify-content: center;
-          -ms-justify-content: center;
-          -o-justify-content: center;
-          justify-content: center;
+          @extend %faj;
           width: 19px;
           height: 19px;
           background: #5691D7;
@@ -410,20 +383,7 @@
           border-radius: 2px;
         }
         & .goodidea {
-          display: -webkit-box;
-          display: -webkit-flex;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-align-items: center;
-          -moz-align-items: center;
-          -ms-align-items: center;
-          -o-align-items: center;
-          align-items: center;
-          -webkit-justify-content: center;
-          -moz-justify-content: center;
-          -ms-justify-content: center;
-          -o-justify-content: center;
-          justify-content: center;
+          @extend %faj;
           width: 19px;
           height: 19px;
           background: #FF961F;
@@ -530,18 +490,18 @@
   color: rgb(175, 58, 49);
   width: 100%;
   & .betk3-footer-top {
+    @extend %flex;
+    @extend %fdc;
     position: absolute;
     top: -60px;
     background: #22563f;
     height: 60px;
-    display: flex;
-    flex-direction: column;
     color: #caebda;
     font-size: 16px;
     width: 100%;
     & .betk3-footer-tops {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       padding: 0px 16px;
       height: 50%;
       & span {
@@ -558,10 +518,10 @@
       }
     }
     & .betk3-footer-buttoms {
+      @extend %flex;
+      @extend %aitems;
       height: 50%;
-      display: flex;
-      align-items: center;
-      padding: 0px 16px; // width: 100%;
+      padding: 0px 16px;
       & input {
         width: 20%;
         margin-left: 10px;
@@ -571,12 +531,12 @@
         border-radius: 2px;
       }
       & span {
+        @extend %flex;
+        @extend %aitems;
+        @extend %fdr;
         width: 45%;
-        display: flex;
-        flex-direction: row;
         font-size: 12px;
         margin-left: 6px;
-        align-items: center;
         & p {
           text-align: center;
           color: #f4c829;
@@ -589,15 +549,15 @@
     }
   }
   & .betk3-footer-buttom {
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
     background: #414141;
     height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 0px 16px;
     & .betk3-footer-buttom-left {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       & button {
         background: none;
         border: none;
@@ -614,9 +574,7 @@
       }
     }
     & .betk3-footer-buttom-right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @extend %faj;
       font-size: 18px;
       height: 40px;
       width: 100px;
@@ -628,11 +586,11 @@
 }
 
 .bete {
-  display: flex;
+  @extend %flex;
   flex-wrap: nowrap;
   & p {
     height: 40px;
-    display: flex;
+    @extend %flex;
     & b {
       width: 60px;
     }
@@ -763,8 +721,8 @@
 .yishai,
 .erbutong,
 .sanbutong {
-  display: flex;
-  justify-content: space-between;
+  @extend %flex;
+  @extend %sbetween;
   & li {
     width: 12% !important;
     & h2 {
@@ -816,21 +774,19 @@
   & li {
     border: none !important;
     width: 100% !important;
-    display: flex;
+    @extend %flex;
     & ul {
+      @extend %flex;
+      @extend %aitems;
+      @extend %fr;
       width: 100% !important;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       & li {
         border: 0.026667rem solid rgba(255, 255, 255, 0.3);
         width: 32% !important;
         margin: 0px !important;
         & span,
         & p {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          @extend %faj;
           width: 85%;
           font-size: 14px !important;
           font-weight: 600;
@@ -891,9 +847,7 @@
             width: 0px;
             height: 0px;
           }
-        } // & span.active{
-        //     border: 1px solid #22563F;
-        // }
+        }
       } //第一组
       & li:nth-child(1) {
         & span {
@@ -1452,20 +1406,16 @@
 }
 
 .sanlianhao {
-  display: flex;
-  justify-content: space-between;
+  @extend %flex;
+  @extend %sbetween;
   border: none !important;
   & li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %faj;
     border: 0.026667rem solid rgba(255, 255, 255, 0.3);
     margin: 0px !important;
     padding: 0px !important;
     & h2 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @extend %faj;
       width: 100% !important;
       height: 22px !important;
       overflow: hidden;
@@ -1544,37 +1494,33 @@
 }
 
 .santonghao {
-  display: flex;
+  @extend %flex;
   border: none !important;
   & li {
-    display: flex;
-    justify-content: center;
+    @extend %flex;
+    @extend %jcontent;
     border: 0.026667rem solid rgba(255, 255, 255, 0.3);
     margin: 0px 4px 8px !important;
     width: 30% !important;
     & h2 {
-      display: flex;
-      justify-content: center;
+      @extend %flex;
+      @extend %jcontent;
       width: 100% !important;
       height: 22px;
       overflow: hidden;
       & a {
-        display: flex;
+        @extend %flex;
         width: 22px !important;
         height: 22px !important;
       }
     }
   }
   & p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %faj;
     width: 100%;
     margin-top: 20px;
     & span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @extend %faj;
       width: 110px;
       height: 26px;
       border: 0.026667rem solid rgba(255, 255, 255, 0.3);
@@ -1691,19 +1637,17 @@
 }
 
 .betc {
+  @extend %flex;
+  @extend %fdc;
   position: absolute;
   top: 50%;
   left: 50%;
   margin-left: -165px;
   margin-top: -80px;
-  display: flex;
-  flex-direction: column;
   width: 320px;
   background: #fff;
   & li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend %faj;
     border-bottom: 1px solid #DFE4ED;
     min-height: 30px;
     font-size: 14px;
@@ -1715,13 +1659,13 @@
     background: rgb(175, 58, 49);
   }
   & li:nth-child(2) {
+    @extend %flex;
+    @extend %fdc;
     min-height: 54px;
-    display: flex;
-    flex-direction: column;
     padding: 4px 0px;
     & p {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       padding: 4px 0px 4px 60px;
       width: 100%;
       & span {
@@ -1751,9 +1695,7 @@
 }
 
 .betshow.van-popup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %faj;
   padding: 8px 16px;
   color: #fff;
   font-size: 14px;

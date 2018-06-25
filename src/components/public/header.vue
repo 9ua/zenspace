@@ -65,6 +65,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../../assets/scss/main.scss";
 .dim {
   border: solid 1px #fff;
   border-radius: 5px;
@@ -87,9 +88,7 @@ export default {
   & .pop-top {
     height: 50px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %faj;
     font-size: 20px;
     color: #fff;
     position: relative;
@@ -98,9 +97,9 @@ export default {
       left: 16px;
     }
     & a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
+      @extend %sbetween;
       position: absolute;
       right: 16px;
       font-size: 20px;

@@ -15,11 +15,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/main.scss";
 .x11x5pop {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  @extend %faj;
+  @extend %fdc;
   position: fixed;
   top: 0;
   background: rgba(0, 0, 0, 0.2);

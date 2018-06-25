@@ -5,7 +5,7 @@
 .second {
   @extend %flex;
   @extend %fdc;
-  min-height: calc(100% + 0.026667rem);
+  min-height: calc(100% + 1px);
   height: auto;
   width: 100%;
   & .one-top {
@@ -13,6 +13,9 @@
   }
   .second-conter {
     margin: 66px 10px 0px;
+    height: 556px;
+    overflow: hidden;
+    overflow-y: scroll;
     & .secondBox {
       & li {
         background: #fff;
@@ -156,7 +159,7 @@
 
 .pastList {
   margin: 106px 10px 10px;
-  height: 13rem;
+  height: 500px;
   overflow: hidden;
   overflow-y: scroll;
   & ul {

@@ -231,7 +231,7 @@ export default {
       listname: "北京",
       lotteryId: "pk10",
       LotteryList: "",
-      money: 1, //投注金额
+      money: "", //投注金额
       displayBonus: 1.96,
       displayBonus1: 0,
       displayBonus2: 0,

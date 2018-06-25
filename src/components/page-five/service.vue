@@ -9,21 +9,21 @@
 <style lang="scss" scoped>
 @import "../../assets/scss/page-five/agency/agent.scss";
 </style>
-<style>
+<style lang="scss" scoped>
 .content {
-  height: 100%;
-  width: 100%;
   background: #fefefe;
   overflow: hidden;
   display: inline;
+  width: 100%;
+  height: 100%;
 }
 .content-in {
   padding-top: 46px;
   border: none;
   height: calc(100% - 46px);
-  height: -o-calc(100% - 46px); /* opera */
-  height: -webkit-calc(100% - 46px); /* google, safari */
-  height: -moz-calc(100% - 46px); /* firefox */
+  height: -o-calc(100% - 46px);
+  height: -webkit-calc(100% - 46px);
+  height: -moz-calc(100% - 46px);
   width: 100%;
   overflow: hidden;
   display: block;

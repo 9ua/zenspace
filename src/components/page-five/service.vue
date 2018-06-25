@@ -9,7 +9,7 @@
 <style lang="scss" scoped>
 @import "../../assets/scss/page-five/agency/agent.scss";
 </style>
-<style>
+<style lang="scss" scoped>
 .content {
   height: 100%;
   width: 100%;

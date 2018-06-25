@@ -1,79 +1,69 @@
-<template>
-  <div class="profit">
-    <div class="profit-top">
-      <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-      <p>今日盈亏</p>
-    </div>
-    <div class="profit-content">
-      <div class="profit-content-top">
-        <div>
-          <p>盈利金额</p>
-          <p>{{winAmount-betAmount+activityAndSend+juniorRebateAmount | keepTwoNum2}}</p>
-        </div>
-      </div>
-      <div class="profit-contents">
-        <i class="el-icon-warning"></i>盈亏计算公式：中奖-投注+活动+返点 </div>
-      <div class="profit-content-list">
-        <ul>
-          <li>
-            <span>{{betAmount}}</span>
-            <span>投注金额</span>
-          </li>
-          <li>
-            <span>{{winAmount}}</span>
-            <span>中奖金额</span>
-          </li>
-          <li>
-            <span>{{activityAndSend}}</span>
-            <span>活动礼金</span>
-          </li>
-          <li>
-            <span>{{juniorRebateAmount}}</span>
-            <span>返点金额</span>
-          </li>
-          <li>
-            <span>{{rechargeAmount}}</span>
-            <span>充值金额</span>
-          </li>
-          <li>
-            <span>{{drawingAmount}}</span>
-            <span>提现金额</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<template lang="jade">
+.profit
+  .profit-top
+    router-link.el-icon-arrow-left(to='/five', tag='i')
+    p 今日盈亏
+  .profit-content
+    .profit-content-top
+      div
+        p 盈利金额
+        p {{winAmount-betAmount+activityAndSend+juniorRebateAmount | keepTwoNum2}}
+    .profit-contents
+      i.el-icon-warning
+      | 盈亏计算公式：中奖-投注+活动+返点
+    .profit-content-list
+      ul
+        li
+          span {{betAmount}}
+          span 投注金额
+        li
+          span {{winAmount}}
+          span 中奖金额
+        li
+          span {{activityAndSend}}
+          span 活动礼金
+        li
+          span {{juniorRebateAmount}}
+          span 返点金额
+        li
+          span {{rechargeAmount}}
+          span 充值金额
+        li
+          span {{drawingAmount}}
+          span 提现金额
 </template>
 <script>
 export default {
-	data() {
-      return {
-		  id:'',
-		  betAmount:0,
-		  winAmount:0,
-		  activityAndSend:0,
-		  juniorRebateAmount:0,
-		  rechargeAmount:0,
-		  drawingAmount:0,
-
-	  }
-	},
-	mounted(){
-		this.getGainLost();
-    },
-	methods :{
-		getGainLost() {
-			this.$http.get(this.$store.state.url+'api/proxy/getGainLost').then((res) => {
+  data() {
+    return {
+      id: "",
+      betAmount: 0,
+      winAmount: 0,
+      activityAndSend: 0,
+      juniorRebateAmount: 0,
+      rechargeAmount: 0,
+      drawingAmount: 0
+    };
+  },
+  mounted() {
+    this.getGainLost();
+  },
+  methods: {
+    getGainLost() {
+      this.$http
+        .get(this.$store.state.url + "api/proxy/getGainLost")
+        .then(res => {
           this.betAmount = res.data.data.betAmount;
           this.winAmount = res.data.data.winAmount;
           this.activityAndSend = res.data.data.activityAndSend;
           this.juniorRebateAmount = res.data.data.juniorRebateAmount;
           this.rechargeAmount = res.data.data.rechargeAmount;
           this.drawingAmount = res.data.data.drawingAmount;
-			}).catch((error) => {
-					console.log("获取列表Error");
-			});
-		},
+        })
+        .catch(error => {
+          console.log("获取列表Error");
+        });
+    }
   },
   filters: {
     // 保留三个小数,不四舍五入
@@ -87,8 +77,8 @@ export default {
       return value.toFixed(3);
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-  @import '../../assets/scss/page-five/profit.scss';
+@import "../../assets/scss/page-five/profit.scss";
 </style>

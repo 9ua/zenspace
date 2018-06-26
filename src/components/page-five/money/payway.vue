@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 充值方式
+    span
   .listStyle-content
     ul.listStyle-I
       router-link(:to="payw.alino+'charge'", tag='li', v-for='(payw,index) in paywaylist', :key='index', v-if='payw.opentype === 0')

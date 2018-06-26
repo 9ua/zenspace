@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/payway', tag='i')
     p 微信支付
+    span
   .listStyle-content
     ul.listStyle-VI
       div(style='text-align:center;height:auto;')

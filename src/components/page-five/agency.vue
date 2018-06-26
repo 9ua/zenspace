@@ -3,6 +3,7 @@
   .agency-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 代理中心
+    span
   .agency-content
     .agency-content-top
       img(src='@/assets/img/five/agent.png')

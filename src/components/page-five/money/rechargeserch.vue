@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 充值信息
+    span
   .listStyle-content
     ul.listStyle-I
       li(v-for='(item,index) in rechargeList', :key='index', @click='select(item,$event)')

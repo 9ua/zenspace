@@ -3,6 +3,7 @@
   .safety-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 安全中心
+    span
   .safety-content
     .safety-content-top
       p.title ———— 您的账号安全级别为极低 ————

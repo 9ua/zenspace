@@ -3,6 +3,7 @@
   .setmobile-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 绑定密保手机
+    span
   .setmobile-content
     ul
       li

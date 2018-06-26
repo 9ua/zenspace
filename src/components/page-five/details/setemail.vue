@@ -3,6 +3,7 @@
   .setemail-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 绑定密保邮箱
+    span
   .setemail-content
     ul
       li

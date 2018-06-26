@@ -3,6 +3,7 @@
   .safeQuestion-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 验证密保问题
+    sapn
   .safeQuestion-input
     div
       p 问题一:

@@ -3,6 +3,7 @@
   .safeEmail-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 验证密保手机
+    span
   .safeEmail-content
     ul
       li

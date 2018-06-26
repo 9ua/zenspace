@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/getCards', tag='i')
     p 绑定银行卡
+    span
   .listStyle-content
     ul.listStyle-III
       li

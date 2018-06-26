@@ -1,11 +1,5 @@
 <template lang="jade">
 .listStyle
-  //
-    <div class="listStyle-top">
-    <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-    <i class="el-icon-arrow-left" @click="banckto"></i>
-    <p>私信</p>
-    </div>
   .listStyle-content
     div
       ul.listStyle-IV(v-show='showFlag')

@@ -3,6 +3,7 @@
   .setQuestion-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 设置密保问题
+    span
   .setQuestion-input
     div
       p 问题一

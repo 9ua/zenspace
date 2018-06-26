@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/payway', tag='i')
     p 银行转账充值
+    span
   .listStyle-content
     ul.listStyle-VI
       li(style='background:#ffeeee;height:42px;')

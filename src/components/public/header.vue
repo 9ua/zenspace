@@ -1,12 +1,21 @@
-<template lang="jade">
-.head-top
-  .pop-top
-    p(v-for='(contents,index) in content', :key='index') {{contents.show === routerUrl ? contents.title : ''}} 
-    img(v-show="routerUrl === 'one'", src='@/assets/img/one/logo.png')
-    router-link.dim(v-show="routerUrl === 'five'", to='service', tag='li') 客服
-    a(:href='os', v-show="routerUrl === 'one'", target='_top')
-      b APP
-      b.el-icon-download
+<template>
+  <div class="head-top">
+    <div class="pop-top">
+      <div class="pop-top-left">
+      </div>
+      <div class="pop-top-middle">
+        <p v-for="(contents,index) in content" :key="index">{{contents.show === routerUrl ? contents.title : ''}} </p>
+        <img v-show="routerUrl === 'one'" src="@/assets/img/one/logo.png" />
+      </div>
+      <div class="pop-top-right">
+        <router-link v-show="routerUrl === 'five'" to="service" tag="span" class="dim">客服</router-link>
+        <a :href="os" v-show="routerUrl === 'one'" target="_top">
+          <b>APP</b>
+          <b class="el-icon-download"></b>
+        </a>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -66,18 +75,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../assets/scss/main.scss";
-.dim {
-  border: solid 1px #fff;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  position: absolute;
-  right: 16px;
-  padding: 3px 8px 6px;
-  & span {
-    padding: 3px;
-  }
-}
 .head-top {
   height: 50px;
   width: 100%;
@@ -88,25 +85,37 @@ export default {
   & .pop-top {
     height: 50px;
     width: 100%;
-    @extend %faj;
-    font-size: 20px;
-    color: #fff;
-    position: relative;
-    & i {
-      position: absolute;
-      left: 16px;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
+    & .pop-top-left {
+      @extend %faj;
+      width: 20%;
+      color: #fff;
+      font-size: 16px;
     }
-    & a {
-      @extend %flex;
-      @extend %aitems;
-      @extend %sbetween;
-      position: absolute;
-      right: 16px;
+    & .pop-top-middle {
+      @extend %faj;
+      width: 60%;
+      color: #fff;
       font-size: 20px;
-      width: 60px;
-      color: #ffffff;
-      & b:nth-child(2) {
-        font-size: 26px;
+    }
+    & .pop-top-right {
+      @extend %faj;
+      width: 20%;
+      color: #fff;
+      font-size: 20px;
+      & a {
+        @extend %flex;
+        color: #fff;
+        font-size: 20px;
+      }
+      & .dim {
+        border: solid 1px #fff;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        padding: 4px 8px;
       }
     }
   }

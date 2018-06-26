@@ -264,7 +264,7 @@ export default {
       show: false, //头部中间
       showa: false, //头部右
       showan: 0, //头部右数字
-      money: 1, //投注金额
+      money: "", //投注金额
       amount: 0, //总金额
       rates: 0,
       bet: false, //投注弹窗

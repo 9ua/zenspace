@@ -1,222 +1,202 @@
-<template>
-  <div class="betbj10">
-    <ul class="betbj10-top">
-      <li>
-        <router-link to="/one" tag="i" class="el-icon-arrow-left"></router-link>
-      </li>
-      <li>
-        <p class="wangfa">玩
-          <br/>法</p>
-        <div class="menu" @click="show = !show">{{titles}}
-          <i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
-        </div>
-        <div class="menu-list">
-          <van-popup v-model="show" position="top">
-            <div class="popscroll">
-              <ul class="menu-list-top">
-                <li v-for="(into,index) in playGroups" :key="index">
-                  <div class="title">{{into.title}}</div>
-                  <div class="menu-list-list-box">
-                    <div class="menu-list-list" v-for="(group,indexa) in into.groups" :key="indexa">
-                      <span v-for="(player,indexb) in group.players" :key="indexb" @click="k3Tab($event,indexa,indexb,player,group,into,index)">
-                        <a>{{player.groupName}}{{player.title}}</a>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </van-popup>
-        </div>
-      </li>
-      <li class="betbj10list">
-        <span @click="showa = !showa">{{listname}}</span>
-        <i :class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' " @click="showa = !showa"></i>
-        <van-popup v-model=" showa" position="top">
-          <ul>
-            <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)">
-              <a>{{listk3.name}}</a>
-            </li>
-          </ul>
-        </van-popup>
-      </li>
-    </ul>
-    <div class="betbj10-content">
-      <div v-show="!show">
-        <div class="betk3-content-top" @click=" betsscContentTopPop = !betsscContentTopPop">
-          <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0">
-            <p>{{item.seasonId}}期开奖号码
-              <i :class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
-            </p>
-            <div>
-              <p>{{item.n1
-                < 10 ? '0'+item.n1 : item.n1}}</p>
-                  <p>{{item.n2
-                    < 10 ? '0'+item.n2 : item.n2}}</p>
-                      <p>{{item.n3
-                        < 10 ? '0'+item.n3 : item.n3}}</p>
-                          <p>{{item.n4
-                            < 10 ? '0'+item.n4 : item.n4}}</p>
-                              <p>{{item.n5
-                                < 10 ? '0'+item.n5 : item.n5}}</p>
-                                  <p>{{item.n6
-                                    < 10 ? '0'+item.n6 : item.n6}}</p>
-                                      <p>{{item.n7
-                                        < 10 ? '0'+item.n7 : item.n7}}</p>
-                                          <p>{{item.n8
-                                            < 10 ? '0'+item.n8 : item.n8}}</p>
-                                              <p>{{item.n9
-                                                < 10 ? '0'+item.n9 : item.n9}}</p>
-                                                  <p>{{item.n10
-                                                    < 10 ? '0'+item.n10 : item.n10}}</p>
-            </div>
-          </div>
-          <div class="content-right">
-            <p>{{seasonId}}期投注截止</p>
-            <div>
-              <p>{{countDown}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="betk3-content-top-pop" v-show="betsscContentTopPop">
-          <ul>
-            <li>
-              <p>期号</p>
-              <p>开奖号码</p>
-              <!-- <p>开奖时间</p> -->
-            </li>
-            <li v-for="(item,index) in getPastOpens" :key="index">
-              <p>{{item.seasonId.substring(4).split("-").join("")}}
-                <i class="el-icon-minus"></i>
-              </p>
-              <p>
-                <a>{{item.n1
-                  < 10 ? '0'+item.n1 : item.n1}}</a>
-                    <a>{{item.n2
-                      < 10 ? '0'+item.n2 : item.n2}}</a>
-                        <a>{{item.n3
-                          < 10 ? '0'+item.n3 : item.n3}}</a>
-                            <a>{{item.n4
-                              < 10 ? '0'+item.n4 : item.n4}}</a>
-                                <a>{{item.n5
-                                  < 10 ? '0'+item.n5 : item.n5}}</a>
-                                    <a>{{item.n6
-                                      < 10 ? '0'+item.n6 : item.n6}}</a>
-                                        <a>{{item.n7
-                                          < 10 ? '0'+item.n7 : item.n7}}</a>
-                                            <a>{{item.n8
-                                              < 10 ? '0'+item.n8 : item.n8}}</a>
-                                                <a>{{item.n9
-                                                  < 10 ? '0'+item.n9 : item.n9}}</a>
-                                                    <a>{{item.n10
-                                                      < 10 ? '0'+item.n10 : item.n10}}</a>
-              </p>
-            </li>
-          </ul>
-        </div>
-        <div class="betk3-content-foot">
-          <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
-            <div class="betssc-list-box" v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb">
-              <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playGroupsId">{{itemabc.remark}}
-                <b>。奖金
-                  <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
-                  <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b>
-                <br/> </span>
-              <ul class="fushi">
-                <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playGroupsId === player.id">
-                  <p v-for="(numViews,indexff) in player.numView" :key="indexff">
-                    <b>{{numViews.title}}</b>
-                    <span>
-                      <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,player)">{{num.ball}}</a>
-                    </span>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="betbj10-footer">
-      <div class="betbj10-footer-top" v-show="zhu > 0">
-        <div class="betbj10-footer-tops">
-          <p>当前选号</p>
-          <span>{{con}}</span>
-        </div>
-        <div class="betbj10-footer-buttoms">
-          <p>每注金额</p>
-          <input type="number" v-model="money" onfocus="this.select()" />
-          <span v-show="money === '' ">请输入要投注的金额</span>
-          <span v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'">单注最高可中
-            <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
-            <p v-show="isNaN(money*displayBonus)">{{youdashuang ? (money*parseInt(displayBonus2*1000))/1000 : (money*parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
-        </div>
-      </div>
-      <div class="betbj10-footer-buttom">
-        <div class="betbj10-footer-buttom-left">
-          <button @click="iscreat">清空</button>
-          <p>
-            <span v-if="zhu >0">共{{zhu}}注,</span>
-            <span v-if="this.money !== '' ">共{{zhu*money}}元</span>
-          </p>
-        </div>
-        <div class="betbj10-footer-buttom-right" @click="betC">马上投注</div>
-      </div>
-    </div>
-    <div class="betcBox" v-show="betGoshow">
-      <ul class="betc" v-show="betGoshow">
-        <li>投注确认</li>
-        <li>
-          <p>
-            <span>{{listname}}PK10 ：</span>{{seasonId}}期</p>
-          <p>
-            <span>投注金额：</span>
-            <b>{{money*zhu}}元</b>
-          </p>
-          <p>
-            <span>投注内容：</span>
-            <span class="popcon">{{con}}</span>
-          </p>
-        </li>
-        <li>
-          <button @click="betCancel">取消</button>
-          <button @click="betGo">确定</button>
-        </li>
-      </ul>
-    </div>
-    <div class="betcBox" v-show="betsuccess">
-      <ul class="betc" v-show="betsuccess">
-        <li>温馨提示！</li>
-        <li>
-          <p>
-            <b>投注成功,</b>
-            <span>您可以在我的账户查看注单详情</span>
-          </p>
-        </li>
-        <li>
-          <button @click="looksucc">查看注单</button>
-          <button @click="betsucc">继续投注</button>
-        </li>
-      </ul>
-    </div>
-    <van-popup class="pop2" v-model="showTimesUp" :close-on-click-overlay="false">
-      <div>
-        <ul>
-          <div class="title">
-            <p>温馨提示！</p>
-          </div>
-          <div class="cont">
-            <p>{{seasonId - 1}}期已截止<br>当前期号{{seasonId}}<br>投注时请注意期号</p>
-          </div>
-          <div class="but">
-            <button class="nodel" @click="showTimesUp = ! showTimesUp">确定</button>
-          </div>
-        </ul>
-      </div>
-    </van-popup>
-    <van-popup class="betshow" v-model="showpop">{{content}}</van-popup>
-  </div>
+<template lang="jade">
+.betbj10
+  ul.betbj10-top
+    li
+      i.el-icon-arrow-left(@click='banckto')
+    li
+      p.wangfa
+        | 玩
+        br
+        | 法
+      .menu(@click='show = !show')
+        | {{titles}}
+        i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+      .menu-list
+        van-popup(v-model='show', position='top')
+          .popscroll
+            ul.menu-list-top
+              li(v-for='(into,index) in playGroups', :key='index')
+                .title {{into.title}}
+                .menu-list-list-box
+                  .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
+                    span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
+                      a {{player.groupName}}{{player.title}}
+    li.betbj10list
+      span(@click='showa = !showa') {{listname}}
+      i(:class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' ", @click='showa = !showa')
+      van-popup(v-model=' showa', position='top')
+        ul
+          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
+            a {{listk3.name}}
+  .betbj10-content
+    div(v-show='!show')
+      .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
+        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
+          p(v-if="$route.query.id === 'pk10'")
+            | {{lastSeasonId*1}}期开奖号码
+            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+          p(v-else='')
+            | {{lastSeasonId.slice(4)*1}}期开奖号码
+            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+          div(v-show='!shownum')
+            p {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
+            p {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
+            p {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
+            p {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
+            p {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
+            p {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
+            p {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
+            p {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
+            p {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
+            p {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
+          .contnet-left-num(v-show='shownum')
+            .num
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{i}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{j}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{k}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{l}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{h}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{q}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{w}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{e}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{r}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{t}}
+        .content-right
+          p {{seasonId}}期投注截止
+          div
+            p {{countDown}}
+      .betk3-content-top-pop(v-show='betsscContentTopPop')
+        ul.look
+          li
+            p 期号
+            p 开奖号码
+            // <p>开奖时间</p>
+          li(v-for='(item,index) in getPastOpens', :key='index')
+            p(v-if="$route.query.id === 'pk10'")
+              | {{item.seasonId}}
+              i.el-icon-minus
+            p(v-else='')
+              | {{item.seasonId.substring(4).split("-").join("")}}
+              i.el-icon-minus
+            p
+              a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
+              a {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
+              a {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
+              a {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
+              a {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
+              a {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
+              a {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
+              a {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
+              a {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
+              a {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
+        p.lookAll
+          button(@click='lookAll') 查看更多
+      .betk3-content-foot
+        div(v-for='(item,indexc) in playGroups', :key='indexc', v-show='indexc === navlist')
+          .betssc-list-box(v-for='(group,indexd) in item.groups', :key='indexd', v-show='indexd === navlistb')
+            span(v-for='(itemabc,indexabc) in playBonus', :key='indexabc', v-show='itemabc.id === playGroupsId')
+              | {{itemabc.remark}}
+              b
+                | 。奖金
+                i(v-show='Number(itemabc.displayBonus)') {{itemabc.displayBonus | keepTwoNum}}
+                i(v-show='isNaN(itemabc.displayBonus)') {{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}
+                |  元
+              br
+            ul.fushi
+              li(v-for='(player,indexf) in group.players', :key='indexf', v-show='playGroupsId === player.id')
+                p(v-for='(numViews,indexff) in player.numView', :key='indexff')
+                  b {{numViews.title}}
+                  span
+                    a(v-for='(num,indexg) in numViews.nums', :key='indexg', :class="num.choose ? 'active' : '' ", @click='curBalls(indexff,indexg,num,numViews,player)') {{num.ball}}
+  .betbj10-footer
+    .betbj10-footer-top(v-show='zhu > 0')
+      .betbj10-footer-tops
+        p 当前选号
+        span {{con}}
+      .betbj10-footer-buttoms
+        p 每注金额
+        input(type='number', v-model='money', onfocus='this.select()')
+        span(v-show="money === '' ") 请输入要投注的金额
+        span(v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'")
+          | 单注最高可中
+          p(v-show='! isNaN(money*displayBonus)') {{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
+          p(v-show='isNaN(money*displayBonus)')
+            | {{youdashuang ? (money*parseInt(displayBonus2*1000))/1000 : (money*parseInt(displayBonus1*1000))/1000 | keepTwoNum}}
+          | 元
+    .betbj10-footer-buttom
+      .betbj10-footer-buttom-left
+        button(@click='iscreat') 清空
+        p
+          span(v-if='zhu >0') 共{{zhu}}注,
+          span(v-if="this.money !== '' ") 共{{zhu*money}}元
+      .betbj10-footer-buttom-right(@click='betC') 马上投注
+  .betcBox(v-show='betGoshow')
+    ul.betc(v-show='betGoshow')
+      li 投注确认
+      li
+        p
+          span {{listname}}PK10 ：
+          | {{seasonId}}期
+        p
+          span 投注金额：
+          b {{money*zhu}}元
+        p
+          span 投注内容：
+          span.popcon {{con}}
+      li
+        button(@click='betCancel') 取消
+        button(@click='betGo') 确定
+  .betcBox(v-show='betsuccess')
+    ul.betc(v-show='betsuccess')
+      li 温馨提示！
+      li
+        p
+          b 投注成功,
+          span 您可以在我的账户查看注单详情
+      li
+        button(@click='looksucc') 查看注单
+        button(@click='betsucc') 继续投注
+  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
+    div
+      ul
+        .title
+          p 温馨提示！
+        .cont
+          p(v-if="$route.query.id === 'pk10'")
+            | {{lastSeasonId*1}}期已截止
+            br
+            | 当前期号{{seasonId}}
+            br
+            | 投注时请注意期号
+          p(v-else='')
+            | {{lastSeasonId.slice(4)*1}}期已截止
+            br
+            | 当前期号{{seasonId}}
+            br
+            | 投注时请注意期号
+        .but
+          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
+  van-popup.betshow(v-model='showpop') {{content}}
 </template>
 <script>
 export default {
@@ -251,7 +231,7 @@ export default {
       listname: "北京",
       lotteryId: "pk10",
       LotteryList: "",
-      money: 1, //投注金额
+      money: "", //投注金额
       displayBonus: 1.96,
       displayBonus1: 0,
       displayBonus2: 0,

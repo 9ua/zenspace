@@ -52,6 +52,7 @@
         }
         & .winning-xq p:nth-child(2) {
           font-size: 16px;
+          @extend %flex;
           & :nth-child(1) {
             display: inline-block;
             width: 40px;

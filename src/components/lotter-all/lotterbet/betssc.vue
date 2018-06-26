@@ -189,7 +189,7 @@ export default {
       listname: "重庆",
       lotteryId: "cqssc",
       LotteryList: "",
-      money: 1, //投注金额
+      money: "", //投注金额
       groupId: "",
       displayBonus: 0,
       displayBonus1: 0,

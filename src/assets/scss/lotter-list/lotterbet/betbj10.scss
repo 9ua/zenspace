@@ -263,7 +263,6 @@
             color: #caebda;
             padding: 4px 0px;
             & a {
-              @extend %faj;
               width: 20px;
               height: 20px;
               overflow: hidden;
@@ -278,7 +277,10 @@
             width: 30%;
           }
           & p:nth-child(2) {
-            width: 70%;
+            width: 40%;
+          }
+          & p:nth-child(3) {
+            width: 30%;
           }
           & p:nth-child(1) {
             position: relative;

@@ -161,7 +161,9 @@
       background: #22563f;
       color: #caebda;
       & .content-left {
-        @extend %faj;
+        @extend %flex;
+        @extend %fdc;
+        @extend %aitems;
         width: 50%;
         border-right: 1px solid #164630;
         & p {

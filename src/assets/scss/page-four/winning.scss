@@ -11,6 +11,9 @@
       height: 66px;
       border: 3px solid #ff906e;
       font-size: 24px;
+      & p{
+        @extend %flex;
+      }
       & span {
         font-size: 20px;
         color: rgb(179, 35, 35);
@@ -54,7 +57,7 @@
           font-size: 16px;
           @extend %flex;
           & :nth-child(1) {
-            display: inline-block;
+            
             width: 40px;
             color: red;
           }

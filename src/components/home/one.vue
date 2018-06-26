@@ -1,20 +1,33 @@
-<template lang="jade">
-.one
-  headers
-  .one-center
-    van-swipe(:autoplay='2200', :show-indicators='false')
-      van-swipe-item(v-for='(item,index) in bannerList', :key='index')
-        img(:src='$store.state.url+item.img')
-    .add
-      van-notice-bar(:speed='20', left-icon='https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png')
-        | {{title}}
-    ul
-      router-link(v-for='(item,index) in lotteryList', :key='index', tag='li', v-if='item.groupId', :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name}}")
-        img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
-        h5 {{item.name}}
-      router-link.lotter-list(to='/lotterList', tag='li')
-        i.el-icon-circle-plus
-        h5 更多彩种
+<template>
+<div class="one">
+  <headers></headers>
+  <div class="one-center">
+    <van-swipe :autoplay="2200" :show-indicators="false">
+      <van-swipe-item v-for="(item,index) in bannerList" :key="index"><img :src="$store.state.url+item.img"/></van-swipe-item>
+    </van-swipe>
+    <div class="add">
+      <van-notice-bar :speed="20" left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png">{{title}}</van-notice-bar>
+    </div>
+    <ul v-show="!$store.state.loginStatus">
+      <router-link v-for="(item,index) in lottery" :key="index" tag="li" to="/login">
+      <img :src="item.path" alt="images"/>
+        <h5>{{item.name}}</h5>
+      </router-link>
+      <router-link to="/lotterList" tag="li" class="lotter-list"><i class="el-icon-circle-plus"></i>
+        <h5>更多彩种</h5>
+      </router-link>
+    </ul>
+    <ul v-show="$store.state.loginStatus">
+      <router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name}}">
+      <img :src="&quot;@/assets/img/one/&quot;+item.groupId+&quot;.png&quot;" alt="images"/>
+        <h5>{{item.name}}</h5>
+      </router-link>
+      <router-link to="/lotterList" tag="li" class="lotter-list"><i class="el-icon-circle-plus"></i>
+        <h5>更多彩种</h5>
+      </router-link>
+    </ul>
+  </div>
+</div>
 </template>
 <script>
 import headers from "../public/header";
@@ -27,7 +40,21 @@ export default {
       titlelist: [],
       indexInfo: "",
       cacheTime: 10000,
-      title: "【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。"
+      title: "【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。",
+      lottery:[
+        {name:'宏發快3',path: require("@/assets/img/one/k3.png")},
+        {name:'宏發时时彩',path: require("@/assets/img/one/ssc.png")},
+        {name:'北京赛车',path: require("@/assets/img/one/pk10.png")},
+        {name:'上海快3',path: require("@/assets/img/one/k3.png")},
+        {name:'江苏快3',path: require("@/assets/img/one/k3.png")},
+        {name:'广西快3',path: require("@/assets/img/one/k3.png")},
+        {name:'河北快3',path: require("@/assets/img/one/k3.png")},
+        {name:'湖北快3',path: require("@/assets/img/one/k3.png")},
+        {name:'安徽快3',path: require("@/assets/img/one/k3.png")},
+        {name:'甘肃快3',path: require("@/assets/img/one/k3.png")},
+        {name:'北京快3',path: require("@/assets/img/one/k3.png")},
+        {name:'重庆时时彩',path: require("@/assets/img/one/ssc.png")},
+      ]
     };
   },
   mounted() {

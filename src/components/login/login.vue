@@ -153,8 +153,6 @@ export default {
       }
     },
     checkeds() {
-      console.log("Ver.1.0.0.6");
-
       if (this.$cookie.get("password")) {
         this.checked = true;
         this.newUserInfo.user = this.$cookie.get("username");

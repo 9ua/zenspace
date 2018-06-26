@@ -1,4 +1,7 @@
 @import './main.scss';
+.home .home-cneter{
+  overflow-y: hidden !important;
+}
 .past{
   position: relative;
 }
@@ -110,6 +113,7 @@
     top: 0px;
     left: 0px;
     width: 100%;
+    z-index: 2018;
     @extend %flex;
     @extend %aitems;
     @extend %sbetween;
@@ -117,7 +121,6 @@
     background: #af3a31;
     color: #fff;
     font-size: 16px;
-    // padding: 0px 16px;
     & i {
       font-size: 24px;
       margin-left: 16px;
@@ -138,6 +141,7 @@
   top:56px;
   left: 0px;
   width: 100%;
+  z-index: 2018;
   & ul {
     height: 40px;
     background: #AE9880;

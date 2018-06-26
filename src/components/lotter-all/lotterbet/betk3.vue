@@ -475,7 +475,7 @@ export default {
       if (this.money === "") {
         setTimeout(() => {
           if (this.money === "") {
-            this.money = 1;
+            this.money = "";
           }
         }, 1000);
       } else {
@@ -1185,7 +1185,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 二不同
       for (let i = 0; i < this.erbutong.length; i++) {
@@ -1193,7 +1193,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 和值
       for (let i = 0; i < this.k3options.length; i++) {
@@ -1207,7 +1207,7 @@ export default {
         this.zhu = 0;
         this.zhu1 = 0;
         this.zhu2 = 0;
-        this.money = 1;
+        this.money = "";
         this.playId1 = "";
         this.playId2 = "";
       }
@@ -1217,7 +1217,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 三连号
       for (let i = 0; i < this.sanlianhao.length; i++) {
@@ -1225,7 +1225,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 三同号
       for (let i = 0; i < this.santonghao.length; i++) {
@@ -1233,7 +1233,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 三不同
       for (let i = 0; i < this.sanbutong.length; i++) {
@@ -1241,7 +1241,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
     },
     betCancel() {

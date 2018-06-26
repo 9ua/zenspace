@@ -311,7 +311,7 @@ export default {
       if (this.money === "") {
         setTimeout(() => {
           if (this.money === "") {
-            this.money = 1;
+            this.money = "";
           }
         }, 1000);
       } else {
@@ -1667,7 +1667,7 @@ export default {
     //清空
     iscreat() {
       this.zhu = "";
-      this.money = 1;
+      this.money = "";
       this.con = "";
       this.d = [];
       this.dd = [];

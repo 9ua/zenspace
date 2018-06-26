@@ -1,21 +1,15 @@
-<template>
-  <div class="head-top">
-    <div class="pop-top">
-      <div class="pop-top-left">
-      </div>
-      <div class="pop-top-middle">
-        <p v-for="(contents,index) in content" :key="index">{{contents.show === routerUrl ? contents.title : ''}} </p>
-        <img v-show="routerUrl === 'one'" src="@/assets/img/one/logo.png" />
-      </div>
-      <div class="pop-top-right">
-        <router-link v-show="routerUrl === 'five'" to="service" tag="span" class="dim">客服</router-link>
-        <a :href="os" v-show="routerUrl === 'one'" target="_top">
-          <b>APP</b>
-          <b class="el-icon-download"></b>
-        </a>
-      </div>
-    </div>
-  </div>
+<template lang="jade">
+.head-top
+  .pop-top
+    .pop-top-left
+    .pop-top-middle
+      p(v-for='(contents,index) in content', :key='index') {{contents.show === routerUrl ? contents.title : ''}} 
+      img(v-show="routerUrl === 'one'", src='@/assets/img/one/logo.png')
+    .pop-top-right
+      router-link.dim(v-show="routerUrl === 'five'", to='service', tag='span') 客服
+      a(:href='os', v-show="routerUrl === 'one'", target='_top')
+        b APP
+        b.el-icon-download
 </template>
 <script>
 export default {

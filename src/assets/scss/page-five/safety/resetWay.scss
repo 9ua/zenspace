@@ -11,12 +11,18 @@
   font-size: 20px;
   background: rgb(175, 58, 49);
   & i {
-    position: absolute;
-    left: 16px;
+    @extend %faj;
+    width: 20%;
     color: #fff;
   }
   & p {
+    @extend %faj;
+    width: 60%;
     color: #fff;
+  }
+  & span{
+    @extend %faj;
+    width: 20%;
   }
 }
 

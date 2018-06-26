@@ -1,7 +1,9 @@
 @import "../main.scss";
 .mymsg {
   .mymsg-top {
-    @extend %faj;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
     width: 100%;
     height: 46px;
     background: rgb(175, 58, 49);
@@ -9,14 +11,15 @@
     top: 0px;
     z-index: 100;
     & i {
-      position: absolute;
-      left: 16px;
+      @extend %faj;
+      width: 20%;
       color: #fff;
       font-size: 20px;
     }
     & ul {
       @extend %flex;
       @extend %aitems;
+      // width: 60%;
       border: 1px solid #fff;
       height: 32px;
       border-radius: 4px;
@@ -31,6 +34,10 @@
         background: #fff;
         color: #dc3b40;
       }
+    }
+    & span{
+      @extend %faj;
+      width: 20%;
     }
   }
   & .mymsg-conter {

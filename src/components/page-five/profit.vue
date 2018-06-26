@@ -3,6 +3,7 @@
   .profit-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 今日盈亏
+    span
   .profit-content
     .profit-content-top
       div

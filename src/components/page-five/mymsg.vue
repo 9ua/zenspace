@@ -4,6 +4,7 @@
     router-link.el-icon-arrow-left(to='/five', tag='i')
     ul
       router-link(v-for='(navs,index) in nav', :to="'/mymsg/'+navs.pathurl", tag='li', :key='index') {{navs.name}}
+    span
   .mymsg-content
     router-view
 </template>

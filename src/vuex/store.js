@@ -34,9 +34,10 @@ const state = {
   playGroupsssc: null,
   historyNum: "/one"
 }
+
 if (process.env.NODE_ENV === 'production') {
-  if (location.hostname === '115.144.238.217')
-    state.url = 'http://' + location.hostname + '/';
+  if (location.hostname === 'm.edu0370.com')
+     state.url = 'http://' + location.hostname.replace('m.', '') + '/';
   else
     state.url = 'https://' + location.hostname.replace('m.', '') + '/';
 } else {

@@ -59,6 +59,7 @@ import md5 from "js-md5";
 export default {
   data() {
     return {
+      withdrawType: 1,
       timeline: "今天",
       cardnum: "",
       bankUserId: "",
@@ -85,8 +86,15 @@ export default {
   methods: {
     getWithdrawInformation() {
       this.$http
-        .get(this.$store.state.url + "api/proxy/getWithdrawInformation")
+        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
+          params: { withdrawType: this.withdrawType }
+        })
         .then(res => {
+          if (this.$store.state.userType === "0") {
+            this.withdrawType = 1;
+          } else if (this.$store.state.userType === "1"){
+            this.withdrawType = 2;
+          }
           this.withdrawInformation = res.data.data;
           this.bankList = res.data.data.bankUserList;
           this.moneyDepositMax = res.data.data.moneyDepositMax;

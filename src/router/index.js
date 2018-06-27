@@ -22,6 +22,8 @@ import bankcharge from '@/components/page-five/money/bankcharge'
 import weixincharge from '@/components/page-five/money/weixincharge'
 import rechargeserch from '@/components/page-five/money/rechargeserch'
 import cashOut from '@/components/page-five/money/cashOut'
+import agencyOut from '@/components/page-five/money/agencyOut'
+import agencyOuts from '@/components/page-five/money/agencyOuts'
 import trade from '@/components/page-five/money/trade'
 import agency from '@/components/page-five/agency'
 import agentBetRecord from '@/components/page-five/agency/agentBetRecord'
@@ -644,6 +646,21 @@ export default new Router({
       path: '/cashOut',
       name: 'cashOut',
       component: cashOut,
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/agencyOut',
+      name: 'agencyOut',
+      component: agencyOut,
+      meta: {
+        keepAlive: false
+      },
+    },{
+      path: '/agencyOuts',
+      name: 'agencyOuts',
+      component: agencyOuts,
       meta: {
         keepAlive: false
       },

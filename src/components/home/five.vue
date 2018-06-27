@@ -59,8 +59,9 @@ import { setStore, getStore, removeStore } from "../../config/mutil";
 export default {
   data() {
     return {
-      bankUserFlag: "",
-      securityCoe: "",
+      bankUserFlag: "", //银行卡状态
+      securityCoe: "", //安全码状态
+      question: "", //密保问题状态
       content: "",
       show2: false,
       balances: "", //用户余额
@@ -136,20 +137,34 @@ export default {
         .then(res => {
           this.securityCoe = res.data.data.securityCoe;
           this.bankUserFlag = res.data.data.bankUserFlag;
+          this.question = res.data.data.question;
           if (this.securityCoe == 0 && this.bankUserFlag == 0) {
-            this.content = "请先绑定安全密码及银行帐户，是否跳转至设定页？";
+            this.content = "请先设置安全密码及绑定银行帐户，是否跳转至设置页？";
             this.show2 = !this.show2;
           } else if (this.bankUserFlag == 0) {
             this.content = "请先绑定银行帐户，是否跳转至设定页？";
             this.show2 = !this.show2;
-          } else {
-            this.waterFall();
+          } else if (this.question == 0) {
+            this.content = "请先设置密保问题，是否跳转至设定页？";
+            this.show2 = !this.show2;
+          }
+          if (
+            this.securityCoe == 1 &&
+            this.bankUserFlag == 1 &&
+            this.question === 1
+          ) {
+            if (this.$store.state.userType === "0") {
+              this.waterFall();
+            } else if (this.$store.state.userType === "1") {
+              this.getAgentWithdrawFlag();
+            }
           }
         })
         .catch(error => {
           console.log("獲取安全中心狀態");
         });
     },
+    //判断是否允许当前会员用户进行提款
     waterFall() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getWithdrawFlag")
@@ -163,11 +178,27 @@ export default {
           console.log("取安全中心状态No111");
         });
     },
+    //判断是否允许当前代理用户进行提款
+    getAgentWithdrawFlag() {
+      this.$axios
+        .get(this.$store.state.url + "api/proxy/getAgentWithdrawFlag")
+        .then(res => {
+          this.water = res.data.code;
+          if (res.data.code === 1) {
+            this.$router.push({ path: "/agencyOuts" });
+          }
+        })
+        .catch(error => {
+          console.log("取安全中心状态No111");
+        });
+    },
     goToSet() {
       if (this.securityCoe == 0 && this.bankUserFlag == 0) {
         this.$router.push({ path: "/setSafePwd" });
       } else if (this.bankUserFlag == 0) {
         this.$router.push({ path: "/newCard" });
+      } else if (this.question == 0) {
+        this.$router.push({ path: "/setQuestion" });
       } else {
         this.waterFall();
       }

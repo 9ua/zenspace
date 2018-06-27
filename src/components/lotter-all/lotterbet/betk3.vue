@@ -14,7 +14,7 @@
       .menu-list
         van-popup(v-model='show', position='top')
           ul.menu-list-top
-            li(v-for='(into,index) in playBonus', :key='index', :class="{'active': index === navlist}", @click='k3Tab($event,index,into)')
+            li(v-for='(into,index) in playBonus', :key='index',v-show="isdfk3(index)", :class="{'active': index === navlist}", @click='k3Tab($event,index,into)')
               .title  {{into.title}} 
               .xq(v-show=' index !== 3') 赔率 {{into.displayBonus | keepTwoNum}}
               .xq(v-show=' index === 3') 赔率 {{playBonus[4].displayBonus | keepTwoNum}}
@@ -148,10 +148,9 @@
               h2
           // 和值
           ul.hezhi(v-show='index === 3')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in k3options', :key='index', @click='hezhidaxiaodanshuang($event,index,k3item)')
+            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in k3options', :key='index',v-if="isdfk3Cen(index)", @click='hezhidaxiaodanshuang($event,index,k3item)')
               h2 {{k3item.title}}
-              span(v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单'\
-              || k3item.title==='双'") 赔 {{k3item.rate | keepThreeNum}}
+              span(v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单' || k3item.title==='双'") 赔 {{k3item.rate | keepThreeNum}}
               span(v-else='') 赔 {{k3item.rate | keepTwoNum}}
           // 大小单双
           ul.daoxiaodanshuang(v-show='index === 4')
@@ -166,13 +165,12 @@
                 a
           // 三同号
           ul.santonghao(v-show='index === 6')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in santonghao', :key='index', @click='k3option($event,index,k3item)')
-              h2
+            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in santonghao', :key='index', @click='santonghaoto($event,index,k3item)')
+              h2(v-if="index<6")
                 a
                 a
                 a
-            p
-              span(:class="issantonghao ? 'active' : ''", @click='tosantonghao') 通选
+              h2(v-if="index === 6") {{k3item.title}}
           // 三不同
           ul.sanbutong(v-show='index === 7')
             li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in sanbutong', :key='index', @click='k3option($event,index,k3item)')
@@ -421,6 +419,7 @@ export default {
           rate: "1.998750",
           selected: false
         },
+        { title: "03", rates: "赔率60.8400", rate: "60.8400", selected: false },
         { title: "04", rates: "赔率60.8400", rate: "60.8400", selected: false },
         { title: "05", rates: "赔率30.4200", rate: "30.4200", selected: false },
         { title: "06", rates: "赔率20.2800", rate: "20.2800", selected: false },
@@ -434,7 +433,8 @@ export default {
         { title: "14", rates: "赔率12.1680", rate: "12.1680", selected: false },
         { title: "15", rates: "赔率20.2800", rate: "20.2800", selected: false },
         { title: "16", rates: "赔率30.4200", rate: "30.4200", selected: false },
-        { title: "17", rates: "赔率60.8400", rate: "60.8400", selected: false }
+        { title: "17", rates: "赔率60.8400", rate: "60.8400", selected: false },
+        { title: "18", rates: "赔率60.8400", rate: "60.8400", selected: false }
       ],
       // 大小单双
       daxiaodanshuang: [
@@ -457,7 +457,8 @@ export default {
         { title: "333", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "444", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "555", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "666", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "666", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "通选", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
       // 三不同
       sanbutong: [
@@ -499,6 +500,22 @@ export default {
     this.iscreat();
   },
   methods: {
+    //非宏发快3，不显示三同号玩法
+    isdfk3(index){
+      if(this.$route.query.id === 'dfk3'){
+        return index != -1;
+      }
+      return index != 6;
+    },
+    isdfk3Cen(index){
+      if(this.$route.query.id === 'dfk3'){
+        return index != -1;
+      }else{
+
+      }
+     // console.log(index)
+      return index != 4 && index != 19 ;
+    },
     //返回到上一次进来的页面
     banckto() {
       this.$router.push(this.$store.state.historyNum);
@@ -687,20 +704,6 @@ export default {
         }
       });
     },
-    //三同号全/反选
-    tosantonghao() {
-      this.issantonghao = !this.issantonghao;
-      for (let i = 0; i < this.santonghao.length; i++) {
-        if (this.issantonghao === true) {
-          this.santonghao[i].selected = true;
-          this.zhu++;
-          this.con = "111,222,333,444,555,666";
-        } else if (this.issantonghao === false) {
-          this.santonghao[i].selected = false;
-          this.iscreat();
-        }
-      }
-    },
     //二同複選xx
     onClickStan1(e) {
       //同時被選取時 清空
@@ -888,53 +891,45 @@ export default {
         this.onClickStan6(e);
       }
     },
-    //和值-大小单双
-    hezhi(e, index, k3item) {
+    //三同号
+    santonghaoto(e, index, k3item) {
       k3item.selected = !k3item.selected;
-      let dxds = ["大", "小", "单", "双"];
-      let rets = [3, 6, 10, 15, 21, 25, 27, 27, 25, 21, 15, 10, 6, 3];
-      let selectedx = [
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17"
-      ];
-      let j = 0;
-      if (k3item.selected === true) {
-        this.rates = k3item.rate;
+      if (k3item.selected === true && index < 6) {
         this.d[index] = k3item.title;
         this.dd = this.d.filter(function(n) {
           return n;
         });
         this.con = this.dd.join(",");
-
-        for (var i = 0; i < selectedx.length; i++) {
-          for (var k = 0; k < this.d.length; k++) {
-            if (selectedx[i] == this.d[k]) {
-              this.hezhiitem[i] = rets[i];
-              j += this.hezhiitem[i];
-            }
-          }
-        }
-        this.zhu = j;
-      } else if (k3item.selected === false) {
-        this.rates = 0;
+        this.zhu++;
+      } else if (k3item.selected === false && index < 6) {
         this.d.splice(index, 1, "");
-        this.hezhiitem.splice(index, 1, "");
         this.dd = this.d.filter(function(n) {
           return n;
         });
         this.con = this.dd.join(",");
+        this.zhu--;
+      }
+      //全、反选
+      if (k3item.selected === true && index === 6) {
+        for (let i = 0; i < this.santonghao.length - 1; i++) {
+          this.santonghao[i].selected = true;
+          this.d[i] = this.santonghao[i].title;
+          this.dd = this.d.filter(function(n) {
+            return n;
+          });
+          this.con = this.dd.join(",");
+          this.zhu = 6;
+        }
+      } else if (k3item.selected === false && index === 6) {
+        for (let i = 0; i < this.santonghao.length - 1; i++) {
+          this.santonghao[i].selected = false;
+          this.d.splice(i, 1, "");
+          this.dd = this.d.filter(function(n) {
+            return n;
+          });
+          this.con = this.dd.join(",");
+          this.zhu = 0;
+        }
       }
     },
     //和值-大小单双 +
@@ -1001,6 +996,7 @@ export default {
         this.zhu = this.zhu1 + this.zhu2;
       }
     },
+    //大小单双，赔率显示
     setupPlayTree(resData) {
       this.playBonus = resData;
       let arrpeilv1 = [];
@@ -1012,20 +1008,22 @@ export default {
         this.k3options[1].rate = arrpeilv2.小;
         this.k3options[2].rate = arrpeilv2.单;
         this.k3options[3].rate = arrpeilv2.双;
-        this.k3options[4].rate = arrpeilv1[4];
-        this.k3options[5].rate = arrpeilv1[5];
-        this.k3options[6].rate = arrpeilv1[6];
-        this.k3options[7].rate = arrpeilv1[7];
-        this.k3options[8].rate = arrpeilv1[8];
-        this.k3options[9].rate = arrpeilv1[9];
-        this.k3options[10].rate = arrpeilv1[10];
-        this.k3options[11].rate = arrpeilv1[11];
-        this.k3options[12].rate = arrpeilv1[12];
-        this.k3options[13].rate = arrpeilv1[13];
-        this.k3options[14].rate = arrpeilv1[14];
-        this.k3options[15].rate = arrpeilv1[15];
-        this.k3options[16].rate = arrpeilv1[16];
-        this.k3options[17].rate = arrpeilv1[17];
+        this.k3options[4].rate = arrpeilv1[3];
+        this.k3options[5].rate = arrpeilv1[4];
+        this.k3options[6].rate = arrpeilv1[5];
+        this.k3options[7].rate = arrpeilv1[6];
+        this.k3options[8].rate = arrpeilv1[7];
+        this.k3options[9].rate = arrpeilv1[8];
+        this.k3options[10].rate = arrpeilv1[9];
+        this.k3options[11].rate = arrpeilv1[10];
+        this.k3options[12].rate = arrpeilv1[11];
+        this.k3options[13].rate = arrpeilv1[12];
+        this.k3options[14].rate = arrpeilv1[13];
+        this.k3options[15].rate = arrpeilv1[14];
+        this.k3options[16].rate = arrpeilv1[15];
+        this.k3options[17].rate = arrpeilv1[16];
+        this.k3options[18].rate = arrpeilv1[17];
+        this.k3options[19].rate = arrpeilv1[18];
       }
     },
     // 玩法树
@@ -1235,6 +1233,7 @@ export default {
         this.zhu = 0;
         this.money = "";
       }
+      this.issantonghao = false;
       // 三不同
       for (let i = 0; i < this.sanbutong.length; i++) {
         this.sanbutong[i].selected = false;
@@ -1244,19 +1243,19 @@ export default {
         this.money = "";
       }
     },
+    //弹窗显示？
     betCancel() {
       this.betGoshow = !this.betGoshow;
     },
+    //投注按钮判断
     betC() {
-      if (this.zhu <= 0) {
+      if (this.zhu === 0) {
         this.betshow = !this.betshow;
         this.content = "请至少选择一注号码投注!";
-      }
-      if (this.money === "") {
+      } else if (this.money === "") {
         this.betshow = !this.betshow;
         this.content = "请填写您要投注的金额!";
-      }
-      if (this.zhu > 0 && this.money !== "") {
+      } else if (this.zhu > 0 && this.money !== "") {
         this.betGoshow = !this.betGoshow;
       }
     },

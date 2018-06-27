@@ -158,7 +158,16 @@
     background: rgb(175,58,49);
     z-index: 12;
     & i {
-        position: absolute;
-        left: 16px;
+        @extend %faj;
+        width: 20%;
+        
+    }
+    & p{
+        @extend %faj;
+        width: 60%;
+    }
+    & span{
+        @extend %faj;
+        width: 20%;
     }
 }

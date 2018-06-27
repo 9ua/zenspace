@@ -3,6 +3,7 @@
   .login-title
     router-link.el-icon-arrow-left(to='/one', tag='i')
     p 用户登录
+    span
   .login-conter
     .login-center-img
       div

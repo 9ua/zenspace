@@ -501,20 +501,19 @@ export default {
   },
   methods: {
     //非宏发快3，不显示三同号玩法
-    isdfk3(index){
-      if(this.$route.query.id === 'dfk3'){
+    isdfk3(index) {
+      if (this.$route.query.id === "dfk3") {
         return index != -1;
       }
       return index != 6;
     },
-    isdfk3Cen(index){
-      if(this.$route.query.id === 'dfk3'){
+    isdfk3Cen(index) {
+      if (this.$route.query.id === "dfk3") {
         return index != -1;
-      }else{
-
+      } else {
       }
-     // console.log(index)
-      return index != 4 && index != 19 ;
+      // console.log(index)
+      return index != 4 && index != 19;
     },
     //返回到上一次进来的页面
     banckto() {
@@ -703,6 +702,9 @@ export default {
           group: this.groupId
         }
       });
+      if (this.$route.query.id !== "dfk3") {
+        this.navlist = 3;
+      }
     },
     //二同複選xx
     onClickStan1(e) {

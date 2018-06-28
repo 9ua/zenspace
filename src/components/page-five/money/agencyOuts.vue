@@ -11,7 +11,8 @@
           i.fa.fa-credit-card(style='padding-right:10px')
           p 普通提现
         i.el-icon-arrow-right
-      router-link(to='agencyOut?id=2', tag='li',@click="getAgentWithdrawFlag")
+      // router-link(to='agencyOut?id=2', tag='li',@click="getAgentWithdrawFlag")
+      li(@click="getAgentWithdrawFlag")
         .mInvite-left
           i.fa.fa-credit-card(style='padding-right:10px')
           p 返点提现
@@ -53,8 +54,11 @@ export default {
       this.$http
         .get(this.$store.state.url + "/api/proxy/getAgentWithdrawFlag")
         .then(res => {
+          
           if (res.data.code === 1) {
             this.$router.push("/agencyOut?id=2");
+          }else{
+            this.$message(res.data.data.message)
           }
         })
         .catch(error => {

@@ -156,7 +156,7 @@ export default {
             if (this.$store.state.userType === "0") {
               this.waterFall();
             } else if (this.$store.state.userType === "1") {
-              this.getAgentWithdrawFlag();
+              this.$router.push({path:"/agencyOuts"});
             }
           }
         })
@@ -183,6 +183,7 @@ export default {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getAgentWithdrawFlag")
         .then(res => {
+          consoele.log(res.data.code)
           this.water = res.data.code;
           if (res.data.code === 1) {
             this.$router.push({ path: "/agencyOuts" });

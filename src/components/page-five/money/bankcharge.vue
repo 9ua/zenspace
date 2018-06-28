@@ -27,9 +27,9 @@
         div
           el-input(placeholder='请输入充值人姓名', v-model='niceName', :value='niceName', clearable='')
       li
-        p 注言
+        p 附言
         div
-          el-input(placeholder='请输入注言', v-model='checkCode', :value='checkCode', clearable='')
+          el-input(placeholder='请输入附言', v-model='checkCode', :value='checkCode', clearable='')
       li
         .button
           button.button1(@click='show2 = !show2') 充值申请
@@ -55,7 +55,7 @@
         p 充值人姓名
         span {{niceName}}
       li
-        p 注言
+        p 附言
         span {{checkCode}}
       li(style='text-align:center;background:#fff;')
         .center

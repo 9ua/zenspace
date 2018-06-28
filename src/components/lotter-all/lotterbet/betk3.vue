@@ -702,7 +702,7 @@ export default {
           group: this.groupId
         }
       });
-      if (this.$route.query.id !== "dfk3") {
+      if (this.$route.query.id !== "dfk3" && this.navlist === 6) {
         this.navlist = 3;
       }
     },

@@ -134,6 +134,7 @@ export default {
         formData.append("amount", this.amount);
         formData.append("bankUserId", this.bankUserId);
         formData.append("securityCode", md5(this.securityCode));
+        formData.append("withdrawType", this.withdrawType);
         this.$axios
           .post(
             this.$store.state.url + "api/proxy/setWithdraw",

@@ -2,22 +2,12 @@
 .listStyle
   .listStyle-top
     router-link.el-icon-arrow-left(to='/payway', tag='i')
-    p 银行转账充值
+    p 支付宝
     span
   .listStyle-content
     ul.listStyle-VI
-      li(style='background:#ffeeee;height:42px;')
-        p 收款银行
-        span {{receiveBankName}}
-      li(style='background:#ffeeee;height:42px;')
-        p 收款人姓名
-        span {{receiveNiceName}}
-      li(style='background:#ffeeee;height:46px;')
-        p 收款卡号
-        span(style='font-size:20px;') {{receiveCard}}
-      li(style='background:#ffeeee;height:42px;')
-        p 收款银行地址
-        span {{receiveAddress}}
+      div(style='text-align:center;height:auto;')
+        img(:src='$store.state.url+this.QRCodeUrl', style='width:40%;height:auto')
       li
         p 充值金额
         div
@@ -27,21 +17,20 @@
         div
           el-input(placeholder='请输入充值人姓名', v-model='niceName', :value='niceName', clearable='')
       li
-        p 附言
+        p 订单号后6位
         div
-          el-input(placeholder='请输入附言', v-model='checkCode', :value='checkCode', clearable='')
+          el-input(placeholder='请输入订单号后6位', v-model='checkCode', :value='checkCode', clearable='')
       li
         .button
           button.button1(@click='show2 = !show2') 充值申请
       .warning
-        p 1、请转账到以上收款银行账户。
+        p 1、请务必填写正确订单号后6位！
         br
-        p 2、请正确填写转账银行卡的持卡人姓名和充值金额，以便及时核对。
+        p 2、请正确填写姓名和充值金额，以便及时核对。
         br
         p 3、转账1笔提交1次，请勿重复提交订单。
         br
-        p
-          | 4、请务必转账后再提交订单，否则无法及时查到您的款项！
+        p 4、请务必转账后再提交订单，否则无法及时查到您的款项！
         br
   van-actionsheet(v-model='show2')
     ul.listStyle-II
@@ -55,7 +44,7 @@
         p 充值人姓名
         span {{niceName}}
       li
-        p 附言
+        p 订单号后6位
         span {{checkCode}}
       li(style='text-align:center;background:#fff;')
         .center
@@ -116,7 +105,7 @@ export default {
     rechargeEntrance() {
       this.$http
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
-          params: { rechargeWay: 5 }
+          params: { rechargeWay: 2 }
         })
         .then(res => {
           this.QRCodeUrl = res.data.data.QRCodeUrl;
@@ -134,40 +123,46 @@ export default {
       this.$router.push({ path: "/five" });
     },
     sendReq() {
-      let config = {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        withCredentials: true
-      };
-      let formData = new FormData();
-      formData.append("rechargeWay", 5);
-      formData.append("receiveBankId", this.receiveBankId);
-      formData.append("chargeamount", this.chargeamount);
-      formData.append("niceName", this.niceName);
-      formData.append("checkCode", this.checkCode);
-      this.$axios
-        .post(
-          this.$store.state.url + "api/proxy/setPayRequest",
-          formData,
-          config
-        )
-        .then(res => {
-          if (res.data.code === 1) {
-            this.content = "申请完成，资讯可至充值信息页面查询。";
-            this.show2 = !this.show2;
-            this.show4 = !this.show4;
-          } else if (res.data.code === 0) {
-            this.content = res.data.data.message;
-            this.show2 = !this.show2;
-            this.show3 = !this.show3;
-          } else {
-            this.content = res.data.content;
-            this.show2 = !this.show2;
-            this.show3 = !this.show3;
-          }
-        })
-        .catch(error => {
-          console.log("setPayApplicationNo");
-        });
+      if (this.checkCode == "") {
+        this.content = "订单号不能為空！";
+        this.show2 = !this.show2;
+        this.show3 = !this.show3;
+      } else {
+        let config = {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true
+        };
+        let formData = new FormData();
+        formData.append("rechargeWay", 2);
+        formData.append("receiveBankId", this.receiveBankId);
+        formData.append("chargeamount", this.chargeamount);
+        formData.append("niceName", this.niceName);
+        formData.append("checkCode", this.checkCode);
+        this.$axios
+          .post(
+            this.$store.state.url + "api/proxy/setPayRequest",
+            formData,
+            config
+          )
+          .then(res => {
+            if (res.data.code === 1) {
+              this.content = "申请完成，资讯可至充值信息页面查询。";
+              this.show2 = !this.show2;
+              this.show4 = !this.show4;
+            } else if (res.data.code === 0) {
+              this.content = res.data.data.message;
+              this.show2 = !this.show2;
+              this.show3 = !this.show3;
+            } else {
+              this.content = res.data.content;
+              this.show2 = !this.show2;
+              this.show3 = !this.show3;
+            }
+          })
+          .catch(error => {
+            console.log("setPayApplicationNo");
+          });
+      }
     }
   }
 };

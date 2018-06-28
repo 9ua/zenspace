@@ -20,6 +20,9 @@ import bet from '@/components/page-five/money/bet'
 import service from '@/components/page-five/service'
 import bankcharge from '@/components/page-five/money/bankcharge'
 import weixincharge from '@/components/page-five/money/weixincharge'
+import creditccharge from '@/components/page-five/money/creditccharge'
+import huabeicharge from '@/components/page-five/money/huabeicharge'
+import alipaycharge from '@/components/page-five/money/alipaycharge'
 import rechargeserch from '@/components/page-five/money/rechargeserch'
 import cashOut from '@/components/page-five/money/cashOut'
 import agencyOut from '@/components/page-five/money/agencyOut'
@@ -614,6 +617,30 @@ export default new Router({
       path: '/weixincharge',
       name: 'weixincharge',
       component: weixincharge,
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/creditccharge',
+      name: 'creditccharge',
+      component: creditccharge,
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/huabeicharge',
+      name: 'huabeicharge',
+      component: huabeicharge,
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/alipaycharge',
+      name: 'alipaycharge',
+      component: alipaycharge,
       meta: {
         keepAlive: false
       },

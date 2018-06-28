@@ -14,7 +14,7 @@
       .menu-list
         van-popup(v-model='show', position='top')
           ul.menu-list-top
-            li(v-for='(into,index) in playBonus', :key='index',v-show="isdfk3(index)", :class="{'active': index === navlist}", @click='k3Tab($event,index,into)')
+            li(v-for='(into,index) in playBonus', :key='index', v-show='isdfk3(index)', :class="{'active': index === navlist}", @click='k3Tab($event,index,into)')
               .title  {{into.title}} 
               .xq(v-show=' index !== 3') 赔率 {{into.displayBonus | keepTwoNum}}
               .xq(v-show=' index === 3') 赔率 {{playBonus[4].displayBonus | keepTwoNum}}
@@ -32,40 +32,7 @@
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
       i.el-icon-arrow-left(@click='lookAllDivTitle')
-      |         查看更多
-    //
-      <div class="lookAllUlBox">
-      <ul class="lookAllUl">
-      <li>
-      <p>期号</p>
-      <p>开奖号码</p>
-      <p>和值</p>
-      <p>大小</p>
-      <p>单双 </p>
-      </li>
-      <li v-for="(item,index) in getPastOpens" :key="index">
-      <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}
-      <i class="el-icon-minus"></i>
-      </p>
-      <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}
-      <i class="el-icon-minus"></i>
-      </p>
-      <p>
-      <a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt="" /></a>
-      <a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt="" /></a>
-      <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
-      </p>
-      <p>{{item.n1+item.n2+item.n3}}</p>
-      <p>
-      <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'">{{item.n1+item.n2+item.n3
-      < 11 ? '小' : '大'}}</span>
-      </p>
-      <p>
-      <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
-      </p>
-      </li>
-      </ul>
-      </div>
+      | 查看更多
   .betk3-content
     div(v-show='!show')
       .betk3-content-top(@click=' betk3ContentTopPop = !betk3ContentTopPop')
@@ -118,8 +85,7 @@
             p {{item.n1+item.n2+item.n3}}
             p
               span(:class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'")
-                | {{item.n1+item.n2+item.n3
-                | < 11 ? '小' : '大'}}
+                | {{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}
             p
               span(:class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'") {{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}
         p.lookAll
@@ -140,15 +106,14 @@
             li
               ul
                 li(v-for='(ertongh,index) in ertonghao', :key='index', @click='ertonghaoto($event,index,ertongh)')
-                  span(:class="ertongh.selected ? 'active' : ''")
-                    | {{ertongh.title}}
+                  span(:class="ertongh.selected ? 'active' : ''") {{ertongh.title}}
           // 二不同
           ul.erbutong(v-show='index === 2')
             li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in erbutong', :key='index', @click='k3option($event,index,k3item)')
               h2
           // 和值
           ul.hezhi(v-show='index === 3')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in k3options', :key='index',v-if="isdfk3Cen(index)", @click='hezhidaxiaodanshuang($event,index,k3item)')
+            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in k3options', :key='index', v-if='isdfk3Cen(index)', @click='hezhidaxiaodanshuang($event,index,k3item)')
               h2 {{k3item.title}}
               span(v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单' || k3item.title==='双'") 赔 {{k3item.rate | keepThreeNum}}
               span(v-else='') 赔 {{k3item.rate | keepTwoNum}}
@@ -166,15 +131,64 @@
           // 三同号
           ul.santonghao(v-show='index === 6')
             li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in santonghao', :key='index', @click='santonghaoto($event,index,k3item)')
-              h2(v-if="index<6")
+              h2(v-if='index<6')
                 a
                 a
                 a
-              h2(v-if="index === 6") {{k3item.title}}
+              h2(v-if='index === 6') {{k3item.title}}
           // 三不同
           ul.sanbutong(v-show='index === 7')
             li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in sanbutong', :key='index', @click='k3option($event,index,k3item)')
               h2
+    p(v-for='(item,index) in playBonus', :key='index', v-show='index === navlist')
+      | {{item.remark}}
+      span(v-show='index !== 3')
+        | 赔率
+        span.k3remark {{ item.displayBonus | keepTwoNum}}
+        |  倍。
+      // 单挑一骰
+      ul.yishai(v-show='index === 0')
+        li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in yishai', :key='index', @click='k3option($event,index,k3item)')
+          h2
+      // 二同号
+      ul.ertonghao(v-show='index === 1')
+        li
+          ul
+            li(v-for='(ertongh,index) in ertonghao', :key='index', @click='ertonghaoto($event,index,ertongh)')
+              span(:class="ertongh.selected ? 'active' : ''") {{ertongh.title}}
+      // 二不同
+      ul.erbutong(v-show='index === 2')
+        li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in erbutong', :key='index', @click='k3option($event,index,k3item)')
+          h2
+      // 和值
+      ul.hezhi(v-show='index === 3')
+        li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in k3options', :key='index', v-if='isdfk3Cen(index)', @click='hezhidaxiaodanshuang($event,index,k3item)')
+          h2 {{k3item.title}}
+          span(v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单' || k3item.title==='双'") 赔 {{k3item.rate | keepThreeNum}}
+          span(v-else='') 赔 {{k3item.rate | keepTwoNum}}
+      // 大小单双
+      ul.daoxiaodanshuang(v-show='index === 4')
+        li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in daxiaodanshuang', :key='index', @click='k3option($event,index,k3item)')
+          h2 {{k3item.title}}
+      // 三连号
+      ul.sanlianhao(v-show='index === 5')
+        li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in sanlianhao', :key='index', @click='k3option($event,index,k3item)')
+          h2
+            a
+            a
+            a
+      // 三同号
+      ul.santonghao(v-show='index === 6')
+        li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in santonghao', :key='index', @click='santonghaoto($event,index,k3item)')
+          h2(v-if='index<6')
+            a
+            a
+            a
+          h2(v-if='index === 6') {{k3item.title}}
+      // 三不同
+      ul.sanbutong(v-show='index === 7')
+        li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in sanbutong', :key='index', @click='k3option($event,index,k3item)')
+          h2
   .betk3-footer
     .betk3-footer-top(v-show='zhu > 0')
       .betk3-footer-tops

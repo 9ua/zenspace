@@ -34,7 +34,7 @@
       i.el-icon-arrow-left(@click='lookAllDivTitle')
       | 查看更多
   .betk3-content
-    div(v-show='!show')
+    div
       .betk3-content-top(@click=' betk3ContentTopPop = !betk3ContentTopPop')
         .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
           p(v-if="$route.query.id === 'bjk3'") {{lastSeasonId*1}}期开奖号码

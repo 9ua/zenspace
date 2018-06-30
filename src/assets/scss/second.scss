@@ -192,11 +192,11 @@
     }
     & span {
       @extend %faj;
-      width: 50px;
       border: 1px solid #eee;
       border-radius: 10px;
       font-size: 12px;
       margin-left: 6px;
+      padding: 0px 10px;
     }
     
   }

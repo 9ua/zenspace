@@ -78,13 +78,35 @@ export default {
       myAmount: "",
       moneyDepositMin: "",
       countMax: "",
-      content: ""
+      content: "",
+      //hotfix-start//
+      hotfixbalance:'',
+      hotfixretrievableRebate:'',
+      //hotfix-end//
     };
   },
-  created() {
+      //hotfix-start//
+      created() {
+        this.getTopUserData();
+      },
+      //hotfix-end//
+  mounted(){
     this.getWithdrawInformation();
   },
   methods: {
+    //hotfix-start//
+    getTopUserData() {
+      this.$http
+        .get(this.$store.state.url + "api/userCenter/getTopUserData")
+        .then(res => {
+          this.hotfixbalance = res.data.data.balance;
+          this.hotfixretrievableRebate = res.data.data.retrievableRebate;
+        })
+        .catch(error => {
+          console.log("获取头部个人信息No");
+        });
+    },
+    //hotfix-end//
     getWithdrawInformation() {
       if (this.$store.state.userType === "0") {
         this.withdrawType = 1;
@@ -99,7 +121,18 @@ export default {
           this.withdrawInformation = res.data.data;
           this.bankList = res.data.data.bankUserList;
           this.moneyDepositMax = res.data.data.moneyDepositMax;
-          this.myAmount = res.data.data.amount;
+          //hotfix-start//
+          if (this.$route.query.id === 2 ) {
+            if (this.hotfixbalance < this.hotfixretrievableRebate) {
+              this.myAmount = this.hotfixbalance;
+            } else {
+              this.myAmount = res.data.data.amount;
+            }
+          } else {
+            this.myAmount = res.data.data.amount;
+          }
+          //hotfix-end//
+          //this.myAmount = res.data.data.amount;
           this.moneyDepositMin = res.data.data.moneyDepositMin;
           this.countMax = res.data.data.countMax;
           for (let i = 0; i < res.data.data.bankUserList.length; i++) {
@@ -123,8 +156,16 @@ export default {
       this.show1 = !this.show1;
     },
     sendReq() {
+      //hotfix-start//
+      if (this.$route.query.id === 2 ) {
+          if (this.hotfixbalance < this.hotfixretrievableRebate) {
+            this.content = "亲，您的馀额没有这么多啊！";
+            this.show2 = true;     
+          }
+      } else   
+      //hotfix-end//
       if (this.amount === "") {
-        this.content = "請輸入金額!";
+        this.content = "请输入金额!";
         this.show2 = true;
       } else {
         let config = {

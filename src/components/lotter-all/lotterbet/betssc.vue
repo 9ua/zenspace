@@ -28,6 +28,27 @@
         ul
           li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
             a {{listssc.name}}
+  .lookAllDiv(v-show='lookAllUl')
+    p.lookAllDivTitle
+      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      | 查看更多
+    .lookAllUlBox
+      ul.lookAllUl
+        li
+          p 期号
+          p 开奖号码
+          p 开奖时间
+        li(v-for='(item,index) in getPastOpens', :key='index')
+          p
+            | {{item.seasonId.substring(4).split("-").join("")*1}}
+            i.el-icon-minus
+          p
+            a {{item.n1}}
+            a {{item.n2}}
+            a {{item.n3}}
+            a {{item.n4}}
+            a {{item.n5}}
+          p {{item.addTime.substring(11)}}
   .betssc-content
     div(v-show='!show')
       .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
@@ -68,7 +89,7 @@
             p 期号
             p 开奖号码
             p 开奖时间
-          li(v-for='(item,index) in getPastOpens', :key='index')
+          li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
             p
               | {{item.seasonId.substring(4).split("-").join("")*1}}
               i.el-icon-minus
@@ -81,6 +102,7 @@
             p {{item.addTime.substring(11)}}
         p.lookAll
           button(@click='lookAll') 查看更多
+          button(@click='lookAllTo') 往期开奖
       .betk3-content-foot
         div
           .betssc-list-box(v-show='true')
@@ -171,6 +193,7 @@ export default {
       k: 0,
       l: 0,
       h: 0,
+      lookAllUl:false,
       shownum: false,
       startyet: false,
       interval: null, //动画
@@ -283,8 +306,13 @@ export default {
     banckto() {
       this.$router.push(this.$store.state.historyNum);
     },
-    //查看更多记录
+    //查看20条记录
     lookAll() {
+      this.betsscContentTopPop = !this.betsscContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
+    },
+    //往期开奖
+    lookAllTo() {
       this.$router.push({
         path: "second/past",
         query: {
@@ -293,6 +321,9 @@ export default {
           group: this.groupId
         }
       });
+    },
+    lookAllDivTitle() {
+      this.lookAllUl = !this.lookAllUl;
     },
     //筛子动画
     start() {
@@ -2024,7 +2055,7 @@ export default {
       this.shownum = true;
       this.$http
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 10 }
+          params: { lotteryId: this.$route.query.id, count: 20 }
         })
         .then(res => {
           this.getPastOpens = res.data.data;

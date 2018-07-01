@@ -28,6 +28,33 @@
         ul
           li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
             a {{listk3.name}}
+  .lookAllDiv(v-show='lookAllUl')
+    p.lookAllDivTitle
+      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      | 查看更多
+    .lookAllUlBox
+      ul.lookAllUl
+        li
+          p 期号
+          p 开奖号码
+        li(v-for='(item,index) in getPastOpens', :key='index')
+          p(v-if="$route.query.id === 'pk10'")
+            | {{item.seasonId}}
+            i.el-icon-minus
+          p(v-else='')
+            | {{item.seasonId.substring(4).split("-").join("")}}
+            i.el-icon-minus
+          p
+            a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
+            a {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
+            a {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
+            a {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
+            a {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
+            a {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
+            a {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
+            a {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
+            a {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
+            a {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
   .betbj10-content
     div(v-show='!show')
       .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
@@ -90,8 +117,7 @@
           li
             p 期号
             p 开奖号码
-            // <p>开奖时间</p>
-          li(v-for='(item,index) in getPastOpens', :key='index')
+          li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
             p(v-if="$route.query.id === 'pk10'")
               | {{item.seasonId}}
               i.el-icon-minus
@@ -111,6 +137,7 @@
               a {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
         p.lookAll
           button(@click='lookAll') 查看更多
+          button(@click='lookAllTo') 往期开奖
       .betk3-content-foot
         div(v-for='(item,indexc) in playGroups', :key='indexc', v-show='indexc === navlist')
           .betssc-list-box(v-for='(group,indexd) in item.groups', :key='indexd', v-show='indexd === navlistb')
@@ -212,6 +239,7 @@ export default {
       e: 1,
       r: 1,
       t: 1,
+      lookAllUl:false,
       shownum: false,
       startyet: false,
       interval: null, //动画
@@ -324,8 +352,13 @@ export default {
     banckto() {
       this.$router.push(this.$store.state.historyNum);
     },
-    //查看更多记录
+    //查看20条记录
     lookAll() {
+      this.betsscContentTopPop = !this.betsscContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
+    },
+    //往期开奖
+    lookAllTo() {
       this.$router.push({
         path: "second/past",
         query: {
@@ -334,6 +367,9 @@ export default {
           group: this.groupId
         }
       });
+    },
+    lookAllDivTitle() {
+      this.lookAllUl = !this.lookAllUl;
     },
     //筛子动画
     start() {
@@ -1632,7 +1668,7 @@ export default {
       this.shownum = true;
       this.$http
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 10 }
+          params: { lotteryId: this.$route.query.id, count: 20 }
         })
         .then(res => {
           this.getPastOpens = res.data.data;

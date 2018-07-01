@@ -33,6 +33,35 @@
     p.lookAllDivTitle
       i.el-icon-arrow-left(@click='lookAllDivTitle')
       | 查看更多
+    .lookAllUlBox
+      ul.lookAllUl
+        li
+          p 期号
+          p 开奖号码
+          p 和值
+          p 大小
+          p 单双 
+        li(v-for='(item,index) in getPastOpens', :key='index')
+          p(v-if="$route.query.id === 'bjk3'")
+            | {{item.seasonId}}
+            i.el-icon-minus
+          p(v-else='')
+            | {{item.seasonId.substring(4).split("-").join("")*1}}
+            i.el-icon-minus
+          p
+            a
+              img(:src='"../../../assets/img/one/n"+item.n1+".png"', alt='')
+            a
+              img(:src='"../../../assets/img/one/n"+item.n2+".png"', alt='')
+            a
+              img(:src='"../../../assets/img/one/n"+item.n3+".png"', alt='')
+          p {{item.n1+item.n2+item.n3}}
+          p
+            span(:class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'")
+              | {{item.n1+item.n2+item.n3
+              | < 11 ? '小' : '大'}}
+          p
+            span(:class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'") {{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}
   .betk3-content
     div
       .betk3-content-top(@click=' betk3ContentTopPop = !betk3ContentTopPop')
@@ -67,7 +96,7 @@
             p 开奖号码
             p 和值
             p 大小
-            p 单双 
+            p 单双
           li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
             p(v-if="$route.query.id === 'bjk3'")
               | {{item.seasonId}}
@@ -85,11 +114,13 @@
             p {{item.n1+item.n2+item.n3}}
             p
               span(:class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'")
-                | {{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}
+                | {{item.n1+item.n2+item.n3
+                | < 11 ? '小' : '大'}}
             p
               span(:class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'") {{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}
         p.lookAll
           button(@click='lookAll') 查看更多
+          button(@click='lookAllTo') 往期开奖
       .betk3-content-foot
         p(v-for='(item,index) in playBonus', :key='index', v-show='index === navlist')
           | {{item.remark}}
@@ -533,8 +564,13 @@ export default {
     banckto() {
       this.$router.push(this.$store.state.historyNum);
     },
-    //查看更多记录
+    //查看20条记录
     lookAll() {
+      this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
+    },
+    //往期开奖
+    lookAllTo() {
       this.$router.push({
         path: "second/past",
         query: {
@@ -543,8 +579,6 @@ export default {
           group: this.groupId
         }
       });
-      // this.betk3ContentTopPop = !this.betk3ContentTopPop;
-      // this.lookAllUl = !this.lookAllUl;
     },
     lookAllDivTitle() {
       this.lookAllUl = !this.lookAllUl;

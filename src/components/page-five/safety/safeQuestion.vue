@@ -3,13 +3,13 @@
   .safeQuestion-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 验证密保问题
-    sapn
+    span
   .safeQuestion-input
     div
       p 问题一:
       select(v-model='title1', disabled='')
         option(v-for='(item,index) in options', :key='index', :value='item.value', disabled='') {{item.label}}
-    div
+    //div
       p 答案:
       input(type='text', v-model='answer1', v-focus='')
   .safeQuestion-input
@@ -17,7 +17,7 @@
       p 问题二:
       select(v-model='title2', disabled='')
         option(v-for='(item,index) in options', :key='index', :value='item.value', disabled='') {{item.label}}
-    div
+    //div
       p 答案:
       input(type='text', v-model='answer2')
   .safeQuestion-but
@@ -69,22 +69,23 @@ export default {
     },
     //验证密保问题
     setQuestion() {
-      let md5answer1 = md5(this.answer1);
-      let md5answer2 = md5(this.answer2);
-      if (md5answer1 === this.answer3) {
-        if (md5answer2 === this.answer4) {
-          this.show = !this.show;
-          this.content = "验证成功！";
-          setTimeout(() => {
-            if (this.content === "验证成功！") {
-              this.$router.push({ path: "/setQuestion" });
-            }
-          }, 1000);
-        }
-      } else {
-        this.show = !this.show;
-        this.content = "验证失败！";
-      }
+      this.$router.push("/safety")
+    //   let md5answer1 = md5(this.answer1);
+    //   let md5answer2 = md5(this.answer2);
+    //   if (md5answer1 === this.answer3) {
+    //     if (md5answer2 === this.answer4) {
+    //       this.show = !this.show;
+    //       this.content = "验证成功！";
+    //       setTimeout(() => {
+    //         if (this.content === "验证成功！") {
+    //           this.$router.push({ path: "/setQuestion" });
+    //         }
+    //       }, 1000);
+    //     }
+    //   } else {
+    //     this.show = !this.show;
+    //     this.content = "验证失败！";
+    //   }
     }
   },
   directives: {

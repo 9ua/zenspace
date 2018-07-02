@@ -36,11 +36,11 @@ const state = {
 }
 // dev & prod
 if (process.env.NODE_ENV === 'production') {
-  if (location.hostname === 'm.edu0370.com')
+  if (location.hostname === 'm.edu0370.com' || location.hostname === 'm.50fq.com')
      state.url = 'http://' + location.hostname.replace('m.', '') + '/';
   else
     state.url = 'https://' + location.hostname.replace('m.', '') + '/';
-} 
+}
 //local
 else {
   state.url = 'http://edu0370.com/';

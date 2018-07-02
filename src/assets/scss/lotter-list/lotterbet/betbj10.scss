@@ -399,7 +399,7 @@
   & .lookAllDivTitle {
     @extend %faj;
     width: 100%;
-    height: 7%;
+    height: 50px;
     line-height: 1.493333rem;
     background: rgb(175, 58, 49);
     color: #FFF;
@@ -417,10 +417,13 @@
     height: 93%;
     position: absolute;
     z-index: 1000;
-    top: 7%;
+    top: 50px;
     left: 0px;
     overflow-y: scroll;
     & .lookAllUl {
+      width: 100%;
+      background: #22563f;
+      padding-bottom: 20px;
       & li {
         @extend %flex;
         & p {

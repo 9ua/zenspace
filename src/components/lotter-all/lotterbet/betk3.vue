@@ -32,7 +32,8 @@
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
       i.el-icon-arrow-left(@click='lookAllDivTitle')
-      | 查看更多
+      b.cont 查看更多
+      span
     .lookAllUlBox
       ul.lookAllUl
         li

@@ -405,11 +405,19 @@
     color: #FFF;
     font-size: 18px;
     & i {
-      position: absolute;
-      left: 15px;
+      @extend %faj;
+      width: 20%;
       font-size: 20px;
       color: #FFF;
-      margin-left: 15px;
+    }
+    & b.cont{
+      @extend %faj;
+      width: 60%;
+      font-weight: 400;
+    }
+    & span{
+      @extend %faj;
+      width: 20%;
     }
   }
   & .lookAllUlBox {

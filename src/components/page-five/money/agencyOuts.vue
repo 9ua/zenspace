@@ -6,12 +6,11 @@
     span
   .listStyle-content
     ul.listStyle-I
-      router-link(to='agencyOut?id=1', tag='li',@click="getWithdrawFlag")
+      li(@click="getWithdrawFlag")
         .mInvite-left
           i.fa.fa-credit-card(style='padding-right:10px')
           p 普通提现
         i.el-icon-arrow-right
-      // router-link(to='agencyOut?id=2', tag='li',@click="getAgentWithdrawFlag")
       li(@click="getAgentWithdrawFlag")
         .mInvite-left
           i.fa.fa-credit-card(style='padding-right:10px')

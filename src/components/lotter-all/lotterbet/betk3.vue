@@ -111,6 +111,7 @@
           <button @click="lookAllTo">往期开奖</button>
         </p>
       </div>
+      
       <div class="betk3-content-foot">
         <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}<span v-show="index !== 3">赔率<span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
           <!-- 单挑一骰-->

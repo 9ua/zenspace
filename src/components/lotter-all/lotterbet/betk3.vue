@@ -268,26 +268,27 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p(v-if="$route.query.id === 'bjk3'")
-            | {{lastSeasonId*1}}期已截止
-            br
-            | 当前期号{{seasonId}}
-            br
-            | 投注时请注意期号
-          p(v-else='')
-            | {{lastSeasonId.slice(4)*1}}期已截止
-            br
-            | 当前期号{{seasonId}}
-            br
-            | 投注时请注意期号
-        .but
-          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
+  .boxPop
+    van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
+      div
+        ul
+          .title
+            p 温馨提示！
+          .cont
+            p(v-if="$route.query.id === 'bjk3'")
+              | {{lastSeasonId*1}}期已截止
+              br
+              | 当前期号{{seasonId}}
+              br
+              | 投注时请注意期号
+            p(v-else='')
+              | {{lastSeasonId.slice(4)*1}}期已截止
+              br
+              | 当前期号{{seasonId}}
+              br
+              | 投注时请注意期号
+          .but
+            button.nodel(@click='showTimesUp = ! showTimesUp') 确定
   van-popup.betshow(v-model='betshow') {{content}}
 </template>
 <script>

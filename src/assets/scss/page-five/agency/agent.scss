@@ -20,12 +20,18 @@
       }
     }
     & i {
-      position: absolute;
-      left: 16px;
+      @extend %faj;
+      width: 20%;
       color: #fff;
     }
     & p {
+      @extend %faj;
+      width: 60%;
       color: #fff;
+    }
+    & span{
+      @extend %faj;
+      width: 20%;
     }
     & ul {
       @extend %flex;

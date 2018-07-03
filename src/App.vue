@@ -23,15 +23,13 @@ p {
   margin: 0;
 }
 .van-popup{
-    position: absolute !important;
-    background-color: #fff;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate3d(-50%,-50%,0) !important;
-    -moz-transform: translate3d(-50%,-50%,0) !important;
-    -ms-transform: translate3d(-50%,-50%,0) !important;
-    -o-transform: translate3d(-50%,-50%,0) !important;
-    transform: translate3d(-50%,-50%,0) !important;
+  position: inherit !important;
+    background-color: rgba(0, 0, 0, 0.1);
+    -webkit-transform: translate3d(0,0,0) !important;
+    -moz-transform: translate3d(0,0,0) !important;
+    -ms-transform: translate3d(0,0,0) !important;
+    -o-transform: translate3d(0,0,0) !important;
+    transform: translate3d(0,0,0) !important;
     -webkit-transition: .2s ease-out !important;
     -moz-transition: .2s ease-out !important;
     -ms-transform: .2s ease-out !important;

@@ -301,7 +301,7 @@ export default {
       shownum: false,
       interval: null, //动画
       lookAllUl: false,
-      showTimesUp: true,
+      showTimesUp: false,
       betshow: false, //投注弹窗
       content: "提示内容!", //弹窗内容
       issantonghao: false,

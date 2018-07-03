@@ -4,9 +4,6 @@
   @extend %flex;
   @extend %fdc;
   @extend %sbetween;
-  position: relative;
-  top: 0px;
-  left: 0px;
   & .betk3-top {
     @extend %flex;
     @extend %aitems;

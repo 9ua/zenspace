@@ -4,12 +4,10 @@
   color: #5e5e5e;
   font-size: 14px;
   border-radius: 10px;
-  // max-width: 400px;
-  // min-width: 180px;
-  & div {
-    // width: 100%;
-    max-width: 400px;
+  max-width: 400px;
   min-width: 180px;
+  & div {
+    width: 100%;
     @extend %faj;
     & ul {
       width: 100%;

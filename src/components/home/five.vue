@@ -1,5 +1,5 @@
 <template lang="jade">
-.five(v-show='$store.state.loginStatus',style="background:red;")
+.five(v-show='$store.state.loginStatus')
   headers
   .five-top
     div

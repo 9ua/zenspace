@@ -41,11 +41,12 @@ const state = {
 //   else
 //     state.url = 'https://' + location.hostname.replace('m.', '') + '/';
 // }
+//test & prod
 if (process.env.NODE_ENV === 'production') {
-  if (location.hostname === 'm.edu0370.com' || location.hostname === 'm.50fq.com')
-    state.url = 'http://mtxflower.com';
+  if (location.hostname === 'm.edu0370.com')
+    state.url = 'http://' + location.hostname.replace('m.', '') + '/';
   else
-    state.url = 'http://mtxflower.com';
+    state.url = 'https://' + location.hostname.replace('m.', '') + '/';
 }
 //local
 else {

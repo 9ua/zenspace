@@ -100,7 +100,7 @@
           <li v-for="(item,index) in getPastOpens" :key="index" v-if="index &lt; 10">
             <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="el-icon-minus"></i></p>
             <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="el-icon-minus"></i></p>
-            <p><a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt=""/></a><a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt=""/></a><a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt=""/></a></p>
+            <p><a><img :src='"@/assets/img/one/n"+item.n1+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n2+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n3+".png"' alt=""/></a></p>
             <p>{{item.n1+item.n2+item.n3}}</p>
             <p><span :class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'">{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</span></p>
             <p><span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span></p>
@@ -111,7 +111,7 @@
           <button @click="lookAllTo">往期开奖</button>
         </p>
       </div>
-      
+
       <div class="betk3-content-foot">
         <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}<span v-show="index !== 3">赔率<span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
           <!-- 单挑一骰-->

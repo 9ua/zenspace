@@ -3,6 +3,7 @@
   .agent-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 客服
+    span
   .content
     iframe.content-in(src='https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=992821&configID=74605&jid=1218814689&s=1')
 </template>
@@ -21,9 +22,9 @@
   padding-top: 46px;
   border: none;
   height: calc(100% - 46px);
-  height: -o-calc(100% - 46px); /* opera */
-  height: -webkit-calc(100% - 46px); /* google, safari */
-  height: -moz-calc(100% - 46px); /* firefox */
+  height: -o-calc(100% - 46px);
+  height: -webkit-calc(100% - 46px);
+  height: -moz-calc(100% - 46px);
   width: 100%;
   overflow: hidden;
   display: block;

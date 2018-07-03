@@ -7,7 +7,7 @@
       .three-box
         p 活动时间：{{actives.beginPrizeTime}}
         p {{actives.status === 0 ? '进行中' : '结束'}}
-      .three-content(ref='pppop', v-if='activesremark === index', v-show='activesremarks')
+      .three-content(v-if='activesremark === index', v-show='activesremarks')
         div
           p(v-html='actives.remark')
 </template>
@@ -33,6 +33,7 @@ export default {
     },
     activity(){
       this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
+        console.log(res,"手机")
         this.activitys = res.data.data;
       }).catch((error) => {
           console.log("getListNo")

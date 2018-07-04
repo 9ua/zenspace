@@ -40,7 +40,7 @@
         <li v-for="(item,index) in getPastOpens" :key="index">
           <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="el-icon-minus"></i></p>
           <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="el-icon-minus"></i></p>
-          <p><a><img :src="'../../../assets/img/one/n'+item.n1+'.png'" alt=""/></a><a><img :src="'../../../assets/img/one/n'+item.n2+'.png'" alt=""/></a><a><img :src="'../../../assets/img/one/n'+item.n3+'.png'" alt=""/></a></p>
+          <p><a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt=""/></a><a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt=""/></a><a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt=""/></a></p>
           <p>{{item.n1+item.n2+item.n3}}</p>
           <p><span :class="item.n1+item.n2+item.n3 &lt; 11 ? 'goodidea' : 'goodluck'">
               {{item.n1+item.n2+item.n3

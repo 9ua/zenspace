@@ -110,7 +110,8 @@
                 transition(name='down-up-translate-fade')
                   div {{t}}
         .content-right
-          p {{seasonId}}期投注截止
+          p(v-if="$route.query.id === 'pk10'") {{seasonId}}期投注截止
+          p(v-else='') {{seasonId.substring(4).split("-").join("")}}期投注截止
           div
             p {{countDown}}
       .betk3-content-top-pop(v-show='betsscContentTopPop')

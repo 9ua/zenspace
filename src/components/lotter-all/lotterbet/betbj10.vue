@@ -43,7 +43,7 @@
             | {{item.seasonId}}
             i.el-icon-minus
           p(v-else='')
-            | {{item.seasonId.substring(4).split("-").join("")}}
+            | {{item.seasonId.substring(4).split("-").join("")*1}}
             i.el-icon-minus
           p
             a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
@@ -111,7 +111,8 @@
                   div {{t}}
         .content-right
           p(v-if="$route.query.id === 'pk10'") {{seasonId}}期投注截止
-          p(v-else='') {{seasonId.substring(4).split("-").join("")}}期投注截止
+          p(v-else='')
+            | {{seasonId2.slice(4)*1}}期投注截止
           div
             p {{countDown}}
       .betk3-content-top-pop(v-show='betsscContentTopPop')
@@ -124,7 +125,7 @@
               | {{item.seasonId}}
               i.el-icon-minus
             p(v-else='')
-              | {{item.seasonId.substring(4).split("-").join("")}}
+              | {{item.seasonId.substring(4).split("-").join("")*1}}
               i.el-icon-minus
             p
               a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
@@ -220,7 +221,7 @@
           p(v-else='')
             | {{lastSeasonId.slice(4)*1}}期已截止
             br
-            | 当前期号{{seasonId}}
+            | 当前期号{{seasonId2.slice(4)*1}}
             br
             | 投注时请注意期号
         .but

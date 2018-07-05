@@ -2,7 +2,7 @@
 .betssc
   ul.betssc-top
     li
-      router-link.el-icon-arrow-left(to='/one', tag='i')
+      i.el-icon-arrow-left(@click='banckto')
     li
       p.wangfa
         | 玩
@@ -28,38 +28,99 @@
         ul
           li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
             a {{listssc.name}}
+  .lookAllDiv(v-show='lookAllUl')
+    p.lookAllDivTitle
+      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      b.cont 查看更多
+      span
+    .lookAllUlBox
+      ul.lookAllUl
+        li
+          p 期号
+          p 开奖号码
+          p 开奖时间
+        li(v-for='(item,index) in getPastOpens', :key='index')
+          p
+            | {{item.seasonId.substring(4).split("-").join("")*1}}
+            i.el-icon-minus
+          p
+            a {{item.n1}}
+            a {{item.n2}}
+            a {{item.n3}}
+            a {{item.n4}}
+            a {{item.n5}}
+          p {{item.addTime.substring(11)}}
   .betssc-content
     div(v-show='!show')
       .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
-        .content-left(v-for='(item,index) in getPastO', :key='index')
-          p 00000000期开奖号码
-          div
-            p 08
-            p 08
-            p 08
-            p 08
-            p 08
+        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
+          p {{lastSeasonId.slice(4)*1}}期开奖号码
+          div(v-show='!shownum')
+            p {{item.n1}}
+            p {{item.n2}}
+            p {{item.n3}}
+            p {{item.n4}}
+            p {{item.n5}}
+            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+          .contnet-left-num(v-show='shownum')
+            .num
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{i}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{j}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{k}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{l}}
+              .span
+                transition(name='down-up-translate-fade')
+                  div {{h}}
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
         .content-right
-          p 00000000期投注截止
+          p {{seasonId}}期投注截止
           div
-            p 00：00：00
+            p {{countDown}}
+      .betk3-content-top-pop(v-show='betsscContentTopPop')
+        ul.look
+          li
+            p 期号
+            p 开奖号码
+            p 开奖时间
+          li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
+            p
+              | {{item.seasonId.substring(4).split("-").join("")*1}}
+              i.el-icon-minus
+            p
+              a {{item.n1}}
+              a {{item.n2}}
+              a {{item.n3}}
+              a {{item.n4}}
+              a {{item.n5}}
+            p {{item.addTime.substring(11)}}
+        p.lookAll
+          button(@click='lookAll') 查看更多
+          button(@click='lookAllTo') 往期开奖
       .betk3-content-foot
-        div(v-for='(item,indexc) in playGroups', :key='indexc', v-show='indexc === navlist')
-          .betssc-list-box(v-for='(group,indexd) in item.groups', :key='indexd', v-show='indexd === navlistb')
-            span(v-for='(player,indexe) in group.players', :key='indexe', v-show='indexe === navlistf')
-              | 从01-11共11个号码中选择1个号码进行购买，当期的5个开奖号码中包含所选号码
+        div
+          .betssc-list-box(v-show='true')
+            span
+              | {{current_player_bonus.remark}}
               b
                 | 。奖金
-                i 4.18
+                i(v-show='Number(current_player_bonus.displayBonus)') {{current_player_bonus.displayBonus | keepTwoNum}}
+                i(v-show='isNaN(current_player_bonus.displayBonus)') {{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}
                 |  元
               br
             ul.fushi
-              li
+              li(v-for='(numViews, indexff) in current_player.numView', :key='indexff')
                 p
-                  b 选一中一
+                  b {{numViews.title}}
                   span
-                    a(v-for='(num,indexg) in x11x5', :key='indexg', @click='curBalls(indexff,indexg,num,numViews,player)') {{num}}
+                    a(v-for='(num,indexg) in numViews.nums', :key='indexg', :class="num.choose ? 'active' : '' ", @click='curBalls(indexff,indexg,num,numViews,current_player)') {{num.ball}}
   .betssc-footer
     .betssc-footer-top(v-show='zhu > 0')
       .betssc-footer-tops
@@ -67,11 +128,13 @@
         span {{con}}
       .betssc-footer-buttoms
         p 每注金额
-        input(type='text', v-model='money')
-        span(v-if="money === '' ") 请输入要投注的金额
-        span(v-else='')
-          | 最高可中
-          p {{rates}}
+        input(type='number', v-model='money', onfocus='this.select()')
+        span(v-if="money === ''") 请输入要投注的金额
+        span(v-else='', v-show="playBonusId !== 'ssc_dxds'")
+          | 单注最高可中
+          p(v-show='! isNaN(money*displayBonus)') {{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
+          p(v-show='isNaN(money*displayBonus)')
+            | {{youhezhi ? (money*parseInt(displayBonus2*1000))/1000 : (money* parseInt(displayBonus1*1000))/1000 | keepTwoNum}}
           | 元
     .betssc-footer-buttom
       .betssc-footer-buttom-left
@@ -80,8 +143,8 @@
           span(v-if='zhu >0') 共{{zhu}}注,
           span(v-if="this.money !== '' ") 共{{zhu*money}}元
       .betssc-footer-buttom-right(@click='betC') 马上投注
-  van-popup(v-model='betGoshow')
-    ul.betc
+  .betcBox(v-show='betGoshow')
+    ul.betc(v-show='betGoshow')
       li 投注确认
       li
         p
@@ -96,8 +159,8 @@
       li
         button(@click='betCancel') 取消
         button(@click='betGo') 确定
-  van-popup(v-model='betsuccess')
-    ul.betc
+  .betcBox(v-show='betsuccess')
+    ul.betc(v-show='betsuccess')
       li 温馨提示！
       li
         p
@@ -106,27 +169,36 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  van-popup(v-model='showTimesUp', :close-on-click-overlay='false')
-    .mIcode-sure
-      .sure2
-        p 温馨提示！
-      .sure2
-        p
-          | {{seasonId - 1}}期已截止
-          br
-          | 当前期号{{seasonId}}
-          br
-          | 投注时请注意期号
-      button.nodel(@click='showTimesUp = ! showTimesUp') 确定
+  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
+    div
+      ul
+        .title
+          p 温馨提示！
+        .cont
+          p
+            | {{lastSeasonId.slice(4)*1}}期已截止
+            br
+            | 当前期号{{seasonId}}
+            br
+            | 投注时请注意期号
+        .but
+          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
   van-popup.sscpop(v-model='showpop') {{content}}
-  maintain
 </template>
 <script>
-import maintain from "../../public/maintain";
-import pop from "../../public/pop";
 export default {
   data() {
     return {
+      i: 0, //动画
+      j: 0,
+      k: 0,
+      l: 0,
+      h: 0,
+      lookAllUl:false,
+      shownum: false,
+      startyet: false,
+      interval: null, //动画
+      youhezhi: false, //判断是否有‘和’
       showTimesUp: false,
       showpop: false, //弹窗
       content: "提示内容!", //弹窗内容
@@ -137,15 +209,22 @@ export default {
       showa: false, //头部右
       showan: 0, //头部右数字
       time: "",
-      titles: "任选 一中一复式",
-      listname: "广东",
+      titles: "五星 复式",
+      listname: "重庆",
       lotteryId: "cqssc",
       LotteryList: "",
-      money: 1, //投注金额
+      money: "", //投注金额
+      groupId: "",
+      displayBonus: 0,
+      displayBonus1: 0,
+      displayBonus2: 0,
+      displayBonus3: "",
       amount: 0, //总金额
       con: "", //已选号码
       zhu: 0, //注数
       rates: 0, //最高可中
+      current_player: {}, //當前玩法
+      current_player_bonus: {}, //當前玩法
       playBonus: "", //玩法树
       playBonusId: "ssc_star5", //点击选中后获取此玩法ID
       playGroups: "",
@@ -154,9 +233,10 @@ export default {
       navlistf: 0,
       betsscContentTopPop: false,
       getPastOpens: "", //获取过去开奖号码10个
-      getPastO: "", //获取过去开奖号码1个
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
+      seasonId3: "",
+      lastSeasonId: "",
       countDown: "",
       players: "",
       intotitle: "",
@@ -189,19 +269,83 @@ export default {
       splayers: [], //
       snumView: [], //
       snums: "", //
-      x11x5: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"]
+      timer: "",
+      timer2: "",
+      cacheTime: 600000,
+      historyNum: 0
     };
   },
-  mounted() {
-    this.getPastOpen(); //获取过去开奖号码10个
-    this.getPastOp(); //获取过去开奖号码1个
-    this.getLotteryList(); //右上获取彩种
-    this.getPlayTree(); //玩法树
+  destroyed() {
+    this.endCount();
+    this.iscreat();
   },
   created() {
-    this.geteServerTime(); //input显示当前时间
+    this.getLotteryList();
+  },
+  mounted() {
+    if (!this.$route.meta.isBack) {
+      this.getPlayTree();
+      this.geteServerTime(); //获取彩種當前獎期時間
+    }
+    this.$route.meta.isBack = false;
+  },
+  watch: {
+    money(newVal) {
+      if (this.money === "") {
+        setTimeout(() => {
+          if (this.money === "") {
+            this.money = "";
+          }
+        }, 1000);
+      } else {
+        this.money = parseInt(newVal);
+      }
+    }
   },
   methods: {
+    //返回到上一次进来的页面
+    banckto() {
+      this.$router.push(this.$store.state.historyNum);
+    },
+    //查看20条记录
+    lookAll() {
+      this.betsscContentTopPop = !this.betsscContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
+    },
+    //往期开奖
+    lookAllTo() {
+      this.$router.push({
+        path: "second/past",
+        query: {
+          id: this.$route.query.id,
+          name: this.$route.query.name,
+          group: this.groupId
+        }
+      });
+    },
+    lookAllDivTitle() {
+      this.lookAllUl = !this.lookAllUl;
+    },
+    //筛子动画
+    start() {
+      var _this = this;
+      this.startyet = true;
+      this.interval = setInterval(function() {
+        _this.i = Math.floor(Math.random() * 9 + 1);
+        _this.j = Math.floor(Math.random() * 9 + 1);
+        _this.k = Math.floor(Math.random() * 9 + 1);
+        _this.l = Math.floor(Math.random() * 9 + 1);
+        _this.h = Math.floor(Math.random() * 9 + 1);
+      }, 39);
+    },
+    end() {
+      var _this = this;
+      clearInterval(this.interval);
+    },
+    endCount() {
+      clearInterval(this.timer);
+      clearTimeout(this.timer2);
+    },
     //中间->投注选号
     curBalls(indexff, indexg, num, numViews, player) {
       num.choose = !num.choose;
@@ -339,23 +483,17 @@ export default {
       ) {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         if (indexff === 2) {
           this.kc[indexg] = num.ball;
-          this.dd = this.kc.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kc;
           this.cn = this.dd.join("");
         }
         if (indexff === 3) {
@@ -367,9 +505,7 @@ export default {
         }
         if (indexff === 4) {
           this.ke[indexg] = num.ball;
-          this.dd = this.ke.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ke;
           this.en = this.dd.join("");
         }
         if (this.playBonusId === "ssc_star4_front") {
@@ -403,6 +539,50 @@ export default {
           this.con = "-,-,-," + this.con;
         }
         if (this.playBonusId === "ssc_star1_dwd") {
+          if (indexff === 0) {
+            this.ka[indexg] = num.ball;
+            this.dd = this.ka;
+            this.an = this.dd.join("");
+          }
+          if (indexff === 1) {
+            this.kb[indexg] = num.ball;
+            this.dd = this.kb;
+            this.bn = this.dd.join("");
+          }
+          if (indexff === 2) {
+            this.kc[indexg] = num.ball;
+            this.dd = this.kc;
+            this.cn = this.dd.join("");
+          }
+          if (indexff === 3) {
+            this.kd[indexg] = num.ball;
+            this.dd = this.kd.filter(function(n) {
+              return n;
+            });
+            this.dn = this.dd.join("");
+          }
+          if (indexff === 4) {
+            this.ke[indexg] = num.ball;
+            this.dd = this.ke;
+            this.en = this.dd.join("");
+          }
+          if (this.playBonusId === "ssc_star1_dwd") {
+            if (this.an === "") {
+              this.an = "-";
+            }
+            if (this.bn === "") {
+              this.bn = "-";
+            }
+            if (this.cn === "") {
+              this.cn = "-";
+            }
+            if (this.dn === "") {
+              this.dn = "-";
+            }
+            if (this.en === "") {
+              this.en = "-";
+            }
+          }
           this.con =
             this.an +
             "," +
@@ -432,23 +612,17 @@ export default {
       if (this.playBonusId === "ssc_side_lhh") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = "[万千]" + this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = "[万百]" + this.dd.join("");
         }
         if (indexff === 2) {
           this.kc[indexg] = num.ball;
-          this.dd = this.kc.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kc;
           this.cn = "[万十]" + this.dd.join("");
         }
         if (indexff === 3) {
@@ -460,9 +634,7 @@ export default {
         }
         if (indexff === 4) {
           this.ke[indexg] = num.ball;
-          this.dd = this.ke.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ke;
           this.en = "[千百]" + this.dd.join("");
         }
         if (indexff === 5) {
@@ -552,6 +724,11 @@ export default {
           this.in +
           "," +
           this.jn;
+        if (this.con.indexOf("和") !== -1) {
+          this.youhezhi = true;
+        } else if (this.con.indexOf("和") === -1) {
+          this.youhezhi = false;
+        }
       }
       //三星包胆 +
       if (
@@ -582,16 +759,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group5") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -601,16 +774,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group10") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -620,16 +789,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group20") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -639,16 +804,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group30") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -658,16 +819,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group60") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -685,16 +842,12 @@ export default {
       if (this.playBonusId === "ssc_star4_front_group4") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -704,16 +857,12 @@ export default {
       if (this.playBonusId === "ssc_star4_front_group12") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -813,44 +962,33 @@ export default {
         this.zhu = this.erkuadu(this.dd);
       }
     },
-
     //投注 ----
     betssc_boxjian(indexff, indexg, num, numViews, player) {
       //大小单双 -
       if (this.playBonusId === "ssc_dxds") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("+");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("+");
         }
         if (indexff === 2) {
           this.kc.splice(indexg, 1, "");
-          this.dd = this.kc.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kc;
           this.cn = this.dd.join("+");
         }
         if (indexff === 3) {
           this.kd.splice(indexg, 1, "");
-          this.dd = this.kd.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kd;
           this.dn = this.dd.join("+");
         }
         if (indexff === 4) {
           this.ke.splice(indexg, 1, "");
-          this.dd = this.ke.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ke;
           this.en = this.dd.join("+");
         }
         if (this.playBonusId === "ssc_dxds") {
@@ -930,23 +1068,17 @@ export default {
       ) {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         if (indexff === 2) {
           this.kc.splice(indexg, 1, "");
-          this.dd = this.kc.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kc;
           this.cn = this.dd.join("");
         }
         if (indexff === 3) {
@@ -958,9 +1090,7 @@ export default {
         }
         if (indexff === 4) {
           this.ke.splice(indexg, 1, "");
-          this.dd = this.ke.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ke;
           this.en = this.dd.join("");
         }
         if (this.playBonusId === "ssc_star4_front") {
@@ -1010,9 +1140,7 @@ export default {
       if (this.playBonusId === "ssc_side_lhh") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = "[万千]" + this.dd.join("");
           if (this.an == "" || this.an == "-" || this.an == "[万千]") {
             this.an = this.dd.join("");
@@ -1020,9 +1148,7 @@ export default {
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = "[万百]" + this.dd.join("");
           if (this.bn == "" || this.bn == "-" || this.bn == "[万百]") {
             this.bn = this.dd.join("");
@@ -1030,9 +1156,7 @@ export default {
         }
         if (indexff === 2) {
           this.kc.splice(indexg, 1, "");
-          this.dd = this.kc.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kc;
           this.cn = "[万十]" + this.dd.join("");
           if (this.cn == "" || this.cn == "-" || this.cn == "[万十]") {
             this.cn = this.dd.join("");
@@ -1040,9 +1164,7 @@ export default {
         }
         if (indexff === 3) {
           this.kd.splice(indexg, 1, "");
-          this.dd = this.kd.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kd;
           this.dn = "[万个]" + this.dd.join("");
           if (this.dn == "" || this.dn == "-" || this.dn == "[万个]") {
             this.dn = this.dd.join("");
@@ -1050,9 +1172,7 @@ export default {
         }
         if (indexff === 4) {
           this.ke.splice(indexg, 1, "");
-          this.dd = this.ke.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ke;
           this.en = "[千百]" + this.dd.join("");
           if (this.en == "" || this.en == "-" || this.en == "[千百]") {
             this.en = this.dd.join("");
@@ -1160,6 +1280,11 @@ export default {
           this.in +
           "," +
           this.jn;
+        if (this.con.indexOf("和") !== -1) {
+          this.youhezhi = true;
+        } else if (this.con.indexOf("和") === -1) {
+          this.youhezhi = false;
+        }
       }
       //三星包胆 -
       if (
@@ -1186,16 +1311,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group5") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -1205,16 +1326,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group10") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -1224,16 +1341,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group20") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -1243,16 +1356,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group30") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -1262,16 +1371,12 @@ export default {
       if (this.playBonusId === "ssc_star5_group60") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -1289,16 +1394,12 @@ export default {
       if (this.playBonusId === "ssc_star4_front_group4") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -1308,16 +1409,12 @@ export default {
       if (this.playBonusId === "ssc_star4_front_group12") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka.filter(function(n) {
-            return n;
-          });
+          this.dd = this.ka;
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb.filter(function(n) {
-            return n;
-          });
+          this.dd = this.kb;
           this.bn = this.dd.join("");
         }
         this.con = this.an + "," + this.bn;
@@ -1417,7 +1514,6 @@ export default {
         this.zhu = this.erkuadu(this.dd);
       }
     },
-
     //----------公用函数-----------
     //复式 betContent = [0,0,0,0,0] , count = 5
     getCount(betContent, stars) {
@@ -1739,7 +1835,7 @@ export default {
     //清空
     iscreat() {
       this.zhu = "";
-      this.money = 1;
+      this.money = "";
       this.con = "";
       this.d = [];
       this.dd = [];
@@ -1763,10 +1859,12 @@ export default {
       this.hn = "";
       this.in = "";
       this.jn = "";
-      for (let i = 0; i < this.snumView.length; i++) {
-        for (let j = 0; j < this.snumView[i].length; j++) {
-          for (let k = 0; k < this.snumView[i][j].nums.length; k++) {
-            this.snumView[i][j].nums[k].choose = false;
+      for (let h = 0; h < this.snumView.length; h++) {
+        if (null != this.snumView[h]) {
+          for (let j = 0; j < this.snumView[h].length; j++) {
+            for (let k = 0; k < this.snumView[h][j].nums.length; k++) {
+              this.snumView[h][j].nums[k].choose = false;
+            }
           }
         }
       }
@@ -1774,62 +1872,67 @@ export default {
     betCancel() {
       this.betGoshow = !this.betGoshow;
     },
-    // 如果只能选择一个球
-    curBall(b, item, index) {
-      if (item.choose) {
-        item.balls.map(b => {
-          b.choose = false;
-        });
+    setupPlayTree() {
+      this.current_player = this.playGroups[0].groups[0].players[0];
+      this.current_player_bonus = this.current_player;
+      for (let i = 0; i < this.playGroups.length; i++) {
+        this.splayGroups.push(this.playGroups[i]);
       }
-      b.choose = !b.choose;
-      if (b.choose === true) {
-        this.d.push(b.ball);
-        this.d.sort((a, b) => {
-          return a - b;
-        });
-        this.con = this.d.join(",");
-        this.zhu++;
-      } else if (b.choose === false) {
-        this.d.splice(1, "");
-        this.con = this.d.join(",");
-        this.zhu--;
+      for (let j = 0; j < this.splayGroups.length; j++) {
+        this.sgroups.push(this.splayGroups[j].groups);
       }
+      for (let k = 0; k < this.sgroups.length; k++) {
+        for (let j = 0; j < this.sgroups[k].length; j++) {
+          this.sgroups2.push(this.sgroups[k][j]);
+        }
+      }
+      for (let i = 0; i < this.sgroups2.length; i++) {
+        this.splayers.push(this.sgroups2[i].players);
+      }
+      for (let h = 0; h < this.splayers.length; h++) {
+        for (let i = 0; i < this.splayers[h].length; i++) {
+          this.snumView.push(this.splayers[h][i].numView);
+        }
+      }
+      this.displayBonus = this.splayers[0][0].displayBonus;
     },
-    //玩法树
+    //玩法术
     getPlayTree() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPlayTree", {
-          params: { lotteryId: this.lotteryId }
-        })
-        .then(res => {
-          this.playBonus = res.data.data.playBonus;
-          this.playGroups = res.data.data.playGroups;
-          for (let i = 0; i < this.playGroups.length; i++) {
-            this.splayGroups.push(this.playGroups[i]);
-          }
-          for (let j = 0; j < this.splayGroups.length; j++) {
-            this.sgroups.push(this.splayGroups[j].groups);
-          }
-          for (let k = 0; k < this.sgroups.length; k++) {
-            for (let j = 0; j < this.sgroups[k].length; j++) {
-              this.sgroups2.push(this.sgroups[k][j]);
-            }
-          }
-          for (let i = 0; i < this.sgroups2.length; i++) {
-            this.splayers.push(this.sgroups2[i].players);
-          }
-          for (let h = 0; h < this.splayers.length; h++) {
-            for (let i = 0; i < this.splayers[h].length; i++) {
-              this.snumView.push(this.splayers[h][i].numView);
-            }
-          }
-        })
-        .catch(error => {
-          console.log("玩法树No");
-        });
+      const now = new Date().getTime();
+      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
+        this.playBonus = JSON.parse(
+          localStorage.getItem("playTree_" + this.$route.query.id)
+        ).playBonus;
+        this.playGroups = JSON.parse(
+          localStorage.getItem("playTree_" + this.$route.query.id)
+        ).playGroups;
+        this.setupPlayTree();
+      } else if (
+        localStorage.getItem("playTree_" + this.$route.query.id) === null
+      ) {
+        this.$http
+          .get(this.$store.state.url + "api/lottery/getPlayTree", {
+            params: { lotteryId: this.lotteryId }
+          })
+          .then(res => {
+            this.playBonus = res.data.data.playBonus;
+            this.playGroups = res.data.data.playGroups;
+            this.current_player = this.playGroups[0].groups[0].players[0];
+            localStorage.setItem(
+              "playTree_" + this.$route.query.id,
+              JSON.stringify(res.data.data)
+            );
+            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+            this.setupPlayTree();
+          })
+          .catch(error => {
+            console.log("玩法树No");
+          });
+      }
     },
     //投注
     betGo() {
+      this.betGoshow = !this.betGoshow;
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
@@ -1843,10 +1946,10 @@ export default {
       formData.append("count", this.zhu);
       formData.append("traceOrders[0].price", this.money);
       formData.append("traceOrders[0].seasonId", this.seasonId2);
-      formData.append("bonusType", 0);
+      formData.append("bounsType", 0);
       formData.append("traceWinStop", 0);
       formData.append("isTrace", 0);
-      formData.append("lotteryId", this.lotteryId);
+      formData.append("lotteryId", this.$route.query.id);
       formData.append("amount", this.money * this.zhu);
       this.$axios
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
@@ -1855,21 +1958,22 @@ export default {
             setTimeout(() => {
               this.showpop = !this.showpop;
               this.content = "投注成功!";
-              this.betGoshow = !this.betGoshow;
               this.iscreat();
               setTimeout(() => {
                 this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
-              }, 1000);
-            }, 600);
+              }, 800);
+            }, 400);
           }
         })
         .catch(error => {
-          console.log("No");
+          console.log("投注No");
         });
     },
+    //查看注单
     looksucc() {
       this.$router.push({ path: "/bet" });
+      this.betsuccess = !this.betsuccess;
     },
     betsucc() {
       this.betsuccess = !this.betsuccess;
@@ -1877,25 +1981,50 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getLotteryList")
-        .then(res => {
-          this.LotteryList = res.data.data.ssc;
-        })
-        .catch(error => {
-          console.log("右上彩种No");
-        });
+      if (localStorage.getItem("lotteryList") !== null) {
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).ssc;
+        this.groupId = this.LotteryList[0].groupId;
+        for (let i = 0; i < this.LotteryList.length; i++) {
+          if (this.LotteryList[i].id === this.$route.query.id) {
+            this.listname = this.LotteryList[i].name.substring(0, 2);
+          }
+        }
+      } else {
+        this.$http
+          .get(this.$store.state.url + "api/lottery/getLotteryList")
+          .then(res => {
+            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
+            this.LotteryList = res.data.data.ssc;
+            this.groupId = this.LotteryList[0].groupId;
+            for (let i = 0; i < this.LotteryList.length; i++) {
+              if (this.LotteryList[i].id === this.$route.query.id) {
+                this.listname = this.LotteryList[i].name.substring(0, 2);
+              }
+            }
+          })
+          .catch(error => {
+            console.log("右上彩种No");
+          });
+      }
     },
     //头部右->菜单点击
     listnames(e, index, into) {
+      this.historyNum++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
       this.showa = !this.showa;
-      this.getPastOpen();
-      this.getPastOp();
-      this.geteServerTime();
-      this.iscreat();
+      this.$router.push({ query: { id: into.id } });
+      this.getPlayTree(); //玩法术
+      this.geteServerTime(); //获取彩種當前獎期時間
+      this.iscreat(); //清空
+      this.$router.push({
+        query: {
+          id: this.$route.query.id,
+          name: into.name,
+          group: this.groupId
+        }
+      });
     },
     //头部菜单项
     k3Tab(e, indexa, indexb, items, group, into, index) {
@@ -1907,50 +2036,70 @@ export default {
       this.navlistf = indexb;
       this.playBonusId = items.id;
       this.show = !this.show;
+      this.current_player = items;
+      this.current_player_bonus = this.current_player;
       this.iscreat();
+      this.displayBonus = items.displayBonus;
+      if (isNaN(this.displayBonus)) {
+        let ar = [];
+        ar = this.displayBonus.split("-");
+        this.displayBonus1 = Number(ar[0]);
+        this.displayBonus2 = Number(ar[1]);
+        this.displayBonus3 = this.displayBonus1 + "-" + this.displayBonus2;
+      }
     },
     //获取过去开奖号码10个
-    getPastOpen() {
-      this.getLotteryList();
+    getPastOp() {
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
       this.$http
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.lotteryId, count: 10 }
+          params: { lotteryId: this.$route.query.id, count: 20 }
         })
         .then(res => {
           this.getPastOpens = res.data.data;
+          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+            this.reGetPastOp();
+          } else {
+            clearTimeout(this.timer2);
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
+          }
         })
         .catch(error => {
           console.log("获取过去开奖号码No");
         });
     },
-    //获取过去开奖号码1个
-    getPastOp() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.lotteryId, count: 1 }
-        })
-        .then(res => {
-          this.getPastO = res.data.data;
-        })
-        .catch(error => {
-          console.log("获取过去开奖号码No");
-        });
+    reGetPastOp() {
+      clearTimeout(this.timer2);
+      this.timer2 = setTimeout(() => {
+        this.getPastOp();
+      }, 10000);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
       clearInterval(this.timer);
+      clearTimeout(this.timer2);
       this.$http
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
-          params: { lotteryId: this.lotteryId }
+          params: { lotteryId: this.$route.query.id }
         })
         .then(res => {
           if (res.data.code === 1) {
             this.seasonId2 = res.data.data.seasonId;
-            this.seasonId = this.seasonId2
-              .substring(4)
-              .split("-")
-              .join("");
+            this.seasonId =
+              this.seasonId2
+                .substring(4)
+                .split("-")
+                .join("") * 1;
+            this.seasonId3 = this.seasonId2 - 1;
+            this.lastSeasonId = res.data.data.lastSeasonId;
             this.today = res.data.data.restSeconds;
+            this.setTimeMode();
+            this.getPastOp(); //获取过去开奖号码10个
             this.initSetTimeout();
           }
         })
@@ -1958,30 +2107,37 @@ export default {
           console.log("获取彩種當前獎期時間No");
         });
     },
+    //時間格式
+    setTimeMode() {
+      var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
+      var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
+      var seconds = Math.floor((this.today % (1 * 60)) / 1);
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      this.countDown = hours + ":" + minutes + ":" + seconds;
+    },
     //倒计时
     initSetTimeout(today) {
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        var hours = Math.floor(
-          (this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60)
-        );
-        var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
-        var seconds = Math.floor((this.today % (1 * 60)) / 1);
-        if (hours < 10) {
-          hours = "0" + hours;
-        }
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
-        if (seconds < 10) {
-          seconds = "0" + seconds;
-        }
-        this.countDown = hours + ":" + minutes + ":" + seconds;
+        this.setTimeMode();
         if (this.today < 1) {
-          this.geteServerTime();
           clearInterval(this.timer);
+          this.timesUp();
         }
       }, 1000);
+    },
+    //時間到彈窗
+    timesUp() {
+      this.showTimesUp = !this.showTimesUp;
+      this.geteServerTime();
     },
     betC() {
       if (this.zhu <= 0) {
@@ -1997,10 +2153,6 @@ export default {
       }
     }
   },
-  components: {
-    maintain,
-    pop
-  },
   //focus
   directives: {
     focus: {
@@ -2008,9 +2160,29 @@ export default {
         el.focus();
       }
     }
+  },
+  // 保留三个小数,不四舍五入
+  filters: {
+    keepTwoNum(value) {
+      value = parseInt(value * 100) / 100;
+      return value;
+    },
+    keepThreeNum(value) {
+      value = parseInt(value * 1000) / 1000;
+      return value;
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../assets/scss/lotter-list/lotterbet/betetf.scss";
+@import "../../../assets/scss/lotter-list/lotterbet/betssc.scss";
+@import "../../../assets/scss/popcorn.scss";
+</style>
+<style>
+.menu-list.van-popup {
+  transition: 0s ease-out !important;
+}
+.van-popup--top {
+  transition: 0s ease-out !important;
+}
 </style>

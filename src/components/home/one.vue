@@ -19,9 +19,13 @@
     </ul>
     <ul v-show="$store.state.loginStatus">
       <router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name}}">
-      <img :src="&quot;@/assets/img/one/&quot;+item.groupId+&quot;.png&quot;" alt="images"/>
+      <img :src='"@/assets/img/one/"+item.groupId+".png"' alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
+      <!-- <router-link tag="li" :to="{path:'/x11x5?id=sj1fc&name=宏发时时彩'}">
+      <img src='@/assets/img/one/x11x5.png' alt="images"/>
+        <h5>广东11选5</h5>
+      </router-link> -->
       <router-link to="/lotterList" tag="li" class="lotter-list"><i class="el-icon-circle-plus"></i>
         <h5>更多彩种</h5>
       </router-link>

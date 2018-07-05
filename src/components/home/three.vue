@@ -33,7 +33,6 @@ export default {
     },
     activity(){
       this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
-        console.log(res,"手机")
         this.activitys = res.data.data;
       }).catch((error) => {
           console.log("getListNo")

@@ -144,7 +144,6 @@ export default {
       this.show1 = !this.show1;
     },
     onConfirm(item, index) {
-      console.log(item, index, this.payway[index].id);
       this.bankNameId = this.payway[index].id;
       this.selectBank = this.payway[index].name;
       this.show1 = !this.show1;

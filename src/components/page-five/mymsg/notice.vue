@@ -61,12 +61,9 @@ export default {
           params: { type: 1 }
         })
         .then(res => {
-          // this.userNoticeList = res;
-          console.log(res);
           this.letterlist = res.data.data;
         })
         .catch(error => {
-          console.log(error);
           console.log("获取彩種ratio ERROR");
         });
     },
@@ -76,12 +73,9 @@ export default {
           params: { id: x }
         })
         .then(res => {
-          // this.userNoticeList = res;
-          console.log(res, 99995);
           this.notice = res.data.data.content;
         })
         .catch(error => {
-          console.log(error);
           console.log("获取CCCCONTENT ERROR");
         });
     }

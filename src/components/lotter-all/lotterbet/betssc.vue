@@ -264,11 +264,11 @@ export default {
       in: "",
       jn: "",
       splayGroups: [],
-      sgroups: [], //
-      sgroups2: [], //
-      splayers: [], //
-      snumView: [], //
-      snums: "", //
+      sgroups: [], 
+      sgroups2: [], 
+      splayers: [], 
+      snumView: [], 
+      snums: "", 
       timer: "",
       timer2: "",
       cacheTime: 600000,

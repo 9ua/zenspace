@@ -499,7 +499,6 @@ export default {
         return index != -1;
       } else {
       }
-      // console.log(index)
       return index != 4 && index != 19;
     },
     //返回到上一次进来的页面

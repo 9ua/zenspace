@@ -327,8 +327,10 @@ export default {
   },
   created() {
     this.getLotteryList();
+    this.endCount();
   },
   mounted() {
+    this.endCount();
     if (!this.$route.meta.isBack) {
       this.getPlayTree();
       this.geteServerTime(); //获取彩種當前獎期時間

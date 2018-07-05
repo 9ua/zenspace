@@ -473,6 +473,7 @@ export default {
   },
   created() {
     this.getLotteryList();
+    this.endCount();
   },
   mounted() {
     this.endCount();

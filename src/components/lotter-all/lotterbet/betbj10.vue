@@ -1654,10 +1654,12 @@ export default {
       this.hn = "";
       this.in = "";
       this.jn = "";
-      for (let i = 0; i < this.snumView.length; i++) {
-        for (let j = 0; j < this.snumView[i].length; j++) {
-          for (let k = 0; k < this.snumView[i][j].nums.length; k++) {
-            this.snumView[i][j].nums[k].choose = false;
+      for (let h = 0; h < this.snumView.length; h++) {
+        if (null != this.snumView[h]) {
+          for (let j = 0; j < this.snumView[h].length; j++) {
+            for (let k = 0; k < this.snumView[h][j].nums.length; k++) {
+              this.snumView[h][j].nums[k].choose = false;
+            }
           }
         }
       }

@@ -85,23 +85,8 @@ Vue.config.productionTip = false
 
 // 超时时间
 axios.defaults.timeout = 60000
-// http请求拦截器
-var loadinginstace;
-axios.interceptors.request.use(config => {
-  loadinginstace = Loading.service({
-    fullscreen: true
-  })
-  return config
-}, error => {
-  loadinginstace.close()
-  Message.error({
-    message: '加载超时'
-  })
-  return Promise.reject(error)
-})
 // http响应拦截器
 axios.interceptors.response.use(data => { // 响应成功关闭loading
-    loadinginstace.close();
   if (data.data.status === 302) {
     localStorage.clear();
     router.push('/login');

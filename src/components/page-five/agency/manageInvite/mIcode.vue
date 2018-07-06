@@ -29,7 +29,7 @@
       li
         span {{selected.code}}
       li
-        input(type='text', v-model='url')
+        input(type='text', v-model='url', onfocus='this.select()')
       li
         p 产生日期
         span {{selected.date}}

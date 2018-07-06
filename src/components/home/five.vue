@@ -233,6 +233,8 @@ export default {
         .then(res => {
           if (res.data.code === 1) {
             this.balances = Number(res.data.data.balance).toFixed(2) + "元";
+          } else {
+            this.balances = "加载延时,请重刷";
           }
         })
         .catch(error => {

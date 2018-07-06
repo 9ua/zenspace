@@ -1,52 +1,62 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import  'babel-polyfill';//解决ie浏览器不支持promise
+import 'babel-polyfill'; //解决ie浏览器不支持promise
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueCookie from "vue-cookie";
 import Carousel from 'element-ui'
 // import { Carousel, Loading } from 'element-ui'
-import { Message } from "element-ui";
-import 'element-ui/lib/theme-chalk/index.css'
-import { Radio, RadioGroup } from 'vue-ydui/dist/lib.px/radio'
 import {
-    Icon,
-    NoticeBar,
-    Actionsheet,
-    Popup,
-    Stepper,
-    Dialog,
-    Swipe,
-    SwipeItem,
-    Collapse,
-    CollapseItem
+  Message,
+  Loading
+} from "element-ui";
+import 'element-ui/lib/theme-chalk/index.css'
+import {
+  Radio,
+  RadioGroup
+} from 'vue-ydui/dist/lib.px/radio'
+import {
+  Icon,
+  NoticeBar,
+  Actionsheet,
+  Popup,
+  Stepper,
+  Dialog,
+  Swipe,
+  SwipeItem,
+  Collapse,
+  CollapseItem
 } from 'vant';
 import 'vant/lib/vant-css/index.css'
 import 'lib-flexible/flexible.js'
-import { Picker } from 'vant';
+import {
+  Picker
+} from 'vant';
 import './assets/iconfont/iconfont.css'
 import './assets/font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './vuex/store'
 import {
-    Tab,
-    Tabs
+  Tab,
+  Tabs
 } from 'vant';
 import {
-    CountDown
+  CountDown
 } from 'vue-ydui/dist/lib.px/countdown';
 import {
-    CountUp
+  CountUp
 } from 'vue-ydui/dist/lib.px/countup';
 import {
-    CheckBox,
-    CheckBoxGroup
+  CheckBox,
+  CheckBoxGroup
 } from 'vue-ydui/dist/lib.px/checkbox';
 import 'vue-ydui/dist/ydui.px.css';
 import md5 from 'js-md5';
-import { SendCode } from 'vue-ydui/dist/lib.px/sendcode';
+import {
+  SendCode
+} from 'vue-ydui/dist/lib.px/sendcode';
 
 Vue.component(SendCode.name, SendCode);
 Vue.use(Collapse).use(CollapseItem)
@@ -76,40 +86,53 @@ Vue.config.productionTip = false
 // 超时时间
 axios.defaults.timeout = 60000
 // http请求拦截器
-
-
-axios.interceptors.response.use(data => { // 响应成功关闭loading
-    if (data.data.status === 302) {
-        localStorage.clear();
-        router.push('/login');
-        this.$store.state.loginStatus = false;
-    }
-    if (data.data.pup === true) {
-        if (data.data.data.message && data.data.data.message !=="参数错误"){
-            Message.error({
-                message: data.data.data.message
-            })
-        } else {
-            if (data.data.data !=="参数错误"){
-            Message.error({
-                message: data.data.data
-            })
-            }
-        }
-    }
-
-    return data
+var loadinginstace;
+axios.interceptors.request.use(config => {
+  loadinginstace = Loading.service({
+    fullscreen: true
+  })
+  return config
 }, error => {
-    return Promise.reject(error)
+  loadinginstace.close()
+  Message.error({
+    message: '加载超时'
+  })
+  return Promise.reject(error)
+})
+// http响应拦截器
+axios.interceptors.response.use(data => { // 响应成功关闭loading
+    loadinginstace.close();
+  if (data.data.status === 302) {
+    localStorage.clear();
+    router.push('/login');
+    this.$store.state.loginStatus = false;
+  }
+  if (data.data.pup === true) {
+    if (data.data.data.message && data.data.data.message !== "参数错误") {
+      Message.error({
+        message: data.data.data.message
+      })
+    } else {
+      if (data.data.data !== "参数错误") {
+        Message.error({
+          message: data.data.data
+        })
+      }
+    }
+  }
+
+  return data
+}, error => {
+  return Promise.reject(error)
 })
 // export default axios
 new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(App),
-    components: {
-        App
-    },
-    template: '<App/>'
+  el: '#app',
+  router,
+  store,
+  render: h => h(App),
+  components: {
+    App
+  },
+  template: '<App/>'
 })

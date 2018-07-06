@@ -231,7 +231,9 @@ export default {
       this.$http
         .get(this.$store.state.url + "api/userCenter/getBalance")
         .then(res => {
-          this.balances = Number(res.data.data.balance).toFixed(2) + "元";
+          if (res.data.code === 1) {
+            this.balances = Number(res.data.data.balance).toFixed(2) + "元";
+          }
         })
         .catch(error => {
           console.log("获取用户余额");

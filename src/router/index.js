@@ -62,6 +62,7 @@ import resetWay from '@/components/page-five/safety/resetWay'
 import setQuestion from '@/components/page-five/safety/setQuestion'
 import safeQuestion from '@/components/page-five/safety/safeQuestion'
 import ErrorPage from '@/components/public/ErrorPage'
+import AppDown from '@/components/public/AppDown'
 import lotterList from '@/components/lotter-all/lotterList'
 import lotterAll from '@/components/lotter-all/lotterAll'
 import k3s from '@/components/lotter-all/k3'
@@ -92,6 +93,14 @@ export default new Router({
       component: ErrorPage,
       meta: {
         title: '操作失败'
+      }
+    },
+    {
+      path: "/AppDown",
+      name: 'AppDown',
+      component: resolve => require(['@/components/public/AppDown.vue'], resolve),
+      meta: {
+        title: '空白',
       }
     },
     {

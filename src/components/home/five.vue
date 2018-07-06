@@ -13,7 +13,7 @@
         p
           | 余额：
           span(v-show=' !money ') *****
-          span(v-show='money', ref='money') {{ balances | keepTwoNum}}元
+          span(v-show='money', ref='money') {{ balances }}
           button(v-show='!money', @click='money = !money') 显示
       .five-top-right2(v-show='money', @click='F5money')
         img(:class=" toF5money ? 'totransition' : ''", src='@/assets/img/five/ROLL.png', alt='')
@@ -123,11 +123,12 @@ export default {
     //刷新余额
     F5money() {
       this.toF5money = !this.toF5money;
-      this.$refs.money.innerHTML = "元";
+      //this.$refs.money.innerHTML = "讀取中...";
+      this.balances = "读取中...";
       setTimeout(() => {
         this.getBalance();
         this.toF5money = !this.toF5money;
-        this.$refs.money.innerHTML = Number(this.balances).toFixed(2) + "元";
+        //this.$refs.money.innerHTML = Number(this.balances).toFixed(2) + "元";
       }, 800);
     },
     //獲取安全中心狀態
@@ -230,10 +231,11 @@ export default {
       this.$http
         .get(this.$store.state.url + "api/userCenter/getBalance")
         .then(res => {
-          this.balances = res.data.data.balance;
+          this.balances = Number(res.data.data.balance).toFixed(2) + "元";
         })
         .catch(error => {
           console.log("获取用户余额");
+          this.balances = "加载延时,请重刷";
         });
     }
   },

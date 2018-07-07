@@ -43,7 +43,7 @@ export default {
       getimgurl: "",
       titlelist: [],
       indexInfo: "",
-      cacheTime: 10000,
+      cacheTime: 1800000,
       title: "【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。",
       lottery:[
         {name:'宏發快3',path: require("@/assets/img/one/k3.png")},

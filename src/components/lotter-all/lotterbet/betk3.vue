@@ -1314,6 +1314,9 @@ export default {
                     this.betsuccess = !this.betsuccess;
                   }, 600);
                 }, 0);
+              } else {
+                this.betnot = true;
+                this.iscreat();
               }
             })
             .catch(error => {

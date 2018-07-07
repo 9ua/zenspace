@@ -1473,8 +1473,11 @@ export default {
               setTimeout(() => {
                 this.showpop = false;
                 this.betsuccess = !this.betsuccess;
-              }, 100);
-            }, 100);
+              }, 600);
+            }, 0);
+          } else {
+              this.betnot = true;
+              this.iscreat();
           }
         })
         .catch(error => {

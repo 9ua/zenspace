@@ -1981,8 +1981,11 @@ export default {
               setTimeout(() => {
                 this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
-              }, 800);
-            }, 400);
+              }, 600);
+            }, 0);
+          } else {
+                this.betnot = true;
+                this.iscreat();
           }
         })
         .catch(error => {

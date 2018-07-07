@@ -142,7 +142,7 @@
         p
           span(v-if='zhu >0') 共{{zhu}}注,
           span(v-if="this.money !== '' ") 共{{zhu*money}}元
-      .betssc-footer-buttom-right(@click='betC') 马上投注
+      .betssc-footer-buttom-right(@click='betC', v-show='betnot') 马上投注
   .betcBox(v-show='betGoshow')
     ul.betc(v-show='betGoshow')
       li 投注确认
@@ -169,6 +169,18 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
+  van-popup.pop2(v-model='betfail', :close-on-click-overlay='false')
+    div
+      ul
+        .title
+          p 温馨提示！
+        .cont
+          p
+            b 投注失败,
+            br
+            | 请检查您的连线
+        .but
+          button.nodel(@click='betfail = ! betfail') 确定
   van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
     div
       ul
@@ -272,7 +284,9 @@ export default {
       timer: "",
       timer2: "",
       cacheTime: 600000,
-      historyNum: 0
+      historyNum: 0,
+      betnot:true,
+      betfail:false,
     };
   },
   destroyed() {
@@ -1934,7 +1948,8 @@ export default {
     },
     //投注
     betGo() {
-      this.betGoshow = !this.betGoshow;
+      this.betGoshow = false;
+      this.betnot = false;
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
@@ -1953,11 +1968,13 @@ export default {
       formData.append("isTrace", 0);
       formData.append("lotteryId", this.$route.query.id);
       formData.append("amount", this.money * this.zhu);
+      this.iscreat();
       this.$axios
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
             setTimeout(() => {
+              this.betnot = true;
               this.showpop = !this.showpop;
               this.content = "投注成功!";
               this.iscreat();
@@ -1970,6 +1987,9 @@ export default {
         })
         .catch(error => {
           console.log("投注No");
+          this.iscreat();
+          this.betfail = true;
+          this.betnot = true;
         });
     },
     //查看注单

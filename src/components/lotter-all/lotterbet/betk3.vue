@@ -183,7 +183,7 @@
         <button @click="iscreat">清空</button>
         <p><span v-if="zhu &gt;0">共{{zhu}}注,</span><span v-if="this.money !== '' ">共{{zhu*money}}元</span></p>
       </div>
-      <div @click="betC" class="betk3-footer-buttom-right">马上投注</div>
+      <div v-show="betnot" @click="betC" class="betk3-footer-buttom-right">马上投注</div>
     </div>
   </div>
   <div v-show="betGoshow" class="betcBox">
@@ -212,6 +212,21 @@
       </li>
     </ul>
   </div>
+  <van-popup v-model="betfail" :close-on-click-overlay="false" class="pop2">
+    <div>
+      <ul>
+        <div class="title">
+          <p>温馨提示！</p>
+        </div>
+        <div class="cont">
+          <p><b>投注失败,</b><br>请检查您的连线</p>
+        </div>
+        <div class="but">
+          <button @click="betfail = ! betfail" class="nodel">确定</button>
+        </div>
+      </ul>
+    </div>
+  </van-popup>
   <van-popup v-model="showTimesUp" :close-on-click-overlay="false" class="pop2">
     <div>
       <ul>
@@ -298,6 +313,8 @@ export default {
       startyet: false,
       playBonus: "", //玩法树
       timer2: "",
+      betnot:true,
+      betfail:false,
       // 单挑一骰
       yishai: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -1254,6 +1271,7 @@ export default {
     //投注
     betGo() {
       this.betGoshow = false;
+      this.betnot= false;
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
@@ -1279,6 +1297,7 @@ export default {
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
+          this.iscreat();
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
@@ -1288,6 +1307,7 @@ export default {
                   this.betshow = !this.betshow;
                   this.content = "投注成功!";
                   // this.betGoshow = !this.betGoshow;
+                  this.betnot = true;
                   this.iscreat();
                   setTimeout(() => {
                     this.betshow = false;
@@ -1298,6 +1318,9 @@ export default {
             })
             .catch(error => {
               console.log("大小单双投注No");
+              this.betfail = true;
+              this.iscreat();
+              this.betnot = true;
             });
         }
         if (this.playId2 === "k3_star3_and" && this.con2 !== "") {
@@ -1315,6 +1338,7 @@ export default {
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
+          this.iscreat();
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
@@ -1323,6 +1347,7 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.content = "投注成功!";
+                    this.betnot = true;
                     // this.betGoshow = !this.betGoshow;
                     this.iscreat();
                     setTimeout(() => {
@@ -1335,6 +1360,9 @@ export default {
             })
             .catch(error => {
               console.log("和值投注No");
+              this.iscreat();
+              this.betfail = true;
+              this.betnot = true;
             });
         }
       } else if (
@@ -1357,6 +1385,7 @@ export default {
         formData.append("isTrace", 0);
         formData.append("lotteryId", this.$route.query.id);
         formData.append("amount", this.money * this.zhu);
+        this.iscreat();
         this.$axios
           .post(this.$store.state.url + "api/lottery/bet", formData, config)
           .then(res => {
@@ -1364,6 +1393,7 @@ export default {
               setTimeout(() => {
                 this.betshow = !this.betshow;
                 this.content = "投注成功!";
+                this.betnot = true;
                 // this.betGoshow = !this.betGoshow;
                 setTimeout(() => {
                   this.betshow = false;
@@ -1375,6 +1405,9 @@ export default {
           })
           .catch(error => {
             console.log("投注No");
+            this.iscreat();
+            this.betfail = true;
+            this.betnot = true;
           });
       }
     },

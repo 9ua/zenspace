@@ -142,7 +142,7 @@
         p
           span(v-if='zhu >0') 共{{zhu}}注,
           span(v-if="this.money !== '' ") 共{{zhu*money}}元
-      .betssc-footer-buttom-right(@click='betC') 马上投注
+      .betssc-footer-buttom-right(@click='betC', v-if='betnot') 马上投注
   .betcBox(v-show='betGoshow')
     ul.betc(v-show='betGoshow')
       li 投注确认

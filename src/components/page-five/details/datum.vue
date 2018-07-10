@@ -200,6 +200,7 @@ export default {
       this.image = this.imgindex;
       setStore("image", this.$store.state.image);
       this.saveUserData();
+      console.log(index)
     },
     //头像选择与提交
     saveImg() {

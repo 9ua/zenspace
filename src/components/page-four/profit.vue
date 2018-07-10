@@ -3,7 +3,7 @@
   ul(v-show='showFlag')
     li(v-for='(item,index) in getLastDay', :key='index', v-show='index < 10')
       .profit-left
-        img(:src='"@/assets/img/five/"+item.img+".jpg"')
+        img(:src='"../../../static/images/"+item.img+".jpg"')
         .profit-xq
           p
             | 账号昵称：

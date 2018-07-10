@@ -5,7 +5,7 @@
     div
       .five-top-left
         router-link(to='/detail/datum', tag='p')
-          img(:src='"@/assets/img/five/"+$store.state.image+".jpg"', alt='')
+          img(:src='"../../../static/images/"+$store.state.image+".jpg"', alt='')
       .five-top-right
         p
           | 账号：

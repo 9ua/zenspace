@@ -22,7 +22,7 @@
           el-input(placeholder='请输入订单号后6位', v-model='checkCode', :value='checkCode', clearable='')
       li
         .button
-          button.button1(@click='show2 = !show2') 充值申请
+          button.button1(@click='isshow3') 充值申请
       .warning
         p 1、请务必填写正确订单号后6位！
         br
@@ -121,6 +121,20 @@ export default {
     },
     goBack() {
       this.$router.push({ path: "/five" });
+    },
+    isshow3(){
+      if(this.chargeamount === ""){
+        this.content = "请输入金额!";
+        this.show3 = true;
+      }else if(this.niceName === ''){
+        this.content = "请输入姓名!";
+        this.show3 = true;
+      }else if(this.checkCode === ''){
+        this.content = "请输入订单后六位!";
+        this.show3 = true;
+      }else{
+        this.show2 = !this.show2;
+      }
     },
     sendReq() {
       if (this.checkCode == "") {

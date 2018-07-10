@@ -21,7 +21,7 @@
       li
         p 申请金额
         div
-          el-input(placeholder='请输入充值金额', v-model='amount', :value='amount', clearable='')
+          el-input(placeholder='请输入金額', v-model='amount', :value='amount', clearable='')
       li
         p 账号
         div(@click='show1 = ! show1')
@@ -68,7 +68,7 @@ export default {
       show2: false,
       show3: false,
       show4: false,
-      selectBank: "请选择要提现银行",
+      selectBank: "请选择银行卡",
       bankList: [],
       payway: [],
       withdrawInformation: "",
@@ -123,7 +123,13 @@ export default {
     },
     sendReq() {
       if (this.amount === "") {
-        this.content = "請輸入金額!";
+        this.content = "请输入金額!";
+        this.show2 = true;
+      }else if(this.selectBank === "请选择银行卡"){
+        this.content = "请选择银行卡!";
+        this.show2 = true;
+      }else if(this.securityCode === ""){
+        this.content = "请输入安全码!";
         this.show2 = true;
       } else {
         let config = {

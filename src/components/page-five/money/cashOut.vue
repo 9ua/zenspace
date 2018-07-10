@@ -13,6 +13,9 @@
         p 最低提现额度 
         | {{moneyDepositMin}}
       li
+        p 账户余额 
+        | {{$store.state.balance}}
+      li
         p 可提现余额 
         | {{myAmount}}
       li
@@ -30,7 +33,7 @@
       li
         p 账户安全码
         div
-          el-input(placeholder='请输入安全码', v-model='securityCode', :value='securityCode', clearable='')
+          el-input(placeholder='请输入安全码', v-model='securityCode', :value='securityCode', clearable='' type="password")
       li
         .button
           button.button1(@click='sendReq()') 提现申请
@@ -74,6 +77,7 @@ export default {
       withdrawInformation: "",
       securityCode: "",
       moneyDepositMax: "",
+      amount: "",
       myAmount: "",
       moneyDepositMin: "",
       countMax: "",
@@ -140,7 +144,7 @@ export default {
         formData.append("amount", this.amount);
         formData.append("bankUserId", this.bankUserId);
         formData.append("securityCode", md5(this.securityCode));
-        formData.append("withdrawType", this.withdrawType);
+        // formData.append("withdrawType", this.withdrawType);
         this.$axios
           .post(
             this.$store.state.url + "api/proxy/setWithdraw",

@@ -154,11 +154,12 @@ export default {
             this.bankUserFlag == 1 &&
             this.question === 1
           ) {
-            if (this.$store.state.userType === "0") {
-              this.waterFall();
-            } else if (this.$store.state.userType === "1") {
-              this.$router.push({path:"/agencyOuts"});
-            }
+            this.waterFall();
+            // if (this.$store.state.userType === "0") {
+            //   this.waterFall();
+            // } else if (this.$store.state.userType === "1") {
+            //   this.$router.push({path:"/agencyOuts"});
+            // }
           }
         })
         .catch(error => {
@@ -231,6 +232,7 @@ export default {
       this.$http
         .get(this.$store.state.url + "api/userCenter/getBalance")
         .then(res => {
+          this.$store.state.balance = res.data.data.balance;
           if (res.data.code === 1) {
             this.balances = Number(res.data.data.balance).toFixed(2) + "元";
           } else {

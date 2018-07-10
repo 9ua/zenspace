@@ -54,6 +54,8 @@
           font-size: 16px;
         }
         & i {
+          @extend %faj;
+          height: 40px;
           font-size: 20px;
           position: absolute;
           right: 20px;

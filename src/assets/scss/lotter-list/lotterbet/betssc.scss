@@ -4,6 +4,8 @@
   @extend %flex;
   @extend %fdc;
   @extend %sbetween;
+  position: relative;
+  overflow: hidden;
   & .betssc-top {
     @extend %flex;
     @extend %aitems;

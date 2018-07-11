@@ -1,9 +1,12 @@
 @import '../../main.scss';
 .betk3 {
+  width: 100%;
   height: 100%;
   @extend %flex;
   @extend %fdc;
   @extend %sbetween;
+  position: relative;
+  overflow: hidden;
   & .betk3-top {
     @extend %flex;
     @extend %aitems;

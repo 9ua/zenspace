@@ -10,10 +10,10 @@
     .login-form
       .login-user
         i.fa.fa-user
-        input(type='text', v-model='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()')
+        input(type='text', v-model='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()',v-focus='')
       .login-pwd
         i.fa.fa-lock
-        input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', v-focus='', @keyup.enter='login')
+        input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', @keyup.enter='login')
         i.iconfont(:class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'", @click='pwd = !pwd')
       .login-captchaCodeImg(v-show='errorcode')
         i.fa.fa-lock

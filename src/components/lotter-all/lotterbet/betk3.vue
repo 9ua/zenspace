@@ -177,14 +177,14 @@
       </div>
       <div class="betk3-footer-buttoms">
         <p>每注金额</p>
-        <input type="number" v-model="money" onfocus="this.select()"/><span v-if="money === '' ">请输入要投注的金额</span><span v-else="">单注最高可中
+        <input type="number" v-model="money" onfocus="this.select()"/><span v-if="money === '' ">请输入要投注的金额</span><span v-else>单注最高可中
           <p>{{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(rates*1000)*money/1000 | keepThreeNum}}</p>元</span>
       </div>
     </div>
     <div class="betk3-footer-buttom">
       <div class="betk3-footer-buttom-left">
         <button @click="iscreat">清空</button>
-        <p><span v-if="zhu &gt;0">共{{zhu}}注,</span><span v-if="this.money !== '' ">共{{zhu*money}}元</span></p>
+        <p><span v-if="zhu &gt;0">共{{zhu}}注,</span><span v-if="money !== '' ">共{{zhu*money}}元</span></p>
       </div>
       <div v-show="betnot" @click="betC" class="betk3-footer-buttom-right">马上投注</div>
     </div>

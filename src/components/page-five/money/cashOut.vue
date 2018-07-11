@@ -24,7 +24,7 @@
       li
         p 申请金额
         div
-          el-input(placeholder='请输入金額', v-model='amount', :value='amount', clearable='')
+          el-input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', :value='amount', clearable='')
       li
         p 账号
         div(@click='show1 = ! show1')
@@ -77,7 +77,6 @@ export default {
       withdrawInformation: "",
       securityCode: "",
       moneyDepositMax: "",
-      amount: "",
       myAmount: "",
       moneyDepositMin: "",
       countMax: "",
@@ -88,6 +87,11 @@ export default {
     this.getWithdrawInformation();
   },
   methods: {
+    parseIntAmount(){
+      if(this.amount !== ''){
+        this.amount = parseInt(this.amount);
+      }
+    },
     getWithdrawInformation() {
       this.$http
         .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
@@ -141,7 +145,7 @@ export default {
           withCredentials: true
         };
         let formData = new FormData();
-        formData.append("amount", this.amount);
+        formData.append("amount", parseInt(this.amount));
         formData.append("bankUserId", this.bankUserId);
         formData.append("securityCode", md5(this.securityCode));
         // formData.append("withdrawType", this.withdrawType);

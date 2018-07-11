@@ -54,6 +54,7 @@
     height: 100%;
     background: #f2f2f2;
     overflow: hidden;
+    overflow-y: scroll;
     .listStyle-check-top {
       & li {
         @extend %flex;

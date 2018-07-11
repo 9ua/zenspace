@@ -50,10 +50,9 @@
         window.history.go(-1);
         setTimeout(function () {
           quitTime = null;
-        }, 1000);
+        }, 500);
       } else {
-        if ((new Date().getTime() - quitTime) < 1000) {
-          mui.toast('再按一次退出应用');
+        if ((new Date().getTime() - quitTime) < 500) {
           quitTime = null;
           plus.runtime.quit();
         }

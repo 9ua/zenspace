@@ -109,7 +109,8 @@ export default new Router({
       component: resolve => require(['@/components/login/login.vue'], resolve),
       meta: {
         title: '登陆',
-        keepAlive: false
+        keepAlive: false,
+        index:1
       }
     },
     {

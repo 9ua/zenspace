@@ -52,8 +52,8 @@
           p {{item.addTime.substring(11)}}
   .betssc-content
     div(v-show='!show')
-      .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
-        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
+      .betk3-content-top
+        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0', @click=' betsscContentTopPop = !betsscContentTopPop')
           p {{lastSeasonId.slice(4)*1}}期开奖号码
           div(v-show='!shownum')
             p {{item.n1}}
@@ -80,10 +80,12 @@
                 transition(name='down-up-translate-fade')
                   div {{h}}
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-        .content-right
-          p {{seasonId}}期投注截止
+        .content-right(@click='tolooksucc')
           div
-            p {{countDown}}
+            p.seasonId {{seasonId}}期投注截止
+            .time
+              p {{countDown}}
+          i.el-icon-caret-left
       .betk3-content-top-pop(v-show='betsscContentTopPop')
         ul.look
           li
@@ -196,8 +198,10 @@
         .but
           button.nodel(@click='showTimesUp = ! showTimesUp') 确定
   van-popup.sscpop(v-model='showpop') {{content}}
+  bets(ref='pop')
 </template>
 <script>
+import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -206,6 +210,7 @@ export default {
       k: 0,
       l: 0,
       h: 0,
+      shwoBet:false,
       lookAllUl:false,
       shownum: false,
       startyet: false,
@@ -2000,6 +2005,10 @@ export default {
       this.$router.push({ path: "/bet" });
       this.betsuccess = !this.betsuccess;
     },
+    tolooksucc(){
+      this.looks = !this.looks;
+      this.$refs.pop.banckto();
+    },
     betsucc() {
       this.betsuccess = !this.betsuccess;
       this.iscreat();
@@ -2177,6 +2186,9 @@ export default {
         this.betGoshow = !this.betGoshow;
       }
     }
+  },
+  components:{
+    bets
   },
   //focus
   directives: {

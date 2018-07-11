@@ -148,6 +148,21 @@
     }
   }
 }
+.listStyle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.pageNum0{
+  transition: 1.8s;
+  transform: translateX(0px);
+}
+.pageNum1{
+  transition: 1.8s;
+  transform: translateX(460px);
+}
 
 .betssc-content {
   height: 100%;
@@ -225,17 +240,24 @@
       }
       & .content-right {
         @extend %flex;
-        @extend %fdc;
+        @extend %sbetween;
         @extend %aitems;
         width: 50%;
-        & p {
+        padding-left: 10px;
+        & .seasonId {
           font-size: 16px;
           line-height: 28px;
         }
-        & div {
+        & .time {
+          @extend %faj;
           & p {
             font-size: 26px;
           }
+        }
+        & i {
+          font-size: 30px;
+          color: #78ba9e;
+          margin-right: -10px;
         }
       }
     }

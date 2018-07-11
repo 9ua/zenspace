@@ -58,8 +58,8 @@
             a {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
   .betbj10-content
     div(v-show='!show')
-      .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
-        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
+      .betk3-content-top
+        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0',@click=' betsscContentTopPop = !betsscContentTopPop')
           p(v-if="$route.query.id === 'pk10'")
             | {{lastSeasonId*1}}期开奖号码
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
@@ -109,12 +109,13 @@
               .span
                 transition(name='down-up-translate-fade')
                   div {{t}}
-        .content-right
-          p(v-if="$route.query.id === 'pk10'") {{seasonId}}期投注截止
-          p(v-else='')
-            | {{seasonId2.slice(4)*1}}期投注截止
+        .content-right(@click='tolooksucc')
           div
-            p {{countDown}}
+            p.seasonId(v-if="$route.query.id === 'pk10'") {{seasonId}}期投注截止
+            p.seasonId(v-else='') {{seasonId2.slice(4)*1}}期投注截止
+            .time
+              p {{countDown}}
+          i.el-icon-caret-left
       .betk3-content-top-pop(v-show='betsscContentTopPop')
         ul.look
           li
@@ -239,8 +240,10 @@
         .but
           button.nodel(@click='showTimesUp = ! showTimesUp') 确定
   van-popup.betshow(v-model='showpop') {{content}}
+  bets(ref='pop')
 </template>
 <script>
+import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -254,6 +257,8 @@ export default {
       e: 1,
       r: 1,
       t: 1,
+      looks:false,
+      shwoBet:false,
       lookAllUl:false,
       shownum: false,
       startyet: false,
@@ -1631,6 +1636,10 @@ export default {
       this.$router.push({ path: "/bet" });
       this.betsuccess = !this.betsuccess;
     },
+    tolooksucc(){
+      this.looks = !this.looks;
+      this.$refs.pop.banckto();
+    },
     //继续投注
     betsucc() {
       this.betsuccess = !this.betsuccess;
@@ -1778,6 +1787,9 @@ export default {
       this.geteServerTime();
     }
   },
+  components:{
+    bets
+  },
   directives: {
     focus: {
       inserted: function(el) {
@@ -1802,7 +1814,7 @@ export default {
 @import "../../../assets/scss/lotter-list/lotterbet/betbj10.scss";
 @import "../../../assets/scss/popcorn.scss";
 </style>
-<style>
+<style lang="scss" scoped>
 .menu-list.van-popup {
   transition: 0s ease-out !important;
 }

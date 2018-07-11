@@ -51,8 +51,8 @@
   </div>
   <div class="betk3-content">
     <div>
-      <div @click=" betk3ContentTopPop = !betk3ContentTopPop" class="betk3-content-top">
-        <div v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0" class="content-left">
+      <div class="betk3-content-top">
+        <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期开奖号码</p>
           <p v-else="">{{lastSeasonId.slice(4)*1}}期开奖号码</p>
           <div v-show="!shownum" class="contnet-left-num">
@@ -80,11 +80,14 @@
             </div><i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
           </div>
         </div>
-        <div class="content-right">
-          <p>{{seasonId}}期投注截止</p>
+        <div class="content-right" @click="tolooksucc">
           <div>
-            <p>{{countDown}}</p>
+            <p class="seasonId">{{seasonId}}期投注截止</p>
+            <div class="time">
+              <p>{{countDown}}</p>
+            </div>
           </div>
+          <i class="el-icon-caret-left"></i>
         </div>
       </div>
       <div v-show="betk3ContentTopPop" class="betk3-content-top-pop">
@@ -244,9 +247,11 @@
     </div>
   </van-popup>
   <van-popup v-model="betshow" class="betshow">{{content}}</van-popup>
+  <bets ref="pop"></bets>
 </div>
 </template>
 <script>
+import bets from '../../page-five/money/bets.vue';
 import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
   data() {
@@ -254,6 +259,7 @@ export default {
       i: 1, //动画
       j: 1,
       k: 1,
+      shwoBet:false,
       shownum: false,
       interval: null, //动画
       lookAllUl: false,
@@ -693,7 +699,6 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
-      this.historyNum++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
@@ -1419,6 +1424,10 @@ export default {
       this.$router.push({ path: "/bet" });
       this.betsuccess = !this.betsuccess;
     },
+    tolooksucc(){
+      this.looks = !this.looks;
+      this.$refs.pop.banckto();
+    },
     //继续投注
     betsucc() {
       this.betsuccess = !this.betsuccess;
@@ -1451,6 +1460,9 @@ export default {
       }
       return groupArr;
     }
+  },
+  components:{
+    bets
   },
   directives: {
     focus: {

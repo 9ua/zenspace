@@ -32,7 +32,8 @@ const state = {
   userType: getStore('userType'), //0会员，1代理
   playBonusk3: null,
   playGroupsssc: null,
-  historyNum: "/one"
+  historyNum: "/one",
+  pageNum:'pageNum0'
 }
 //test & prod
 if (process.env.NODE_ENV === 'production') {

@@ -49,11 +49,11 @@
         //回退到上一页面
         window.history.go(-1);
         setTimeout(function () {
-          //1s中后清除
           quitTime = null;
         }, 1000);
       } else {
         if ((new Date().getTime() - quitTime) < 1000) {
+          mui.toast('再按一次退出应用');
           quitTime = null;
           plus.runtime.quit();
         }

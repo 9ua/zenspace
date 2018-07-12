@@ -320,6 +320,7 @@
 
 .listStyle-I {
   background: #fff;
+  margin-bottom: 100px;
   & li {
     @extend %flex;
     @extend %aitems;

@@ -54,7 +54,7 @@
       <div class="betk3-content-top">
         <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0" @click=" betk3ContentTopPop = !betk3ContentTopPop">
           <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期开奖号码</p>
-          <p v-else="">{{lastSeasonId.slice(4)*1}}期开奖号码</p>
+          <p v-else>{{lastSeasonId.slice(4)*1}}期开奖号码</p>
           <div v-show="!shownum" class="contnet-left-num">
             <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
             <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
@@ -138,7 +138,7 @@
           <!-- 和值-->
           <ul v-show="index === 3" class="hezhi">
             <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" v-if="isdfk3Cen(index)" @click="hezhidaxiaodanshuang($event,index,k3item)">
-              <h2>{{k3item.title}}</h2><span v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单' || k3item.title==='双'">赔 {{k3item.rate | keepThreeNum}}</span><span v-else="">赔 {{k3item.rate | keepTwoNum}}</span>
+              <h2>{{k3item.title}}</h2><span v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单' || k3item.title==='双'">赔 {{k3item.rate | keepThreeNum}}</span><span v-else>赔 {{k3item.rate | keepTwoNum}}</span>
             </li>
           </ul>
           <!-- 大小单双-->
@@ -238,7 +238,7 @@
         </div>
         <div class="cont">
           <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期已截止<br/>当前期号{{seasonId}}<br/>投注时请注意期号</p>
-          <p v-else="">{{lastSeasonId.slice(4)*1}}期已截止<br/>当前期号{{seasonId}}<br/>投注时请注意期号</p>
+          <p v-else>{{lastSeasonId.slice(4)*1}}期已截止<br/>当前期号{{seasonId}}<br/>投注时请注意期号</p>
         </div>
         <div class="but">
           <button @click="showTimesUp = ! showTimesUp" class="nodel">确定</button>

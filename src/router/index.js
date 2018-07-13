@@ -1,82 +1,80 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/components/home/home'
-import one from '@/components/home/one'
-import second from '@/components/home/second'
-import past from '@/components/page-second/past'
-import three from '@/components/home/three'
-import four from '@/components/home/four'
-import five from '@/components/home/five'
-import login from '@/components/login/login'
-import registered from '@/components/login/registered'
-import reset from '@/components/login/reset'
-import resetpwd from '@/components/login/resetpwd'
-import resetway from '@/components/login/resetway'
-import verifyPwdSafe from '@/components/login/verifyPwdSafe'
-import winning from '@/components/page-four/winning'
-import profit from '@/components/page-four/profit'
-import pop from '@/components/page-four/pop'
-import bet from '@/components/page-five/money/bet'
-import service from '@/components/page-five/service'
-import bankcharge from '@/components/page-five/money/bankcharge'
-import weixincharge from '@/components/page-five/money/weixincharge'
-import creditccharge from '@/components/page-five/money/creditccharge'
-import huabeicharge from '@/components/page-five/money/huabeicharge'
-import alipaycharge from '@/components/page-five/money/alipaycharge'
-import rechargeserch from '@/components/page-five/money/rechargeserch'
-import cashOut from '@/components/page-five/money/cashOut'
-import agencyOut from '@/components/page-five/money/agencyOut'
-import agencyOuts from '@/components/page-five/money/agencyOuts'
-import trade from '@/components/page-five/money/trade'
-import agency from '@/components/page-five/agency'
-import agentBetRecord from '@/components/page-five/agency/agentBetRecord'
-import agentBillRecord from '@/components/page-five/agency/agentBillRecord'
-import agentIntro from '@/components/page-five/agency/agentIntro'
-import agentMember from '@/components/page-five/agency/agentMember'
-import agentReport from '@/components/page-five/agency/agentReport'
-import lowerReport from '@/components/page-five/agency/lowerReport'
-import manageInvite from '@/components/page-five/agency/manageInvite'
-import mIcode from '@/components/page-five/agency/manageInvite/mIcode'
-import mInvite from '@/components/page-five/agency/manageInvite/mInvite'
-import payway from '@/components/page-five/money/payway'
-import detail from '@/components/page-five/detail'
-import datum from '@/components/page-five/details/datum'
-import setmobile from '@/components/page-five/details/setmobile'
-import setemail from '@/components/page-five/details/setemail'
-import title from '@/components/page-five/details/title'
-import mymsg from '@/components/page-five/mymsg'
-import letter from '@/components/page-five/mymsg/letter'
-import notice from '@/components/page-five/mymsg/notice'
-import profits from '@/components/page-five/profit'
-import safety from '@/components/page-five/safety'
-import verifyPwd from '@/components/page-five/safety/verifyPwd'
-import setPwd from '@/components/page-five/safety/setPwd'
-import getCards from '@/components/page-five/safety/getCards'
-import newCard from '@/components/page-five/safety/newCard'
-import verifySafePwd from '@/components/page-five/safety/verifySafePwd'
-import changeSafePwd from '@/components/page-five/safety/changeSafePwd'
-import safeMobile from '@/components/page-five/safety/safeMobile'
-import safeEmail from '@/components/page-five/safety/safeEmail'
-import setSafePwd from '@/components/page-five/safety/setSafePwd'
-import resetWay from '@/components/page-five/safety/resetWay'
-import setQuestion from '@/components/page-five/safety/setQuestion'
-import safeQuestion from '@/components/page-five/safety/safeQuestion'
-import ErrorPage from '@/components/public/ErrorPage'
-import AppDown from '@/components/public/AppDown'
-import lotterList from '@/components/lotter-all/lotterList'
-import lotterAll from '@/components/lotter-all/lotterAll'
-import k3s from '@/components/lotter-all/k3'
-import sscs from '@/components/lotter-all/ssc'
-import klcs from '@/components/lotter-all/klc'
-import etfs from '@/components/lotter-all/etf'
-import betbj10 from '@/components/lotter-all/lotterbet/betbj10'
-import betbjkl8 from '@/components/lotter-all/lotterbet/betbjkl8'
-import betetf from '@/components/lotter-all/lotterbet/betetf'
-import betk3 from '@/components/lotter-all/lotterbet/betk3'
-import betlhc from '@/components/lotter-all/lotterbet/betlhc'
-import betssc from '@/components/lotter-all/lotterbet/betssc'
-
-
+const home = () => import('@/components/home/home')
+const one = () => import('@/components/home/one')
+const second = () => import('@/components/home/second')
+const past = () => import('@/components/page-second/past')
+const three = () => import('@/components/home/three')
+const four = () => import('@/components/home/four')
+const five = () => import('@/components/home/five')
+const login = () => import('@/components/login/login')
+const registered = () => import('@/components/login/registered')
+const reset = () => import('@/components/login/reset')
+const resetpwd = () => import('@/components/login/resetpwd')
+const resetway = () => import('@/components/login/resetway')
+const verifyPwdSafe = () => import('@/components/login/verifyPwdSafe')
+const winning = () => import('@/components/page-four/winning')
+const profit = () => import('@/components/page-four/profit')
+const pop = () => import('@/components/page-four/pop')
+const bet = () => import('@/components/page-five/money/bet')
+const service = () => import('@/components/page-five/service')
+const bankcharge = () => import('@/components/page-five/money/bankcharge')
+const weixincharge = () => import('@/components/page-five/money/weixincharge')
+const creditccharge = () => import('@/components/page-five/money/creditccharge')
+const huabeicharge = () => import('@/components/page-five/money/huabeicharge')
+const alipaycharge = () => import('@/components/page-five/money/alipaycharge')
+const rechargeserch = () => import('@/components/page-five/money/rechargeserch')
+const cashOut = () => import('@/components/page-five/money/cashOut')
+const agencyOut = () => import('@/components/page-five/money/agencyOut')
+const agencyOuts = () => import('@/components/page-five/money/agencyOuts')
+const trade = () => import('@/components/page-five/money/trade')
+const agency = () => import('@/components/page-five/agency')
+const agentBetRecord = () => import('@/components/page-five/agency/agentBetRecord')
+const agentBillRecord = () => import('@/components/page-five/agency/agentBillRecord')
+const agentIntro = () => import('@/components/page-five/agency/agentIntro')
+const agentMember = () => import('@/components/page-five/agency/agentMember')
+const agentReport = () => import('@/components/page-five/agency/agentReport')
+const lowerReport = () => import('@/components/page-five/agency/lowerReport')
+const manageInvite = () => import('@/components/page-five/agency/manageInvite')
+const mIcode = () => import('@/components/page-five/agency/manageInvite/mIcode')
+const mInvite = () => import('@/components/page-five/agency/manageInvite/mInvite')
+const payway = () => import('@/components/page-five/money/payway')
+const detail = () => import('@/components/page-five/detail')
+const datum = () => import('@/components/page-five/details/datum')
+const setmobile = () => import('@/components/page-five/details/setmobile')
+const setemail = () => import('@/components/page-five/details/setemail')
+const title = () => import('@/components/page-five/details/title')
+const mymsg = () => import('@/components/page-five/mymsg')
+const letter = () => import('@/components/page-five/mymsg/letter')
+const notice = () => import('@/components/page-five/mymsg/notice')
+const profits = () => import('@/components/page-five/profit')
+const safety = () => import('@/components/page-five/safety')
+const verifyPwd = () => import('@/components/page-five/safety/verifyPwd')
+const setPwd = () => import('@/components/page-five/safety/setPwd')
+const getCards = () => import('@/components/page-five/safety/getCards')
+const newCard = () => import('@/components/page-five/safety/newCard')
+const verifySafePwd = () => import('@/components/page-five/safety/verifySafePwd')
+const changeSafePwd = () => import('@/components/page-five/safety/changeSafePwd')
+const safeMobile = () => import('@/components/page-five/safety/safeMobile')
+const safeEmail = () => import('@/components/page-five/safety/safeEmail')
+const setSafePwd = () => import('@/components/page-five/safety/setSafePwd')
+const resetWay = () => import('@/components/page-five/safety/resetWay')
+const setQuestion = () => import('@/components/page-five/safety/setQuestion')
+const safeQuestion = () => import('@/components/page-five/safety/safeQuestion')
+const ErrorPage = () => import('@/components/public/ErrorPage')
+const AppDown = () => import('@/components/public/AppDown')
+const lotterList = () => import('@/components/lotter-all/lotterList')
+const lotterAll = () => import('@/components/lotter-all/lotterAll')
+const k3s = () => import('@/components/lotter-all/k3')
+const sscs = () => import('@/components/lotter-all/ssc')
+const klcs = () => import('@/components/lotter-all/klc')
+const etfs = () => import('@/components/lotter-all/etf')
+const betbj10 = () => import('@/components/lotter-all/lotterbet/betbj10')
+const betbjkl8 = () => import('@/components/lotter-all/lotterbet/betbjkl8')
+const betetf = () => import('@/components/lotter-all/lotterbet/betetf')
+const betk3 = () => import('@/components/lotter-all/lotterbet/betk3')
+const betlhc = () => import('@/components/lotter-all/lotterbet/betlhc')
+const betssc = () => import('@/components/lotter-all/lotterbet/betssc')
 Vue.use(Router)
 export default new Router({
   mode: 'history',

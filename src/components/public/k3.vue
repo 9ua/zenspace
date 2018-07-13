@@ -8,7 +8,7 @@
       p 每注金额
       input(type='text', v-model='money', v-focus='')
       span(v-if="money === '' ") 请输入要投注的金额
-      span(v-else='')
+      span(v-else)
         | 最高可中
         p {{money*191.16 | keepTwoNum}}
         | 元

@@ -132,7 +132,7 @@
         p 每注金额
         input(type='number', v-model='money', onfocus='this.select()')
         span(v-if="money === ''") 请输入要投注的金额
-        span(v-else='', v-show="playBonusId !== 'ssc_dxds'")
+        span(v-else, v-show="playBonusId !== 'ssc_dxds'")
           | 单注最高可中
           p(v-show='! isNaN(money*displayBonus)') {{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
           p(v-show='isNaN(money*displayBonus)')

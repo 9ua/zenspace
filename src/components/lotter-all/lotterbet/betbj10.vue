@@ -42,7 +42,7 @@
           p(v-if="$route.query.id === 'pk10'")
             | {{item.seasonId}}
             i.el-icon-minus
-          p(v-else='')
+          p(v-else)
             | {{item.seasonId.substring(4).split("-").join("")*1}}
             i.el-icon-minus
           p
@@ -63,7 +63,7 @@
           p(v-if="$route.query.id === 'pk10'")
             | {{lastSeasonId*1}}期开奖号码
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-          p(v-else='')
+          p(v-else)
             | {{lastSeasonId.slice(4)*1}}期开奖号码
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
           div(v-show='!shownum')
@@ -112,7 +112,7 @@
         .content-right(@click='tolooksucc')
           div
             p.seasonId(v-if="$route.query.id === 'pk10'") {{seasonId}}期投注截止
-            p.seasonId(v-else='') {{seasonId2.slice(4)*1}}期投注截止
+            p.seasonId(v-else) {{seasonId2.slice(4)*1}}期投注截止
             .time
               p {{countDown}}
           i.el-icon-caret-left
@@ -125,7 +125,7 @@
             p(v-if="$route.query.id === 'pk10'")
               | {{item.seasonId}}
               i.el-icon-minus
-            p(v-else='')
+            p(v-else)
               | {{item.seasonId.substring(4).split("-").join("")*1}}
               i.el-icon-minus
             p
@@ -231,7 +231,7 @@
             | 当前期号{{seasonId}}
             br
             | 投注时请注意期号
-          p(v-else='')
+          p(v-else)
             | {{lastSeasonId.slice(4)*1}}期已截止
             br
             | 当前期号{{seasonId2.slice(4)*1}}

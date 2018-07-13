@@ -26,16 +26,16 @@ export default {
           name: "william",
           money: 95.08,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/6.jpg")
+          paths: require("../../../static/images/16.jpg")
         },
         {
           name: "daniel",
           money: 1238.654,
           lotterylist: "安徽快3",
-          paths: require("../../../static/images/3.jpg")
+          paths: require("../../../static/images/13.jpg")
         },
         {
-          name: "江若泊",
+          name: "stanjklfdsa",
           money: 853.66,
           lotterylist: "宏發快3",
           paths: require("../../../static/images/1.jpg")
@@ -44,7 +44,7 @@ export default {
           name: "james",
           money: 452.442,
           lotterylist: "北京赛车",
-          paths: require("../../../static/images/2.jpg")
+          paths: require("../../../static/images/12.jpg")
         },
         {
           name: "noah",
@@ -68,13 +68,13 @@ export default {
           name: "sophia",
           money: 158.25,
           lotterylist: "上海快3",
-          paths: require("../../../static/images/2.jpg")
+          paths: require("../../../static/images/21.jpg")
         },
         {
           name: "anthony",
           money: 458.23,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/3.jpg")
+          paths: require("../../../static/images/31.jpg")
         },
         {
           name: "elizabeth",
@@ -86,7 +86,7 @@ export default {
           name: "christian",
           money: 77.654,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/5.jpg")
+          paths: require("../../../static/images/15.jpg")
         },
         {
           name: "brandon",
@@ -98,7 +98,7 @@ export default {
           name: "zachary",
           money: 1207.654,
           lotterylist: "上海快3",
-          paths: require("../../../static/images/0.jpg")
+          paths: require("../../../static/images/10.jpg")
         },
         {
           name: "jessica,",
@@ -131,7 +131,7 @@ export default {
           paths: require("../../../static/images/4.jpg")
         },
         {
-          name: "若烟",
+          name: "ttqwera",
           money: 4524.28,
           lotterylist: "湖北快3",
           paths: require("../../../static/images/7.jpg")
@@ -140,7 +140,7 @@ export default {
           name: "adfas",
           money: 7452.0,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/2.jpg")
+          paths: require("../../../static/images/16.jpg")
         },
         {
           name: "Jasmine",
@@ -158,7 +158,7 @@ export default {
           name: "fdsawqg",
           money: 156877.1,
           lotterylist: "广西快3",
-          paths: require("../../../static/images/7.jpg")
+          paths: require("../../../static/images/17.jpg")
         },
         {
           name: "gfukhgj",
@@ -176,7 +176,7 @@ export default {
           name: "辛弃疾",
           money: 21.36,
           lotterylist: "江苏快3",
-          paths: require("../../../static/images/0.jpg")
+          paths: require("../../../static/images/10.jpg")
         },
         {
           name: "ytmioi",
@@ -206,7 +206,7 @@ export default {
           name: "ewdghtr",
           money: 15687.88,
           lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/5.jpg")
+          paths: require("../../../static/images/15.jpg")
         },
         {
           name: "rey",
@@ -236,7 +236,7 @@ export default {
           name: "Stan",
           money: 85000,
           lotterylist: "重庆时时彩",
-          paths: require("../../../static/images/0.jpg")
+          paths: require("../../../static/images/10.jpg")
         },
         {
           name: "Jason",
@@ -259,8 +259,26 @@ export default {
         {
           name: "Neo",
           money: 6120,
+          lotterylist: "宏發时时彩",
+          paths: require("../../../static/images/18.jpg")
+        },
+        {
+          name: "来fsadfsl",
+          money: 6120,
+          lotterylist: "宏發pk10",
+          paths: require("../../../static/images/28.jpg")
+        },
+        {
+          name: "F不来钱",
+          money: 6120,
           lotterylist: "广西快3",
-          paths: require("../../../static/images/8.jpg")
+          paths: require("../../../static/images/32.jpg")
+        },
+        {
+          name: "k12234",
+          money: 6120,
+          lotterylist: "宏發pk10",
+          paths: require("../../../static/images/22.jpg")
         }
       ],
       selectedFood: {},
@@ -269,16 +287,16 @@ export default {
           name: "william",
           money: 95.08,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/6.jpg")
+          paths: require("../../../static/images/16.jpg")
         },
         {
           name: "daniel",
           money: 1238.654,
           lotterylist: "安徽快3",
-          paths: require("../../../static/images/3.jpg")
+          paths: require("../../../static/images/13.jpg")
         },
         {
-          name: "江若泊",
+          name: "stanjklfdsa",
           money: 853.66,
           lotterylist: "宏發快3",
           paths: require("../../../static/images/1.jpg")
@@ -287,7 +305,7 @@ export default {
           name: "james",
           money: 452.442,
           lotterylist: "北京赛车",
-          paths: require("../../../static/images/2.jpg")
+          paths: require("../../../static/images/12.jpg")
         },
         {
           name: "noah",
@@ -311,13 +329,13 @@ export default {
           name: "sophia",
           money: 158.25,
           lotterylist: "上海快3",
-          paths: require("../../../static/images/2.jpg")
+          paths: require("../../../static/images/21.jpg")
         },
         {
           name: "anthony",
           money: 458.23,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/3.jpg")
+          paths: require("../../../static/images/31.jpg")
         },
         {
           name: "elizabeth",
@@ -329,7 +347,7 @@ export default {
           name: "christian",
           money: 77.654,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/5.jpg")
+          paths: require("../../../static/images/15.jpg")
         },
         {
           name: "brandon",
@@ -341,7 +359,7 @@ export default {
           name: "zachary",
           money: 1207.654,
           lotterylist: "上海快3",
-          paths: require("../../../static/images/0.jpg")
+          paths: require("../../../static/images/10.jpg")
         },
         {
           name: "jessica,",
@@ -374,7 +392,7 @@ export default {
           paths: require("../../../static/images/4.jpg")
         },
         {
-          name: "若烟",
+          name: "ttqwera",
           money: 4524.28,
           lotterylist: "湖北快3",
           paths: require("../../../static/images/7.jpg")
@@ -383,7 +401,7 @@ export default {
           name: "adfas",
           money: 7452.0,
           lotterylist: "宏發快3",
-          paths: require("../../../static/images/2.jpg")
+          paths: require("../../../static/images/16.jpg")
         },
         {
           name: "Jasmine",
@@ -401,7 +419,7 @@ export default {
           name: "fdsawqg",
           money: 156877.1,
           lotterylist: "广西快3",
-          paths: require("../../../static/images/7.jpg")
+          paths: require("../../../static/images/17.jpg")
         },
         {
           name: "gfukhgj",
@@ -419,7 +437,7 @@ export default {
           name: "辛弃疾",
           money: 21.36,
           lotterylist: "江苏快3",
-          paths: require("../../../static/images/0.jpg")
+          paths: require("../../../static/images/10.jpg")
         },
         {
           name: "ytmioi",
@@ -449,7 +467,7 @@ export default {
           name: "ewdghtr",
           money: 15687.88,
           lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/5.jpg")
+          paths: require("../../../static/images/15.jpg")
         },
         {
           name: "rey",
@@ -479,7 +497,7 @@ export default {
           name: "Stan",
           money: 85000,
           lotterylist: "重庆时时彩",
-          paths: require("../../../static/images/0.jpg")
+          paths: require("../../../static/images/10.jpg")
         },
         {
           name: "Jason",
@@ -502,8 +520,26 @@ export default {
         {
           name: "Neo",
           money: 6120,
+          lotterylist: "宏發时时彩",
+          paths: require("../../../static/images/18.jpg")
+        },
+        {
+          name: "来fsadfsl",
+          money: 6120,
+          lotterylist: "宏發pk10",
+          paths: require("../../../static/images/28.jpg")
+        },
+        {
+          name: "F不来钱",
+          money: 6120,
           lotterylist: "广西快3",
-          paths: require("../../../static/images/8.jpg")
+          paths: require("../../../static/images/32.jpg")
+        },
+        {
+          name: "k12234",
+          money: 6120,
+          lotterylist: "宏發pk10",
+          paths: require("../../../static/images/22.jpg")
         }
       ],
       showFlag: true,

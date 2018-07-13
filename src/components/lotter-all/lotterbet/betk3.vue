@@ -658,7 +658,7 @@ export default {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
-      }, 10000);
+      }, 3000);
     },
     //右上获取彩种
     getLotteryList() {

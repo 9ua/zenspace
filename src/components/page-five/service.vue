@@ -12,11 +12,11 @@
 </style>
 <style lang="scss" scoped>
 .content {
-  height: 100%;
-  width: 100%;
   background: #fefefe;
   overflow: hidden;
   display: inline;
+  width: 100%;
+  height: 100%;
 }
 .content-in {
   padding-top: 46px;

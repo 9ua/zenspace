@@ -93,6 +93,9 @@ export default {
       width: 60%;
       color: #fff;
       font-size: 20px;
+      & img{
+        height: 46px;
+      }
     }
     & .pop-top-right {
       @extend %faj;

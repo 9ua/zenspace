@@ -2165,6 +2165,8 @@ export default {
         if (this.today < 1) {
           clearInterval(this.timer);
           this.timesUp();
+        }else if(this.today === 45){
+          this.geteServerTime();
         }
       }, 1000);
     },

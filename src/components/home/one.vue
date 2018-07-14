@@ -44,7 +44,7 @@ export default {
       titlelist: [],
       indexInfo: "",
       cacheTime: 1800000,
-      title: "【欢迎光临】 欢迎来到宏發彩票，您的支持是我们最大的源动力。",
+      title: "【欢迎光临】 欢迎来到吉丰娱乐，您的支持是我们最大的源动力。",
       lottery:[
         {name:'宏發快3',path: require("@/assets/img/one/k3.png")},
         {name:'宏發时时彩',path: require("@/assets/img/one/ssc.png")},

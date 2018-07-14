@@ -52,7 +52,7 @@ export default {
         this.os = "/app/hongfayule.apk";
       } else if (/iPhone|iPad/i.test(userAgent)) {
         //是否為iPhone或iPad
-        this.os = "https://i.diawi.com/pcwU34";
+        this.os = "http://xmvip.vip/uyH3U4";
       } else if (/Windows/i.test(userAgent)) {
         //使否是用電腦觀看
         this.os = "/app/hongfayule.apk";

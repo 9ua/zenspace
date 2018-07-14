@@ -627,6 +627,9 @@ export default {
     //時間到彈窗
     timesUp() {
       this.showTimesUp = !this.showTimesUp;
+      setTimeout(() => {
+        this.showTimesUp = false;
+      },3000);
       this.geteServerTime();
     },
     //获取过去开奖号码10个
@@ -658,7 +661,7 @@ export default {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
-      }, 3000);
+      }, 15000);
     },
     //右上获取彩种
     getLotteryList() {

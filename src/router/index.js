@@ -491,22 +491,6 @@ export default new Router({
       }
     },
     {
-      path: '/detail/setmobile',
-      name: 'setmobile',
-      component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: '/detail/setemail',
-      name: 'setemail',
-      component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
       path: '/bet',
       name: 'bet',
       component: resolve => require(['@/components/page-five/money/bet.vue'], resolve),

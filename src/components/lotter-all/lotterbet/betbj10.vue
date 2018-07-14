@@ -1728,7 +1728,7 @@ export default {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
-      }, 10000);
+      }, 15000);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
@@ -1784,6 +1784,9 @@ export default {
     //時間到彈窗
     timesUp() {
       this.showTimesUp = !this.showTimesUp;
+      setTimeout(() => {
+        this.showTimesUp = false;
+      },3000);
       this.geteServerTime();
     }
   },

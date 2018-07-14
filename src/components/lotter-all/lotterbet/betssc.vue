@@ -250,6 +250,7 @@ export default {
       navlistf: 0,
       betsscContentTopPop: false,
       getPastOpens: "", //获取过去开奖号码10个
+      getPastOpenB: "", //获取过去开奖号码第一个
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
       seasonId3: "",
@@ -2082,37 +2083,6 @@ export default {
         this.displayBonus3 = this.displayBonus1 + "-" + this.displayBonus2;
       }
     },
-    //获取过去开奖号码10个
-    getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
-      this.shownum = true;
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 20 }
-        })
-        .then(res => {
-          this.getPastOpens = res.data.data;
-          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            this.reGetPastOp();
-          } else {
-            clearTimeout(this.timer2);
-            this.end();
-            this.startyet = false;
-            this.shownum = false;
-          }
-        })
-        .catch(error => {
-          console.log("获取过去开奖号码No");
-        });
-    },
-    reGetPastOp() {
-      clearTimeout(this.timer2);
-      this.timer2 = setTimeout(() => {
-        this.getPastOp();
-      }, 15000);
-    },
     //获取彩種當前獎期時間
     geteServerTime() {
       clearInterval(this.timer);
@@ -2141,7 +2111,7 @@ export default {
           console.log("获取彩種當前獎期時間No");
         });
     },
-    //時間格式
+    //時間格式轉換
     setTimeMode() {
       var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
       var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
@@ -2165,8 +2135,13 @@ export default {
         if (this.today < 1) {
           clearInterval(this.timer);
           this.timesUp();
-        }else if(this.today === 45){
-          this.geteServerTime();
+        }
+        if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
+          this.getPastOp();
         }
       }, 1000);
     },
@@ -2177,6 +2152,38 @@ export default {
         this.showTimesUp = false;
       },3000);
       this.geteServerTime();
+    },
+    //获取过去开奖号码10个
+    getPastOp() {
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
+      this.$http
+        .get(this.$store.state.url + "api/lottery/getPastOpen", {
+          params: { lotteryId: this.$route.query.id, count: 20 }
+        })
+        .then(res => {
+          this.getPastOpens = res.data.data;
+          this.getPastOpenB = res.data.data;
+          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+            this.reGetPastOp();
+          } else {
+            clearTimeout(this.timer2);
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
+          }
+        })
+        .catch(error => {
+          console.log("获取过去开奖号码No");
+        });
+    },
+    reGetPastOp() {
+      clearTimeout(this.timer2);
+      this.timer2 = setTimeout(() => {
+        this.getPastOp();
+      }, 12000);
     },
     betC() {
       if (this.zhu <= 0) {

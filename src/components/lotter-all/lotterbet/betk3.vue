@@ -291,6 +291,7 @@ export default {
       n3: 1,
       cacheTime: 600000,
       getPastOpens: "", //获取过去开奖号码10个
+      getPastOpenB: "", //获取过去开奖号码第一个
       LotteryList: "",
       groupId: "",
       seasonId: "", //截取后的期号
@@ -621,8 +622,13 @@ export default {
         if (this.today < 1) {
           clearInterval(this.timer);
           this.timesUp();
-        }else if(this.today === 45){
-          this.geteServerTime();
+        }
+        if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
+          this.getPastOp();
         }
       }, 1000);
     },
@@ -646,6 +652,7 @@ export default {
         })
         .then(res => {
           this.getPastOpens = res.data.data;
+          this.getPastOpenB = res.data.data;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
             this.reGetPastOp();
           } else {
@@ -663,7 +670,7 @@ export default {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
-      }, 15000);
+      }, 12000);
     },
     //右上获取彩种
     getLotteryList() {

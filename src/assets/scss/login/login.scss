@@ -1,174 +1,172 @@
+@import "../main.scss";
 .login {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: rgb(175,58,49);
+  @extend %flex;
+  @extend %fdc;
+  @extend %sbetween;
+  background: rgb(175, 58, 49);
+  height: 100%;
+  & .login-conter {
+    margin-top: 46px;
     height: 100%;
-    & .login-conter {
-        margin-top: 46px;
-        height: 100%;
-        & .login-center-img {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 30px 0px;
-            & div {
-                display: flexl;
-                justify-content: center;
-                align-items: center;
-                height: 220px;
-                width: 250px;
-                background: pink;
-                // border-radius: 50%;
-                background: url(../../assets/img/home/game.png) no-repeat center center;
-                background-size: 100% 100%;
-            }
-        }
-        & .login-form {
-            display: flex;
-            flex-direction: column;
-            padding: 0 20px;
-            background: rgb(175,58,49);
-            >div {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                height: 40px;
-                border: 1px solid #c6c6c6;
-                background: #fff;
-                & i {
-                    color:#ae9880;
-                    font-size: 20px;
-                    width:40px;
-                    text-align: center;
-                }
-                & input {
-                    width: 100%;
-                    height: 30px;
-                    padding: 2px ;
-                    border: none;
-                }
-                & img {
-                    width: 120px;
-                    height: 40px;
-                }
-            }
-            .login-rememb{
-                margin-top: 10px;
-                border: none;
-                background: none;
-                & .yd-checkbox-icon{
-                    width: 18px !important;
-                    height: 18px !important;
-                    color: #f75f5b !important;
-                    border:1px solid #fff;
-                }
-                & .yd-checkbox-text{
-                    color: #fff !important;
-                }
-            }
-            .login-pwd,
-            .login-pwdshow,
-            .login-captchaCodeImg {
-                border-top: none;
-            }
-            .login-go {
-                border: none;
-                margin-top: 30px;
-                border-radius: 6px;
-            }
-            & button {
-                width: 100%;
-                border: none;
-                height: 45px;
-                background: #F94E4E;
-                font-size: 18px;
-                color: #fff;
-                border-radius: 6px;
-            }
-            & .login-live {
-                margin-top: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: none;
-                background: none;
-                & a {
-                    font-size: 14px;
-                    background: none;
-                    color: #ddd;
-                }
-                & a:nth-child(1) {
-                    border-right: 1px solid #ddd;
-                    padding-right: 6px;
-                    margin-right: 6px;
-                    color: #f4c829;
-                }
-                & a:nth-child(2){
-                    color:#fff;
-                }
-            }
-        }
+    & .login-center-img {
+      @extend %faj;
+      margin: 30px 0px;
+      & div {
+        @extend %faj;
+        height: 220px;
+        width: 250px;
+        background: pink;
+        background: url(../../assets/img/home/game.png) no-repeat center center;
+        background-size: 100% 100%;
+      }
     }
+    & .login-form {
+      @extend %flex;
+      @extend %fdc;
+      padding: 0 20px;
+      background: rgb(175, 58, 49);
+      >div {
+        @extend %flex;
+        @extend %aitems;
+        @extend %sbetween;
+        height: 40px;
+        border: 1px solid #c6c6c6;
+        background: #fff;
+        & i {
+          color: #ae9880;
+          font-size: 20px;
+          width: 40px;
+          text-align: center;
+        }
+        & input {
+          width: 100%;
+          height: 30px;
+          padding: 2px;
+          border: none;
+        }
+        & img {
+          width: 120px;
+          height: 40px;
+        }
+      }
+      .login-rememb {
+        margin-top: 10px;
+        border: none;
+        background: none;
+        & .yd-checkbox-icon {
+          width: 18px !important;
+          height: 18px !important;
+          color: #f75f5b !important;
+          border: 1px solid #fff;
+        }
+        & .yd-checkbox-text {
+          color: #fff !important;
+        }
+      }
+      .login-pwd,
+      .login-pwdshow,
+      .login-captchaCodeImg {
+        border-top: none;
+      }
+      .login-go {
+        border: none;
+        margin-top: 30px;
+        border-radius: 6px;
+      }
+      & button {
+        width: 100%;
+        border: none;
+        height: 45px;
+        background: #F94E4E;
+        font-size: 18px;
+        color: #fff;
+        border-radius: 6px;
+      }
+      & .login-live {
+        margin-top: 20px;
+        @extend %faj;
+        border: none;
+        background: none;
+        & a {
+          font-size: 14px;
+          background: none;
+          color: #ddd;
+        }
+        & a:nth-child(1) {
+          border-right: 1px solid #ddd;
+          padding-right: 6px;
+          margin-right: 6px;
+          color: #f4c829;
+        }
+        & a:nth-child(2) {
+          color: #fff;
+        }
+      }
+    }
+  }
 }
 
 .login-pop {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    top:0px;
-    left: 0px;
-    position: absolute;
-    z-index: 15;
-    background: rgba(0, 0, 0, 0.2);
-    >div {
-        display: flex;
-        align-items: center;
-        line-height: 32px;
-        background: #fff;
-        border-radius: 6px;
-        padding: 0px 10px;
-        & i {
-            margin-right: 8px;
-        }
+  @extend %faj;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  z-index: 15;
+  background: rgba(0, 0, 0, 0.2);
+  >div {
+    @extend %flex;
+    @extend %aitems;
+    line-height: 32px;
+    background: #fff;
+    border-radius: 6px;
+    padding: 0px 10px;
+    & i {
+      margin-right: 8px;
     }
+  }
 }
 
 .el-form-item {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .el-form-item__content {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+  @extend %flex;
+  @extend %jcontent;
+  margin-top: 30px;
 }
 
 .el-button--primary {
-    width: 90%;
-    background-color: #dc3b40 !important;
-    border-color: #dc3b40 !important;
-    & span {
-        font-size: 20px;
-    }
+  width: 90%;
+  background-color: #dc3b40 !important;
+  border-color: #dc3b40 !important;
+  & span {
+    font-size: 20px;
+  }
 }
 
 .login-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    color: #fff;
-    position: fixed;
-    top: 0px;
-    height: 46px;
-    width: 100%;
-    background: rgb(175,58,49);
-    z-index: 12;
-    & i {
-        position: absolute;
-        left: 16px;
-    }
+  @extend %faj;
+  font-size: 20px;
+  color: #fff;
+  position: fixed;
+  top: 0px;
+  height: 46px;
+  width: 100%;
+  background: rgb(175, 58, 49);
+  z-index: 12;
+  & i {
+    @extend %faj;
+    width: 20%;
+  }
+  & p {
+    @extend %faj;
+    width: 60%;
+  }
+  & span {
+    @extend %faj;
+    width: 20%;
+  }
 }

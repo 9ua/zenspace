@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 银行卡管理
+    span
   .listStyle-content
     ul(style='listStyle-I')
       li.row2(v-for='(item,index) in bankUserList', :key='index', @click='select(item,$event)')
@@ -143,7 +144,6 @@ export default {
       this.show1 = !this.show1;
     },
     onConfirm(item, index) {
-      console.log(item, index, this.payway[index].id);
       this.bankNameId = this.payway[index].id;
       this.selectBank = this.payway[index].name;
       this.show1 = !this.show1;

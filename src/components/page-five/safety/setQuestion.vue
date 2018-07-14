@@ -3,6 +3,7 @@
   .setQuestion-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 设置密保问题
+    span
   .setQuestion-input
     div
       p 问题一
@@ -21,12 +22,15 @@
       input(type='text', v-model='answer2')
   .setQuestion-but
     button(@click='setQuestion') 确定
+  van-popup(v-model='show') {{content}}
 </template>
 <script>
 import md5 from "js-md5";
 export default {
   data() {
     return {
+      show:false,
+      content:'',
       options: [
         { value: 1, label: "您的出生地是哪里？" },
         { value: 2, label: "您高中的学校是？" },
@@ -52,18 +56,27 @@ export default {
     },
     //设置密保问题
     setQuestion() {
-      let md5answer1 = md5(this.answer1);
-      let md5answer2 = md5(this.answer2);
-      let config = {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        withCredentials: true
-      };
-      let formData = new FormData();
-      formData.append("title1", this.title1);
-      formData.append("title2", this.title2);
-      formData.append("answer1", md5answer1);
-      formData.append("answer2", md5answer2);
-      if (this.title1 != this.title2) {
+      if(this.answer1 == ""){
+        this.show = !this.show;
+        this.content = "第一个密保答案不能为空！";
+      }else if(this.answer2 == ""){
+        this.show = !this.show;
+        this.content = "第二个密保答案不能为空！";
+      }else if(this.title1 == this.title2){
+        this.show = !this.show;
+        this.content = "密保问题不能相同！";
+      }else{
+        let md5answer1 = md5(this.answer1);
+        let md5answer2 = md5(this.answer2);
+        let config = {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true
+        };
+        let formData = new FormData();
+        formData.append("title1", this.title1);
+        formData.append("title2", this.title2);
+        formData.append("answer1", md5answer1);
+        formData.append("answer2", md5answer2);
         this.$axios
           .post(
             this.$store.state.url + "api/userCenter/setSecurityQuestion",
@@ -82,9 +95,6 @@ export default {
           .catch(error => {
             console.log("设置密保问题No");
           });
-      } else {
-        this.show = !this.show;
-        this.content = "密保问题不能相同！";
       }
     }
   },

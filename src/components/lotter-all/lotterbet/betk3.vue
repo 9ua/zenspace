@@ -1,252 +1,257 @@
-<template lang="jade">
-.betk3
-  ul.betk3-top
-    li
-      i.el-icon-arrow-left(@click='banckto')
-    li
-      p.wangfa
-        | 玩
-        br
-        | 法
-      .menu(@click='show = !show')
-        | {{titles}}
-        i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-      .menu-list
-        van-popup(v-model='show', position='top')
-          ul.menu-list-top
-            li(v-for='(into,index) in playBonus', :key='index', :class="{'active': index === navlist}", @click='k3Tab($event,index,into)')
-              .title  {{into.title}} 
-              .xq(v-show=' index !== 3') 赔率 {{into.displayBonus | keepTwoNum}}
-              .xq(v-show=' index === 3') 赔率 {{playBonus[4].displayBonus | keepTwoNum}}
-              .img
-                span.img1
-                span.img2
-                span.img3
-    li.betk3list
-      span(@click='showa = !showa') {{listname}}
-      i(:class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' ", @click='showa = !showa')
-      van-popup(v-model=' showa', position='top')
-        ul
-          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
-            a {{listk3.name}}
-  .lookAllDiv(v-show='lookAllUl')
-    p.lookAllDivTitle
-      i.el-icon-arrow-left(@click='lookAllDivTitle')
-      |         查看更多
-    //
-      <div class="lookAllUlBox">
-      <ul class="lookAllUl">
-      <li>
-      <p>期号</p>
-      <p>开奖号码</p>
-      <p>和值</p>
-      <p>大小</p>
-      <p>单双 </p>
-      </li>
-      <li v-for="(item,index) in getPastOpens" :key="index">
-      <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}
-      <i class="el-icon-minus"></i>
-      </p>
-      <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}
-      <i class="el-icon-minus"></i>
-      </p>
-      <p>
-      <a><img :src='"../../../assets/img/one/n"+item.n1+".png"' alt="" /></a>
-      <a><img :src='"../../../assets/img/one/n"+item.n2+".png"' alt="" /></a>
-      <a><img :src='"../../../assets/img/one/n"+item.n3+".png"' alt="" /></a>
-      </p>
-      <p>{{item.n1+item.n2+item.n3}}</p>
-      <p>
-      <span :class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'">{{item.n1+item.n2+item.n3
-      < 11 ? '小' : '大'}}</span>
-      </p>
-      <p>
-      <span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span>
-      </p>
-      </li>
-      </ul>
+<template>
+<div class="betk3">
+  <ul class="betk3-top">
+    <li><i @click="banckto" class="el-icon-arrow-left"></i></li>
+    <li>
+      <p class="wangfa">玩<br/>法</p>
+      <div @click="show = !show" class="menu">{{titles}}<i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i></div>
+      <div class="menu-list">
+        <van-popup v-model="show" position="top">
+          <ul class="menu-list-top">
+            <li v-for="(into,index) in playBonus" :key="index" v-show="isdfk3(index)" :class="{'active': index === navlist}" @click="k3Tab($event,index,into)">
+              <div class="title"> {{into.title}} </div>
+              <div v-show=" index !== 3" class="xq">赔率 {{into.displayBonus | keepTwoNum}}</div>
+              <div v-show=" index === 3" class="xq">赔率 {{playBonus[4].displayBonus | keepTwoNum}}</div>
+              <div class="img"><span class="img1"></span><span class="img2"></span><span class="img3"></span></div>
+            </li>
+          </ul>
+        </van-popup>
       </div>
-  .betk3-content
-    div(v-show='!show')
-      .betk3-content-top(@click=' betk3ContentTopPop = !betk3ContentTopPop')
-        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
-          p(v-if="$route.query.id === 'bjk3'") {{lastSeasonId*1}}期开奖号码
-          p(v-else='') {{lastSeasonId.slice(4)*1}}期开奖号码
-          .contnet-left-num(v-show='!shownum')
-            p(:style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}")
-            p(:style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}")
-            p(:style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n3 +'.png') + ')'}")
-            i(:class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-          .contnet-left-num(v-show='shownum')
-            .num
-              .span
-                transition(name='down-up-translate-fade')
-                  div(:style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ i +'.png') + ')'}")
-              .span
-                transition(name='down-up-translate-fade')
-                  div(:style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ j +'.png') + ')'}")
-              .span
-                transition(name='down-up-translate-fade')
-                  div(:style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ k +'.png') + ')'}")
-            i(:class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-        .content-right
-          p {{seasonId}}期投注截止
-          div
-            p {{countDown}}
-      .betk3-content-top-pop(v-show='betk3ContentTopPop')
-        ul.look
-          li
-            p 期号
-            p 开奖号码
-            p 和值
-            p 大小
-            p 单双 
-          li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
-            p(v-if="$route.query.id === 'bjk3'")
-              | {{item.seasonId}}
-              i.el-icon-minus
-            p(v-else='')
-              | {{item.seasonId.substring(4).split("-").join("")*1}}
-              i.el-icon-minus
-            p
-              a
-                img(:src='"../../../assets/img/one/n"+item.n1+".png"', alt='')
-              a
-                img(:src='"../../../assets/img/one/n"+item.n2+".png"', alt='')
-              a
-                img(:src='"../../../assets/img/one/n"+item.n3+".png"', alt='')
-            p {{item.n1+item.n2+item.n3}}
-            p
-              span(:class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'")
-                | {{item.n1+item.n2+item.n3
-                | < 11 ? '小' : '大'}}
-            p
-              span(:class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'") {{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}
-        p.lookAll
-          button(@click='lookAll') 查看更多
-      .betk3-content-foot
-        p(v-for='(item,index) in playBonus', :key='index', v-show='index === navlist')
-          | {{item.remark}}
-          span(v-show='index !== 3')
-            | 赔率
-            span.k3remark {{ item.displayBonus | keepTwoNum}}
-            |  倍。
-          // 单挑一骰
-          ul.yishai(v-show='index === 0')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in yishai', :key='index', @click='k3option($event,index,k3item)')
-              h2
-          // 二同号
-          ul.ertonghao(v-show='index === 1')
-            li
-              ul
-                li(v-for='(ertongh,index) in ertonghao', :key='index', @click='ertonghaoto($event,index,ertongh)')
-                  span(:class="ertongh.selected ? 'active' : ''")
-                    | {{ertongh.title}}
-          // 二不同
-          ul.erbutong(v-show='index === 2')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in erbutong', :key='index', @click='k3option($event,index,k3item)')
-              h2
-          // 和值
-          ul.hezhi(v-show='index === 3')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in k3options', :key='index', @click='hezhidaxiaodanshuang($event,index,k3item)')
-              h2 {{k3item.title}}
-              span(v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单'\
-              || k3item.title==='双'") 赔 {{k3item.rate | keepThreeNum}}
-              span(v-else='') 赔 {{k3item.rate | keepTwoNum}}
-          // 大小单双
-          ul.daoxiaodanshuang(v-show='index === 4')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in daxiaodanshuang', :key='index', @click='k3option($event,index,k3item)')
-              h2 {{k3item.title}}
-          // 三连号
-          ul.sanlianhao(v-show='index === 5')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in sanlianhao', :key='index', @click='k3option($event,index,k3item)')
-              h2
-                a
-                a
-                a
-          // 三同号
-          ul.santonghao(v-show='index === 6')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in santonghao', :key='index', @click='k3option($event,index,k3item)')
-              h2
-                a
-                a
-                a
-            p
-              span(:class="issantonghao ? 'active' : ''", @click='tosantonghao') 通选
-          // 三不同
-          ul.sanbutong(v-show='index === 7')
-            li(:class="k3item.selected ? 'active' : ''", v-for='(k3item,index) in sanbutong', :key='index', @click='k3option($event,index,k3item)')
-              h2
-  .betk3-footer
-    .betk3-footer-top(v-show='zhu > 0')
-      .betk3-footer-tops
-        p 当前选号
-        span {{con}}
-      .betk3-footer-buttoms
-        p 每注金额
-        input(type='number', v-model='money', onfocus='this.select()')
-        span(v-if="money === '' ") 请输入要投注的金额
-        span(v-else='')
-          | 单注最高可中
-          p
-            | {{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(rates*1000)*money/1000 | keepThreeNum}}
-          | 元
-    .betk3-footer-buttom
-      .betk3-footer-buttom-left
-        button(@click='iscreat') 清空
-        p
-          span(v-if='zhu >0') 共{{zhu}}注,
-          span(v-if="this.money !== '' ") 共{{zhu*money}}元
-      .betk3-footer-buttom-right(@click='betC') 马上投注
-  .betcBox(v-show='betGoshow')
-    ul.betc(v-show='betGoshow')
-      li 投注确认
-      li
-        p
-          span {{listname}}快3 ：
-          | {{seasonId}}期
-        p
-          span 投注金额：
-          b {{money*zhu}}元
-        p
-          span 投注内容：
-          span.popcon {{con}}
-      li
-        button(@click='betCancel') 取消
-        button(@click='betGo') 确定
-  .betcBox(v-show='betsuccess')
-    ul.betc(v-show='betsuccess')
-      li 温馨提示！
-      li
-        p
-          b 投注成功,
-          | 您可以在我的账户查看注单详情
-      li
-        button(@click='looksucc') 查看注单
-        button(@click='betsucc') 继续投注
-  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p(v-if="$route.query.id === 'bjk3'")
-            | {{lastSeasonId*1}}期已截止
-            br
-            | 当前期号{{seasonId}}
-            br
-            | 投注时请注意期号
-          p(v-else='')
-            | {{lastSeasonId.slice(4)*1}}期已截止
-            br
-            | 当前期号{{seasonId}}
-            br
-            | 投注时请注意期号
-        .but
-          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
-  van-popup.betshow(v-model='betshow') {{content}}
+    </li>
+    <li class="betk3list"><span @click="showa = !showa">{{listname}}</span><i :class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' " @click="showa = !showa"></i>
+      <van-popup v-model=" showa" position="top">
+        <ul>
+          <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)"><a>{{listk3.name}}</a></li>
+        </ul>
+      </van-popup>
+    </li>
+  </ul>
+  <div v-show="lookAllUl" class="lookAllDiv">
+    <p class="lookAllDivTitle"><i @click="lookAllDivTitle" class="el-icon-arrow-left"></i><b class="cont">查看更多</b><span></span></p>
+    <div class="lookAllUlBox">
+      <ul class="lookAllUl">
+        <li>
+          <p>期号</p>
+          <p>开奖号码</p>
+          <p>和值</p>
+          <p>大小</p>
+          <p>单双 </p>
+        </li>
+        <li v-for="(item,index) in getPastOpens" :key="index">
+          <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="el-icon-minus"></i></p>
+          <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="el-icon-minus"></i></p>
+          <p><a><img :src='"@/assets/img/one/n"+item.n1+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n2+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n3+".png"' alt=""/></a></p>
+          <p>{{item.n1+item.n2+item.n3}}</p>
+          <p><span :class="item.n1+item.n2+item.n3 &lt; 11 ? 'goodidea' : 'goodluck'">
+              {{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</span></p>
+          <p><span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="betk3-content">
+    <div>
+      <div class="betk3-content-top">
+        <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0" @click=" betk3ContentTopPop = !betk3ContentTopPop">
+          <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期开奖号码</p>
+          <p v-else>{{lastSeasonId.slice(4)*1}}期开奖号码</p>
+          <div v-show="!shownum" class="contnet-left-num">
+            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
+            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
+            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n3 +'.png') + ')'}"></p><i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+          </div>
+          <div v-show="shownum" class="contnet-left-num">
+            <div class="num">
+              <div class="span">
+                <transition name="down-up-translate-fade">
+                  <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ i +'.png') + ')'}"></div>
+                </transition>
+              </div>
+              <div class="span">
+                <transition name="down-up-translate-fade">
+                  <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ j +'.png') + ')'}"></div>
+                </transition>
+              </div>
+              <div class="span">
+                <transition name="down-up-translate-fade">
+                  <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ k +'.png') + ')'}"></div>
+                </transition>
+              </div>
+            </div><i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+          </div>
+        </div>
+        <div class="content-right" @click="tolooksucc">
+          <div>
+            <p class="seasonId">{{seasonId}}期投注截止</p>
+            <div class="time">
+              <p>{{countDown}}</p>
+            </div>
+          </div>
+          <i class="el-icon-caret-left"></i>
+        </div>
+      </div>
+      <div v-show="betk3ContentTopPop" class="betk3-content-top-pop">
+        <ul class="look">
+          <li>
+            <p>期号</p>
+            <p>开奖号码</p>
+            <p>和值</p>
+            <p>大小</p>
+            <p>单双</p>
+          </li>
+          <li v-for="(item,index) in getPastOpens" :key="index" v-if="index &lt; 10">
+            <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="el-icon-minus"></i></p>
+            <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="el-icon-minus"></i></p>
+            <p><a><img :src='"@/assets/img/one/n"+item.n1+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n2+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n3+".png"' alt=""/></a></p>
+            <p>{{item.n1+item.n2+item.n3}}</p>
+            <p><span :class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'">{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</span></p>
+            <p><span :class="(item.n1+item.n2+item.n3)%2 === 0 ? 'goodidea' : 'goodluck'">{{(item.n1+item.n2+item.n3)%2 === 0 ? '双' : '单'}}</span></p>
+          </li>
+        </ul>
+        <p class="lookAll">
+          <button @click="lookAll">查看更多</button>
+          <button @click="lookAllTo">往期开奖</button>
+        </p>
+      </div>
+      <div class="betk3-content-foot">
+        <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}<span v-show="index !== 3">赔率<span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
+          <!-- 单挑一骰-->
+          <ul v-show="index === 0" class="yishai">
+            <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
+              <h2></h2>
+            </li>
+          </ul>
+          <!-- 二同号-->
+          <ul v-show="index === 1" class="ertonghao">
+            <li>
+              <ul>
+                <li v-for="(ertongh,index) in ertonghao" :key="index" @click="ertonghaoto($event,index,ertongh)"><span :class="ertongh.selected ? 'active' : ''">{{ertongh.title}}</span></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- 二不同-->
+          <ul v-show="index === 2" class="erbutong">
+            <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in erbutong" :key="index" @click="k3option($event,index,k3item)">
+              <h2></h2>
+            </li>
+          </ul>
+          <!-- 和值-->
+          <ul v-show="index === 3" class="hezhi">
+            <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in k3options" :key="index" v-if="isdfk3Cen(index)" @click="hezhidaxiaodanshuang($event,index,k3item)">
+              <h2>{{k3item.title}}</h2><span v-if="k3item.title==='大' ||k3item.title==='小' || k3item.title==='单' || k3item.title==='双'">赔 {{k3item.rate | keepThreeNum}}</span><span v-else>赔 {{k3item.rate | keepTwoNum}}</span>
+            </li>
+          </ul>
+          <!-- 大小单双-->
+          <ul v-show="index === 4" class="daoxiaodanshuang">
+            <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in daxiaodanshuang" :key="index" @click="k3option($event,index,k3item)">
+              <h2>{{k3item.title}}</h2>
+            </li>
+          </ul>
+          <!-- 三连号-->
+          <ul v-show="index === 5" class="sanlianhao">
+            <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
+              <h2><a></a><a></a><a></a></h2>
+            </li>
+          </ul>
+          <!-- 三同号-->
+          <ul v-show="index === 6" class="santonghao">
+            <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="santonghaoto($event,index,k3item)">
+              <h2 v-if="index&lt;6"><a></a><a></a><a></a></h2>
+              <h2 v-if="index === 6">{{k3item.title}}</h2>
+            </li>
+          </ul>
+          <!-- 三不同-->
+          <ul v-show="index === 7" class="sanbutong">
+            <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
+              <h2></h2>
+            </li>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="betk3-footer">
+    <div v-show="zhu &gt; 0" class="betk3-footer-top">
+      <div class="betk3-footer-tops">
+        <p>当前选号</p><span>{{con}}</span>
+      </div>
+      <div class="betk3-footer-buttoms">
+        <p>每注金额</p>
+        <input type="number" v-model="money" onfocus="this.select()"/><span v-if="money === '' ">请输入要投注的金额</span><span v-else>单注最高可中
+          <p>{{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(rates*1000)*money/1000 | keepThreeNum}}</p>元</span>
+      </div>
+    </div>
+    <div class="betk3-footer-buttom">
+      <div class="betk3-footer-buttom-left">
+        <button @click="iscreat">清空</button>
+        <p><span v-if="zhu &gt;0">共{{zhu}}注,</span><span v-if="money !== '' ">共{{zhu*money}}元</span></p>
+      </div>
+      <div v-show="betnot" @click="betC" class="betk3-footer-buttom-right">马上投注</div>
+    </div>
+  </div>
+  <div v-show="betGoshow" class="betcBox">
+    <ul v-show="betGoshow" class="betc">
+      <li>投注确认</li>
+      <li>
+        <p><span>{{listname}}快3 ：</span>{{seasonId}}期</p>
+        <p><span>投注金额：</span><b>{{money*zhu}}元</b></p>
+        <p><span>投注内容：</span><span class="popcon">{{con}}</span></p>
+      </li>
+      <li>
+        <button @click="betCancel">取消</button>
+        <button @click="betGo">确定</button>
+      </li>
+    </ul>
+  </div>
+  <div v-show="betsuccess" class="betcBox">
+    <ul v-show="betsuccess" class="betc">
+      <li>温馨提示！</li>
+      <li>
+        <p><b>投注成功,</b>您可以在我的账户查看注单详情</p>
+      </li>
+      <li>
+        <button @click="looksucc">查看注单</button>
+        <button @click="betsucc">继续投注</button>
+      </li>
+    </ul>
+  </div>
+  <van-popup v-model="betfail" :close-on-click-overlay="false" class="pop2">
+    <div>
+      <ul>
+        <div class="title">
+          <p>温馨提示！</p>
+        </div>
+        <div class="cont">
+          <p><b>投注失败,</b><br>请检查您的连线</p>
+        </div>
+        <div class="but">
+          <button @click="betfail = ! betfail" class="nodel">确定</button>
+        </div>
+      </ul>
+    </div>
+  </van-popup>
+  <van-popup v-model="showTimesUp" :close-on-click-overlay="false" class="pop2">
+    <div>
+      <ul>
+        <div class="title">
+          <p>温馨提示！</p>
+        </div>
+        <div class="cont">
+          <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期已截止<br/>当前期号{{seasonId}}<br/>投注时请注意期号</p>
+          <p v-else>{{lastSeasonId.slice(4)*1}}期已截止<br/>当前期号{{seasonId}}<br/>投注时请注意期号</p>
+        </div>
+        <div class="but">
+          <button @click="showTimesUp = ! showTimesUp" class="nodel">确定</button>
+        </div>
+      </ul>
+    </div>
+  </van-popup>
+  <van-popup v-model="betshow" class="betshow">{{content}}</van-popup>
+  <bets ref="pop"></bets>
+</div>
 </template>
 <script>
+import bets from '../../page-five/money/bets.vue';
 import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
   data() {
@@ -254,6 +259,7 @@ export default {
       i: 1, //动画
       j: 1,
       k: 1,
+      shwoBet:false,
       shownum: false,
       interval: null, //动画
       lookAllUl: false,
@@ -264,7 +270,7 @@ export default {
       show: false, //头部中间
       showa: false, //头部右
       showan: 0, //头部右数字
-      money: 1, //投注金额
+      money: "", //投注金额
       amount: 0, //总金额
       rates: 0,
       bet: false, //投注弹窗
@@ -285,6 +291,7 @@ export default {
       n3: 1,
       cacheTime: 600000,
       getPastOpens: "", //获取过去开奖号码10个
+      getPastOpenB: "", //获取过去开奖号码第一个
       LotteryList: "",
       groupId: "",
       seasonId: "", //截取后的期号
@@ -313,6 +320,8 @@ export default {
       startyet: false,
       playBonus: "", //玩法树
       timer2: "",
+      betnot:true,
+      betfail:false,
       // 单挑一骰
       yishai: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -421,6 +430,7 @@ export default {
           rate: "1.998750",
           selected: false
         },
+        { title: "03", rates: "赔率60.8400", rate: "60.8400", selected: false },
         { title: "04", rates: "赔率60.8400", rate: "60.8400", selected: false },
         { title: "05", rates: "赔率30.4200", rate: "30.4200", selected: false },
         { title: "06", rates: "赔率20.2800", rate: "20.2800", selected: false },
@@ -434,7 +444,8 @@ export default {
         { title: "14", rates: "赔率12.1680", rate: "12.1680", selected: false },
         { title: "15", rates: "赔率20.2800", rate: "20.2800", selected: false },
         { title: "16", rates: "赔率30.4200", rate: "30.4200", selected: false },
-        { title: "17", rates: "赔率60.8400", rate: "60.8400", selected: false }
+        { title: "17", rates: "赔率60.8400", rate: "60.8400", selected: false },
+        { title: "18", rates: "赔率60.8400", rate: "60.8400", selected: false }
       ],
       // 大小单双
       daxiaodanshuang: [
@@ -457,7 +468,8 @@ export default {
         { title: "333", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "444", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "555", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "666", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "666", rates: "赔率63.72", rate: "63.72", selected: false },
+        { title: "通选", rates: "赔率63.72", rate: "63.72", selected: false }
       ],
       // 三不同
       sanbutong: [
@@ -475,7 +487,7 @@ export default {
       if (this.money === "") {
         setTimeout(() => {
           if (this.money === "") {
-            this.money = 1;
+            this.money = "";
           }
         }, 1000);
       } else {
@@ -485,6 +497,7 @@ export default {
   },
   created() {
     this.getLotteryList();
+    this.endCount();
   },
   mounted() {
     this.endCount();
@@ -499,12 +512,31 @@ export default {
     this.iscreat();
   },
   methods: {
+    //非宏发快3，不显示三同号玩法
+    isdfk3(index) {
+      if (this.$route.query.id === "dfk3") {
+        return index != -1;
+      }
+      return index != 6;
+    },
+    isdfk3Cen(index) {
+      if (this.$route.query.id === "dfk3") {
+        return index != -1;
+      } else {
+      }
+      return index != 4 && index != 19;
+    },
     //返回到上一次进来的页面
     banckto() {
       this.$router.push(this.$store.state.historyNum);
     },
-    //查看更多记录
+    //查看20条记录
     lookAll() {
+      this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
+    },
+    //往期开奖
+    lookAllTo() {
       this.$router.push({
         path: "second/past",
         query: {
@@ -513,8 +545,6 @@ export default {
           group: this.groupId
         }
       });
-      // this.betk3ContentTopPop = !this.betk3ContentTopPop;
-      // this.lookAllUl = !this.lookAllUl;
     },
     lookAllDivTitle() {
       this.lookAllUl = !this.lookAllUl;
@@ -593,11 +623,21 @@ export default {
           clearInterval(this.timer);
           this.timesUp();
         }
+        if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
+          this.getPastOp();
+        }
       }, 1000);
     },
     //時間到彈窗
     timesUp() {
       this.showTimesUp = !this.showTimesUp;
+      setTimeout(() => {
+        this.showTimesUp = false;
+      },3000);
       this.geteServerTime();
     },
     //获取过去开奖号码10个
@@ -612,6 +652,7 @@ export default {
         })
         .then(res => {
           this.getPastOpens = res.data.data;
+          this.getPastOpenB = res.data.data;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
             this.reGetPastOp();
           } else {
@@ -629,7 +670,7 @@ export default {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
-      }, 10000);
+      }, 12000);
     },
     //右上获取彩种
     getLotteryList() {
@@ -670,7 +711,6 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
-      this.historyNum++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
@@ -686,19 +726,8 @@ export default {
           group: this.groupId
         }
       });
-    },
-    //三同号全/反选
-    tosantonghao() {
-      this.issantonghao = !this.issantonghao;
-      for (let i = 0; i < this.santonghao.length; i++) {
-        if (this.issantonghao === true) {
-          this.santonghao[i].selected = true;
-          this.zhu++;
-          this.con = "111,222,333,444,555,666";
-        } else if (this.issantonghao === false) {
-          this.santonghao[i].selected = false;
-          this.iscreat();
-        }
+      if (this.$route.query.id !== "dfk3" && this.navlist === 6) {
+        this.navlist = 3;
       }
     },
     //二同複選xx
@@ -888,53 +917,45 @@ export default {
         this.onClickStan6(e);
       }
     },
-    //和值-大小单双
-    hezhi(e, index, k3item) {
+    //三同号
+    santonghaoto(e, index, k3item) {
       k3item.selected = !k3item.selected;
-      let dxds = ["大", "小", "单", "双"];
-      let rets = [3, 6, 10, 15, 21, 25, 27, 27, 25, 21, 15, 10, 6, 3];
-      let selectedx = [
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17"
-      ];
-      let j = 0;
-      if (k3item.selected === true) {
-        this.rates = k3item.rate;
+      if (k3item.selected === true && index < 6) {
         this.d[index] = k3item.title;
         this.dd = this.d.filter(function(n) {
           return n;
         });
         this.con = this.dd.join(",");
-
-        for (var i = 0; i < selectedx.length; i++) {
-          for (var k = 0; k < this.d.length; k++) {
-            if (selectedx[i] == this.d[k]) {
-              this.hezhiitem[i] = rets[i];
-              j += this.hezhiitem[i];
-            }
-          }
-        }
-        this.zhu = j;
-      } else if (k3item.selected === false) {
-        this.rates = 0;
+        this.zhu++;
+      } else if (k3item.selected === false && index < 6) {
         this.d.splice(index, 1, "");
-        this.hezhiitem.splice(index, 1, "");
         this.dd = this.d.filter(function(n) {
           return n;
         });
         this.con = this.dd.join(",");
+        this.zhu--;
+      }
+      //全、反选
+      if (k3item.selected === true && index === 6) {
+        for (let i = 0; i < this.santonghao.length - 1; i++) {
+          this.santonghao[i].selected = true;
+          this.d[i] = this.santonghao[i].title;
+          this.dd = this.d.filter(function(n) {
+            return n;
+          });
+          this.con = this.dd.join(",");
+          this.zhu = 6;
+        }
+      } else if (k3item.selected === false && index === 6) {
+        for (let i = 0; i < this.santonghao.length - 1; i++) {
+          this.santonghao[i].selected = false;
+          this.d.splice(i, 1, "");
+          this.dd = this.d.filter(function(n) {
+            return n;
+          });
+          this.con = this.dd.join(",");
+          this.zhu = 0;
+        }
       }
     },
     //和值-大小单双 +
@@ -1001,6 +1022,7 @@ export default {
         this.zhu = this.zhu1 + this.zhu2;
       }
     },
+    //大小单双，赔率显示
     setupPlayTree(resData) {
       this.playBonus = resData;
       let arrpeilv1 = [];
@@ -1012,20 +1034,22 @@ export default {
         this.k3options[1].rate = arrpeilv2.小;
         this.k3options[2].rate = arrpeilv2.单;
         this.k3options[3].rate = arrpeilv2.双;
-        this.k3options[4].rate = arrpeilv1[4];
-        this.k3options[5].rate = arrpeilv1[5];
-        this.k3options[6].rate = arrpeilv1[6];
-        this.k3options[7].rate = arrpeilv1[7];
-        this.k3options[8].rate = arrpeilv1[8];
-        this.k3options[9].rate = arrpeilv1[9];
-        this.k3options[10].rate = arrpeilv1[10];
-        this.k3options[11].rate = arrpeilv1[11];
-        this.k3options[12].rate = arrpeilv1[12];
-        this.k3options[13].rate = arrpeilv1[13];
-        this.k3options[14].rate = arrpeilv1[14];
-        this.k3options[15].rate = arrpeilv1[15];
-        this.k3options[16].rate = arrpeilv1[16];
-        this.k3options[17].rate = arrpeilv1[17];
+        this.k3options[4].rate = arrpeilv1[3];
+        this.k3options[5].rate = arrpeilv1[4];
+        this.k3options[6].rate = arrpeilv1[5];
+        this.k3options[7].rate = arrpeilv1[6];
+        this.k3options[8].rate = arrpeilv1[7];
+        this.k3options[9].rate = arrpeilv1[8];
+        this.k3options[10].rate = arrpeilv1[9];
+        this.k3options[11].rate = arrpeilv1[10];
+        this.k3options[12].rate = arrpeilv1[11];
+        this.k3options[13].rate = arrpeilv1[12];
+        this.k3options[14].rate = arrpeilv1[13];
+        this.k3options[15].rate = arrpeilv1[14];
+        this.k3options[16].rate = arrpeilv1[15];
+        this.k3options[17].rate = arrpeilv1[16];
+        this.k3options[18].rate = arrpeilv1[17];
+        this.k3options[19].rate = arrpeilv1[18];
       }
     },
     // 玩法树
@@ -1185,7 +1209,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 二不同
       for (let i = 0; i < this.erbutong.length; i++) {
@@ -1193,7 +1217,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 和值
       for (let i = 0; i < this.k3options.length; i++) {
@@ -1207,7 +1231,7 @@ export default {
         this.zhu = 0;
         this.zhu1 = 0;
         this.zhu2 = 0;
-        this.money = 1;
+        this.money = "";
         this.playId1 = "";
         this.playId2 = "";
       }
@@ -1217,7 +1241,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 三连号
       for (let i = 0; i < this.sanlianhao.length; i++) {
@@ -1225,7 +1249,7 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
       // 三同号
       for (let i = 0; i < this.santonghao.length; i++) {
@@ -1233,36 +1257,38 @@ export default {
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
+      this.issantonghao = false;
       // 三不同
       for (let i = 0; i < this.sanbutong.length; i++) {
         this.sanbutong[i].selected = false;
         this.d = [];
         this.con = "";
         this.zhu = 0;
-        this.money = 1;
+        this.money = "";
       }
     },
+    //弹窗显示？
     betCancel() {
       this.betGoshow = !this.betGoshow;
     },
+    //投注按钮判断
     betC() {
-      if (this.zhu <= 0) {
+      if (this.zhu === 0) {
         this.betshow = !this.betshow;
         this.content = "请至少选择一注号码投注!";
-      }
-      if (this.money === "") {
+      } else if (this.money === "") {
         this.betshow = !this.betshow;
         this.content = "请填写您要投注的金额!";
-      }
-      if (this.zhu > 0 && this.money !== "") {
+      } else if (this.zhu > 0 && this.money !== "") {
         this.betGoshow = !this.betGoshow;
       }
     },
     //投注
     betGo() {
       this.betGoshow = false;
+      this.betnot= false;
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
@@ -1288,6 +1314,7 @@ export default {
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
+          this.iscreat();
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
@@ -1297,16 +1324,23 @@ export default {
                   this.betshow = !this.betshow;
                   this.content = "投注成功!";
                   // this.betGoshow = !this.betGoshow;
+                  this.betnot = true;
                   this.iscreat();
                   setTimeout(() => {
                     this.betshow = false;
                     this.betsuccess = !this.betsuccess;
                   }, 600);
                 }, 0);
+              } else {
+                this.betnot = true;
+                this.iscreat();
               }
             })
             .catch(error => {
               console.log("大小单双投注No");
+              this.betfail = true;
+              this.iscreat();
+              this.betnot = true;
             });
         }
         if (this.playId2 === "k3_star3_and" && this.con2 !== "") {
@@ -1324,6 +1358,7 @@ export default {
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
+          this.iscreat();
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
@@ -1332,6 +1367,7 @@ export default {
                   setTimeout(() => {
                     this.betshow = !this.betshow;
                     this.content = "投注成功!";
+                    this.betnot = true;
                     // this.betGoshow = !this.betGoshow;
                     this.iscreat();
                     setTimeout(() => {
@@ -1344,6 +1380,9 @@ export default {
             })
             .catch(error => {
               console.log("和值投注No");
+              this.iscreat();
+              this.betfail = true;
+              this.betnot = true;
             });
         }
       } else if (
@@ -1366,6 +1405,7 @@ export default {
         formData.append("isTrace", 0);
         formData.append("lotteryId", this.$route.query.id);
         formData.append("amount", this.money * this.zhu);
+        this.iscreat();
         this.$axios
           .post(this.$store.state.url + "api/lottery/bet", formData, config)
           .then(res => {
@@ -1373,6 +1413,7 @@ export default {
               setTimeout(() => {
                 this.betshow = !this.betshow;
                 this.content = "投注成功!";
+                this.betnot = true;
                 // this.betGoshow = !this.betGoshow;
                 setTimeout(() => {
                   this.betshow = false;
@@ -1384,6 +1425,9 @@ export default {
           })
           .catch(error => {
             console.log("投注No");
+            this.iscreat();
+            this.betfail = true;
+            this.betnot = true;
           });
       }
     },
@@ -1391,6 +1435,10 @@ export default {
     looksucc() {
       this.$router.push({ path: "/bet" });
       this.betsuccess = !this.betsuccess;
+    },
+    tolooksucc(){
+      this.looks = !this.looks;
+      this.$refs.pop.banckto();
     },
     //继续投注
     betsucc() {
@@ -1424,6 +1472,9 @@ export default {
       }
       return groupArr;
     }
+  },
+  components:{
+    bets
   },
   directives: {
     focus: {

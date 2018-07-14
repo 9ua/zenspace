@@ -3,6 +3,7 @@
   .safeMobile-top
     router-link.el-icon-arrow-left(to='/', tag='i')
     p 验证密保手机
+    span
   .safeMobile-content
     ul
       li

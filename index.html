@@ -14,23 +14,53 @@
   <meta name="screen-orientation" content="portrait">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>宏發娛樂</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.bootcss.com/mui/3.7.1/js/mui.min.js"></script>
+  <title>吉丰娱乐</title>
 </head>
 
 <body>
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>
-<!-- <script type="text/javascript">
-  document.oncontextmenu = function () {
-    return false;
-  };
-  document.onkeydown = function () {
-    if (window.event && window.event.keyCode == 123) {
-      event.keyCode = 0;
-      event.returnValue = false;
-      return false;
+<script type="text/javascript">
+  // document.oncontextmenu = function () {
+  //   return false;
+  // };
+  // document.onkeydown = function () {
+  //   if (window.event && window.event.keyCode == 123) {
+  //     event.keyCode = 0;
+  //     event.returnValue = false;
+  //     return false;
+  //   }
+  // };
+  mui.init({
+    swipeBack: false, //关闭右滑关闭功能（默认就是false）
+    keyEventBind: {
+      backbutton: true //开启back按键监听（默认就是true）
     }
-  };
-</script> -->
+  });
+  var quitTime = null;
+  mui.plusReady(function () {
+    mui.back = function () {
+      //首次按键，提示‘再按一次退出应用’
+      if (!quitTime) {
+        //记录第一次按下回退键的时间
+        quitTime = new Date().getTime();
+        //回退到上一页面
+        window.history.go(-1);
+        setTimeout(function () {
+          quitTime = null;
+        }, 500);
+      } else {
+        if ((new Date().getTime() - quitTime) < 500) {
+          quitTime = null;
+          plus.runtime.quit();
+        }
+      }
+    };
+  });
+
+</script>
+
 </html>

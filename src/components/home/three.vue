@@ -3,11 +3,11 @@
   headers
   ul(v-show='showFlag')
     li(v-for='(actives,index) in activitys', :key='index')
-      img(:src="'https://mtxflower.com/'+actives.icon", @click='activeR($event,actives,index)')
+      img(:src='"https://mtxflower.com/"+actives.icon', @click='activeR($event,actives,index)')
       .three-box
         p 活动时间：{{actives.beginPrizeTime}}
         p {{actives.status === 0 ? '进行中' : '结束'}}
-      .three-content(ref='pppop', v-if='activesremark === index', v-show='activesremarks')
+      .three-content(v-if='activesremark === index', v-show='activesremarks')
         div
           p(v-html='actives.remark')
 </template>
@@ -20,7 +20,8 @@ export default {
       activesremarks:false,
       activitys:'',
       selectedFood: {},
-      showFlag: true
+      showFlag: true,
+      cacheTime: 1800000,
     };
   },
   mounted(){
@@ -32,11 +33,31 @@ export default {
       this.activesremarks = !this.activesremarks;
     },
     activity(){
-      this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
-        this.activitys = res.data.data;
-      }).catch((error) => {
-          console.log("getListNo")
-      })
+      var now = new Date().getTime();
+      if (localStorage.getItem("getList") !== null) {
+        var setupTime = localStorage.getItem("date_getList");
+        if (null == setupTime || now - setupTime > this.cacheTime) {
+          localStorage.removeItem("getList");
+          localStorage.removeItem("date_getList");
+          this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
+            localStorage.setItem("getList", JSON.stringify(res.data.data));
+            localStorage.setItem("date_getList", now);
+            this.activitys = res.data.data;
+          }).catch((error) => {
+              console.log("getListNo")
+          })
+        } else {
+            this.activitys = JSON.parse(localStorage.getItem("getList"));
+        }
+      } else {
+          this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
+            localStorage.setItem("getList", JSON.stringify(res.data.data));
+            localStorage.setItem("date_getList", now);
+            this.activitys = res.data.data;
+          }).catch((error) => {
+              console.log("getListNo")
+          })
+      }
     },
     selectFood(threeC, event,index) {
       this.selectedFood = threeC;

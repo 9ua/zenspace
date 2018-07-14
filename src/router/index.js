@@ -1,76 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/components/home/home'
-import one from '@/components/home/one'
-import second from '@/components/home/second'
-import past from '@/components/page-second/past'
-import three from '@/components/home/three'
-import four from '@/components/home/four'
-import five from '@/components/home/five'
-import login from '@/components/login/login'
-import registered from '@/components/login/registered'
-import reset from '@/components/login/reset'
-import resetpwd from '@/components/login/resetpwd'
-import resetway from '@/components/login/resetway'
-import verifyPwdSafe from '@/components/login/verifyPwdSafe'
-import winning from '@/components/page-four/winning'
-import profit from '@/components/page-four/profit'
-import pop from '@/components/page-four/pop'
-import bet from '@/components/page-five/money/bet'
-import service from '@/components/page-five/service'
-import bankcharge from '@/components/page-five/money/bankcharge'
-import weixincharge from '@/components/page-five/money/weixincharge'
-import rechargeserch from '@/components/page-five/money/rechargeserch'
-import cashOut from '@/components/page-five/money/cashOut'
-import trade from '@/components/page-five/money/trade'
-import agency from '@/components/page-five/agency'
-import agentBetRecord from '@/components/page-five/agency/agentBetRecord'
-import agentBillRecord from '@/components/page-five/agency/agentBillRecord'
-import agentIntro from '@/components/page-five/agency/agentIntro'
-import agentMember from '@/components/page-five/agency/agentMember'
-import agentReport from '@/components/page-five/agency/agentReport'
-import lowerReport from '@/components/page-five/agency/lowerReport'
-import manageInvite from '@/components/page-five/agency/manageInvite'
-import mIcode from '@/components/page-five/agency/manageInvite/mIcode'
-import mInvite from '@/components/page-five/agency/manageInvite/mInvite'
-import payway from '@/components/page-five/money/payway'
-import detail from '@/components/page-five/detail'
-import datum from '@/components/page-five/details/datum'
-import setmobile from '@/components/page-five/details/setmobile'
-import setemail from '@/components/page-five/details/setemail'
-import title from '@/components/page-five/details/title'
-import mymsg from '@/components/page-five/mymsg'
-import letter from '@/components/page-five/mymsg/letter'
-import notice from '@/components/page-five/mymsg/notice'
-import profits from '@/components/page-five/profit'
-import safety from '@/components/page-five/safety'
-import verifyPwd from '@/components/page-five/safety/verifyPwd'
-import setPwd from '@/components/page-five/safety/setPwd'
-import getCards from '@/components/page-five/safety/getCards'
-import newCard from '@/components/page-five/safety/newCard'
-import verifySafePwd from '@/components/page-five/safety/verifySafePwd'
-import changeSafePwd from '@/components/page-five/safety/changeSafePwd'
-import safeMobile from '@/components/page-five/safety/safeMobile'
-import safeEmail from '@/components/page-five/safety/safeEmail'
-import setSafePwd from '@/components/page-five/safety/setSafePwd'
-import resetWay from '@/components/page-five/safety/resetWay'
-import setQuestion from '@/components/page-five/safety/setQuestion'
-import safeQuestion from '@/components/page-five/safety/safeQuestion'
-import ErrorPage from '@/components/public/ErrorPage'
-import lotterList from '@/components/lotter-all/lotterList'
-import lotterAll from '@/components/lotter-all/lotterAll'
-import k3s from '@/components/lotter-all/k3'
-import sscs from '@/components/lotter-all/ssc'
-import klcs from '@/components/lotter-all/klc'
-import etfs from '@/components/lotter-all/etf'
-import betbj10 from '@/components/lotter-all/lotterbet/betbj10'
-import betbjkl8 from '@/components/lotter-all/lotterbet/betbjkl8'
-import betetf from '@/components/lotter-all/lotterbet/betetf'
-import betk3 from '@/components/lotter-all/lotterbet/betk3'
-import betlhc from '@/components/lotter-all/lotterbet/betlhc'
-import betssc from '@/components/lotter-all/lotterbet/betssc'
-
-
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -81,12 +10,13 @@ export default new Router({
       return { x: 0, y: 0 }
     }
   },
-  routes: [{
-      path: '/ErrorPage',
-      name: 'ErrorPage',
-      component: ErrorPage,
+  routes: [
+    {
+      path: "/AppDown",
+      name: 'AppDown',
+      component: resolve => require(['@/components/public/AppDown.vue'], resolve),
       meta: {
-        title: '操作失败'
+        title: '空白',
       }
     },
     {
@@ -95,7 +25,8 @@ export default new Router({
       component: resolve => require(['@/components/login/login.vue'], resolve),
       meta: {
         title: '登陆',
-        keepAlive: false
+        keepAlive: false,
+        index:1
       }
     },
     {
@@ -197,7 +128,7 @@ export default new Router({
       children: [{
           path: 'lotterAll',
           name: 'lotterAll',
-          component: lotterAll,
+          component: resolve => require(['@/components/lotter-all/lotterAll.vue'], resolve),
           meta: {
             keepAlive: true
           }
@@ -240,7 +171,7 @@ export default new Router({
       path: '/',
       name: 'home',
       redirect: 'one',
-      component: home,
+      component: resolve => require(['@/components/home/home.vue'], resolve),
       meta: {
         keepAlive: true
       },
@@ -287,7 +218,7 @@ export default new Router({
           children: [{
               path: 'winning',
               name: 'winning',
-              component: winning,
+              component: resolve => require(['@/components/page-four/winning.vue'], resolve),
               meta: {
                 keepAlive: true
               }
@@ -295,7 +226,7 @@ export default new Router({
             {
               path: 'profit',
               name: 'profit',
-              component: profit,
+              component: resolve => require(['@/components/page-four/profit.vue'], resolve),
               meta: {
                 keepAlive: true
               }
@@ -313,18 +244,9 @@ export default new Router({
       ]
     },
     {
-      path: '/pop',
-      name: 'pop',
-      component: resolve => require(['@/components/page-four/pop.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
       path: '/safety',
       name: 'safety',
-      component: safety,
-      // component: resolve => require(['@/components/page-five/safety.vue'], resolve),
+      component: resolve => require(['@/components/page-five/safety.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -332,7 +254,7 @@ export default new Router({
     {
       path: '/verifyPwd',
       name: 'verifyPwd',
-      component: verifyPwd,
+      component: resolve => require(['@/components/page-five/safety/verifyPwd.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -340,7 +262,7 @@ export default new Router({
     {
       path: '/setPwd',
       name: 'setPwd',
-      component: setPwd,
+      component: resolve => require(['@/components/page-five/safety/setPwd.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -348,7 +270,7 @@ export default new Router({
     {
       path: '/verifySafePwd',
       name: 'verifySafePwd',
-      component: verifySafePwd,
+      component: resolve => require(['@/components/page-five/safety/verifySafePwd.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -356,7 +278,7 @@ export default new Router({
     {
       path: '/changeSafePwd',
       name: 'changeSafePwd',
-      component: changeSafePwd,
+      component: resolve => require(['@/components/page-five/safety/changeSafePwd.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -364,7 +286,7 @@ export default new Router({
     {
       path: '/safeMobile',
       name: 'safeMobile',
-      component: safeMobile,
+      component: resolve => require(['@/components/page-five/safety/safeMobile.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -372,7 +294,7 @@ export default new Router({
     {
       path: '/safeEmail',
       name: 'safeEmail',
-      component: safeEmail,
+      component: resolve => require(['@/components/page-five/safety/safeEmail.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -380,7 +302,7 @@ export default new Router({
     {
       path: '/setSafePwd',
       name: 'setSafePwd',
-      component: setSafePwd,
+      component: resolve => require(['@/components/page-five/safety/setSafePwd.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -388,7 +310,7 @@ export default new Router({
     {
       path: '/resetWay',
       name: 'resetWay',
-      component: resetWay,
+      component: resolve => require(['@/components/page-five/safety/resetWay.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -396,7 +318,7 @@ export default new Router({
     {
       path: '/setQuestion',
       name: 'setQuestion',
-      component: setQuestion,
+      component: resolve => require(['@/components/page-five/safety/setQuestion.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -404,7 +326,7 @@ export default new Router({
     {
       path: '/safeQuestion',
       name: 'safeQuestion',
-      component: safeQuestion,
+      component: resolve => require(['@/components/page-five/safety/safeQuestion.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -412,7 +334,7 @@ export default new Router({
     {
       path: '/profits',
       name: 'profits',
-      component: profits,
+      component: resolve => require(['@/components/page-five/profit.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -421,14 +343,14 @@ export default new Router({
       path: '/mymsg',
       name: 'mymsg',
       redirect: 'mymsg/notice',
-      component: mymsg,
+      component: resolve => require(['@/components/page-five/mymsg.vue'], resolve),
       meta: {
         keepAlive: false
       },
       children: [{
           path: 'notice',
           name: 'notice',
-          component: notice,
+          component: resolve => require(['@/components/page-five/mymsg/notice.vue'], resolve),
           meta: {
             keepAlive: false
           }
@@ -436,7 +358,7 @@ export default new Router({
         {
           path: 'letter',
           name: 'letter',
-          component: letter,
+          component: resolve => require(['@/components/page-five/mymsg/letter.vue'], resolve),
           meta: {
             keepAlive: false
           }
@@ -447,7 +369,7 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       redirect: 'detail/datum',
-      component: detail,
+      component: resolve => require(['@/components/page-five/detail.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -462,7 +384,7 @@ export default new Router({
         {
           path: 'title',
           name: 'title',
-          component: title,
+          component: resolve => require(['@/components/page-five/details/title.vue'],resolve),
           meta: {
             keepAlive: false
           }
@@ -473,7 +395,7 @@ export default new Router({
     {
       path: '/agency',
       name: 'agency',
-      component: agency,
+      component: resolve => require(['@/components/page-five/agency.vue'],resolve),
       meta: {
         keepAlive: false
       },
@@ -481,7 +403,7 @@ export default new Router({
     {
       path: '/agentIntro',
       name: 'agentIntro',
-      component: agentIntro,
+      component: resolve => require(['@/components/page-five/agency/agentIntro.vue'],resolve),
       meta: {
         keepAlive: false
       }
@@ -489,7 +411,7 @@ export default new Router({
     {
       path: '/agentReport',
       name: 'agentReport',
-      component: agentReport,
+      component: resolve => require(['@/components/page-five/agency/agentReport.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -497,7 +419,7 @@ export default new Router({
     {
       path: '/lowerReport',
       name: 'lowerReport',
-      component: lowerReport,
+      component: resolve => require(['@/components/page-five/agency/lowerReport.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -505,7 +427,7 @@ export default new Router({
     {
       path: '/manageInvite',
       name: 'manageInvite',
-      component: manageInvite,
+      component: resolve => require(['@/components/page-five/agency/manageInvite.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -513,7 +435,7 @@ export default new Router({
       children: [{
           path: 'mInvite',
           name: 'mInvite',
-          component: mInvite,
+          component: resolve => require(['@/components/page-five/agency/manageInvite/mInvite.vue'], resolve),
           meta: {
             keepAlive: false
           }
@@ -521,7 +443,7 @@ export default new Router({
         {
           path: 'mIcode',
           name: 'mIcode',
-          component: mIcode,
+          component: resolve => require(['@/components/page-five/agency/manageInvite/mIcode.vue'], resolve),
           meta: {
             keepAlive: false
           }
@@ -531,7 +453,7 @@ export default new Router({
     {
       path: '/agentMember',
       name: 'agentMember',
-      component: agentMember,
+      component: resolve => require(['@/components/page-five/agency/agentMember.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -539,7 +461,7 @@ export default new Router({
     {
       path: '/agentBetRecord',
       name: 'agentBetRecord',
-      component: agentBetRecord,
+      component: resolve => require(['@/components/page-five/agency/agentBetRecord.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -547,23 +469,7 @@ export default new Router({
     {
       path: '/agentBillRecord',
       name: 'agentBillRecord',
-      component: agentBillRecord,
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: '/detail/setmobile',
-      name: 'setmobile',
-      component: resolve => require(['@/components//page-five/details/setmobile.vue'], resolve),
-      meta: {
-        keepAlive: false
-      }
-    },
-    {
-      path: '/detail/setemail',
-      name: 'setemail',
-      component: resolve => require(['@/components//page-five/details/setemail.vue'], resolve),
+      component: resolve => require(['@/components/page-five/agency/agentBillRecord.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -587,7 +493,7 @@ export default new Router({
     {
       path: '/bet',
       name: 'bet',
-      component: bet,
+      component: resolve => require(['@/components/page-five/money/bet.vue'], resolve),
       meta: {
         keepAlive: true
       },
@@ -595,7 +501,7 @@ export default new Router({
     {
       path: '/trade',
       name: 'trade',
-      component: trade,
+      component: resolve => require(['@/components/page-five/money/trade.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -603,7 +509,7 @@ export default new Router({
     {
       path: '/bankcharge',
       name: 'bankcharge',
-      component: bankcharge,
+      component: resolve => require(['@/components/page-five/money/bankcharge.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -611,7 +517,31 @@ export default new Router({
     {
       path: '/weixincharge',
       name: 'weixincharge',
-      component: weixincharge,
+      component: resolve => require(['@/components/page-five/money/weixincharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/creditccharge',
+      name: 'creditccharge',
+      component: resolve => require(['@/components/page-five/money/creditccharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/huabeicharge',
+      name: 'huabeicharge',
+      component: resolve => require(['@/components/page-five/money/huabeicharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/alipaycharge',
+      name: 'alipaycharge',
+      component: resolve => require(['@/components/page-five/money/alipaycharge.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -619,7 +549,7 @@ export default new Router({
     {
       path: '/rechargeserch',
       name: 'rechargeserch',
-      component: rechargeserch,
+      component: resolve => require(['@/components/page-five/money/rechargeserch.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -627,7 +557,7 @@ export default new Router({
     {
       path: '/getCards',
       name: 'getCards',
-      component: getCards,
+      component: resolve => require(['@/components/page-five/safety/getCards.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -635,7 +565,7 @@ export default new Router({
     {
       path: '/newCard',
       name: 'newCard',
-      component: newCard,
+      component: resolve => require(['@/components/page-five/safety/newCard.vue'], resolve),
       meta: {
         keepAlive: false
       }
@@ -643,7 +573,22 @@ export default new Router({
     {
       path: '/cashOut',
       name: 'cashOut',
-      component: cashOut,
+      component: resolve => require(['@/components/page-five/money/cashOut.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/agencyOut',
+      name: 'agencyOut',
+      component: resolve => require(['@/components/page-five/money/agencyOut.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },{
+      path: '/agencyOuts',
+      name: 'agencyOuts',
+      component: resolve => require(['@/components/page-five/money/agencyOuts.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -651,7 +596,7 @@ export default new Router({
     {
       path: '/service',
       name: 'service',
-      component: service,
+      component: resolve => require(['@/components/page-five/service.vue'], resolve),
       meta: {
         keepAlive: false
       },
@@ -659,7 +604,7 @@ export default new Router({
     {
       path: '/payway',
       name: 'payway',
-      component: payway,
+      component: resolve => require(['@/components/page-five/money/payway.vue'], resolve),
       meta: {
         keepAlive: false
       },

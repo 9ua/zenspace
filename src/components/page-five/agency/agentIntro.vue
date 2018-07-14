@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/agency', tag='i')
     p 代理说明
+    span
   .listStyle-content
     .listStyle-content-top
       img(src='@/assets/img/five/agentIntro.png')

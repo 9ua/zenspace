@@ -3,6 +3,7 @@
   .verifySafePwd-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 验证安全密码
+    span
   .verifySafePwd-input
     p 原安全密码
     input(type='password', v-model='oldPassword', placeholder='请输入当前所使用的密码', v-focus='')

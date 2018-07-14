@@ -1,11 +1,5 @@
 <template lang="jade">
 .listStyle
-  //
-    <div class="listStyle-top">
-    <router-link to="/five" tag="i" class="el-icon-arrow-left"></router-link>
-    <i class="el-icon-arrow-left" @click="banckto"></i>
-    <p>私信</p>
-    </div>
   .listStyle-content
     div
       ul.listStyle-IV(v-show='showFlag')
@@ -67,12 +61,9 @@ export default {
           params: { type: 1 }
         })
         .then(res => {
-          // this.userNoticeList = res;
-          console.log(res);
           this.letterlist = res.data.data;
         })
         .catch(error => {
-          console.log(error);
           console.log("获取彩種ratio ERROR");
         });
     },
@@ -82,12 +73,9 @@ export default {
           params: { id: x }
         })
         .then(res => {
-          // this.userNoticeList = res;
-          console.log(res, 99995);
           this.notice = res.data.data.content;
         })
         .catch(error => {
-          console.log(error);
           console.log("获取CCCCONTENT ERROR");
         });
     }

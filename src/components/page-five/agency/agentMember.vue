@@ -3,6 +3,7 @@
   .listStyle-top(v-bind:class='{ blur: show2 }')
     router-link.el-icon-arrow-left(to='/agency', tag='i')
     p 会员管理
+    span
   .listStyle-content(v-bind:class='{ blur: show2 }')
     .row
       .title 账号

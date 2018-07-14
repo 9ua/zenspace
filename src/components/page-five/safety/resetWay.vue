@@ -3,6 +3,7 @@
   .resetWay-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 找回安全密码
+    span
   .resetWay-input
     router-link(to='', tag='div')
       p 通过密保问题

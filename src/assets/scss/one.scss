@@ -1,6 +1,7 @@
+@import "./main.scss";
 .van-notice-bar {
-  display: flex;
-  align-items: center;
+  @extend %flex;
+  @extend %aitems;
   background: #fff !important;
   color: #333;
   height: 46px;
@@ -18,7 +19,7 @@
 
 .add {
   position: relative;
-  align-items: center;
+  @extend %aitems;
   height: 46px;
   border-bottom: 1px solid #E9E9E9;
   background: #fff;
@@ -26,20 +27,17 @@
 
 .one-center {
   height: 100%;
-  // overflow-y: scroll;
   background: #fff;
   ul {
-    display: flex;
-    flex-wrap: wrap;
+    @extend %flex;
+    @extend %fr;
     background: #fff;
     margin: 6px 0px 0px;
     width: 100%;
     border-top: 1px solid #DFE4ED;
     & li {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
+      @extend %faj;
+      @extend %fdc;
       border: 1px solid #DFE4ED;
       border-top: 0px solid #DFE4ED;
       border-left: 0px solid #DFE4ED;

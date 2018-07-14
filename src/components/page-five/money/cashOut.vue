@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 我要提现
+    span
   .listStyle-content
     ul.listStyle-III
       li
@@ -12,6 +13,9 @@
         p 最低提现额度 
         | {{moneyDepositMin}}
       li
+        p 账户余额 
+        | {{$store.state.balance}}
+      li
         p 可提现余额 
         | {{myAmount}}
       li
@@ -20,7 +24,7 @@
       li
         p 申请金额
         div
-          el-input(placeholder='请输入充值金额', v-model='amount', :value='amount', clearable='')
+          el-input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', :value='amount', clearable='')
       li
         p 账号
         div(@click='show1 = ! show1')
@@ -29,7 +33,7 @@
       li
         p 账户安全码
         div
-          el-input(placeholder='请输入安全码', v-model='securityCode', :value='securityCode', clearable='')
+          el-input(placeholder='请输入安全码', v-model='securityCode', :value='securityCode', clearable='' type="password")
       li
         .button
           button.button1(@click='sendReq()') 提现申请
@@ -58,6 +62,7 @@ import md5 from "js-md5";
 export default {
   data() {
     return {
+      withdrawType: 1,
       timeline: "今天",
       cardnum: "",
       bankUserId: "",
@@ -66,7 +71,7 @@ export default {
       show2: false,
       show3: false,
       show4: false,
-      selectBank: "请选择要提现银行",
+      selectBank: "请选择银行卡",
       bankList: [],
       payway: [],
       withdrawInformation: "",
@@ -82,10 +87,22 @@ export default {
     this.getWithdrawInformation();
   },
   methods: {
+    parseIntAmount(){
+      if(this.amount !== ''){
+        this.amount = parseInt(this.amount);
+      }
+    },
     getWithdrawInformation() {
       this.$http
-        .get(this.$store.state.url + "api/proxy/getWithdrawInformation")
+        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
+          params: { withdrawType: this.withdrawType }
+        })
         .then(res => {
+          if (this.$store.state.userType === "0") {
+            this.withdrawType = 1;
+          } else if (this.$store.state.userType === "1"){
+            this.withdrawType = 2;
+          }
           this.withdrawInformation = res.data.data;
           this.bankList = res.data.data.bankUserList;
           this.moneyDepositMax = res.data.data.moneyDepositMax;
@@ -114,7 +131,13 @@ export default {
     },
     sendReq() {
       if (this.amount === "") {
-        this.content = "請輸入金額!";
+        this.content = "请输入金額!";
+        this.show2 = true;
+      }else if(this.selectBank === "请选择银行卡"){
+        this.content = "请选择银行卡!";
+        this.show2 = true;
+      }else if(this.securityCode === ""){
+        this.content = "请输入安全码!";
         this.show2 = true;
       } else {
         let config = {
@@ -122,9 +145,10 @@ export default {
           withCredentials: true
         };
         let formData = new FormData();
-        formData.append("amount", this.amount);
+        formData.append("amount", parseInt(this.amount));
         formData.append("bankUserId", this.bankUserId);
         formData.append("securityCode", md5(this.securityCode));
+        // formData.append("withdrawType", this.withdrawType);
         this.$axios
           .post(
             this.$store.state.url + "api/proxy/setWithdraw",

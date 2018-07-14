@@ -25,17 +25,17 @@
   van-actionsheet(v-model='show')
     .listStyle-II
       li
-        span {{this.selected.id}}
+        span {{selected.id}}
       li
-        span {{this.selected.code}}
+        span {{selected.code}}
       li
-        span {{this.url}}
+        input(type='text', v-model='url', onfocus='this.select()')
       li
         p 产生日期
-        span {{this.selected.date}}
+        span {{selected.date}}
       li
         p 注册数
-        span ({{this.selected.count}})个帐户
+        span ({{selected.count}})个帐户
       li
         .button
           button.button2(@click='select2()') 删除此邀请码
@@ -82,7 +82,7 @@ export default {
       this.show = !this.show;
       this.selected = a;
       this.url =
-        "https://" + location.hostname + "/#/registered?code=" + a.code;
+        "http://" + location.hostname + "/registered?code=" + a.code;
     },
     select2() {
       this.show2 = !this.show2;

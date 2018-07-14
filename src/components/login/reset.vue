@@ -3,6 +3,7 @@
   .reset-title
     router-link.el-icon-arrow-left(to='/login', tag='i')
     p 忘记密码
+    span
   .reset-content
     ul
       li

@@ -21,7 +21,6 @@ export default {
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryListAll = res.data.data.all;
-          console.log(this.lotteryListAll);
         })
         .catch(error => {
           console.log("getLotteryListNo");

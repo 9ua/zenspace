@@ -29,18 +29,22 @@ const state = {
   email: getStore('email'), //邮箱
   sex: getStore('sex'), //性别ID
   birthday: getStore('birthday'), //生日
-  userType: getStore('userType'), //member type
+  userType: getStore('userType'), //0会员，1代理
   playBonusk3: null,
   playGroupsssc: null,
-  historyNum: "/one"
+  historyNum: "/one",
+  pageNum:'pageNum0'
 }
+//test & prod
 if (process.env.NODE_ENV === 'production') {
-  if (location.hostname === '115.144.238.217')
-    state.url = 'http://' + location.hostname + '/';
+  if (location.hostname === 'm.edu0370.com')
+    state.url = 'http://' + location.hostname.replace('m.', '') + '/';
   else
     state.url = 'https://' + location.hostname.replace('m.', '') + '/';
-} else {
-  state.url = 'http://115.144.238.217/';
+}
+//local
+else {
+  state.url = 'http://edu0370.com/';
 }
 
 export default new Vuex.Store({

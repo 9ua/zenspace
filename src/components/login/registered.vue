@@ -14,11 +14,11 @@
         input(type='text', onfocus='this.select()', v-model='username', placeholder='请输入您要注册的账号')
       li
         span 设置密码
-        input(:type="pwd ? 'text' : 'password'", v-model='password1', onfocus='this.select()', placeholder='请输入您要设置的密码')
+        input(:type="pwd ? 'text' : 'password'", v-model='password1', onfocus='this.select()', placeholder='请输入您的密码')
         i.iconfont(:class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'", @click='pwd = !pwd')
       li
         span 确认密码
-        input(type='password', v-model='password2', onfocus='this.select()', placeholder='请再次输入您要设置的密码')
+        input(type='password', v-model='password2', onfocus='this.select()', placeholder='请再次输入您的密码')
       li
         span 验证码
         input(type='text', onfocus='this.select()', v-model='verification', placeholder='请输入验证码')

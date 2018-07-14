@@ -1,12 +1,13 @@
+@import "../../main.scss";
 .betssc {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @extend %flex;
+  @extend %fdc;
+  @extend %sbetween;
   & .betssc-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
     height: 46px;
     font-size: 16px;
     padding: 0px 16px;
@@ -20,17 +21,13 @@
       width: 56%;
       text-align: center;
       font-size: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @extend %faj;
       & .wangfa {
         margin: 0px;
         margin-right: 4px;
       }
       & .menu {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @extend %faj;
         padding: 2px 6px;
         border: 1px solid hsla(0, 0%, 100%, .5);
         border-radius: 4px;
@@ -41,11 +38,11 @@
         }
       }
       & .menu-list {
+        @extend %flex;
+        @extend %fdc;
         position: absolute;
         left: 0px;
         top: 43px;
-        display: flex;
-        flex-direction: column;
         width: 100%;
         & .van-popup--top {
           top: 43px;
@@ -60,20 +57,18 @@
             -webkit-overflow-scrolling: touch;
             & .menu-list-top {
               width: 100%;
-              display: flex;
-              flex-direction: column;
-              flex-wrap: wrap;
+              @extend %flex;
+              @extend %fdc;
+              @extend %fr;
               & li {
-                display: flex;
-                flex-direction: row;
+                @extend %flex;
+                @extend %fdr;
                 font-size: 12px;
                 width: 100%;
                 padding: 4px 0px;
                 border-bottom: 1px solid hsla(0, 0%, 100%, .3);
                 & .title {
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
+                  @extend %faj;
                   height: 24px;
                   font-size: 16px;
                   width: 20%;
@@ -81,15 +76,13 @@
                 & .menu-list-list-box {
                   width: 80%;
                   & .menu-list-list {
-                    display: flex;
-                    align-items: center;
+                    @extend %flex;
+                    @extend %aitems;
+                    @extend %fr;
                     background: none;
-                    flex-wrap: wrap;
                     overflow: hidden;
                     & span {
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
+                      @extend %faj;
                       width: 80px;
                       height: 24px;
                       background: none;
@@ -122,17 +115,15 @@
     & li:nth-child(3) {
       text-align: right;
       & ul {
-        display: flex;
-        flex-wrap: wrap;
+        @extend %flex;
+        @extend %fr;
         position: absolute;
         top: 44px;
         right: 1px;
         width: 160px;
         background: #fff;
         & li {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          @extend %faj;
           width: 50%;
           font-size: 14px;
           color: #000;
@@ -155,14 +146,14 @@
   >div {
     height: 100%;
     & .betk3-content-top {
-      display: flex;
-      justify-content: space-between;
+      @extend %flex;
+      @extend %sbetween;
       background: #22563f;
       color: #caebda;
       & .content-left {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @extend %flex;
+        @extend %aitems;
+        @extend %fdc;
         width: 50%;
         border-right: 1px solid #164630;
         & p {
@@ -170,13 +161,11 @@
           line-height: 28px;
         }
         & div {
-          display: flex;
-          align-items: center;
+          @extend %flex;
+          @extend %aitems;
           margin-top: 4px;
           & p {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @extend %faj;
             width: 22px;
             height: 22px;
             overflow: hidden;
@@ -195,9 +184,9 @@
         }
       }
       & .content-right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @extend %flex;
+        @extend %aitems;
+        @extend %fdc;
         width: 50%;
         & p {
           font-size: 16px;
@@ -216,11 +205,9 @@
       background: #22563f;
       & ul {
         & li {
-          display: flex;
+          @extend %flex;
           & p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            @extend %faj;
             font-size: 14px;
             color: #caebda;
             padding: 4px 0px;
@@ -284,27 +271,25 @@
           & .fushi {
             margin-top: 10px;
             & li {
-              display: flex;
-              flex-direction: column;
+              @extend %flex;
+              @extend %fdc;
               & p {
-                display: flex;
-                margin-bottom: 6px; //   border-bottom: 1px solid rgb(79, 170, 140);
+                @extend %flex;
+                margin-bottom: 6px;
                 & b {
-                  display: flex;
+                  @extend %flex;
+                  @extend %jcontent;
                   align-items: flex-start;
-                  justify-content: center;
                   width: 14%;
                   padding-top: 6px;
                 }
                 & span {
-                  display: flex;
+                  @extend %flex;
+                  @extend %fr;
                   width: 86%;
-                  flex-wrap: wrap;
                   & a {
+                    @extend %faj;
                     margin: 0px 26px 8px 0px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
                     width: 30px;
                     height: 30px;
                     border-radius: 50%;
@@ -342,18 +327,18 @@
   color: #ffaf36;
   width: 100%;
   & .betssc-footer-top {
+    @extend %flex;
+    @extend %fdc;
     position: absolute;
     top: -60px;
     background: #22563f;
     height: 60px;
-    display: flex;
-    flex-direction: column;
     color: #caebda;
     font-size: 16px;
     width: 100%;
     & .betssc-footer-tops {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       height: 50%;
       & span {
         color: #ffaf36;
@@ -370,9 +355,9 @@
       }
     }
     & .betssc-footer-buttoms {
+      @extend %flex;
+      @extend %aitems;
       height: 50%;
-      display: flex;
-      align-items: center;
       & input {
         width: 20%;
         margin-left: 10px;
@@ -383,8 +368,8 @@
       }
       & span {
         width: 55%;
-        display: flex;
-        flex-direction: row;
+        @extend %flex;
+        @extend %fdr;
         font-size: 12px;
         margin-left: 6px;
         align-items: center;
@@ -403,13 +388,13 @@
   & .betssc-footer-buttom {
     background: #000;
     height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
     padding: 0px 16px;
     & .betssc-footer-buttom-left {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       & button {
         background: none;
         border: none;
@@ -426,9 +411,7 @@
       }
     }
     & .betssc-footer-buttom-right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @extend %faj;
       font-size: 18px;
       height: 30px;
       width: 100px;
@@ -440,9 +423,7 @@
 }
 
 .van-popup.sscpop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %faj;
   padding: 8px 16px;
   color: #fff;
   font-size: 14px;
@@ -454,31 +435,29 @@
   background-color: rgba(0, 0, 0, 0.2) !important;
 }
 .betc {
+  @extend %flex;
+  @extend %fdc;
   position: absolute;
   top: 50%;
   left: 50%;
   margin-left: -170px;
   margin-top: -80px;
-  display: flex;
-  flex-direction: column;
   width: 340px;
   background: #ddd;
   & li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend %faj;
     border-bottom: 1px solid #DFE4ED;
     min-height: 30px;
     font-size: 14px;
   }
   & li:nth-child(2) {
+    @extend %flex;
+    @extend %fdc;
     min-height: 54px;
-    display: flex;
-    flex-direction: column;
     padding: 4px 0px;
     & p {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       padding: 4px 0px 4px 60px;
       width: 100%;
       & span {

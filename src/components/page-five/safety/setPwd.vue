@@ -3,6 +3,7 @@
   .setPwd-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 设置登陆密码
+    span
   .setPwd-input
     div
       p 登陆密码

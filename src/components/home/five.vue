@@ -5,7 +5,7 @@
     div
       .five-top-left
         router-link(to='/detail/datum', tag='p')
-          img(:src='"@/assets/img/five/"+$store.state.image+".jpg"', alt='')
+          img(:src='"../../../static/images/"+$store.state.image+".jpg"', alt='')
       .five-top-right
         p
           | 账号：
@@ -13,7 +13,7 @@
         p
           | 余额：
           span(v-show=' !money ') *****
-          span(v-show='money', ref='money') {{ balances | keepTwoNum}}元
+          span(v-show='money', ref='money') {{ balances }}
           button(v-show='!money', @click='money = !money') 显示
       .five-top-right2(v-show='money', @click='F5money')
         img(:class=" toF5money ? 'totransition' : ''", src='@/assets/img/five/ROLL.png', alt='')
@@ -59,8 +59,9 @@ import { setStore, getStore, removeStore } from "../../config/mutil";
 export default {
   data() {
     return {
-      bankUserFlag: "",
-      securityCoe: "",
+      bankUserFlag: "", //银行卡状态
+      securityCoe: "", //安全码状态
+      question: "", //密保问题状态
       content: "",
       show2: false,
       balances: "", //用户余额
@@ -122,11 +123,12 @@ export default {
     //刷新余额
     F5money() {
       this.toF5money = !this.toF5money;
-      this.$refs.money.innerHTML = "元";
+      //this.$refs.money.innerHTML = "讀取中...";
+      this.balances = "读取中...";
       setTimeout(() => {
         this.getBalance();
         this.toF5money = !this.toF5money;
-        this.$refs.money.innerHTML = Number(this.balances).toFixed(2) + "元";
+        //this.$refs.money.innerHTML = Number(this.balances).toFixed(2) + "元";
       }, 800);
     },
     //獲取安全中心狀態
@@ -136,20 +138,35 @@ export default {
         .then(res => {
           this.securityCoe = res.data.data.securityCoe;
           this.bankUserFlag = res.data.data.bankUserFlag;
+          this.question = res.data.data.question;
           if (this.securityCoe == 0 && this.bankUserFlag == 0) {
-            this.content = "请先绑定安全密码及银行帐户，是否跳转至设定页？";
+            this.content = "请先设置安全密码及绑定银行帐户，是否跳转至设置页？";
             this.show2 = !this.show2;
           } else if (this.bankUserFlag == 0) {
             this.content = "请先绑定银行帐户，是否跳转至设定页？";
             this.show2 = !this.show2;
-          } else {
+          } else if (this.question == 0) {
+            this.content = "请先设置密保问题，是否跳转至设定页？";
+            this.show2 = !this.show2;
+          }
+          if (
+            this.securityCoe == 1 &&
+            this.bankUserFlag == 1 &&
+            this.question === 1
+          ) {
             this.waterFall();
+            // if (this.$store.state.userType === "0") {
+            //   this.waterFall();
+            // } else if (this.$store.state.userType === "1") {
+            //   this.$router.push({path:"/agencyOuts"});
+            // }
           }
         })
         .catch(error => {
           console.log("獲取安全中心狀態");
         });
     },
+    //判断是否允许当前会员用户进行提款
     waterFall() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getWithdrawFlag")
@@ -163,11 +180,28 @@ export default {
           console.log("取安全中心状态No111");
         });
     },
+    //判断是否允许当前代理用户进行提款
+    getAgentWithdrawFlag() {
+      this.$axios
+        .get(this.$store.state.url + "api/proxy/getAgentWithdrawFlag")
+        .then(res => {
+          consoele.log(res.data.code)
+          this.water = res.data.code;
+          if (res.data.code === 1) {
+            this.$router.push({ path: "/agencyOuts" });
+          }
+        })
+        .catch(error => {
+          console.log("取安全中心状态No111");
+        });
+    },
     goToSet() {
       if (this.securityCoe == 0 && this.bankUserFlag == 0) {
         this.$router.push({ path: "/setSafePwd" });
       } else if (this.bankUserFlag == 0) {
         this.$router.push({ path: "/newCard" });
+      } else if (this.question == 0) {
+        this.$router.push({ path: "/setQuestion" });
       } else {
         this.waterFall();
       }
@@ -198,10 +232,16 @@ export default {
       this.$http
         .get(this.$store.state.url + "api/userCenter/getBalance")
         .then(res => {
-          this.balances = res.data.data.balance;
+          this.$store.state.balance = res.data.data.balance;
+          if (res.data.code === 1) {
+            this.balances = Number(res.data.data.balance).toFixed(2) + "元";
+          } else {
+            this.balances = "加载延时,请重刷";
+          }
         })
         .catch(error => {
           console.log("获取用户余额");
+          this.balances = "加载延时,请重刷";
         });
     }
   },

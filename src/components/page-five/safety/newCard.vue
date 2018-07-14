@@ -3,6 +3,7 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/getCards', tag='i')
     p 绑定银行卡
+    span
   .listStyle-content
     ul.listStyle-III
       li
@@ -29,7 +30,7 @@
       li
         p 安全密码
         div
-          el-input(placeholder='请输入安全密码', v-model='securityCode', :value='securityCode', clearable='')
+          el-input(placeholder='请输入安全密码', v-model='securityCode', :value='securityCode', clearable='' type="password")
       li
         .button
           button.button1(@click='sendReq()') 确定
@@ -106,7 +107,6 @@ export default {
       this.show1 = !this.show1;
     },
     onConfirm(item, index) {
-      console.log(item, index, this.payway[index].id);
       this.bankNameId = this.payway[index].id;
       this.selectBank = this.payway[index].name;
       this.show1 = !this.show1;

@@ -28,10 +28,32 @@
         ul
           li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
             a {{listssc.name}}
+  .lookAllDiv(v-show='lookAllUl')
+    p.lookAllDivTitle
+      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      b.cont 查看更多
+      span
+    .lookAllUlBox
+      ul.lookAllUl
+        li
+          p 期号
+          p 开奖号码
+          p 开奖时间
+        li(v-for='(item,index) in getPastOpens', :key='index')
+          p
+            | {{item.seasonId.substring(4).split("-").join("")*1}}
+            i.el-icon-minus
+          p
+            a {{item.n1}}
+            a {{item.n2}}
+            a {{item.n3}}
+            a {{item.n4}}
+            a {{item.n5}}
+          p {{item.addTime.substring(11)}}
   .betssc-content
     div(v-show='!show')
-      .betk3-content-top(@click=' betsscContentTopPop = !betsscContentTopPop')
-        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0')
+      .betk3-content-top
+        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0', @click=' betsscContentTopPop = !betsscContentTopPop')
           p {{lastSeasonId.slice(4)*1}}期开奖号码
           div(v-show='!shownum')
             p {{item.n1}}
@@ -58,17 +80,19 @@
                 transition(name='down-up-translate-fade')
                   div {{h}}
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-        .content-right
-          p {{seasonId}}期投注截止
+        .content-right(@click='tolooksucc')
           div
-            p {{countDown}}
+            p.seasonId {{seasonId}}期投注截止
+            .time
+              p {{countDown}}
+          i.el-icon-caret-left
       .betk3-content-top-pop(v-show='betsscContentTopPop')
         ul.look
           li
             p 期号
             p 开奖号码
             p 开奖时间
-          li(v-for='(item,index) in getPastOpens', :key='index')
+          li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
             p
               | {{item.seasonId.substring(4).split("-").join("")*1}}
               i.el-icon-minus
@@ -81,6 +105,7 @@
             p {{item.addTime.substring(11)}}
         p.lookAll
           button(@click='lookAll') 查看更多
+          button(@click='lookAllTo') 往期开奖
       .betk3-content-foot
         div
           .betssc-list-box(v-show='true')
@@ -107,7 +132,7 @@
         p 每注金额
         input(type='number', v-model='money', onfocus='this.select()')
         span(v-if="money === ''") 请输入要投注的金额
-        span(v-else='', v-show="playBonusId !== 'ssc_dxds'")
+        span(v-else, v-show="playBonusId !== 'ssc_dxds'")
           | 单注最高可中
           p(v-show='! isNaN(money*displayBonus)') {{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
           p(v-show='isNaN(money*displayBonus)')
@@ -119,7 +144,7 @@
         p
           span(v-if='zhu >0') 共{{zhu}}注,
           span(v-if="this.money !== '' ") 共{{zhu*money}}元
-      .betssc-footer-buttom-right(@click='betC') 马上投注
+      .betssc-footer-buttom-right(@click='betC', v-show='betnot') 马上投注
   .betcBox(v-show='betGoshow')
     ul.betc(v-show='betGoshow')
       li 投注确认
@@ -146,6 +171,18 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
+  van-popup.pop2(v-model='betfail', :close-on-click-overlay='false')
+    div
+      ul
+        .title
+          p 温馨提示！
+        .cont
+          p
+            b 投注失败,
+            br
+            | 请检查您的连线
+        .but
+          button.nodel(@click='betfail = ! betfail') 确定
   van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
     div
       ul
@@ -161,8 +198,10 @@
         .but
           button.nodel(@click='showTimesUp = ! showTimesUp') 确定
   van-popup.sscpop(v-model='showpop') {{content}}
+  bets(ref='pop')
 </template>
 <script>
+import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -171,6 +210,8 @@ export default {
       k: 0,
       l: 0,
       h: 0,
+      shwoBet:false,
+      lookAllUl:false,
       shownum: false,
       startyet: false,
       interval: null, //动画
@@ -189,7 +230,7 @@ export default {
       listname: "重庆",
       lotteryId: "cqssc",
       LotteryList: "",
-      money: 1, //投注金额
+      money: "", //投注金额
       groupId: "",
       displayBonus: 0,
       displayBonus1: 0,
@@ -209,6 +250,7 @@ export default {
       navlistf: 0,
       betsscContentTopPop: false,
       getPastOpens: "", //获取过去开奖号码10个
+      getPastOpenB: "", //获取过去开奖号码第一个
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
       seasonId3: "",
@@ -240,15 +282,17 @@ export default {
       in: "",
       jn: "",
       splayGroups: [],
-      sgroups: [], //
-      sgroups2: [], //
-      splayers: [], //
-      snumView: [], //
-      snums: "", //
+      sgroups: [], 
+      sgroups2: [], 
+      splayers: [], 
+      snumView: [], 
+      snums: "", 
       timer: "",
       timer2: "",
       cacheTime: 600000,
-      historyNum: 0
+      historyNum: 0,
+      betnot:true,
+      betfail:false,
     };
   },
   destroyed() {
@@ -257,8 +301,10 @@ export default {
   },
   created() {
     this.getLotteryList();
+    this.endCount();
   },
   mounted() {
+    this.endCount();
     if (!this.$route.meta.isBack) {
       this.getPlayTree();
       this.geteServerTime(); //获取彩種當前獎期時間
@@ -270,7 +316,7 @@ export default {
       if (this.money === "") {
         setTimeout(() => {
           if (this.money === "") {
-            this.money = 1;
+            this.money = "";
           }
         }, 1000);
       } else {
@@ -283,8 +329,13 @@ export default {
     banckto() {
       this.$router.push(this.$store.state.historyNum);
     },
-    //查看更多记录
+    //查看20条记录
     lookAll() {
+      this.betsscContentTopPop = !this.betsscContentTopPop;
+      this.lookAllUl = !this.lookAllUl;
+    },
+    //往期开奖
+    lookAllTo() {
       this.$router.push({
         path: "second/past",
         query: {
@@ -293,6 +344,9 @@ export default {
           group: this.groupId
         }
       });
+    },
+    lookAllDivTitle() {
+      this.lookAllUl = !this.lookAllUl;
     },
     //筛子动画
     start() {
@@ -1803,7 +1857,7 @@ export default {
     //清空
     iscreat() {
       this.zhu = "";
-      this.money = 1;
+      this.money = "";
       this.con = "";
       this.d = [];
       this.dd = [];
@@ -1900,7 +1954,8 @@ export default {
     },
     //投注
     betGo() {
-      this.betGoshow = !this.betGoshow;
+      this.betGoshow = false;
+      this.betnot = false;
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
@@ -1919,29 +1974,41 @@ export default {
       formData.append("isTrace", 0);
       formData.append("lotteryId", this.$route.query.id);
       formData.append("amount", this.money * this.zhu);
+      this.iscreat();
       this.$axios
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
             setTimeout(() => {
+              this.betnot = true;
               this.showpop = !this.showpop;
               this.content = "投注成功!";
               this.iscreat();
               setTimeout(() => {
                 this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
-              }, 800);
-            }, 400);
+              }, 600);
+            }, 0);
+          } else {
+                this.betnot = true;
+                this.iscreat();
           }
         })
         .catch(error => {
           console.log("投注No");
+          this.iscreat();
+          this.betfail = true;
+          this.betnot = true;
         });
     },
     //查看注单
     looksucc() {
       this.$router.push({ path: "/bet" });
       this.betsuccess = !this.betsuccess;
+    },
+    tolooksucc(){
+      this.looks = !this.looks;
+      this.$refs.pop.banckto();
     },
     betsucc() {
       this.betsuccess = !this.betsuccess;
@@ -2016,37 +2083,6 @@ export default {
         this.displayBonus3 = this.displayBonus1 + "-" + this.displayBonus2;
       }
     },
-    //获取过去开奖号码10个
-    getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
-      this.shownum = true;
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 10 }
-        })
-        .then(res => {
-          this.getPastOpens = res.data.data;
-          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            this.reGetPastOp();
-          } else {
-            clearTimeout(this.timer2);
-            this.end();
-            this.startyet = false;
-            this.shownum = false;
-          }
-        })
-        .catch(error => {
-          console.log("获取过去开奖号码No");
-        });
-    },
-    reGetPastOp() {
-      clearTimeout(this.timer2);
-      this.timer2 = setTimeout(() => {
-        this.getPastOp();
-      }, 10000);
-    },
     //获取彩種當前獎期時間
     geteServerTime() {
       clearInterval(this.timer);
@@ -2075,7 +2111,7 @@ export default {
           console.log("获取彩種當前獎期時間No");
         });
     },
-    //時間格式
+    //時間格式轉換
     setTimeMode() {
       var hours = Math.floor((this.today % (1 * 60 * 60 * 24)) / (1 * 60 * 60));
       var minutes = Math.floor((this.today % (1 * 60 * 60)) / (1 * 60));
@@ -2100,12 +2136,54 @@ export default {
           clearInterval(this.timer);
           this.timesUp();
         }
+        if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46){
+          this.getPastOp();
+        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
+          this.getPastOp();
+        }
       }, 1000);
     },
     //時間到彈窗
     timesUp() {
       this.showTimesUp = !this.showTimesUp;
+      setTimeout(() => {
+        this.showTimesUp = false;
+      },3000);
       this.geteServerTime();
+    },
+    //获取过去开奖号码10个
+    getPastOp() {
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
+      this.$http
+        .get(this.$store.state.url + "api/lottery/getPastOpen", {
+          params: { lotteryId: this.$route.query.id, count: 20 }
+        })
+        .then(res => {
+          this.getPastOpens = res.data.data;
+          this.getPastOpenB = res.data.data;
+          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+            this.reGetPastOp();
+          } else {
+            clearTimeout(this.timer2);
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
+          }
+        })
+        .catch(error => {
+          console.log("获取过去开奖号码No");
+        });
+    },
+    reGetPastOp() {
+      clearTimeout(this.timer2);
+      this.timer2 = setTimeout(() => {
+        this.getPastOp();
+      }, 12000);
     },
     betC() {
       if (this.zhu <= 0) {
@@ -2120,6 +2198,9 @@ export default {
         this.betGoshow = !this.betGoshow;
       }
     }
+  },
+  components:{
+    bets
   },
   //focus
   directives: {

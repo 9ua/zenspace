@@ -17,50 +17,50 @@
     .listStyle-content-list
       ul
         li
-          span {{userTeam.actualSaleAmount}}
+          span {{userTeam.betAmount}}
           span 投注金额
         li
-          span {{userTeam.winAmount}}
+          span {{userTeam.winningAmount}}
           span 中奖金额
         li
-          span {{userTeam.activityAndSend}}
+          span {{userTeam.activityAmount}}
           span 活动礼金
         li
-          span {{userTeam.rebateAmount}}
+          span {{userTeam.teamRebateAmount}}
           span 团队返点
         li
-          span {{userTeam.count}}
+          span {{userTeam.profit}}
           span 团队盈利
         li
           span {{userTeam.rechargeAmount}}
           span 充值金额
         li
-          span {{userTeam.drawingAmount}}
+          span {{userTeam.withdrawAmount}}
           span 提现金额
         li
-          span {{userTeam.firstRechargeCount}}
+          span {{userTeam.firstChargeCount}}
           span 首充人数
         li
-          span {{userTeam.regTeamCount}}
+          span {{userTeam.regCount}}
           span 注册人数
         li
-          span {{userTeam.betCount}}
+          span {{userTeam.betPerCount}}
           span 投注人数
         li
-          span {{userTeam.teamCount}}
+          span {{userTeam.lowerCount}}
           span 下级人数
         li
           span {{userTeam.teamAmount}}
           span 团队馀额
         li
-          span {{userTeam.BettRebate}}
+          span {{userTeam.agentRebateAmount}}
           span 代理返点
         li
-          span {{userTeam.wages}}
-          span 代理工资
+          // span {{userTeam.wages}}
+          // span 代理工资
         li
-          span {{userTeam.periodicDividends}}
-          span 代理分红
+          // span {{userTeam.periodicDividends}}
+          // span 代理分红
 </template>
 <script>
 export default {

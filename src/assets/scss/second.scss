@@ -5,13 +5,17 @@
 .second {
   @extend %flex;
   @extend %fdc;
-  height: 100%;
+  min-height: calc(100% + 1px);
+  height: auto;
   width: 100%;
   & .one-top {
     color: #fff;
   }
   .second-conter {
     margin: 66px 10px 0px;
+    height: 556px;
+    overflow: hidden;
+    overflow-y: scroll;
     & .secondBox {
       & li {
         background: #fff;
@@ -106,6 +110,7 @@
     top: 0px;
     left: 0px;
     width: 100%;
+    z-index: 2018;
     @extend %flex;
     @extend %aitems;
     @extend %sbetween;
@@ -113,7 +118,6 @@
     background: #af3a31;
     color: #fff;
     font-size: 16px;
-    // padding: 0px 16px;
     & i {
       font-size: 24px;
       margin-left: 16px;
@@ -134,6 +138,7 @@
   top:56px;
   left: 0px;
   width: 100%;
+  z-index: 2018;
   & ul {
     height: 40px;
     background: #AE9880;
@@ -155,7 +160,7 @@
 
 .pastList {
   margin: 106px 10px 10px;
-  height: 13rem;
+  height: 500px;
   overflow: hidden;
   overflow-y: scroll;
   & ul {
@@ -187,11 +192,11 @@
     }
     & span {
       @extend %faj;
-      width: 50px;
       border: 1px solid #eee;
       border-radius: 10px;
       font-size: 12px;
       margin-left: 6px;
+      padding: 0px 10px;
     }
     
   }

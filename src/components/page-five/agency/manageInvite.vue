@@ -4,6 +4,7 @@
     router-link.el-icon-arrow-left(to='/agency', tag='i')
     ul
       router-link(v-for='(navs,index) in nav', :to="'/manageInvite/'+navs.pathurl", tag='li', :key='index') {{navs.name}}
+    span
   .mymsg-content
     router-view
 </template>

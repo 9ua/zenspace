@@ -8,7 +8,7 @@
       p 每注金额
       input(type='text', v-model='money', v-focus='')
       span(v-if="money === '' ") 请输入要投注的金额
-      span(v-else='')
+      span(v-else)
         | 最高可中
         p {{money*191.16 | keepTwoNum}}
         | 元
@@ -50,6 +50,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../../assets/scss/main.scss";
 .betk3-footer {
   background: #000;
   color: #ffaf36;
@@ -57,13 +58,13 @@ export default {
     background: #22563f;
     height: 60px;
     padding: 0px 16px;
-    display: flex;
-    flex-direction: column;
+    @extend %flex;
+    @extend %fdc;
     color: #caebda;
     font-size: 16px;
     & .betk3-footer-tops {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       height: 50%;
       & span {
         color: #ffaf36;
@@ -78,8 +79,8 @@ export default {
     }
     & .betk3-footer-buttoms {
       height: 50%;
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       width: 100%;
       & input {
         width: 20%;
@@ -91,11 +92,11 @@ export default {
       }
       & span {
         width: 55%;
-        display: flex;
-        flex-direction: row;
+        @extend %flex;
+        @extend %aitems;
+        @extend %fdr;
         font-size: 12px;
         margin-left: 6px;
-        align-items: center;
         & p {
           text-align: center;
           color: #ffaf36;
@@ -110,13 +111,13 @@ export default {
   & .betk3-footer-buttom {
     background: #000;
     height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
     padding: 0px 16px;
     & .betk3-footer-buttom-left {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       & button {
         background: none;
         border: none;
@@ -130,9 +131,7 @@ export default {
       }
     }
     & .betk3-footer-buttom-right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @extend %faj;
       font-size: 18px;
       height: 30px;
       width: 100px;

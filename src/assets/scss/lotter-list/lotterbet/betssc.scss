@@ -4,6 +4,8 @@
   @extend %flex;
   @extend %fdc;
   @extend %sbetween;
+  position: relative;
+  overflow: hidden;
   & .betssc-top {
     @extend %flex;
     @extend %aitems;
@@ -20,17 +22,13 @@
       width: 60%;
       text-align: center;
       font-size: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @extend %faj;
       & .wangfa {
         margin: 0px;
         margin-right: 4px;
       }
       & .menu {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @extend %faj;
         padding: 2px 6px;
         font-size: 14px;
         border: 1px solid hsla(0, 0%, 100%, .5);
@@ -42,14 +40,14 @@
         }
       }
       & .menu-list {
+        @extend %flex;
+        @extend %fdc;
         position: absolute;
         left: 0px;
-        top: 53px;
-        display: flex;
-        flex-direction: column;
+        top: 46px;
         width: 100%;
         & .van-popup--top {
-          top: 53px;
+          top: 46px;
           background: none !important;
           height: 76%;
           overflow: hidden;
@@ -60,22 +58,20 @@
             overflow-y: scroll;
             -webkit-overflow-scrolling: touch;
             & .menu-list-top {
+              @extend %flex;
+              @extend %fdc;
+              @extend %fr;
               width: 100%;
-              display: flex;
-              flex-direction: column;
-              flex-wrap: wrap;
               background: rgba(0, 0, 0, 0.2);
               & li {
-                display: flex;
-                flex-direction: row;
+                @extend %flex;
+                @extend %fdr;
                 font-size: 12px;
                 width: 100%;
                 padding: 4px 0px;
                 border-bottom: 1px solid hsla(0, 0%, 100%, .3);
                 & .title {
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
+                  @extend %faj;
                   height: 24px;
                   color: #f4c829;
                   font-size: 16px;
@@ -84,15 +80,13 @@
                 & .menu-list-list-box {
                   width: 80%;
                   & .menu-list-list {
-                    display: flex;
-                    align-items: center;
+                    @extend %flex;
+                    @extend %aitems;
+                    @extend %fr;
                     background: none;
-                    flex-wrap: wrap;
                     overflow: hidden;
                     & span {
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
+                      @extend %faj;
                       width: 80px;
                       height: 26px;
                       background: none;
@@ -129,8 +123,8 @@
     & li:nth-child(3) {
       text-align: right;
       & ul {
-        display: flex;
-        flex-wrap: wrap;
+        @extend %flex;
+        @extend %fr;
         position: absolute;
         top: 46px;
         right: 0px;
@@ -139,10 +133,8 @@
         padding: 10px 0 10px 10px;
         border-radius: 0 0 0 10px;
         & li {
-          display: flex;
+          @extend %faj;
           border-radius: 5px;
-          justify-content: center;
-          align-items: center;
           width: 45%;
           font-size: 14px;
           color: #666;
@@ -158,7 +150,21 @@
     }
   }
 }
-
+.listStyle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.pageNum0{
+  transition: .6s;
+  transform: translateX(0px);
+}
+.pageNum1{
+  transition: .6s;
+  transform: translateX(460px);
+}
 .betssc-content {
   height: 100%;
   background: #317455;
@@ -166,14 +172,14 @@
   >div {
     height: 100%;
     & .betk3-content-top {
-      display: flex;
-      justify-content: space-between;
+      @extend %flex;
+      @extend %sbetween;
       background: #22563f;
       color: #caebda;
       & .content-left {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @extend %flex;
+        @extend %fdc;
+        @extend %aitems;
         width: 50%;
         border-right: 1px solid #164630;
         & p {
@@ -181,13 +187,11 @@
           line-height: 28px;
         }
         & div {
-          display: flex;
-          align-items: center;
+          @extend %flex;
+          @extend %aitems;
           margin-top: 4px;
           & p {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @extend %faj;
             width: 22px;
             height: 22px;
             overflow: hidden;
@@ -205,14 +209,12 @@
           }
         }
         & .contnet-left-num {
-          display: flex;
+          @extend %faj;
           width: 100%;
           height: 30px;
-          align-items: center;
-          justify-content: center;
           & .num {
-            display: flex;
-            align-items: center;
+            @extend %flex;
+            @extend %aitems;
             height: 30px;
             & .span {
               color: #fff;
@@ -221,9 +223,7 @@
               margin: 0px 2px;
               & div {
                 margin: 0px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                @extend %faj;
                 color: #caebda;
                 width: 22px;
                 height: 22px;
@@ -241,17 +241,24 @@
       }
       & .content-right {
         @extend %flex;
-        @extend %fdc;
+        @extend %sbetween;
         @extend %aitems;
         width: 50%;
-        & p {
+        padding-left: 10px;
+        & .seasonId {
           font-size: 16px;
           line-height: 28px;
         }
-        & div {
+        & .time {
+          @extend %faj;
           & p {
             font-size: 26px;
           }
+        }
+        & i {
+          font-size: 30px;
+          color: #78ba9e;
+          margin-right: -10px;
         }
       }
     }
@@ -262,11 +269,9 @@
       z-index: 2002;
       & .look {
         & li {
-          display: flex;
+          @extend %flex;
           & p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            @extend %faj;
             font-size: 14px;
             color: #caebda;
             padding: 4px 0px;
@@ -319,6 +324,7 @@
           color: #caebda;
           padding: 4px 20px;
           border-radius: 4px;
+          margin: 0px 8px;
         }
       }
     }
@@ -332,7 +338,7 @@
         height: 100%;
         >.betssc-list-box {
           width: 100%;
-          padding-bottom: 130px;
+          padding-bottom: 240px;
           & b {
             & i {
               color: #f0c930;
@@ -355,14 +361,12 @@
                   padding-top: 6px;
                 }
                 & span {
-                  display: flex;
+                  @extend %flex;
+                  @extend %fr;
                   width: 86%;
-                  flex-wrap: wrap;
                   & a {
                     margin: 0px 26px 8px 0px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    @extend %faj;
                     width: 30px;
                     height: 30px;
                     border-radius: 50%;
@@ -388,6 +392,103 @@
               padding: 4%;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+.lookAllDiv {
+  @extend %flex;
+  @extend %fdc;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #22563f;
+  & .lookAllDivTitle {
+    @extend %faj;
+    width: 100%;
+    height: 50px;
+    line-height: 1.493333rem;
+    background: rgb(175, 58, 49);
+    color: #FFF;
+    font-size: 18px;
+    & i {
+      @extend %faj;
+      width: 20%;
+      font-size: 20px;
+      color: #FFF;
+    }
+    & b.cont{
+      @extend %faj;
+      width: 60%;
+      font-weight: 400;
+    }
+    & span{
+      @extend %faj;
+      width: 20%;
+    }
+  }
+  & .lookAllUlBox {
+    width: 100%;
+    height: 93%;
+    position: absolute;
+    z-index: 1000;
+    top: 50px;
+    left: 0px;
+    overflow-y: scroll;
+    & .lookAllUl {
+      width: 100%;
+      background: #22563f;
+      padding-bottom: 20px;
+      & li {
+        @extend %flex;
+        & p {
+          @extend %faj;
+          font-size: 14px;
+          color: #caebda;
+          padding: 4px 0px;
+          & a {
+            width: 20px;
+            height: 20px;
+            overflow: hidden;
+            color: #caebda;
+            & img {
+              width: 200%;
+              height: 600%;
+            }
+          }
+        }
+        & p:nth-child(1) {
+          width: 30%;
+        }
+        & p:nth-child(2) {
+          width: 40%;
+        }
+        & p:nth-child(3) {
+          width: 30%;
+        }
+        & p:nth-child(1) {
+          position: relative;
+          border-right: 1px solid #212121;
+          & i {
+            font-weight: 700;
+            font-size: 16px;
+            color: #212121;
+            position: absolute;
+            right: -8px;
+          }
+        }
+      }
+      & li:nth-child(1) {
+        border-top: 1px solid hsla(0, 0%, 100%, .3);
+        border-bottom: 1px solid #212121;
+        & p:nth-child(1) {
+          border: none;
         }
       }
     }
@@ -524,8 +625,8 @@
   left: 50%;
   margin-left: -170px;
   margin-top: -80px;
-  display: flex;
-  flex-direction: column;
+  @extend %flex;
+  @extend %fdc;
   width: 320px;
   background: #fff;
   & li {
@@ -542,12 +643,12 @@
   }
   & li:nth-child(2) {
     min-height: 54px;
-    display: flex;
-    flex-direction: column;
+    @extend %flex;
+    @extend %fdc;
     padding: 4px 0px;
     & p {
-      display: flex;
-      align-items: center;
+      @extend %flex;
+      @extend %aitems;
       padding: 4px 0px 4px 60px;
       width: 100%;
       & span {

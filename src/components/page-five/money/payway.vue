@@ -3,10 +3,11 @@
   .listStyle-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 充值方式
+    span
   .listStyle-content
     ul.listStyle-I
       router-link(:to="payw.alino+'charge'", tag='li', v-for='(payw,index) in paywaylist', :key='index', v-if='payw.opentype === 0')
-        .mInvite-left
+        .mInvite-left(style='width:76%')
           i.fa.fa-credit-card(style='padding-right:10px')
           p
             | {{payw.alias}}
@@ -42,7 +43,6 @@ export default {
       this.$http
         .get(this.$store.state.url + "/api/proxy/getRechargeWayList")
         .then(res => {
-          console.log(res.data.data);
           this.paywaylist = res.data.data;
         })
         .catch(error => {

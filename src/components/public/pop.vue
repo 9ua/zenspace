@@ -30,29 +30,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/main.scss";
 .pop {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %faj;
   & div {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %faj;
     & ul {
       width: 76%;
       border-radius: 4px;
       background: #fff;
       & li {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
+        @extend %faj;
+        @extend %fdc;
         width: 100%;
       }
       & .title {
@@ -65,7 +60,7 @@ export default {
       & .cont {
         & .contBox {
           width: 90%;
-          display: flex;
+          @extend %flex;
           justify-content: flex-start;
           align-items: flex-start;
           min-height: 30px;
@@ -78,8 +73,8 @@ export default {
         }
       }
       & .but {
-        display: flex;
-        flex-direction: row;
+        @extend %flex;
+        @extend %fdr;
         & button {
           height: 30px;
           width: 50%;

@@ -3,6 +3,7 @@
   .setSafePwd-top
     router-link.el-icon-arrow-left(to='/safety', tag='i')
     p 修改安全密码
+    span
   .setSafePwd-input
     div
       p 安全密码

@@ -3,6 +3,7 @@
   .safety-top
     router-link.el-icon-arrow-left(to='/five', tag='i')
     p 安全中心
+    span
   .safety-content
     .safety-content-top
       p.title ———— 您的账号安全级别为极低 ————
@@ -36,7 +37,7 @@
       router-link(:to="question === 0 ? 'setQuestion' : 'safeQuestion'", tag='li')
         p {{question === 0 ? '设置密保问题' : '已设置密保问题'}}
         div
-          p {{question === 0 ? '设置' : '修改'}}
+          p {{question === 0 ? '设置' : '查看'}}
           i.el-icon-arrow-right
       router-link(:to="email === 0 ? 'detail/setemail' : 'safeEmail'", tag='li')
         p {{email === 0 ? '设置密保邮箱' : '已设置密保邮箱'}}
@@ -98,19 +99,17 @@ export default {
     },
     //退出
     logout() {
-      this.$axios
-        .get(this.$store.state.url + "api/user/logout")
-        .then(res => {
-          this.$store.state.loginStatus = false;
-          this.$store.state.Globalusername = "";
-          this.$store.state.Globalpassword = "";
-          this.$store.state.JSESSIONICookie = "";
-          localStorage.clear();
-          this.$router.push("/one");
-        })
-        .catch(error => {
-          console.log("logoutNo");
-        });
+      this.$axios.get(this.$store.state.url + "api/user/logout").then(res => {
+        this.$store.state.loginStatus = false;
+        this.$store.state.Globalusername = "";
+        this.$store.state.Globalpassword = "";
+        this.$store.state.JSESSIONICookie = "";
+        localStorage.clear();
+        this.$router.push("/one");
+      })
+      .catch(error => {
+        console.log("logoutNo");
+      });
     }
   }
 };

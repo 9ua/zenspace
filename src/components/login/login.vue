@@ -3,16 +3,17 @@
   .login-title
     router-link.el-icon-arrow-left(to='/one', tag='i')
     p 用户登录
+    span
   .login-conter
     .login-center-img
       div
     .login-form
       .login-user
         i.fa.fa-user
-        input(type='text', v-model='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()')
+        input(type='text', v-model='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()',v-focus='')
       .login-pwd
         i.fa.fa-lock
-        input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', v-focus='', @keyup.enter='login')
+        input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', @keyup.enter='login')
         i.iconfont(:class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'", @click='pwd = !pwd')
       .login-captchaCodeImg(v-show='errorcode')
         i.fa.fa-lock
@@ -153,8 +154,6 @@ export default {
       }
     },
     checkeds() {
-      console.log("Ver.1.0.0.6");
-
       if (this.$cookie.get("password")) {
         this.checked = true;
         this.newUserInfo.user = this.$cookie.get("username");

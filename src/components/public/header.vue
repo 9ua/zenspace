@@ -1,12 +1,15 @@
 <template lang="jade">
 .head-top
   .pop-top
-    p(v-for='(contents,index) in content', :key='index') {{contents.show === routerUrl ? contents.title : ''}} 
-    img(v-show="routerUrl === 'one'", src='@/assets/img/one/logo.png')
-    router-link.dim(v-show="routerUrl === 'five'", to='service', tag='li') 客服
-    a(:href='os', v-show="routerUrl === 'one'", target='_top')
-      b APP
-      b.el-icon-download
+    .pop-top-left
+    .pop-top-middle
+      p(v-for='(contents,index) in content', :key='index') {{contents.show === routerUrl ? contents.title : ''}} 
+      img(v-show="routerUrl === 'one'", src='@/assets/img/one/logo.png')
+    .pop-top-right
+      router-link.dim(v-show="routerUrl === 'five'", to='service', tag='span') 客服
+      a(:href='os', v-show="routerUrl === 'one'", target='_top')
+        b APP
+        b.el-icon-download
 </template>
 <script>
 export default {
@@ -49,7 +52,7 @@ export default {
         this.os = "/app/hongfayule.apk";
       } else if (/iPhone|iPad/i.test(userAgent)) {
         //是否為iPhone或iPad
-        this.os = "http://www.pgyer.com/mjn2";
+        this.os = "https://i.diawi.com/pcwU34";
       } else if (/Windows/i.test(userAgent)) {
         //使否是用電腦觀看
         this.os = "/app/hongfayule.apk";
@@ -65,18 +68,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.dim {
-  border: solid 1px #fff;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  position: absolute;
-  right: 16px;
-  padding: 3px 8px 6px;
-  & span {
-    padding: 3px;
-  }
-}
+@import "../../assets/scss/main.scss";
 .head-top {
   height: 50px;
   width: 100%;
@@ -87,27 +79,40 @@ export default {
   & .pop-top {
     height: 50px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    color: #fff;
-    position: relative;
-    & i {
-      position: absolute;
-      left: 16px;
+    @extend %flex;
+    @extend %aitems;
+    @extend %sbetween;
+    & .pop-top-left {
+      @extend %faj;
+      width: 20%;
+      color: #fff;
+      font-size: 16px;
     }
-    & a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: absolute;
-      right: 16px;
+    & .pop-top-middle {
+      @extend %faj;
+      width: 60%;
+      color: #fff;
       font-size: 20px;
-      width: 60px;
-      color: #ffffff;
-      & b:nth-child(2) {
-        font-size: 26px;
+      & img{
+        height: 46px;
+      }
+    }
+    & .pop-top-right {
+      @extend %faj;
+      width: 20%;
+      color: #fff;
+      font-size: 20px;
+      & a {
+        @extend %flex;
+        color: #fff;
+        font-size: 20px;
+      }
+      & .dim {
+        border: solid 1px #fff;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        padding: 4px 8px;
       }
     }
   }

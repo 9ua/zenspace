@@ -21,7 +21,7 @@ export default {
       } else if (/iPhone|iPad/i.test(userAgent)) {
         //是否為iPhone或iPad
         // this.os = "https://www.pgyer.com/GndQ";
-        window.location.href = "https://www.pgyer.com/GndQ";
+        window.location.href = "https://i.diawi.com/dCRkKf";
       } else if (/Windows/i.test(userAgent)) {
         //使否是用電腦觀看
         // this.os = "/app/hongfayule.apk";

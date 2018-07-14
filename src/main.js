@@ -6,7 +6,6 @@ import App from './App'
 import router from './router'
 import VueCookie from "vue-cookie";
 import Carousel from 'element-ui'
-// import { Carousel, Loading } from 'element-ui'
 import {
   Message,
   Loading
@@ -34,7 +33,6 @@ import {
   Picker
 } from 'vant';
 import './assets/iconfont/iconfont.css'
-import './assets/font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './vuex/store'

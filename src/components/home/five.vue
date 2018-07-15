@@ -154,12 +154,12 @@ export default {
             this.bankUserFlag == 1 &&
             this.question === 1
           ) {
-            this.waterFall();
-            // if (this.$store.state.userType === "0") {
-            //   this.waterFall();
-            // } else if (this.$store.state.userType === "1") {
-            //   this.$router.push({path:"/agencyOuts"});
-            // }
+            // this.waterFall();
+            if (this.$store.state.userType === "0") {
+              this.waterFall();
+            } else if (this.$store.state.userType === "1") {
+              this.$router.push({path:"/agencyOuts"});
+            }
           }
         })
         .catch(error => {

@@ -65,19 +65,18 @@ export default {
   methods: {
     newReward(){
       // this.winpool.reverse();
-      
       let a = {
           name: this.randomWord(true,4,7),
           money: 0,
           lotterylist: this.arr2[Math.round(Math.random() * (this.arr2.length-1))],
           paths: require("../../../static/images/"+Math.floor(Math.random()*(32)+1)+".jpg")
         };
-      let racial = Math.round(Math.random() * (100-1)) + 1;
-      if (racial < 70) {
-        a.money = (Math.floor(Math.random()*(70000)+100))/100;
-      } else {
-        a.money = (Math.floor(Math.random()*(200000)+100))/100;
-      }
+        let racial = Math.round(Math.random()*(100-1))+1;
+        if (racial < 70) {
+          a.money = (Math.floor(Math.random()*(70000)+100))/100;
+        } else {
+          a.money = (Math.floor(Math.random()*(200000)+100))/100;
+        }
       this.winpool.push(a);
       // this.winpool.shift();
       // this.winpool.reverse();

@@ -6,13 +6,12 @@
         img(:src='item.paths')
         .winning-xq
           p
-            span {{item.name | capitalize}}
+            span {{item.name}}
             span 在{{item.lotterylist}}
           p
-            span 喜中
-            span ￥{{item.money | keepTwoNum}}
+            span 喜中 ￥{{item.money | keepTwoNum}}
       .winning-right
-  pop(:pop='selectedFood', @sonclick='haashow', ref='pop')
+  // pop(:pop='selectedFood', @sonclick='haashow', ref='pop')
 </template>
 <script>
 import pop from "./pop";
@@ -28,545 +27,76 @@ export default {
           lotterylist: "宏發快3",
           paths: require("../../../static/images/16.jpg")
         },
-        {
-          name: "daniel",
-          money: 1238.654,
-          lotterylist: "安徽快3",
-          paths: require("../../../static/images/13.jpg")
-        },
-        {
-          name: "stanjklfdsa",
-          money: 853.66,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "james",
-          money: 452.442,
-          lotterylist: "北京赛车",
-          paths: require("../../../static/images/12.jpg")
-        },
-        {
-          name: "noah",
-          money: 45.244,
-          lotterylist: "北京赛车",
-          paths: require("../../../static/images/0.jpg")
-        },
-        {
-          name: "samuel",
-          money: 85.17,
-          lotterylist: "上海快3",
-          paths: require("../../../static/images/7.jpg")
-        },
-        {
-          name: "david",
-          money: 132.04,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "sophia",
-          money: 158.25,
-          lotterylist: "上海快3",
-          paths: require("../../../static/images/21.jpg")
-        },
-        {
-          name: "anthony",
-          money: 458.23,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/31.jpg")
-        },
-        {
-          name: "elizabeth",
-          money: 5499.08,
-          lotterylist: "北京快3",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "christian",
-          money: 77.654,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/15.jpg")
-        },
-        {
-          name: "brandon",
-          money: 856.07,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "zachary",
-          money: 1207.654,
-          lotterylist: "上海快3",
-          paths: require("../../../static/images/10.jpg")
-        },
-        {
-          name: "jessica,",
-          money: 21.36,
-          lotterylist: "北京快3",
-          paths: require("../../../static/images/2.jpg")
-        },
-        {
-          name: "robert",
-          money: 31.55,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/3.jpg")
-        },
-        {
-          name: "Justin",
-          money: 31.55,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/8.jpg")
-        },
-        {
-          name: "Hunter",
-          money: 1587.24,
-          lotterylist: "湖北快3",
-          paths: require("../../../static/images/5.jpg")
-        },
-        {
-          name: "Victoria",
-          money: 13.14,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/4.jpg")
-        },
-        {
-          name: "ttqwera",
-          money: 4524.28,
-          lotterylist: "湖北快3",
-          paths: require("../../../static/images/7.jpg")
-        },
-        {
-          name: "adfas",
-          money: 7452.0,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/16.jpg")
-        },
-        {
-          name: "Jasmine",
-          money: 8532.66,
-          lotterylist: "广西快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "霍去病",
-          money: 9535.03,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/8.jpg")
-        },
-        {
-          name: "fdsawqg",
-          money: 156877.1,
-          lotterylist: "广西快3",
-          paths: require("../../../static/images/17.jpg")
-        },
-        {
-          name: "gfukhgj",
-          money: 1563.2,
-          lotterylist: "江苏快3",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "dfhteuj",
-          money: 15687.88,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "辛弃疾",
-          money: 21.36,
-          lotterylist: "江苏快3",
-          paths: require("../../../static/images/10.jpg")
-        },
-        {
-          name: "ytmioi",
-          money: 89.12,
-          lotterylist: "甘肃快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "nkkrtuy",
-          money: 7552.12,
-          lotterylist: "安徽快3",
-          paths: require("../../../static/images/3.jpg")
-        },
-        {
-          name: "hfdw6mm",
-          money: 1356.16,
-          lotterylist: "吉林快3",
-          paths: require("../../../static/images/2.jpg")
-        },
-        {
-          name: "ksfgfdsg",
-          money: 1535.0,
-          lotterylist: "北京赛车",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "ewdghtr",
-          money: 15687.88,
-          lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/15.jpg")
-        },
-        {
-          name: "rey",
-          money: 26.12,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/7.jpg")
-        },
-        {
-          name: "Joey",
-          money: 12.04,
-          lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/8.jpg")
-        },
-        {
-          name: "John",
-          money: 138.32,
-          lotterylist: "河北快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "Nathan",
-          money: 853482.66,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "Stan",
-          money: 85000,
-          lotterylist: "重庆时时彩",
-          paths: require("../../../static/images/10.jpg")
-        },
-        {
-          name: "Jason",
-          money: 1238.654,
-          lotterylist: "北京快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "Tino",
-          money: 85000,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "Stephen",
-          money: 85000,
-          lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/3.jpg")
-        },
-        {
-          name: "Neo",
-          money: 6120,
-          lotterylist: "宏發时时彩",
-          paths: require("../../../static/images/18.jpg")
-        },
-        {
-          name: "来fsadfsl",
-          money: 6120,
-          lotterylist: "宏發pk10",
-          paths: require("../../../static/images/28.jpg")
-        },
-        {
-          name: "F不来钱",
-          money: 6120,
-          lotterylist: "广西快3",
-          paths: require("../../../static/images/32.jpg")
-        },
-        {
-          name: "k12234",
-          money: 6120,
-          lotterylist: "宏發pk10",
-          paths: require("../../../static/images/22.jpg")
-        }
-      ],
-      selectedFood: {},
-      winpool: [
-        {
-          name: "william",
-          money: 95.08,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/16.jpg")
-        },
-        {
-          name: "daniel",
-          money: 1238.654,
-          lotterylist: "安徽快3",
-          paths: require("../../../static/images/13.jpg")
-        },
-        {
-          name: "stanjklfdsa",
-          money: 853.66,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "james",
-          money: 452.442,
-          lotterylist: "北京赛车",
-          paths: require("../../../static/images/12.jpg")
-        },
-        {
-          name: "noah",
-          money: 45.244,
-          lotterylist: "北京赛车",
-          paths: require("../../../static/images/0.jpg")
-        },
-        {
-          name: "samuel",
-          money: 85.17,
-          lotterylist: "上海快3",
-          paths: require("../../../static/images/7.jpg")
-        },
-        {
-          name: "david",
-          money: 132.04,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "sophia",
-          money: 158.25,
-          lotterylist: "上海快3",
-          paths: require("../../../static/images/21.jpg")
-        },
-        {
-          name: "anthony",
-          money: 458.23,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/31.jpg")
-        },
-        {
-          name: "elizabeth",
-          money: 5499.08,
-          lotterylist: "北京快3",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "christian",
-          money: 77.654,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/15.jpg")
-        },
-        {
-          name: "brandon",
-          money: 856.07,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "zachary",
-          money: 1207.654,
-          lotterylist: "上海快3",
-          paths: require("../../../static/images/10.jpg")
-        },
-        {
-          name: "jessica,",
-          money: 21.36,
-          lotterylist: "北京快3",
-          paths: require("../../../static/images/2.jpg")
-        },
-        {
-          name: "robert",
-          money: 31.55,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/3.jpg")
-        },
-        {
-          name: "Justin",
-          money: 31.55,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/8.jpg")
-        },
-        {
-          name: "Hunter",
-          money: 1587.24,
-          lotterylist: "湖北快3",
-          paths: require("../../../static/images/5.jpg")
-        },
-        {
-          name: "Victoria",
-          money: 13.14,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/4.jpg")
-        },
-        {
-          name: "ttqwera",
-          money: 4524.28,
-          lotterylist: "湖北快3",
-          paths: require("../../../static/images/7.jpg")
-        },
-        {
-          name: "adfas",
-          money: 7452.0,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/16.jpg")
-        },
-        {
-          name: "Jasmine",
-          money: 8532.66,
-          lotterylist: "广西快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "霍去病",
-          money: 9535.03,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/8.jpg")
-        },
-        {
-          name: "fdsawqg",
-          money: 156877.1,
-          lotterylist: "广西快3",
-          paths: require("../../../static/images/17.jpg")
-        },
-        {
-          name: "gfukhgj",
-          money: 1563.2,
-          lotterylist: "江苏快3",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "dfhteuj",
-          money: 15687.88,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "辛弃疾",
-          money: 21.36,
-          lotterylist: "江苏快3",
-          paths: require("../../../static/images/10.jpg")
-        },
-        {
-          name: "ytmioi",
-          money: 89.12,
-          lotterylist: "甘肃快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "nkkrtuy",
-          money: 7552.12,
-          lotterylist: "安徽快3",
-          paths: require("../../../static/images/3.jpg")
-        },
-        {
-          name: "hfdw6mm",
-          money: 1356.16,
-          lotterylist: "吉林快3",
-          paths: require("../../../static/images/2.jpg")
-        },
-        {
-          name: "ksfgfdsg",
-          money: 1535.0,
-          lotterylist: "北京赛车",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "ewdghtr",
-          money: 15687.88,
-          lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/15.jpg")
-        },
-        {
-          name: "rey",
-          money: 26.12,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/7.jpg")
-        },
-        {
-          name: "Joey",
-          money: 12.04,
-          lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/8.jpg")
-        },
-        {
-          name: "John",
-          money: 138.32,
-          lotterylist: "河北快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "Nathan",
-          money: 853482.66,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/1.jpg")
-        },
-        {
-          name: "Stan",
-          money: 85000,
-          lotterylist: "重庆时时彩",
-          paths: require("../../../static/images/10.jpg")
-        },
-        {
-          name: "Jason",
-          money: 1238.654,
-          lotterylist: "北京快3",
-          paths: require("../../../static/images/9.jpg")
-        },
-        {
-          name: "Tino",
-          money: 85000,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/6.jpg")
-        },
-        {
-          name: "Stephen",
-          money: 85000,
-          lotterylist: "新疆时时彩",
-          paths: require("../../../static/images/3.jpg")
-        },
-        {
-          name: "Neo",
-          money: 6120,
-          lotterylist: "宏發时时彩",
-          paths: require("../../../static/images/18.jpg")
-        },
-        {
-          name: "来fsadfsl",
-          money: 6120,
-          lotterylist: "宏發pk10",
-          paths: require("../../../static/images/28.jpg")
-        },
-        {
-          name: "F不来钱",
-          money: 6120,
-          lotterylist: "广西快3",
-          paths: require("../../../static/images/32.jpg")
-        },
-        {
-          name: "k12234",
-          money: 6120,
-          lotterylist: "宏發pk10",
-          paths: require("../../../static/images/22.jpg")
-        }
-      ],
+        ],
+      winpool:[],
       showFlag: true,
       a: 0,
-      x: 0
+      x: 0,
+      arr1:['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+      arr2:['宏發快3','宏發pk10','宏發時時彩','广西快3','新疆时时彩','北京快3','重庆时时彩','河北快3','北京赛车','安徽快3','甘肃快3','安徽快3','江苏快3','湖北快3'],
     };
   },
   //可以倒计时，或做秒钟
   created() {
+    var   arr2=['宏發快3','宏發pk10','宏發時時彩','广西快3','新疆时时彩','北京快3','重庆时时彩','河北快3','北京赛车','安徽快3','甘肃快3','安徽快3','江苏快3','湖北快3'];
+    for (let i=0;i<10;i++){
+      this.newReward();
+    }
     var countdown = () => {
-      this.a = 1;
-      let max = 798121.51545;
-      let min = 100;
-      this.x = Math.random(this.a) * 3500;
-      this.b = Math.floor(Math.random(this.a) * 10 + 1);
+    //   this.a = 1;
+    //   let max = 798121.51545;
+    //   let min = 100;
+    //   this.x = Math.random(this.a) * 3500;
+    //   this.b = Math.floor(Math.random(this.a) * 10 + 1);
       this.winpool.reverse();
-      this.winpool.push(this.haa[Math.floor(Math.random(this.a) * 10 + 1)]);
-      // this.winpool[10].money = this.x;
+      this.newReward();
+      // this.winpool.push(a);
+
+    //   this.winpool.push(this.haa[Math.floor(Math.random(this.a) * 10 + 1)]);
+    //   // this.winpool[10].money = this.x;
       this.winpool.shift();
       this.winpool.reverse();
-      //随机整数数
-      this.a = Math.floor(Math.random(this.a) * (max - min + 1) + min);
-      setTimeout(countdown, 1400);
+    //   //随机整数数
+    //   this.a = Math.floor(Math.random(this.a) * (max - min + 1) + min);
+    setTimeout(countdown, 1400);
     };
     setTimeout(countdown, 1400);
   },
   methods: {
+    newReward(){
+      // this.winpool.reverse();
+      
+      let a = {
+          name: this.randomWord(true,4,7),
+          money: 0,
+          lotterylist: this.arr2[Math.round(Math.random() * (this.arr2.length-1))],
+          paths: require("../../../static/images/"+Math.floor(Math.random()*(32)+1)+".jpg")
+        };
+      let racial = Math.round(Math.random() * (100-1)) + 1;
+      if (racial < 70) {
+        a.money = (Math.floor(Math.random()*(70000)+100))/100;
+      } else {
+        a.money = (Math.floor(Math.random()*(200000)+100))/100;
+      }
+      this.winpool.push(a);
+      // this.winpool.shift();
+      // this.winpool.reverse();
+    },
+    randomWord(randomFlag, min, max){
+    var str = "",
+        range = min,
+        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+      // 随机产生
+      if(randomFlag){
+          range = Math.round(Math.random() * (max-min)) + min;
+      }
+      str += arr[Math.round(Math.random() * (arr.length-10)+9)];
+      for(var i=0; i<range; i++){
+          str += '*';
+      }
+      str += arr[Math.round(Math.random() * (arr.length-1))];
+    return str;
+    },
     selectFood(item, event) {
       this.showFlag = false;
       this.selectedFood = item;

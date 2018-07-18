@@ -1,7 +1,7 @@
 <template lang="jade">
 .winning
   ul(v-show='showFlag')
-    li(v-for='(item,index) in winpool', :key='index', v-show='index <10')
+    li(v-for='(item,index) in winpool', :key='index', v-show='index <12')
       .winning-left
         img(:src='item.paths')
         .winning-xq

@@ -7,10 +7,12 @@
         .winning-xq
           p
             span {{item.name}}
-            span 在{{item.lotterylist}}
+            span 在  {{item.lotterylist}}
           p
-            span 喜中 ￥{{item.money | keepTwoNum}}
+            span 喜中 ￥ {{item.money | keepTwoNum}}
       .winning-right
+      .winning-right2
+      // .winning-right3
   // pop(:pop='selectedFood', @sonclick='haashow', ref='pop')
 </template>
 <script>

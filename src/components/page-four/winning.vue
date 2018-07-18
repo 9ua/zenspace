@@ -72,10 +72,10 @@ export default {
           paths: require("../../../static/images/"+Math.floor(Math.random()*(32)+1)+".jpg")
         };
         let racial = Math.round(Math.random()*(100-1))+1;
-        if (racial < 70) {
-          a.money = (Math.floor(Math.random()*(70000)+100))/100;
+        if (racial < 65) {
+          a.money = (Math.floor(Math.random()*(40000)+200))/100;
         } else {
-          a.money = (Math.floor(Math.random()*(200000)+100))/100;
+          a.money = (Math.floor(Math.random()*(200000)+200))/100;
         }
       this.winpool.push(a);
       // this.winpool.shift();

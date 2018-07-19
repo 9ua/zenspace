@@ -1471,6 +1471,7 @@ export default {
     tolooksucc(){
       this.looks = !this.looks;
       this.$refs.pop.banckto();
+      this.$refs.pop.getTradeList();
     },
     //继续投注
     betsucc() {

@@ -59,7 +59,7 @@
   .betbj10-content
     div(v-show='!show')
       .betk3-content-top
-        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0',@click=' betsscContentTopPop = !betsscContentTopPop')
+        .content-left(@click=' betsscContentTopPop = !betsscContentTopPop')
           p(v-if="$route.query.id === 'pk10'") {{lastSeasonId*1}}期开奖号码
           p(v-else) {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
@@ -400,7 +400,6 @@ export default {
           getHM = "0"+getHM;
         }
         this.lastSeasonIds = getMonth+getDate.toString()+getHM;
-        console.log(this.lastSeasonIds)
       }else{
         this.end();
         this.isGetItem = false;
@@ -1660,6 +1659,7 @@ export default {
     tolooksucc(){
       this.looks = !this.looks;
       this.$refs.pop.banckto();
+      this.$refs.pop.getTradeList();
     },
     //继续投注
     betsucc() {
@@ -1786,7 +1786,7 @@ export default {
       },3000);
       this.geteServerTime();
     },
-    //获取过去开奖号码10个
+    //获取过去开奖号码20个
     getPastOp() {
       if (this.startyet == false) {
         this.start();

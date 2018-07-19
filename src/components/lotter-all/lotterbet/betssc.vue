@@ -40,29 +40,28 @@
           p 开奖号码
           p 开奖时间
         li(v-for='(item,index) in getPastOpens', :key='index')
-          p
-            | {{item.seasonId.substring(4).split("-").join("")*1}}
+          p {{item.seasonId.substring(4).split("-").join("")*1}}
             i.el-icon-minus
           p
-            a {{item.n1}}
-            a {{item.n2}}
-            a {{item.n3}}
-            a {{item.n4}}
-            a {{item.n5}}
+            a {{n1}}
+            a {{n2}}
+            a {{n3}}
+            a {{n4}}
+            a {{n5}}
           p {{item.addTime.substring(11)}}
   .betssc-content
     div(v-show='!show')
       .betk3-content-top
-        .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0', @click=' betsscContentTopPop = !betsscContentTopPop')
-          p {{lastSeasonId.slice(4)*1}}期开奖号码
-          div(v-show='!shownum')
-            p {{item.n1}}
-            p {{item.n2}}
-            p {{item.n3}}
-            p {{item.n4}}
-            p {{item.n5}}
+        .content-left(@click=' betsscContentTopPop = !betsscContentTopPop')
+          p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
+          div(v-if="shownum === false")
+            p {{n1}}
+            p {{n2}}
+            p {{n3}}
+            p {{n4}}
+            p {{n5}}
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-          .contnet-left-num(v-show='shownum')
+          .contnet-left-num(v-if="shownum === true && isGetItem === true")
             .num
               .span
                 transition(name='down-up-translate-fade')
@@ -82,7 +81,7 @@
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
         .content-right(@click='tolooksucc')
           div
-            p.seasonId {{seasonId}}期投注截止
+            p.seasonId {{seasonId !== '' ? seasonId : Number(lastSeasonIds)+1}}期投注截止
             .time
               p {{countDown !== '' ? countDown : "00:00:00"}}
           i.el-icon-caret-left
@@ -210,6 +209,11 @@ export default {
       k: 0,
       l: 0,
       h: 0,
+      n1:1,
+      n2:1,
+      n3:1,
+      n4:1,
+      n5:1,
       shwoBet:false,
       lookAllUl:false,
       shownum: false,
@@ -255,6 +259,8 @@ export default {
       seasonId2: "", //当前期号
       seasonId3: "",
       lastSeasonId: "",
+      lastSeasonIds: "",
+      isGetItem:false,
       countDown: "",
       players: "",
       intotitle: "",
@@ -300,6 +306,7 @@ export default {
     this.iscreat();
   },
   created() {
+    this.noGetItem();
     this.getLotteryList();
     this.endCount();
   },
@@ -325,6 +332,29 @@ export default {
     }
   },
   methods: {
+    //没打接口前
+    noGetItem(){
+      if(this.startyet == false){
+        this.start();
+        this.initSetTimeout();
+        this.isGetItem = true;
+        this.shownum = true;
+        let myDate = new Date();
+        let getMonth = myDate.getMonth()+1;
+        let getDate = myDate.getDate();
+        let getHours = myDate.getHours()*60;
+        let getMinutes = myDate.getMinutes();
+        let getHM = getHours+getMinutes;
+        if(getHM < 1000){
+          getHM = "0"+getHM;
+        }
+        this.lastSeasonIds = getMonth+getDate.toString()+getHM;
+      }else{
+        this.end();
+        this.isGetItem = false;
+        this.shownum = false;
+      }
+    },
     //返回到上一次进来的页面
     banckto() {
       this.$router.push(this.$store.state.historyNum);
@@ -2009,6 +2039,7 @@ export default {
     tolooksucc(){
       this.looks = !this.looks;
       this.$refs.pop.banckto();
+      this.$refs.pop.getTradeList();
     },
     betsucc() {
       this.betsuccess = !this.betsuccess;
@@ -2167,6 +2198,11 @@ export default {
         .then(res => {
           this.getPastOpens = res.data.data;
           this.getPastOpenB = res.data.data;
+          this.n1 = this.getPastOpens[0].n1;
+          this.n2 = this.getPastOpens[0].n2;
+          this.n3 = this.getPastOpens[0].n3;
+          this.n4 = this.getPastOpens[0].n4;
+          this.n5 = this.getPastOpens[0].n5;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
             this.reGetPastOp();
           } else {

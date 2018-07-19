@@ -5,7 +5,7 @@
     div
       .five-top-left
         router-link(to='/detail/datum', tag='p')
-          img(:src='"../../../static/images/"+$store.state.image+".jpg"', alt='')
+          img(:src='"../../../static/images/"+image+".jpg"', alt='')
       .five-top-right
         p
           | 账号：
@@ -185,7 +185,6 @@ export default {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getAgentWithdrawFlag")
         .then(res => {
-          consoele.log(res.data.code)
           this.water = res.data.code;
           if (res.data.code === 1) {
             this.$router.push({ path: "/agencyOuts" });
@@ -208,24 +207,17 @@ export default {
     },
     //获取头部个人信息
     getTopUserData() {
-      this.$http
-        .get(this.$store.state.url + "api/userCenter/getTopUserData")
-        .then(res => {
-          if (res.data.data.image === "") {
-            this.image = 0;
-            this.$store.state.image = this.image;
-            setStore("image", this.image);
-            setStore("image", this.$store.state.image);
-          } else {
-            this.image = res.data.data.image;
-            this.$store.state.image = this.image;
-            setStore("image", this.image);
-            setStore("image", this.$store.state.image);
-          }
+      if(localStorage.getItem("image") !== null){
+        this.image = localStorage.getItem("image");
+      }else{
+        this.$http.get(this.$store.state.url + "api/userCenter/getTopUserData").then(res => {
+          localStorage.setItem("image",res.data.data.image);
+          this.image = localStorage.getItem("image");
         })
         .catch(error => {
           console.log("获取头部个人信息No");
         });
+      }
     },
     //获取用户余额
     getBalance() {

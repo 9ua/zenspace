@@ -47,6 +47,7 @@ import headers from "../public/header";
 export default {
   data() {
     return {
+      loading:true,
       getPastOpens: "",
       getPastOpens2: "",
       today: "",
@@ -130,7 +131,6 @@ export default {
         for (let k = 0; k < this.times.length; k++) {
           this.times[k] = this.times[k] - 1;
           this.h = this.times[0];
-          
           if (this.times[k] < 0) {
             this.lotteryId = this.getPastOpens[k].lotteryId;
             this.h2 = k;

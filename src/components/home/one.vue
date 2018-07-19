@@ -3,7 +3,8 @@
   <headers></headers>
   <div class="one-center">
     <van-swipe :autoplay="2200" :show-indicators="false">
-      <van-swipe-item v-for="(item,index) in bannerList" :key="index"><img :src="$store.state.url+item.img"/></van-swipe-item>
+      <van-swipe-item v-if="isbanner"><img src="https://hf89.com//res/upload/98488f66967c44a0877728544b620a2f.jpg"/></van-swipe-item>
+      <van-swipe-item v-else v-for="(item,index) in bannerList" :key="index"><img :src="$store.state.url+item.img"/></van-swipe-item>
     </van-swipe>
     <div class="add">
       <van-notice-bar :speed="20" left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png">{{title}}</van-notice-bar>
@@ -38,6 +39,7 @@ import headers from "../public/header";
 export default {
   data() {
     return {
+      isbanner:false,
       lotteryList: [],
       bannerList: [],
       getimgurl: "",
@@ -63,8 +65,14 @@ export default {
   },
   mounted() {
     this.getLotterlist();
+    this.showBanner();
   },
   methods: {
+    showBanner(){
+      if(location.hostname === "localhost" || location.hostname === "m.edu0370.com"){
+        this.isbanner = true;
+      }
+    },
     getLotterlist() {
       var now = new Date().getTime();
       if (localStorage.getItem("indexInfo") !== null) {

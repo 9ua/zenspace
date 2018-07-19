@@ -557,7 +557,6 @@ export default {
       this.b = Math.floor(Math.random(this.a) * 10 + 1);
       this.winpool.reverse();
       this.winpool.push(this.haa[Math.floor(Math.random(this.a) * 10 + 1)]);
-      // this.winpool[10].money = this.x;
       this.winpool.shift();
       this.winpool.reverse();
       //随机整数数

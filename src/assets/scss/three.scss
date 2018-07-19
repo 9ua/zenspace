@@ -6,6 +6,7 @@
     margin-top: 56px;
     width: 100%;
     background: #fff;
+    position: relative;
     & li {
       @extend %flex;
       @extend %aitems;
@@ -33,6 +34,11 @@
           padding: 0 20px;
         }
       }
+    }
+    & .loading{
+      position: absolute;
+      top: -8px;
+      left: 0px;
     }
   }
 }

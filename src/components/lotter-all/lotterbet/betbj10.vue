@@ -60,24 +60,21 @@
     div(v-show='!show')
       .betk3-content-top
         .content-left(v-for='(item,index) in getPastOpens', :key='index', v-show='index === 0',@click=' betsscContentTopPop = !betsscContentTopPop')
-          p(v-if="$route.query.id === 'pk10'")
-            | {{lastSeasonId*1}}期开奖号码
+          p(v-if="$route.query.id === 'pk10'") {{lastSeasonId*1}}期开奖号码
+          p(v-else) {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
             i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-          p(v-else)
-            | {{lastSeasonId.slice(4)*1}}期开奖号码
-            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
-          div(v-show='!shownum')
-            p {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
-            p {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
-            p {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
-            p {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
-            p {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
-            p {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
-            p {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
-            p {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
-            p {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
-            p {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
-          .contnet-left-num(v-show='shownum')
+          div(v-if="shownum === false")
+            p {{n1 < 10 ? '0'+n1 : n1}}
+            p {{n2 < 10 ? '0'+n2 : n2}}
+            p {{n3 < 10 ? '0'+n3 : n3}}
+            p {{n4 < 10 ? '0'+n4 : n4}}
+            p {{n5 < 10 ? '0'+n5 : n5}}
+            p {{n6 < 10 ? '0'+n6 : n6}}
+            p {{n7 < 10 ? '0'+n7 : n7}}
+            p {{n8 < 10 ? '0'+n8 : n8}}
+            p {{n9 < 10 ? '0'+n9 : n9}}
+            p {{n10 < 10 ? '0'+n10 : n10}}
+          .contnet-left-num(v-if="shownum === true && isGetItem === true")
             .num
               .span
                 transition(name='down-up-translate-fade')
@@ -112,9 +109,9 @@
         .content-right(@click='tolooksucc')
           div
             p.seasonId(v-if="$route.query.id === 'pk10'") {{seasonId}}期投注截止
-            p.seasonId(v-else) {{seasonId2.slice(4)*1}}期投注截止
+            p.seasonId(v-else) {{seasonId2 !== '' ? seasonId2.slice(4)*1 : Number(lastSeasonIds)+1}}期投注截止
             .time
-              p {{countDown}}
+              p {{countDown !== '' ? countDown : "00:00:00"}}
           i.el-icon-caret-left
       .betk3-content-top-pop(v-show='betsscContentTopPop')
         ul.look
@@ -257,6 +254,16 @@ export default {
       e: 1,
       r: 1,
       t: 1,
+      n1: 1, //动画
+      n2: 1,
+      n3: 1,
+      n4: 1,
+      n5: 1,
+      n6: 1,
+      n7: 1,
+      n8: 1,
+      n9: 1,
+      n10: 1,
       looks:false,
       shwoBet:false,
       lookAllUl:false,
@@ -323,6 +330,8 @@ export default {
       seasonId2: "", //当前期号
       seasonId3: "",
       lastSeasonId: "",
+      lastSeasonIds: "",
+      isGetItem:false,
       countDown: "",
       players: "",
       intotitle: "",
@@ -348,6 +357,7 @@ export default {
     this.iscreat();
   },
   created() {
+    this.noGetItem();
     this.getLotteryList();
     this.endCount();
   },
@@ -373,6 +383,30 @@ export default {
     }
   },
   methods: {
+    //没打接口前
+    noGetItem(){
+      if(this.startyet == false){
+        this.start();
+        this.initSetTimeout();
+        this.isGetItem = true;
+        this.shownum = true;
+        let myDate = new Date();
+        let getMonth = myDate.getMonth()+1;
+        let getDate = myDate.getDate();
+        let getHours = myDate.getHours()*60;
+        let getMinutes = myDate.getMinutes();
+        let getHM = getHours+getMinutes;
+        if(getHM < 1000){
+          getHM = "0"+getHM;
+        }
+        this.lastSeasonIds = getMonth+getDate.toString()+getHM;
+        console.log(this.lastSeasonIds)
+      }else{
+        this.end();
+        this.isGetItem = false;
+        this.shownum = false;
+      }
+    },
     //返回到上一次进来的页面
     banckto() {
       this.$router.push(this.$store.state.historyNum);
@@ -512,16 +546,7 @@ export default {
         if (this.en === "") {
           this.en = "-";
         }
-        this.con =
-          this.an +
-          "," +
-          this.bn +
-          "," +
-          this.cn +
-          "," +
-          this.dn +
-          "," +
-          this.en;
+        this.con =this.an +"," +this.bn +"," +this.cn +"," +this.dn +"," +this.en;
       }
       //两面盘，大小
       if (this.playGroupsId === "pk10_side_ds") {
@@ -784,8 +809,7 @@ export default {
         this.playGroupsId === "pk10_star2" ||
         this.playGroupsId === "pk10_star3" ||
         this.playGroupsId === "pk10_star4" ||
-        this.playGroupsId === "pk10_star5"
-      ) {
+        this.playGroupsId === "pk10_star5") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka.filter(function(n) {
@@ -852,8 +876,7 @@ export default {
         this.playGroupsId === "pk10_star2_dj" ||
         this.playGroupsId === "pk10_star3_dj" ||
         this.playGroupsId === "pk10_star4_dj" ||
-        this.playGroupsId === "pk10_star5_dj"
-      ) {
+        this.playGroupsId === "pk10_star5_dj") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka.filter(function(n) {
@@ -1257,8 +1280,7 @@ export default {
         this.playGroupsId === "pk10_star2" ||
         this.playGroupsId === "pk10_star3" ||
         this.playGroupsId === "pk10_star4" ||
-        this.playGroupsId === "pk10_star5"
-      ) {
+        this.playGroupsId === "pk10_star5") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka.filter(function(n) {
@@ -1325,8 +1347,7 @@ export default {
         this.playGroupsId === "pk10_star2_dj" ||
         this.playGroupsId === "pk10_star3_dj" ||
         this.playGroupsId === "pk10_star4_dj" ||
-        this.playGroupsId === ""
-      ) {
+        this.playGroupsId === "pk10_star5_dj") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka.filter(function(n) {
@@ -1614,7 +1635,6 @@ export default {
     //头部菜单项
     k3Tab(e, indexa, indexb, items, group, into, index) {
       this.titles = into.title + " " + items.title;
-      this.navlist = index;
       this.show = !this.show;
       this.intotitle = into.title;
       this.itemstitle = items.title;
@@ -1779,6 +1799,16 @@ export default {
         .then(res => {
           this.getPastOpens = res.data.data;
           this.getPastOpenB = res.data.data;
+          this.n1 = this.getPastOpens[0].n1;
+          this.n2 = this.getPastOpens[0].n2;
+          this.n3 = this.getPastOpens[0].n3;
+          this.n4 = this.getPastOpens[0].n4;
+          this.n5 = this.getPastOpens[0].n5;
+          this.n6 = this.getPastOpens[0].n6;
+          this.n7 = this.getPastOpens[0].n7;
+          this.n8 = this.getPastOpens[0].n8;
+          this.n9 = this.getPastOpens[0].n9;
+          this.n10 = this.getPastOpens[0].n10;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
             this.reGetPastOp();
           } else {

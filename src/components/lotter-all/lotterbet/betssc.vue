@@ -84,7 +84,7 @@
           div
             p.seasonId {{seasonId}}期投注截止
             .time
-              p {{countDown}}
+              p {{countDown !== '' ? countDown : "00:00:00"}}
           i.el-icon-caret-left
       .betk3-content-top-pop(v-show='betsscContentTopPop')
         ul.look
@@ -2044,6 +2044,7 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
+      this.titles ="五星 复式";
       this.historyNum++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
@@ -2064,16 +2065,15 @@ export default {
     //头部菜单项
     k3Tab(e, indexa, indexb, items, group, into, index) {
       this.titles = into.title + " " + items.groupName + " " + items.title;
+      this.show = !this.show;
       this.intotitle = into.title;
       this.itemstitle = items.title;
+      this.playBonusId = items.id;
       this.navlist = index;
       this.navlistb = indexa;
       this.navlistf = indexb;
-      this.playBonusId = items.id;
-      this.show = !this.show;
       this.current_player = items;
       this.current_player_bonus = this.current_player;
-      this.iscreat();
       this.displayBonus = items.displayBonus;
       if (isNaN(this.displayBonus)) {
         let ar = [];
@@ -2082,6 +2082,7 @@ export default {
         this.displayBonus2 = Number(ar[1]);
         this.displayBonus3 = this.displayBonus1 + "-" + this.displayBonus2;
       }
+      this.iscreat();
     },
     //获取彩種當前獎期時間
     geteServerTime() {

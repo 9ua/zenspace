@@ -52,15 +52,16 @@
   <div class="betk3-content">
     <div>
       <div class="betk3-content-top">
-        <div class="content-left" v-for="(item,index) in getPastOpens" :key="index" v-show="index === 0" @click=" betk3ContentTopPop = !betk3ContentTopPop">
-          <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId*1}}期开奖号码</p>
-          <p v-else>{{lastSeasonId.slice(4)*1}}期开奖号码</p>
-          <div v-show="!shownum" class="contnet-left-num">
-            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n1 +'.png') + ')'}"></p>
-            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n2 +'.png') + ')'}"></p>
-            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ item.n3 +'.png') + ')'}"></p><i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+        <div class="content-left" @click=" betk3ContentTopPop = !betk3ContentTopPop">
+          <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId}}期开奖号码</p>
+          <p v-if="$route.query.id !== 'bjk3'">{{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码</p>
+          <div v-if="shownum === false" class="contnet-left-num">
+            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n1 +'.png') + ')'}"></p>
+            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n2 +'.png') + ')'}"></p>
+            <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n3 +'.png') + ')'}"></p>
+            <i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
           </div>
-          <div v-show="shownum" class="contnet-left-num">
+          <div v-if="shownum === true && isGetItem === true" class="contnet-left-num">
             <div class="num">
               <div class="span">
                 <transition name="down-up-translate-fade">
@@ -82,9 +83,10 @@
         </div>
         <div class="content-right" @click="tolooksucc">
           <div>
-            <p class="seasonId">{{seasonId}}期投注截止</p>
+            <p class="seasonId" v-if="$route.query.id === 'bjk3'">{{seasonId}}期投注截止</p>
+            <p class="seasonId" v-if="$route.query.id !== 'bjk3'">{{seasonId !== '' ? seasonId : Number(lastSeasonIds)+1}}期投注截止</p>
             <div class="time">
-              <p>{{countDown}}</p>
+              <p>{{countDown !== '' ? countDown : "00:00:00"}}</p>
             </div>
           </div>
           <i class="el-icon-caret-left"></i>
@@ -290,14 +292,16 @@ export default {
       n2: 1,
       n3: 1,
       cacheTime: 600000,
-      getPastOpens: "", //获取过去开奖号码10个
-      getPastOpenB: "", //获取过去开奖号码第一个
+      getPastOpens: null, //获取过去开奖号码10个
+      getPastOpenB: null, //获取过去开奖号码第一个
       LotteryList: "",
       groupId: "",
       seasonId: "", //截取后的期号
       seasonId2: "", //当前期号
       seasonId3: "", //当前期号-1
       lastSeasonId: "",
+      lastSeasonIds: "",
+      isGetItem:false,
       betsuccess: false,
       betGoshow: false,
       betk3ContentTopPop: false,
@@ -496,6 +500,7 @@ export default {
     }
   },
   created() {
+    this.noGetItem();
     this.getLotteryList();
     this.endCount();
   },
@@ -512,6 +517,29 @@ export default {
     this.iscreat();
   },
   methods: {
+    //没打接口前
+    noGetItem(){
+      if(this.startyet == false){
+        this.start();
+        this.initSetTimeout();
+        this.isGetItem = true;
+        this.shownum = true;
+        let myDate = new Date();
+        let getMonth = myDate.getMonth()+1;
+        let getDate = myDate.getDate();
+        let getHours = myDate.getHours()*60;
+        let getMinutes = myDate.getMinutes();
+        let getHM = getHours+getMinutes;
+        if(getHM < 1000){
+          getHM = "0"+getHM;
+        }
+        this.lastSeasonIds = getMonth+getDate.toString()+getHM;
+      }else{
+        this.end();
+        this.isGetItem = false;
+        this.shownum = false;
+      }
+    },
     //非宏发快3，不显示三同号玩法
     isdfk3(index) {
       if (this.$route.query.id === "dfk3") {
@@ -653,6 +681,9 @@ export default {
         .then(res => {
           this.getPastOpens = res.data.data;
           this.getPastOpenB = res.data.data;
+          this.n1 = this.getPastOpens[0].n1;
+          this.n2 = this.getPastOpens[0].n2;
+          this.n3 = this.getPastOpens[0].n3;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
             this.reGetPastOp();
           } else {
@@ -700,17 +731,9 @@ export default {
           });
       }
     },
-    //头部菜单项
-    k3Tab(e, index, into) {
-      this.iscreat();
-      this.titles = into.title;
-      this.navlist = index;
-      this.show = !this.show;
-      this.playId = this.playBonus[index].id;
-      this.rates = this.playBonus[this.navlist].displayBonus;
-    },
     //头部右->菜单点击
     listnames(e, index, into) {
+      this.titles = "和值";
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
@@ -729,6 +752,15 @@ export default {
       if (this.$route.query.id !== "dfk3" && this.navlist === 6) {
         this.navlist = 3;
       }
+    },
+    //头部菜单项
+    k3Tab(e, index, into) {
+      this.iscreat();
+      this.titles = into.title;
+      this.navlist = index;
+      this.show = !this.show;
+      this.playId = this.playBonus[index].id;
+      this.rates = this.playBonus[this.navlist].displayBonus;
     },
     //二同複選xx
     onClickStan1(e) {

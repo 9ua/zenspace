@@ -23,7 +23,6 @@ const state = {
   captchaCodeImg: {}, //验证码地址
   errorcode: 0, //输入错误次数
   balance: null, //余额
-  image: getStore('image'), //用户头像
   nickname: getStore('nickname'), //用户昵称
   mobile: getStore('mobile'), //手机
   email: getStore('email'), //邮箱

@@ -23,7 +23,7 @@ export default {
     return {
       selectedFood: {},
       showFlag: true,
-      getLastDay: 0
+      getLastDay: null
     };
   },
   mounted() {
@@ -32,14 +32,19 @@ export default {
   methods: {
     //获取昨日盈利数据
     getLastDayWinList() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getLastDayWinList")
-        .then(res => {
-          this.getLastDay = res.data.data;
-        })
-        .catch(error => {
-          console.log("获取昨日盈利数据No");
-        });
+      if(localStorage.getItem("getLastDays") !== null){
+        this.getLastDay = JSON.parse(localStorage.getItem("getLastDays"));
+      }else{
+        this.$http
+          .get(this.$store.state.url + "api/lottery/getLastDayWinList")
+          .then(res => {
+            localStorage.setItem("getLastDays",JSON.stringify(res.data.data));
+            this.getLastDay = JSON.parse(localStorage.getItem("getLastDays"));
+          })
+          .catch(error => {
+            console.log("获取昨日盈利数据No");
+          });
+      }
     },
     haashow(isshow) {
       this.showFlag = !isshow.showPage;

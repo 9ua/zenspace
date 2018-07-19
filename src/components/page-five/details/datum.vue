@@ -197,8 +197,8 @@ export default {
       this.imgName = img.name;
       this.imgUrl = img.paths;
       this.imgindex = index;
-      this.image = this.imgindex;
-      setStore("image", this.$store.state.image);
+      localStorage.setItem("image",this.imgindex);
+      this.image = localStorage.getItem("image");
       this.saveUserData();
     },
     //头像选择与提交

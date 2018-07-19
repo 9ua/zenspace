@@ -581,10 +581,13 @@ export default {
     start() {
       var _this = this;
       this.startyet = true;
+        _this.i = 1;
+        _this.j = 1;
+        _this.k = 1;
       this.interval = setInterval(function() {
-        _this.i = ((_this.i+1)%3)+1;
-        _this.j = ((_this.j+1)%3)+1;
-        _this.k = ((_this.k+1)%3)+1;
+        _this.i = (_this.i%3)+1;
+        _this.j = (_this.j%3)+1;
+        _this.k = (_this.k%3)+1;
       }, 100);
     },
     end() {

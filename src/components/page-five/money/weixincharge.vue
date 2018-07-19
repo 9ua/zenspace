@@ -17,14 +17,14 @@
         div
           el-input(placeholder='请输入充值人姓名', v-model='niceName', :value='niceName', clearable='')
       li
-        p 订单号后6位
+        p 交易订单号后6位
         div
           el-input(placeholder='请输入订单号后6位', v-model='checkCode', :value='checkCode', clearable='')
       li
         .button
           button.button1(@click='isshow3') 充值申请
       .warning
-        p 1、请务必填写正确订单号后6位！
+        p 1、请务必填写正确交易订单号后6位！
         br
         p 2、请正确填写姓名和充值金额，以便及时核对。
         br

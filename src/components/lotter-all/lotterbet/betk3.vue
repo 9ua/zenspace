@@ -582,10 +582,10 @@ export default {
       var _this = this;
       this.startyet = true;
       this.interval = setInterval(function() {
-        _this.i = Math.floor(Math.random() * 3 + 1);
-        _this.j = Math.floor(Math.random() * 3 + 1);
-        _this.k = Math.floor(Math.random() * 3 + 1);
-      }, 39);
+        _this.i = ((_this.i+1)%3)+1;
+        _this.j = ((_this.j+1)%3)+1;
+        _this.k = ((_this.k+1)%3)+1;
+      }, 100);
     },
     end() {
       var _this = this;

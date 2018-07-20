@@ -1224,7 +1224,6 @@ export default {
         }
       }
     },
-
     //清空
     iscreat() {
       // 单挑一骰

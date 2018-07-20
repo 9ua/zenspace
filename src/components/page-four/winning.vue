@@ -3,7 +3,7 @@
   ul(v-show='showFlag')
     li(v-for='(item,index) in winpool', :key='index', v-show='index <12')
       .winning-left
-        img(:src='item.paths')
+        img(:src='"@/assets/img/one/"+item.paths+".jpg"')
         .winning-xq
           p
             span {{item.name}}
@@ -22,14 +22,6 @@ export default {
   data() {
     return {
       b: 0,
-      haa: [
-        {
-          name: "william",
-          money: 95.08,
-          lotterylist: "宏發快3",
-          paths: require("../../../static/images/16.jpg")
-        },
-        ],
       winpool:[],
       showFlag: true,
       a: 0,
@@ -59,7 +51,7 @@ export default {
           name: this.randomWord(true,4,7),
           money: 0,
           lotterylist: this.arr2[Math.round(Math.random() * (this.arr2.length-1))],
-          paths: require("../../../static/images/"+Math.floor(Math.random()*(32)+1)+".jpg")
+          paths:Math.floor(Math.random()*(32)+1)
         };
         let racial = Math.round(Math.random()*(100-1))+1;
         if (racial < 65) {
@@ -68,8 +60,6 @@ export default {
           a.money = (Math.floor(Math.random()*(200000)+200))/100;
         }
       this.winpool.push(a);
-      // this.winpool.shift();
-      // this.winpool.reverse();
     },
     randomWord(randomFlag, min, max){
     var str = "",

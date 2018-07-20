@@ -3,13 +3,11 @@
   ul(v-show='showFlag')
     li(v-for='(item,index) in getLastDay', :key='index', v-show='index < 10')
       .profit-left
-        img(:src='"../../../static/images/"+item.img+".jpg"')
+        img(:src='"@/assets/img/one/"+item.img+".jpg"')
         .profit-xq
-          p
-            | 账号昵称：
+          p 账号昵称：
             span {{item.account | capitalize}}
-          p
-            | 昨日盈利：
+          p 昨日盈利：
             span ￥{{item.bonus}}
       .profit-right
         span {{index+1}}

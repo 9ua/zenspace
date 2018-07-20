@@ -195,7 +195,7 @@ export default {
     //头像选择与编辑
     tonickname(img, event, index) {
       this.imgName = img.name;
-      this.imgUrl = img.paths;
+      this.imgUrl = require("@/assets/img/one/"+img.paths+".jpg");
       this.imgindex = index;
       localStorage.setItem("image",this.imgindex);
       this.image = localStorage.getItem("image");

@@ -22,21 +22,21 @@
       h3 Ta喜欢的彩票
       ul
         li.active(v-for='(item,index) in imgs', :key='index')
-          img(:src='item.paths', v-show='item.selected')
+          img(:src='"@/assets/img/one/"+item.paths+".jpg"', v-show='item.selected')
 </template>
 <script>
 export default {
   data() {
     return {
       imgs: [
-        { paths: require("../../../static/images/1.jpg"), selected: false },
-        { paths: require("../../../static/images/2.jpg"), selected: false },
-        { paths: require("../../../static/images/3.jpg"), selected: false },
-        { paths: require("../../../static/images/4.jpg"), selected: false },
-        { paths: require("../../../static/images/5.jpg"), selected: false },
-        { paths: require("../../../static/images/6.jpg"), selected: false },
-        { paths: require("../../../static/images/7.jpg"), selected: false },
-        { paths: require("../../../static/images/8.jpg"), selected: false }
+        { paths:1, selected: false },
+        { paths:2, selected: false },
+        { paths:3, selected: false },
+        { paths:4, selected: false },
+        { paths:5, selected: false },
+        { paths:6, selected: false },
+        { paths:7, selected: false },
+        { paths:8, selected: false }
       ],
       isshow: {
         showPage: false

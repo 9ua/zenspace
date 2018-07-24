@@ -5,7 +5,7 @@
     div
       .five-top-left
         router-link(to='/detail/datum', tag='p')
-          img(:src='"../../../static/images/"+image+".jpg"', alt='')
+          img(:src='"@/assets/img/one/"+image+".jpg"', alt='')
       .five-top-right
         p
           | 账号：
@@ -65,7 +65,7 @@ export default {
       content: "",
       show2: false,
       balances: "", //用户余额
-      image: 0, //用户头像
+      image: 1, //用户头像
       money: false,
       toF5money: false, //刷新动画
       water: "",

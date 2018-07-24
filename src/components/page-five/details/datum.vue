@@ -4,7 +4,7 @@
     li(@click='show = !show')
       p 头像
       div
-        img(:src='"../../../../static/images/"+image+".jpg"', alt='')
+        img(:src='"@/assets/img/one/"+image+".jpg"', alt='')
         i.el-icon-arrow-right
     li
       p 昵称
@@ -25,7 +25,7 @@
       .datum-hide
         ul.datum-imgs
           li(v-for='(img,index) in imgs', :key='index')
-            img(:src='img.paths', @click='tonickname(img,$event,index)')
+            img(:src='"@/assets/img/one/"+img.paths+".jpg"', @click='tonickname(img,$event,index)')
     .datum-but
       button(@click='saveImg') 保存头像
       button(@click='show = !show') 取消
@@ -75,42 +75,42 @@ export default {
       birthday: "1988/11/11", //生日
       nicknameShow1: true,
       nicknameShow2: false,
-      imgsrc: require("../../../../static/images/0.jpg"),
+      imgsrc: require("@/assets/img/one/0.jpg"),
       sexlist: ["保密", "男", "女"],
       imgs: [
-        { name: "小姐姐", paths: require("../../../../static/images/0.jpg") },
-        { name: "杰森斯坦森", paths: require("../../../../static/images/1.jpg") },
-        { name: "金莎", paths: require("../../../../static/images/2.jpg") },
-        { name: "高圆圆", paths: require("../../../../static/images/3.jpg") },
-        { name: "迪丽热巴", paths: require("../../../../static/images/4.jpg") },
-        { name: "黄宗泽", paths: require("../../../../static/images/5.jpg") },
-        { name: "肌肉男", paths: require("../../../../static/images/6.jpg") },
-        { name: "刘德华", paths: require("../../../../static/images/7.jpg") },
-        { name: "李冰冰", paths: require("../../../../static/images/8.jpg") },
-        { name: "苏有朋", paths: require("../../../../static/images/9.jpg") },
-        { name: "贝克汉姆", paths: require("../../../../static/images/10.jpg") },
-        { name: "谢霆锋", paths: require("../../../../static/images/11.jpg") },
-        { name: "李敏镐", paths: require("../../../../static/images/12.jpg") },
-        { name: "郑伊健", paths: require("../../../../static/images/13.jpg") },
-        { name: "全智贤", paths: require("../../../../static/images/14.jpg") },
-        { name: "李小龙", paths: require("../../../../static/images/15.jpg") },
-        { name: "李连杰", paths: require("../../../../static/images/16.jpg") },
-        { name: "小妹妹", paths: require("../../../../static/images/17.jpg") },
-        { name: "特朗普", paths: require("../../../../static/images/18.jpg") },
-        { name: "葛优", paths: require("../../../../static/images/19.jpg") },
-        { name: "文章", paths: require("../../../../static/images/20.jpg") },
-        { name: "赵薇", paths: require("../../../../static/images/21.jpg") },
-        { name: "张学友", paths: require("../../../../static/images/22.jpg") },
-        { name: "陈小春", paths: require("../../../../static/images/23.jpg") },
-        { name: "林心如", paths: require("../../../../static/images/24.jpg") },
-        { name: "吴奇隆", paths: require("../../../../static/images/25.jpg") },
-        { name: "张一山", paths: require("../../../../static/images/26.jpg") },
-        { name: "钟汉良", paths: require("../../../../static/images/27.jpg") },
-        { name: "波多野结衣", paths: require("../../../../static/images/28.jpg") },
-        { name: "赵丽颖", paths: require("../../../../static/images/29.jpg") },
-        { name: "王宝强", paths: require("../../../../static/images/30.jpg") },
-        { name: "朱茵", paths: require("../../../../static/images/31.jpg") },
-        { name: "科比", paths: require("../../../../static/images/32.jpg") },
+        { name: "小姐姐", paths:0 },
+        { name: "杰森斯坦森", paths:1},
+        { name: "金莎", paths:2 },
+        { name: "高圆圆", paths:3},
+        { name: "迪丽热巴", paths:4},
+        { name: "黄宗泽", paths:5},
+        { name: "肌肉男", paths:6},
+        { name: "刘德华", paths:7 },
+        { name: "李冰冰", paths: 8 },
+        { name: "苏有朋", paths: 9 },
+        { name: "贝克汉姆", paths:10 },
+        { name: "谢霆锋", paths:11 },
+        { name: "李敏镐", paths:12 },
+        { name: "郑伊健", paths:13 },
+        { name: "全智贤", paths:14 },
+        { name: "李小龙", paths:15 },
+        { name: "李连杰", paths:16 },
+        { name: "小妹妹", paths:17 },
+        { name: "特朗普", paths:18 },
+        { name: "葛优", paths:19 },
+        { name: "文章", paths:20 },
+        { name: "赵薇", paths:21 },
+        { name: "张学友", paths:22 },
+        { name: "陈小春", paths:23 },
+        { name: "林心如", paths:24 },
+        { name: "吴奇隆", paths:25 },
+        { name: "张一山", paths:26 },
+        { name: "钟汉良", paths:27 },
+        { name: "波多野结衣", paths:28 },
+        { name: "赵丽颖", paths: 29},
+        { name: "王宝强", paths: 30},
+        { name: "朱茵", paths: 31},
+        { name: "科比", paths:32 },
       ]
     };
   },
@@ -195,7 +195,7 @@ export default {
     //头像选择与编辑
     tonickname(img, event, index) {
       this.imgName = img.name;
-      this.imgUrl = img.paths;
+      this.imgUrl = require("@/assets/img/one/"+img.paths+".jpg");
       this.imgindex = index;
       localStorage.setItem("image",this.imgindex);
       this.image = localStorage.getItem("image");

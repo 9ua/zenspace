@@ -5,10 +5,10 @@
       li
         span 用户类型
         label
-          input#member.magic-radio(v-model='usertype', type='radio', value='0',checked="checked") 
+          input#member.magic-radio(v-model='usertype', type='radio', value='0',name='utype') 
           会员
         label
-          input#member2.magic-radio(v-model='usertype', type='radio', value='1') 
+          input#member2.magic-radio(v-model='usertype', type='radio', value='1',name='utype') 
           代理
       li
         span 设定返点

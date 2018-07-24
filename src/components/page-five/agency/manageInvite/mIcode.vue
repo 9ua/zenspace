@@ -1,9 +1,9 @@
 <template lang="jade">
 .mInvite
   .mInvite-top(@change='typechange')
-    input#member.magic-radio(v-model='usertype', type='radio', value='2')
+    input#member.magic-radio(v-model='usertype', type='radio', value='2',name='utype')
     label(for='member') 会员邀请码
-    input#member2.magic-radio(v-model='usertype', type='radio', value='1')
+    input#member2.magic-radio(v-model='usertype', type='radio', value='1',name='utype')
     label(for='member2') 代理邀请码
   .mInvite-content
     ul(v-show='showFlag')

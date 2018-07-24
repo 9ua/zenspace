@@ -14,7 +14,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import {
   Radio,
   RadioGroup
-} from 'vue-ydui/dist/lib.px/radio'
+} from 'vue-ydui/dist/lib.px/radio';
 import {
   Icon,
   NoticeBar,

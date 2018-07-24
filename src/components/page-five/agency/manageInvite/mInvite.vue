@@ -4,10 +4,12 @@
     ul
       li
         span 用户类型
-        input#member.magic-radio(v-model='usertype', type='radio', value='0')
-        label(for='member') 会员
-        input#member2.magic-radio(v-model='usertype', type='radio', value='1')
-        label(for='member2') 代理
+        label
+          input#member.magic-radio(v-model='usertype', type='radio', value='0',checked="checked") 
+          会员
+        label
+          input#member2.magic-radio(v-model='usertype', type='radio', value='1') 
+          代理
       li
         span 设定返点
         select(v-model='rebateratio', @change='setrebet($event)')
@@ -86,4 +88,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../../../assets/scss/page-five/agency/mInvite.scss";
+.magic-radio {
+  width: .7rem;
+  height: .7rem;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  -webkit-border-radius: 0.6rem;
+  border-radius: 0.6rem;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  vertical-align:top;
+  cursor: default;
+  // -webkit-appearance: none;  /**隐藏原生控件**/
+}
 </style>

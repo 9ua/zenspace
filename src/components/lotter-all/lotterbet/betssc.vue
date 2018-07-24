@@ -531,8 +531,7 @@ export default {
         this.playBonusId === "ssc_star3_last" ||
         this.playBonusId === "ssc_star2_front" ||
         this.playBonusId === "ssc_star2_last" ||
-        this.playBonusId === "ssc_star1_dwd"
-      ) {
+        this.playBonusId === "ssc_star1_dwd" ) {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -1164,27 +1163,9 @@ export default {
           this.con = this.an + "," + this.bn;
           this.zhu = this.getCount(this.con.split(","), 2);
         } else if (this.playBonusId === "ssc_star1_dwd") {
-          this.con =
-            this.an +
-            "," +
-            this.bn +
-            "," +
-            this.cn +
-            "," +
-            this.dn +
-            "," +
-            this.en;
+          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
         } else if (this.playBonusId === "ssc_star5") {
-          this.con =
-            this.an +
-            "," +
-            this.bn +
-            "," +
-            this.cn +
-            "," +
-            this.dn +
-            "," +
-            this.en;
+          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
           this.zhu = this.getCount(this.con.split(","), 5);
         }
       }
@@ -1697,7 +1678,7 @@ export default {
       let count = 0;
       for (let i = 0; i < n1.length; i++) {
         count += n2.length;
-        if (n2.indexOf(n1[i])) {
+        if (n2.indexOf(n1[i]) >= 0) {
           count--;
         }
       }

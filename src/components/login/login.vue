@@ -10,7 +10,7 @@
     .login-form
       .login-user
         i.fa.fa-user
-        input(type='text', v-model='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()',v-focus='')
+        input(type='text', v-model.trim='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()',v-focus='')
       .login-pwd
         i.fa.fa-lock
         input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', @keyup.enter='login')

@@ -91,20 +91,4 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../../../assets/scss/page-five/agency/mInvite.scss";
-.magic-radio {
-  width: .7rem;
-  height: .7rem;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  -webkit-border-radius: 0.6rem;
-  border-radius: 0.6rem;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  display: inline-block;
-  vertical-align:top;
-  cursor: default;
-  // -webkit-appearance: none;  /**隐藏原生控件**/
-}
 </style>

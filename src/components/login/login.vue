@@ -25,7 +25,8 @@
         button(@click='login', v-show='loginReq') 立即登陆
       .login-live
         router-link(to='registered') 立即注册
-        router-link(to='reset') 忘记密码
+        //router-link(to='reset') 忘记密码
+        router-link(to='service') 忘记密码
   .login-pop(v-show='pop', @click='pop = false')
     div
       i.iconfont.icon-information

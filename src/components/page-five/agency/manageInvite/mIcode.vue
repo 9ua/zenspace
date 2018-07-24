@@ -69,13 +69,13 @@ export default {
     };
   },
   mounted() {
-      if (this.$route.query.type) {
-        if (this.$route.query.type == 0){
-          this.usertype= 2;
-        } else if ( this.$route.query.type == 1) {
-          this.usertype= 1;
-        }
-      }
+    // if (this.$route.query.type) {
+    //   if (this.$route.query.type == 0){
+    //     this.usertype= 2;
+    //   } else if ( this.$route.query.type == 1) {
+    //     this.usertype= 1;
+    //   }
+    // }
     this.getInviteList();
   },
   filters: {
@@ -85,6 +85,10 @@ export default {
     }
   },
   methods: {
+    setUserType(v){
+      this.usertype = v;
+      console.log(this.usertype,v,"---------")
+    },
     select(a) {
       this.show = !this.show;
       this.selected = a;

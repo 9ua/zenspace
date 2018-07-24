@@ -22,8 +22,17 @@ export default {
           pathurl: "mIcode"
         }
       ],
-      radio: "1"
+      radio: 0
     };
+  },
+  methods:{
+    toNavs(index){
+      if(index === 0){
+        this.$router.push("mInvite?type=2")
+      }else{
+        this.$router.push("mInvite?type=1")
+      }
+    }
   }
 };
 </script>

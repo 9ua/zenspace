@@ -75,7 +75,7 @@ export default {
           config
         )
         .then(res => {
-          this.$router.push({ path: "/manageInvite/mIcode" });
+          this.$router.push({ path: "/manageInvite/mIcode",query: {type: this.usertype} });
         })
         .catch(error => {
           console.log("createInviteCodeNo");

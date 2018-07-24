@@ -69,6 +69,13 @@ export default {
     };
   },
   mounted() {
+      if (this.$route.query.type) {
+        if (this.$route.query.type == 0){
+          this.usertype= 2;
+        } else if ( this.$route.query.type == 1) {
+          this.usertype= 1;
+        }
+      }
     this.getInviteList();
   },
   filters: {

@@ -20,7 +20,7 @@
         input(type='text', onfocus='this.select()', v-model='newUserInfo.verification', placeholder='请输入验证码')
         img(:src='captchaCodeImg', @click='getCaptchaCode')
       .login-rememb
-        yd-checkbox(v-model='checked', colo='#419fd9', @click='checked = !checked') 记住密码
+        el-checkbox(v-model='checked', @click='checked = !checked') 记住密码
       .login-go
         button(@click='login', v-show='loginReq') 立即登陆
       .login-live

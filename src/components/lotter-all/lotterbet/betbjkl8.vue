@@ -29,19 +29,11 @@
           | 888888开奖：
           ul
             li(v-for='(item,index) in 10', :key='index')
-              yd-countup(:endnum='item', duration='1', decimals='0', separator='', suffix='')
+              span {{item}}
             | ...
         p
           | 888888投注：
           span
-            yd-countdown(time='2018/04/13 22:00:00')
-              span
-                | {%h}
-                i :
-              span
-                | {%m}
-                i :
-              span {%s}
           i(:class=" lottery ? 'el-icon-arrow-down' :'el-icon-arrow-up'")
         .lottery-ms(v-show=' !lottery')
           p

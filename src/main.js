@@ -12,10 +12,6 @@ import {
 } from "element-ui";
 import 'element-ui/lib/theme-chalk/index.css'
 import {
-  Radio,
-  RadioGroup
-} from 'vue-ydui/dist/lib.px/radio';
-import {
   Icon,
   NoticeBar,
   Actionsheet,
@@ -36,36 +32,14 @@ import './assets/iconfont/iconfont.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './vuex/store'
-import {
-  Tab,
-  Tabs
-} from 'vant';
-import {
-  CountDown
-} from 'vue-ydui/dist/lib.px/countdown';
-import {
-  CountUp
-} from 'vue-ydui/dist/lib.px/countup';
-import {
-  CheckBox,
-  CheckBoxGroup
-} from 'vue-ydui/dist/lib.px/checkbox';
-import 'vue-ydui/dist/ydui.px.css';
+import { Tab, Tabs } from 'vant';
 import md5 from 'js-md5';
-import {
-  SendCode
-} from 'vue-ydui/dist/lib.px/sendcode';
 
-Vue.component(SendCode.name, SendCode);
 Vue.use(Collapse).use(CollapseItem)
 Vue.use(Swipe).use(SwipeItem);
-Vue.component(CheckBox.name, CheckBox);
-Vue.component(CheckBoxGroup.name, CheckBoxGroup);
 axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 window.axios = axios;
-Vue.component(CountUp.name, CountUp);
-Vue.component(CountDown.name, CountDown);
 Vue.use(VueCookie);
 Vue.use(Stepper);
 Vue.use(Popup);
@@ -74,8 +48,6 @@ Vue.use(VueAxios, axios);
 Vue.use(Actionsheet);
 Vue.use(NoticeBar);
 Vue.use(Icon);
-Vue.component(Radio.name, Radio);
-Vue.component(RadioGroup.name, RadioGroup);
 Vue.use(Carousel);
 Vue.use(Picker);
 Vue.config.productionTip = false

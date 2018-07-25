@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToFive')
     p(v-if='$route.query.id === "1"') 代理普通提现
     p(v-if='$route.query.id === "2"') 代理返点提现
     span
@@ -94,6 +94,10 @@ export default {
     this.getWithdrawInformation();
   },
   methods: {
+    //返回Five页面
+    listStyleToFive(){
+      this.$router.push("/five");
+    },
     //hotfix-start//
     getTopUserData() {
       this.$http

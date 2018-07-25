@@ -1,7 +1,7 @@
 <template lang="jade">
 .registered
   .registered-title
-    router-link.el-icon-arrow-left(to='/login', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 用户注册
     router-link(to='', tag='b') 客服
   .registered-content
@@ -59,6 +59,9 @@ export default {
     this.serchCode();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/login')
+    },
     serchCode() {
       if (!this.$route.query.code) {
       } else {

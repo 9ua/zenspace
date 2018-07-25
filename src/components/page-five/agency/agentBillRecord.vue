@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/agency', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 交易明細
     .dim(@click='show = ! show')
       | {{timeline}}
@@ -11,7 +11,7 @@
       li
         el-input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', :value='accountName', clearable='')
         button(@click='getTradeList()')
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
     .listStyle-content-top
       van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
     van-tabs(v-model='accountChangeType', @click='print')
@@ -98,6 +98,9 @@ export default {
     this.getTradeList();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/agency')
+    },
     onClick(item) {
       this.timeline = item.name;
       this.betweenType = item.Type;

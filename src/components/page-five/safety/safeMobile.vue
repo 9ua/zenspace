@@ -1,7 +1,7 @@
 <template lang="jade">
 .safeMobile
   .safeMobile-top
-    router-link.el-icon-arrow-left(to='/', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 验证密保手机
     span
   .safeMobile-content
@@ -32,6 +32,9 @@ export default {
     this.getBindPhone();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/')
+    },
     //验证安全码
     validSecurityCode() {
       let config = {

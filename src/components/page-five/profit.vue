@@ -1,7 +1,7 @@
 <template lang="jade">
 .profit
   .profit-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='profitToFive')
     p 今日盈亏
     span
   .profit-content
@@ -10,7 +10,7 @@
         p 盈利金额
         p {{winAmount-betAmount+activityAndSend+juniorRebateAmount | keepTwoNum2}}
     .profit-contents
-      i.el-icon-warning
+      van-icon(name='warn')
       | 盈亏计算公式：中奖-投注+活动+返点
     .profit-content-list
       ul
@@ -50,6 +50,10 @@ export default {
     this.getGainLost();
   },
   methods: {
+    //返回five页面
+    profitToFive(){
+      this.$router.push('/five')
+    },
     getGainLost() {
       this.$http
         .get(this.$store.state.url + "api/proxy/getGainLost")

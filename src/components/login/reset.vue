@@ -1,7 +1,7 @@
 <template lang="jade">
 .reset
   .reset-title
-    router-link.el-icon-arrow-left(to='/login', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 忘记密码
     span
   .reset-content
@@ -25,6 +25,9 @@ export default {
     this.getCaptchaCode();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/login')
+    },
     getCaptchaCode() {
       this.newDate = new Date().getTime();
       this.captchaCodeImg =

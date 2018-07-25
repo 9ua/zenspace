@@ -16,7 +16,7 @@
         <van-notice-bar @click="noticeClick" :speed="20" left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png">{{title}}</van-notice-bar>
       </div>
       <div class="add2" style="float:right">
-        <i style="margin:45% 30%;float:right;" @click="noticeClick" class="el-icon-arrow-right active"></i>
+        <van-icon name="arrow active" style="margin:45% 30%;float:right;" @click="noticeClick"></van-icon>
       </div>
     </div>
     <ul v-show="!$store.state.loginStatus">
@@ -24,7 +24,7 @@
       <img :src="item.path" alt="images"/>
         <h5>{{item.name}}</h5>
       </router-link>
-      <router-link to="/lotterList" tag="li" class="lotter-list"><i class="el-icon-circle-plus"></i>
+      <router-link to="/lotterList" tag="li" class="lotter-list"><van-icon name="add-o" />
         <h5>更多彩种</h5>
       </router-link>
     </ul>
@@ -37,7 +37,7 @@
       <img src='@/assets/img/one/x11x5.png' alt="images"/>
         <h5>广东11选5</h5>
       </router-link> -->
-      <router-link to="/lotterList" tag="li" class="lotter-list"><i class="el-icon-circle-plus"></i>
+      <router-link to="/lotterList" tag="li" class="lotter-list"><van-icon name="add-o" />
         <h5>更多彩种</h5>
       </router-link>
     </ul>

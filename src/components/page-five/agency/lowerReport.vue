@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top(v-bind:class='{ blur: show2 }')
-    router-link.el-icon-arrow-left(to='/agency', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 下级报表
     .dim(@click='show = ! show')
       | {{timeline}}
@@ -32,10 +32,10 @@
         span {{selected.account}}
       li(v-show='this.show3', @click='getUnderLevelReport2()')
         p 查看下级
-        i.el-icon-arrow-right
+        van-icon(name='arrow')
       router-link(:to="{path:'/agentReport',query: {id: this.selected.account}}", tag='li')
         p 查看报表
-        i.el-icon-arrow-right
+        van-icon(name='arrow')
       li
         .button
           button.button1(@click='show2 =! show2') 确定
@@ -91,6 +91,9 @@ export default {
     this.getUnderLevelReport();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/agency')
+    },
     select(a) {
       this.selected = a;
       this.childCount = a.childCount;

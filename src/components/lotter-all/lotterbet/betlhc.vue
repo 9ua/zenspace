@@ -1,7 +1,7 @@
 <template>
 <div class="betlhc">
   <div class="betlhc-top">
-    <router-link class="el-icon-arrow-left" to='/one' tag='i'></router-link>
+    <van-icon name='arrow-left' @click='listStyleToSafety' />
     <p>六合彩</p>
     <span></span>
   </div>
@@ -26,6 +26,9 @@ export default {
     this.getList();
   },
   methods:{
+    listStyleToSafety(){
+      this.$router.push("/one")
+    },
     geteServerTime(){
       this.$http.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId:"dfk3" }}).then(res => {
         this.seasonId = res.data.data.seasonId;

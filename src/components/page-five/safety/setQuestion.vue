@@ -1,7 +1,7 @@
 <template lang="jade">
 .setQuestion
   .setQuestion-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 设置密保问题
     span
   .setQuestion-input
@@ -48,6 +48,9 @@ export default {
     };
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/safety')
+    },
     selecteds1(e) {
       this.title1 = e.target.value;
     },

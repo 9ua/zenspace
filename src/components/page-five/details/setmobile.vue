@@ -1,7 +1,7 @@
 <template lang="jade">
 .setmobile
   .setmobile-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 绑定密保手机
     span
   .setmobile-content
@@ -36,6 +36,9 @@ export default {
     };
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/safety')
+    },
     //取验证码
     sendMobilCode() {
       const mobile_yz = /^[1][3,4,5,7,8][0-9]{9}$/;

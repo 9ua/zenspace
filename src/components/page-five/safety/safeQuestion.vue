@@ -1,7 +1,7 @@
 <template lang="jade">
 .safeQuestion
   .safeQuestion-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 验证密保问题
     span
   .safeQuestion-input
@@ -53,6 +53,9 @@ export default {
     this.getUserSafeData();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push("/safety");
+    },
     //获取密保问题
     getUserSafeData() {
       this.$axios

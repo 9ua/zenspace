@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    i.el-icon-arrow-left(@click='banckto')
+    van-icon(name='arrow-left',@click='banckto')
     p 投注记录
     .dim(@click='show = ! show')
       | {{timeline}}

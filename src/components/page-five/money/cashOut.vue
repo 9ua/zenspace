@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 我要提现
     span
   .listStyle-content
@@ -87,6 +87,9 @@ export default {
     this.getWithdrawInformation();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/five')
+    },
     parseIntAmount(){
       if(this.amount !== ''){
         this.amount = parseInt(this.amount);

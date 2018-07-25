@@ -1,7 +1,7 @@
 <template lang="jade">
 .past
   header
-    i.el-icon-arrow-left(@click='past')
+    van-icon(name='arrow-left',@click='past')
     p.pastTitle
       span {{this.$route.query.name}}
       | 开奖记录

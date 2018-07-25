@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/agency', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 代理报表
     .dim(@click='show = ! show')
       | {{timeline}}
@@ -13,7 +13,7 @@
       li
         el-input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', :value='accountName', clearable='')
         button(@click='getUserTeam()')
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
     .listStyle-content-list
       ul
         li
@@ -111,6 +111,9 @@ export default {
     this.getUserTeam();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/agency')
+    },
     onClick(name) {
       this.timeline = name.name;
       this.dateFlag = name.type;

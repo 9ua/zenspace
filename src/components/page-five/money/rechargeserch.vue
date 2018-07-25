@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 充值信息
     span
   .listStyle-content
@@ -62,6 +62,9 @@ export default {
     this.getRechargeList();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/five')
+    },
     select(a) {
       this.id = a.id;
       this.status = a.status;

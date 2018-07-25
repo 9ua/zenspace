@@ -1,7 +1,7 @@
 <template lang="jade">
 .lotterList
   .lotterList-top
-    router-link.el-icon-arrow-left(to='/one', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 全部彩种
   .lotterList-nav
     .lotterList-nav-box
@@ -24,6 +24,11 @@ export default {
         { name: "11选5", pathsrc: "etfs" }
       ]
     };
+  },
+  methods:{
+    listStyleToSafety(){
+      this.$router.push('/one')
+    },
   }
 };
 </script>

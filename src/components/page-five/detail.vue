@@ -1,7 +1,7 @@
 <template lang="jade">
 .detail
   .detail-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 个人资料
     span
   .detail-content
@@ -11,6 +11,11 @@
 export default {
   data() {
     return {};
+  },
+  methods:{
+    listStyleToSafety(){
+      this.$router.push('/five')
+    },
   }
 };
 </script>

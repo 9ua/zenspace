@@ -1,7 +1,7 @@
 <template lang="jade">
 .mymsg
   .mymsg-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='mymsgToFive')
     ul
       router-link(v-for='(navs,index) in nav', :to="'/mymsg/'+navs.pathurl", tag='li', :key='index') {{navs.name}}
     span
@@ -23,6 +23,12 @@ export default {
         }
       ]
     };
+  },
+  methods:{
+    //返回five页面
+    mymsgToFive(){
+      this.$router.push('/five')
+    },
   }
 };
 </script>

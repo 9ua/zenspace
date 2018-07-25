@@ -1,7 +1,7 @@
 <template lang="jade">
 .login(v-show='loginStatus === false')
   .login-title
-    router-link.el-icon-arrow-left(to='/one', tag='i')
+    van-icon(name="arrow-left",@click='loginS')
     p 用户登录
     span
   .login-conter
@@ -63,6 +63,10 @@ export default {
     this.checkeds();
   },
   methods: {
+    //登陆成功
+    loginS(){
+      this.$router.push("/one")
+    },
     getCaptchaCode() {
       this.newDate = new Date().getTime();
       this.captchaCodeImg =

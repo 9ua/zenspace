@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/payway', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToPayway')
     p 支付宝
     span
   .listStyle-content
@@ -101,6 +101,10 @@ export default {
     this.rechargeEntrance();
   },
   methods: {
+    //返回payway页面
+    listStyleToPayway(){
+      this.$router.push("/payway");
+    },
     rechargeEntrance() {
       this.$http
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {

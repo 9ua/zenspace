@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top(v-bind:class='{ blur: show2 }')
-    router-link.el-icon-arrow-left(to='/agency', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 会员管理
     span
   .listStyle-content(v-bind:class='{ blur: show2 }')
@@ -55,6 +55,9 @@ export default {
     this.getUnderUserList();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/agency')
+    },
     select(a) {
       this.show2 = !this.show2;
       this.selected = a;

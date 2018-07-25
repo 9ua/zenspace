@@ -1,7 +1,7 @@
 <template lang="jade">
 .setemail
   .setemail-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 绑定密保邮箱
     span
   .setemail-content
@@ -37,6 +37,9 @@ export default {
     };
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/safety')
+    },
     //取邮箱验证码
     sendEmailCode() {
       const email_yz = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;

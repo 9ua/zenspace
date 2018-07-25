@@ -2,7 +2,7 @@
 .betssc
   ul.betssc-top
     li
-      i.el-icon-arrow-left(@click='banckto')
+      van-icon(name='arrow-left',@click='banckto')
     li
       p.wangfa
         | 玩
@@ -30,7 +30,7 @@
             a {{listssc.name}}
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
-      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      van-icon(name='arrow-left',@click='lookAllDivTitle')
       b.cont 查看更多
       span
     .lookAllUlBox

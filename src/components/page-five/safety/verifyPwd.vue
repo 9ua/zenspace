@@ -1,7 +1,7 @@
 <template lang="jade">
 .verifyPwd
   .verifyPwd-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 验证原密码
     span
   .verifyPwd-input
@@ -22,6 +22,9 @@ export default {
     };
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/safety')
+    },
     validOldLoginPassword() {
       let oldPassword = md5(this.oldPassword);
       let config = {

@@ -5,13 +5,13 @@
       p 头像
       div
         img(:src='"@/assets/img/one/"+image+".jpg"', alt='')
-        i.el-icon-arrow-right
+        van-icon(name="arrow")
     li
       p 昵称
       div
         el-input(placeholder='请设置昵称', v-model='nickname', :value='nickname', clearable='', ref='isnickname', @blur='nickNameFocus', @focus='nickNameFocus', v-show='isnicknameto')
         p {{nickname}}
-        i.el-icon-arrow-right(v-show='!nickname')
+        van-icon(name="arrow",v-show='!nickname')
     li
       p 账号
       div
@@ -35,25 +35,25 @@
       div
         router-link(v-if='mobile === null', to='setmobile') {{ mobile === null ? '未设置' : 'mobile' }}
         span {{mobile}}
-        i.el-icon-arrow-right(v-show=' !mobile')
+        van-icon(name="arrow",v-show=' !mobile')
     li
       p 邮箱
       div
         router-link(v-if='email === null', to='setemail') {{ email === null ? '未设置' : email }}
         span {{email}}
-        i.el-icon-arrow-right(v-show=' !email')
+        van-icon(name="arrow",v-show=' !email')
     li
       p 性别
       div
         select(v-model='sex', @change='selecteds($event)')
           option(v-for='(sexs,index) in sexlist', :key='index', :value='index') {{sexs}}
-        i.el-icon-arrow-right
+        van-icon(name="arrow")
     li
       p 生日
       div
         p
-          el-date-picker(v-model='birthday', type='date', value-format='yyyy/MM/dd', @change='(value) => toBirthday(value)', format='yyyy/MM/dd', :editable='false', placeholder='选择日期')
-        i.el-icon-arrow-right
+          input(type='date',v-model='birthday',@change='toBirthday')
+        van-icon(name="arrow")
 </template>
 <script>
 import { setStore, getStore, removeStore } from "../../../config/mutil";
@@ -72,7 +72,7 @@ export default {
       sex: 0, //性别ID
       mobile: null, //手机号码
       email: null, //邮箱
-      birthday: "1988/11/11", //生日
+      birthday: "", //生日
       nicknameShow1: true,
       nicknameShow2: false,
       imgsrc: require("@/assets/img/one/0.jpg"),
@@ -119,10 +119,7 @@ export default {
   },
   methods: {
     //生日选择
-    toBirthday(value) {
-      this.birthday = value;
-      this.$store.state.birthday = this.birthday;
-      setStore("birthday", this.$store.state.birthday);
+    toBirthday() {
       this.saveUserData();
     },
     //性别选择

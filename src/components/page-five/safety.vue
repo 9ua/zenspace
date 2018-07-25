@@ -1,7 +1,7 @@
 <template lang="jade">
 .safety
   .safety-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 安全中心
     span
   .safety-content
@@ -9,49 +9,40 @@
       p.title ———— 您的账号安全级别为极低 ————
       div
         el-rate(v-model='value5', disabled='', show-score='', text-color='#ff9900', score-template='')
-        //
-          <i class="el-icon-star-on active"></i>
-          <i class="el-icon-star-on active"></i>
-          <i class="el-icon-star-on active"></i>
-          <i class="el-icon-star-on active"></i>
-          <i class="el-icon-star-on"></i>
-      //
-        <p class="time">上次登陆：2018-04-07  14:14:14</p>
-        <p class="land"><span>香港</span> | <span>不是我登陆？</span></p>
     ul
       router-link(to='verifyPwd', tag='li')
         p 修改登陆密码
         div
           p 修改
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
       router-link(:to="securityCoe === 0 ? 'setSafePwd' : 'verifySafePwd'", tag='li')
         p {{securityCoe === 0 ? '设置安全密码' : '已设置安全密码'}}
         div
           p {{securityCoe === 0 ? '设置' : '修改'}}
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
       router-link(:to="mobile === 0 ? 'detail/setmobile' : 'safeMobile'", tag='li')
         p {{mobile === 0 ? '设置密保手机' : '已设置密保手机'}}
         div
           p {{mobile === 0 ? '设置' : '修改'}}
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
       router-link(:to="question === 0 ? 'setQuestion' : 'safeQuestion'", tag='li')
         p {{question === 0 ? '设置密保问题' : '已设置密保问题'}}
         div
           p {{question === 0 ? '设置' : '查看'}}
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
       router-link(:to="email === 0 ? 'detail/setemail' : 'safeEmail'", tag='li')
         p {{email === 0 ? '设置密保邮箱' : '已设置密保邮箱'}}
         div
           p {{email === 0 ? '设置' : '修改'}}
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
       router-link(to='getCards', tag='li')
         p 银行卡管理
         div
           p 设置
-          i.el-icon-arrow-right
+          van-icon(name='arrow')
     .logout(@click='logout')
       p 退出登陆
-      i.el-icon-arrow-right
+      van-icon(name='arrow')
 </template>
 <script>
 import { setStore, getStore, removeStore } from "../../config/mutil";
@@ -70,6 +61,9 @@ export default {
     this.getSecurityCenterStatus();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/five')
+    },
     //取安全中心状态
     getSecurityCenterStatus() {
       this.$axios

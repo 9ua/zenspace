@@ -40,7 +40,7 @@
         .five-content-nav
           i.fa(:class='fiveNavs.icon')
           p {{fiveNavs.name}}
-        i.el-icon-arrow-right
+        van-icon(name="arrow")
   van-popup.pop2(v-model='show2', :close-on-click-overlay='false')
     div
       ul

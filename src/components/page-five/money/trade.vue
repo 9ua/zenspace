@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 交易记录
     .dim(@click='show = ! show')
       | {{timeline}}
@@ -89,6 +89,9 @@ export default {
     this.getTradeList();
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/five')
+    },
     select(a) {
       this.show2 = !this.show2;
       this.selected = a;

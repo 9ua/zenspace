@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/agency', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 代理说明
     span
   .listStyle-content
@@ -21,6 +21,16 @@
       p 可在代理报表、投注明细、交易明细查看代理的发展情况；
       p 建议开设的下级也是代理类型，无论发展了几级，您都能获得返点。
 </template>
+<script>
+export default {
+  methods:{
+    listStyleToSafety(){
+      this.$router.push('/agency')
+    },
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 @import "../../../assets/scss/listStyle.scss";
 </style>

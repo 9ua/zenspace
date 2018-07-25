@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToFive')
     p 充值方式
     span
   .listStyle-content
@@ -13,7 +13,7 @@
             | {{payw.alias}}
             br
             span(style='font-size:12px;color:#bbb') {{payw.content}}
-        i.el-icon-arrow-right
+        van-icon(name='arrow')
   van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
     div
       ul
@@ -39,6 +39,10 @@ export default {
     this.getRechargeWayList();
   },
   methods: {
+    //返回Five页面
+    listStyleToFive(){
+      this.$router.push("/five");
+    },
     getRechargeWayList() {
       this.$http
         .get(this.$store.state.url + "/api/proxy/getRechargeWayList")

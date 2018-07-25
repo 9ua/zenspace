@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/getCards', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToGetCards')
     p 绑定银行卡
     span
   .listStyle-content
@@ -81,6 +81,9 @@ export default {
     this.getBankNameList();
   },
   methods: {
+    listStyleToGetCards(){
+      this.$router.push('/getCards')
+    },
     getBankNameList() {
       this.$http
         .get(this.$store.state.url + "api/proxy/getBankNameList")

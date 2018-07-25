@@ -1,12 +1,22 @@
 <template lang="jade">
 .agent
   .agent-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='agentToFive')
     p 客服
     span
   .content
     iframe.content-in(src='https://kf1.learnsaas.com/chat/chatClient/chatbox.jsp?companyID=992821&configID=74605&jid=1218814689&s=1')
 </template>
+<script>
+export default {
+  methods:{
+    agentToFive(){
+      this.$router.push("/five");
+    },
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 @import "../../assets/scss/page-five/agency/agent.scss";
 </style>

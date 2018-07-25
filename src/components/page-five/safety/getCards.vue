@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 银行卡管理
     span
   .listStyle-content
@@ -110,6 +110,9 @@ export default {
   },
   mounted() {},
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/safety')
+    },
     select(a) {
       this.id = a.id;
       this.selectBank = a.title;

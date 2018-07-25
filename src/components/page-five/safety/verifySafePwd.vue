@@ -1,7 +1,7 @@
 <template lang="jade">
 .verifySafePwd
   .verifySafePwd-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 验证安全密码
     span
   .verifySafePwd-input
@@ -24,6 +24,9 @@ export default {
     };
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/safety');
+    },
     validSecurityCode() {
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },

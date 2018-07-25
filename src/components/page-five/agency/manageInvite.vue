@@ -1,7 +1,7 @@
 <template lang="jade">
 .mymsg
   .mymsg-top
-    router-link.el-icon-arrow-left(to='/agency', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     ul
       router-link(v-for='(navs,index) in nav', :to="'/manageInvite/'+navs.pathurl", tag='li', :key='index') {{navs.name}}
     span
@@ -26,6 +26,9 @@ export default {
     };
   },
   methods:{
+    listStyleToSafety(){
+      this.$router.push('/agency')
+    },
     toNavs(index){
       if(index === 0){
         this.$router.push("mInvite?type=2")

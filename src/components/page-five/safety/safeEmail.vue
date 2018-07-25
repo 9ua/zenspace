@@ -1,7 +1,7 @@
 <template lang="jade">
 .safeEmail
   .safeEmail-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='safeEmailToSafety')
     p 验证密保手机
     span
   .safeEmail-content
@@ -32,6 +32,10 @@ export default {
     this.getBindEmail();
   },
   methods: {
+    //返回safety页面
+    safeEmailToSafety(){
+      this.$router.push("/safety")
+    },
     //验证安全码
     validSecurityCode() {
       let config = {

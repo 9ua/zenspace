@@ -2,7 +2,7 @@
 .betbj10
   ul.betbj10-top
     li
-      i.el-icon-arrow-left(@click='banckto')
+      van-icon(name='arrow-left',@click='banckto')
     li
       p.wangfa
         | 玩

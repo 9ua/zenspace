@@ -1,7 +1,7 @@
 <template lang="jade">
 .setSafePwd
   .setSafePwd-top
-    router-link.el-icon-arrow-left(to='/safety', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 设置安全密码
     span
   .setSafePwd-input
@@ -37,6 +37,9 @@ export default {
     };
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/safety')
+    },
     setSafePwd() {
       const newPassword_yz = /^[0-9]{6,6}$/;
       let yzPassword = newPassword_yz.test(this.newPassword);

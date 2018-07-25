@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    router-link.el-icon-arrow-left(to='/five', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToFive')
     p 代理提现
     span
   .listStyle-content
@@ -10,12 +10,12 @@
         .mInvite-left
           i.fa.fa-credit-card(style='padding-right:10px')
           p 普通提现
-        i.el-icon-arrow-right
+        van-icon(name='arrow')
       li(@click="getAgentWithdrawFlag")
         .mInvite-left
           i.fa.fa-credit-card(style='padding-right:10px')
           p 返点提现
-        i.el-icon-arrow-right
+        van-icon(name='arrow')
   van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
     div
       ul
@@ -35,6 +35,10 @@ export default {
     };
   },
   methods: {
+    //返回Five页面
+    listStyleToFive(){
+      this.$router.push("/five");
+    },
     //判断是否允许当前用户进行提款
     getWithdrawFlag() {
       this.$http

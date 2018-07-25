@@ -1,7 +1,7 @@
 <template lang="jade">
 .verifySafePwd
   .verifySafePwd-top
-    router-link.el-icon-arrow-left(to='/resetpwd', tag='i')
+    van-icon(name='arrow-left',@click='listStyleToSafety')
     p 验证安全密码
   .verifySafePwd-input
     p 原安全密码
@@ -20,6 +20,9 @@ export default {
     };
   },
   methods: {
+    listStyleToSafety(){
+      this.$router.push('/resetpwd')
+    },
     verifySafePwd() {
       this.$router.push({
         path: "/setPwd"

@@ -1,7 +1,7 @@
 <template>
 <div class="betk3">
   <ul class="betk3-top">
-    <li><i @click="banckto" class="el-icon-arrow-left"></i></li>
+    <li><van-icon name='arrow-left' @click="banckto" /></li>
     <li>
       <p class="wangfa">玩<br/>法</p>
       <div @click="show = !show" class="menu">{{titles}}<i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i></div>
@@ -27,7 +27,7 @@
     </li>
   </ul>
   <div v-show="lookAllUl" class="lookAllDiv">
-    <p class="lookAllDivTitle"><i @click="lookAllDivTitle" class="el-icon-arrow-left"></i><b class="cont">查看更多</b><span></span></p>
+    <p class="lookAllDivTitle"><van-cion name="arrow-left" @click="lookAllDivTitle" /><b class="cont">查看更多</b><span></span></p>
     <div class="lookAllUlBox">
       <ul class="lookAllUl">
         <li>

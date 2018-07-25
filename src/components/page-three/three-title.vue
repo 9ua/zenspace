@@ -1,6 +1,6 @@
 <template lang="jade">
 .three-title
-  i.el-icon-arrow-left(@click='hide')
+  van-icon(name='arrow-left',@click='hide')
   p 信息
 </template>
 <script>

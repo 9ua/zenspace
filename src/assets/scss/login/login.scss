@@ -55,15 +55,6 @@
         margin-top: 10px;
         border: none;
         background: none;
-        & .yd-checkbox-icon {
-          width: 18px !important;
-          height: 18px !important;
-          color: #f75f5b !important;
-          border: 1px solid #fff;
-        }
-        & .yd-checkbox-text {
-          color: #fff !important;
-        }
       }
       .login-pwd,
       .login-pwdshow,
@@ -171,4 +162,20 @@
     @extend %faj;
     width: 20%;
   }
+}
+.el-checkbox__input.is-checked+.el-checkbox__label,.el-checkbox{
+  color: #fff;
+}
+.el-checkbox__inner{
+  background-color:#AF3A31;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color:#F94E4E;
+  border-color: #FFF;
+}
+.el-checkbox__input.is-focus .el-checkbox__inner{
+  border-color: #FFF;
+}
+.el-checkbox__inner:hover{
+  border-color: #FFF;
 }

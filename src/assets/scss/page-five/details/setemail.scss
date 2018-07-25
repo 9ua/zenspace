@@ -61,6 +61,22 @@
           border: none;
           padding: 0px 4px;
         }
+        & .primary{
+          @extend %faj;
+          background: #F94E4E;
+          color: #fff;
+          height: 40px;
+          width: 140px;
+          border-radius: 6px;
+        }
+        & .primarys{
+          @extend %faj;
+          background: #F3F3F3;
+          color: #000;
+          height: 40px;
+          width: 140px;
+          border-radius: 6px;
+        }
       }
       & li:nth-child(2) {
         & input {
@@ -78,7 +94,7 @@
   height: 36px;
   & button {
     padding: 0px;
-    background: rgb(175, 58, 49);
+    background:#F94E4E;
     border: none;
     width: 86%;
     height: 36px;
@@ -98,7 +114,7 @@
   height: 40px;
   line-height: 40px;
   width: 140px;
-  background: rgb(175, 58, 49);
+  background: #F94E4E;
   color: #000;
   border: 1px solid linear-gradient(to right, #f75f5b, #fead50);
 }
@@ -118,5 +134,5 @@
   color: #fff;
   font-size: 14px;
   border-radius: 4px;
-  background: rgb(175, 58, 49);
+  background: #F94E4E;
 }

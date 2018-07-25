@@ -12,7 +12,8 @@
       li
         p 验证码：
         input(v-model='validCode', type='text', placeholder='请输入验证码')
-        yd-sendcode(v-model='start1', @click.native='sendMobilCode', second='5', init-str='发送验证码', run-str='{%s}秒后重新获取', reset-str='你可以重新获取验证码啦', size='large', type='primary')
+        span.primary(@click='sendMobilCode',v-show='!iss') 发送验证码
+        span.primarys(@click='sendMobilCode',v-show='iss') {{s}} 秒后重新获取
       li
         p 安全密码：
         input(type='password', v-model='securityCode', placeholder='请输入您的安全码')
@@ -25,9 +26,10 @@ import md5 from "js-md5";
 export default {
   data() {
     return {
+      iss:false,
+      s:59,
       show: false, //弹窗
       content: "提示内容!", //弹窗内容
-      start1: false,
       mobile: null, //手机号
       validCode: "", //验证码
       securityCode: "" //安全码
@@ -41,8 +43,18 @@ export default {
       if (!this.mobile) {
         this.show = !this.show;
         this.content = "手机号码不能为空！";
+      } else if(this.mobile){
+        clearInterval(this.setInt);
+        this.setInt = setInterval(() =>{
+          this.iss = true;
+          this.s --;
+          if(this.s === 0){
+            this.iss = false;
+            clearInterval(this.setInt)
+            this.s = 59;
+          }
+        },1000);
       } else if (yzmobile) {
-        this.start1 = true;
         let config = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           withCredentials: true

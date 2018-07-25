@@ -4,10 +4,12 @@
     ul
       li
         span 用户类型
-        input#member.magic-radio(v-model='usertype', type='radio', value='0')
-        label(for='member') 会员
-        input#member2.magic-radio(v-model='usertype', type='radio', value='1')
-        label(for='member2') 代理
+        input#member.magic-radio(v-model='usertype', type='radio', value='0',name='utype') 
+        label(for='member')
+          span 会员
+        input#member2.magic-radio(v-model='usertype', type='radio', value='1',name='utype') 
+        label(for='member2')
+          span 代理
       li
         span 设定返点
         select(v-model='rebateratio', @change='setrebet($event)')

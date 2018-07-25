@@ -27,7 +27,7 @@
     </li>
   </ul>
   <div v-show="lookAllUl" class="lookAllDiv">
-    <p class="lookAllDivTitle"><van-cion name="arrow-left" @click="lookAllDivTitle" /><b class="cont">查看更多</b><span></span></p>
+    <p class="lookAllDivTitle"><van-icon name="arrow-left" @click="lookAllDivTitle" /><b class="cont">查看更多</b><span></span></p>
     <div class="lookAllUlBox">
       <ul class="lookAllUl">
         <li>

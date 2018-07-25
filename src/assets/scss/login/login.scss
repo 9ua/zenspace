@@ -164,18 +164,18 @@
   }
 }
 .el-checkbox__input.is-checked+.el-checkbox__label,.el-checkbox{
-  color: #fff;
+  color: #fff !important;
 }
 .el-checkbox__inner{
-  background-color:#AF3A31;
+  background-color:#AF3A31 !important;
 }
 .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
-  background-color:#F94E4E;
-  border-color: #FFF;
+  background-color:#F94E4E !important;
+  border-color: #FFF !important;
 }
 .el-checkbox__input.is-focus .el-checkbox__inner{
-  border-color: #FFF;
+  border-color: #FFF !important;
 }
 .el-checkbox__inner:hover{
-  border-color: #FFF;
+  border-color: #FFF !important;
 }

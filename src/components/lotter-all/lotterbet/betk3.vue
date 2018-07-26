@@ -78,7 +78,7 @@
                   <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ k +'.png') + ')'}"></div>
                 </transition>
               </div>
-            </div><i :class="betk3ContentTopPop ? 'icon-up' : 'icon-down'"></i>
+            </div><i class="iconfont" :class="betk3ContentTopPop ? 'icon-up' : 'icon-down'"></i>
           </div>
         </div>
         <div class="content-right" @click="tolooksucc">

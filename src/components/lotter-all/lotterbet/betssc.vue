@@ -78,7 +78,7 @@
               .span
                 transition(name='down-up-translate-fade')
                   div {{h}}
-            i(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
+            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
         .content-right(@click='tolooksucc')
           div
             p.seasonId {{seasonId !== '' ? seasonId : Number(lastSeasonIds)+1}}期投注截止

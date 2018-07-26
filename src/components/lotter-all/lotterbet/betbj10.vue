@@ -61,6 +61,7 @@
       .betk3-content-top
         .content-left(@click=' betsscContentTopPop = !betsscContentTopPop')
           p(v-if="$route.query.id === 'pk10'") {{lastSeasonId*1}}期开奖号码
+            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
           p(v-else) {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
             i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
           div(v-if="shownum === false")

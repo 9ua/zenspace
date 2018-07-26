@@ -22,16 +22,16 @@
       li
         p 申请金额
         div
-          el-input(placeholder='请输入提现金额', v-model='amount', :value='amount', clearable='')
+          input(placeholder='请输入提现金额', v-model='amount', value='amount', clearable='')
       li
         p 账号
         div(@click='show1 = ! show1')
           | {{selectBank}}
-          span.el-icon-arrow-down
+          span.iconfont.icon-xia
       li
         p 账户安全码
         div
-          el-input(placeholder='请输入安全码', v-model='securityCode', :value='securityCode', clearable='')
+          input(placeholder='请输入安全码', v-model='securityCode', value='securityCode', clearable='')
       li
         .button
           button.button1(@click='sendReq') 提现申请
@@ -100,7 +100,7 @@ export default {
     },
     //hotfix-start//
     getTopUserData() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/userCenter/getTopUserData")
         .then(res => {
           this.hotfixbalance = res.data.data.balance;
@@ -117,7 +117,7 @@ export default {
       } else if (this.$store.state.userType === "1") {
         this.withdrawType = 2;
       }
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
           params: { withdrawType: this.$route.query.id }
         })

@@ -18,7 +18,7 @@
         p 安全密码：
         input(type='password', v-model='securityCode', placeholder='请输入您的安全码')
     .setmobile-but
-      el-button(type='primary', @click='saveBindPhone') 确定
+      button(type='primary', @click='saveBindPhone') 确定
   van-popup(v-model='show') {{content}}
 </template>
 <script>

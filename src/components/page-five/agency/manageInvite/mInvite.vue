@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     createbetlist() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/agent/getExtQuota")
         .then(res => {
           this.highbet = res.data.data.rebateRatio;

@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     lotteryssc() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryListssc = res.data.data.ssc;

@@ -24,16 +24,16 @@
       li
         p 申请金额
         div
-          el-input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', :value='amount', clearable='')
+          input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', value='amount', clearable='')
       li
         p 账号
         div(@click='show1 = ! show1')
           | {{selectBank}}
-          span.el-icon-arrow-down
+          span.iconfont.icon-xia
       li
         p 账户安全码
         div
-          el-input(placeholder='请输入安全码', v-model='securityCode', :value='securityCode', clearable='' type="password")
+          input(placeholder='请输入安全码', v-model='securityCode', value='securityCode', clearable='' type="password")
       li
         .button
           button.button1(@click='sendReq()') 提现申请
@@ -96,7 +96,7 @@ export default {
       }
     },
     getWithdrawInformation() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
           params: { withdrawType: this.withdrawType }
         })

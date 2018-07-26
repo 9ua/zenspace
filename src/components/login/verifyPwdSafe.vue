@@ -6,8 +6,8 @@
   .verifySafePwd-input
     p 原安全密码
     input(type='password', placeholder='请输入当前所使用的密码', v-focus='')
-  .verifySafePwd-but
-    el-button(type='primary', @click='verifySafePwd') 确定
+  .verifySafePwd-butverifySafePwd-but
+    button(type='primary', @click='verifySafePwd') 确定
   .verifySafePwd-tisi  安全密码用于提现、绑定银行卡等操作，可保障资金安全。 
 </template>
 <script>

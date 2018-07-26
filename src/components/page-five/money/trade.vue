@@ -5,7 +5,7 @@
     p 交易记录
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
       van-actionsheet(v-model='show', :actions='actions', cancel-text='取消')
@@ -107,7 +107,7 @@ export default {
       this.getTradeList();
     },
     getTradeList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getTradeList", {
           params: {
             account: this.$store.state.Globalusername,

@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     lotteryklc() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryListklc = res.data.data.pk10;

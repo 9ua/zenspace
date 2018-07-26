@@ -17,7 +17,7 @@
         .mInvite-right
           p
             span ({{item.statusName}})
-        i.el-icon-arrow-down
+        i.iconfont.icon-xia
   van-actionsheet(v-model='show2')
     ul.listStyle-II(style='text-align:center')
       li
@@ -83,7 +83,7 @@ export default {
       this.QRCodeUrl = a.QRCodeUrl;
     },
     getRechargeList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getRechargeList", {
           params: { start: 0, limit: 100 }
         })

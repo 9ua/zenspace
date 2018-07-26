@@ -71,15 +71,17 @@
           @extend %aitems;
         }
         & .input-top {
-          width: 75%;
+          width: 60%;
+          padding:4px 0px 4px 4px;
         }
         & button {
+          @extend %faj;
           width: 35px;
         }
       }
       & i {
-        margin-left: 10px;
-        color: #ccc;
+        // margin-left: 10px;
+        color: #000;
         font-size: 20px;
       }
       & .mInvite-left {

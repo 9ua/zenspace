@@ -9,7 +9,7 @@
     li
       p 昵称
       div
-        el-input(placeholder='请设置昵称', v-model='nickname', :value='nickname', clearable='', ref='isnickname', @blur='nickNameFocus', @focus='nickNameFocus', v-show='isnicknameto')
+        input(type='text',placeholder='请设置昵称', v-model='nickname', value='nickname',ref='isnickname',@blur='nickNameFocus', @focus='nickNameFocus', v-show='isnicknameto')
         p {{nickname}}
         van-icon(name="arrow",v-show='!nickname')
     li
@@ -168,7 +168,7 @@ export default {
     },
     //获取个人信息
     getUserData() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/userCenter/getUserData")
         .then(res => {
           this.image = res.data.data.image;

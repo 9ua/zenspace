@@ -1,7 +1,7 @@
 <template lang="jade">
 .registered
   .registered-title
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click="listStyleToSafety")
     p 用户注册
     router-link(to='', tag='b') 客服
   .registered-content

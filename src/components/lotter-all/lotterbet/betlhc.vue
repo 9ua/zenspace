@@ -30,7 +30,7 @@ export default {
       this.$router.push("/one")
     },
     geteServerTime(){
-      this.$http.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId:"dfk3" }}).then(res => {
+      this.$axios.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId:"dfk3" }}).then(res => {
         this.seasonId = res.data.data.seasonId;
         this.today = res.data.data.restSeconds;
         this.setTimeMode();
@@ -69,7 +69,7 @@ export default {
       this.countDown = hours + ":" + minutes + ":" + seconds;
     },
     getList(){
-      this.$http.get("../../../../static/k3.json").then(res =>{
+      this.$axios.get("../../../../static/k3.json").then(res =>{
         console.log("res:",res)
       })
     },

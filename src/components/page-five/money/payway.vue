@@ -44,7 +44,7 @@ export default {
       this.$router.push("/five");
     },
     getRechargeWayList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "/api/proxy/getRechargeWayList")
         .then(res => {
           this.paywaylist = res.data.data;

@@ -1,10 +1,10 @@
 <template>
 <div class="betk3">
   <ul class="betk3-top">
-    <li><van-icon name='arrow-left' @click="banckto" /></li>
+    <li><i class="iconfont icon-left" @click="banckto"></i></li>
     <li>
       <p class="wangfa">玩<br/>法</p>
-      <div @click="show = !show" class="menu">{{titles}}<i :class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i></div>
+      <div @click="show = !show" class="menu">{{titles}}<i class="iconfont" :class="show ? 'icon-up' : 'icon-down'"></i></div>
       <div class="menu-list">
         <van-popup v-model="show" position="top">
           <ul class="menu-list-top">
@@ -18,7 +18,7 @@
         </van-popup>
       </div>
     </li>
-    <li class="betk3list"><span @click="showa = !showa">{{listname}}</span><i :class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' " @click="showa = !showa"></i>
+    <li class="betk3list"><span @click="showa = !showa">{{listname}}</span><i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="showa = !showa"></i>
       <van-popup v-model=" showa" position="top">
         <ul>
           <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)"><a>{{listk3.name}}</a></li>
@@ -27,7 +27,7 @@
     </li>
   </ul>
   <div v-show="lookAllUl" class="lookAllDiv">
-    <p class="lookAllDivTitle"><van-cion name="arrow-left" @click="lookAllDivTitle" /><b class="cont">查看更多</b><span></span></p>
+    <p class="lookAllDivTitle"><van-icon name="arrow-left" @click="lookAllDivTitle" /><b class="cont">查看更多</b><span></span></p>
     <div class="lookAllUlBox">
       <ul class="lookAllUl">
         <li>
@@ -38,8 +38,8 @@
           <p>单双 </p>
         </li>
         <li v-for="(item,index) in getPastOpens" :key="index">
-          <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="el-icon-minus"></i></p>
-          <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="el-icon-minus"></i></p>
+          <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="iconfont icon-plus-minus"></i></p>
+          <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="iconfont icon-plus-minus"></i></p>
           <p><a><img :src='"@/assets/img/one/n"+item.n1+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n2+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n3+".png"' alt=""/></a></p>
           <p>{{item.n1+item.n2+item.n3}}</p>
           <p><span :class="item.n1+item.n2+item.n3 &lt; 11 ? 'goodidea' : 'goodluck'">
@@ -59,7 +59,7 @@
             <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n1 +'.png') + ')'}"></p>
             <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n2 +'.png') + ')'}"></p>
             <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n3 +'.png') + ')'}"></p>
-            <i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+            <i class="iconfont" :class="betk3ContentTopPop ? 'icon-up' : 'icon-down'"></i>
           </div>
           <div v-if="shownum === true && isGetItem === true" class="contnet-left-num">
             <div class="num">
@@ -78,7 +78,7 @@
                   <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ k +'.png') + ')'}"></div>
                 </transition>
               </div>
-            </div><i :class="betk3ContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"></i>
+            </div><i :class="betk3ContentTopPop ? 'icon-up' : 'icon-down'"></i>
           </div>
         </div>
         <div class="content-right" @click="tolooksucc">
@@ -89,7 +89,7 @@
               <p>{{countDown !== '' ? countDown : "00:00:00"}}</p>
             </div>
           </div>
-          <i class="el-icon-caret-left"></i>
+          <i class="iconfont icon-sanjiaoleft"></i>
         </div>
       </div>
       <div v-show="betk3ContentTopPop" class="betk3-content-top-pop">
@@ -102,8 +102,8 @@
             <p>单双</p>
           </li>
           <li v-for="(item,index) in getPastOpens" :key="index" v-if="index &lt; 10">
-            <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="el-icon-minus"></i></p>
-            <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="el-icon-minus"></i></p>
+            <p v-if="$route.query.id === 'bjk3'">{{item.seasonId}}<i class="iconfont icon-plus-minus"></i></p>
+            <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}<i class="iconfont icon-plus-minus"></i></p>
             <p><a><img :src='"@/assets/img/one/n"+item.n1+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n2+".png"' alt=""/></a><a><img :src='"@/assets/img/one/n"+item.n3+".png"' alt=""/></a></p>
             <p>{{item.n1+item.n2+item.n3}}</p>
             <p><span :class="item.n1+item.n2+item.n3 < 11 ? 'goodidea' : 'goodluck'">{{item.n1+item.n2+item.n3 < 11 ? '小' : '大'}}</span></p>
@@ -602,7 +602,7 @@ export default {
     geteServerTime() {
       clearInterval(this.timer);
       clearTimeout(this.timer2);
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
         })
@@ -677,7 +677,7 @@ export default {
         this.start();
       }
       this.shownum = true;
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: 20 }
         })
@@ -717,7 +717,7 @@ export default {
           }
         }
       } else {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
             localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
@@ -1097,7 +1097,7 @@ export default {
         if (null == setupTime || now - setupTime > this.cacheTime) {
           localStorage.removeItem("playTree_" + this.$route.query.id);
           localStorage.removeItem("date_playTree_" + this.$route.query.id);
-          this.$http
+          this.$axios
             .get(this.$store.state.url + "api/lottery/getPlayTree", {
               params: { lotteryId: this.$route.query.id }
             })
@@ -1129,7 +1129,7 @@ export default {
             JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id))
           );
       } else {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getPlayTree", {
             params: { lotteryId: this.$route.query.id }
           })

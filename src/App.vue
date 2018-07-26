@@ -23,8 +23,4 @@ html,
 p {
   margin: 0;
 }
-.el-loading-spinner i,.el-loading-spinner .el-loading-text{
-  color: #fff;
-  font-size: 20px;
-}
 </style>

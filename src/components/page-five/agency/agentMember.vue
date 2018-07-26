@@ -63,7 +63,7 @@ export default {
       this.selected = a;
     },
     getUnderUserList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderUserList", {
           params: { account: this.$store.state.Globalusername }
         })

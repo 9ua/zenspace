@@ -9,8 +9,7 @@
       router-link.dim(v-show="routerUrl === 'five'", to='service', tag='span') 客服
       a(:href='os', v-show="routerUrl === 'one'", target='_top')
         b APP
-        // van-icon(name="share")
-        b.el-icon-download
+        b.iconfont.icon-xiazai
 </template>
 <script>
 export default {
@@ -107,6 +106,12 @@ export default {
         @extend %faj;
         color: #fff;
         font-size: 20px;
+        & b{
+          margin-right: 4px;
+        }
+        & b.iconfont{
+          font-size: 22px;
+        }
       }
       & .dim {
         border: solid 1px #fff;

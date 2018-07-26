@@ -2,7 +2,7 @@
 .safeEmail
   .safeEmail-top
     van-icon(name='arrow-left',@click='safeEmailToSafety')
-    p 验证密保手机
+    p 验证密保邮箱
     span
   .safeEmail-content
     ul
@@ -13,7 +13,7 @@
         p 安全密码：
         input(type='password', v-model='oldPassword', placeholder='请输入您的安全码')
     .safeEmail-but
-      el-button(type='primary', @click='validSecurityCode') 确定
+      button(type='primary', @click='validSecurityCode') 确定
   van-popup(v-model='show') {{content}}
 </template>
 <script>
@@ -97,7 +97,7 @@ export default {
     },
     //获取已经绑定的手机号码
     getBindEmail() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/userCenter/getBindEmail")
         .then(res => {
           this.email = res.data.data.email;

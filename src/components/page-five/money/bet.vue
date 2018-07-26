@@ -5,7 +5,7 @@
     p 投注记录
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
       van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
@@ -25,7 +25,7 @@
               span(v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}") {{item.statusName}}
               br
               span(v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}") {{item.win}}
-          i.el-icon-arrow-down
+          i.iconfont.icon-xia
     van-actionsheet(v-model='show2')
       ul.listStyle-II
         li
@@ -178,7 +178,7 @@ export default {
 		    });
     },
     getTradeList(){
-        this.$http.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.$store.state.Globalusername,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
+        this.$axios.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.$store.state.Globalusername,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
         this.tradelist = res.data.data.list;
 			}).catch((error) => {
         console.log("获取彩種ratio ERROR");

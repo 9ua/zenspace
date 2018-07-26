@@ -210,7 +210,7 @@ export default {
       if(localStorage.getItem("image") !== null){
         this.image = localStorage.getItem("image");
       }else{
-        this.$http.get(this.$store.state.url + "api/userCenter/getTopUserData").then(res => {
+        this.$axios.get(this.$store.state.url + "api/userCenter/getTopUserData").then(res => {
           localStorage.setItem("image",res.data.data.image);
           this.image = localStorage.getItem("image");
         })
@@ -221,7 +221,7 @@ export default {
     },
     //获取用户余额
     getBalance() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/userCenter/getBalance")
         .then(res => {
           this.$store.state.balance = res.data.data.balance;

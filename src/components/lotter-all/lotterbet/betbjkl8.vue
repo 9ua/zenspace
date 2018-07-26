@@ -2,7 +2,7 @@
 .betbjkl8
   ul.betbjkl8-top
     li
-      router-link.el-icon-arrow-left(to='/one', tag='i')
+      i.iconfont.icon-left(@click="banckto")
     li
       p.wangfa
         | 玩
@@ -10,7 +10,7 @@
         | 法
       .menu(@click='show = !show')
         | {{titles}}
-        i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+        i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
         van-popup(v-model='show', position='top')
           .menu-list-top(v-for='(val,index) in renxuan', :key='index')
@@ -34,7 +34,7 @@
         p
           | 888888投注：
           span
-          i(:class=" lottery ? 'el-icon-arrow-down' :'el-icon-arrow-up'")
+          i.iconfont(:class=" lottery ? 'icon-up' :'icon-down'")
         .lottery-ms(v-show=' !lottery')
           p
             span 期号
@@ -44,7 +44,7 @@
               div
                 span 888888
                 span 00:00:00
-              i.el-icon-minus
+              i.iconfont.icon-plus-minus
               div
                 ul
                   li(v-for='(item,index) in 20', :key='index') 02
@@ -278,6 +278,9 @@ export default {
     };
   },
   methods: {
+    banckto(){
+      this.$router.push('/one');
+    },
     menunav(event, index, muens) {
       if (muens) {
         this.navs = index;

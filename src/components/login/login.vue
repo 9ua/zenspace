@@ -1,7 +1,7 @@
 <template lang="jade">
 .login(v-show='loginStatus === false')
   .login-title
-    van-icon(name="arrow-left",@click='loginS')
+    i.iconfont.icon-left(@click="loginS")
     p 用户登录
     span
   .login-conter
@@ -20,7 +20,8 @@
         input(type='text', onfocus='this.select()', v-model='newUserInfo.verification', placeholder='请输入验证码')
         img(:src='captchaCodeImg', @click='getCaptchaCode')
       .login-rememb
-        el-checkbox(v-model='checked', @click='checked = !checked') 记住密码
+        input(style='border-color:#FFF;color:#FFF;',type='checkbox',v-model='checked', @click='checked = !checked')
+        span 记住密码
       .login-go
         button(@click='login', v-show='loginReq') 立即登陆
       .login-live

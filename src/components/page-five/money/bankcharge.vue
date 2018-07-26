@@ -21,15 +21,15 @@
       li
         p 充值金额
         div
-          el-input(placeholder='请输入充值金额', v-model='chargeamount', :value='chargeamount', clearable='')
+          input(placeholder='请输入充值金额', v-model='chargeamount', value='chargeamount', clearable='')
       li
         p 充值人姓名
         div
-          el-input(placeholder='请输入充值人姓名', v-model='niceName', :value='niceName', clearable='')
+          input(placeholder='请输入充值人姓名', v-model='niceName', value='niceName', clearable='')
       li
         p 附言
         div
-          el-input(placeholder='请输入附言', v-model='checkCode', :value='checkCode', clearable='')
+          input(placeholder='请输入附言', v-model='checkCode', value='checkCode', clearable='')
       li
         .button
           button.button1(@click="isshow3") 充值申请
@@ -117,7 +117,7 @@ export default {
       this.$router.push("/payway");
     },
     rechargeEntrance() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
           params: { rechargeWay: 5 }
         })

@@ -5,15 +5,15 @@
     p 代理报表
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
       van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
     ul.listStyle-check-top
       li
-        el-input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', :value='accountName', clearable='')
+        input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', value='accountName', clearable='')
         button(@click='getUserTeam()')
-          van-icon(name='arrow')
+          i.iconfont.icon-you
     .listStyle-content-list
       ul
         li
@@ -129,7 +129,7 @@ export default {
     },
     getUserTeam() {
       if (this.accountName == "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getUserTeam", {
             params: {
               account: this.$store.state.Globalusername,
@@ -143,7 +143,7 @@ export default {
             console.log("获取列表Error");
           });
       } else if (this.accountName !== "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getUserTeam", {
             params: { account: this.accountName, dateFlag: this.dateFlag }
           })

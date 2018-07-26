@@ -33,7 +33,7 @@ export default {
       if(localStorage.getItem("getLastDays") !== null){
         this.getLastDay = JSON.parse(localStorage.getItem("getLastDays"));
       }else{
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getLastDayWinList")
           .then(res => {
             localStorage.setItem("getLastDays",JSON.stringify(res.data.data));

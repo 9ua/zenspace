@@ -2,7 +2,7 @@
 .betbj10
   ul.betbj10-top
     li
-      van-icon(name='arrow-left',@click='banckto')
+      i.iconfont.icon-left(@click="banckto")
     li
       p.wangfa
         | 玩
@@ -10,7 +10,7 @@
         | 法
       .menu(@click='show = !show')
         | {{titles}}
-        i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+        i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
         van-popup(v-model='show', position='top')
           .popscroll
@@ -23,14 +23,14 @@
                       a {{player.groupName}}{{player.title}}
     li.betbj10list
       span(@click='showa = !showa') {{listname}}
-      i(:class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' ", @click='showa = !showa')
+      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
       van-popup(v-model=' showa', position='top')
         ul
           li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
             a {{listk3.name}}
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
-      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      i.iconfont.icon-left(@click='lookAllDivTitle')
       b.cont 查看更多
       span
     .lookAllUlBox
@@ -41,10 +41,10 @@
         li(v-for='(item,index) in getPastOpens', :key='index')
           p(v-if="$route.query.id === 'pk10'")
             | {{item.seasonId}}
-            i.el-icon-minus
+            i.iconfont.icon-plus-minus
           p(v-else)
             | {{item.seasonId.substring(4).split("-").join("")*1}}
-            i.el-icon-minus
+            i.iconfont.icon-plus-minus
           p
             a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
             a {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
@@ -62,7 +62,7 @@
         .content-left(@click=' betsscContentTopPop = !betsscContentTopPop')
           p(v-if="$route.query.id === 'pk10'") {{lastSeasonId*1}}期开奖号码
           p(v-else) {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
-            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
           div(v-if="shownum === false")
             p {{n1 < 10 ? '0'+n1 : n1}}
             p {{n2 < 10 ? '0'+n2 : n2}}
@@ -112,7 +112,7 @@
             p.seasonId(v-else) {{seasonId2 !== '' ? seasonId2.slice(4)*1 : Number(lastSeasonIds)+1}}期投注截止
             .time
               p {{countDown !== '' ? countDown : "00:00:00"}}
-          i.el-icon-caret-left
+          i.iconfont.icon-sanjiaoleft
       .betk3-content-top-pop(v-show='betsscContentTopPop')
         ul.look
           li
@@ -121,10 +121,10 @@
           li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
             p(v-if="$route.query.id === 'pk10'")
               | {{item.seasonId}}
-              i.el-icon-minus
+              i.iconfont.icon-plus-minus
             p(v-else)
               | {{item.seasonId.substring(4).split("-").join("")*1}}
-              i.el-icon-minus
+              i.iconfont.icon-plus-minus
             p
               a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
               a {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
@@ -1546,7 +1546,7 @@ export default {
       } else if (
         localStorage.getItem("playTree_" + this.$route.query.id) === null
       ) {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getPlayTree", {
             params: { lotteryId: this.lotteryId }
           })
@@ -1595,7 +1595,7 @@ export default {
           }
         }
       } else {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
             localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
@@ -1724,7 +1724,7 @@ export default {
     geteServerTime() {
       clearInterval(this.timer);
       clearTimeout(this.timer2);
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
         })
@@ -1792,7 +1792,7 @@ export default {
         this.start();
       }
       this.shownum = true;
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: 20 }
         })

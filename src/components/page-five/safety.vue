@@ -8,7 +8,7 @@
     .safety-content-top
       p.title ———— 您的账号安全级别为极低 ————
       div
-        el-rate(v-model='value5', disabled='', show-score='', text-color='#ff9900', score-template='')
+        span.iconfont.icon-iconfontxingxing(:class="{'xingxing': index <= value5}",v-for='index in 5',:key='index')
     ul
       router-link(to='verifyPwd', tag='li')
         p 修改登陆密码

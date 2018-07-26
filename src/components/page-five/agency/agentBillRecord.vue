@@ -5,13 +5,13 @@
     p 交易明細
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content
     ul.listStyle-check-top
       li
-        el-input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', :value='accountName', clearable='')
+        input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', value='accountName', clearable='')
         button(@click='getTradeList()')
-          van-icon(name='arrow')
+          i.iconfont.icon-you
     .listStyle-content-top
       van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
     van-tabs(v-model='accountChangeType', @click='print')
@@ -113,7 +113,7 @@ export default {
     },
     getTradeList() {
       if (this.accountName == "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getTradeList", {
             params: {
               account: this.$store.state.Globalusername,
@@ -129,7 +129,7 @@ export default {
             console.log("获取彩種ratio ERROR");
           });
       } else {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getTradeList", {
             params: {
               account: this.accountName,

@@ -5,7 +5,7 @@
     p 下级报表
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content(v-bind:class='{ blur: show2 }')
     .listStyle-content-top
       van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
@@ -112,7 +112,7 @@ export default {
     },
     getUnderLevelReport() {
       this.nowAccount = this.$store.state.Globalusername;
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
           params: {
             account: this.$store.state.Globalusername,
@@ -128,7 +128,7 @@ export default {
     },
     getUnderLevelReport2() {
       this.nowAccount = this.selected.account;
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
           params: { account: this.selected.account, dateFlag: this.dateFlag }
         })

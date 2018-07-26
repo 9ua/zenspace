@@ -55,7 +55,7 @@ export default {
       this.$router.push('/five')
     },
     getGainLost() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getGainLost")
         .then(res => {
           this.betAmount = res.data.data.betAmount;

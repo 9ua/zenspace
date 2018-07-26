@@ -56,7 +56,7 @@ export default {
       this.getTradeList();
     },
     getUserNoticeList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getUserNoticeList", {
           params: { type: 1 }
         })
@@ -68,7 +68,7 @@ export default {
         });
     },
     getNoticeInfor(x) {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "/api/proxy/getNoticeInfor", {
           params: { id: x }
         })

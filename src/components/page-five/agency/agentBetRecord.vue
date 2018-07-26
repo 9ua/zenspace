@@ -5,13 +5,13 @@
     p 投注明細
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content(v-bind:class='{ blur: show2 }')
     ul.listStyle-check-top
       li
-        el-input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', :value='accountName', clearable='')
+        input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', value='accountName', clearable='')
         button(@click='getTradeList()')
-          van-icon(name='arrow')
+          i.iconfont.icon-you
     .listStyle-content-top
       van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
     van-tabs(v-model='accountChangeType', @click='print')
@@ -30,7 +30,7 @@
               span {{item.statusName}}
               br
               span
-          i.el-icon-arrow-down
+          i.iconfont.icon-xia
   van-actionsheet(v-model='show2')
     ul.listStyle-II
       li
@@ -153,7 +153,7 @@ export default {
     },
     getTradeList() {
       if (this.accountName == "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getbetOrderList", {
             params: {
               account: this.$store.state.Globalusername,
@@ -169,7 +169,7 @@ export default {
             console.log("获取彩種ratio ERROR");
           });
       } else if (this.accountName !== "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getbetOrderList", {
             params: {
               account: this.accountName,

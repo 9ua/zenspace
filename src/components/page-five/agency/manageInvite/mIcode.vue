@@ -25,7 +25,7 @@
             span 注册数
             br
             span ({{item.count}})
-        i.el-icon-arrow-down
+        i.iconfont.icon-xia
   van-actionsheet(v-model='show')
     .listStyle-II
       li
@@ -106,7 +106,7 @@ export default {
       this.getInviteList();
     },
     getInviteList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/agent/inviteCode", {
           params: { type: this.usertype }
         })

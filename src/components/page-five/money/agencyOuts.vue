@@ -41,7 +41,7 @@ export default {
     },
     //判断是否允许当前用户进行提款
     getWithdrawFlag() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "/api/proxy/getWithdrawFlag")
         .then(res => {
           if (res.data.code === 1) {
@@ -54,7 +54,7 @@ export default {
     },
     //判断是否允许当前代理用户进行返点提款
     getAgentWithdrawFlag() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "/api/proxy/getAgentWithdrawFlag")
         .then(res => {
           

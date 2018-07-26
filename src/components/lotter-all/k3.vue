@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     lotteryk3() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryListk3 = res.data.data.k3;

@@ -5,12 +5,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueCookie from "vue-cookie";
-import Carousel from 'element-ui'
-import {
-  Message,
-  Loading
-} from "element-ui";
-import 'element-ui/lib/theme-chalk/index.css'
 import {
   Icon,
   NoticeBar,
@@ -48,7 +42,6 @@ Vue.use(VueAxios, axios);
 Vue.use(Actionsheet);
 Vue.use(NoticeBar);
 Vue.use(Icon);
-Vue.use(Carousel);
 Vue.use(Picker);
 Vue.config.productionTip = false
 /* eslint-disable no-new */

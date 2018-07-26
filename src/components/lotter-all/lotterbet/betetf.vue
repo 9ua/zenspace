@@ -2,7 +2,7 @@
 .betssc
   ul.betssc-top
     li
-      i.el-icon-arrow-left(@click='banckto')
+      i.iconfont.icon-left(@click='banckto')
     li
       p.wangfa
         | 玩
@@ -10,7 +10,7 @@
         | 法
       .menu(@click='show = !show')
         | {{titles}}
-        i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+        i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
         van-popup(v-model='show', position='top')
           .popscroll
@@ -23,14 +23,14 @@
                       a {{player.groupName}}{{player.title}}
     li.betssclist
       span(@click='showa = !showa') {{listname}}
-      i(:class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' ", @click='showa = !showa')
+      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
       van-popup(v-model=' showa', position='top')
         ul
           li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
             a {{listssc.name}}
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
-      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      i.iconfont.icon-xia(@click='lookAllDivTitle')
       b.cont 查看更多
       span
     .lookAllUlBox
@@ -42,7 +42,7 @@
         li(v-for='(item,index) in getPastOpens', :key='index')
           p
             | {{item.seasonId.substring(4).split("-").join("")*1}}
-            i.el-icon-minus
+            i.iconfont.icon-plus-minus
           p
             a {{item.n1}}
             a {{item.n2}}
@@ -61,7 +61,7 @@
             p {{item.n3}}
             p {{item.n4}}
             p {{item.n5}}
-            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
           .contnet-left-num(v-show='shownum')
             .num
               .span
@@ -79,7 +79,7 @@
               .span
                 transition(name='down-up-translate-fade')
                   div {{h}}
-            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
         .content-right
           p {{seasonId}}期投注截止
           div
@@ -93,7 +93,7 @@
           li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
             p
               | {{item.seasonId.substring(4).split("-").join("")*1}}
-              i.el-icon-minus
+              i.iconfont.icon-plus-minus
             p
               a {{item.n1}}
               a {{item.n2}}
@@ -1910,7 +1910,7 @@ export default {
       } else if (
         localStorage.getItem("playTree_" + this.$route.query.id) === null
       ) {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getPlayTree", {
             params: { lotteryId: this.lotteryId }
           })
@@ -1990,7 +1990,7 @@ export default {
           }
         }
       } else {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
             localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
@@ -2054,7 +2054,7 @@ export default {
         this.start();
       }
       this.shownum = true;
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: 20 }
         })
@@ -2083,7 +2083,7 @@ export default {
     geteServerTime() {
       clearInterval(this.timer);
       clearTimeout(this.timer2);
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
         })

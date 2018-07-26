@@ -10,27 +10,27 @@
         p 选择银行
         div(@click='show1 = ! show1')
           | {{selectBank}}
-          i.el-icon-arrow-down
+          i.iconfont.icon-xia
       li
         p 开户地址
         div
-          el-input(placeholder='请输入开户地址', v-model='address', :value='address', clearable='')
+          input(placeholder='请输入开户地址', v-model='address', value='address', clearable='')
       li
         p 开户人姓名
         div
-          el-input(placeholder='请输入银行卡的姓名', v-model='niceName', :value='niceName', clearable='')
+          input(placeholder='请输入银行卡的姓名', v-model='niceName', value='niceName', clearable='')
       li
         p 银行卡号
         div
-          el-input(placeholder='请输入银行卡号', v-model='card', :value='card', clearable='')
+          input(placeholder='请输入银行卡号', v-model='card', value='card', clearable='')
       li
         p 确认卡号
         div
-          el-input(placeholder='请确认银行卡号', v-model='card2', :value='card2', clearable='')
+          input(placeholder='请确认银行卡号', v-model='card2', value='card2', clearable='')
       li
         p 安全密码
         div
-          el-input(placeholder='请输入安全密码', v-model='securityCode', :value='securityCode', clearable='' type="password")
+          input(placeholder='请输入安全密码', v-model='securityCode', value='securityCode', clearable='' type="password")
       li
         .button
           button.button1(@click='sendReq()') 确定
@@ -85,7 +85,7 @@ export default {
       this.$router.push('/getCards')
     },
     getBankNameList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getBankNameList")
         .then(res => {
           this.bankList = res.data.data;

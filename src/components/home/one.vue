@@ -95,7 +95,7 @@ export default {
         if (null == setupTime || now - setupTime > this.cacheTime) {
           localStorage.removeItem("indexInfo");
           localStorage.removeItem("date_indexInfo");
-          this.$http
+          this.$axios
             .get(this.$store.state.url + "api/index/getIndexInfo")
             .then(res => {
               localStorage.setItem("indexInfo", JSON.stringify(res.data.data));
@@ -122,7 +122,7 @@ export default {
           }
         }
       } else {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/index/getIndexInfo")
           .then(res => {
             localStorage.setItem("indexInfo", JSON.stringify(res.data.data));

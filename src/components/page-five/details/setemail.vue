@@ -18,7 +18,7 @@
         p 安全密码：
         input(type='text', v-model='securityCode', placeholder='请输入您的安全码')
     .setemail-but
-      el-button(type='primary', @click='saveBindEmail') 确定
+      button(type='primary', @click='saveBindEmail') 确定
   van-popup(v-model='show') {{content}}
 </template>
 <script>

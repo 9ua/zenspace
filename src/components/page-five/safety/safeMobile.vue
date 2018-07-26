@@ -13,7 +13,7 @@
         p 安全密码：
         input(type='password', v-model='oldPassword', placeholder='请输入您的安全码')
     .safeMobile-but
-      el-button(type='primary', @click='validSecurityCode') 确定
+      button(type='primary', @click='validSecurityCode') 确定
   van-popup(v-model='show') {{content}}
 </template>
 <script>
@@ -96,7 +96,7 @@ export default {
     },
     //获取已经绑定的手机号码
     getBindPhone() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/userCenter/getBindPhone")
         .then(res => {
           this.mobile = res.data.data.mobile;

@@ -32,6 +32,7 @@ export default {
     activeR(e,actives,index){
       this.activesremark = index;
       this.activesremarks = !this.activesremarks;
+      this.$pop.show({title:'温馨提示',content:'恭喜您，投注成功！',content1:'',content2:'',number:2});
     },
     activity(){
       var now = new Date().getTime();

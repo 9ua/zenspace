@@ -40,22 +40,19 @@
         .five-content-nav
           i.fa(:class='fiveNavs.icon')
           p {{fiveNavs.name}}
-        van-icon(name="arrow")
-  van-popup.pop2(v-model='show2', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button.del(@click='goToSet()') 确定
-          button.nodel(@click='show2 = !show2') 取消
+        i.iconfont.icon-you
+  div.show(v-show='show2')
+    ul
+      li.title
+        p 温馨提示！
+      li.cont
+        p {{content}}
+      li.but
+        button.del.active(@click='goToSet()') 确定
+        button.nodel(@click='show2 = !show2') 取消
 </template>
 <script>
 import headers from "../public/header";
-import VueCookie from "vue-cookie";
-import { setStore, getStore, removeStore } from "../../config/mutil";
 export default {
   data() {
     return {
@@ -139,7 +136,7 @@ export default {
           this.securityCoe = res.data.data.securityCoe;
           this.bankUserFlag = res.data.data.bankUserFlag;
           this.question = res.data.data.question;
-          if (this.securityCoe == 0 && this.bankUserFlag == 0) {
+          if (this.securityCoe == 0) {
             this.content = "请先设置安全密码及绑定银行帐户，是否跳转至设置页？";
             this.show2 = !this.show2;
           } else if (this.bankUserFlag == 0) {
@@ -195,7 +192,8 @@ export default {
         });
     },
     goToSet() {
-      if (this.securityCoe == 0 && this.bankUserFlag == 0) {
+      console.log(111)
+      if (this.securityCoe == 0) {
         this.$router.push({ path: "/setSafePwd" });
       } else if (this.bankUserFlag == 0) {
         this.$router.push({ path: "/newCard" });
@@ -250,5 +248,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../assets/scss/five.scss";
+@import "../../assets/scss/page-five/public.scss";
 @import "../../assets/scss/popcorn.scss";
 </style>

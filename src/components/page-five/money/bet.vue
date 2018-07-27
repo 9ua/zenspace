@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='banckto')
+    i.iconfont.icon-left(@click='banckto')
     p 投注记录
     .dim(@click='show = ! show')
       | {{timeline}}
@@ -60,16 +60,15 @@
         li
           .button
             button.button1(@click='show2 =! show2') 确定
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p 确定要将此单撤回?
-        .but
-          button.del(@click='cancelLottery(selected.id,selected.lotteryId)') 确定
-          button.nodel(@click='show3 = !show3') 取消
+  div.show(v-show="show3")
+    ul
+      .title
+        p 温馨提示！
+      .cont
+        p 确定要将此单撤回?
+      .but
+        button.del.active(@click='cancelLottery(selected.id,selected.lotteryId)') 确定
+        button.nodel(@click='show3 = !show3') 取消
 </template>
 <script>
 export default {
@@ -190,6 +189,7 @@ export default {
 <style lang="scss" scoped>
   @import '../../../assets/scss/listStyle.scss';
   @import '../../../assets/scss/popcorn.scss';
+  @import '../../../assets/scss/page-five/public.scss';
   .class-a {
     color: rgb(255, 74, 74) !important;
   }

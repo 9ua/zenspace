@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 信用卡
     span
   .listStyle-content
@@ -53,27 +53,16 @@
         .button
           button.button2(@click='sendReq()') 确定
           button.button3(@click='show2 = !show2') 取消
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button(@click='show3 = ! show3') 确定
-  van-popup.pop2(v-model='show4', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button(@click='goBack()') 确定
+  div.show(v-show='show4')
+    ul
+      .title
+        p 温馨提示！
+      .cont
+        p {{content}}
+      .but
+        button(@click='goBack()') 确定
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
   data() {
     return {
@@ -87,9 +76,7 @@ export default {
       checkCode: "",
       show1: false,
       show2: false,
-      show3: false,
       show4: false,
-
       QRCodeUrl: "",
       receiveAddress: "",
       receiveBankId: "",
@@ -129,7 +116,7 @@ export default {
       if (this.checkCode == "") {
         this.content = "订单号不能為空！";
         this.show2 = !this.show2;
-        this.show3 = !this.show3;
+        this.$pop.show({error:'',title:'温馨提示',content:this.content,content1:'',content2:'',number:2});
       } else {
         let config = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -155,11 +142,11 @@ export default {
             } else if (res.data.code === 0) {
               this.content = res.data.data.message;
               this.show2 = !this.show2;
-              this.show3 = !this.show3;
+              this.$pop.show({error:'',title:'温馨提示',content:this.content,content1:'',content2:'',number:2});
             } else {
               this.content = res.data.content;
               this.show2 = !this.show2;
-              this.show3 = !this.show3;
+              this.$pop.show({error:'',title:'温馨提示',content:this.content,content1:'',content2:'',number:2});
             }
           })
           .catch(error => {
@@ -174,4 +161,5 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/listStyle.scss";
 @import "../../../assets/scss/popcorn.scss";
+@import "../../../assets/scss/page-five/public.scss";
 </style>

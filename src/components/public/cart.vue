@@ -17,7 +17,7 @@
         .ball(transition='drop', v-for='ball in balls', v-show='ball.show', :key='ball.id')
           .inner
     .basket-right(@click='basketTo')
-      van-icon(name='shopping-cart')
+      i.iconfont.icon-liwu
         span.badge {{badge > 0 ? badge : ''}}
         | 号码篮
 </template>

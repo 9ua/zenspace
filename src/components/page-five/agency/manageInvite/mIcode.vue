@@ -44,17 +44,17 @@
         .button
           button.button2(@click='select2()') 删除此邀请码
           button.button3(@click='show = !show') 取消
-  van-popup(v-model='show2', position='bottom')
-    .listStyle-II
-      li
+  div.show(v-show='show2')
+    ul
+      li.title
+        p 温馨提示！
+      li.cont
         p 确定要删除此邀请码?
-      li
-        .button
-          button.button2(@click='delInviteCode()') 删除
-          button.button3(@click='select2()') 取消
+      li.but
+        button.del.active(@click='delInviteCode()') 删除
+        button.nodel(@click='select2()') 取消
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../../config/mutil";
 export default {
   data() {
     return {
@@ -147,4 +147,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../../../assets/scss/page-five/agency/mInvite.scss";
+@import "../../../../assets/scss/page-five/public.scss";
 </style>

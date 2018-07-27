@@ -1,7 +1,7 @@
 <template lang="jade">
 .agent
   .agent-top
-    van-icon(name='arrow-left',@click='agentToFive')
+    i.iconfont.icon-left(@click='agentToFive')
     p 客服
     span
   .content

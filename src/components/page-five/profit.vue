@@ -1,7 +1,7 @@
 <template lang="jade">
 .profit
   .profit-top
-    van-icon(name='arrow-left',@click='profitToFive')
+    i.iconfont.icon-left(@click='profitToFive')
     p 今日盈亏
     span
   .profit-content
@@ -10,7 +10,7 @@
         p 盈利金额
         p {{winAmount-betAmount+activityAndSend+juniorRebateAmount | keepTwoNum2}}
     .profit-contents
-      van-icon(name='warn')
+      i.iconfont.icon-gantanhao
       | 盈亏计算公式：中奖-投注+活动+返点
     .profit-content-list
       ul

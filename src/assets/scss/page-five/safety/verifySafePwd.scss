@@ -5,7 +5,8 @@
 }
 
 .zhaohui {
-  @extend %flex;
+  @extend %flex,%aitems;
+  height: 36px;
   padding-right: 16px;
   font-size: 14px;
   justify-content: flex-end;
@@ -55,7 +56,7 @@
 .verifySafePwd-but {
   @extend %flex;
   @extend %jcontent;
-  margin-top: 40px;
+  margin-top: 20px;
   & button {
     padding: 0px;
     background:#F94E4E;

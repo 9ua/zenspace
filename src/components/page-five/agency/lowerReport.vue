@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top(v-bind:class='{ blur: show2 }')
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 下级报表
     .dim(@click='show = ! show')
       | {{timeline}}
@@ -32,10 +32,10 @@
         span {{selected.account}}
       li(v-show='this.show3', @click='getUnderLevelReport2()')
         p 查看下级
-        van-icon(name='arrow')
+        i.iconfont.icon-you
       router-link(:to="{path:'/agentReport',query: {id: this.selected.account}}", tag='li')
         p 查看报表
-        van-icon(name='arrow')
+        i.iconfont.icon-you
       li
         .button
           button.button1(@click='show2 =! show2') 确定

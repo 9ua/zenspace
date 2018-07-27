@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToFive')
+    i.iconfont.icon-left(@click='listStyleToFive')
     p(v-if='$route.query.id === "1"') 代理普通提现
     p(v-if='$route.query.id === "2"') 代理返点提现
     span
@@ -35,24 +35,14 @@
       li
         .button
           button.button1(@click='sendReq') 提现申请
-  van-popup.pop2(v-model='show2', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button.nodel(@click='show2 = ! show2') 确定
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button.nodel(@click='goBack()') 确定
+  div.show(v-show='show3')
+    ul
+      .title
+        p 温馨提示！
+      .cont
+        p {{content}}
+      .but
+        button.nodel(@click='goBack()') 确定
   van-actionsheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消')
 </template>
 <script>
@@ -66,7 +56,6 @@ export default {
       bankUserId: "",
       amount: "",
       show1: false,
-      show2: false,
       show3: false,
       show4: false,
       selectBank: "请选择要提现银行",
@@ -164,13 +153,13 @@ export default {
       if (this.$route.query.id === 2 ) {
           if (this.hotfixbalance < this.hotfixretrievableRebate) {
             this.content = "亲，您的馀额没有这么多啊！";
-            this.show2 = true;     
+            this.$pop.show({error:'',title:'温馨提示',content:'亲，您的馀额没有这么多啊！',content1:'',content2:'',number:2});  
           }
       } else   
       //hotfix-end//
       if (this.amount === "") {
         this.content = "请输入金额!";
-        this.show2 = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'请输入金额!',content1:'',content2:'',number:2});
       } else {
         let config = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -193,7 +182,7 @@ export default {
               this.show3 = true;
             } else {
               this.content = res.data.data.message;
-              this.show2 = true;
+              this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
             }
           })
           .catch(error => {

@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top(v-bind:class='{ blur: show2 }')
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 会员管理
     span
   .listStyle-content(v-bind:class='{ blur: show2 }')

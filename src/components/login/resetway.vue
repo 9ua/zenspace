@@ -1,13 +1,13 @@
 <template lang="jade">
 .resetway
   .resetway-title
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 找回密码
   .resetway-content
     ul
       router-link(to='login', tag='li')
         span 通过身份识别
-        van-icon(name="arrow")
+        i.iconfont.icon-you
 </template>
 <script>
 export default {

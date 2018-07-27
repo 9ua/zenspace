@@ -12,22 +12,9 @@
         | {{titles}}
         i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
-        van-popup(v-model='show', position='top')
-          .popscroll
-            ul.menu-list-top
-              li(v-for='(into,index) in playGroups', :key='index')
-                .title {{into.title}}
-                .menu-list-list-box
-                  .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
-                    span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
-                      a {{player.groupName}}{{player.title}}
     li.betbj10list
       span(@click='showa = !showa') {{listname}}
       i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
-      van-popup(v-model=' showa', position='top')
-        ul
-          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
-            a {{listk3.name}}
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
       i.iconfont.icon-left(@click='lookAllDivTitle')
@@ -205,39 +192,6 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  van-popup.pop2(v-model='betfail', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p
-            b 投注失败,
-            br
-            | 请检查您的连线
-        .but
-          button.nodel(@click='betfail = ! betfail') 确定
-  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p(v-if="$route.query.id === 'pk10'")
-            | {{lastSeasonId*1}}期已截止
-            br
-            | 当前期号{{seasonId}}
-            br
-            | 投注时请注意期号
-          p(v-else)
-            | {{lastSeasonId.slice(4)*1}}期已截止
-            br
-            | 当前期号{{seasonId2.slice(4)*1}}
-            br
-            | 投注时请注意期号
-        .but
-          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
-  van-popup.betshow(v-model='showpop') {{content}}
   bets(ref='pop')
 </template>
 <script>
@@ -272,8 +226,6 @@ export default {
       startyet: false,
       interval: null, //动画
       youdashuang: false, //判断是否有‘大双’
-      showTimesUp: false,
-      showpop: false, //弹窗
       content: "提示内容!", //弹窗内容
       bet: false, //投注弹窗
       betsuccess: false,
@@ -350,7 +302,6 @@ export default {
       timer2: "",
       historyNum: 0,
       betnot:true,
-      betfail:false,
     };
   },
   destroyed() {
@@ -1493,15 +1444,13 @@ export default {
         .then(res => {
           if (res.data.message === "success") {
             setTimeout(() => {
-              this.showpop = !this.showpop;
-              this.content = "投注成功!";
+              this.$pop.show({title:'温馨提示',content:'恭喜您，投注成功！',content1:'',content2:'',number:1});
               this.betnot = true;
-              this.iscreat();
               setTimeout(() => {
-                this.showpop = false;
                 this.betsuccess = !this.betsuccess;
-              }, 600);
-            }, 0);
+                this.iscreat();
+              }, 1700);
+            }, 600);
           } else {
               this.betnot = true;
               this.iscreat();
@@ -1510,7 +1459,7 @@ export default {
         .catch(error => {
           console.log("投注No");
           this.iscreat();
-          this.betfail = true;
+          this.$pop.show({title:'温馨提示',content:'投注失败,请检查您的网络！',content1:'',content2:'',number:1});
           this.betnot = true;
         });
     },
@@ -1582,6 +1531,8 @@ export default {
           })
           .catch(error => {
             console.log("玩法树No");
+            this.$store.state.loginStatus = false;
+            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
           });
       }
     },
@@ -1670,12 +1621,10 @@ export default {
     //马上投注
     betC() {
       if (this.zhu <= 0) {
-        this.betshow = !this.betshow;
-        this.content = "请至少选择一注号码投注!";
+        this.$pop.show({title:'温馨提示',content:'请至少选择一注号码投注!',content1:'',content2:'',number:2});
       }
       if (this.money === "") {
-        this.betshow = !this.betshow;
-        this.content = "请填写您要投注的金额!";
+        this.$pop.show({title:'温馨提示',content:'请填写您要投注的金额!',content1:'',content2:'',number:2});
       }
       if (this.zhu > 0 && this.money !== "") {
         this.betGoshow = !this.betGoshow;
@@ -1781,10 +1730,7 @@ export default {
     },
     //時間到彈窗
     timesUp() {
-      this.showTimesUp = !this.showTimesUp;
-      setTimeout(() => {
-        this.showTimesUp = false;
-      },3000);
+      this.$pop.show({title:'温馨提示',content:'',content1:String(this.seasonId*1 ),content2:String(Number(this.seasonId+1)),number:3});
       this.geteServerTime();
     },
     //获取过去开奖号码20个
@@ -1856,12 +1802,4 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/lotter-list/lotterbet/betbj10.scss";
 @import "../../../assets/scss/popcorn.scss";
-</style>
-<style lang="scss" scoped>
-.menu-list.van-popup {
-  transition: 0s ease-out !important;
-}
-.van-popup--top {
-  transition: 0s ease-out !important;
-}
 </style>

@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToFive')
+    i.iconfont.icon-left(@click='listStyleToFive')
     p 充值方式
     span
   .listStyle-content
@@ -13,25 +13,14 @@
             | {{payw.alias}}
             br
             span(style='font-size:12px;color:#bbb') {{payw.content}}
-        van-icon(name='arrow')
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button(@click='show3 = ! show3') 确定
+        i.iconfont.icon-you
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
   data() {
     return {
       content: "",
       receiveAddress: "",
-      show3: false,
       paywaylist: ""
     };
   },

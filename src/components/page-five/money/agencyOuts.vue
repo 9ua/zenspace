@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToFive')
+    i.iconfont.icon-left(@click='listStyleToFive')
     p 代理提现
     span
   .listStyle-content
@@ -10,28 +10,18 @@
         .mInvite-left
           i.fa.fa-credit-card(style='padding-right:10px')
           p 普通提现
-        van-icon(name='arrow')
+        i.iconfont.icon-you
       li(@click="getAgentWithdrawFlag")
         .mInvite-left
           i.fa.fa-credit-card(style='padding-right:10px')
           p 返点提现
-        van-icon(name='arrow')
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button(@click='show3 = ! show3') 确定
+        i.iconfont.icon-you
 </template>
 <script>
 export default {
   data() {
     return {
       content: "",
-      show3: false
     };
   },
   methods: {

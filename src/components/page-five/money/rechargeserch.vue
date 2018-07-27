@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 充值信息
     span
   .listStyle-content
@@ -37,7 +37,6 @@
           button.button1(@click='show2=!show2') 确定
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
   data() {
     return {

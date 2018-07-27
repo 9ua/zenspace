@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top(v-bind:class='{ blur: show2 }')
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 投注明細
     .dim(@click='show = ! show')
       | {{timeline}}

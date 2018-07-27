@@ -12,22 +12,9 @@
         | {{titles}}
         i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
-        van-popup(v-model='show', position='top')
-          .popscroll
-            ul.menu-list-top
-              li(v-for='(into,index) in playGroups', :key='index')
-                .title {{into.title}}
-                .menu-list-list-box
-                  .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
-                    span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
-                      a {{player.groupName}}{{player.title}}
     li.betssclist
       span(@click='showa = !showa') {{listname}}
       i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
-      van-popup(v-model=' showa', position='top')
-        ul
-          li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
-            a {{listssc.name}}
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
       i.iconfont.icon-xia(@click='lookAllDivTitle')
@@ -169,21 +156,6 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p
-            | {{lastSeasonId.slice(4)*1}}期已截止
-            br
-            | 当前期号{{seasonId}}
-            br
-            | 投注时请注意期号
-        .but
-          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
-  van-popup.sscpop(v-model='showpop') {{content}}
 </template>
 <script>
 export default {
@@ -200,8 +172,6 @@ export default {
       interval: null, //动画
       youhezhi: false, //判断是否有‘和’
       showTimesUp: false,
-      showpop: false, //弹窗
-      content: "提示内容!", //弹窗内容
       bet: false, //投注弹窗
       betsuccess: false,
       betGoshow: false,
@@ -1956,12 +1926,10 @@ export default {
         .then(res => {
           if (res.data.message === "success") {
             setTimeout(() => {
-              this.showpop = !this.showpop;
-              this.content = "投注成功!";
-              this.iscreat();
+              this.$pop.show({title:'温馨提示',content:'恭喜您，投注成功！',content1:'',content2:'',number:1});
               setTimeout(() => {
-                this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
+                this.iscreat();
               }, 800);
             }, 400);
           }
@@ -2136,17 +2104,14 @@ export default {
     },
     //時間到彈窗
     timesUp() {
-      this.showTimesUp = !this.showTimesUp;
+      this.$pop.show({title:'温馨提示',content:'',content1:String(this.seasonId*1 ),content2:String(Number(this.seasonId+1)),number:3});
       this.geteServerTime();
     },
     betC() {
-      if (this.zhu <= 0) {
-        this.betshow = !this.betshow;
-        this.content = "请至少选择一注号码投注!";
-      }
-      if (this.money === "") {
-        this.betshow = !this.betshow;
-        this.content = "请填写您要投注的金额!";
+      if (this.zhu === 0) {
+        this.$pop.show({title:'温馨提示',content:'请至少选择一注号码投注!',content1:'',content2:'',number:2});
+      } else if (this.money === "") {
+        this.$pop.show({title:'温馨提示',content:'请填写您要投注的金额!',content1:'',content2:'',number:2});
       }
       if (this.zhu > 0 && this.money !== "") {
         this.betGoshow = !this.betGoshow;
@@ -2177,12 +2142,4 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/lotter-list/lotterbet/betssc.scss";
 @import "../../../assets/scss/popcorn.scss";
-</style>
-<style>
-.menu-list.van-popup {
-  transition: 0s ease-out !important;
-}
-.van-popup--top {
-  transition: 0s ease-out !important;
-}
 </style>

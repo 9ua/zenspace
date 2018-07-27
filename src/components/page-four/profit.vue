@@ -15,7 +15,6 @@
 </template>
 <script>
 import pop from "./pop";
-import { setStore, getStore, removeStore } from "../../config/mutil";
 export default {
   data() {
     return {

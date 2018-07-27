@@ -23,7 +23,6 @@
     button(@click='getInviteCode()') 取得邀请码
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../../config/mutil";
 export default {
   data() {
     return {

@@ -1,7 +1,7 @@
 <template lang="jade">
 .safeQuestion
   .safeQuestion-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 验证密保问题
     span
   .safeQuestion-input
@@ -22,14 +22,12 @@
       input(type='text', v-model='answer2')
   .safeQuestion-but
     button(@click='setQuestion') 确定
-  van-popup(v-model='show') {{content}}
 </template>
 <script>
 import md5 from "js-md5";
 export default {
   data() {
     return {
-      show: false, //弹窗
       content: "提示内容!", //弹窗内容
       options: [
         { value: 1, label: "您的出生地是哪里？" },
@@ -77,8 +75,7 @@ export default {
     //   let md5answer2 = md5(this.answer2);
     //   if (md5answer1 === this.answer3) {
     //     if (md5answer2 === this.answer4) {
-    //       this.show = !this.show;
-    //       this.content = "验证成功！";
+    //       this.$pop.show({error:'',title:'温馨提示',content:'验证成功！',content1:'',content2:'',number:2});
     //       setTimeout(() => {
     //         if (this.content === "验证成功！") {
     //           this.$router.push({ path: "/setQuestion" });
@@ -86,8 +83,7 @@ export default {
     //       }, 1000);
     //     }
     //   } else {
-    //     this.show = !this.show;
-    //     this.content = "验证失败！";
+    //     this.$pop.show({error:'',title:'温馨提示',content:'验证失败！',content1:'',content2:'',number:2});
     //   }
     }
   },

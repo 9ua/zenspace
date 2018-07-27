@@ -1,36 +1,26 @@
 <template lang="jade">
 .setSafePwd
   .setSafePwd-top
-    van-icon(name='arrow-left',@click='setSafePwdToFive')
+    i.iconfont.icon-left(@click='setSafePwdToFive')
     p 修改安全密码
     span
   .setSafePwd-input
     div
       p 安全密码
-      input(type='password', v-model='newPassword', placeholder='请输入6位数密码', v-focus='')
+      input(type='password', v-model='newPassword',maxlength='6', placeholder='请输入6位数密码', v-focus='')
     div
       p 确认密码
-      input(type='password', v-model='newPassword2', placeholder='请输入6位数密码')
+      input(type='password', v-model='newPassword2',maxlength='6', placeholder='请输入6位数密码')
   .setSafePwd-but
     button(@click='setSecurityCodes') 确定
   .setSafePwd-tisi
     | 安全密码用于提现、绑定银行卡等操作，可保障资金安全。
-  van-popup.pop2(v-model='show', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button.nodel(@click='show = ! show') 确定
 </template>
 <script>
 import md5 from "js-md5";
 export default {
   data() {
     return {
-      show: false, //弹窗
       content: "提示内容!", //弹窗内容
       newPassword: null, //安全码
       newPassword2: null //确认安全码
@@ -45,14 +35,11 @@ export default {
       const newPassword_yz = /^[0-9]{6,6}$/;
       let yzPassword = newPassword_yz.test(this.newPassword);
       if (this.newPassword === "") {
-        this.content = "密码不能为空";
-        this.show = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'密码不能为空',content1:'',content2:'',number:2});
       } else if (yzPassword == false) {
-        this.content = "安全密码：6位数字";
-        this.show = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'安全密码：6位数字',content1:'',content2:'',number:2});
       } else if (this.newPassword !== this.newPassword2) {
-        this.content = "两次密码输入不一致";
-        this.show = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'两次密码输入不一致',content1:'',content2:'',number:2});
       } else {
         let config = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -71,20 +58,19 @@ export default {
               config
             )
             .then(res => {
-              this.show = !this.show;
               this.content = res.data.data.message;
+              this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
               setTimeout(() => {
                 if (this.content === "修改成功！") {
                   this.$router.push({ path: "/safety" });
                 }
-              }, 1500);
+              }, 1700);
             })
             .catch(error => {
               console.log("setSecurityCodesNo");
             });
         } else {
-          this.show = !this.show;
-          this.content = "两次密码不相同！";
+          this.$pop.show({error:'',title:'温馨提示',content:"两次密码不相同！",content1:'',content2:'',number:2});
         }
       }
     }

@@ -4,7 +4,6 @@ import 'babel-polyfill'; //解决ie浏览器不支持promise
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueCookie from "vue-cookie";
 import {
   Icon,
   NoticeBar,
@@ -22,19 +21,20 @@ import 'lib-flexible/flexible.js'
 import {
   Picker
 } from 'vant';
-import './assets/iconfont/iconfont.css'
+import '@/assets/iconfont/iconfont.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './vuex/store'
 import { Tab, Tabs } from 'vant';
 import md5 from 'js-md5';
+import popTo from "./components/public/pop"
 
+Vue.use(popTo);
 Vue.use(Collapse).use(CollapseItem)
 Vue.use(Swipe).use(SwipeItem);
 axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 window.axios = axios;
-Vue.use(VueCookie);
 Vue.use(Stepper);
 Vue.use(Popup);
 Vue.use(Tab).use(Tabs);
@@ -59,14 +59,10 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
   }
   if (data.data.pup === true) {
     if (data.data.data.message && data.data.data.message !== "参数错误") {
-      Message.error({
-        message: data.data.data.message
-      })
+      Vue.prototype.$pop.show({error:data.data.data.message,number:10});
     } else {
       if (data.data.data !== "参数错误") {
-        Message.error({
-          message: data.data.data
-        })
+        Vue.prototype.$pop.show({error:data.data.data,number:10});
       }
     }
   }
@@ -75,7 +71,7 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
 }, error => {
   return Promise.reject(error)
 })
-// export default axios
+export default axios
 new Vue({
   el: '#app',
   router,

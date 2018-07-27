@@ -1,8 +1,8 @@
 <template lang="jade">
 .setPwd
   .setPwd-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
-    p 设置登陆密码
+    i.iconfont.icon-left(@click='listStyleToSafety')
+    p 修改登陆密码
     span
   .setPwd-input
     div
@@ -13,14 +13,12 @@
       input(type='password', v-model='newPassword2', placeholder='请再次输入密码')
   .setPwd-but
     button(@click='changeLoginPassword') 确定
-  van-popup(v-model='show') {{content}}
 </template>
 <script>
 import md5 from "js-md5";
 export default {
   data() {
     return {
-      show: false, //弹窗
       content: "提示内容!", //弹窗内容
       newPassword: "", //新密码
       newPassword2: "" //确认新密码
@@ -49,21 +47,20 @@ export default {
             config
           )
           .then(res => {
-            this.show = !this.show;
             this.content = res.data.data.message;
+            this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
             setTimeout(() => {
               if (this.content === "修改成功！") {
                 this.$router.push({ path: "/one" });
                 this.$store.state.loginStatus = false;
               }
-            }, 2000);
+            }, 1700);
           })
           .catch(error => {
             console.log("更改密码No");
           });
       } else {
-        this.show = !this.show;
-        this.content = "两次密码不相同！";
+        this.$pop.show({error:'',title:'温馨提示',content:'两次密码不相同！',content1:'',content2:'',number:2});
       }
     }
   },

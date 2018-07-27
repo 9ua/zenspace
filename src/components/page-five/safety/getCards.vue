@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 银行卡管理
     span
   .listStyle-content
@@ -41,36 +41,17 @@
       li
         p 安全密码
         div
-          input(placeholder='请输入安全密码', v-model='securityCode', value='securityCode', clearable='')
+          input(placeholder='请输入安全密码', v-model='securityCode',maxlength='6', value='securityCode', clearable='')
       li
         .button
           button.button2(@click='sendReq()') 修改
           button.button3(@click='show3=!show3') 取消
-  van-popup.pop2(v-model='show6', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content2}}
-        .but
-          button.nodel(@click='show6 = ! show6') 确定
-  van-popup.pop2(v-model='show5', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content2}}
-        .but
-          button.nodel(@click='show5 = !show5') 确定
   van-popup(v-model='show1', position='bottom', :overlay='true')
     van-picker(show-toolbar='', title='请选择银行', :columns='payway2', @cancel='onCancel', @confirm='onConfirm')
 </template>
 <script>
 import md5 from "js-md5";
 import { Message } from "element-ui";
-import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
   data() {
     return {
@@ -82,10 +63,7 @@ export default {
       bankUserList: [],
       timeline: "今天",
       show1: false,
-      show2: false,
       show3: false,
-      show5: false,
-      show6: false,
       usertype: 2,
       selected: [],
       bankUserList: [],
@@ -127,12 +105,10 @@ export default {
         .then(res => {
           this.securityCoe = res.data.data.securityCoe;
           if (this.securityCoe !== 1) {
-            Message.error({
-              message: "请先绑定安全密码!"
-            });
+            this.$pop.show({error:'',title:'温馨提示',content:'请先绑定安全密码!',content1:'',content2:'',number:1});
             setTimeout(() => {
               this.$router.push({ path: "/setSafePwd" });
-            }, 1000);
+            }, 1700);
           } else {
             this.$router.push({ path: "/newCard" });
           }
@@ -207,11 +183,11 @@ export default {
         .then(res => {
           if (res.data.code === 1) {
             this.content2 = res.data.data.message;
-            this.show5 = true;
+            this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
             this.show3 = false;
           } else {
             this.content2 = res.data.data.message;
-            this.show6 = true;
+            this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
           }
           this.getBankUserList();
         })

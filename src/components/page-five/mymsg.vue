@@ -1,7 +1,7 @@
 <template lang="jade">
 .mymsg
   .mymsg-top
-    van-icon(name='arrow-left',@click='mymsgToFive')
+    i.iconfont.icon-left(@click='mymsgToFive')
     ul
       router-link(v-for='(navs,index) in nav', :to="'/mymsg/'+navs.pathurl", tag='li', :key='index') {{navs.name}}
     span

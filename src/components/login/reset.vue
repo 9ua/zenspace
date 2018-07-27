@@ -1,7 +1,7 @@
 <template lang="jade">
 .reset
   .reset-title
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 忘记密码
     span
   .reset-content

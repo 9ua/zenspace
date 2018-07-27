@@ -1,7 +1,7 @@
 <template>
 <div class="betlhc">
   <div class="betlhc-top">
-    <van-icon name='arrow-left' @click='listStyleToSafety' />
+    <i class="iconfont icon-left" @click='listStyleToSafety'></i>
     <p>六合彩</p>
     <span></span>
   </div>

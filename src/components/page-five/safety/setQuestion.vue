@@ -1,7 +1,7 @@
 <template lang="jade">
 .setQuestion
   .setQuestion-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 设置密保问题
     span
   .setQuestion-input
@@ -22,14 +22,12 @@
       input(type='text', v-model='answer2')
   .setQuestion-but
     button(@click='setQuestion') 确定
-  van-popup(v-model='show') {{content}}
 </template>
 <script>
 import md5 from "js-md5";
 export default {
   data() {
     return {
-      show:false,
       content:'',
       options: [
         { value: 1, label: "您的出生地是哪里？" },
@@ -60,14 +58,11 @@ export default {
     //设置密保问题
     setQuestion() {
       if(this.answer1 == ""){
-        this.show = !this.show;
-        this.content = "第一个密保答案不能为空！";
+        this.$pop.show({error:'',title:'温馨提示',content:'第一个密保答案不能为空！',content1:'',content2:'',number:2});
       }else if(this.answer2 == ""){
-        this.show = !this.show;
-        this.content = "第二个密保答案不能为空！";
+        this.$pop.show({error:'',title:'温馨提示',content:'第二个密保答案不能为空！',content1:'',content2:'',number:2});
       }else if(this.title1 == this.title2){
-        this.show = !this.show;
-        this.content = "密保问题不能相同！";
+        this.$pop.show({error:'',title:'温馨提示',content:'密保问题不能相同！',content1:'',content2:'',number:2});
       }else{
         let md5answer1 = md5(this.answer1);
         let md5answer2 = md5(this.answer2);
@@ -87,13 +82,13 @@ export default {
             config
           )
           .then(res => {
-            this.show = !this.show;
             this.content = res.data.data.message;
+            this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
             setTimeout(() => {
               if (this.content === "设定成功！") {
                 this.$router.push({ path: "/safety" });
               }
-            }, 2000);
+            }, 1700);
           })
           .catch(error => {
             console.log("设置密保问题No");

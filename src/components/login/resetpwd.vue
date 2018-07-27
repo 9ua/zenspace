@@ -7,13 +7,13 @@
     ul
       router-link(to='verifyPwdSafe', tag='li')
         span 通过安全密码
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='', tag='li')
         span 通过密保问题
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='', tag='li')
         span 通过密保邮箱
-        van-icon(name="arrow")
+        i.iconfont.icon-you
 </template>
 <script>
 export default {

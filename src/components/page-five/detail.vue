@@ -1,7 +1,7 @@
 <template lang="jade">
 .detail
   .detail-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 个人资料
     span
   .detail-content

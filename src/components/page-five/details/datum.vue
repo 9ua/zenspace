@@ -16,7 +16,7 @@
       p 账号
       div
         p {{$store.state.Globalusername}}
-  van-actionsheet(v-model='show', title='修改头像')
+  actionSheet(v-model='show', title='修改头像',@hide='hide')
     .datum-img
       p 预览
       img(:src='imgUrl ? imgUrl : imgsrc')
@@ -57,7 +57,11 @@
 </template>
 <script>
 import { setStore, getStore, removeStore } from "../../../config/mutil";
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       isnicknameto: false,
@@ -78,46 +82,49 @@ export default {
       imgsrc: require("@/assets/img/one/0.jpg"),
       sexlist: ["保密", "男", "女"],
       imgs: [
-        { name: "小姐姐", paths:0 },
-        { name: "杰森斯坦森", paths:1},
-        { name: "金莎", paths:2 },
-        { name: "高圆圆", paths:3},
-        { name: "迪丽热巴", paths:4},
-        { name: "黄宗泽", paths:5},
-        { name: "肌肉男", paths:6},
-        { name: "刘德华", paths:7 },
+        { name: "小姐姐", paths: 0 },
+        { name: "杰森斯坦森", paths: 1 },
+        { name: "金莎", paths: 2 },
+        { name: "高圆圆", paths: 3 },
+        { name: "迪丽热巴", paths: 4 },
+        { name: "黄宗泽", paths: 5 },
+        { name: "肌肉男", paths: 6 },
+        { name: "刘德华", paths: 7 },
         { name: "李冰冰", paths: 8 },
         { name: "苏有朋", paths: 9 },
-        { name: "贝克汉姆", paths:10 },
-        { name: "谢霆锋", paths:11 },
-        { name: "李敏镐", paths:12 },
-        { name: "郑伊健", paths:13 },
-        { name: "全智贤", paths:14 },
-        { name: "李小龙", paths:15 },
-        { name: "李连杰", paths:16 },
-        { name: "小妹妹", paths:17 },
-        { name: "特朗普", paths:18 },
-        { name: "葛优", paths:19 },
-        { name: "文章", paths:20 },
-        { name: "赵薇", paths:21 },
-        { name: "张学友", paths:22 },
-        { name: "陈小春", paths:23 },
-        { name: "林心如", paths:24 },
-        { name: "吴奇隆", paths:25 },
-        { name: "张一山", paths:26 },
-        { name: "钟汉良", paths:27 },
-        { name: "波多野结衣", paths:28 },
-        { name: "赵丽颖", paths: 29},
-        { name: "王宝强", paths: 30},
-        { name: "朱茵", paths: 31},
-        { name: "科比", paths:32 },
-      ]
+        { name: "贝克汉姆", paths: 10 },
+        { name: "谢霆锋", paths: 11 },
+        { name: "李敏镐", paths: 12 },
+        { name: "郑伊健", paths: 13 },
+        { name: "全智贤", paths: 14 },
+        { name: "李小龙", paths: 15 },
+        { name: "李连杰", paths: 16 },
+        { name: "小妹妹", paths: 17 },
+        { name: "特朗普", paths: 18 },
+        { name: "葛优", paths: 19 },
+        { name: "文章", paths: 20 },
+        { name: "赵薇", paths: 21 },
+        { name: "张学友", paths: 22 },
+        { name: "陈小春", paths: 23 },
+        { name: "林心如", paths: 24 },
+        { name: "吴奇隆", paths: 25 },
+        { name: "张一山", paths: 26 },
+        { name: "钟汉良", paths: 27 },
+        { name: "波多野结衣", paths: 28 },
+        { name: "赵丽颖", paths: 29 },
+        { name: "王宝强", paths: 30 },
+        { name: "朱茵", paths: 31 },
+        { name: "科比", paths: 32 }
+      ],
     };
   },
   mounted() {
     this.getUserData();
   },
   methods: {
+    hide(){
+      this.show=false;
+    },
     //生日选择
     toBirthday() {
       this.saveUserData();
@@ -192,9 +199,9 @@ export default {
     //头像选择与编辑
     tonickname(img, event, index) {
       this.imgName = img.name;
-      this.imgUrl = require("@/assets/img/one/"+img.paths+".jpg");
+      this.imgUrl = require("@/assets/img/one/" + img.paths + ".jpg");
       this.imgindex = index;
-      localStorage.setItem("image",this.imgindex);
+      localStorage.setItem("image", this.imgindex);
       this.image = localStorage.getItem("image");
       this.saveUserData();
     },

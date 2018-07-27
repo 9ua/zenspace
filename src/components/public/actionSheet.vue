@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" @touchmove.prevent.stop @click="$emit('hide', $event)" v-show='value'>
+  <div class="modal" @click="$emit('hide', $event)" v-show='value'>
     <transition name="actionsheet-float"  v-show='value'>
       <div class="actionsheet" :class="{ 'actionsheet_title': title }"  v-show='value'>
         <div class="actionsheet-header" v-if="title">
@@ -9,7 +9,7 @@
         <ul v-if="!title" class="actionsheet-list">
 
         </ul>
-        <div v-if="cancelText" v-text="cancelText" class="actionsheet-item actionsheet-cancel" @click.stop="$emit('hide', false)" />
+        <div v-if="cancelText" v-text="cancelText" class="actionsheet-item actionsheet-cancel" @click.stop="$emit('hide', false)"></div>
         <div v-else class="actionsheet-content">
           <slot />
         </div>

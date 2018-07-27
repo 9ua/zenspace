@@ -25,7 +25,7 @@
       .datum-hide
         ul.datum-imgs
           li(v-for='(img,index) in imgs', :key='index')
-            img(:src='"@/assets/img/one/"+img.paths+".jpg"', @click='tonickname(img,$event,index)')
+            img(:src='"@/assets/img/one/"+img.paths+".jpg"', @click.stop='tonickname(img,$event,index)')
     .datum-but
       button(@click='saveImg') 保存头像
       button(@click='show = !show') 取消

@@ -9,7 +9,7 @@
       .five-top-right
         p
           | 账号：
-          span {{$store.state.Globalusername}}
+          span {{username}}
         p
           | 余额：
           span(v-show=' !money ') *****
@@ -56,6 +56,7 @@ import headers from "../public/header";
 export default {
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       bankUserFlag: "", //银行卡状态
       securityCoe: "", //安全码状态
       question: "", //密保问题状态

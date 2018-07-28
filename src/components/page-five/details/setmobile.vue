@@ -48,6 +48,24 @@ export default {
         this.content = "手机号码不能为空！";
       } else if(this.mobile){
         clearInterval(this.setInt);
+        if (yzmobile) {
+          let config = {
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            withCredentials: true
+          };
+          let formData = new FormData();
+          formData.append("mobil", Number(this.mobile));
+          this.$axios
+            .post(
+              this.$store.state.url + "api/userCenter/sendMobilCode",
+              formData,
+              config
+            )
+            .then(res => {})
+            .catch(error => {
+              console.log("取验证码No");
+            });
+        };
         this.setInt = setInterval(() =>{
           this.iss = true;
           this.s --;
@@ -57,23 +75,6 @@ export default {
             this.s = 59;
           }
         },1000);
-      } else if (yzmobile) {
-        let config = {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          withCredentials: true
-        };
-        let formData = new FormData();
-        formData.append("mobil", Number(this.mobile));
-        this.$axios
-          .post(
-            this.$store.state.url + "api/userCenter/sendMobilCode",
-            formData,
-            config
-          )
-          .then(res => {})
-          .catch(error => {
-            console.log("取验证码No");
-          });
       }
     },
     //绑定手机号码

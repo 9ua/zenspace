@@ -609,5 +609,29 @@ export default new Router({
         keepAlive: false
       },
     },
+    {
+      path: '/onlinecharge',
+      name: 'onlinecharge',
+      component: resolve => require(['@/components/page-five/money/onlinecharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/alimobilecharge',
+      name: 'alimobilecharge',
+      component: resolve => require(['@/components/page-five/money/alimobilecharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/qqcharge',
+      name: 'qqcharge',
+      component: resolve => require(['@/components/page-five/money/qqcharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
   ]
 })

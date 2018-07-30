@@ -44,6 +44,7 @@
 export default {
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       a: "",
       nowAccount: "",
       dateFlag: 0,
@@ -111,11 +112,11 @@ export default {
       this.getUnderLevelReport();
     },
     getUnderLevelReport() {
-      this.nowAccount = this.$store.state.Globalusername;
+      this.nowAccount = this.username;
       this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
           params: {
-            account: this.$store.state.Globalusername,
+            account: this.username,
             dateFlag: this.dateFlag
           }
         })

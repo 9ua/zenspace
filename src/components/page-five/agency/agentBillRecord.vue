@@ -35,6 +35,7 @@
 export default {
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       active: 1,
       timeline: "今天",
       show: false,
@@ -116,7 +117,7 @@ export default {
         this.$axios
           .get(this.$store.state.url + "api/proxy/getTradeList", {
             params: {
-              account: this.$store.state.Globalusername,
+              account: this.username,
               include: 2,
               accountChangeType: this.accountChangeType,
               betweenType: this.betweenType

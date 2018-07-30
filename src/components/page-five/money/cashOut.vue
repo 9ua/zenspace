@@ -86,9 +86,7 @@ export default {
     },
     getWithdrawInformation() {
       this.$axios
-        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
-          params: { withdrawType: this.withdrawType }
-        })
+        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {params: { withdrawType: this.$store.state.userType }})
         .then(res => {
           if (this.$store.state.userType === "0") {
             this.withdrawType = 1;

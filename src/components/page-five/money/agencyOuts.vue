@@ -47,10 +47,10 @@ export default {
       this.$axios
         .get(this.$store.state.url + "/api/proxy/getAgentWithdrawFlag")
         .then(res => {
-          
           if (res.data.code === 1) {
             this.$router.push("/agencyOut?id=2");
           }else{
+            // this.$pop.show({error:res.data.data.message,title:'温馨提示',content:'请选择银行',content1:'',content2:'',number:2});
             this.$message(res.data.data.message)
           }
         })

@@ -5,13 +5,13 @@
       p 头像
       div
         img(:src='"@/assets/img/one/"+image+".jpg"', alt='')
-        van-icon(name="arrow")
+        i.iconfont.icon-you
     li
       p 昵称
       div
         input(type='text',placeholder='请设置昵称', v-model='nickname', value='nickname',ref='isnickname',@blur='nickNameFocus', @focus='nickNameFocus', v-show='isnicknameto')
         p {{nickname}}
-        van-icon(name="arrow",v-show='!nickname')
+        i.iconfont.icon-you(v-show='!nickname')
     li
       p 账号
       div
@@ -35,25 +35,25 @@
       div
         router-link(v-if='mobile === null', to='setmobile') {{ mobile === null ? '未设置' : 'mobile' }}
         span {{mobile}}
-        van-icon(name="arrow",v-show=' !mobile')
+        i.iconfont.icon-you(v-show=' !mobile')
     li
       p 邮箱
       div
         router-link(v-if='email === null', to='setemail') {{ email === null ? '未设置' : email }}
         span {{email}}
-        van-icon(name="arrow",v-show=' !email')
+        i.iconfont.icon-you(v-show=' !email')
     li
       p 性别
       div
         select(v-model='sex', @change='selecteds($event)')
           option(v-for='(sexs,index) in sexlist', :key='index', :value='index') {{sexs}}
-        van-icon(name="arrow")
+        i.iconfont.icon-you
     li
       p 生日
       div
         p
           input(type='date',v-model='birthday',@change='toBirthday')
-        van-icon(name="arrow")
+        i.iconfont.icon-you
 </template>
 <script>
 import { setStore, getStore, removeStore } from "../../../config/mutil";

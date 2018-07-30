@@ -121,19 +121,19 @@ export default {
               this.$store.state.Globalusername = res.data.data.account;
               this.$store.state.Globalpassword = this.newUserInfo.pwd;
               localStorage.setItem("Globalname", this.$store.state.Globalusername);
-                localStorage.setItem("Globalword", pwd);
+              localStorage.setItem("Globalword", pwd);
               if (this.checked === true) {
                 localStorage.setItem("username", res.data.data.account);
                 localStorage.setItem("password", pwd);
               } else {
-                // localStorage.removeItem("username");
-                // localStorage.removeItem("password");
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
               }
               this.$router.push({ path: "/one" });
             } else {
               if (res.data.code === 0) {
-                // localStorage.removeItem("username");
-                // localStorage.removeItem("password");
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
               }
               if (res.data.data.errCount >= 3) {
                 this.getCaptchaCode();

@@ -43,11 +43,15 @@
         p {{content}}
       .but
         button.nodel(@click='goBack()') 确定
-  van-actionsheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消')
+  actionSheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消',@hide='hide')
 </template>
 <script>
 import md5 from "js-md5";
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       withdrawType: 1,
@@ -83,6 +87,9 @@ export default {
     this.getWithdrawInformation();
   },
   methods: {
+    hide(){
+      this.show1=!this.show1;
+    },
     //返回Five页面
     listStyleToFive(){
       this.$router.push("/five");

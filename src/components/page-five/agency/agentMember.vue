@@ -20,7 +20,7 @@
           p {{item.loginTime}}
         .title2
           p {{item.childCount}}
-  van-actionsheet.listModel(v-model='show2')
+  actionSheet.listModel(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         span {{selected.account}}
@@ -32,7 +32,11 @@
           button.button1(@click='show2 =! show2') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       username:localStorage.getItem('Globalname'),
@@ -56,6 +60,9 @@ export default {
     this.getUnderUserList();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },

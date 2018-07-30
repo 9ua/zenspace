@@ -8,7 +8,7 @@
       span.iconfont.icon-xia
   .listStyle-content(v-bind:class='{ blur: show2 }')
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     .row
       .title3 {{nowAccount}}之下级
     .row
@@ -26,7 +26,7 @@
           p {{item.teamCount}}
         .title
           p {{item.count}}
-  van-actionsheet(v-model='show2')
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         span {{selected.account}}
@@ -41,7 +41,11 @@
           button.button1(@click='show2 =! show2') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       username:localStorage.getItem('Globalname'),
@@ -92,6 +96,10 @@ export default {
     this.getUnderLevelReport();
   },
   methods: {
+    hide(){
+      this.show=false;
+      this.show2=false;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },

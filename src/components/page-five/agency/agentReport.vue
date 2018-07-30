@@ -8,7 +8,7 @@
       span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     ul.listStyle-check-top
       li
         input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', value='accountName', clearable='')
@@ -63,7 +63,11 @@
           // span 代理分红
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       username:localStorage.getItem('Globalname'),
@@ -112,6 +116,9 @@ export default {
     this.getUserTeam();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },

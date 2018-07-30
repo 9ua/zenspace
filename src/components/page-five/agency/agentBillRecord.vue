@@ -13,7 +13,7 @@
         button(@click='getTradeList()')
           i.iconfont.icon-you
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     van-tabs(v-model='accountChangeType', @click='print')
       van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
     div
@@ -32,7 +32,11 @@
               span {{item.changeAmount}}
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       username:localStorage.getItem('Globalname'),
@@ -99,6 +103,9 @@ export default {
     this.getTradeList();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },

@@ -8,7 +8,7 @@
       span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
-      van-actionsheet(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     ul.noVanTabs
       li(:class='index === active ? "active" : ""' v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
     ul.listStyle-I(v-show='showFlag')
@@ -26,7 +26,11 @@
             span {{item.changeAmount}}
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       username:localStorage.getItem('Globalname'),
@@ -90,6 +94,9 @@ export default {
     this.getTradeList();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/five')
     },

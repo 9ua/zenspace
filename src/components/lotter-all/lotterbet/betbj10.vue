@@ -11,8 +11,8 @@
       .menu(@click='show = !show')
         | {{titles}}
         i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
-      .menu-list
-        van-popup(v-model='show', position='top')
+      .menu-list(v-show='show',@click="show = false")
+        .menu-listShow
           .popscroll
             ul.menu-list-top
               li(v-for='(into,index) in playGroups', :key='index')
@@ -24,9 +24,9 @@
     li.betbj10list
       span(@click='showa = !showa') {{listname}}
       i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
-      van-popup(v-model=' showa', position='top')
+      .betk3listRight(v-show='showa')
         ul
-          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
+          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
             a {{listk3.name}}
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
@@ -114,7 +114,7 @@
             .time
               p {{countDown !== '' ? countDown : "00:00:00"}}
           i.iconfont.icon-sanjiaoleft
-      .betk3-content-top-pop(v-show='betsscContentTopPop')
+      .betk3-content-top-pop(v-show='betsscContentTopPop', @click="betsscContentTopPop = false")
         ul.look
           li
             p 期号
@@ -1583,7 +1583,7 @@ export default {
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
-      this.showa = !this.showa;
+      this.showa = false;
       this.$router.push({ query: { id: into.id } });
       this.getPlayTree(); //玩法术
       this.geteServerTime(); //获取彩種當前獎期時間

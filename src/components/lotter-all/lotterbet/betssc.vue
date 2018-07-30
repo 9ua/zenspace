@@ -11,8 +11,8 @@
       .menu(@click='show = !show')
         | {{titles}}
         i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
-      .menu-list
-        van-popup(v-model='show', position='top')
+      .menu-list(v-show='show',@click="show = false")
+        .menu-listShow
           .popscroll
             ul.menu-list-top
               li(v-for='(into,index) in playGroups', :key='index')
@@ -24,7 +24,7 @@
     li.betssclist
       span(@click='showa = !showa') {{listname}}
       i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
-      van-popup(v-model=' showa', position='top')
+      .betk3listRight(v-show='showa')
         ul
           li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
             a {{listssc.name}}
@@ -85,7 +85,7 @@
             .time
               p {{countDown !== '' ? countDown : "00:00:00"}}
           i.iconfont.icon-sanjiaoleft
-      .betk3-content-top-pop(v-show='betsscContentTopPop')
+      .betk3-content-top-pop(v-show='betsscContentTopPop',@click="betsscContentTopPop = false")
         ul.look
           li
             p 期号
@@ -2209,12 +2209,4 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/lotter-list/lotterbet/betssc.scss";
 @import "../../../assets/scss/popcorn.scss";
-</style>
-<style>
-.menu-list.van-popup {
-  transition: 0s ease-out !important;
-}
-.van-popup--top {
-  transition: 0s ease-out !important;
-}
 </style>

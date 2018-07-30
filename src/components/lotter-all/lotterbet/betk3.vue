@@ -5,8 +5,8 @@
     <li>
       <p class="wangfa">玩<br/>法</p>
       <div @click="show = !show" class="menu">{{titles}}<i class="iconfont" :class="show ? 'icon-up' : 'icon-down'"></i></div>
-      <div class="menu-list">
-        <van-popup v-model="show" position="top">
+      <div class="menu-list" v-show="show" @click="show = false">
+        <div class="menu-listShow">
           <ul class="menu-list-top">
             <li v-for="(into,index) in playBonus" :key="index" v-show="isdfk3(index)" :class="{'active': index === navlist}" @click="k3Tab($event,index,into)">
               <div class="title"> {{into.title}} </div>
@@ -15,15 +15,15 @@
               <div class="img"><span class="img1"></span><span class="img2"></span><span class="img3"></span></div>
             </li>
           </ul>
-        </van-popup>
+        </div>
       </div>
     </li>
     <li class="betk3list"><span @click="showa = !showa">{{listname}}</span><i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="showa = !showa"></i>
-      <van-popup v-model=" showa" position="top">
+      <div class="betk3listRight" v-show="showa">
         <ul>
           <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)"><a>{{listk3.name}}</a></li>
         </ul>
-      </van-popup>
+      </div>
     </li>
   </ul>
   <div v-show="lookAllUl" class="lookAllDiv">
@@ -92,7 +92,7 @@
           <i class="iconfont icon-sanjiaoleft"></i>
         </div>
       </div>
-      <div v-show="betk3ContentTopPop" class="betk3-content-top-pop">
+      <div class="betk3-content-top-pop" v-show="betk3ContentTopPop" @click="betk3ContentTopPop = false">
         <ul class="look">
           <li>
             <p>期号</p>
@@ -1475,9 +1475,6 @@ export default {
 @import "../../../assets/scss/popcorn.scss";
 </style>
 <style>
-.van-popup--top {
-  transition: 0s ease-out !important;
-}
 .down-up-translate-fade-enter-active,
 .down-up-translate-fade-leave-active {
   transition: all 0.1s;

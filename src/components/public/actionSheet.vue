@@ -39,7 +39,10 @@ export default {
     }
   },
   beforeDestroy(){
-    document.body.removeChild(document.querySelector(".modal"));
+    let modal=document.querySelector(".modal")
+    if(modal){
+      document.body.removeChild(modal);
+    }
   },
   methods: {
     update() {

@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <transition name="actionsheet-float" v-show='value'>
     <div class="actionsheet" :class="{ 'actionsheet_title': title }" v-show='value'>
       <div class="actionsheet-header" v-if="title">
@@ -12,22 +11,6 @@
       <div v-if="cancelText" v-text="cancelText" class="actionsheet-item actionsheet-cancel" @click.stop="$emit('hide', false)" />
       <div v-else class="actionsheet-content">
         <slot />
-=======
-  <div class="modal" @click="$emit('hide', $event)" v-show='value'>
-    <transition name="actionsheet-float"  v-show='value'>
-      <div class="actionsheet" :class="{ 'actionsheet_title': title }"  v-show='value'>
-        <div class="actionsheet-header" v-if="title">
-          <div v-text="title" />
-          <i class="iconfont icon-close" @click.stop="$emit('hide', false)" />
-        </div>
-        <ul v-if="!title" class="actionsheet-list">
-
-        </ul>
-        <div v-if="cancelText" v-text="cancelText" class="actionsheet-item actionsheet-cancel" @click.stop="$emit('hide', false)"></div>
-        <div v-else class="actionsheet-content">
-          <slot />
-        </div>
->>>>>>> 47e945371506f86e4d8719ab47a1f518f7251d48
       </div>
     </div>
   </transition>

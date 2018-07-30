@@ -35,6 +35,7 @@
 export default {
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       dateFlag: 0,
       underUserList: [],
       timeline: "今日",
@@ -65,7 +66,7 @@ export default {
     getUnderUserList() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderUserList", {
-          params: { account: this.$store.state.Globalusername }
+          params: { account: this.username }
         })
         .then(res => {
           this.underUserList = res.data.data;

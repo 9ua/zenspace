@@ -66,6 +66,7 @@
 export default {
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       accountName: "",
       dateFlag: 0,
       timeline: "今日",
@@ -132,7 +133,7 @@ export default {
         this.$axios
           .get(this.$store.state.url + "api/proxy/getUserTeam", {
             params: {
-              account: this.$store.state.Globalusername,
+              account: this.username,
               dateFlag: this.dateFlag
             }
           })

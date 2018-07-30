@@ -15,7 +15,7 @@
     li
       p 账号
       div
-        p {{$store.state.Globalusername}}
+        p {{username}}
   actionSheet(v-model='show', title='修改头像',@hide='hide')
     .datum-img
       p 预览
@@ -64,6 +64,7 @@ export default {
   },
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       isnicknameto: false,
       input: false,
       show: false,

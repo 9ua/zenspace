@@ -12,9 +12,22 @@
         | {{titles}}
         i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
+        van-popup(v-model='show', position='top')
+          .popscroll
+            ul.menu-list-top
+              li(v-for='(into,index) in playGroups', :key='index')
+                .title {{into.title}}
+                .menu-list-list-box
+                  .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
+                    span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
+                      a {{player.groupName}}{{player.title}}
     li.betbj10list
       span(@click='showa = !showa') {{listname}}
       i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
+      van-popup(v-model=' showa', position='top')
+        ul
+          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
+            a {{listk3.name}}
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
       i.iconfont.icon-left(@click='lookAllDivTitle')

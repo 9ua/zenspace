@@ -74,6 +74,7 @@
 export default {
   data(){
     return {
+      username:localStorage.getItem('Globalname'),
       shwoB:false,
       active: 1,
       timeline:'今天',
@@ -172,7 +173,7 @@ export default {
 		    });
     },
     getTradeList(){
-        this.$axios.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.$store.state.Globalusername,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
+        this.$axios.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.username,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
         this.tradelist = res.data.data.list;
 			}).catch((error) => {
         console.log("获取彩種ratio ERROR");

@@ -15,14 +15,14 @@
           .mInvite-right
             p
               span
-    van-actionsheet(v-model='show2')
+    div.showBottom(v-show='show2',@click='show2 = false')
       ul.listStyle-V
         li
           span {{selected.title}}
         div(style='padding:20px 30px 0; max-height: 420px; overflow-y: scroll;', v-html='notice')
         li
           .button
-            button.button1(@click='show2 =! show2') 确定
+            button.button1(@click='show2 = false') 确定
 </template>
 <script>
 export default {
@@ -40,6 +40,9 @@ export default {
     this.getUserNoticeList();
   },
   methods: {
+    aaaaaa(){
+      this.show2 = false;
+    },
     select(a) {
       this.selected = a;
       this.getNoticeInfor(a.id);

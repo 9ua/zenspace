@@ -10,12 +10,12 @@
     ul.listStyle-check-top
       li
         input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', value='accountName', clearable='')
-        button(@click='getTradeList()')
+        button(@click='getTradeList')
           i.iconfont.icon-you
     .listStyle-content-top
       actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
-    van-tabs(v-model='accountChangeType', @click='print')
-      van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
+    ul.noVanTabs
+      li(:class='index === active ? "active" : ""',v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
     div
       ul.listStyle-I(v-show='showFlag')
         li(v-for='(item,index) in tradelist', :key='index', @click='select(item,$event)')
@@ -71,18 +71,16 @@ export default {
   data() {
     return {
       username:localStorage.getItem('Globalname'),
-      active: 1,
+      active: 0,
       timeline: "今天",
       show: false,
       show2: false,
       accountChangeType: 100,
       betweenType: 1,
-      status: 100,
       changeAmount: "",
       changeTime: "",
       tradelist: [],
       accountName: "",
-
       usertype: 2,
       highbet: 0,
       rebateratio: 0,
@@ -156,8 +154,9 @@ export default {
       this.show = !this.show;
       this.getTradeList();
     },
-    print(index, title) {
-      this.status = this.pagelist[index].Type;
+    print(index, item) {
+      this.active = index;
+      this.accountChangeType = item.Type;
       this.getTradeList();
     },
     getTradeList() {
@@ -167,7 +166,7 @@ export default {
             params: {
               account: this.username,
               include: 2,
-              status: this.status,
+              status: this.accountChangeType,
               betweenType: this.betweenType
             }
           })
@@ -183,7 +182,7 @@ export default {
             params: {
               account: this.accountName,
               include: 0,
-              status: this.status,
+              status: this.accountChangeType,
               betweenType: this.betweenType
             }
           })

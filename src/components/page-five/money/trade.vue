@@ -10,8 +10,8 @@
     .listStyle-content-top
       actionSheet(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     ul.noVanTabs
-      li(:class='index === active ? "active" : ""' v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
-    ul.listStyle-I(v-show='showFlag')
+      li(:class='index === active ? "active" : ""',v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
+    ul.listStyle-I
       li(v-for='(item,index) in tradelist', :key='index')
         .mInvite-left
           p
@@ -52,7 +52,6 @@ export default {
       extaddress: "",
       invitelist: "",
       selected: [],
-      showFlag: true,
       pagelist: [
         {
           name: "所有类型",

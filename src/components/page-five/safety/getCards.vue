@@ -16,7 +16,7 @@
           button.button1(@click='goCreate()') 添加银行卡
     .warning
       p {{content}}
-  van-actionsheet(v-model='show3')
+  actionSheet(v-model='show3',@hide='hide')
     ul.listStyle-II
       li 修改银行卡
       li
@@ -50,9 +50,13 @@
     van-picker(show-toolbar='', title='请选择银行', :columns='payway2', @cancel='onCancel', @confirm='onConfirm')
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 import md5 from "js-md5";
 import { Message } from "element-ui";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       content: "",
@@ -88,8 +92,11 @@ export default {
   },
   mounted() {},
   methods: {
-    listStyleToSafety(){
-      this.$router.push('/safety')
+    hide(){
+      this.show3=!this.show3;
+    },
+    listStyleToSafety() {
+      this.$router.push("/safety");
     },
     select(a) {
       this.id = a.id;
@@ -105,7 +112,14 @@ export default {
         .then(res => {
           this.securityCoe = res.data.data.securityCoe;
           if (this.securityCoe !== 1) {
-            this.$pop.show({error:'',title:'温馨提示',content:'请先绑定安全密码!',content1:'',content2:'',number:1});
+            this.$pop.show({
+              error: "",
+              title: "温馨提示",
+              content: "请先绑定安全密码!",
+              content1: "",
+              content2: "",
+              number: 1
+            });
             setTimeout(() => {
               this.$router.push({ path: "/setSafePwd" });
             }, 1700);
@@ -183,11 +197,25 @@ export default {
         .then(res => {
           if (res.data.code === 1) {
             this.content2 = res.data.data.message;
-            this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
+            this.$pop.show({
+              error: "",
+              title: "温馨提示",
+              content: res.data.data.message,
+              content1: "",
+              content2: "",
+              number: 2
+            });
             this.show3 = false;
           } else {
             this.content2 = res.data.data.message;
-            this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
+            this.$pop.show({
+              error: "",
+              title: "温馨提示",
+              content: res.data.data.message,
+              content1: "",
+              content2: "",
+              number: 2
+            });
           }
           this.getBankUserList();
         })

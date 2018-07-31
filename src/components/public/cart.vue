@@ -2,8 +2,6 @@
 .cart
   .cart-num(v-show='selected.length > 0')
     div
-      van-stepper(v-model='value')
-        span 倍
     div
       span(:class="{'active': index === lists}", v-for="(unit,index) in ['元','角','分']", :key='index', @click='moneyC(index)') {{unit}}
   .basket
@@ -100,9 +98,6 @@ export default {
     > div {
       @extend %flex;
       @extend %aitems;
-      & .van-stepper {
-        margin-right: 8px;
-      }
       & span {
         font-size: 18px;
       }

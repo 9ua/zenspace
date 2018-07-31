@@ -32,7 +32,7 @@
         br
         p 4、请务必转账后再提交订单，否则无法及时查到您的款项！
         br
-  van-actionsheet(v-model='show2')
+  div.showBottom(v-show='show2',@click='show2 = false')
     ul.listStyle-II
       li
         .center
@@ -149,7 +149,7 @@ export default {
           .then(res => {
             if (res.data.code === 1) {
               this.content = "申请完成，资讯可至充值信息页面查询。";
-              this.show2 = !this.show2;
+              this.show2 = false;
               this.show4 = !this.show4;
             } else if (res.data.code === 0) {
               this.content = res.data.data.message;

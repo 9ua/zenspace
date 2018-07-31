@@ -13,7 +13,7 @@
         button(@click='getTradeList()')
           i.iconfont.icon-you
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     van-tabs(v-model='accountChangeType', @click='print')
       van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
     div
@@ -31,7 +31,7 @@
               br
               span
           i.iconfont.icon-xia
-  van-actionsheet(v-model='show2')
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         span {{selected.lotteryName}}
@@ -63,9 +63,14 @@
           button.button1(@click='show2 =! show2') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       active: 1,
       timeline: "今天",
       show: false,
@@ -134,6 +139,10 @@ export default {
     this.getTradeList();
   },
   methods: {
+    hide(){
+      this.show=false;
+      this.show2=false;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },
@@ -156,7 +165,7 @@ export default {
         this.$axios
           .get(this.$store.state.url + "api/proxy/getbetOrderList", {
             params: {
-              account: this.$store.state.Globalusername,
+              account: this.username,
               include: 2,
               status: this.status,
               betweenType: this.betweenType

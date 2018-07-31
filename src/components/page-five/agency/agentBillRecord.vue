@@ -13,7 +13,7 @@
         button(@click='getTradeList()')
           i.iconfont.icon-you
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     van-tabs(v-model='accountChangeType', @click='print')
       van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
     div
@@ -32,9 +32,14 @@
               span {{item.changeAmount}}
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       active: 1,
       timeline: "今天",
       show: false,
@@ -98,6 +103,9 @@ export default {
     this.getTradeList();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },
@@ -116,7 +124,7 @@ export default {
         this.$axios
           .get(this.$store.state.url + "api/proxy/getTradeList", {
             params: {
-              account: this.$store.state.Globalusername,
+              account: this.username,
               include: 2,
               accountChangeType: this.accountChangeType,
               betweenType: this.betweenType

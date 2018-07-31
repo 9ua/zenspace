@@ -15,7 +15,7 @@
     li
       p 账号
       div
-        p {{$store.state.Globalusername}}
+        p {{username}}
   actionSheet(v-model='show', title='修改头像',@hide='hide')
     .datum-img
       p 预览
@@ -64,6 +64,7 @@ export default {
   },
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       isnicknameto: false,
       input: false,
       show: false,
@@ -123,7 +124,7 @@ export default {
   },
   methods: {
     hide(){
-      this.show=false;
+      this.show=!this.show;
     },
     //生日选择
     toBirthday() {
@@ -132,6 +133,8 @@ export default {
     //性别选择
     selecteds(e) {
       this.sex = e.target.value;
+      this.$store.state.sex = this.sex;
+      setStore("sex", this.$store.state.sex);
       this.saveUserData();
     },
     //昵称
@@ -140,6 +143,8 @@ export default {
         this.isnicknameto = true;
       } else if (this.$refs.isnickname.value !== "") {
         this.nickname = this.$refs.isnickname.value;
+        this.$store.state.nickname = this.nickname;
+        setStore("nickname", this.$store.state.nickname);
         this.saveUserData();
       }
     },

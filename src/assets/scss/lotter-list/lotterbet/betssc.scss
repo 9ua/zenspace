@@ -40,29 +40,27 @@
         }
       }
       & .menu-list {
-        @extend %flex;
-        @extend %fdc;
+        @extend %flex,%fdc;
         position: absolute;
         left: 0px;
         top: 46px;
+        z-index: 20180608;
         width: 100%;
-        & .van-popup--top {
-          top: 46px;
-          background: none !important;
-          height: 76%;
+        height: 100%;
+        background-color:rgba(0,0,0,.4);
+        & .menu-listShow{
+          background: #317455;
+          height: 84%;
           overflow: hidden;
           & .popscroll {
             width: 100%;
-            height: 100%;
+            height: 84%;
             position: absolute;
             overflow-y: scroll;
             -webkit-overflow-scrolling: touch;
             & .menu-list-top {
-              @extend %flex;
-              @extend %fdc;
-              @extend %fr;
+              @extend %flex,%fdc,%fr;
               width: 100%;
-              background: rgba(0, 0, 0, 0.2);
               & li {
                 @extend %flex;
                 @extend %fdr;
@@ -118,6 +116,7 @@
             }
           }
         }
+        
       }
     }
     & li:nth-child(3) {
@@ -270,9 +269,11 @@
     & .betk3-content-top-pop {
       position: absolute;
       width: 100%;
-      background: #22563f;
+      height: 100%;
+      background-color:rgba(0,0,0,.4);
       z-index: 2002;
       & .look {
+        background: #22563f;
         & li {
           @extend %flex;
           & p {
@@ -322,7 +323,8 @@
       }
       .lookAll {
         @extend %faj;
-        margin: 8px 0px 4px;
+        padding: 8px 0px 8px;
+        background: #22563f;
         & button {
           border: 1px solid #caebda;
           background: none;
@@ -601,19 +603,6 @@
       background: rgb(175, 58, 49);
     }
   }
-}
-
-.van-popup.sscpop {
-  @extend %faj;
-  padding: 8px 16px;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 4px;
-  background: rgb(175, 58, 49);
-}
-
-.van-modal {
-  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .betcBox {

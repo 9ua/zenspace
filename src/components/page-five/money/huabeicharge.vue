@@ -32,7 +32,7 @@
         br
         p 4、请务必转账后再提交订单，否则无法及时查到您的款项！
         br
-  van-actionsheet(v-model='show2')
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         .center
@@ -63,7 +63,11 @@
         button(@click='goBack()') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       timeline: "今天",
@@ -89,6 +93,9 @@ export default {
     this.rechargeEntrance();
   },
   methods: {
+    hide(){
+      this.show2=!this.show2;
+    },
     listStyleToSafety(){
       this.$router.push('/payway')
     },

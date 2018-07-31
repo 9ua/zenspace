@@ -18,7 +18,7 @@
           p
             span ({{item.statusName}})
         i.iconfont.icon-xia
-  van-actionsheet(v-model='show2')
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II(style='text-align:center')
       li
         p 订单编号
@@ -37,7 +37,11 @@
           button.button1(@click='show2=!show2') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       show2: false,
@@ -61,6 +65,9 @@ export default {
     this.getRechargeList();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/five')
     },

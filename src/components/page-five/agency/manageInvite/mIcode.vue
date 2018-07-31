@@ -26,7 +26,7 @@
             br
             span ({{item.count}})
         i.iconfont.icon-xia
-  van-actionsheet(v-model='show')
+  actionSheet(v-model='show',@hide='hide')
     .listStyle-II
       li
         span {{selected.id}}
@@ -55,7 +55,11 @@
         button.nodel(@click='select2()') 取消
 </template>
 <script>
+import actionSheet from "../../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       show: false,
@@ -89,6 +93,9 @@ export default {
     }
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     setUserType(v){
       this.usertype = v;
       console.log(this.usertype,v,"---------")

@@ -1,23 +1,35 @@
 <template>
-  <div class="modal" @click="$emit('hide', $event)" v-show='value'>
-    <transition name="actionsheet-float"  v-show='value'>
-      <div class="actionsheet" :class="{ 'actionsheet_title': title }"  v-show='value'>
-        <div class="actionsheet-header" v-if="title">
-          <div v-text="title" />
-          <i class="iconfont icon-close" @click.stop="$emit('hide', false)" />
-        </div>
-        <ul v-if="!title" class="actionsheet-list">
-
-        </ul>
-        <div v-if="cancelText" v-text="cancelText" class="actionsheet-item actionsheet-cancel" @click.stop="$emit('hide', false)"></div>
-        <div v-else class="actionsheet-content">
-          <slot />
-        </div>
+  <transition name="actionsheet-float" v-show='value'>
+    <div class="actionsheet" :class="{ 'actionsheet_title': title }" v-show='value'>
+      <div class="actionsheet-header" v-if="title">
+        <div v-text="title" />
+        <i class="iconfont icon-cuo" @click.stop="$emit('hide', false)" />
       </div>
-    </transition>
-  </div>
+      <ul v-if="!title" class="actionsheet-list">
+         <li
+          v-for="(item, index) in actions"
+          :key="index"
+          class="actionsheet-item hairline--top"
+          :class="[item.className, { 'actionsheet-item-loading': item.loading }]"
+          @click.stop="onClickItem(item)"
+        >
+        <template v-if="!item.loading">
+            <span class="actionsheet-name">{{ item.name }}</span>
+            <span class="actionsheet-subname" v-if="item.subname">{{ item.subname }}</span>
+          </template>
+          <loading v-else class="actionsheet-loading" size="20px" />
+        </li>
+      </ul>
+      <div v-if="cancelText" v-text="cancelText" class="actionsheet-item actionsheet-cancel" @click.stop="$emit('hide', false)" />
+      <div v-else class="actionsheet-content">
+        <slot />
+      </div>
+    </div>
+  </transition>
 </template>
 <script>
+import Modal from "./Modal";
+import Vue from "vue";
 export default {
   name: "actionsheet",
   props: {
@@ -33,9 +45,33 @@ export default {
       default: true
     }
   },
+  watch: {
+    value(val) {
+      this.update();
+    }
+  },
+  beforeDestroy(){
+    let modal=document.querySelector(".modal")
+    if(modal){
+      document.body.removeChild(modal);
+    }
+  },
   methods: {
+    update() {
+      if (!document.querySelector(".modal")) {
+          let modal = new (Vue.extend(Modal))({
+          el: document.createElement("div")
+        });
+        modal.$on("click", this.onClick);
+        document.body.appendChild(modal.$el);
+      }
+      document.querySelector(".modal").style.display=this.value ? "block" : "none";
+    },
+    onClick() {
+      this.$emit("hide",false);           
+    },
     onClickItem(item) {
-      if (typeof item.callback === "function") {
+      if (typeof item.callback === 'function') {
         item.callback(item);
       }
     }
@@ -44,23 +80,53 @@ export default {
 </script>
 <style lang="scss" scoped>
 .actionsheet {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   color: #333;
-  background-color: #fff;
+  padding:0 !important;
+  background-color: #f8f8f8;
   z-index: 20001;
   transition: 0.2s ease-out;
   &-float-enter,
   &-float-leave-active {
-    transform: translate3d(0, 100%, 0);
+    transform: translateY(100%);
+  }
+    &-withtitle {
+    background-color: white;
+  }
+
+  &-item {
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    background-color: white;
+
+    &:active {
+      background-color:  #e8e8e8;;
+    }
+  }
+
+  &-subname {
+    font-size: 12px;
+    color: #666;;
+    margin-left: 5px;
+  }
+
+  &-loading {
+    display: inline-block;
+  }
+
+  &-cancel {
+    margin-top: 10px;
   }
   &-header {
     line-height: 44px;
     text-align: center;
     position: relative;
-    & .icon-close {
+    & .iconfont {
       top: 0;
       right: 0;
       padding: 0 0.4rem;
@@ -71,31 +137,21 @@ export default {
     }
   }
 }
-@keyframes bottom-enter {
-  from {
-    transform: translate3d(0, 0, 0);
+[class*='hairline'] {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    border: 0 solid #e5e5e5;
+    border-top-width: .026667rem;
   }
-  to {
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-@keyframes bottom-leave {
-  from {
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-.modal {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  transition: opacity 1.2s ease-out;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 2000;
 }
 </style>

@@ -45,12 +45,16 @@
         p {{content}}
       .but
         button.nodel(@click='goBack()') 确定
-  van-actionsheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消')
+  actionSheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消')
 </template>
 <script>
 import md5 from "js-md5";
+import actionSheet from "../../public/actionSheet";
 export default {
-  data() {
+  components: {
+    actionSheet
+  },
+  data(){
     return {
       withdrawType: 1,
       timeline: "今天",
@@ -76,6 +80,9 @@ export default {
     this.getWithdrawInformation();
   },
   methods: {
+    hide(){
+      this.show1=!this.show1;
+    },
     listStyleToSafety(){
       this.$router.push('/five')
     },
@@ -86,9 +93,7 @@ export default {
     },
     getWithdrawInformation() {
       this.$axios
-        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
-          params: { withdrawType: this.withdrawType }
-        })
+        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {params: { withdrawType: this.$store.state.userType }})
         .then(res => {
           if (this.$store.state.userType === "0") {
             this.withdrawType = 1;

@@ -23,7 +23,6 @@ export default {
   },
   mounted(){
     this.geteServerTime();
-    this.getList();
   },
   methods:{
     listStyleToSafety(){
@@ -67,11 +66,6 @@ export default {
         seconds = "0" + seconds;
       }
       this.countDown = hours + ":" + minutes + ":" + seconds;
-    },
-    getList(){
-      this.$axios.get("../../../../static/k3.json").then(res =>{
-        console.log("res:",res)
-      })
     },
   }
 }

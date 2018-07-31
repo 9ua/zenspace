@@ -20,7 +20,7 @@
           p {{item.loginTime}}
         .title2
           p {{item.childCount}}
-  van-actionsheet.listModel(v-model='show2')
+  actionSheet.listModel(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         span {{selected.account}}
@@ -32,9 +32,14 @@
           button.button1(@click='show2 =! show2') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       dateFlag: 0,
       underUserList: [],
       timeline: "今日",
@@ -55,6 +60,9 @@ export default {
     this.getUnderUserList();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },
@@ -65,7 +73,7 @@ export default {
     getUnderUserList() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderUserList", {
-          params: { account: this.$store.state.Globalusername }
+          params: { account: this.username }
         })
         .then(res => {
           this.underUserList = res.data.data;

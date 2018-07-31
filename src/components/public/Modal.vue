@@ -22,7 +22,7 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  transition:  1.2s ease-out;
+  transition:  0.2s ease-out;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 2000;
 }

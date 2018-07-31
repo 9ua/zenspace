@@ -680,15 +680,6 @@
   }
 }
 
-.menu-list .van-popup {
-  background-color: rgba(0, 0, 0, 0) !important;
-}
-
-.van-modal {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  display: none;
-}
-
 .menu-list-top li:nth-child(1) {
   .img1 {
     background: url(../../../assets/img/one/n1.png) no-repeat center;
@@ -1787,17 +1778,3 @@
   }
 }
 
-.betshow.van-popup {
-  @extend %faj;
-  padding: 8px 16px;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 4px;
-  max-width: 300px;
-  min-width: 180px;
-  background: rgb(175, 58, 49);
-}
-
-.menu-list.van-popup {
-  transition: 0s ease-out !important;
-}

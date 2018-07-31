@@ -4,45 +4,19 @@ import 'babel-polyfill'; //解决ie浏览器不支持promise
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import {
-  Icon,
-  NoticeBar,
-  Actionsheet,
-  Popup,
-  Stepper,
-  Dialog,
-  Swipe,
-  SwipeItem,
-  Collapse,
-  CollapseItem
-} from 'vant';
-import 'vant/lib/vant-css/index.css'
 import 'lib-flexible/flexible.js'
-import {
-  Picker
-} from 'vant';
 import '@/assets/iconfont/iconfont.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './vuex/store'
-import { Tab, Tabs } from 'vant';
 import md5 from 'js-md5';
 import popTo from "./components/public/pop"
 
 Vue.use(popTo);
-Vue.use(Collapse).use(CollapseItem)
-Vue.use(Swipe).use(SwipeItem);
 axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 window.axios = axios;
-Vue.use(Stepper);
-Vue.use(Popup);
-Vue.use(Tab).use(Tabs);
 Vue.use(VueAxios, axios);
-Vue.use(Actionsheet);
-Vue.use(NoticeBar);
-Vue.use(Icon);
-Vue.use(Picker);
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 

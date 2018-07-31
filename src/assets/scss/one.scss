@@ -19,12 +19,6 @@
   color: #dc3b40;
 }
 
-.van-nav-bar,
-.van-nav-bar__right {
-  height: 46px;
-}
-
-
 .add {
   position: relative;
   @extend %aitems;
@@ -128,8 +122,4 @@
       width: 100%;
     }
   }
-}
-
-.van-modal {
-  background-color: rgba(0, 0, 0, 0.2) !important;
 }

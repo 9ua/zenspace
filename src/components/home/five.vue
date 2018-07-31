@@ -20,25 +20,25 @@
     ul
       router-link(to='/payway', tag='li')
         .icon-top.top-1
-          i.fa.fa-credit-card(aria-hidden='true')
+          i.iconfont.icon-creditcard(aria-hidden='true')(style='line-height: 48px')
         span 我要充值
       li(@click='safeCenter()')
         .icon-top.top-2
-          i.fa.fa-money(aria-hidden='true')
+          i.iconfont.icon-cash(aria-hidden='true')(style='line-height: 48px')
         span 我要提现
       router-link(to='/trade', tag='li')
         .icon-top.top-3
-          i.fa.fa-book(aria-hidden='true')
+          i.iconfont.icon-notebook(aria-hidden='true')(style='line-height: 48px')
         span 交易记录
       router-link(to='/bet', tag='li')
         .icon-top.top-4
-          i.fa.fa-star(aria-hidden='true')
+          i.iconfont.icon-notepad_add(aria-hidden='true')(style='line-height: 48px')
         span 投注记录
   .five-content
     ul
       router-link(:to='fiveNavs.paths', tag='li', v-for='(fiveNavs,index) in fiveNav', :key='index', v-if='fiveNavs.viewC')
         .five-content-nav
-          i.fa(:class='fiveNavs.icon')
+          i.iconfont(:class='fiveNavs.icon')
           p {{fiveNavs.name}}
         i.iconfont.icon-you
   div.show(v-show='show2')
@@ -70,37 +70,37 @@ export default {
       fiveNav: [
         {
           name: "个人信息",
-          icon: "fa-address-book-o",
+          icon: "icon-address-book-o",
           paths: "detail",
           viewC: true
         },
         {
           name: "安全中心",
-          icon: "fa-lock",
+          icon: "icon-lock",
           paths: "safety",
           viewC: true
         },
         {
           name: "代理中心",
-          icon: "fa-users",
+          icon: "icon-concard",
           paths: "agency",
           viewC: false
         },
         {
           name: "今日盈亏",
-          icon: "fa-line-chart",
+          icon: "icon-line-chart",
           paths: "profits",
           viewC: true
         },
         {
           name: "我的消息",
-          icon: "fa-envelope-o",
+          icon: "icon-envelope",
           paths: "mymsg",
           viewC: true
         },
         {
           name: "充值信息",
-          icon: "fa-file-text-o",
+          icon: "icon-file",
           paths: "rechargeserch",
           viewC: true
         }

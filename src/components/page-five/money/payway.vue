@@ -8,7 +8,7 @@
     ul.listStyle-I
       router-link(:to="payw.alino+'charge'", tag='li', v-for='(payw,index) in paywaylist', :key='index', v-if='payw.opentype === 0')
         .mInvite-left(style='width:76%')
-          i.fa.fa-credit-card(style='padding-right:10px')
+          i.iconfont.icon-creditcard(style='padding-right:10px')
           p
             | {{payw.alias}}
             br

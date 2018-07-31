@@ -9,14 +9,14 @@
       div
     .login-form
       .login-user
-        i.fa.fa-user
+        i.iconfont.icon-user
         input(type='text', v-model.trim='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()',v-focus='')
       .login-pwd
-        i.fa.fa-lock
+        i.iconfont.icon-lock
         input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', @keyup.enter='login')
         i.iconfont(:class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'", @click='pwd = !pwd')
       .login-captchaCodeImg(v-show='errorcode')
-        i.fa.fa-lock
+        i.iconfont.icon-lock
         input(type='text', onfocus='this.select()', v-model='newUserInfo.verification', placeholder='请输入验证码')
         img(:src='captchaCodeImg', @click='getCaptchaCode')
       .login-rememb

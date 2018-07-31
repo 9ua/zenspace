@@ -53,7 +53,6 @@
 <script>
 import actionSheet from "../../public/actionSheet";
 import md5 from "js-md5";
-import { Message } from "element-ui";
 export default {
   components: {
     actionSheet

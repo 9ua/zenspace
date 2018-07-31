@@ -6,18 +6,11 @@
         <i class="iconfont icon-cuo" @click.stop="$emit('hide', false)" />
       </div>
       <ul v-if="!title" class="actionsheet-list">
-         <li
-          v-for="(item, index) in actions"
-          :key="index"
-          class="actionsheet-item hairline--top"
-          :class="[item.className, { 'actionsheet-item-loading': item.loading }]"
-          @click.stop="onClickItem(item)"
-        >
-        <template v-if="!item.loading">
+        <li v-for="(item, index) in actions" :key="index" class="actionsheet-item hairline--top" :class="[item.className, { 'actionsheet-item-loading': item.loading }]" @click.stop="onClickItem(item)">
+          <template>
             <span class="actionsheet-name">{{ item.name }}</span>
             <span class="actionsheet-subname" v-if="item.subname">{{ item.subname }}</span>
           </template>
-          <loading v-else class="actionsheet-loading" size="20px" />
         </li>
       </ul>
       <div v-if="cancelText" v-text="cancelText" class="actionsheet-item actionsheet-cancel" @click.stop="$emit('hide', false)" />
@@ -50,28 +43,30 @@ export default {
       this.update();
     }
   },
-  beforeDestroy(){
-    let modal=document.querySelector(".modal")
-    if(modal){
+  beforeDestroy() {
+    let modal = document.querySelector(".modal");
+    if (modal) {
       document.body.removeChild(modal);
     }
   },
   methods: {
     update() {
       if (!document.querySelector(".modal")) {
-          let modal = new (Vue.extend(Modal))({
+        let modal = new (Vue.extend(Modal))({
           el: document.createElement("div")
         });
         modal.$on("click", this.onClick);
         document.body.appendChild(modal.$el);
       }
-      document.querySelector(".modal").style.display=this.value ? "block" : "none";
+      document.querySelector(".modal").style.display = this.value
+        ? "block"
+        : "none";
     },
     onClick() {
-      this.$emit("hide",false);           
+      this.$emit("hide", false);
     },
     onClickItem(item) {
-      if (typeof item.callback === 'function') {
+      if (typeof item.callback === "function") {
         item.callback(item);
       }
     }
@@ -85,7 +80,7 @@ export default {
   right: 0;
   bottom: 0;
   color: #333;
-  padding:0 !important;
+  padding: 0 !important;
   background-color: #f8f8f8;
   z-index: 20001;
   transition: 0.2s ease-out;
@@ -93,7 +88,7 @@ export default {
   &-float-leave-active {
     transform: translateY(100%);
   }
-    &-withtitle {
+  &-withtitle {
     background-color: white;
   }
 
@@ -105,13 +100,13 @@ export default {
     background-color: white;
 
     &:active {
-      background-color:  #e8e8e8;;
+      background-color: #e8e8e8;
     }
   }
 
   &-subname {
     font-size: 12px;
-    color: #666;;
+    color: #666;
     margin-left: 5px;
   }
 
@@ -137,7 +132,7 @@ export default {
     }
   }
 }
-[class*='hairline'] {
+[class*="hairline"] {
   position: relative;
   &::after {
     content: "";
@@ -146,12 +141,12 @@ export default {
     left: 0;
     width: 200%;
     height: 200%;
-    transform: scale(.5);
+    transform: scale(0.5);
     transform-origin: 0 0;
     pointer-events: none;
     box-sizing: border-box;
     border: 0 solid #e5e5e5;
-    border-top-width: .026667rem;
+    border-top-width: 0.026667rem;
   }
 }
 </style>

@@ -297,10 +297,6 @@
   }
 }
 
-.van-popup {
-  filter: blur(0px);
-}
-
 .member-top {
   @extend %aitems;
   @extend %jcontent;
@@ -533,9 +529,6 @@
   filter: blur(2px);
 }
 
-.van-modal {
-  background-color: rgba(0, 0, 0, .2) !important;
-}
 
 .listStyle-III {
   background: #fff;

@@ -1,22 +1,23 @@
 @import "./main.scss";
-.van-notice-bar {
+.notice-bar {
   @extend %flex;
   @extend %aitems;
+  @extend %sbetween;
   background: #fff !important;
   color: #333;
   height: 46px;
   padding: 0px 14px !important;
+  & img{
+    width: 18px;
+  }
+  & marquee{
+    color:#f60;
+  }
 }
 
-.van-notice-bar__left-icon {
+.notice-bar__left-icon {
   color: #dc3b40;
 }
-
-.van-nav-bar,
-.van-nav-bar__right {
-  height: 46px;
-}
-
 
 .add {
   position: relative;
@@ -109,21 +110,16 @@
     border: none;
   }
 }
-
-.van-swipe {
+.swipe {
   position: relative;
   height: 100%;
   padding-top: 50px;
   min-height: 170px;
   max-height: 180px;
-  & .van-swipe-item {
+  & .swipe-item {
     & img {
       height: 100%;
       width: 100%;
     }
   }
-}
-
-.van-modal {
-  background-color: rgba(0, 0, 0, 0.2) !important;
 }

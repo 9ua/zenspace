@@ -21,7 +21,10 @@
       li 修改银行卡
       li
         p 银行
-        div(@click='show1 = ! show1') {{this.selectBank}}
+        div
+          select(v-model='selectBank')
+            option 请选择银行
+            option(:value='item', v-for='(item,index) in payway2', :key='index') {{item}}
       li
         p 开户地址
         div
@@ -46,8 +49,6 @@
         .button
           button.button2(@click='sendReq()') 修改
           button.button3(@click='show3=!show3') 取消
-  van-popup(v-model='show1', position='bottom', :overlay='true')
-    van-picker(show-toolbar='', title='请选择银行', :columns='payway2', @cancel='onCancel', @confirm='onConfirm')
 </template>
 <script>
 import actionSheet from "../../public/actionSheet";
@@ -104,6 +105,7 @@ export default {
       this.address = a.address;
       this.niceName = a.niceName;
       this.card = a.card;
+      this.card2 = a.card;
       this.show3 = !this.show3;
     },
     goCreate() {

@@ -9,8 +9,8 @@
   .listStyle-content
     .listStyle-content-top
       actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
-    van-tabs(v-model='accountChangeType', @click='print')
-      van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
+    ul.noVanTabs
+      li(:class='index === active ? "active" : ""',v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
     div
       ul.listStyle-I(v-show='showFlag')
         li(v-for='(item,index) in tradelist', :key='index', @click='select(item,$event)')
@@ -79,7 +79,7 @@ export default {
   data(){
     return {
         username:localStorage.getItem('Globalname'),
-		    active: 1,
+		    active: 0,
         timeline:'今天',
         show:false,
         show2:false,
@@ -167,8 +167,9 @@ export default {
       this.show = ! this.show;
       this.getTradeList();
     },
-    print(index,title){
-      this.status = this.pagelist[index].Type;
+    print(index,item){
+      this.active = index;
+      this.status = item.Type;
       this.getTradeList();
     },
     cancelLottery(a,b){

@@ -22,7 +22,7 @@
       li
         p 申请金额
         div
-          input(placeholder='请输入提现金额', v-model='amount', value='amount', clearable='')
+          input(type='number', placeholder='请输入提现金额', v-model='amount', value='amount', clearable='')
       li
         p 账号
         div(@click='show1 = ! show1')

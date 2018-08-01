@@ -279,8 +279,7 @@
       <ul v-show="betsuccess" class="betc">
         <li>温馨提示！</li>
         <li>
-          <p>
-            <b>投注成功,</b>您可以在我的账户查看注单详情</p>
+          <p><b>投注成功,</b>您可以在我的账户查看注单详情</p>
         </li>
         <li>
           <button @click="looksucc">查看注单</button>
@@ -1423,7 +1422,7 @@ export default {
                     content: "恭喜您，投注成功！",
                     content1: "",
                     content2: "",
-                    number: 2
+                    number: 1
                   });
                   this.betnot = true;
                   setTimeout(() => {
@@ -1478,7 +1477,7 @@ export default {
                       content: "恭喜您，投注成功！",
                       content1: "",
                       content2: "",
-                      number: 2
+                      number: 1
                     });
                     this.betnot = true;
                     setTimeout(() => {

@@ -21,7 +21,7 @@
       li
         p 充值金额
         div
-          input(placeholder='请输入充值金额', v-model='chargeamount', value='chargeamount', clearable='')
+          input(type='number', placeholder='请输入充值金额', v-model='chargeamount', value='chargeamount', clearable='')
       li
         p 充值人姓名
         div

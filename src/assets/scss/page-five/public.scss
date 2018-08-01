@@ -37,12 +37,13 @@
       border-radius: 0px 0px 4px 4px;
       & button{
         width: 100%;
-        @extend %faj;
         border:none;
         background: none;
         outline: none;
         height: 40px;
+        line-height: 40px;
         font-size: 14px;
+        text-align: center;
         border: 1px solid #ddd;
       }
       & button.active{

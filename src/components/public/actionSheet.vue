@@ -51,12 +51,15 @@ export default {
   },
   methods: {
     update() {
-      if (!document.querySelector(".modal")) {
+      let tmp=document.querySelector(".modal");
+      if (!tmp) {
         let modal = new (Vue.extend(Modal))({
           el: document.createElement("div")
         });
         modal.$on("click", this.onClick);
-        document.body.appendChild(modal.$el);
+        const actionsheet=document.querySelector(".actionsheet");
+        const targetNode = actionsheet && actionsheet.parentNode && actionsheet.parentNode.nodeType !== 11 ? actionsheet.parentNode : document.body;
+        targetNode.appendChild(modal.$el);
       }
       document.querySelector(".modal").style.display = this.value
         ? "block"
@@ -82,7 +85,7 @@ export default {
   color: #333;
   padding: 0 !important;
   background-color: #f8f8f8;
-  z-index: 20001;
+  z-index: 20180801;
   transition: 0.2s ease-out;
   &-float-enter,
   &-float-leave-active {

@@ -1423,7 +1423,7 @@ export default {
                     content: "恭喜您，投注成功！",
                     content1: "",
                     content2: "",
-                    number: 2
+                    number: 1
                   });
                   this.betnot = true;
                   setTimeout(() => {
@@ -1478,7 +1478,7 @@ export default {
                       content: "恭喜您，投注成功！",
                       content1: "",
                       content2: "",
-                      number: 2
+                      number: 1
                     });
                     this.betnot = true;
                     setTimeout(() => {

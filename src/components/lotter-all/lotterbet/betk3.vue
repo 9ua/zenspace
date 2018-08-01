@@ -782,7 +782,6 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
-      this.titles = "和值";
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
@@ -800,6 +799,7 @@ export default {
       });
       if (this.$route.query.id !== "dfk3" && this.navlist === 6) {
         this.navlist = 3;
+        this.titles = "和值";
       }
     },
     //头部菜单项

@@ -167,6 +167,8 @@ export default {
         font-size: 14px;
       }
       & .logoAffirm{
+        width: 100%;
+        @extend %faj;
         color:red;
       }
     }

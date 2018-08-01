@@ -53,7 +53,8 @@ export default {
       securityCoe: 0, //安全码
       mobile: 0, //密保手机
       question: 0, //密保问题
-      email: 0 //密保邮箱
+      email: 0, //密保邮箱
+      localStorageArr:[],
     };
   },
   mounted() {
@@ -92,11 +93,19 @@ export default {
     },
     //退出
     logout() {
+      for(let i=0;i<localStorage.length;i++){
+        this.localStorageArr.push(localStorage.key(i));
+      }
+      this.localStorageArr.map((key) =>{
+        if(key !== 'username' && key !== 'password'){
+          localStorage.removeItem(key)
+        }
+      });
       this.$axios.get(this.$store.state.url + "api/user/logout").then(res => {
         this.$store.state.loginStatus = false;
         this.$store.state.Globalpassword = "";
         this.$store.state.JSESSIONICookie = "";
-        localStorage.clear();
+        // localStorage.clear();
         this.$router.push("/one");
       })
       .catch(error => {

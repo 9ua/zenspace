@@ -20,7 +20,7 @@
         input(type='text', onfocus='this.select()', v-model='newUserInfo.verification', placeholder='请输入验证码')
         img(:src='captchaCodeImg', @click='getCaptchaCode')
       .login-rememb
-        input(style='border-color:#FFF;color:#FFF;',type='checkbox',v-model='checked', @click='checked = !checked')
+        input(style='border-color:#FFF;color:#FFF;',type='checkbox',v-model='checked', @click='checkeds')
         span 记住密码
       .login-go
         button(@click='login', v-show='loginReq') 立即登陆
@@ -54,11 +54,11 @@ export default {
         pwd: "",
         verification: "",
         rempwd: ""
-      }
+      },
     };
   },
   created() {
-    localStorage.clear();
+    // localStorage.clear();
     this.checkeds();
   },
   methods: {

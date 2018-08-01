@@ -27,7 +27,7 @@ axios.defaults.timeout = 120000
 
 axios.interceptors.response.use(data => { // 响应成功关闭loading
   if (data.data.status === 302) {
-    localStorage.clear();
+    // localStorage.clear();
     router.push('/login');
     this.$store.state.loginStatus = false;
   }

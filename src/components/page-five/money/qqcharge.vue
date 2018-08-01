@@ -118,6 +118,7 @@ export default {
           )
           .then(res => {
             if (res.data.code === 1) {
+              console.log(res.data.data);
               var z = document.createElement('p');
               z.innerHTML = res.data.data;
               //z.innerHTML='<script>alert("12345")<'+'/script>';

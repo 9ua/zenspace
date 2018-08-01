@@ -8,12 +8,12 @@
     ul.listStyle-I
       li(@click="getWithdrawFlag")
         .mInvite-left
-          i.fa.fa-credit-card(style='padding-right:10px')
+          i.iconfont.icon-creditcard(style='padding-right:10px')
           p 普通提现
         i.iconfont.icon-you
       li(@click="getAgentWithdrawFlag")
         .mInvite-left
-          i.fa.fa-credit-card(style='padding-right:10px')
+          i.iconfont.icon-creditcard(style='padding-right:10px')
           p 返点提现
         i.iconfont.icon-you
 </template>

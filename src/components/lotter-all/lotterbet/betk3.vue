@@ -279,8 +279,7 @@
       <ul v-show="betsuccess" class="betc">
         <li>温馨提示！</li>
         <li>
-          <p>
-            <b>投注成功,</b>您可以在我的账户查看注单详情</p>
+          <p><b>投注成功,</b>您可以在我的账户查看注单详情</p>
         </li>
         <li>
           <button @click="looksucc">查看注单</button>

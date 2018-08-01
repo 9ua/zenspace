@@ -201,7 +201,7 @@
       li
         p
           b 投注成功,
-          span 您可以在我的账户查看注单详情
+          | 您可以在我的账户查看注单详情
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注

@@ -14,10 +14,10 @@
         </div>
       </div>
       <div v-show="$store.state.loginStatus">
-        <div class="notice-bar">
+        <div class="notice-bar"  @click="noticeClick">
           <img src="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png" alt="">
           <marquee scrollamount="2" width='80%'>{{title}}</marquee>
-          <i class="iconfont icon-you active" @click="noticeClick"></i>
+          <i class="iconfont icon-you active"></i>
         </div>
       </div>
       <ul v-show="!$store.state.loginStatus">

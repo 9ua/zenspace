@@ -76,134 +76,147 @@ export default {
   components: {
     actionSheet
   },
-  data(){
+  data() {
     return {
-        username:localStorage.getItem('Globalname'),
-		    active: 0,
-        timeline:'今天',
-        show:false,
-        show2:false,
-        show3:false,
-        accountChangeType:100,
-        betweenType:1,
-        status:100,
-        changeAmount:'',
-        changeTime:'',
-        tradelist:[],
-        usertype:2,
-        highbet:0,
-        rebateratio:0,
-        betlist:[],
-        validtime:0,
-        extaddress:'',
-        content:'',
-        invitelist:'',
-        selected:[],
-		    showFlag: true,
-          pagelist:[
-          {
-            name:'全部',
-            Type:100,
-            callback: this.print,
-          },
-          {
-            name:'已中奖',
-            Type:1,
-            callback: this.print,
-          },
-          {
-            name:'未中奖',
-            Type:2,
-            callback: this.print,
-          },
-          {
-            name:'等待开奖',
-            Type:6,
-            callback: this.print,
-          }
-        ],
-        actions: [
+      username: localStorage.getItem("Globalname"),
+      active: 0,
+      timeline: "今天",
+      show: false,
+      show2: false,
+      show3: false,
+      accountChangeType: 100,
+      betweenType: 1,
+      status: 100,
+      changeAmount: "",
+      changeTime: "",
+      tradelist: [],
+      usertype: 2,
+      highbet: 0,
+      rebateratio: 0,
+      betlist: [],
+      validtime: 0,
+      extaddress: "",
+      content: "",
+      invitelist: "",
+      selected: [],
+      showFlag: true,
+      pagelist: [
         {
-          name: '今天',
-          Type:1,
-          callback: this.onClick,
+          name: "全部",
+          Type: 100,
+          callback: this.print
         },
         {
-          name: '昨天',
-          Type:2,
-          callback: this.onClick,
+          name: "已中奖",
+          Type: 1,
+          callback: this.print
         },
         {
-          name: '七天',
-          Type:3,
+          name: "未中奖",
+          Type: 2,
+          callback: this.print
+        },
+        {
+          name: "等待开奖",
+          Type: 6,
+          callback: this.print
+        }
+      ],
+      actions: [
+        {
+          name: "今天",
+          Type: 1,
+          callback: this.onClick
+        },
+        {
+          name: "昨天",
+          Type: 2,
+          callback: this.onClick
+        },
+        {
+          name: "七天",
+          Type: 3,
           callback: this.onClick,
           loading: false
-        },
-        ],
-        
-        
-    }
+        }
+      ]
+    };
   },
-
-  mounted(){
-      this.getTradeList();
+  mounted() {
+    this.getTradeList();
   },
   methods: {
-    hide(){
-      this.show=false;
-      this.show2=false;
+    hide() {
+      this.show = false;
+      this.show2 = false;
     },
     //返回到上一次进来的页面
-    banckto(){
-      this.$router.go(-1)
+    banckto() {
+      this.$router.go(-1);
     },
     select(a) {
-        this.show2 = !this.show2;
-        this.selected = a;
-      },
-    onClick(item){
+      this.show2 = !this.show2;
+      this.selected = a;
+    },
+    onClick(item) {
       this.timeline = item.name;
       this.betweenType = item.Type;
-      this.show = ! this.show;
+      this.show = !this.show;
       this.getTradeList();
     },
-    print(index,item){
+    print(index, item) {
       this.active = index;
       this.status = item.Type;
       this.getTradeList();
     },
-    cancelLottery(a,b){
-          let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'},withCredentials:true};
-          let formData = new FormData();
-          formData.append('lotteryId', b);
-          formData.append('ids', a);
-          this.$axios.post(this.$store.state.url+'api/lottery/cancel', formData, config).then((res) => {
-             this.getTradeList();
-             this.show3 =false;
-             this.show2 =false;
-          }).catch((error) => {
-            console.log(error);
-            console.log("撤單ERROR");
-		    });
+    cancelLottery(a, b) {
+      let config = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        withCredentials: true
+      };
+      let formData = new FormData();
+      formData.append("lotteryId", b);
+      formData.append("ids", a);
+      this.$axios
+        .post(this.$store.state.url + "api/lottery/cancel", formData, config)
+        .then(res => {
+          this.getTradeList();
+          this.show3 = false;
+          this.show2 = false;
+        })
+        .catch(error => {
+          console.log(error);
+          console.log("撤單ERROR");
+        });
     },
-    getTradeList(){
-        this.$axios.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.username,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
-        this.tradelist = res.data.data.list;
-			}).catch((error) => {
-        console.log("获取彩種ratio ERROR");
-		});
-    },
-  },
+    getTradeList() {
+      this.$axios
+        .get(this.$store.state.url + "api/proxy/getbetOrderList", {
+          params: {
+            account: this.username,
+            include: 0,
+            status: this.status,
+            betweenType: this.betweenType
+          }
+        })
+        .then(res => {
+          this.tradelist = res.data.data.list;
+        })
+        .catch(error => {
+          console.log("获取彩種ratio ERROR");
+        });
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../../assets/scss/listStyle.scss';
-  @import '../../../assets/scss/popcorn.scss';
-  @import '../../../assets/scss/page-five/public.scss';
-  .class-a {
-    color: rgb(255, 74, 74) !important;
-  }
-  .class-b {
-    color: rgb(89, 168, 93) !important;
-  }
+@import "../../../assets/scss/listStyle.scss";
+@import "../../../assets/scss/popcorn.scss";
+@import "../../../assets/scss/page-five/public.scss";
+.class-a {
+  color: rgb(255, 74, 74) !important;
+}
+.class-b {
+  color: rgb(89, 168, 93) !important;
+}
 </style>

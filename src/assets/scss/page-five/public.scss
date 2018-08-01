@@ -8,11 +8,12 @@
   left: 0px;
   z-index: 20180608;
   & ul {
-    min-width: 300px;
+    width: 260px;
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
-    margin-left:-150px ;
+    margin-left:-130px ;
+    margin-top:-80px ;
     background: #FFF;
     border-radius: 4px;
     & .title {
@@ -28,9 +29,10 @@
     & .cont{
       @extend %faj;
       font-size: 14px;
-      min-height: 118px;
+      height: 80px;
       border-left: 1px solid #ddd;
       border-right: 1px solid #ddd;
+      padding: 0px 12px;
     }
     & .but{
       @extend %flex,%sbetween;

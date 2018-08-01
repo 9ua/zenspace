@@ -36,9 +36,9 @@
           <h5>{{item.name}}</h5>
         </router-link>
         <!-- <router-link tag="li" :to="{path:'/x11x5?id=sj1fc&name=宏发时时彩'}">
-      <img src='@/assets/img/one/x11x5.png' alt="images"/>
-        <h5>广东11选5</h5>
-      </router-link> -->
+        <img src='@/assets/img/one/x11x5.png' alt="images"/>
+          <h5>广东11选5</h5>
+        </router-link> -->
         <router-link to="/lotterList" tag="li" class="lotter-list">
           <i class="iconfont icon-jia"></i>
           <h5>更多彩种</h5>

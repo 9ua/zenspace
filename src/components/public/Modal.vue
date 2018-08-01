@@ -24,6 +24,6 @@ export default {
   left: 0;
   transition:  0.2s ease-out;
   background-color: rgba(0, 0, 0, 0.2);
-  z-index: 2018080;
+  z-index: 2000;
 }
 </style>

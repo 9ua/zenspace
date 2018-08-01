@@ -85,7 +85,7 @@ export default {
   color: #333;
   padding: 0 !important;
   background-color: #f8f8f8;
-  z-index: 20180801;
+  z-index: 2001;
   transition: 0.2s ease-out;
   &-float-enter,
   &-float-leave-active {

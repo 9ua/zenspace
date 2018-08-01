@@ -9,12 +9,12 @@
 export default {
   data() {
     return {
-      lotteryListklc: ""
+      lotteryListklc: JSON.parse(localStorage.getItem("lotteryList")).pk10
     };
   },
-  mounted() {
-    this.lotteryklc();
-  },
+  // mounted() {
+  //   this.lotteryklc();
+  // },
   methods: {
     lotteryklc() {
       this.$axios

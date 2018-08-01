@@ -9,11 +9,11 @@
 export default {
   data() {
     return {
-      lotteryListssc: ""
+      lotteryListssc: JSON.parse(localStorage.getItem("lotteryList")).ssc
     };
   },
   mounted() {
-    this.lotteryssc();
+    // this.lotteryssc();
   },
   methods: {
     lotteryssc() {

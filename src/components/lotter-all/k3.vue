@@ -9,11 +9,11 @@
 export default {
   data() {
     return {
-      lotteryListk3: ""
+      lotteryListk3: JSON.parse(localStorage.getItem("lotteryList")).k3
     };
   },
   mounted() {
-    this.lotteryk3();
+    // this.lotteryk3();
   },
   methods: {
     lotteryk3() {
@@ -21,6 +21,7 @@ export default {
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryListk3 = res.data.data.k3;
+          console.log(res.data.data)
         })
         .catch(error => {
           console.log("getLotteryListNo");

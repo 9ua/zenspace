@@ -20,19 +20,19 @@
     ul
       router-link(to='/payway', tag='li')
         .icon-top.top-1
-          i.iconfont.icon-creditcard(aria-hidden='true')(style='line-height: 48px')
+          i.iconfont.icon-creditcard(aria-hidden='true')
         span 我要充值
       li(@click='safeCenter()')
         .icon-top.top-2
-          i.iconfont.icon-cash(aria-hidden='true')(style='line-height: 48px')
+          i.iconfont.icon-cash(aria-hidden='true')
         span 我要提现
       router-link(to='/trade', tag='li')
         .icon-top.top-3
-          i.iconfont.icon-notebook(aria-hidden='true')(style='line-height: 48px')
+          i.iconfont.icon-notebook(aria-hidden='true')
         span 交易记录
       router-link(to='/bet', tag='li')
         .icon-top.top-4
-          i.iconfont.icon-notepad_add(aria-hidden='true')(style='line-height: 48px')
+          i.iconfont.icon-notepad_add(aria-hidden='true')
         span 投注记录
   .five-content
     ul
@@ -251,4 +251,10 @@ export default {
 @import "../../assets/scss/five.scss";
 @import "../../assets/scss/page-five/public.scss";
 @import "../../assets/scss/popcorn.scss";
+.iconfont {
+  display: inline-block;
+}
+i {
+  text-align:center;
+}
 </style>

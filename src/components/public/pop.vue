@@ -159,17 +159,18 @@ export default {
       border-top: 1px solid #ddd;
       & button{
         width: 100%;
-        @extend %faj;
         border:none;
         background: none;
         outline: none;
         height: 40px;
+        line-height: 40px;
         font-size: 14px;
+        text-align: center;
       }
       & .logoAffirm{
         width: 100%;
-        @extend %faj;
         color:red;
+        text-align: center;
       }
     }
   }

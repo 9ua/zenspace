@@ -1411,7 +1411,6 @@ export default {
           formData.append("isTrace", 0);
           formData.append("lotteryId", this.$route.query.id);
           formData.append("amount", this.money * this.zhu1);
-          this.iscreat();
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
@@ -1427,9 +1426,9 @@ export default {
                     number: 2
                   });
                   this.betnot = true;
-                  this.iscreat();
                   setTimeout(() => {
                     this.betsuccess = !this.betsuccess;
+                    this.iscreat();
                   }, 1700);
                 }, 600);
               } else {
@@ -1482,9 +1481,9 @@ export default {
                       number: 2
                     });
                     this.betnot = true;
-                    this.iscreat();
                     setTimeout(() => {
                       this.betsuccess = !this.betsuccess;
+                      this.iscreat();
                     }, 1700);
                   }, 600);
                 }

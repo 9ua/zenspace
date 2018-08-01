@@ -201,4 +201,10 @@ export default {
   .class-b {
     color: rgb(89, 168, 93) !important;
   }
+  .listStyle-top{
+    position:initial !important;
+  }
+  .listStyle-content{
+    padding: 0px !important;
+  }
 </style>

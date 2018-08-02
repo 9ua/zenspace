@@ -35,7 +35,7 @@ p {
   margin: 0;
 }
 input{
-  height: 20px;
-  line-height: 20px;
+  height: 24px;
+  line-height: 24px;
 }
 </style>

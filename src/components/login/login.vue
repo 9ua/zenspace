@@ -58,7 +58,6 @@ export default {
     };
   },
   created() {
-    // localStorage.clear();
     this.checkeds();
   },
   methods: {

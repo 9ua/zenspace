@@ -105,8 +105,7 @@ export default {
         this.$store.state.loginStatus = false;
         this.$store.state.Globalpassword = "";
         this.$store.state.JSESSIONICookie = "";
-        // localStorage.clear();
-        this.$router.push("/one");
+        this.$router.push("/login");
       })
       .catch(error => {
         console.log("logoutNo");

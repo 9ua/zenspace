@@ -159,8 +159,8 @@ export default {
       //hotfix-start//
       if (this.$route.query.id === 2 ) {
           if (this.hotfixbalance < this.hotfixretrievableRebate) {
-            this.content = "亲，您的馀额没有这么多啊！";
-            this.$pop.show({error:'',title:'温馨提示',content:'亲，您的馀额没有这么多啊！',content1:'',content2:'',number:2});  
+            this.content = "亲，您余额没有这么多啊！";
+            this.$pop.show({error:'',title:'温馨提示',content:'亲，您的余额没有这么多啊！',content1:'',content2:'',number:2});  
           }
       } else   
       //hotfix-end//

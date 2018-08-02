@@ -80,7 +80,6 @@ export default {
           params: {type: 1}
         })
         .then(res => {
-          console.log(res.data.data,"------");
           for (let i = 0; i < res.data.data.length; i++) {
             this.payway.push({
               name: res.data.data[i].name,

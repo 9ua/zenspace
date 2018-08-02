@@ -1,18 +1,24 @@
 <template>
   <div class="pop" v-show="openSimple" @click="closeSimple">
     <ul class="error" v-if="number === '10'">
-      <li><i class="iconfont icon-gantanhao"></i>{{error}}</li>
+      <li>
+        <i class="iconfont icon-gantanhao"></i>{{error}}</li>
     </ul>
     <ul class="loginSuccess num1" v-if="number =='1'">
       <li class="title">
         <span></span>
         <p>{{title}}</p>
-        <span><i class="iconfont icon-cuo transition"></i></span>
+        <span>
+          <i class="iconfont icon-cuo transition"></i>
+        </span>
       </li>
       <li class="content">
-        <p><i class="iconfont icon-gantanhao"></i>{{content}}</p>
+        <p>
+          <i class="iconfont icon-gantanhao"></i>{{content}}</p>
       </li>
-      <li class="button"><button class="logoAffirm" @click="openSimple = false">确认</button></li>
+      <li class="button">
+        <button class="logoAffirm" @click="openSimple = false">确认</button>
+      </li>
     </ul>
     <!-- 3秒后自动关闭 -->
     <ul class="loginSuccess num2" v-if="number =='2'">
@@ -23,25 +29,20 @@
       <li class="title">
         <span></span>
         <p>{{title}}</p>
-        <span><i class="iconfont icon-cuo transition"></i></span>
+        <span>
+          <i class="iconfont icon-cuo transition"></i>
+        </span>
       </li>
       <li class="content">
         <p>{{content1}}期已截止</p>
-        <p>当前期号<b>{{content2}}</b></p>
+        <p>当前期号
+          <b>{{content2}}</b>
+        </p>
         <p>投注时请注意期号!</p>
       </li>
-      <li class="button"><button class="logoAffirm" @click="openSimple = false">确认</button></li>
-    </ul>
-    <ul class="loginSuccess num1" v-if="number =='4'">
-      <li class="title">
-        <span></span>
-        <p>{{title}}</p>
-        <span><i class="iconfont icon-cuo transition"></i></span>
+      <li class="button">
+        <button class="logoAffirm" @click="openSimple = false">确认</button>
       </li>
-      <li class="content">
-        <p><i class="iconfont icon-gantanhao"></i>{{content}}</p>
-      </li>
-      <li class="button"><button class="logoAffirm" @click="go">确认11</button></li>
     </ul>
   </div>
 </template>
@@ -50,45 +51,39 @@ export default {
   data() {
     return {
       openSimple: true,
-      setInter:null,
+      setInter: null
     };
   },
-  props:{
-    error:String,
-    title:String,
-    content:String,
-    content1:String,
-    content2:String,
-    number:String,
-    go:{
-      type:Function
-    }
+  props: {
+    error: String,
+    title: String,
+    content: String,
+    content1: String,
+    content2: String,
+    number: String,
   },
-  mounted(){
+  mounted() {
     this.three();
   },
   methods: {
-    closeSimple(){
-      this.$pop.hide()
-    },
-    goTo(){
-      // this.gos();
+    closeSimple() {
+      this.$pop.hide();
     },
     //1.5秒后自动关闭
-    three(){
-      if(this.number === '2'){
+    three() {
+      if (this.number === "2") {
         clearInterval(this.setInter);
-        this.setInter = setInterval(() =>{
+        this.setInter = setInterval(() => {
           this.closeSimple();
           clearInterval(this.setInter);
-        },1500)
+        }, 1500);
       }
-      if(this.number === '3' || this.number === '10'){
+      if (this.number === "3" || this.number === "10") {
         clearInterval(this.setInter);
-        this.setInter = setInterval(() =>{
+        this.setInter = setInterval(() => {
           this.closeSimple();
           clearInterval(this.setInter);
-        },3000)
+        }, 3000);
       }
     }
   }
@@ -96,7 +91,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../assets/scss/main.scss";
-.pop{
+.pop {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -106,60 +101,60 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:rgba(0,0,0,.4);
-  & ul{
+  background-color: rgba(0, 0, 0, 0.4);
+  & ul {
     min-width: 300px;
     max-width: 500px;
-    background: #FFF;
+    background: #fff;
     border-radius: 4px;
     @extend %flex;
     @extend %fdc;
     @extend %sbetween;
-    & .title{
-      @extend %flex,%aitems,%sbetween;
-      background: rgb(175,58,49);
+    & .title {
+      @extend %flex, %aitems, %sbetween;
+      background: rgb(175, 58, 49);
       color: #fff;
       font-size: 16px;
       height: 40px;
-      border: 1px solid rgb(175,58,49);
+      border: 1px solid rgb(175, 58, 49);
       border-radius: 4px 4px 0px 0px;
       border-bottom: 0px solid #ddd;
-      & span{
+      & span {
         @extend %faj;
         width: 10%;
         height: 40px;
       }
-      & p{
+      & p {
         width: 80%;
         height: 40px;
       }
-      & i{
+      & i {
         width: 26px;
         height: 26px;
         font-size: 26px;
       }
-      & i.transition:hover{
+      & i.transition:hover {
         transition: All 4s ease-in-out;
         transform: rotate(3600deg);
       }
     }
-    & .content{
+    & .content {
       @extend %faj;
       font-size: 14px;
       min-height: 118px;
-      & i{
-        color: rgb(175,58,49);
+      & i {
+        color: rgb(175, 58, 49);
         font-size: 32px;
         margin-right: 18px;
       }
     }
-    & .button{
+    & .button {
       @extend %flex;
       @extend %sbetween;
       border-top: 1px solid #ddd;
-      & button{
+      & button {
         width: 100%;
-        border:none;
+        border: none;
         background: none;
         outline: none;
         height: 40px;
@@ -167,26 +162,26 @@ export default {
         font-size: 14px;
         text-align: center;
       }
-      & .logoAffirm{
+      & .logoAffirm {
         width: 100%;
-        color:red;
+        color: red;
         text-align: center;
       }
     }
   }
-  & .loginSuccess{
-    & h4{
+  & .loginSuccess {
+    & h4 {
       height: 28px;
       line-height: 28px;
-      color: #FA7E00;
+      color: #fa7e00;
     }
-    & p{
+    & p {
       height: 70px;
       @extend %faj;
     }
   }
 }
-.pop ul.error{
+.pop ul.error {
   position: absolute;
   top: 50px;
   left: 50%;
@@ -194,8 +189,8 @@ export default {
   height: 40px;
   margin-left: -50%;
   border-radius: 4px;
-  & li{
-    @extend %flex,%aitems;
+  & li {
+    @extend %flex, %aitems;
     width: calc(100%-16px);
     height: 40px;
     line-height: 40px;
@@ -203,23 +198,22 @@ export default {
     border-radius: 4px;
     padding-left: 16px;
     color: #f56c6c;
-    & i{
+    & i {
       margin-right: 6px;
     }
   }
 }
-.num1{}
-.num2{
-  & li{
+.num2 {
+  & li {
     @extend %faj;
   }
 }
-.num3{
-  & li.content{
-    @extend %flex,%fdc,%aitems;
-    & p{
+.num3 {
+  & li.content {
+    @extend %flex, %fdc, %aitems;
+    & p {
       height: 30px;
-      & b{
+      & b {
         color: red;
         margin-left: 4px;
       }

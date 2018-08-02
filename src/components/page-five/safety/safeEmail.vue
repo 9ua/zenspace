@@ -59,7 +59,7 @@ export default {
               if (this.content === "验证成功！") {
                 this.$router.push({ path: "/detail/setemail" });
               }
-            }, 1700);
+            }, 800);
           })
           .catch(error => {
             console.log(error);

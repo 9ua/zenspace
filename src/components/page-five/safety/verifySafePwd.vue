@@ -49,7 +49,7 @@ export default {
               if (this.content === "验证成功！") {
                 this.$router.push({ path: "/changeSafePwd" });
               }
-            }, 1700);
+            }, 800);
           })
           .catch(error => {
             console.log("验证安全密码No");

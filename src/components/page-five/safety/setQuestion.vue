@@ -88,7 +88,7 @@ export default {
               if (this.content === "设定成功！") {
                 this.$router.push({ path: "/safety" });
               }
-            }, 1700);
+            }, 800);
           })
           .catch(error => {
             console.log("设置密保问题No");

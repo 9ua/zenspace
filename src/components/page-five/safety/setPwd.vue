@@ -54,7 +54,7 @@ export default {
                 this.$router.push({ path: "/one" });
                 this.$store.state.loginStatus = false;
               }
-            }, 1700);
+            }, 800);
           })
           .catch(error => {
             console.log("更改密码No");

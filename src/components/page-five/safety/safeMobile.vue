@@ -55,7 +55,7 @@ export default {
             if (this.content === "验证成功！") {
               this.$router.push({ path: "/detail/setmobile" });
             }
-          }, 1700);
+          }, 800);
         })
         .catch(error => {
           console.log("验证安全码No");
@@ -90,7 +90,7 @@ export default {
       if (this.content === "绑定成功！") {
         setTimeout(() =>{
           this.$router.push({ path: "/safety" });
-        },1700)
+        },800)
       }
     },
     //获取已经绑定的手机号码

@@ -1968,7 +1968,7 @@ export default {
               setTimeout(() => {
                 this.betsuccess = !this.betsuccess;
                 this.iscreat();
-              }, 1700);
+              }, 800);
             }, 600);
           } else {
                 this.betnot = true;

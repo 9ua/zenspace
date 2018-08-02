@@ -64,7 +64,7 @@ export default {
                 if (this.content === "修改成功！") {
                   this.$router.push({ path: "/safety" });
                 }
-              }, 1700);
+              }, 800);
             })
             .catch(error => {
               console.log("setSecurityCodesNo");

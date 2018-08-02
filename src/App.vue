@@ -34,4 +34,8 @@ dl {
 p {
   margin: 0;
 }
+input{
+  height: 20px;
+  line-height: 20px;
+}
 </style>

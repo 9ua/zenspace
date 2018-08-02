@@ -123,7 +123,7 @@ export default {
             });
             setTimeout(() => {
               this.$router.push({ path: "/setSafePwd" });
-            }, 1700);
+            }, 800);
           } else {
             this.$router.push({ path: "/newCard" });
           }

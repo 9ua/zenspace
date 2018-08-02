@@ -47,7 +47,7 @@ export default {
               if (this.content === "验证成功！") {
                 this.$router.push({ path: "/setPwd" });
               }
-            }, 1700);
+            }, 800);
           })
           .catch(error => {
             console.log("绑定邮箱No");

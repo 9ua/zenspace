@@ -1421,7 +1421,7 @@ export default {
                     setTimeout(() => {
                       this.iscreat();
                       this.betsuccess = !this.betsuccess;
-                    }, 1700);
+                    }, 800);
                   }
                   
                 }, 600);
@@ -1471,7 +1471,7 @@ export default {
                     setTimeout(() => {
                       this.betsuccess = !this.betsuccess;
                       this.iscreat();
-                    }, 1700);
+                    }, 800);
                   }, 600);
                 }
               }
@@ -1528,7 +1528,7 @@ export default {
                 setTimeout(() => {
                   this.betsuccess = !this.betsuccess;
                   this.iscreat();
-                }, 1700);
+                }, 800);
               }, 600);
             }
           })

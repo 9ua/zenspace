@@ -1,51 +1,50 @@
 <template lang="jade">
 .safety
   .safety-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 安全中心
     span
   .safety-content
     .safety-content-top
       p.title ———— 您的账号安全级别为极低 ————
       div
-        el-rate(v-model='value5', disabled='', show-score='', text-color='#ff9900', score-template='')
+        span.iconfont.icon-iconfontxingxing(:class="{'xingxing': index <= value5}",v-for='index in 5',:key='index')
     ul
       router-link(to='verifyPwd', tag='li')
         p 修改登陆密码
         div
           p 修改
-          van-icon(name='arrow')
+          i.iconfont.icon-you
       router-link(:to="securityCoe === 0 ? 'setSafePwd' : 'verifySafePwd'", tag='li')
         p {{securityCoe === 0 ? '设置安全密码' : '已设置安全密码'}}
         div
           p {{securityCoe === 0 ? '设置' : '修改'}}
-          van-icon(name='arrow')
+          i.iconfont.icon-you
       router-link(:to="mobile === 0 ? 'detail/setmobile' : 'safeMobile'", tag='li')
         p {{mobile === 0 ? '设置密保手机' : '已设置密保手机'}}
         div
           p {{mobile === 0 ? '设置' : '修改'}}
-          van-icon(name='arrow')
+          i.iconfont.icon-you
       router-link(:to="question === 0 ? 'setQuestion' : 'safeQuestion'", tag='li')
         p {{question === 0 ? '设置密保问题' : '已设置密保问题'}}
         div
           p {{question === 0 ? '设置' : '查看'}}
-          van-icon(name='arrow')
+          i.iconfont.icon-you
       router-link(:to="email === 0 ? 'detail/setemail' : 'safeEmail'", tag='li')
         p {{email === 0 ? '设置密保邮箱' : '已设置密保邮箱'}}
         div
           p {{email === 0 ? '设置' : '修改'}}
-          van-icon(name='arrow')
+          i.iconfont.icon-you
       router-link(to='getCards', tag='li')
         p 银行卡管理
         div
           p 设置
-          van-icon(name='arrow')
+          i.iconfont.icon-you
     .logout(@click='logout')
       p 退出登陆
-      van-icon(name='arrow')
+      i.iconfont.icon-you
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../config/mutil";
 export default {
   data() {
     return {
@@ -54,7 +53,8 @@ export default {
       securityCoe: 0, //安全码
       mobile: 0, //密保手机
       question: 0, //密保问题
-      email: 0 //密保邮箱
+      email: 0, //密保邮箱
+      localStorageArr:[],
     };
   },
   mounted() {
@@ -93,13 +93,19 @@ export default {
     },
     //退出
     logout() {
+      for(let i=0;i<localStorage.length;i++){
+        this.localStorageArr.push(localStorage.key(i));
+      }
+      this.localStorageArr.map((key) =>{
+        if(key !== 'username' && key !== 'password'){
+          localStorage.removeItem(key)
+        }
+      });
       this.$axios.get(this.$store.state.url + "api/user/logout").then(res => {
         this.$store.state.loginStatus = false;
-        this.$store.state.Globalusername = "";
         this.$store.state.Globalpassword = "";
         this.$store.state.JSESSIONICookie = "";
-        localStorage.clear();
-        this.$router.push("/one");
+        this.$router.push("/login");
       })
       .catch(error => {
         console.log("logoutNo");

@@ -9,7 +9,7 @@
       .five-top-right
         p
           | 账号：
-          span {{$store.state.Globalusername}}
+          span {{username}}
         p
           | 余额：
           span(v-show=' !money ') *****
@@ -20,45 +20,43 @@
     ul
       router-link(to='/payway', tag='li')
         .icon-top.top-1
-          i.fa.fa-credit-card(aria-hidden='true')
+          i.iconfont.icon-creditcard(aria-hidden='true')
         span 我要充值
       li(@click='safeCenter()')
         .icon-top.top-2
-          i.fa.fa-money(aria-hidden='true')
+          i.iconfont.icon-cash(aria-hidden='true')
         span 我要提现
       router-link(to='/trade', tag='li')
         .icon-top.top-3
-          i.fa.fa-book(aria-hidden='true')
+          i.iconfont.icon-notebook(aria-hidden='true')
         span 交易记录
       router-link(to='/bet', tag='li')
         .icon-top.top-4
-          i.fa.fa-star(aria-hidden='true')
+          i.iconfont.icon-notepad_add(aria-hidden='true')
         span 投注记录
   .five-content
     ul
       router-link(:to='fiveNavs.paths', tag='li', v-for='(fiveNavs,index) in fiveNav', :key='index', v-if='fiveNavs.viewC')
         .five-content-nav
-          i.fa(:class='fiveNavs.icon')
+          i.iconfont(:class='fiveNavs.icon')
           p {{fiveNavs.name}}
-        van-icon(name="arrow")
-  van-popup.pop2(v-model='show2', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button.del(@click='goToSet()') 确定
-          button.nodel(@click='show2 = !show2') 取消
+        i.iconfont.icon-you
+  div.show(v-show='show2')
+    ul
+      li.title
+        p 温馨提示！
+      li.cont
+        p {{content}}
+      li.but
+        button.del.active(@click='goToSet()') 确定
+        button.nodel(@click='show2 = !show2') 取消
 </template>
 <script>
 import headers from "../public/header";
-import VueCookie from "vue-cookie";
-import { setStore, getStore, removeStore } from "../../config/mutil";
 export default {
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       bankUserFlag: "", //银行卡状态
       securityCoe: "", //安全码状态
       question: "", //密保问题状态
@@ -72,37 +70,37 @@ export default {
       fiveNav: [
         {
           name: "个人信息",
-          icon: "fa-address-book-o",
+          icon: "icon-address-book-o",
           paths: "detail",
           viewC: true
         },
         {
           name: "安全中心",
-          icon: "fa-lock",
+          icon: "icon-lock",
           paths: "safety",
           viewC: true
         },
         {
           name: "代理中心",
-          icon: "fa-users",
+          icon: "icon-concard",
           paths: "agency",
           viewC: false
         },
         {
           name: "今日盈亏",
-          icon: "fa-line-chart",
+          icon: "icon-line-chart",
           paths: "profits",
           viewC: true
         },
         {
           name: "我的消息",
-          icon: "fa-envelope-o",
+          icon: "icon-envelope",
           paths: "mymsg",
           viewC: true
         },
         {
           name: "充值信息",
-          icon: "fa-file-text-o",
+          icon: "icon-file",
           paths: "rechargeserch",
           viewC: true
         }
@@ -139,7 +137,7 @@ export default {
           this.securityCoe = res.data.data.securityCoe;
           this.bankUserFlag = res.data.data.bankUserFlag;
           this.question = res.data.data.question;
-          if (this.securityCoe == 0 && this.bankUserFlag == 0) {
+          if (this.securityCoe == 0) {
             this.content = "请先设置安全密码及绑定银行帐户，是否跳转至设置页？";
             this.show2 = !this.show2;
           } else if (this.bankUserFlag == 0) {
@@ -195,7 +193,8 @@ export default {
         });
     },
     goToSet() {
-      if (this.securityCoe == 0 && this.bankUserFlag == 0) {
+      console.log(111)
+      if (this.securityCoe == 0) {
         this.$router.push({ path: "/setSafePwd" });
       } else if (this.bankUserFlag == 0) {
         this.$router.push({ path: "/newCard" });
@@ -210,7 +209,7 @@ export default {
       if(localStorage.getItem("image") !== null){
         this.image = localStorage.getItem("image");
       }else{
-        this.$http.get(this.$store.state.url + "api/userCenter/getTopUserData").then(res => {
+        this.$axios.get(this.$store.state.url + "api/userCenter/getTopUserData").then(res => {
           localStorage.setItem("image",res.data.data.image);
           this.image = localStorage.getItem("image");
         })
@@ -221,7 +220,7 @@ export default {
     },
     //获取用户余额
     getBalance() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/userCenter/getBalance")
         .then(res => {
           this.$store.state.balance = res.data.data.balance;
@@ -250,5 +249,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../assets/scss/five.scss";
+@import "../../assets/scss/page-five/public.scss";
 @import "../../assets/scss/popcorn.scss";
+.iconfont {
+  display: inline-block;
+}
+i {
+  text-align:center;
+}
 </style>

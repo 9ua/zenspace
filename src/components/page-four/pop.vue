@@ -2,7 +2,7 @@
 .pop(v-show='isshow.showPage')
   .one-top
     .pop-top
-      van-icon(name='arrow-left',@click='hide')
+      i.iconfont.icon-left(@click='hide')
       p 玩家信息
   .pop-center
     .pop-center-top

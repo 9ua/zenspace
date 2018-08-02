@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToPayway')
+    i.iconfont.icon-left(@click='listStyleToPayway')
     p 银行转账充值
     span
   .listStyle-content
@@ -21,15 +21,15 @@
       li
         p 充值金额
         div
-          el-input(placeholder='请输入充值金额', v-model='chargeamount', :value='chargeamount', clearable='')
+          input(type='number', placeholder='请输入充值金额', v-model='chargeamount', value='chargeamount', clearable='')
       li
         p 充值人姓名
         div
-          el-input(placeholder='请输入充值人姓名', v-model='niceName', :value='niceName', clearable='')
+          input(placeholder='请输入充值人姓名', v-model='niceName', value='niceName', clearable='')
       li
         p 附言
         div
-          el-input(placeholder='请输入附言', v-model='checkCode', :value='checkCode', clearable='')
+          input(placeholder='请输入附言', v-model='checkCode', value='checkCode', clearable='')
       li
         .button
           button.button1(@click="isshow3") 充值申请
@@ -43,7 +43,7 @@
         p
           | 4、请务必转账后再提交订单，否则无法及时查到您的款项！
         br
-  van-actionsheet(v-model='show2')
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         .center
@@ -64,28 +64,21 @@
         .button
           button.button2(@click='sendReq()') 确定
           button.button3(@click='show2 = !show2') 取消
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button(@click='show3 = ! show3') 确定
-  van-popup.pop2(v-model='show4', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button(@click='goBack()') 确定
+  div.show(v-show='show4')
+    ul
+      .title
+        p 温馨提示！
+      .cont
+        p {{content}}
+      .but
+        button(@click='goBack()') 确定
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../config/mutil";
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       timeline: "今天",
@@ -98,7 +91,6 @@ export default {
       checkCode: "",
       show1: false,
       show2: false,
-      show3: false,
       show4: false,
       QRCodeUrl: "",
       receiveAddress: "",
@@ -112,12 +104,15 @@ export default {
     this.rechargeEntrance();
   },
   methods: {
+    hide(){
+      this.show2=!this.show2;
+    },
     //返回payway页面
     listStyleToPayway(){
       this.$router.push("/payway");
     },
     rechargeEntrance() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
           params: { rechargeWay: 5 }
         })
@@ -138,11 +133,9 @@ export default {
     },
     isshow3(){
       if(this.chargeamount === ""){
-        this.content = "请输入金额!";
-        this.show3 = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'请输入金额!',content1:'',content2:'',number:2});
       }else if(this.niceName === ''){
-        this.content = "请输入姓名!";
-        this.show3 = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'请输入姓名!',content1:'',content2:'',number:2});
       }else{
         this.show2 = !this.show2;
       }
@@ -172,11 +165,11 @@ export default {
           } else if (res.data.code === 0) {
             this.content = res.data.data.message;
             this.show2 = !this.show2;
-            this.show3 = !this.show3;
+            this.$pop.show({error:'',title:'温馨提示',content:res.data.content,content1:'',content2:'',number:2});
           } else {
             this.content = res.data.content;
             this.show2 = !this.show2;
-            this.show3 = !this.show3;
+            this.$pop.show({error:'',title:'温馨提示',content:res.data.content,content1:'',content2:'',number:2});
           }
         })
         .catch(error => {
@@ -190,4 +183,5 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/listStyle.scss";
 @import "../../../assets/scss/popcorn.scss";
+@import "../../../assets/scss/page-five/public.scss";
 </style>

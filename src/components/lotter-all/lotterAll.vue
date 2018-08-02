@@ -9,22 +9,26 @@
 export default {
   data() {
     return {
-      lotteryListAll: ""
+      lotteryListAll: ''
     };
   },
-  mounted() {
-    this.lotteryAll();
+  mounted(){
+    this.lotter();
   },
-  methods: {
-    lotteryAll() {
-      this.$http
-        .get(this.$store.state.url + "api/lottery/getLotteryList")
-        .then(res => {
+  methods:{
+    lotter(){
+      if(JSON.parse(localStorage.getItem("lotteryList")) !== null){
+        this.lotteryListAll = JSON.parse(localStorage.getItem("lotteryList")).all;
+      }else {
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
+          localStorage.setItem("lotteryList",JSON.stringify(res.data.data));
           this.lotteryListAll = res.data.data.all;
         })
         .catch(error => {
           console.log("getLotteryListNo");
         });
+      }
+      
     }
   }
 };

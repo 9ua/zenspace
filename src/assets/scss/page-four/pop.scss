@@ -5,11 +5,6 @@
   width: $width;
 }
 
-.van-nav-bar {
-  width: 100%;
-  background: #dc3b40 !important;
-}
-
 .pop {
   background: #fff;
   height: 100%;
@@ -148,10 +143,4 @@
       }
     }
   }
-}
-
-.van-nav-bar .van-icon,
-.van-nav-bar__title {
-  color: #fff;
-  font-size: 18px;
 }

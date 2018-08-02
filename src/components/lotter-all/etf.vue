@@ -14,7 +14,7 @@ export default {
   },
   methods:{
     lotteryetf(){
-      this.$http.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
+      this.$axios.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
         this.lotteryListetf = res.data.data.x11x5;
       }).catch((error) => {
           console.log("getLotteryListNo")

@@ -23,7 +23,6 @@
     button(@click='getInviteCode()') 取得邀请码
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../../config/mutil";
 export default {
   data() {
     return {
@@ -40,7 +39,7 @@ export default {
   },
   methods: {
     createbetlist() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/agent/getExtQuota")
         .then(res => {
           this.highbet = res.data.data.rebateRatio;

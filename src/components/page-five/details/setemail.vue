@@ -1,7 +1,7 @@
 <template lang="jade">
 .setemail
   .setemail-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 绑定密保邮箱
     span
   .setemail-content
@@ -16,10 +16,9 @@
         span.primarys(@click='sendEmailCode',v-show='iss') {{s}} 秒后重新获取
       li
         p 安全密码：
-        input(type='text', v-model='securityCode', placeholder='请输入您的安全码')
+        input(type='password', v-model='securityCode',maxlength='6', placeholder='请输入您的安全码')
     .setemail-but
-      el-button(type='primary', @click='saveBindEmail') 确定
-  van-popup(v-model='show') {{content}}
+      button(type='primary', @click='saveBindEmail') 确定
 </template>
 <script>
 import md5 from "js-md5";
@@ -28,7 +27,6 @@ export default {
     return {
       iss:false,
       s:59,
-      show: false, //弹窗
       content: "提示内容!", //弹窗内容
       email: null, //邮箱
       validCode: "", //验证码
@@ -44,10 +42,12 @@ export default {
     sendEmailCode() {
       const email_yz = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
       let yzemail = email_yz.test(this.email);
+      console.log(email_yz.test(this.email))
       if (!this.email) {
-        this.show = !this.show;
-        this.content = "邮箱地址不能为空！";
-      } else if(this.email){
+        this.$pop.show({title:'温馨提示',content:'邮箱地址不能为空！',content1:'',content2:'',number:2});
+      }else if(yzemail === false){
+        this.$pop.show({title:'温馨提示',content:'邮箱地址格式不正确！',content1:'',content2:'',number:2});
+      }else if (yzemail) {
         clearInterval(this.setInt);
         this.setInt = setInterval(() =>{
           this.iss = true;
@@ -58,7 +58,6 @@ export default {
             this.s = 59;
           }
         },1000);
-      }else if (yzemail) {
         let config = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           withCredentials: true
@@ -95,8 +94,8 @@ export default {
           config
         )
         .then(res => {
-          this.show = !this.show;
           this.content = res.data.data.message;
+          this.$pop.show({title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:1});
           if (this.content === "绑定成功！") {
             this.$router.push({ path: "/five" });
           }

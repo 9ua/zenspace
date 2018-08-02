@@ -2,7 +2,7 @@
 .betssc
   ul.betssc-top
     li
-      i.el-icon-arrow-left(@click='banckto')
+      i.iconfont.icon-left(@click='banckto')
     li
       p.wangfa
         | 玩
@@ -10,27 +10,14 @@
         | 法
       .menu(@click='show = !show')
         | {{titles}}
-        i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+        i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
-        van-popup(v-model='show', position='top')
-          .popscroll
-            ul.menu-list-top
-              li(v-for='(into,index) in playGroups', :key='index')
-                .title {{into.title}}
-                .menu-list-list-box
-                  .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
-                    span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
-                      a {{player.groupName}}{{player.title}}
     li.betssclist
       span(@click='showa = !showa') {{listname}}
-      i(:class="showa ? 'el-icon-caret-top' : 'el-icon-caret-bottom' ", @click='showa = !showa')
-      van-popup(v-model=' showa', position='top')
-        ul
-          li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
-            a {{listssc.name}}
+      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
   .lookAllDiv(v-show='lookAllUl')
     p.lookAllDivTitle
-      i.el-icon-arrow-left(@click='lookAllDivTitle')
+      i.iconfont.icon-xia(@click='lookAllDivTitle')
       b.cont 查看更多
       span
     .lookAllUlBox
@@ -42,7 +29,7 @@
         li(v-for='(item,index) in getPastOpens', :key='index')
           p
             | {{item.seasonId.substring(4).split("-").join("")*1}}
-            i.el-icon-minus
+            i.iconfont.icon-plus-minus
           p
             a {{item.n1}}
             a {{item.n2}}
@@ -61,7 +48,7 @@
             p {{item.n3}}
             p {{item.n4}}
             p {{item.n5}}
-            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
           .contnet-left-num(v-show='shownum')
             .num
               .span
@@ -79,7 +66,7 @@
               .span
                 transition(name='down-up-translate-fade')
                   div {{h}}
-            i(:class="betsscContentTopPop ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
         .content-right
           p {{seasonId}}期投注截止
           div
@@ -93,7 +80,7 @@
           li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
             p
               | {{item.seasonId.substring(4).split("-").join("")*1}}
-              i.el-icon-minus
+              i.iconfont.icon-plus-minus
             p
               a {{item.n1}}
               a {{item.n2}}
@@ -169,21 +156,6 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  van-popup.pop2(v-model='showTimesUp', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p
-            | {{lastSeasonId.slice(4)*1}}期已截止
-            br
-            | 当前期号{{seasonId}}
-            br
-            | 投注时请注意期号
-        .but
-          button.nodel(@click='showTimesUp = ! showTimesUp') 确定
-  van-popup.sscpop(v-model='showpop') {{content}}
 </template>
 <script>
 export default {
@@ -200,8 +172,6 @@ export default {
       interval: null, //动画
       youhezhi: false, //判断是否有‘和’
       showTimesUp: false,
-      showpop: false, //弹窗
-      content: "提示内容!", //弹窗内容
       bet: false, //投注弹窗
       betsuccess: false,
       betGoshow: false,
@@ -1910,7 +1880,7 @@ export default {
       } else if (
         localStorage.getItem("playTree_" + this.$route.query.id) === null
       ) {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getPlayTree", {
             params: { lotteryId: this.lotteryId }
           })
@@ -1956,12 +1926,10 @@ export default {
         .then(res => {
           if (res.data.message === "success") {
             setTimeout(() => {
-              this.showpop = !this.showpop;
-              this.content = "投注成功!";
-              this.iscreat();
+              this.$pop.show({title:'温馨提示',content:'恭喜您，投注成功！',content1:'',content2:'',number:1});
               setTimeout(() => {
-                this.showpop = !this.showpop;
                 this.betsuccess = !this.betsuccess;
+                this.iscreat();
               }, 800);
             }, 400);
           }
@@ -1990,7 +1958,7 @@ export default {
           }
         }
       } else {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
             localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
@@ -2054,7 +2022,7 @@ export default {
         this.start();
       }
       this.shownum = true;
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: 20 }
         })
@@ -2083,7 +2051,7 @@ export default {
     geteServerTime() {
       clearInterval(this.timer);
       clearTimeout(this.timer2);
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
         })
@@ -2136,17 +2104,14 @@ export default {
     },
     //時間到彈窗
     timesUp() {
-      this.showTimesUp = !this.showTimesUp;
+      this.$pop.show({title:'温馨提示',content:'',content1:String(this.seasonId*1 ),content2:String(Number(this.seasonId+1)),number:3});
       this.geteServerTime();
     },
     betC() {
-      if (this.zhu <= 0) {
-        this.betshow = !this.betshow;
-        this.content = "请至少选择一注号码投注!";
-      }
-      if (this.money === "") {
-        this.betshow = !this.betshow;
-        this.content = "请填写您要投注的金额!";
+      if (this.zhu === 0) {
+        this.$pop.show({title:'温馨提示',content:'请至少选择一注号码投注!',content1:'',content2:'',number:2});
+      } else if (this.money === "") {
+        this.$pop.show({title:'温馨提示',content:'请填写您要投注的金额!',content1:'',content2:'',number:2});
       }
       if (this.zhu > 0 && this.money !== "") {
         this.betGoshow = !this.betGoshow;
@@ -2177,12 +2142,4 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/lotter-list/lotterbet/betssc.scss";
 @import "../../../assets/scss/popcorn.scss";
-</style>
-<style>
-.menu-list.van-popup {
-  transition: 0s ease-out !important;
-}
-.van-popup--top {
-  transition: 0s ease-out !important;
-}
 </style>

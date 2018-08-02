@@ -1,7 +1,7 @@
 <template lang="jade">
 .agency
   .agency-top
-    van-icon(name="arrow-left",@click='tofive')
+    i.iconfont.icon-left(@click='tofive')
     p 代理中心
     span
   .agency-content
@@ -10,25 +10,25 @@
     ul
       router-link(to='/agentIntro', tag='li')
         p 代理说明
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='/agentReport', tag='li')
         p 代理报表
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='/lowerReport', tag='li')
         p 下级报表
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='/manageInvite', tag='li')
         p 下级开户
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='/agentMember', tag='li')
         p 会员管理
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='/agentBetRecord', tag='li')
         p 投注明细
-        van-icon(name="arrow")
+        i.iconfont.icon-you
       router-link(to='/agentBillRecord', tag='li')
         p 交易明细
-        van-icon(name="arrow")
+        i.iconfont.icon-you
 </template>
 <script>
 export default {

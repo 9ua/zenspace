@@ -10,7 +10,6 @@
       .three-content(v-if='activesremark === index', v-show='activesremarks')
         div
           p(v-html='actives.remark')
-    // .loading(v-loading="loading",style='width:100%;height:100%;',element-loading-text="Loading....",element-loading-spinner="el-icon-loading",element-loading-background="rgba(80,80,80,0.9)")
 </template>
 <script>
 import headers from "../public/header";
@@ -41,7 +40,7 @@ export default {
         if (null == setupTime || now - setupTime > this.cacheTime) {
           localStorage.removeItem("getList");
           localStorage.removeItem("date_getList");
-          this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
+          this.$axios.get(this.$store.state.url+'api/activity/getList').then((res) => {
             localStorage.setItem("getList", JSON.stringify(res.data.data));
             localStorage.setItem("date_getList", now);
             this.activitys = res.data.data;
@@ -52,7 +51,7 @@ export default {
           this.activitys = JSON.parse(localStorage.getItem("getList"));
         }
       } else {
-          this.$http.get(this.$store.state.url+'api/activity/getList').then((res) => {
+          this.$axios.get(this.$store.state.url+'api/activity/getList').then((res) => {
             localStorage.setItem("getList", JSON.stringify(res.data.data));
             localStorage.setItem("date_getList", now);
             this.activitys = res.data.data;

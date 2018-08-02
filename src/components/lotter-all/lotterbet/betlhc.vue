@@ -1,7 +1,7 @@
 <template>
 <div class="betlhc">
   <div class="betlhc-top">
-    <van-icon name='arrow-left' @click='listStyleToSafety' />
+    <i class="iconfont icon-left" @click='listStyleToSafety'></i>
     <p>六合彩</p>
     <span></span>
   </div>
@@ -23,14 +23,13 @@ export default {
   },
   mounted(){
     this.geteServerTime();
-    this.getList();
   },
   methods:{
     listStyleToSafety(){
       this.$router.push("/one")
     },
     geteServerTime(){
-      this.$http.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId:"dfk3" }}).then(res => {
+      this.$axios.get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {params: { lotteryId:"dfk3" }}).then(res => {
         this.seasonId = res.data.data.seasonId;
         this.today = res.data.data.restSeconds;
         this.setTimeMode();
@@ -67,11 +66,6 @@ export default {
         seconds = "0" + seconds;
       }
       this.countDown = hours + ":" + minutes + ":" + seconds;
-    },
-    getList(){
-      this.$http.get("../../../../static/k3.json").then(res =>{
-        console.log("res:",res)
-      })
     },
   }
 }

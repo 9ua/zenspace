@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 代理说明
     span
   .listStyle-content

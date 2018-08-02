@@ -9,15 +9,15 @@
 export default {
   data() {
     return {
-      lotteryListklc: ""
+      lotteryListklc: JSON.parse(localStorage.getItem("lotteryList")).pk10
     };
   },
-  mounted() {
-    this.lotteryklc();
-  },
+  // mounted() {
+  //   this.lotteryklc();
+  // },
   methods: {
     lotteryklc() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryListklc = res.data.data.pk10;

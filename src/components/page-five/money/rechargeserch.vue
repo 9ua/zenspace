@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 充值信息
     span
   .listStyle-content
@@ -17,8 +17,8 @@
         .mInvite-right
           p
             span ({{item.statusName}})
-        i.el-icon-arrow-down
-  van-actionsheet(v-model='show2')
+        i.iconfont.icon-xia
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II(style='text-align:center')
       li
         p 订单编号
@@ -37,8 +37,11 @@
           button.button1(@click='show2=!show2') 确定
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../config/mutil";
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       show2: false,
@@ -62,6 +65,9 @@ export default {
     this.getRechargeList();
   },
   methods: {
+    hide(){
+      this.show2=!this.show2;
+    },
     listStyleToSafety(){
       this.$router.push('/five')
     },
@@ -83,7 +89,7 @@ export default {
       this.QRCodeUrl = a.QRCodeUrl;
     },
     getRechargeList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getRechargeList", {
           params: { start: 0, limit: 100 }
         })

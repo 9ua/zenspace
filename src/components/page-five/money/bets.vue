@@ -1,16 +1,16 @@
 <template lang="jade">
 .listStyle(:class='shwoB ? "pageNum0" : "pageNum1"')
   .listStyle-top
-    van-icon(name='arrow-left',@click='banckto')
+    i.iconfont.icon-left(@click='banckto')
     p 投注记录
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
-    van-tabs(v-model='accountChangeType', @click='print')
-      van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
+    ul.noVanTabs
+      li(:class='index === active ? "active" : ""',v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
     div
       ul.listStyle-I(v-show='showFlag')
         li(v-for='(item,index) in tradelist', :key='index', @click='select(item,$event)')
@@ -25,8 +25,8 @@
               span(v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}") {{item.statusName}}
               br
               span(v-bind:class="{'class-a': item.status===1, 'class-b': item.status===2}") {{item.win}}
-          i.el-icon-arrow-down
-    van-actionsheet(v-model='show2')
+          i.iconfont.icon-xia
+    actionSheet(v-model='show2',@hide='hide')
       ul.listStyle-II
         li
           span {{selected.lotteryName}}
@@ -60,23 +60,27 @@
         li
           .button
             button.button1(@click='show2 =! show2') 确定
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p 确定要将此单撤回?
-        .but
-          button.del(@click='cancelLottery(selected.id,selected.lotteryId)') 确定
-          button.nodel(@click='show3 = !show3') 取消
+  div.show(v-show='show3')
+    ul
+      .title
+        p 温馨提示！
+      .cont
+        p 确定要将此单撤回?
+      .but
+        button.del.acitve(@click='cancelLottery(selected.id,selected.lotteryId)') 确定
+        button.nodel(@click='show3 = !show3') 取消
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data(){
     return {
+      username:localStorage.getItem('Globalname'),
       shwoB:false,
-      active: 1,
+      active: 0,
       timeline:'今天',
       show:false,
       show2:false,
@@ -140,6 +144,10 @@ export default {
     }
   },
   methods: {
+    hide(){
+      this.show=false;
+      this.show2=false;
+    },
     //返回到上一次进来的页面
     banckto(){
       this.shwoB = !this.shwoB;
@@ -154,8 +162,9 @@ export default {
       this.show = ! this.show;
       this.getTradeList();
     },
-    print(index,title){
-      this.status = this.pagelist[index].Type;
+    print(index,item){
+      this.active =index;
+      this.status = item.Type;
       this.getTradeList();
     },
     cancelLottery(a,b){
@@ -173,7 +182,7 @@ export default {
 		    });
     },
     getTradeList(){
-        this.$http.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.$store.state.Globalusername,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
+        this.$axios.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.username,include:0,status:this.status,betweenType:this.betweenType,}}).then((res) => {
         this.tradelist = res.data.data.list;
 			}).catch((error) => {
         console.log("获取彩種ratio ERROR");
@@ -185,10 +194,17 @@ export default {
 <style lang="scss" scoped>
   @import '../../../assets/scss/listStyle.scss';
   @import '../../../assets/scss/popcorn.scss';
+  @import '../../../assets/scss/page-five/public.scss';
   .class-a {
     color: rgb(255, 74, 74) !important;
   }
   .class-b {
     color: rgb(89, 168, 93) !important;
+  }
+  .listStyle-top{
+    position:initial !important;
+  }
+  .listStyle-content{
+    padding: 0px !important;
   }
 </style>

@@ -1,7 +1,7 @@
 <template lang="jade">
 .safeMobile
   .safeMobile-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 验证密保手机
     span
   .safeMobile-content
@@ -11,17 +11,15 @@
         span {{mobile}}
       li
         p 安全密码：
-        input(type='password', v-model='oldPassword', placeholder='请输入您的安全码')
+        input(type='password', v-model='oldPassword',maxlength='6', placeholder='请输入您的安全码')
     .safeMobile-but
-      el-button(type='primary', @click='validSecurityCode') 确定
-  van-popup(v-model='show') {{content}}
+      button(type='primary', @click='validSecurityCode') 确定
 </template>
 <script>
 import md5 from "js-md5";
 export default {
   data() {
     return {
-      show: false, //弹窗
       content: "提示内容!", //弹窗内容
       start1: false,
       mobile: null, //手机号
@@ -51,13 +49,13 @@ export default {
           config
         )
         .then(res => {
-          this.show = !this.show;
           this.content = res.data.data.message;
+          this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
           setTimeout(() => {
             if (this.content === "验证成功！") {
               this.$router.push({ path: "/detail/setmobile" });
             }
-          }, 2000);
+          }, 1700);
         })
         .catch(error => {
           console.log("验证安全码No");
@@ -79,8 +77,7 @@ export default {
           config
         )
         .then(res => {
-          this.show = !this.show;
-          this.content = res.data.data.message;
+          this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
         })
         .catch(error => {
           console.log("取验证码No");
@@ -88,15 +85,17 @@ export default {
     },
     //验证成功后
     safeMobile() {
-      this.show = !this.show;
       this.content = res.data.data.message;
+      this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
       if (this.content === "绑定成功！") {
-        this.$router.push({ path: "/safety" });
+        setTimeout(() =>{
+          this.$router.push({ path: "/safety" });
+        },1700)
       }
     },
     //获取已经绑定的手机号码
     getBindPhone() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/userCenter/getBindPhone")
         .then(res => {
           this.mobile = res.data.data.mobile;

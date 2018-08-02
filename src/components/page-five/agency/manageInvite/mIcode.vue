@@ -25,8 +25,8 @@
             span 注册数
             br
             span ({{item.count}})
-        i.el-icon-arrow-down
-  van-actionsheet(v-model='show')
+        i.iconfont.icon-xia
+  actionSheet(v-model='show',@hide='hide')
     .listStyle-II
       li
         span {{selected.id}}
@@ -44,18 +44,22 @@
         .button
           button.button2(@click='select2()') 删除此邀请码
           button.button3(@click='show = !show') 取消
-  van-popup(v-model='show2', position='bottom')
-    .listStyle-II
-      li
+  div.show(v-show='show2')
+    ul
+      li.title
+        p 温馨提示！
+      li.cont
         p 确定要删除此邀请码?
-      li
-        .button
-          button.button2(@click='delInviteCode()') 删除
-          button.button3(@click='select2()') 取消
+      li.but
+        button.del.active(@click='delInviteCode()') 删除
+        button.nodel(@click='select2()') 取消
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../../config/mutil";
+import actionSheet from "../../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
       show: false,
@@ -89,6 +93,9 @@ export default {
     }
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     setUserType(v){
       this.usertype = v;
       console.log(this.usertype,v,"---------")
@@ -106,7 +113,7 @@ export default {
       this.getInviteList();
     },
     getInviteList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/agent/inviteCode", {
           params: { type: this.usertype }
         })
@@ -147,4 +154,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../../../assets/scss/page-five/agency/mInvite.scss";
+@import "../../../../assets/scss/page-five/public.scss";
 </style>

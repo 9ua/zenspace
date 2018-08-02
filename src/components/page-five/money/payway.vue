@@ -1,37 +1,26 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToFive')
+    i.iconfont.icon-left(@click='listStyleToFive')
     p 充值方式
     span
   .listStyle-content
     ul.listStyle-I
       router-link(:to="payw.alino+'charge'", tag='li', v-for='(payw,index) in paywaylist', :key='index', v-if='payw.opentype === 0')
         .mInvite-left(style='width:76%')
-          i.fa.fa-credit-card(style='padding-right:10px')
+          i.iconfont.icon-creditcard(style='padding-right:10px')
           p
             | {{payw.alias}}
             br
             span(style='font-size:12px;color:#bbb') {{payw.content}}
-        van-icon(name='arrow')
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button(@click='show3 = ! show3') 确定
+        i.iconfont.icon-you
 </template>
 <script>
-import { setStore, getStore, removeStore } from "../../../config/mutil";
 export default {
   data() {
     return {
       content: "",
       receiveAddress: "",
-      show3: false,
       paywaylist: ""
     };
   },
@@ -44,7 +33,7 @@ export default {
       this.$router.push("/five");
     },
     getRechargeWayList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "/api/proxy/getRechargeWayList")
         .then(res => {
           this.paywaylist = res.data.data;

@@ -1,19 +1,19 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 代理报表
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     ul.listStyle-check-top
       li
-        el-input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', :value='accountName', clearable='')
+        input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', value='accountName', clearable='')
         button(@click='getUserTeam()')
-          van-icon(name='arrow')
+          i.iconfont.icon-you
     .listStyle-content-list
       ul
         li
@@ -63,9 +63,14 @@
           // span 代理分红
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       accountName: "",
       dateFlag: 0,
       timeline: "今日",
@@ -111,6 +116,9 @@ export default {
     this.getUserTeam();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },
@@ -129,10 +137,10 @@ export default {
     },
     getUserTeam() {
       if (this.accountName == "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getUserTeam", {
             params: {
-              account: this.$store.state.Globalusername,
+              account: this.username,
               dateFlag: this.dateFlag
             }
           })
@@ -143,7 +151,7 @@ export default {
             console.log("获取列表Error");
           });
       } else if (this.accountName !== "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getUserTeam", {
             params: { account: this.accountName, dateFlag: this.dateFlag }
           })

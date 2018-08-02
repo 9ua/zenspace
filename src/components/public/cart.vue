@@ -2,13 +2,11 @@
 .cart
   .cart-num(v-show='selected.length > 0')
     div
-      van-stepper(v-model='value')
-        span 倍
     div
       span(:class="{'active': index === lists}", v-for="(unit,index) in ['元','角','分']", :key='index', @click='moneyC(index)') {{unit}}
   .basket
     .basket-left(:class="{'active':selected.length > 0}", @click='addbasket')
-      i.el-icon-plus
+      i.iconfont.icon-plus-add
       div
         p 共{{selected.length}}注，{{totalMoney * unit | keepTwoNum}}元
         p
@@ -17,8 +15,8 @@
         .ball(transition='drop', v-for='ball in balls', v-show='ball.show', :key='ball.id')
           .inner
     .basket-right(@click='basketTo')
-      van-icon(name='shopping-cart')
-        el-badge.item(:value='badge', v-show='badge > 0')
+      i.iconfont.icon-liwu
+        span.badge {{badge > 0 ? badge : ''}}
         | 号码篮
 </template>
 <script>
@@ -26,7 +24,7 @@ export default {
   data() {
     return {
       value: 1, //倍数
-      badge: 0, //购物篮数
+      badge: 1, //购物篮数
       lists: 0,
       allmoney: 2, //共多少钱
       balls: [
@@ -100,9 +98,6 @@ export default {
     > div {
       @extend %flex;
       @extend %aitems;
-      & .van-stepper {
-        margin-right: 8px;
-      }
       & span {
         font-size: 18px;
       }
@@ -169,7 +164,13 @@ export default {
         font-size: 22px;
         margin-right: 10px;
       }
-      & .el-badge {
+      & .badge {
+        @extend %faj;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #f56c6c;
+        color: #fff;
         position: absolute;
         top: 2px;
         left: 24px;

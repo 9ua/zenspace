@@ -45,9 +45,6 @@
         @extend %flex;
         @extend %fdc;
         width: 100%;
-        & .van-popup--top {
-          top: 43px;
-        }
         & .menu-list-top {
           padding-left: 16px;
           @extend %flex;
@@ -280,42 +277,6 @@
 }
 
 .bjkl8popup {
-  .van-modal {
-    background-color: rgba(0, 0, 0, .2);
-  }
-  .van-popup {
-    width: 66%;
-    border-radius: 4px;
-  }
-  .van-popup {
-    & ul {
-      margin-bottom: 12px;
-      font-size: 14px;
-      color: #666;
-      & li {
-        @extend %flex;
-        height: 30px;
-        & span {
-          @extend %faj;
-          & b {
-            color: red;
-            font-weight: 400;
-            padding: 0px 6px;
-          }
-        }
-        & span:nth-child(1) {
-          width: 40%;
-        }
-        & span:nth-child(2) {
-          width: 60%;
-        }
-      }
-      & li:nth-child(1) {
-        height: 40px;
-        font-size: 14px;
-      }
-    }
-  }
   .popBut {
     @extend %faj;
     background: #EBEBEB;

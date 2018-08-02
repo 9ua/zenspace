@@ -1,7 +1,7 @@
 <template lang="jade">
 .lotterList
   .lotterList-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 全部彩种
   .lotterList-nav
     .lotterList-nav-box

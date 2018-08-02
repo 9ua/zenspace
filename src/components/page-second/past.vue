@@ -1,7 +1,7 @@
 <template lang="jade">
 .past
   header
-    van-icon(name='arrow-left',@click='past')
+    i.iconfont.icon-left(@click='past')
     p.pastTitle
       span {{this.$route.query.name}}
       | 开奖记录
@@ -145,7 +145,7 @@ export default {
     checkOk() {},
     // 获取全部彩种
     getLotteryList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryAll = res.data.data.all;
@@ -155,7 +155,7 @@ export default {
         });
     },
     getPastOp() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: this.count }
         })

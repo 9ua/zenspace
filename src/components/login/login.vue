@@ -1,7 +1,7 @@
 <template lang="jade">
 .login(v-show='loginStatus === false')
   .login-title
-    van-icon(name="arrow-left",@click='loginS')
+    i.iconfont.icon-left(@click="loginS")
     p 用户登录
     span
   .login-conter
@@ -9,18 +9,19 @@
       div
     .login-form
       .login-user
-        i.fa.fa-user
+        i.iconfont.icon-user
         input(type='text', v-model.trim='newUserInfo.user', placeholder='请输入用户名', onfocus='this.select()',v-focus='')
       .login-pwd
-        i.fa.fa-lock
+        i.iconfont.icon-lock
         input(:type="pwd ? 'text' : 'password'", v-model='newUserInfo.pwd', placeholder='请输入密码', onfocus='this.select()', @keyup.enter='login')
         i.iconfont(:class="pwd ? 'icon-guanbi' : 'icon-buxianshimima'", @click='pwd = !pwd')
       .login-captchaCodeImg(v-show='errorcode')
-        i.fa.fa-lock
+        i.iconfont.icon-lock
         input(type='text', onfocus='this.select()', v-model='newUserInfo.verification', placeholder='请输入验证码')
         img(:src='captchaCodeImg', @click='getCaptchaCode')
       .login-rememb
-        el-checkbox(v-model='checked', @click='checked = !checked') 记住密码
+        input(style='border-color:#FFF;color:#FFF;',type='checkbox',v-model='checked', @click='checkeds')
+        span 记住密码
       .login-go
         button(@click='login', v-show='loginReq') 立即登陆
       .login-live
@@ -35,8 +36,6 @@
 <script>
 import md5 from "js-md5";
 import headers from "../public/header";
-import VueCookie from "vue-cookie";
-import { setStore, getStore, removeStore } from "../../config/mutil";
 import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
@@ -55,11 +54,10 @@ export default {
         pwd: "",
         verification: "",
         rempwd: ""
-      }
+      },
     };
   },
   created() {
-    localStorage.clear();
     this.checkeds();
   },
   methods: {
@@ -99,8 +97,8 @@ export default {
           withCredentials: true
         };
         let pwd = this.newUserInfo.pwd;
-        if (this.$cookie.get("password") && pwd === "PASSWORD") {
-          pwd = this.$cookie.get("password");
+        if (localStorage.getItem("password") && pwd === "PASSWORD") {
+          pwd = localStorage.getItem("password");
         } else {
           pwd = md5(this.newUserInfo.pwd);
         }
@@ -113,32 +111,28 @@ export default {
           .then(res => {
             this.$store.state.JSESSIONICookie = res.data.data.sessionId;
             this.$store.state.userType = res.data.data.userType;
-            setStore("JSESSIONICookie", this.$store.state.JSESSIONICookie);
-            setStore("userType", this.$store.state.userType);
             this.loginSta = true;
             this.$store.state.loginStatus = this.loginSta;
-            setStore("loginSta", this.loginSta);
+            localStorage.setItem("JSESSIONICookie", this.$store.state.JSESSIONICookie);
+            localStorage.setItem("userType", this.$store.state.userType);
+            localStorage.setItem("loginSta", this.loginSta);
             if (res.data.code === 1) {
               this.$store.state.Globalusername = res.data.data.account;
               this.$store.state.Globalpassword = this.newUserInfo.pwd;
-              setStore("username", this.$store.state.Globalusername);
-              setStore("password", pwd);
+              localStorage.setItem("Globalname", this.$store.state.Globalusername);
+              localStorage.setItem("Globalword", pwd);
               if (this.checked === true) {
-                setStore("username", this.$store.state.Globalusername);
-                setStore("password", pwd);
-                this.$cookie.set("username", res.data.data.account, {
-                  expires: "1M"
-                });
-                this.$cookie.set("password", pwd, { expires: "1M" });
+                localStorage.setItem("username", res.data.data.account);
+                localStorage.setItem("password", pwd);
               } else {
-                this.$cookie.delete("username");
-                this.$cookie.delete("password");
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
               }
               this.$router.push({ path: "/one" });
             } else {
               if (res.data.code === 0) {
-                this.$cookie.delete("username");
-                this.$cookie.delete("password");
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
               }
               if (res.data.data.errCount >= 3) {
                 this.getCaptchaCode();
@@ -150,7 +144,7 @@ export default {
               }
               this.newUserInfo.pwd = "";
               this.checked = false;
-              removeStore("password");
+              localStorage.removeItem("password");
             }
           })
           .catch(error => {
@@ -159,11 +153,11 @@ export default {
       }
     },
     checkeds() {
-      if (this.$cookie.get("password")) {
+      if (localStorage.getItem("password")) {
         this.checked = true;
-        this.newUserInfo.user = this.$cookie.get("username");
+        this.newUserInfo.user = localStorage.getItem("username");
         this.newUserInfo.pwd = "PASSWORD";
-        this.newUserInfo.rempwd = this.$cookie.get("password");
+        this.newUserInfo.rempwd = localStorage.getItem("password");
       }
     }
   },

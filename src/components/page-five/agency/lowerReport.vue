@@ -1,14 +1,14 @@
 <template lang="jade">
 .listStyle
   .listStyle-top(v-bind:class='{ blur: show2 }')
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 下级报表
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content(v-bind:class='{ blur: show2 }')
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
     .row
       .title3 {{nowAccount}}之下级
     .row
@@ -26,24 +26,29 @@
           p {{item.teamCount}}
         .title
           p {{item.count}}
-  van-actionsheet(v-model='show2')
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         span {{selected.account}}
       li(v-show='this.show3', @click='getUnderLevelReport2()')
         p 查看下级
-        van-icon(name='arrow')
+        i.iconfont.icon-you
       router-link(:to="{path:'/agentReport',query: {id: this.selected.account}}", tag='li')
         p 查看报表
-        van-icon(name='arrow')
+        i.iconfont.icon-you
       li
         .button
           button.button1(@click='show2 =! show2') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
+      username:localStorage.getItem('Globalname'),
       a: "",
       nowAccount: "",
       dateFlag: 0,
@@ -91,6 +96,10 @@ export default {
     this.getUnderLevelReport();
   },
   methods: {
+    hide(){
+      this.show=false;
+      this.show2=false;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },
@@ -111,11 +120,11 @@ export default {
       this.getUnderLevelReport();
     },
     getUnderLevelReport() {
-      this.nowAccount = this.$store.state.Globalusername;
-      this.$http
+      this.nowAccount = this.username;
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
           params: {
-            account: this.$store.state.Globalusername,
+            account: this.username,
             dateFlag: this.dateFlag
           }
         })
@@ -128,7 +137,7 @@ export default {
     },
     getUnderLevelReport2() {
       this.nowAccount = this.selected.account;
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
           params: { account: this.selected.account, dateFlag: this.dateFlag }
         })

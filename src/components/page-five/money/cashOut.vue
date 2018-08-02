@@ -1,7 +1,7 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 我要提现
     span
   .listStyle-content
@@ -24,43 +24,37 @@
       li
         p 申请金额
         div
-          el-input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', :value='amount', clearable='')
+          input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', value='amount', clearable='')
       li
         p 账号
         div(@click='show1 = ! show1')
           | {{selectBank}}
-          span.el-icon-arrow-down
+          span.iconfont.icon-xia
       li
         p 账户安全码
         div
-          el-input(placeholder='请输入安全码', v-model='securityCode', :value='securityCode', clearable='' type="password")
+          input(placeholder='请输入安全码', v-model='securityCode',maxlength='6' value='securityCode', clearable='' type="password")
       li
         .button
           button.button1(@click='sendReq()') 提现申请
-  van-popup.pop2(v-model='show2', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button.nodel(@click='show2 = ! show2') 确定
-  van-popup.pop2(v-model='show3', :close-on-click-overlay='false')
-    div
-      ul
-        .title
-          p 温馨提示！
-        .cont
-          p {{content}}
-        .but
-          button.nodel(@click='goBack()') 确定
-  van-actionsheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消')
+  div.show(v-show='show3')
+    ul
+      .title
+        p 温馨提示！
+      .cont
+        p {{content}}
+      .but
+        button.nodel(@click='goBack()') 确定
+  actionSheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消')
 </template>
 <script>
 import md5 from "js-md5";
+import actionSheet from "../../public/actionSheet";
 export default {
-  data() {
+  components: {
+    actionSheet
+  },
+  data(){
     return {
       withdrawType: 1,
       timeline: "今天",
@@ -68,7 +62,6 @@ export default {
       bankUserId: "",
       amount: "",
       show1: false,
-      show2: false,
       show3: false,
       show4: false,
       selectBank: "请选择银行卡",
@@ -87,6 +80,9 @@ export default {
     this.getWithdrawInformation();
   },
   methods: {
+    hide(){
+      this.show1=!this.show1;
+    },
     listStyleToSafety(){
       this.$router.push('/five')
     },
@@ -96,10 +92,8 @@ export default {
       }
     },
     getWithdrawInformation() {
-      this.$http
-        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {
-          params: { withdrawType: this.withdrawType }
-        })
+      this.$axios
+        .get(this.$store.state.url + "api/proxy/getWithdrawInformation", {params: { withdrawType: this.$store.state.userType }})
         .then(res => {
           if (this.$store.state.userType === "0") {
             this.withdrawType = 1;
@@ -134,14 +128,11 @@ export default {
     },
     sendReq() {
       if (this.amount === "") {
-        this.content = "请输入金額!";
-        this.show2 = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'请输入金額!',content1:'',content2:'',number:2});
       }else if(this.selectBank === "请选择银行卡"){
-        this.content = "请选择银行卡!";
-        this.show2 = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'请选择银行卡!',content1:'',content2:'',number:2});
       }else if(this.securityCode === ""){
-        this.content = "请输入安全码!";
-        this.show2 = true;
+        this.$pop.show({error:'',title:'温馨提示',content:'请输入安全码!',content1:'',content2:'',number:2});
       } else {
         let config = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -164,7 +155,7 @@ export default {
               this.show3 = true;
             } else {
               this.content = res.data.data.message;
-              this.show2 = true;
+              this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
             }
           })
           .catch(error => {
@@ -179,4 +170,5 @@ export default {
 <style lang="scss" scoped>
 @import "../../../assets/scss/listStyle.scss";
 @import "../../../assets/scss/popcorn.scss";
+@import "../../../assets/scss/page-five/public.scss";
 </style>

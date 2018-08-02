@@ -2,7 +2,7 @@
 .betbjkl8
   ul.betbjkl8-top
     li
-      router-link.el-icon-arrow-left(to='/one', tag='i')
+      i.iconfont.icon-left(@click="banckto")
     li
       p.wangfa
         | 玩
@@ -10,16 +10,8 @@
         | 法
       .menu(@click='show = !show')
         | {{titles}}
-        i(:class="show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'")
+        i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
       .menu-list
-        van-popup(v-model='show', position='top')
-          .menu-list-top(v-for='(val,index) in renxuan', :key='index')
-            p(:class="{'active': index === navs}", v-for='(muens,index) in val.a', :key='index', @click='menunav($event,index,muens)') {{muens}}
-          ul
-            li(v-for='(val,index) in renxuan', :key='index', v-show='navs === 0')
-              p(:class="{'active': index === renxuanlist}", v-for='(item,index) in val.valus', :key='index', @click='showrenxuan($event,item,index)') {{item}}
-            li(v-show='navs === 1')
-              p(:class="{'active': index === quweilist}", v-for='(item,index) in quwei', :key='index', @click='showquwei($event,item,index)') {{item}}
     li
       p 北京快乐8
   .betbjkl8-content
@@ -34,7 +26,7 @@
         p
           | 888888投注：
           span
-          i(:class=" lottery ? 'el-icon-arrow-down' :'el-icon-arrow-up'")
+          i.iconfont(:class=" lottery ? 'icon-up' :'icon-down'")
         .lottery-ms(v-show=' !lottery')
           p
             span 期号
@@ -44,7 +36,7 @@
               div
                 span 888888
                 span 00:00:00
-              i.el-icon-minus
+              i.iconfont.icon-plus-minus
               div
                 ul
                   li(v-for='(item,index) in 20', :key='index') 02
@@ -82,131 +74,6 @@
             ul
               li.choose2(v-for='(val,xia) in 40', :key='xia', @click='selecNumXia($event,xia,val)') {{xia+41}}
       .bjkl8popup
-        van-popup(v-model='pop3')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 3
-                span
-                  b 70.26
-                  | 元
-              li
-                span 2
-                span
-                  b 7.02
-                  | 元
-            .popBut
-              button(@click='pop3=!pop3') 确定
-        van-popup(v-model='pop4')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 4
-                span
-                  b 212.28
-                  | 元
-              li
-                span 3
-                span
-                  b 15.02
-                  | 元
-              li
-                span 2
-                span
-                  b 3.05
-                  | 元
-            .popBut
-              button(@click='pop4=!pop4') 确定
-        van-popup(v-model='pop5')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 5
-                span
-                  b 1007.86
-                  | 元
-              li
-                span 4
-                span
-                  b 53.75
-                  | 元
-              li
-                span 3
-                span
-                  b 7.74
-                  | 元
-            .popBut
-              button(@click='pop5=!pop5') 确定
-        van-popup(v-model='pop6')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 6
-                span
-                  b 3779.51
-                  | 元
-              li
-                span 5
-                span
-                  b 157.47
-                  | 元
-              li
-                span 4
-                span
-                  b 17.08
-                  | 元
-              li
-                span 3
-                span
-                  b 3.75
-                  | 元
-            .popBut
-              button(@click='pop6=!pop6') 确定
-        van-popup(v-model='pop7')
-          div
-            ul
-              li
-                span 猜中
-                span 单注最高奖金
-              li
-                span 7
-                span
-                  b 15981.93
-                  | 元
-              li
-                span 6
-                span
-                  b 532.73
-                  | 元
-              li
-                span 5
-                span
-                  b 45.14
-                  | 元
-              li
-                span 4
-                span
-                  b 7.47
-                  | 元
-              li
-                span 0
-                span
-                  b 3.20
-                  | 元
-            .popBut
-              button(@click='pop7=!pop7') 确定
       cart(:cart='con,selected', ref='cart')
 </template>
 <script>
@@ -278,6 +145,9 @@ export default {
     };
   },
   methods: {
+    banckto(){
+      this.$router.push('/one');
+    },
     menunav(event, index, muens) {
       if (muens) {
         this.navs = index;

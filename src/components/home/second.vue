@@ -84,7 +84,7 @@ export default {
     },
     //获取全部彩种
     getPastOp() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.lotteryId, count: this.count }
         })
@@ -99,7 +99,7 @@ export default {
         });
     },
     getPastOps() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.lotteryId, count: 1 }
         })

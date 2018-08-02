@@ -71,15 +71,17 @@
           @extend %aitems;
         }
         & .input-top {
-          width: 75%;
+          width: 60%;
+          padding:4px 0px 4px 4px;
         }
         & button {
+          @extend %faj;
           width: 35px;
         }
       }
       & i {
-        margin-left: 10px;
-        color: #ccc;
+        // margin-left: 10px;
+        color: #000;
         font-size: 20px;
       }
       & .mInvite-left {
@@ -229,6 +231,18 @@
         font-size: 14px;
       }
     }
+    & ul.noVanTabs{
+      @extend %flex,%sbetween;
+      & li{
+        @extend %faj;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        padding: 0;
+      }
+      & li.active{
+        border-bottom: 1px solid #dc3b40;
+      }
+    }
   }
 }
 
@@ -281,10 +295,6 @@
     color: #fff;
     border-radius: 6px;
   }
-}
-
-.van-popup {
-  filter: blur(0px);
 }
 
 .member-top {
@@ -519,24 +529,18 @@
   filter: blur(2px);
 }
 
-.van-modal {
-  background-color: rgba(0, 0, 0, .2) !important;
-}
 
 .listStyle-III {
   background: #fff;
   & li {
-    @extend %flex;
-    @extend %aitems;
-    @extend %sbetween;
+    @extend %flex,%aitems,%sbetween;
     padding: 0px 20px;
     font-size: 16px;
     color: #5e5e5e;
     height: 56px !important;
     border-bottom: 1px solid #E8E8E8;
     >div {
-      @extend %flex;
-      @extend %aitems;
+      @extend %flex,%aitems;
     }
   }
   & li:nth-last-child(1) {
@@ -637,15 +641,12 @@
 }
 
 .listStyle-V {
-  @extend %aitems;
-  @extend %jcontent;
+  @extend %aitems,%jcontent;
   background: #fff;
   color: #5e5e5e;
   & li {
     padding: 0 30px;
-    @extend %flex;
-    @extend %aitems;
-    @extend %sbetween;
+    @extend %flex,%aitems,%sbetween;
     background: #f2f2f2;
     border-bottom: 1px solid #E8E8E8;
     font-size: 16px;
@@ -655,8 +656,7 @@
       font-size: 20px;
     }
     >div {
-      @extend %flex;
-      @extend %aitems;
+      @extend %flex,%aitems;
     }
     & span {
       float: right;
@@ -783,5 +783,21 @@
       color: #ff6818;
       text-align: right;
     }
+  }
+}
+
+.showBottom{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 20180606;
+  background-color:rgba(0,0,0,.4);
+  & ul.listStyle-V,ul.listStyle-II{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    z-index: 20180607;
   }
 }

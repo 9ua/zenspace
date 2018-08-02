@@ -1,21 +1,21 @@
 <template lang="jade">
 .listStyle
   .listStyle-top(v-bind:class='{ blur: show2 }')
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 投注明細
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content(v-bind:class='{ blur: show2 }')
     ul.listStyle-check-top
       li
-        el-input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', :value='accountName', clearable='')
-        button(@click='getTradeList()')
-          van-icon(name='arrow')
+        input.input-top(size='medium', placeholder='请输入用户帐号名称', v-model='accountName', value='accountName', clearable='')
+        button(@click='getTradeList')
+          i.iconfont.icon-you
     .listStyle-content-top
-      van-actionsheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消')
-    van-tabs(v-model='accountChangeType', @click='print')
-      van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
+      actionSheet.mIcode-go(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
+    ul.noVanTabs
+      li(:class='index === active ? "active" : ""',v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
     div
       ul.listStyle-I(v-show='showFlag')
         li(v-for='(item,index) in tradelist', :key='index', @click='select(item,$event)')
@@ -30,8 +30,8 @@
               span {{item.statusName}}
               br
               span
-          i.el-icon-arrow-down
-  van-actionsheet(v-model='show2')
+          i.iconfont.icon-xia
+  actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
         span {{selected.lotteryName}}
@@ -63,21 +63,24 @@
           button.button1(@click='show2 =! show2') 确定
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
-      active: 1,
+      username:localStorage.getItem('Globalname'),
+      active: 0,
       timeline: "今天",
       show: false,
       show2: false,
       accountChangeType: 100,
       betweenType: 1,
-      status: 100,
       changeAmount: "",
       changeTime: "",
       tradelist: [],
       accountName: "",
-
       usertype: 2,
       highbet: 0,
       rebateratio: 0,
@@ -134,6 +137,10 @@ export default {
     this.getTradeList();
   },
   methods: {
+    hide(){
+      this.show=false;
+      this.show2=false;
+    },
     listStyleToSafety(){
       this.$router.push('/agency')
     },
@@ -147,18 +154,19 @@ export default {
       this.show = !this.show;
       this.getTradeList();
     },
-    print(index, title) {
-      this.status = this.pagelist[index].Type;
+    print(index, item) {
+      this.active = index;
+      this.accountChangeType = item.Type;
       this.getTradeList();
     },
     getTradeList() {
       if (this.accountName == "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getbetOrderList", {
             params: {
-              account: this.$store.state.Globalusername,
+              account: this.username,
               include: 2,
-              status: this.status,
+              status: this.accountChangeType,
               betweenType: this.betweenType
             }
           })
@@ -169,12 +177,12 @@ export default {
             console.log("获取彩種ratio ERROR");
           });
       } else if (this.accountName !== "") {
-        this.$http
+        this.$axios
           .get(this.$store.state.url + "api/proxy/getbetOrderList", {
             params: {
               account: this.accountName,
               include: 0,
-              status: this.status,
+              status: this.accountChangeType,
               betweenType: this.betweenType
             }
           })

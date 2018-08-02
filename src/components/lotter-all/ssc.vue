@@ -9,15 +9,15 @@
 export default {
   data() {
     return {
-      lotteryListssc: ""
+      lotteryListssc: JSON.parse(localStorage.getItem("lotteryList")).ssc
     };
   },
   mounted() {
-    this.lotteryssc();
+    // this.lotteryssc();
   },
   methods: {
     lotteryssc() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
           this.lotteryListssc = res.data.data.ssc;

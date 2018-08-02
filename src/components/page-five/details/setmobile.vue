@@ -1,7 +1,7 @@
 <template lang="jade">
 .setmobile
   .setmobile-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 绑定密保手机
     span
   .setmobile-content
@@ -16,10 +16,9 @@
         span.primarys(@click='sendMobilCode',v-show='iss') {{s}} 秒后重新获取
       li
         p 安全密码：
-        input(type='password', v-model='securityCode', placeholder='请输入您的安全码')
+        input(type='password', v-model='securityCode',maxlength='6', placeholder='请输入您的安全码')
     .setmobile-but
-      el-button(type='primary', @click='saveBindPhone') 确定
-  van-popup(v-model='show') {{content}}
+      button(type='primary', @click='saveBindPhone') 确定
 </template>
 <script>
 import md5 from "js-md5";
@@ -28,7 +27,6 @@ export default {
     return {
       iss:false,
       s:59,
-      show: false, //弹窗
       content: "提示内容!", //弹窗内容
       mobile: null, //手机号
       validCode: "", //验证码
@@ -44,8 +42,7 @@ export default {
       const mobile_yz = /^[1][3,4,5,7,8][0-9]{9}$/;
       let yzmobile = mobile_yz.test(this.mobile);
       if (!this.mobile) {
-        this.show = !this.show;
-        this.content = "手机号码不能为空！";
+        this.$pop.show({error:'',title:'温馨提示',content:'手机号码不能为空！',content1:'',content2:'',number:2});
       } else if(this.mobile){
         clearInterval(this.setInt);
         if (yzmobile) {
@@ -95,8 +92,8 @@ export default {
           config
         )
         .then(res => {
-          this.show = !this.show;
           this.content = res.data.data.message;
+          this.$pop.show({error:'',title:'温馨提示',content:res.data.data.message,content1:'',content2:'',number:2});
           if (this.content === "绑定成功！") {
             this.$router.push({ path: "/five" });
           }

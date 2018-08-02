@@ -1,17 +1,17 @@
 <template lang="jade">
 .listStyle
   .listStyle-top
-    van-icon(name='arrow-left',@click='listStyleToSafety')
+    i.iconfont.icon-left(@click='listStyleToSafety')
     p 交易记录
     .dim(@click='show = ! show')
       | {{timeline}}
-      span.el-icon-arrow-down
+      span.iconfont.icon-xia
   .listStyle-content
     .listStyle-content-top
-      van-actionsheet(v-model='show', :actions='actions', cancel-text='取消')
-    van-tabs(v-model='accountChangeType', @click='print')
-      van-tab.typeo(v-for='(item,index) in pagelist', :key='index', :title='item.name')
-    ul.listStyle-I(v-show='showFlag')
+      actionSheet(v-model='show', :actions='actions', cancel-text='取消',@hide='hide')
+    ul.noVanTabs
+      li(:class='index === active ? "active" : ""',v-for='(item,index) in pagelist', :key='index',@click='print(index,item)') {{item.name}}
+    ul.listStyle-I
       li(v-for='(item,index) in tradelist', :key='index')
         .mInvite-left
           p
@@ -26,10 +26,15 @@
             span {{item.changeAmount}}
 </template>
 <script>
+import actionSheet from "../../public/actionSheet";
 export default {
+  components: {
+    actionSheet
+  },
   data() {
     return {
-      active: 1,
+      username:localStorage.getItem('Globalname'),
+      active: 0,
       timeline: "今天",
       show: false,
       show2: false,
@@ -47,7 +52,6 @@ export default {
       extaddress: "",
       invitelist: "",
       selected: [],
-      showFlag: true,
       pagelist: [
         {
           name: "所有类型",
@@ -89,6 +93,9 @@ export default {
     this.getTradeList();
   },
   methods: {
+    hide(){
+      this.show=!this.show;
+    },
     listStyleToSafety(){
       this.$router.push('/five')
     },
@@ -102,15 +109,16 @@ export default {
       this.show = !this.show;
       this.getTradeList();
     },
-    print(index, title) {
-      this.accountChangeType = this.pagelist[index].Type;
+    print(index, item) {
+      this.active = index;
+      this.accountChangeType = item.Type;
       this.getTradeList();
     },
     getTradeList() {
-      this.$http
+      this.$axios
         .get(this.$store.state.url + "api/proxy/getTradeList", {
           params: {
-            account: this.$store.state.Globalusername,
+            account: this.username,
             include: 0,
             accountChangeType: this.accountChangeType,
             betweenType: this.betweenType

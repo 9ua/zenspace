@@ -27,7 +27,7 @@ export default {
   methods:{
     //返回five页面
     mymsgToFive(){
-      this.$router.push('/five')
+      this.$router.go(-1);
     },
   }
 };

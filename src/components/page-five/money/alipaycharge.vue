@@ -6,7 +6,7 @@
     span
   .listStyle-content
     ul.listStyle-VI
-      div(style='text-align:center;height:auto;')
+      div(style='text-align:center;height:auto;min-height:160px;')
         img(:src='$store.state.url+this.QRCodeUrl', style='width:40%;height:auto')
       li
         p 充值金额

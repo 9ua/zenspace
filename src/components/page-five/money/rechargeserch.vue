@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     hide(){
-      this.show=!this.show;
+      this.show2=!this.show2;
     },
     listStyleToSafety(){
       this.$router.push('/five')

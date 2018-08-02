@@ -2,7 +2,7 @@
 .listStyle
   .listStyle-top
     i.iconfont.icon-left(@click='backTo')
-    p 支付宝直连
+    p 支付宝通道A
     span
   .listStyle-content
     ul.listStyle-III
@@ -11,7 +11,7 @@
         div
           input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', value='amount', clearable='')
       li
-        p 账号
+        p 支付渠道
         div
           | {{selectBank}}
       li

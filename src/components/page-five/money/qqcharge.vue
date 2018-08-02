@@ -11,7 +11,7 @@
         div
           input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', value='amount', clearable='')
       li
-        p 账号
+        p 支付渠道
         div
           | {{selectBank}}
       li
@@ -123,7 +123,7 @@ export default {
               z.innerHTML = res.data.data;
               //z.innerHTML='<script>alert("12345")<'+'/script>';
               document.body.appendChild(z);
-              this.excecuteJS();
+              this.excecuteJS(); 
               console.log('成功');
             } else {
               this.content = res.data.content;

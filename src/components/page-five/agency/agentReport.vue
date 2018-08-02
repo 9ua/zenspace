@@ -51,7 +51,7 @@
           span 下级人数
         li
           span {{userTeam.teamAmount}}
-          span 团队馀额
+          span 团队余额
         li
           span {{userTeam.agentRebateAmount}}
           span 代理返点

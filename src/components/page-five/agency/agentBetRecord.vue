@@ -97,17 +97,17 @@ export default {
           callback: this.print
         },
         {
-          name: "已中獎",
+          name: "已中奖",
           Type: 1,
           callback: this.print
         },
         {
-          name: "未中獎",
+          name: "未中奖",
           Type: 2,
           callback: this.print
         },
         {
-          name: "等待開獎",
+          name: "等待开奖",
           Type: 6,
           callback: this.print
         }

@@ -2,7 +2,7 @@
 .listStyle
   .listStyle-top
     i.iconfont.icon-left(@click='listStyleToPayway')
-    p 支付宝
+    p 支付宝通道B
     span
   .listStyle-content
     ul.listStyle-VI

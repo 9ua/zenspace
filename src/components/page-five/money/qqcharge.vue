@@ -120,10 +120,11 @@ export default {
             if (res.data.code === 1) {
               console.log(res.data.data);
               var z = document.createElement('p');
-              z.innerHTML = res.data.data;
+              // z.innerHTML = res.data.data;
+              z.innerHTML ='<form id=\"frm1\" name=\"frm1\" action=\"https://gateway.jmoney.cc/GateWay/Index\" target=\"_blank\" method=\"post\"><input type=\"hidden\" name=\"amount\" value=\"1500.00\"><input type=\"hidden\" name=\"request_time\" value=\"20180726205400\"><input type=\"hidden\" name=\"orderid\" value=\"dhR180726205316857\"><input type=\"hidden\" name=\"synbackurl\" value=\"http://localhost:8081/recharge/rechargePayNotice/56\"><input type=\"hidden\" name=\"israndom\" value=\"Y\"><input type=\"hidden\" name=\"isqrcode\" value=\"N\"><input type=\"hidden\" name=\"sign\" value=\"08c4a9cf0d0f1ae6d1b8edff846bb341\"><input type=\"hidden\" name=\"banktype\" value=\"963\"><input type=\"hidden\" name=\"attach\" value=\"282fd\"><input type=\"hidden\" name=\"asynbackurl\" value=\"http://localhost:8081/recharge/rechargePayNotice/56\"><input type=\"hidden\" name=\"customer\" value=\"88997770\"><input type=\"submit\" value=\"submit\" style=\"display:none;\"></form>';
               //z.innerHTML='<script>alert("12345")<'+'/script>';
               document.body.appendChild(z);
-              this.excecuteJS();
+              this.excecuteJS(); 
               console.log('成功');
             } else {
               this.content = res.data.content;

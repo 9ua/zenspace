@@ -1414,21 +1414,16 @@ export default {
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
               if (res.data.message === "success") {
-                this.con1 = "";
                 setTimeout(() => {
-                  this.$pop.show({
-                    error: "",
-                    title: "温馨提示",
-                    content: "恭喜您，投注成功！",
-                    content1: "",
-                    content2: "",
-                    number: 1
-                  });
-                  this.betnot = true;
-                  setTimeout(() => {
-                    this.betsuccess = !this.betsuccess;
-                    this.iscreat();
-                  }, 1700);
+                  if(this.con1 !== '' && this.con2 === ''){
+                    this.$pop.show({error: "",title: "温馨提示",content: "恭喜您，投注成功！",content1: "",content2: "",number: 1});
+                    this.betnot = true;
+                    setTimeout(() => {
+                      this.iscreat();
+                      this.betsuccess = !this.betsuccess;
+                    }, 1700);
+                  }
+                  
                 }, 600);
               } else {
                 this.betnot = true;
@@ -1471,14 +1466,7 @@ export default {
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
                   setTimeout(() => {
-                    this.$pop.show({
-                      error: "",
-                      title: "温馨提示",
-                      content: "恭喜您，投注成功！",
-                      content1: "",
-                      content2: "",
-                      number: 1
-                    });
+                    this.$pop.show({error: "",title: "温馨提示",content: "恭喜您，投注成功！",content1: "",content2: "",number: 1});
                     this.betnot = true;
                     setTimeout(() => {
                       this.betsuccess = !this.betsuccess;

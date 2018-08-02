@@ -11,7 +11,7 @@
         div
           input(type="number" @focus="parseIntAmount" @blur='parseIntAmount' placeholder='请输入金額', v-model='amount', value='amount', clearable='')
       li
-        p 账号
+        p 支付渠道
         div(@click='show1 = ! show1')
           | {{selectBank}}
           span.iconfont.icon-xia

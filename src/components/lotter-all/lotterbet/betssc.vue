@@ -1989,6 +1989,7 @@ export default {
     },
     tolooksucc(){
       this.looks = !this.looks;
+      this.betsscContentTopPop = false;
       this.$refs.pop.banckto();
       this.$refs.pop.getTradeList();
     },

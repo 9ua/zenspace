@@ -15,6 +15,9 @@
   <meta name="screen-orientation" content="portrait">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
+
   <script src="/static/mui.min.js"></script>
   <title>宏發娛樂</title>
 </head>
@@ -23,16 +26,16 @@
   <!-- built files will be auto injected aa-->
 </body>
 <script type="text/javascript">
-  // document.oncontextmenu = function () {
-  //   return false;
-  // };
-  // document.onkeydown = function () {
-  //   if (window.event && window.event.keyCode == 123) {
-  //     event.keyCode = 0;
-  //     event.returnValue = false;
-  //     return false;
-  //   }
-  // };
+  document.oncontextmenu = function () {
+    return false;
+  };
+  document.onkeydown = function () {
+    if (window.event && window.event.keyCode == 123) {
+      event.keyCode = 0;
+      event.returnValue = false;
+      return false;
+    }
+  };
   mui.init({
     swipeBack: false, //关闭右滑关闭功能（默认就是false）
     keyEventBind: {

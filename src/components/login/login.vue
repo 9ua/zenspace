@@ -117,9 +117,9 @@ export default {
             localStorage.setItem("userType", this.$store.state.userType);
             localStorage.setItem("loginSta", this.loginSta);
             if (res.data.code === 1) {
-              this.$store.state.Globalusername = res.data.data.account;
-              this.$store.state.Globalpassword = this.newUserInfo.pwd;
-              localStorage.setItem("Globalname", this.$store.state.Globalusername);
+              this.$store.state.Globalname = res.data.data.account;
+              this.$store.state.Globalword = this.newUserInfo.pwd;
+              localStorage.setItem("Globalname", this.$store.state.Globalname);
               localStorage.setItem("Globalword", pwd);
               if (this.checked === true) {
                 localStorage.setItem("username", res.data.data.account);
@@ -127,6 +127,8 @@ export default {
               } else {
                 localStorage.removeItem("username");
                 localStorage.removeItem("password");
+                localStorage.removeItem("Globalname");
+                localStorage.removeItem("Globalword");
               }
               this.$router.push({ path: "/one" });
             } else {

@@ -1,7 +1,7 @@
 <template lang="jade">
 .klc
   ul
-    router-link(v-for='(item,index) in lotteryListklc', :key='index', tag='li', :to="{path:'/pk10',query:{id:item.id}}")
+    router-link(v-for='(item,index) in lotteryListklc', :key='index', tag='li', :to="{path:'/pk10',query:{id:item.id,name:item.name}}")
       img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
       h5 {{item.name}}
 </template>

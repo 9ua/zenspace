@@ -516,7 +516,7 @@ export default {
         { title: "4", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "5", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "6", rates: "赔率63.72", rate: "63.72", selected: false }
-      ]
+      ],
     };
   },
   watch: {
@@ -530,7 +530,7 @@ export default {
       } else {
         this.money = parseInt(newVal);
       }
-    }
+    },
   },
   created() {
     this.noGetItem();
@@ -538,6 +538,12 @@ export default {
     this.endCount();
   },
   mounted() {
+    let _this = this;
+    document.addEventListener("visibilitychange", function() {
+      if(document.hidden === false){
+        _this.geteServerTime();
+      }
+    });
     this.endCount();
     if (!this.$route.meta.isBack) {
       this.geteServerTime(); //获取彩種當前獎期時間

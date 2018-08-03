@@ -327,6 +327,12 @@ export default {
     this.endCount();
   },
   mounted() {
+    let _this = this;
+    document.addEventListener("visibilitychange", function() {
+      if(document.hidden === false){
+        _this.geteServerTime();
+      }
+    });
     this.endCount();
     if (!this.$route.meta.isBack) {
       this.getPlayTree();

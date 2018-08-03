@@ -25,22 +25,16 @@
   <!-- built files will be auto injected aa-->
 </body>
 <script type="text/javascript">
-  // var string = document.hidden;
-  // document.addEventListener("visibilitychange", function() {
-  //   if(document.hidden === false){
-  //     alert("111111111111111");
-  //   }
-  // });
-  // document.oncontextmenu = function () {
-  //   return false;
-  // };
-  // document.onkeydown = function () {
-  //   if (window.event && window.event.keyCode == 123) {
-  //     event.keyCode = 0;
-  //     event.returnValue = false;
-  //     return false;
-  //   }
-  // };
+  document.oncontextmenu = function () {
+    return false;
+  };
+  document.onkeydown = function () {
+    if (window.event && window.event.keyCode == 123) {
+      event.keyCode = 0;
+      event.returnValue = false;
+      return false;
+    }
+  };
   mui.init({
     swipeBack: false, //关闭右滑关闭功能（默认就是false）
     keyEventBind: {

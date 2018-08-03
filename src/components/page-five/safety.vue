@@ -97,7 +97,7 @@ export default {
         this.localStorageArr.push(localStorage.key(i));
       }
       this.localStorageArr.map((key) =>{
-        if(key !== 'username' && key !== 'password'){
+        if(key !== 'username' && key !== 'password' && key !== 'Globalname' && key !== 'Globalword'){
           localStorage.removeItem(key)
         }
       });

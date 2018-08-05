@@ -21,7 +21,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 
 // 超时时间
-axios.defaults.timeout = 120000
+axios.defaults.timeout = 20000
 // http请求拦截器
 
 

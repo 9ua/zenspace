@@ -13,7 +13,7 @@
           img(:src='pop.paths')
         h3 {{pop.name}}
         ul
-          li 账号：{{$store.state.Globalusername | capitalize}}
+          li 账号：{{$store.state.Globalname | capitalize}}
           li 性别：保密
           li
             // <p>头衔：农民</p>

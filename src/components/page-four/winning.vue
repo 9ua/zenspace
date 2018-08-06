@@ -90,11 +90,6 @@ export default {
     }
   },
   filters: {
-    capitalize(value) {
-      let start = value.slice(0, 1);
-      let end = value.slice(-1);
-      return `${start}***${end}`;
-    },
     keepTwoNum(value) {
       value = Number(value);
       return value.toFixed(2);

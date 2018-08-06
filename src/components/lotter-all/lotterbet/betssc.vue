@@ -274,7 +274,7 @@ export default {
   destroyed() {
     this.endCount();
     this.iscreat();
-    document.removeEventListener("visibilitychange",this.listen);
+    // document.removeEventListener("visibilitychange",this.listen);
   },
   created() {
     this.noGetItem();
@@ -282,7 +282,7 @@ export default {
     this.endCount();
   },
   mounted() {
-    document.addEventListener("visibilitychange",this.listen);
+    // document.addEventListener("visibilitychange",this.listen);
     this.endCount();
     if (!this.$route.meta.isBack) {
       this.getPlayTree();
@@ -304,14 +304,14 @@ export default {
     }
   },
   methods: {
-    listen() {
-        if(document.hidden === false){
-          this.geteServerTime();
-        }
-        if(document.hidden === true){
-          this.endCount();
-        }
-    },
+    // listen() {
+    //     if(document.hidden === false){
+    //       this.geteServerTime();
+    //     }
+    //     if(document.hidden === true){
+    //       this.endCount();
+    //     }
+    // },
     //没打接口前
     noGetItem(){
       if(this.startyet == false){

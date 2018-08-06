@@ -103,7 +103,7 @@ export default {
       });
       this.$axios.get(this.$store.state.url + "api/user/logout").then(res => {
         this.$store.state.loginStatus = false;
-        this.$store.state.Globalpassword = "";
+        this.$store.state.Globalword = "";
         this.$store.state.JSESSIONICookie = "";
         this.$router.push("/login");
       })

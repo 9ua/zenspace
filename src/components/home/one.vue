@@ -21,10 +21,10 @@
         </div>
       </div>
       <ul v-show="!$store.state.loginStatus">
-        <router-link v-for="(item,index) in lottery" :key="index" tag="li" to="/login">
+        <li v-for="(item,index) in lottery" :key="index" @click="toLogin">
           <img :src="item.path" alt="images" />
           <h5>{{item.name}}</h5>
-        </router-link>
+        </li>
         <router-link to="/lotterList" tag="li" class="lotter-list">
           <i class="iconfont icon-jia"></i>
           <h5>更多彩种</h5>
@@ -95,6 +95,13 @@ export default {
       this.$router.push({
         path: '/mymsg/notice'
       })
+    },
+    toLogin(){
+      this.$pop.show({error: "",title: "温馨提示",content: "获取不成功,请检查您的网络！",content1: "",content2: "",number: 1});
+      setTimeout(() => {
+        this.$pop.hide();
+        this.$router.push("/login")
+      },1000)
     },
     a() {
       this.isbanner = true

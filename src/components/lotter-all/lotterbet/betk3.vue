@@ -538,7 +538,7 @@ export default {
     this.endCount();
   },
   mounted() {
-    document.addEventListener("visibilitychange",this.listen);
+    // document.addEventListener("visibilitychange",this.listen);
     this.endCount();
     if (!this.$route.meta.isBack) {
       this.geteServerTime(); //获取彩種當前獎期時間
@@ -549,7 +549,7 @@ export default {
   destroyed() {
     this.endCount();
     this.iscreat();
-    document.removeEventListener("visibilitychange",this.listen);
+    // document.removeEventListener("visibilitychange",this.listen);
   },
   methods: {
     listen() {
@@ -643,7 +643,7 @@ export default {
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      console.log("getserver");
+      // console.log("getserver");
       clearInterval(this.timer);
       clearTimeout(this.timer2);
       this.$axios
@@ -694,7 +694,6 @@ export default {
       this.timer = setInterval(() => {
         this.today = this.today - 1;
         this.setTimeMode();
-        console.log("-1 SEC");
         if (this.today < 1) {
           clearInterval(this.timer);
           this.timesUp();

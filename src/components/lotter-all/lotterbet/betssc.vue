@@ -2079,6 +2079,7 @@ export default {
       this.current_player = items;
       this.current_player_bonus = this.current_player;
       this.displayBonus = items.displayBonus;
+      console.log(items,'------')
       if (isNaN(this.displayBonus)) {
         let ar = [];
         ar = this.displayBonus.split("-");

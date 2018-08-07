@@ -1,0 +1,211 @@
+{
+  "data": {
+    "title": "快3",
+    "playGroups": [
+      {
+        "title": "一骰",
+        "groups": [
+          {
+            "id": "k3_star1",
+            "remark": "选择1个或者多个骰号，如果开奖号码中包含该号（顺序不限）即中奖",
+            "fullTitle": "单挑一骰",
+            "numView": [
+              {
+                "nums": [
+                  {"ball": "1","choose": false}, 
+                  {"ball": "2","choose": false}, 
+                  {"ball": "3","choose": false}, 
+                  {"ball": "4","choose": false}, 
+                  {"ball": "5","choose": false}, 
+                  {"ball": "6","choose": false}
+                ]
+              }
+            ]
+          }
+        ]
+      }, 
+      {
+        "title": "二骰",
+        "groups": [
+          {
+            "id": "k3_star2_same_not",
+            "remark": "对所有2不同号进行单选或多选，选号与开奖号中任意2个号码相同即中奖",
+            "fullTitle": "二不同",
+            "numView": [
+              {
+                "nums": [
+                  {"ball": "1","choose": false}, 
+                  {"ball": "2","choose": false}, 
+                  {"ball": "3","choose": false}, 
+                  {"ball": "4","choose": false}, 
+                  {"ball": "5","choose": false},
+                  {"ball": "6","choose": false}
+                ]
+              }
+            ]
+          }, 
+          {
+            "id": "k3_star2_same",
+            "remark": "选择1对相同号码和1个不同号码进行单选或者多选投注，选号与开奖号相同（顺序不限）即中奖",
+            "fullTitle": "二同号",
+            "numView": [
+              {
+                "nums": [
+                  {"ball": "112","choose": false}, 
+                  {"ball": "113","choose": false}, 
+                  {"ball": "114","choose": false}, 
+                  {"ball": "115","choose": false}, 
+                  {"ball": "116","choose": false}, 
+                  {"ball": "全选","choose": false}
+                ]
+              }, 
+              {
+                "nums": [
+                  {"ball": "221","choose": false}, 
+                  {"ball": "223","choose": false}, 
+                  {"ball": "224","choose": false}, 
+                  {"ball": "225","choose": false}, 
+                  {"ball": "226","choose": false}, 
+                  {"ball": "全选","choose": false}
+                ]
+              }, 
+              {
+                "nums": [
+                  {"ball": "331","choose": false}, 
+                  {"ball": "332","choose": false}, 
+                  {"ball": "334","choose": false}, 
+                  {"ball": "335","choose": false}, 
+                  {"ball": "336","choose": false}, 
+                  {"ball": "全选","choose": false}
+                ]
+              }, 
+              {
+                "nums": [
+                  {"ball": "441","choose": false}, 
+                  {"ball": "442","choose": false}, 
+                  {"ball": "443","choose": false}, 
+                  {"ball": "445","choose": false}, 
+                  {"ball": "446","choose": false}, 
+                  {"ball": "全选","choose": false}
+                ]
+              }, 
+              {
+                "nums": [
+                  {"ball": "551","choose": false}, 
+                  {"ball": "552","choose": false}, 
+                  {"ball": "553","choose": false}, 
+                  {"ball": "554","choose": false}, 
+                  {"ball": "556","choose": false}, 
+                  {"ball": "全选","choose": false}
+                ]
+              }, 
+              {
+                "nums": [
+                  {"ball": "661","choose": false}, 
+                  {"ball": "662","choose": false}, 
+                  {"ball": "663","choose": false}, 
+                  {"ball": "664","choose": false}, 
+                  {"ball": "665","choose": false}, 
+                  {"ball": "全选","choose": false}
+                ]
+              }
+            ]
+          }
+        ]
+      }, 
+      {
+        "title": "三骰",
+        "groups": [
+          {
+            "id": "k3_star3_and",
+            "remark": "至少选择1个和值（3个号码之和）进行投注，所选和值与开奖的3个号码的和值相同即中奖",
+            "fullTitle": "和值",
+            "numView": [
+              {
+                "nums": [
+                  {"ball": "大","choose": false}, 
+                  {"ball": "小","choose": false}, 
+                  {"ball": "单","choose": false}, 
+                  {"ball": "双","choose": false}
+                ]
+              },
+              {
+                "nums": [
+                  {"ball": "03","choose": false}, 
+                  {"ball": "04","choose": false}, 
+                  {"ball": "05","choose": false}, 
+                  {"ball": "06","choose": false}, 
+                  {"ball": "07","choose": false}, 
+                  {"ball": "08","choose": false}, 
+                  {"ball": "09","choose": false}, 
+                  {"ball": "10","choose": false}]
+              }, 
+              {
+                "nums": [
+                  {"ball": "11","choose": false}, 
+                  {"ball": "12","choose": false}, 
+                  {"ball": "13","choose": false}, 
+                  {"ball": "14","choose": false}, 
+                  {"ball": "15","choose": false}, 
+                  {"ball": "16","choose": false}, 
+                  {"ball": "17","choose": false}, 
+                  {"ball": "18","choose": false}]
+              }
+            ]
+          }, 
+          {
+            "id": "k3_star3_link",
+            "remark": "对所有3个相连的号码（123，234，345，456)进行单选或多选投注，选号与开奖号相同（顺序不限）即中奖",
+            "fullTitle": "三连号",
+            "numView": [
+              {
+                "nums": [
+                  {"ball": "123","choose": false}, 
+                  {"ball": "234","choose": false}, 
+                  {"ball": "345","choose": false}, 
+                  {"ball": "456","choose": false}
+                ]
+              }
+            ]
+          }, 
+          {
+            "id": "k3_star3_same_not",
+            "remark": "对所有3不同号进行单选或多选，选号与开奖号相同（顺序不限）即中奖",
+            "fullTitle": "三不同",
+            "numView": [
+              {
+                "nums": [
+                  {"ball": "1","choose": false}, 
+                  {"ball": "2","choose": false}, 
+                  {"ball": "3","choose": false}, 
+                  {"ball": "4","choose": false}, 
+                  {"ball": "5","choose": false},
+                  {"ball": "6","choose": false}
+                ]
+              }
+            ]
+          }, 
+          {
+            "id": "k3_star3_same",
+            "remark": "对豹子号（111，222，333，444，555，666）进行单选或通选投注，选号与开奖号相同即中奖",
+            "fullTitle": "三同号",
+            "numView": [
+              {
+                "nums": [
+                  {"ball": "111","choose": false}, 
+                  {"ball": "222","choose": false}, 
+                  {"ball": "333","choose": false},
+                  {"ball": "444","choose": false}, 
+                  {"ball": "555","choose": false}, 
+                  {"ball": "666","choose": false},
+                  {"ball": "通选","choose": false}
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pup": false
+}

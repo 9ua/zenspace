@@ -19,7 +19,6 @@ const state = {
   balance: null, //余额
   userType: localStorage.getItem('userType'), //0会员，1代理
   historyNum: "/one",
-  url:''
 }
 //test & prod
 if (process.env.NODE_ENV === 'production') {

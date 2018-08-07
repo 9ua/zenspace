@@ -1942,6 +1942,7 @@ export default {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;
             this.current_player = this.playGroups[0].groups[0].players[0];
+            console.log("current_player",this.current_player)
             localStorage.setItem(
               "playTree_" + this.$route.query.id,
               JSON.stringify(res.data.data)

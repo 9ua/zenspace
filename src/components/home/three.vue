@@ -3,7 +3,8 @@
   headers
   ul(v-show='showFlag')
     li(v-for='(actives,index) in activitys', :key='index')
-      img(:src='"https://mtxflower.com/"+actives.icon', @click='activeR($event,actives,index)')
+      img(v-if='showImg', :src='"https://mtxflower.com/"+actives.icon', @click='activeR($event,actives,index)')
+      img(v-else, :src='$store.state.url+actives.icon', @click='activeR($event,actives,index)')
       .three-box
         p 活动时间：{{actives.beginPrizeTime}}
         p {{actives.status === 0 ? '进行中' : '结束'}}
@@ -16,6 +17,7 @@ import headers from "../public/header";
 export default {
   data() {
     return {
+      showImg:false,
       loading:true,
       activesremark:0,
       activesremarks:false,
@@ -27,8 +29,14 @@ export default {
   },
   mounted(){
     this.activity();
+    this.showImgs();
   },
   methods: {
+    showImgs() {
+      if (location.hostname === 'localhost' ||location.hostname === 'm.edu0370.com') {
+        this.showImg = true
+      }
+    },
     activeR(e,actives,index){
       this.activesremark = index;
       this.activesremarks = !this.activesremarks;

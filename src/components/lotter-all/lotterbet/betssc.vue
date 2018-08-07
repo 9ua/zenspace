@@ -1911,42 +1911,11 @@ export default {
     },
     //玩法术
     getPlayTree() {
-      this.$axios.get("../../../static/ssc.json")
-        .then(res => {
-            this.playBonus = res.data.data.playBonus;
-            this.playGroups = res.data.data.playGroups;
-            this.current_player = this.playGroups[0].groups[0].players[0];
-            this.setupPlayTree();
-          })
-          .catch(error => {
-            console.log("玩法树No");
-            this.$store.state.loginStatus = false;
-            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
-          });
-
-
-
-
-      // const now = new Date().getTime();
-      // if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
-      //   this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
-      //   this.playGroups = JSON.parse(
-      //     localStorage.getItem("playTree_" + this.$route.query.id)
-      //   ).playGroups;
-      //   this.setupPlayTree();
-      // } else if (
-      //   localStorage.getItem("playTree_" + this.$route.query.id) === null
-      // ) {
-      //   this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.lotteryId }})
+      // this.$axios.get("../../../static/ssc.json")
       //   .then(res => {
       //       this.playBonus = res.data.data.playBonus;
       //       this.playGroups = res.data.data.playGroups;
       //       this.current_player = this.playGroups[0].groups[0].players[0];
-      //       localStorage.setItem(
-      //         "playTree_" + this.$route.query.id,
-      //         JSON.stringify(res.data.data)
-      //       );
-      //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);
       //       this.setupPlayTree();
       //     })
       //     .catch(error => {
@@ -1954,7 +1923,38 @@ export default {
       //       this.$store.state.loginStatus = false;
       //       this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
       //     });
-      // }
+
+
+
+
+      const now = new Date().getTime();
+      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
+        this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
+        this.playGroups = JSON.parse(
+          localStorage.getItem("playTree_" + this.$route.query.id)
+        ).playGroups;
+        this.setupPlayTree();
+      } else if (
+        localStorage.getItem("playTree_" + this.$route.query.id) === null
+      ) {
+        this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.lotteryId }})
+        .then(res => {
+            this.playBonus = res.data.data.playBonus;
+            this.playGroups = res.data.data.playGroups;
+            this.current_player = this.playGroups[0].groups[0].players[0];
+            localStorage.setItem(
+              "playTree_" + this.$route.query.id,
+              JSON.stringify(res.data.data)
+            );
+            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+            this.setupPlayTree();
+          })
+          .catch(error => {
+            console.log("玩法树No");
+            this.$store.state.loginStatus = false;
+            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
+          });
+      }
     },
     //投注
     betGo() {

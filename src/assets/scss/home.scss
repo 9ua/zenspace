@@ -5,7 +5,7 @@ $desw: 750;
 }
 
 @mixin Bg($pic, $width, $height) {
-  background: url('../../assets/img/home/'+$pic) no-repeat;
+  background: url('../../assets/img/one/'+$pic) no-repeat;
   height: $height;
   width: $width;
 }

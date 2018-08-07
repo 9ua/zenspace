@@ -127,8 +127,6 @@ export default {
               } else {
                 localStorage.removeItem("username");
                 localStorage.removeItem("password");
-                // localStorage.removeItem("Globalname");
-                // localStorage.removeItem("Globalword");
               }
               this.$router.push({ path: "/one" });
             } else {

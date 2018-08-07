@@ -16,7 +16,7 @@
           span(v-show='money', ref='money') {{ balances }}
           button(v-show='!money', @click='money = !money') 显示
       .five-top-right2(v-show='money', @click='F5money')
-        img(:class=" toF5money ? 'totransition' : ''", src='@/assets/img/five/ROLL.png', alt='')
+        img(:class=" toF5money ? 'totransition' : ''", src='@/assets/img/one/ROLL.png', alt='')
     ul
       router-link(to='/payway', tag='li')
         .icon-top.top-1

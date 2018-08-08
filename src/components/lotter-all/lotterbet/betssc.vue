@@ -1911,7 +1911,7 @@ export default {
     },
     //玩法术
     getPlayTree() {
-      this.$axios.get("../../../static/ssc.json")
+      this.$axios.get("static/ssc.json")
         .then(res => {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;

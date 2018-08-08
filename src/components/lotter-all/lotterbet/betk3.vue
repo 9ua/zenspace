@@ -1164,7 +1164,7 @@ export default {
     },
     // 玩法树
     getPlayTree() {
-      this.$axios.get("./static/k3s.json").then(res => {
+      this.$axios.get("static/k3s.json").then(res => {
         this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data.playBonus)));
       })
       .catch(error => {

@@ -1620,7 +1620,7 @@ export default {
     //玩法树
     getPlayTree() {
       this.$axios
-        .get("../../../static/pk10.json")
+        .get("static/pk10.json")
         .then(res => {
           this.playBonus = res.data.data.playBonus;
           this.playGroups = res.data.data.playGroups;

@@ -28,6 +28,7 @@
 export default {
   data() {
     return {
+      isRead:false,
       letterlist: [],
       showFlag: true,
       show2: false,
@@ -47,7 +48,7 @@ export default {
       this.selected = a;
       a.isRead = true;
       this.getNoticeInfor(a.id);
-      if(a.isRead === false){
+      if(a.isRead === true){
         this.addReadNotice(a.id);
       }
       this.show2 = !this.show2;

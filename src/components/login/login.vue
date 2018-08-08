@@ -127,8 +127,6 @@ export default {
               } else {
                 localStorage.removeItem("username");
                 localStorage.removeItem("password");
-                // localStorage.removeItem("Globalname");
-                // localStorage.removeItem("Globalword");
               }
               this.$router.push({ path: "/one" });
             } else {
@@ -151,6 +149,10 @@ export default {
           })
           .catch(error => {
             console.log(error);
+            // if(this.$store.state.loginStatus === false){
+            //   this.$pop.show({error: "",title: "温馨提示",content: "获取不成功,请检查您的网络！",content1: "",content2: "",number: 1});
+            // }
+            // this.$pop.show({error: "",title: "温馨提示",content: "获取不成功,请检查您的网络！",content1: "",content2: "",number: 1});
           });
       }
     },

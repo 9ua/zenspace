@@ -196,7 +196,9 @@ export default {
             account: this.username,
             include: 0,
             status: this.status,
-            betweenType: this.betweenType
+            betweenType: this.betweenType,
+            start:1,
+            limit:100
           }
         })
         .then(res => {

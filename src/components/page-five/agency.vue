@@ -6,7 +6,7 @@
     span
   .agency-content
     .agency-content-top
-      img(src='@/assets/img/five/agent.png')
+      img(src='@/assets/img/one/agent.png')
     ul
       router-link(to='/agentIntro', tag='li')
         p 代理说明

@@ -81,6 +81,7 @@ export default {
         localStorage.getItem("playTree_" + this.$route.query.id) === null
       ) {
         this.$axios
+          // .get( "./static/ssc.json", {
           .get(this.$store.state.url + "api/lottery/getPlayTree", {
             params: { lotteryId: this.lotteryId }
           })

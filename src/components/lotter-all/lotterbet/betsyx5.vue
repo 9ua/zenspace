@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      lotteryId: "cqssc" //配置彩种信息
+      lotteryId: "pk10" //配置彩种信息
     };
   },
   destroyed() {

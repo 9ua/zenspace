@@ -161,7 +161,8 @@
         <div class="betk3-content-foot">
           <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
             <span v-show="index !== 3">赔率
-              <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
+              <span class="k3remark">{{ displayBonus | keepTwoNum}}</span> 倍。</span>
+              <!-- <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span> -->
             <!-- 单挑一骰-->
             <ul v-show="index === 0" class="yishai">
               <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
@@ -319,7 +320,7 @@ export default {
       titles: "和值",
       listname: "江苏",
       lotteryId: "jsk3",
-      playId: "k3_star1", //玩法术
+      playId: "k3_star3_and", //玩法术
       playId1: "", //玩法术
       playId2: "", //玩法术
       n1: 1,
@@ -357,6 +358,7 @@ export default {
       cons: "",
       startyet: false,
       playBonus: "", //玩法树
+      displayBonus:'',//当前玩法的赔率
       timer2: "",
       betnot: true,
       // 单挑一骰
@@ -538,6 +540,7 @@ export default {
     this.endCount();
   },
   mounted() {
+    this.getPlayTreeBetRate();
     // document.addEventListener("visibilitychange",this.listen);
     this.endCount();
     if (!this.$route.meta.isBack) {
@@ -812,6 +815,7 @@ export default {
         this.navlist = 3;
         this.titles = "和值";
       }
+      this.getPlayTreeBetRate();
     },
     //头部菜单项
     k3Tab(e, index, into) {
@@ -821,6 +825,8 @@ export default {
       this.show = !this.show;
       this.playId = this.playBonus[index].id;
       this.rates = this.playBonus[this.navlist].displayBonus;
+      this.getPlayTreeBetRate();
+      console.log(this.playId)
     },
     //二同複選xx
     onClickStan1(e) {
@@ -1116,13 +1122,17 @@ export default {
     },
     //大小单双，赔率显示
     setupPlayTree(resData) {
-      console.log(resData)
       this.playBonus = resData;
       let arrpeilv1 = [];
       let arrpeilv2 = [];
       arrpeilv1 = this.playBonus[3].bonusArray;
       arrpeilv2 = this.playBonus[4].bonusArray;
-      for (let i = 0; i < this.k3options.length; i++) {
+      // if(this.playId === 'k3_star3_and'){
+
+      // }
+      // console.log(arrpeilv1);
+      // console.log(arrpeilv2);
+      // for (let i = 0; i < this.k3options.length; i++) {
         this.k3options[0].rate = arrpeilv2.大;
         this.k3options[1].rate = arrpeilv2.小;
         this.k3options[2].rate = arrpeilv2.单;
@@ -1143,78 +1153,83 @@ export default {
         this.k3options[17].rate = arrpeilv1[16];
         this.k3options[18].rate = arrpeilv1[17];
         this.k3options[19].rate = arrpeilv1[18];
-      }
+      // }
+    },
+    
+    getPlayTreeBetRate(){
+      this.$axios.get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {params: {lotteryId:this.$route.query.id, playId: this.playId}}).then(res => {
+        this.displayBonus = res.data.data.displayBonus;
+        // console.log(res,'---',this.displayBonus)
+      })
     },
     // 玩法树
     getPlayTree() {
-      var now = new Date().getTime();
-      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
-        var setupTime = localStorage.getItem(
-          "date_playTree_" + this.$route.query.id
-        );
-        if (null == setupTime || now - setupTime > this.cacheTime) {
-          localStorage.removeItem("playTree_" + this.$route.query.id);
-          localStorage.removeItem("date_playTree_" + this.$route.query.id);
-          this.$axios
-            .get(this.$store.state.url + "api/lottery/getPlayTree", {
-              params: { lotteryId: this.$route.query.id }
-            })
-            .then(res => {
-              this.setupPlayTree(
-                JSON.parse(JSON.stringify(res.data.data.playBonus))
-              );
-              localStorage.setItem(
-                "playTree_" + this.$route.query.id,
-                JSON.stringify(res.data.data.playBonus)
-              );
-              localStorage.setItem(
-                "date_playTree_" + this.$route.query.id,
-                now
-              );
-            })
-            .catch(error => {
-              console.log("玩法树No");
-              this.$store.state.loginStatus = false;
-              this.$pop.show({
-                error: "",
-                title: "温馨提示",
-                content: "获取不成功,请检查您的网络！",
-                content1: "",
-                content2: "",
-                number: 1
-              });
-            });
-        } else
-          this.setupPlayTree(
-            JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id))
-          );
-      } else {
-        this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }})
-        // this.$axios.get("./static/k3s.json")
-          .then(res => {
-            this.setupPlayTree(
-              JSON.parse(JSON.stringify(res.data.data.playBonus))
-            );
-            //set to local storage
-            localStorage.setItem(
-              "playTree_" + this.$route.query.id,
-              JSON.stringify(res.data.data.playBonus)
-            );
-            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
-          })
-          .catch(error => {
-            console.log("玩法树No");
-            this.$store.state.loginStatus = false;
-            this.$pop.show({
-              error: "",
-              title: "温馨提示",
-              content: "获取不成功!",
-              content1: "",
-              content2: "",
-              number: 2
-            });
-          });
-      }
+      this.$axios.get("./static/k3s.json").then(res => {
+        this.setupPlayTree(JSON.parse(JSON.stringify(res.data.data.playBonus)));
+      })
+      .catch(error => {
+        console.log("玩法树No");
+      });
+      // var now = new Date().getTime();
+      // if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
+      //   var setupTime = localStorage.getItem(
+      //     "date_playTree_" + this.$route.query.id
+      //   );
+      //   if (null == setupTime || now - setupTime > this.cacheTime) {
+      //     localStorage.removeItem("playTree_" + this.$route.query.id);
+      //     localStorage.removeItem("date_playTree_" + this.$route.query.id);
+      //     this.$axios
+      //       .get(this.$store.state.url + "api/lottery/getPlayTree", {
+      //         params: { lotteryId: this.$route.query.id }
+      //       })
+      //       .then(res => {
+      //         this.setupPlayTree(
+      //           JSON.parse(JSON.stringify(res.data.data.playBonus))
+      //         );
+      //         localStorage.setItem(
+      //           "playTree_" + this.$route.query.id,
+      //           JSON.stringify(res.data.data.playBonus)
+      //         );
+      //         localStorage.setItem(
+      //           "date_playTree_" + this.$route.query.id,
+      //           now
+      //         );
+      //       })
+      //       .catch(error => {
+      //         console.log("玩法树No");
+      //         this.$store.state.loginStatus = false;
+      //         this.$pop.show({
+      //           error: "",
+      //           title: "温馨提示",
+      //           content: "获取不成功,请检查您的网络！",
+      //           content1: "",
+      //           content2: "",
+      //           number: 1
+      //         });
+      //       });
+      //   } else
+      //     this.setupPlayTree(
+      //       JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id))
+      //     );
+      // } else {
+      //   this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }})
+      //     .then(res => {
+      //       this.setupPlayTree(
+      //         JSON.parse(JSON.stringify(res.data.data.playBonus))
+      //       );
+      //       //set to local storage
+      //       localStorage.setItem(
+      //         "playTree_" + this.$route.query.id,
+      //         JSON.stringify(res.data.data.playBonus)
+      //       );
+      //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+      //     })
+      //     .catch(error => {
+      //       console.log("玩法树No");
+      //       this.$store.state.loginStatus = false;
+      //       this.$pop.show({error: "",title: "温馨提示",content: "获取不成功!",content1: "",content2: "",number: 2});
+      //     });
+      // }
     },
     //中间->投注选号
     k3option(e, index, k3item) {

@@ -1920,8 +1920,6 @@ export default {
           })
           .catch(error => {
             console.log("玩法树No");
-            this.$store.state.loginStatus = false;
-            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
           });
 
 

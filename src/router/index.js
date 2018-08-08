@@ -118,6 +118,14 @@ export default new Router({
       }
     },
     {
+      path: "/syx5",
+      name: 'betsyx5',
+      component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/lotterList',
       name: 'lotterList',
       redirect: 'lotterList/lotterAll',

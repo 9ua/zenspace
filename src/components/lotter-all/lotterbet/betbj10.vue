@@ -1,214 +1,297 @@
-<template lang="jade">
-.betbj10
-  ul.betbj10-top
-    li
-      i.iconfont.icon-left(@click="banckto")
-    li
-      p.wangfa
-        | 玩
-        br
-        | 法
-      .menu(@click='show = !show')
-        | {{titles}}
-        i.iconfont(:class="show ? 'icon-up' : 'icon-down'")
-      .menu-list(v-show='show',@click="show = false")
-        .menu-listShow
-          .popscroll
-            ul.menu-list-top
-              li(v-for='(into,index) in playGroups', :key='index')
-                .title {{into.title}}
-                .menu-list-list-box
-                  .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
-                    span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
-                      a {{player.groupName}}{{player.title}}
-    li.betbj10list
-      span(@click='showa = !showa') {{listname}}
-      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
-      .betk3listRight(v-show='showa')
-        ul
-          li(v-for='(listk3,index) in LotteryList', :key='index', @click='listnames($event,index,listk3)')
-            a {{listk3.name}}
-  .lookAllDiv(v-show='lookAllUl')
-    p.lookAllDivTitle
-      i.iconfont.icon-left(@click='lookAllDivTitle')
-      b.cont 查看更多
-      span
-    .lookAllUlBox
-      ul.lookAllUl
-        li
-          p 期号
-          p 开奖号码
-        li(v-for='(item,index) in getPastOpens', :key='index')
-          p(v-if="$route.query.id === 'pk10'")
-            | {{item.seasonId}}
-            i.iconfont.icon-plus-minus
-          p(v-else)
-            | {{item.seasonId.substring(4).split("-").join("")*1}}
-            i.iconfont.icon-plus-minus
-          p
-            a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
-            a {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
-            a {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
-            a {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
-            a {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
-            a {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
-            a {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
-            a {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
-            a {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
-            a {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
-  .betbj10-content
-    div(v-show='!show')
-      .betk3-content-top
-        .content-left(@click=' betsscContentTopPop = !betsscContentTopPop')
-          p(v-if="$route.query.id === 'pk10'") {{lastSeasonId*1}}期开奖号码
-            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
-          p(v-else) {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
-            i.iconfont(:class="betsscContentTopPop ? 'icon-up' : 'icon-down'")
-          div(v-if="shownum === false")
-            p {{n1 < 10 ? '0'+n1 : n1}}
-            p {{n2 < 10 ? '0'+n2 : n2}}
-            p {{n3 < 10 ? '0'+n3 : n3}}
-            p {{n4 < 10 ? '0'+n4 : n4}}
-            p {{n5 < 10 ? '0'+n5 : n5}}
-            p {{n6 < 10 ? '0'+n6 : n6}}
-            p {{n7 < 10 ? '0'+n7 : n7}}
-            p {{n8 < 10 ? '0'+n8 : n8}}
-            p {{n9 < 10 ? '0'+n9 : n9}}
-            p {{n10 < 10 ? '0'+n10 : n10}}
-          .contnet-left-num(v-if="shownum === true && isGetItem === true")
-            .num
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{i}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{j}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{k}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{l}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{h}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{q}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{w}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{e}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{r}}
-              .span
-                transition(name='down-up-translate-fade')
-                  div {{t}}
-        .content-right(@click='tolooksucc')
-          div
-            p.seasonId(v-if="$route.query.id === 'pk10'") {{seasonId}}期投注截止
-            p.seasonId(v-else) {{seasonId2 !== '' ? seasonId2.slice(4)*1 : Number(lastSeasonIds)+1}}期投注截止
-            .time
-              p {{countDown !== '' ? countDown : "00:00:00"}}
-          i.iconfont.icon-sanjiaoleft
-      .betk3-content-top-pop(v-show='betsscContentTopPop', @click="betsscContentTopPop = false")
-        ul.look
-          li
-            p 期号
-            p 开奖号码
-          li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
-            p(v-if="$route.query.id === 'pk10'")
-              | {{item.seasonId}}
-              i.iconfont.icon-plus-minus
-            p(v-else)
-              | {{item.seasonId.substring(4).split("-").join("")*1}}
-              i.iconfont.icon-plus-minus
-            p
-              a {{item.n1 < 10 ? '0'+item.n1 : item.n1}}
-              a {{item.n2 < 10 ? '0'+item.n2 : item.n2}}
-              a {{item.n3 < 10 ? '0'+item.n3 : item.n3}}
-              a {{item.n4 < 10 ? '0'+item.n4 : item.n4}}
-              a {{item.n5 < 10 ? '0'+item.n5 : item.n5}}
-              a {{item.n6 < 10 ? '0'+item.n6 : item.n6}}
-              a {{item.n7 < 10 ? '0'+item.n7 : item.n7}}
-              a {{item.n8 < 10 ? '0'+item.n8 : item.n8}}
-              a {{item.n9 < 10 ? '0'+item.n9 : item.n9}}
-              a {{item.n10 < 10 ? '0'+item.n10 : item.n10}}
-        p.lookAll
-          button(@click='lookAll') 查看更多
-          button(@click='lookAllTo') 往期开奖
-      .betk3-content-foot
-        div(v-for='(item,indexc) in playGroups', :key='indexc', v-show='indexc === navlist')
-          .betssc-list-box(v-for='(group,indexd) in item.groups', :key='indexd', v-show='indexd === navlistb')
-            span(v-for='(itemabc,indexabc) in playBonus', :key='indexabc', v-show='itemabc.id === playGroupsId')
-              | {{itemabc.remark}}
-              b
-                | 。奖金
-                i(v-show='Number(itemabc.displayBonus)') {{itemabc.displayBonus | keepTwoNum}}
-                i(v-show='isNaN(itemabc.displayBonus)') {{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}
-                |  元
-              br
-            ul.fushi
-              li(v-for='(player,indexf) in group.players', :key='indexf', v-show='playGroupsId === player.id')
-                p(v-for='(numViews,indexff) in player.numView', :key='indexff')
-                  b {{numViews.title}}
-                  span
-                    a(v-for='(num,indexg) in numViews.nums', :key='indexg', :class="num.choose ? 'active' : '' ", @click='curBalls(indexff,indexg,num,numViews,player)') {{num.ball}}
-  .betbj10-footer
-    .betbj10-footer-top(v-show='zhu > 0')
-      .betbj10-footer-tops
-        p 当前选号
-        span {{con}}
-      .betbj10-footer-buttoms
-        p 每注金额
-        input(type='number', v-model='money', onfocus='this.select()')
-        span(v-show="money === '' ") 请输入要投注的金额
-        span(v-show="money !== '' && playGroupsId !== 'pk10_star2_dj' && playGroupsId !== 'pk10_star3_dj' && playGroupsId !== 'pk10_star4_dj' && playGroupsId !== 'pk10_star5_dj'")
-          | 单注最高可中
-          p(v-show='! isNaN(money*displayBonus)') {{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
-          p(v-show='isNaN(money*displayBonus)')
-            | {{youdashuang ? (money*parseInt(displayBonus2*1000))/1000 : (money*parseInt(displayBonus1*1000))/1000 | keepTwoNum}}
-          | 元
-    .betbj10-footer-buttom
-      .betbj10-footer-buttom-left
-        button(@click='iscreat') 清空
-        p
-          span(v-if='zhu >0') 共{{zhu}}注,
-          span(v-if="this.money !== '' ") 共{{zhu*money}}元
-      .betbj10-footer-buttom-right(@click='betC', v-show='betnot') 马上投注
-  .betcBox(v-show='betGoshow')
-    ul.betc(v-show='betGoshow')
-      li 投注确认
-      li
-        p
-          span {{listname}}PK10 ：
-          | {{seasonId}}期
-        p
-          span 投注金额：
-          b {{money*zhu}}元
-        p
-          span 投注内容：
-          span.popcon {{con}}
-      li
-        button(@click='betCancel') 取消
-        button(@click='betGo') 确定
-  .betcBox(v-show='betsuccess')
-    ul.betc(v-show='betsuccess')
-      li 温馨提示！
-      li
-        p
-          b 投注成功,
-          | 您可以在我的账户查看注单详情
-      li
-        button(@click='looksucc') 查看注单
-        button(@click='betsucc') 继续投注
-  bets(ref='pop')
+<template>
+  <div class="betbj10">
+    <ul class="betbj10-top">
+      <li>
+        <i @click="banckto" class="iconfont icon-left"></i>
+      </li>
+      <li>
+        <p class="wangfa">玩<br/>法</p>
+        <div @click="show = !show" class="menu">{{titles}}
+          <i :class="show ? 'icon-up' : 'icon-down'" class="iconfont"></i>
+        </div>
+        <div v-show="show" @click="show = false" class="menu-list">
+          <div class="menu-listShow">
+            <div class="popscroll">
+              <ul class="menu-list-top">
+                <li v-for="(into,index) in playGroups" :key="index">
+                  <div class="title">{{into.title}}</div>
+                  <div class="menu-list-list-box">
+                    <div v-for="(group,indexa) in into.groups" :key="indexa" class="menu-list-list">
+                      <span v-for="(player,indexb) in group.players" :key="indexb" @click="k3Tab($event,indexa,indexb,player,group,into,index)">
+                        <a>{{player.groupName}}{{player.title}}</a>
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="betbj10list">
+        <span @click="showa = !showa">{{listname}}</span>
+        <i :class="showa ? 'icon-up' : 'icon-down' " @click="showa = !showa" class="iconfont"></i>
+        <div v-show="showa" class="betk3listRight">
+          <ul>
+            <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)">
+              <a>{{listk3.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div v-show="lookAllUl" class="lookAllDiv">
+      <p class="lookAllDivTitle">
+        <i @click="lookAllDivTitle" class="iconfont icon-left"></i>
+        <b class="cont">查看更多</b>
+        <span></span>
+      </p>
+      <div class="lookAllUlBox">
+        <ul class="lookAllUl">
+          <li>
+            <p>期号</p>
+            <p>开奖号码</p>
+          </li>
+          <li v-for="(item,index) in getPastOpens" :key="index">
+            <p v-if="$route.query.id === 'pk10'">{{item.seasonId}}
+              <i class="iconfont icon-plus-minus"></i>
+            </p>
+            <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}
+              <i class="iconfont icon-plus-minus"></i>
+            </p>
+            <p>
+              <a>{{item.n1 &lt; 10 ? '0'+item.n1 : item.n1}}</a>
+              <a>{{item.n2 &lt; 10 ? '0'+item.n2 : item.n2}}</a>
+              <a>{{item.n3 &lt; 10 ? '0'+item.n3 : item.n3}}</a>
+              <a>{{item.n4 &lt; 10 ? '0'+item.n4 : item.n4}}</a>
+              <a>{{item.n5 &lt; 10 ? '0'+item.n5 : item.n5}}</a>
+              <a>{{item.n6 &lt; 10 ? '0'+item.n6 : item.n6}}</a>
+              <a>{{item.n7 &lt; 10 ? '0'+item.n7 : item.n7}}</a>
+              <a>{{item.n8 &lt; 10 ? '0'+item.n8 : item.n8}}</a>
+              <a>{{item.n9 &lt; 10 ? '0'+item.n9 : item.n9}}</a>
+              <a>{{item.n10 &lt; 10 ? '0'+item.n10 : item.n10}}</a>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="betbj10-content">
+      <div v-show="!show">
+        <div class="betk3-content-top">
+          <div @click=" betsscContentTopPop = !betsscContentTopPop" class="content-left">
+            <p v-if="$route.query.id === 'pk10'">{{lastSeasonId*1}}期开奖号码
+              <i :class="betsscContentTopPop ? 'icon-up' : 'icon-down'" class="iconfont"></i>
+            </p>
+            <p v-else>{{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
+              <i :class="betsscContentTopPop ? 'icon-up' : 'icon-down'" class="iconfont"></i>
+            </p>
+            <div v-if="shownum === false">
+              <p>{{n1 &lt; 10 ? '0'+n1 : n1}}</p>
+              <p>{{n2 &lt; 10 ? '0'+n2 : n2}}</p>
+              <p>{{n3 &lt; 10 ? '0'+n3 : n3}}</p>
+              <p>{{n4 &lt; 10 ? '0'+n4 : n4}}</p>
+              <p>{{n5 &lt; 10 ? '0'+n5 : n5}}</p>
+              <p>{{n6 &lt; 10 ? '0'+n6 : n6}}</p>
+              <p>{{n7 &lt; 10 ? '0'+n7 : n7}}</p>
+              <p>{{n8 &lt; 10 ? '0'+n8 : n8}}</p>
+              <p>{{n9 &lt; 10 ? '0'+n9 : n9}}</p>
+              <p>{{n10 &lt; 10 ? '0'+n10 : n10}}</p>
+            </div>
+            <div v-if="shownum === true &amp;&amp; isGetItem === true" class="contnet-left-num">
+              <div class="num">
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{i}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{j}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{k}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{l}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{h}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{q}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{w}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{e}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{r}}</div>
+                  </transition>
+                </div>
+                <div class="span">
+                  <transition name="down-up-translate-fade">
+                    <div>{{t}}</div>
+                  </transition>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div @click="tolooksucc" class="content-right">
+            <div>
+              <p v-if="$route.query.id === 'pk10'" class="seasonId">{{seasonId}}期投注截止</p>
+              <p v-else class="seasonId">{{seasonId2 !== '' ? seasonId2.slice(4)*1 : Number(lastSeasonIds)+1}}期投注截止</p>
+              <div class="time">
+                <p>{{countDown !== '' ? countDown : "00:00:00"}}</p>
+              </div>
+            </div>
+            <i class="iconfont icon-sanjiaoleft"></i>
+          </div>
+        </div>
+        <div v-show="betsscContentTopPop" @click="betsscContentTopPop = false" class="betk3-content-top-pop">
+          <ul class="look">
+            <li>
+              <p>期号</p>
+              <p>开奖号码</p>
+            </li>
+            <li v-for="(item,index) in getPastOpens" :key="index" v-if="index &lt; 10">
+              <p v-if="$route.query.id === 'pk10'">{{item.seasonId}}
+                <i class="iconfont icon-plus-minus"></i>
+              </p>
+              <p v-else>{{item.seasonId.substring(4).split("-").join("")*1}}
+                <i class="iconfont icon-plus-minus"></i>
+              </p>
+              <p>
+                <a>{{item.n1 &lt; 10 ? '0'+item.n1 : item.n1}}</a>
+                <a>{{item.n2 &lt; 10 ? '0'+item.n2 : item.n2}}</a>
+                <a>{{item.n3 &lt; 10 ? '0'+item.n3 : item.n3}}</a>
+                <a>{{item.n4 &lt; 10 ? '0'+item.n4 : item.n4}}</a>
+                <a>{{item.n5 &lt; 10 ? '0'+item.n5 : item.n5}}</a>
+                <a>{{item.n6 &lt; 10 ? '0'+item.n6 : item.n6}}</a>
+                <a>{{item.n7 &lt; 10 ? '0'+item.n7 : item.n7}}</a>
+                <a>{{item.n8 &lt; 10 ? '0'+item.n8 : item.n8}}</a>
+                <a>{{item.n9 &lt; 10 ? '0'+item.n9 : item.n9}}</a>
+                <a>{{item.n10 &lt; 10 ? '0'+item.n10 : item.n10}}</a>
+              </p>
+            </li>
+          </ul>
+          <p class="lookAll">
+            <button @click="lookAll">查看更多</button>
+            <button @click="lookAllTo">往期开奖</button>
+          </p>
+        </div>
+        <div class="betk3-content-foot">
+          <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
+            <div v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb" class="betssc-list-box">
+              <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playGroupsId">{{itemabc.remark}}
+                <b>。奖金
+                  <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b><br/></span>
+              <!-- <ul class="fushi">
+                <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playGroupsId === player.id">
+                  <p v-for="(numViews,indexff) in player.numView" :key="indexff">
+                    <b>{{numViews.title}}</b>
+                    <span>
+                      <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,player)">{{num.ball}}</a>
+                    </span>
+                  </p>
+                </li>
+              </ul> -->
+              <ul class="fushi">
+                <li v-for="(numViews, indexf) in current_player.numView" :key="indexf">
+                  <p>
+                    <b>{{numViews.title}}</b>
+                    <span>
+                      <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexf,indexg,num,numViews,current_player)">{{num.ball}}</a>
+                    </span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="betbj10-footer">
+      <div v-show="zhu &gt; 0" class="betbj10-footer-top">
+        <div class="betbj10-footer-tops">
+          <p>当前选号</p>
+          <span>{{con}}</span>
+        </div>
+        <div class="betbj10-footer-buttoms">
+          <p>每注金额</p>
+          <input type="number" v-model="money" onfocus="this.select()" />
+          <span v-show="money === '' ">请输入要投注的金额</span>
+          <span v-show="money !== '' &amp;&amp; playGroupsId !== 'pk10_star2_dj' &amp;&amp; playGroupsId !== 'pk10_star3_dj' &amp;&amp; playGroupsId !== 'pk10_star4_dj' &amp;&amp; playGroupsId !== 'pk10_star5_dj'">单注最高可中
+            <p v-show="! isNaN(money*displayBonus)">{{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}</p>
+            <p v-show="isNaN(money*displayBonus)">{{youdashuang ? (money*parseInt(displayBonus2*1000))/1000 : (money*parseInt(displayBonus1*1000))/1000 | keepTwoNum}}</p>元</span>
+        </div>
+      </div>
+      <div class="betbj10-footer-buttom">
+        <div class="betbj10-footer-buttom-left">
+          <button @click="iscreat">清空</button>
+          <p>
+            <span v-if="zhu &gt;0">共{{zhu}}注,</span>
+            <span v-if="this.money !== '' ">共{{zhu*money}}元</span>
+          </p>
+        </div>
+        <div @click="betC" v-show="betnot" class="betbj10-footer-buttom-right">马上投注</div>
+      </div>
+    </div>
+    <div v-show="betGoshow" class="betcBox">
+      <ul v-show="betGoshow" class="betc">
+        <li>投注确认</li>
+        <li>
+          <p>
+            <span>{{listname}}PK10 ：</span>{{seasonId}}期</p>
+          <p>
+            <span>投注金额：</span>
+            <b>{{money*zhu}}元</b>
+          </p>
+          <p>
+            <span>投注内容：</span>
+            <span class="popcon">{{con}}</span>
+          </p>
+        </li>
+        <li>
+          <button @click="betCancel">取消</button>
+          <button @click="betGo">确定</button>
+        </li>
+      </ul>
+    </div>
+    <div v-show="betsuccess" class="betcBox">
+      <ul v-show="betsuccess" class="betc">
+        <li>温馨提示！</li>
+        <li>
+          <p>
+            <b>投注成功,</b>您可以在我的账户查看注单详情</p>
+        </li>
+        <li>
+          <button @click="looksucc">查看注单</button>
+          <button @click="betsucc">继续投注</button>
+        </li>
+      </ul>
+    </div>
+    <bets ref="pop"></bets>
+  </div>
 </template>
 <script>
-import bets from '../../page-five/money/bets.vue';
+import bets from "../../page-five/money/bets.vue";
 export default {
   data() {
     return {
@@ -232,9 +315,9 @@ export default {
       n8: 1,
       n9: 1,
       n10: 1,
-      looks:false,
-      shwoBet:false,
-      lookAllUl:false,
+      looks: false,
+      shwoBet: false,
+      lookAllUl: false,
       shownum: false,
       startyet: false,
       interval: null, //动画
@@ -284,6 +367,7 @@ export default {
       zhu: 0,
       rates: 0, //最高可中
       groupId: "",
+      current_player: {}, //當前玩法
       playBonus: "", //玩法树1
       playGroups: "", //玩法树2
       pk10star2dj: true,
@@ -297,7 +381,7 @@ export default {
       seasonId3: "",
       lastSeasonId: "",
       lastSeasonIds: "",
-      isGetItem:false,
+      isGetItem: false,
       countDown: "",
       players: "",
       intotitle: "",
@@ -314,7 +398,7 @@ export default {
       timer: "",
       timer2: "",
       historyNum: 0,
-      betnot:true,
+      betnot: true
     };
   },
   destroyed() {
@@ -359,23 +443,23 @@ export default {
     //     }
     // },
     //没打接口前
-    noGetItem(){
-      if(this.startyet == false){
+    noGetItem() {
+      if (this.startyet == false) {
         this.start();
         this.initSetTimeout();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
-        let getMonth = myDate.getMonth()+1;
+        let getMonth = myDate.getMonth() + 1;
         let getDate = myDate.getDate();
-        let getHours = myDate.getHours()*60;
+        let getHours = myDate.getHours() * 60;
         let getMinutes = myDate.getMinutes();
-        let getHM = getHours+getMinutes;
-        if(getHM < 1000){
-          getHM = "0"+getHM;
+        let getHM = getHours + getMinutes;
+        if (getHM < 1000) {
+          getHM = "0" + getHM;
         }
-        this.lastSeasonIds = getMonth+getDate.toString()+getHM;
-      }else{
+        this.lastSeasonIds = getMonth + getDate.toString() + getHM;
+      } else {
         this.end();
         this.isGetItem = false;
         this.shownum = false;
@@ -520,7 +604,16 @@ export default {
         if (this.en === "") {
           this.en = "-";
         }
-        this.con =this.an +"," +this.bn +"," +this.cn +"," +this.dn +"," +this.en;
+        this.con =
+          this.an +
+          "," +
+          this.bn +
+          "," +
+          this.cn +
+          "," +
+          this.dn +
+          "," +
+          this.en;
       }
       //两面盘，大小
       if (this.playGroupsId === "pk10_side_ds") {
@@ -783,7 +876,8 @@ export default {
         this.playGroupsId === "pk10_star2" ||
         this.playGroupsId === "pk10_star3" ||
         this.playGroupsId === "pk10_star4" ||
-        this.playGroupsId === "pk10_star5") {
+        this.playGroupsId === "pk10_star5"
+      ) {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka.filter(function(n) {
@@ -850,7 +944,8 @@ export default {
         this.playGroupsId === "pk10_star2_dj" ||
         this.playGroupsId === "pk10_star3_dj" ||
         this.playGroupsId === "pk10_star4_dj" ||
-        this.playGroupsId === "pk10_star5_dj") {
+        this.playGroupsId === "pk10_star5_dj"
+      ) {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka.filter(function(n) {
@@ -1254,7 +1349,8 @@ export default {
         this.playGroupsId === "pk10_star2" ||
         this.playGroupsId === "pk10_star3" ||
         this.playGroupsId === "pk10_star4" ||
-        this.playGroupsId === "pk10_star5") {
+        this.playGroupsId === "pk10_star5"
+      ) {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka.filter(function(n) {
@@ -1321,7 +1417,8 @@ export default {
         this.playGroupsId === "pk10_star2_dj" ||
         this.playGroupsId === "pk10_star3_dj" ||
         this.playGroupsId === "pk10_star4_dj" ||
-        this.playGroupsId === "pk10_star5_dj") {
+        this.playGroupsId === "pk10_star5_dj"
+      ) {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka.filter(function(n) {
@@ -1467,7 +1564,13 @@ export default {
         .then(res => {
           if (res.data.message === "success") {
             setTimeout(() => {
-              this.$pop.show({title:'温馨提示',content:'恭喜您，投注成功！',content1:'',content2:'',number:1});
+              this.$pop.show({
+                title: "温馨提示",
+                content: "恭喜您，投注成功！",
+                content1: "",
+                content2: "",
+                number: 1
+              });
               this.betnot = true;
               setTimeout(() => {
                 this.betsuccess = !this.betsuccess;
@@ -1475,121 +1578,100 @@ export default {
               }, 800);
             }, 600);
           } else {
-              this.betnot = true;
-              this.iscreat();
+            this.betnot = true;
+            this.iscreat();
           }
         })
         .catch(error => {
           console.log("投注No");
           this.iscreat();
-          this.$pop.show({title:'温馨提示',content:'投注失败,请检查您的网络！',content1:'',content2:'',number:1});
+          this.$pop.show({
+            title: "温馨提示",
+            content: "投注失败,请检查您的网络！",
+            content1: "",
+            content2: "",
+            number: 1
+          });
           this.betnot = true;
         });
     },
+    setupPlayTree() {
+      for (let i = 0; i < this.playGroups.length; i++) {
+        this.splayGroups.push(this.playGroups[i]);
+      }
+      for (let j = 0; j < this.splayGroups.length; j++) {
+        this.sgroups.push(this.splayGroups[j].groups);
+      }
+      for (let k = 0; k < this.sgroups.length; k++) {
+        for (let j = 0; j < this.sgroups[k].length; j++) {
+          this.sgroups2.push(this.sgroups[k][j]);
+        }
+      }
+      for (let i = 0; i < this.sgroups2.length; i++) {
+        this.splayers.push(this.sgroups2[i].players);
+      }
+      for (let h = 0; h < this.splayers.length; h++) {
+        for (let i = 0; i < this.splayers[h].length; i++) {
+          this.snumView.push(this.splayers[h][i].numView);
+        }
+      }
+      this.displayBonus = this.splayers[0][0].displayBonus;
+    },
     //玩法树
     getPlayTree() {
-      // this.$axios.get("../../../static/pk10.json").then(res => {
-      //   this.playBonus = res.data.data.playBonus;
-      //   this.playGroups = res.data.data.playGroups;
-      //   for (let i = 0; i < this.playGroups.length; i++) {
-      //     this.splayGroups.push(this.playGroups[i]);
-      //   }
-      //   for (let j = 0; j < this.splayGroups.length; j++) {
-      //     this.sgroups.push(this.splayGroups[j].groups);
-      //   }
-      //   for (let k = 0; k < this.sgroups.length; k++) {
-      //     for (let j = 0; j < this.sgroups[k].length; j++) {
-      //       this.sgroups2.push(this.sgroups[k][j]);
-      //     }
-      //   }
-      //   for (let i = 0; i < this.sgroups2.length; i++) {
-      //     this.splayers.push(this.sgroups2[i].players);
-      //   }
-      //   for (let h = 0; h < this.splayers.length; h++) {
-      //     for (let i = 0; i < this.splayers[h].length; i++) {
-      //       this.snumView.push(this.splayers[h][i].numView);
-      //     }
-      //   }
-      //   this.displayBonus = this.splayers[0][0].displayBonus;
-      // })
-      // .catch(error => {
-      //   console.log("玩法树No");
-      //   this.$store.state.loginStatus = false;
-      //   this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
-      // });
-
-
-
-      const now = new Date().getTime();
-      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
-        this.playBonus = JSON.parse(
-          localStorage.getItem("playTree_" + this.$route.query.id)
-        ).playBonus;
-        this.playGroups = JSON.parse(
-          localStorage.getItem("playTree_" + this.$route.query.id)
-        ).playGroups;
-        for (let i = 0; i < this.playGroups.length; i++) {
-          this.splayGroups.push(this.playGroups[i]);
-        }
-        for (let j = 0; j < this.splayGroups.length; j++) {
-          this.sgroups.push(this.splayGroups[j].groups);
-        }
-        for (let k = 0; k < this.sgroups.length; k++) {
-          for (let j = 0; j < this.sgroups[k].length; j++) {
-            this.sgroups2.push(this.sgroups[k][j]);
-          }
-        }
-        for (let i = 0; i < this.sgroups2.length; i++) {
-          this.splayers.push(this.sgroups2[i].players);
-        }
-        for (let h = 0; h < this.splayers.length; h++) {
-          for (let i = 0; i < this.splayers[h].length; i++) {
-            this.snumView.push(this.splayers[h][i].numView);
-          }
-        }
-        this.displayBonus = this.splayers[0][0].displayBonus;
-      } else if (
-        localStorage.getItem("playTree_" + this.$route.query.id) === null
-      ) {
-        this.$axios
-          .get(this.$store.state.url + "api/lottery/getPlayTree", {
-            params: { lotteryId: this.lotteryId }
-          })
-          .then(res => {
-            this.playBonus = res.data.data.playBonus;
-            this.playGroups = res.data.data.playGroups;
-            localStorage.setItem(
-              "playTree_" + this.$route.query.id,
-              JSON.stringify(res.data.data)
-            );
-            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
-            for (let i = 0; i < this.playGroups.length; i++) {
-              this.splayGroups.push(this.playGroups[i]);
-            }
-            for (let j = 0; j < this.splayGroups.length; j++) {
-              this.sgroups.push(this.splayGroups[j].groups);
-            }
-            for (let k = 0; k < this.sgroups.length; k++) {
-              for (let j = 0; j < this.sgroups[k].length; j++) {
-                this.sgroups2.push(this.sgroups[k][j]);
-              }
-            }
-            for (let i = 0; i < this.sgroups2.length; i++) {
-              this.splayers.push(this.sgroups2[i].players);
-            }
-            for (let h = 0; h < this.splayers.length; h++) {
-              for (let i = 0; i < this.splayers[h].length; i++) {
-                this.snumView.push(this.splayers[h][i].numView);
-              }
-            }
-            this.displayBonus = this.splayers[0][0].displayBonus;
-          })
-          .catch(error => {
-            console.log("玩法树No");
-            this.$store.state.loginStatus = false;
-            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
+      this.$axios
+        .get("../../../static/pk10.json")
+        .then(res => {
+          this.playBonus = res.data.data.playBonus;
+          this.playGroups = res.data.data.playGroups;
+          this.current_player = this.playGroups[0].groups[0].players[0];
+          this.setupPlayTree();
+        })
+        .catch(error => {
+          console.log("玩法树No");
+          this.$store.state.loginStatus = false;
+          this.$pop.show({
+            title: "温馨提示",
+            content: "获取不成功,请检查您的网络！",
+            content1: "",
+            content2: "",
+            number: 1
           });
-      }
+        });
+
+      // const now = new Date().getTime();
+      // if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
+      //   this.playBonus = JSON.parse(
+      //     localStorage.getItem("playTree_" + this.$route.query.id)
+      //   ).playBonus;
+      //   this.playGroups = JSON.parse(
+      //     localStorage.getItem("playTree_" + this.$route.query.id)
+      //   ).playGroups;
+      //   this.setupPlayTree();
+      // } else if (
+      //   localStorage.getItem("playTree_" + this.$route.query.id) === null
+      // ) {
+      //   this.$axios
+      //     .get(this.$store.state.url + "api/lottery/getPlayTree", {
+      //       params: { lotteryId: this.lotteryId }
+      //     })
+      //     .then(res => {
+      //       this.playBonus = res.data.data.playBonus;
+      //       this.playGroups = res.data.data.playGroups;
+      //       this.current_player = this.playGroups[0].groups[0].players[0];
+      //       localStorage.setItem(
+      //         "playTree_" + this.$route.query.id,
+      //         JSON.stringify(res.data.data)
+      //       );
+      //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+      //       this.setupPlayTree();
+      //     })
+      //     .catch(error => {
+      //       console.log("玩法树No");
+      //       this.$store.state.loginStatus = false;
+      //       this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
+      //     });
+      // }
     },
     //右上获取彩种
     getLotteryList() {
@@ -1648,6 +1730,7 @@ export default {
       this.navlist = index;
       this.navlistb = indexa;
       this.navlistf = indexb;
+      this.current_player = items;
       this.displayBonus = items.displayBonus;
       if (isNaN(this.displayBonus)) {
         let ar = [];
@@ -1663,7 +1746,7 @@ export default {
       this.$router.push({ path: "/bet" });
       this.betsuccess = !this.betsuccess;
     },
-    tolooksucc(){
+    tolooksucc() {
       this.looks = !this.looks;
       this.betsscContentTopPop = false;
       this.$refs.pop.banckto();
@@ -1677,10 +1760,22 @@ export default {
     //马上投注
     betC() {
       if (this.zhu <= 0) {
-        this.$pop.show({title:'温馨提示',content:'请至少选择一注号码投注!',content1:'',content2:'',number:2});
+        this.$pop.show({
+          title: "温馨提示",
+          content: "请至少选择一注号码投注!",
+          content1: "",
+          content2: "",
+          number: 2
+        });
       }
       if (this.money === "") {
-        this.$pop.show({title:'温馨提示',content:'请填写您要投注的金额!',content1:'',content2:'',number:2});
+        this.$pop.show({
+          title: "温馨提示",
+          content: "请填写您要投注的金额!",
+          content1: "",
+          content2: "",
+          number: 2
+        });
       }
       if (this.zhu > 0 && this.money !== "") {
         this.betGoshow = !this.betGoshow;
@@ -1775,18 +1870,33 @@ export default {
           clearInterval(this.timer);
           this.timesUp();
         }
-        if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47){
+        if (
+          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
+          this.today === 47
+        ) {
           this.getPastOp();
-        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46){
+        } else if (
+          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
+          this.today === 46
+        ) {
           this.getPastOp();
-        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
+        } else if (
+          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
+          this.today === 45
+        ) {
           this.getPastOp();
         }
       }, 1000);
     },
     //時間到彈窗
     timesUp() {
-      this.$pop.show({title:'温馨提示',content:'',content1:String(this.seasonId*1 ),content2:String(Number(this.seasonId+1)),number:3});
+      this.$pop.show({
+        title: "温馨提示",
+        content: "",
+        content1: String(this.seasonId * 1),
+        content2: String(Number(this.seasonId + 1)),
+        number: 3
+      });
       this.geteServerTime();
     },
     //获取过去开奖号码20个
@@ -1830,9 +1940,9 @@ export default {
       this.timer2 = setTimeout(() => {
         this.getPastOp();
       }, 12000);
-    },
+    }
   },
-  components:{
+  components: {
     bets
   },
   directives: {

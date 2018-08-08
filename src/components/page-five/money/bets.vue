@@ -182,7 +182,7 @@ export default {
 		    });
     },
     getTradeList(){
-        this.$axios.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.username,include:0,status:this.status,betweenType:this.betweenType,start:1,limit:100}}).then((res) => {
+        this.$axios.get(this.$store.state.url+'api/proxy/getbetOrderList',{params:{account:this.username,include:0,status:this.status,betweenType:this.betweenType,start:0,limit:100}}).then((res) => {
         this.tradelist = res.data.data.list;
 			}).catch((error) => {
         console.log("获取彩種ratio ERROR");

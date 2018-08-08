@@ -247,7 +247,7 @@
         <div class="betk3-footer-buttom-left">
           <button @click="iscreat">清空</button>
           <p>
-            <span v-if="zhu &gt;0">共{{zhu}}注,</span>
+            <span v-if="zhu &gt; 0">共{{zhu}}注,</span>
             <span v-if="money !== '' ">共{{zhu*money}}元</span>
           </p>
         </div>
@@ -1116,6 +1116,7 @@ export default {
     },
     //大小单双，赔率显示
     setupPlayTree(resData) {
+      console.log(resData)
       this.playBonus = resData;
       let arrpeilv1 = [];
       let arrpeilv2 = [];
@@ -1188,10 +1189,8 @@ export default {
             JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id))
           );
       } else {
-        this.$axios
-          .get(this.$store.state.url + "api/lottery/getPlayTree", {
-            params: { lotteryId: this.$route.query.id }
-          })
+        this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }})
+        // this.$axios.get("./static/k3s.json")
           .then(res => {
             this.setupPlayTree(
               JSON.parse(JSON.stringify(res.data.data.playBonus))

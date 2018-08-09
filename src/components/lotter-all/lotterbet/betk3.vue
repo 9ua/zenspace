@@ -591,7 +591,6 @@ export default {
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      // console.log("getserver");
       clearInterval(this.timer);
       clearTimeout(this.timer2);
       this.$axios
@@ -1015,7 +1014,6 @@ export default {
           this.con2 = this.dd.join(",");
           this.zhu2++;
         }
-
         this.d[index] = k3item.title;
         this.peilv[index] = k3item.rate;
         this.peilv1 = this.peilv.filter(function(n) {
@@ -1068,7 +1066,6 @@ export default {
         this.poptitle[4].rate = res.data.data["三连号"];
         this.poptitle[5].rate = res.data.data["三同号"];
         this.poptitle[6].rate = res.data.data["三不同"];
-        console.log("getLotteryPlayBetRate---",res)
       })
     },
     //大小单双，赔率显示
@@ -1078,7 +1075,6 @@ export default {
           if(this.navlist === 3){
             localStorage.setItem("bonusArray",JSON.stringify(res.data.data.bonusArray));
             this.bonusArray = JSON.parse(localStorage.getItem("bonusArray"));
-            // this.bonusArray = res.data.data.bonusArray;
             this.k3options[0].rate = this.bonusArray["大"];
             this.k3options[1].rate = this.bonusArray["小"];
             this.k3options[2].rate = this.bonusArray["单"];
@@ -1100,7 +1096,6 @@ export default {
             this.k3options[18].rate = this.bonusArray["17"];
             this.k3options[19].rate = this.bonusArray["18"];
           }
-          // console.log(res)
         });
     },
     //中间->投注选号
@@ -1215,6 +1210,9 @@ export default {
         this.money = "";
         this.playId1 = "";
         this.playId2 = "";
+        this.peilv=[];
+        this.peilv1 = 0;
+        this.rates = 0;
       }
       // 三连号
       for (let i = 0; i < this.sanlianhao.length; i++) {

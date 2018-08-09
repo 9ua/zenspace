@@ -21,10 +21,10 @@ export default {
     //查看注单
     looksucc() {
       this.$router.push({ path: "/bet" });
-      this.$store.state.betsuccess = !this.$store.state.betsuccess;
+      this.$store.commit("BET_SUCCESS","reverse");
     },
     betsucc() {
-      this.$store.state.betsuccess = !this.$store.state.betsuccess;
+      this.$store.commit("BET_SUCCESS","reverse");
       this.$emit("iscreat");
     },
   }

@@ -32,25 +32,26 @@ export default {
       return this.$store.state.con;
     },
     seasonId() {
-      return (
-        this.$store.state.seasonId2
-          .substring(4)
-          .split("-")
-          .join("") * 1
-      );
+      return  this.$store.getters.seasonId;
+    },
+    seasonId2() {
+      return  this.$store.state.seasonId2;
     },
     money() {
       return this.$store.state.money;
+    },
+    playBonusId() {
+      return this.$store.getters.playBonusId;
     }
   },
   methods: {
     betCancel() {
-      this.$store.state.betGoshow = !this.$store.state.betGoshow;
+      this.$store.commit("BET_GO_SHOW", "reverse");
     },
     //投注
     betGo() {
-      this.$store.state.betGoshow = false;
-      this.$store.state.betnot = false;
+      this.$store.commit("BET_GO_SHOW", false);
+      this.$store.commit("BET_NOT", false);
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
@@ -60,10 +61,10 @@ export default {
       formData.append("order[0].betCount", this.zhu);
       formData.append("order[0].price", this.money);
       formData.append("order[0].unit", 1);
-      formData.append("order[0].playId", this.$store.state.playBonusId);
+      formData.append("order[0].playId", this.playBonusId);
       formData.append("count", this.zhu);
       formData.append("traceOrders[0].price", this.money);
-      formData.append("traceOrders[0].seasonId", this.$store.state.seasonId2);
+      formData.append("traceOrders[0].seasonId", this.seasonId2);
       formData.append("bounsType", 0);
       formData.append("traceWinStop", 0);
       formData.append("isTrace", 0);
@@ -81,12 +82,12 @@ export default {
               content2: "",
               number: 1
             });
-            this.$store.state.betnot = true;
+            this.$store.commit("BET_NOT", true);
             setTimeout(() => {
-              this.$store.state.betsuccess = !this.$store.state.betsuccess;
+              this.$store.commit("BET_SUCCESS", "reverse");
             }, 600);
           } else {
-            this.$store.state.betnot = true;
+            this.$store.commit("BET_NOT", true);
             if (res.data.status === 501) {
               this.$pop.show({
                 title: "发生错误",
@@ -106,7 +107,7 @@ export default {
             content2: "",
             number: 1
           });
-          this.$store.state.betnot = true;
+          this.$store.commit("BET_NOT", true);
         });
     }
   }

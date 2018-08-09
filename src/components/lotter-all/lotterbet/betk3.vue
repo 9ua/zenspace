@@ -279,7 +279,8 @@
       <ul v-show="betsuccess" class="betc">
         <li>温馨提示！</li>
         <li>
-          <p><b>投注成功,</b>您可以在我的账户查看注单详情</p>
+          <p>
+            <b>投注成功,</b>您可以在我的账户查看注单详情</p>
         </li>
         <li>
           <button @click="looksucc">查看注单</button>
@@ -516,7 +517,7 @@ export default {
         { title: "4", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "5", rates: "赔率63.72", rate: "63.72", selected: false },
         { title: "6", rates: "赔率63.72", rate: "63.72", selected: false }
-      ],
+      ]
     };
   },
   watch: {
@@ -530,7 +531,7 @@ export default {
       } else {
         this.money = parseInt(newVal);
       }
-    },
+    }
   },
   created() {
     this.noGetItem();
@@ -538,7 +539,7 @@ export default {
     this.endCount();
   },
   mounted() {
-    // document.addEventListener("visibilitychange",this.listen);
+    document.addEventListener("visibilitychange",this.listen);
     this.endCount();
     if (!this.$route.meta.isBack) {
       this.geteServerTime(); //获取彩種當前獎期時間
@@ -546,25 +547,25 @@ export default {
     }
     this.$route.meta.isBack = false;
   },
-  destroyed() {
+  beforeDestroy() {
     this.endCount();
     this.iscreat();
-    // document.removeEventListener("visibilitychange",this.listen);
+    document.removeEventListener("visibilitychange",this.listen);
   },
   methods: {
-    // listen() {
-    //     if(document.hidden === false){
-    //       this.geteServerTime();
-    //     }
-    //     if(document.hidden === true){
-    //       this.endCount();
-    //     }
-    // },
+    listen() {
+        if(document.hidden === false){
+          this.geteServerTime();
+        }
+        if(document.hidden === true){
+          this.endCount();
+        }
+    },
     //没打接口前
     noGetItem() {
       if (this.startyet == false) {
         this.start();
-        this.initSetTimeout();
+        // this.initSetTimeout();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
@@ -635,17 +636,28 @@ export default {
     },
     end() {
       var _this = this;
-      clearInterval(this.interval);
+      clearInterval(_this.interval);
     },
     endCount() {
-      clearInterval(this.timer);
-      clearTimeout(this.timer2);
+      // clearInterval(this.timer);
+      console.log("before:" + this.timer);
+      if (this.timer) {
+        for (let i = 0; i <= this.timer; i++) {
+          clearInterval(i);
+        }
+      }
+      console.log("after:" + this.timer);
+      if (this.timer2) {
+        for (let i = 0; i <= timer2; i++) {
+          clearTimeout(i);
+        }
+      }
+      // clearTimeout(this.timer2);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
       // console.log("getserver");
-      clearInterval(this.timer);
-      clearTimeout(this.timer2);
+      this.endCount();
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
@@ -665,8 +677,8 @@ export default {
             }
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
-            this.getPastOp();
             this.initSetTimeout();
+            this.getPastOp();
           }
         })
         .catch(error => {
@@ -691,24 +703,36 @@ export default {
     },
     //倒计时
     initSetTimeout() {
+      console.log(this.timer);
+      this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
+        console.log(this.today);
         this.setTimeMode();
         if (this.today < 1) {
-          clearInterval(this.timer);
+          this.endCount();
           this.timesUp();
         }
         if (
+          this.getPastOpenB &&
+          this.getPastOpenB[0].lotteryId != this.$route.query.id
+        ) {
+          this.endCount();
+        }
+        if (
+          this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
           this.getPastOp();
         } else if (
+          this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
           this.getPastOp();
         } else if (
+          this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
@@ -716,6 +740,7 @@ export default {
         }
       }, 1000);
     },
+
     //時間到彈窗
     timesUp() {
       this.$pop.show({
@@ -745,7 +770,9 @@ export default {
           this.n2 = this.getPastOpens[0].n2;
           this.n3 = this.getPastOpens[0].n3;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            this.reGetPastOp();
+            if (res.data.data[0].lotteryId === this.$route.query.id) {
+              this.reGetPastOp();
+            }
           } else {
             clearTimeout(this.timer2);
             this.end();
@@ -758,8 +785,10 @@ export default {
         });
     },
     reGetPastOp() {
-      clearTimeout(this.timer2);
-      this.timer2 = setTimeout(() => {
+      for (let i = 0; i <= this.timer2; i++) {
+        clearTimeout(i);
+      }
+      this.timer2 = this.setTimeout(() => {
         this.getPastOp();
       }, 12000);
     },
@@ -798,9 +827,10 @@ export default {
       this.showan = index;
       this.showa = !this.showa;
       this.$router.push({ query: { id: into.id } });
+      this.endCount();
+      this.iscreat(); //清空
       this.getPlayTree(); //玩法术
       this.geteServerTime(); //获取彩種當前獎期時間
-      this.iscreat(); //清空
       this.$router.push({
         query: {
           id: this.$route.query.id,
@@ -1116,7 +1146,6 @@ export default {
     },
     //大小单双，赔率显示
     setupPlayTree(resData) {
-      console.log(resData)
       this.playBonus = resData;
       let arrpeilv1 = [];
       let arrpeilv2 = [];
@@ -1189,8 +1218,11 @@ export default {
             JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id))
           );
       } else {
-        this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.$route.query.id }})
-        // this.$axios.get("./static/k3s.json")
+        this.$axios
+          .get(this.$store.state.url + "api/lottery/getPlayTree", {
+            params: { lotteryId: this.$route.query.id }
+          })
+          // this.$axios.get("./static/k3s.json")
           .then(res => {
             this.setupPlayTree(
               JSON.parse(JSON.stringify(res.data.data.playBonus))
@@ -1425,15 +1457,21 @@ export default {
             .then(res => {
               if (res.data.message === "success") {
                 setTimeout(() => {
-                  if(this.con1 !== '' && this.con2 === ''){
-                    this.$pop.show({error: "",title: "温馨提示",content: "恭喜您，投注成功！",content1: "",content2: "",number: 1});
+                  if (this.con1 !== "" && this.con2 === "") {
+                    this.$pop.show({
+                      error: "",
+                      title: "温馨提示",
+                      content: "恭喜您，投注成功！",
+                      content1: "",
+                      content2: "",
+                      number: 1
+                    });
                     this.betnot = true;
                     setTimeout(() => {
                       this.iscreat();
                       this.betsuccess = !this.betsuccess;
                     }, 800);
                   }
-                  
                 }, 600);
               } else {
                 this.betnot = true;
@@ -1476,7 +1514,14 @@ export default {
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
                   setTimeout(() => {
-                    this.$pop.show({error: "",title: "温馨提示",content: "恭喜您，投注成功！",content1: "",content2: "",number: 1});
+                    this.$pop.show({
+                      error: "",
+                      title: "温馨提示",
+                      content: "恭喜您，投注成功！",
+                      content1: "",
+                      content2: "",
+                      number: 1
+                    });
                     this.betnot = true;
                     setTimeout(() => {
                       this.betsuccess = !this.betsuccess;

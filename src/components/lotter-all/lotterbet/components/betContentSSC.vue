@@ -21,12 +21,6 @@
 export default {
   data() {
     return {
-      playGroups: {}, //玩法树，
-      splayGroups: [],
-      sgroups: [],
-      sgroups2: [],
-      splayers: [],
-      snumView: [],
       d: [], //选中的号码的下标
       dd: [], //选中的号码的下标
       ka: [], //选中的号码的下标
@@ -55,25 +49,31 @@ export default {
     current_player() {
       return this.$store.state.current_player;
     },
-    displayBonus1(){
-      let displayBonus1="";
-       if (this.current_player.displayBonus&&this.current_player.displayBonus.indexOf("-")!=-1) {
+    playBonusId(){
+      return this.current_player.id;
+    },
+    displayBonus1() {
+      let displayBonus1 = "";
+      if (
+        this.current_player.displayBonus &&
+        this.current_player.displayBonus.indexOf("-") != -1
+      ) {
         displayBonus1 = this.current_player.displayBonus.split("-")[0];
         displayBonus1 = Number(displayBonus1);
       }
       return displayBonus1;
     },
-    displayBonus2(){
-      let displayBonus2="";
-       if (this.current_player.displayBonus&&this.current_player.displayBonus.indexOf("-")!=-1) {
+    displayBonus2() {
+      let displayBonus2 = "";
+      if (
+        this.current_player.displayBonus &&
+        this.current_player.displayBonus.indexOf("-") != -1
+      ) {
         displayBonus2 = this.current_player.displayBonus.split("-")[1];
         displayBonus2 = Number(displayBonus2);
       }
       return displayBonus2;
     }
-  },
-  mounted() {
-    this.getPlayTree();
   },
   methods: {
     //清空
@@ -103,25 +103,23 @@ export default {
       this.hn = "";
       this.in = "";
       this.jn = "";
-      this.$store.state.current_player.numView.forEach((item1,index1)=>{
-        item1.nums.forEach((item2,index2)=>{         
-          if(item2.choose===true){
-            this.$store.state.current_player.numView[index1].nums[index2].choose=false;
+      if (this.current_player.numView) {
+        this.current_player.numView.forEach((item1, index1) => {
+          if (item1.nums) {
+            item1.nums.forEach((item2, index2) => {
+              if (item2.choose === true) {
+                this.$store.state.current_player.numView[index1].nums[
+                  index2
+                ].choose = false;
+              }
+            });
           }
-        })
-      })
-    },
-    //玩法术
-    getPlayTree() {
-      const now = new Date().getTime();
-      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
-        this.playGroups = JSON.parse(
-          localStorage.getItem("playTree_" + this.$route.query.id)
-        ).playGroups;
+        });
       }
     },
     //中间->投注选号
     curBalls(indexff, indexg, num, numViews, player) {
+      console.log(this.playBonusId)
       num.choose = !num.choose;
       if (num.choose === true) {
         this.d[indexg] = num.ball;
@@ -462,7 +460,7 @@ export default {
     //投注 ++++
     bet_boxjia(indexff, indexg, num, numViews, player) {
       //大小单双 +
-      if (this.$store.state.playBonusId === "ssc_dxds") {
+      if (this.playBonusId === "ssc_dxds") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka.filter(function(n) {
@@ -498,42 +496,40 @@ export default {
           });
           this.en = this.dd.join("+");
         }
-        if (this.$store.state.playBonusId === "ssc_dxds") {
-          if (this.an === "") {
-            this.an = "-";
-          }
-          if (this.bn === "") {
-            this.bn = "-";
-          }
-          if (this.cn === "") {
-            this.cn = "-";
-          }
-          if (this.dn === "") {
-            this.dn = "-";
-          }
-          if (this.en === "") {
-            this.en = "-";
-          }
-          this.$store.state.con =
-            this.an +
-            "," +
-            this.bn +
-            "," +
-            this.cn +
-            "," +
-            this.dn +
-            "," +
-            this.en;
+        if (this.an === "") {
+          this.an = "-";
         }
+        if (this.bn === "") {
+          this.bn = "-";
+        }
+        if (this.cn === "") {
+          this.cn = "-";
+        }
+        if (this.dn === "") {
+          this.dn = "-";
+        }
+        if (this.en === "") {
+          this.en = "-";
+        }
+        this.$store.state.con =
+          this.an +
+          "," +
+          this.bn +
+          "," +
+          this.cn +
+          "," +
+          this.dn +
+          "," +
+          this.en;
       }
       //五星、四星、三星、二星二码不定位 、前四组选6+
       if (
-        this.$store.state.playBonusId === "ssc_star4_front_group6" ||
-        this.$store.state.playBonusId === "ssc_star5_none2" ||
-        this.$store.state.playBonusId === "ssc_star4_front_none2" ||
-        this.$store.state.playBonusId === "ssc_star3_front_none2" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_none2" ||
-        this.$store.state.playBonusId === "ssc_star3_last_none2"
+        this.playBonusId === "ssc_star4_front_group6" ||
+        this.playBonusId === "ssc_star5_none2" ||
+        this.playBonusId === "ssc_star4_front_none2" ||
+        this.playBonusId === "ssc_star3_front_none2" ||
+        this.playBonusId === "ssc_star3_mid_none2" ||
+        this.playBonusId === "ssc_star3_last_none2"
       ) {
         let ret = this.groupSplit(this.dd, 2);
         let arr = [];
@@ -547,10 +543,10 @@ export default {
       }
       //三码不定位、三星组六 +
       if (
-        this.$store.state.playBonusId === "ssc_star5_none3" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group6" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group6" ||
-        this.$store.state.playBonusId === "ssc_star3_front_group6"
+        this.playBonusId === "ssc_star5_none3" ||
+        this.playBonusId === "ssc_star3_mid_group6" ||
+        this.playBonusId === "ssc_star3_last_group6" ||
+        this.playBonusId === "ssc_star3_front_group6"
       ) {
         let ret = this.groupSplit(this.dd, 3);
         let arr = [];
@@ -564,14 +560,14 @@ export default {
       }
       //复式 +
       if (
-        this.$store.state.playBonusId === "ssc_star5" ||
-        this.$store.state.playBonusId === "ssc_star4_front" ||
-        this.$store.state.playBonusId === "ssc_star3_front" ||
-        this.$store.state.playBonusId === "ssc_star3_mid" ||
-        this.$store.state.playBonusId === "ssc_star3_last" ||
-        this.$store.state.playBonusId === "ssc_star2_front" ||
-        this.$store.state.playBonusId === "ssc_star2_last" ||
-        this.$store.state.playBonusId === "ssc_star1_dwd"
+        this.playBonusId === "ssc_star5" ||
+        this.playBonusId === "ssc_star4_front" ||
+        this.playBonusId === "ssc_star3_front" ||
+        this.playBonusId === "ssc_star3_mid" ||
+        this.playBonusId === "ssc_star3_last" ||
+        this.playBonusId === "ssc_star2_front" ||
+        this.playBonusId === "ssc_star2_last" ||
+        this.playBonusId === "ssc_star1_dwd"
       ) {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
@@ -600,37 +596,56 @@ export default {
           this.dd = this.ke;
           this.en = this.dd.join("");
         }
-        if (this.$store.state.playBonusId === "ssc_star4_front") {
-          this.$store.state.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 4);
+        if (this.playBonusId === "ssc_star4_front") {
+          this.$store.state.con =
+            this.an + "," + this.bn + "," + this.cn + "," + this.dn;
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            4
+          );
           this.$store.state.con = this.$store.state.con + ",-";
         }
-        if (this.$store.state.playBonusId === "ssc_star3_front") {
+        if (this.playBonusId === "ssc_star3_front") {
           this.$store.state.con = this.an + "," + this.bn + "," + this.cn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 3);
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            3
+          );
           this.$store.state.con = this.$store.state.con + ",-" + ",-";
         }
-        if (this.$store.state.playBonusId === "ssc_star3_mid") {
+        if (this.playBonusId === "ssc_star3_mid") {
           this.$store.state.con = this.an + "," + this.bn + "," + this.cn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 3);
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            3
+          );
           this.$store.state.con = "-," + this.$store.state.con + ",-";
         }
-        if (this.$store.state.playBonusId === "ssc_star3_last") {
+        if (this.playBonusId === "ssc_star3_last") {
           this.$store.state.con = this.an + "," + this.bn + "," + this.cn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 3);
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            3
+          );
           this.$store.state.con = "-,-," + this.$store.state.con;
         }
-        if (this.$store.state.playBonusId === "ssc_star2_front") {
+        if (this.playBonusId === "ssc_star2_front") {
           this.$store.state.con = this.an + "," + this.bn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 2);
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            2
+          );
           this.$store.state.con = this.$store.state.con + ",-" + ",-" + ",-";
         }
-        if (this.$store.state.playBonusId === "ssc_star2_last") {
+        if (this.playBonusId === "ssc_star2_last") {
           this.$store.state.con = this.an + "," + this.bn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 2);
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            2
+          );
           this.$store.state.con = "-,-,-," + this.$store.state.con;
         }
-        if (this.$store.state.playBonusId === "ssc_star1_dwd") {
+        if (this.playBonusId === "ssc_star1_dwd") {
           if (indexff === 0) {
             this.ka[indexg] = num.ball;
             this.dd = this.ka;
@@ -658,7 +673,7 @@ export default {
             this.dd = this.ke;
             this.en = this.dd.join("");
           }
-          if (this.$store.state.playBonusId === "ssc_star1_dwd") {
+          if (this.playBonusId === "ssc_star1_dwd") {
             if (this.an === "") {
               this.an = "-";
             }
@@ -686,7 +701,7 @@ export default {
             "," +
             this.en;
         }
-        if (this.$store.state.playBonusId === "ssc_star5") {
+        if (this.playBonusId === "ssc_star5") {
           this.$store.state.con =
             this.an +
             "," +
@@ -697,11 +712,14 @@ export default {
             this.dn +
             "," +
             this.en;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 5);
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            5
+          );
         }
       }
       //龙虎和 +
-      if (this.$store.state.playBonusId === "ssc_side_lhh") {
+      if (this.playBonusId === "ssc_side_lhh") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -764,7 +782,7 @@ export default {
           });
           this.jn = "[十个]" + this.dd.join("");
         }
-        if (this.$store.state.playBonusId === "ssc_side_lhh") {
+        if (this.playBonusId === "ssc_side_lhh") {
           if (this.an === "") {
             this.an = "-";
           }
@@ -819,9 +837,9 @@ export default {
       }
       //三星包胆 +
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_group_contains" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group_contains" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group_contains"
+        this.playBonusId === "ssc_star3_front_group_contains" ||
+        this.playBonusId === "ssc_star3_mid_group_contains" ||
+        this.playBonusId === "ssc_star3_last_group_contains"
       ) {
         for (let i = 0; i < numViews.nums.length; i++) {
           this.$store.state.zhu = 54;
@@ -832,8 +850,8 @@ export default {
       }
       //二星包胆 +
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_group_contains" ||
-        this.$store.state.playBonusId === "ssc_star2_last_group_contains"
+        this.playBonusId === "ssc_star2_front_group_contains" ||
+        this.playBonusId === "ssc_star2_last_group_contains"
       ) {
         for (let i = 0; i < numViews.nums.length; i++) {
           this.$store.state.zhu = 9;
@@ -843,7 +861,7 @@ export default {
         }
       }
       //五星--组选5 +
-      if (this.$store.state.playBonusId === "ssc_star5_group5") {
+      if (this.playBonusId === "ssc_star5_group5") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -855,10 +873,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount5(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount5(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选10 +
-      if (this.$store.state.playBonusId === "ssc_star5_group10") {
+      if (this.playBonusId === "ssc_star5_group10") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -870,10 +890,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount10(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount10(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选20 +
-      if (this.$store.state.playBonusId === "ssc_star5_group20") {
+      if (this.playBonusId === "ssc_star5_group20") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -885,10 +907,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount20(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount20(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选30 +
-      if (this.$store.state.playBonusId === "ssc_star5_group30") {
+      if (this.playBonusId === "ssc_star5_group30") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -900,10 +924,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount30(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount30(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选60 +
-      if (this.$store.state.playBonusId === "ssc_star5_group60") {
+      if (this.playBonusId === "ssc_star5_group60") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -915,10 +941,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount60(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount60(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选120 +
-      if (this.$store.state.playBonusId === "ssc_star5_group120") {
+      if (this.playBonusId === "ssc_star5_group120") {
         this.dd = this.d.filter(function(n) {
           return n;
         });
@@ -926,7 +954,7 @@ export default {
         this.$store.state.zhu = this.getCount120(lengths);
       }
       //前四--组选4 +
-      if (this.$store.state.playBonusId === "ssc_star4_front_group4") {
+      if (this.playBonusId === "ssc_star4_front_group4") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -938,10 +966,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount4(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount4(
+          this.$store.state.con.split(",")
+        );
       }
       //前四--组选12 +
-      if (this.$store.state.playBonusId === "ssc_star4_front_group12") {
+      if (this.playBonusId === "ssc_star4_front_group12") {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
           this.dd = this.ka;
@@ -953,10 +983,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount12(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount12(
+          this.$store.state.con.split(",")
+        );
       }
       //前四--组选24 +
-      if (this.$store.state.playBonusId === "ssc_star4_front_group24") {
+      if (this.playBonusId === "ssc_star4_front_group24") {
         this.dd = this.d.filter(function(n) {
           return n;
         });
@@ -965,9 +997,9 @@ export default {
       }
       //前三、中三、后三组选 -
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_group3" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group3" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group3"
+        this.playBonusId === "ssc_star3_front_group3" ||
+        this.playBonusId === "ssc_star3_mid_group3" ||
+        this.playBonusId === "ssc_star3_last_group3"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -977,8 +1009,8 @@ export default {
       }
       //二星组选 复式 +
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_group" ||
-        this.$store.state.playBonusId === "ssc_star2_last_group"
+        this.playBonusId === "ssc_star2_front_group" ||
+        this.playBonusId === "ssc_star2_last_group"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -987,9 +1019,9 @@ export default {
       }
       //三星直选和值 +
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_and" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_and" ||
-        this.$store.state.playBonusId === "ssc_star3_last_and"
+        this.playBonusId === "ssc_star3_front_and" ||
+        this.playBonusId === "ssc_star3_mid_and" ||
+        this.playBonusId === "ssc_star3_last_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -998,9 +1030,9 @@ export default {
       }
       //三星组选和值 +
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_group_and" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group_and" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group_and"
+        this.playBonusId === "ssc_star3_front_group_and" ||
+        this.playBonusId === "ssc_star3_mid_group_and" ||
+        this.playBonusId === "ssc_star3_last_group_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1009,9 +1041,9 @@ export default {
       }
       //三星跨度 +
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_kd" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_kd" ||
-        this.$store.state.playBonusId === "ssc_star3_last_kd"
+        this.playBonusId === "ssc_star3_front_kd" ||
+        this.playBonusId === "ssc_star3_mid_kd" ||
+        this.playBonusId === "ssc_star3_last_kd"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1020,8 +1052,8 @@ export default {
       }
       //二星直选和值 +
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_and" ||
-        this.$store.state.playBonusId === "ssc_star2_last_and"
+        this.playBonusId === "ssc_star2_front_and" ||
+        this.playBonusId === "ssc_star2_last_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1030,8 +1062,8 @@ export default {
       }
       //二星组选和值 +
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_group_and" ||
-        this.$store.state.playBonusId === "ssc_star2_last_group_and"
+        this.playBonusId === "ssc_star2_front_group_and" ||
+        this.playBonusId === "ssc_star2_last_group_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1040,8 +1072,8 @@ export default {
       }
       //二星跨度 +
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_kd" ||
-        this.$store.state.playBonusId === "ssc_star2_last_kd"
+        this.playBonusId === "ssc_star2_front_kd" ||
+        this.playBonusId === "ssc_star2_last_kd"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1052,7 +1084,7 @@ export default {
     //投注 ----
     bet_boxjian(indexff, indexg, num, numViews, player) {
       //大小单双 -
-      if (this.$store.state.playBonusId === "ssc_dxds") {
+      if (this.playBonusId === "ssc_dxds") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1078,7 +1110,7 @@ export default {
           this.dd = this.ke;
           this.en = this.dd.join("+");
         }
-        if (this.$store.state.playBonusId === "ssc_dxds") {
+        if (this.playBonusId === "ssc_dxds") {
           if (this.an === "") {
             this.an = "-";
           }
@@ -1108,12 +1140,12 @@ export default {
       }
       //五星、四星、三星、二星二码不定位 、前四组选6 -
       if (
-        this.$store.state.playBonusId === "ssc_star4_front_group6" ||
-        this.$store.state.playBonusId === "ssc_star5_none2" ||
-        this.$store.state.playBonusId === "ssc_star4_front_none2" ||
-        this.$store.state.playBonusId === "ssc_star3_front_none2" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_none2" ||
-        this.$store.state.playBonusId === "ssc_star3_last_none2"
+        this.playBonusId === "ssc_star4_front_group6" ||
+        this.playBonusId === "ssc_star5_none2" ||
+        this.playBonusId === "ssc_star4_front_none2" ||
+        this.playBonusId === "ssc_star3_front_none2" ||
+        this.playBonusId === "ssc_star3_mid_none2" ||
+        this.playBonusId === "ssc_star3_last_none2"
       ) {
         let ret = this.groupSplit(this.dd, 2);
         let arr = [];
@@ -1127,10 +1159,10 @@ export default {
       }
       //三码不定位、前三组六、中三组六、后三组六 -
       if (
-        this.$store.state.playBonusId === "ssc_star5_none3" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group6" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group6" ||
-        this.$store.state.playBonusId === "ssc_star3_front_group6"
+        this.playBonusId === "ssc_star5_none3" ||
+        this.playBonusId === "ssc_star3_mid_group6" ||
+        this.playBonusId === "ssc_star3_last_group6" ||
+        this.playBonusId === "ssc_star3_front_group6"
       ) {
         let ret = this.groupSplit(this.dd, 3);
         let arr = [];
@@ -1144,14 +1176,14 @@ export default {
       }
       //复式 -
       if (
-        this.$store.state.playBonusId === "ssc_star5" ||
-        this.$store.state.playBonusId === "ssc_star4_front" ||
-        this.$store.state.playBonusId === "ssc_star3_front" ||
-        this.$store.state.playBonusId === "ssc_star3_mid" ||
-        this.$store.state.playBonusId === "ssc_star3_last" ||
-        this.$store.state.playBonusId === "ssc_star2_front" ||
-        this.$store.state.playBonusId === "ssc_star2_last" ||
-        this.$store.state.playBonusId === "ssc_star1_dwd"
+        this.playBonusId === "ssc_star5" ||
+        this.playBonusId === "ssc_star4_front" ||
+        this.playBonusId === "ssc_star3_front" ||
+        this.playBonusId === "ssc_star3_mid" ||
+        this.playBonusId === "ssc_star3_last" ||
+        this.playBonusId === "ssc_star2_front" ||
+        this.playBonusId === "ssc_star2_last" ||
+        this.playBonusId === "ssc_star1_dwd"
       ) {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
@@ -1180,35 +1212,57 @@ export default {
           this.dd = this.ke;
           this.en = this.dd.join("");
         }
-        if (this.$store.state.playBonusId === "ssc_star4_front") {
-          this.$store.state.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 4);
-        } else if (this.$store.state.playBonusId === "ssc_star3_front") {
+        if (this.playBonusId === "ssc_star4_front") {
+          this.$store.state.con =
+            this.an + "," + this.bn + "," + this.cn + "," + this.dn;
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            4
+          );
+        } else if (this.playBonusId === "ssc_star3_front") {
           this.$store.state.con = this.an + "," + this.bn + "," + this.cn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 3);
-        } else if (this.$store.state.playBonusId === "ssc_star3_mid") {
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            3
+          );
+        } else if (this.playBonusId === "ssc_star3_mid") {
           this.$store.state.con = this.an + "," + this.bn + "," + this.cn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 3);
-        } else if (this.$store.state.playBonusId === "ssc_star3_last") {
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            3
+          );
+        } else if (this.playBonusId === "ssc_star3_last") {
           this.$store.state.con = this.an + "," + this.bn + "," + this.cn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 3);
-        } else if (this.$store.state.playBonusId === "ssc_star2_front") {
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            3
+          );
+        } else if (this.playBonusId === "ssc_star2_front") {
           this.$store.state.con = this.an + "," + this.bn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 2);
-        } else if (this.$store.state.playBonusId === "ssc_star2_last") {
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            2
+          );
+        } else if (this.playBonusId === "ssc_star2_last") {
           this.$store.state.con = this.an + "," + this.bn;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 2);
-        } else if (this.$store.state.playBonusId === "ssc_star1_dwd") {
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            2
+          );
+        } else if (this.playBonusId === "ssc_star1_dwd") {
           this.$store.state.con =
             this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
-        } else if (this.$store.state.playBonusId === "ssc_star5") {
+        } else if (this.playBonusId === "ssc_star5") {
           this.$store.state.con =
             this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
-          this.$store.state.zhu = this.getCount(this.$store.state.con.split(","), 5);
+          this.$store.state.zhu = this.getCount(
+            this.$store.state.con.split(","),
+            5
+          );
         }
       }
       //龙虎和 -
-      if (this.$store.state.playBonusId === "ssc_side_lhh") {
+      if (this.playBonusId === "ssc_side_lhh") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1299,7 +1353,7 @@ export default {
             this.jn = this.dd.join("");
           }
         }
-        if (this.$store.state.playBonusId === "ssc_side_lhh") {
+        if (this.playBonusId === "ssc_side_lhh") {
           if (this.an === "") {
             this.an = "-";
           }
@@ -1354,9 +1408,9 @@ export default {
       }
       //三星包胆 -
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_group_contains" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group_contains" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group_contains"
+        this.playBonusId === "ssc_star3_front_group_contains" ||
+        this.playBonusId === "ssc_star3_mid_group_contains" ||
+        this.playBonusId === "ssc_star3_last_group_contains"
       ) {
         for (let i = 0; i < numViews.nums.length; i++) {
           this.$store.state.zhu = 0;
@@ -1365,8 +1419,8 @@ export default {
       }
       //二星包胆 -
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_group_contains" ||
-        this.$store.state.playBonusId === "ssc_star2_last_group_contains"
+        this.playBonusId === "ssc_star2_front_group_contains" ||
+        this.playBonusId === "ssc_star2_last_group_contains"
       ) {
         for (let i = 0; i < numViews.nums.length; i++) {
           this.$store.state.zhu = 0;
@@ -1374,7 +1428,7 @@ export default {
         }
       }
       //五星--组选5 -
-      if (this.$store.state.playBonusId === "ssc_star5_group5") {
+      if (this.playBonusId === "ssc_star5_group5") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1386,10 +1440,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount5(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount5(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选10 -
-      if (this.$store.state.playBonusId === "ssc_star5_group10") {
+      if (this.playBonusId === "ssc_star5_group10") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1401,10 +1457,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount10(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount10(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选20 -
-      if (this.$store.state.playBonusId === "ssc_star5_group20") {
+      if (this.playBonusId === "ssc_star5_group20") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1416,10 +1474,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount20(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount20(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选30 -
-      if (this.$store.state.playBonusId === "ssc_star5_group30") {
+      if (this.playBonusId === "ssc_star5_group30") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1431,10 +1491,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount30(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount30(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选60 -
-      if (this.$store.state.playBonusId === "ssc_star5_group60") {
+      if (this.playBonusId === "ssc_star5_group60") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1446,10 +1508,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount60(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount60(
+          this.$store.state.con.split(",")
+        );
       }
       //五星--组选120 -
-      if (this.$store.state.playBonusId === "ssc_star5_group120") {
+      if (this.playBonusId === "ssc_star5_group120") {
         this.dd = this.d.filter(function(n) {
           return n;
         });
@@ -1457,7 +1521,7 @@ export default {
         this.$store.state.zhu = this.getCount120(lengths);
       }
       //前四--组选4 -
-      if (this.$store.state.playBonusId === "ssc_star4_front_group4") {
+      if (this.playBonusId === "ssc_star4_front_group4") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1469,10 +1533,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount4(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount4(
+          this.$store.state.con.split(",")
+        );
       }
       //前四--组选12 -
-      if (this.$store.state.playBonusId === "ssc_star4_front_group12") {
+      if (this.playBonusId === "ssc_star4_front_group12") {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;
@@ -1484,10 +1550,12 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.state.con = this.an + "," + this.bn;
-        this.$store.state.zhu = this.getzuCount12(this.$store.state.con.split(","));
+        this.$store.state.zhu = this.getzuCount12(
+          this.$store.state.con.split(",")
+        );
       }
       //前四--组选24 -
-      if (this.$store.state.playBonusId === "ssc_star4_front_group24") {
+      if (this.playBonusId === "ssc_star4_front_group24") {
         this.dd = this.d.filter(function(n) {
           return n;
         });
@@ -1496,9 +1564,9 @@ export default {
       }
       //前三、中三、后三组选 -
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_group3" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group3" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group3"
+        this.playBonusId === "ssc_star3_front_group3" ||
+        this.playBonusId === "ssc_star3_mid_group3" ||
+        this.playBonusId === "ssc_star3_last_group3"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1508,8 +1576,8 @@ export default {
       }
       //二星组选 复式 -
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_group" ||
-        this.$store.state.playBonusId === "ssc_star2_last_group"
+        this.playBonusId === "ssc_star2_front_group" ||
+        this.playBonusId === "ssc_star2_last_group"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1518,9 +1586,9 @@ export default {
       }
       //三星直选和值 -
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_and" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_and" ||
-        this.$store.state.playBonusId === "ssc_star3_last_and"
+        this.playBonusId === "ssc_star3_front_and" ||
+        this.playBonusId === "ssc_star3_mid_and" ||
+        this.playBonusId === "ssc_star3_last_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1529,9 +1597,9 @@ export default {
       }
       //三星组选和值 -
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_group_and" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_group_and" ||
-        this.$store.state.playBonusId === "ssc_star3_last_group_and"
+        this.playBonusId === "ssc_star3_front_group_and" ||
+        this.playBonusId === "ssc_star3_mid_group_and" ||
+        this.playBonusId === "ssc_star3_last_group_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1540,9 +1608,9 @@ export default {
       }
       //三星跨度 -
       if (
-        this.$store.state.playBonusId === "ssc_star3_front_kd" ||
-        this.$store.state.playBonusId === "ssc_star3_mid_kd" ||
-        this.$store.state.playBonusId === "ssc_star3_last_kd"
+        this.playBonusId === "ssc_star3_front_kd" ||
+        this.playBonusId === "ssc_star3_mid_kd" ||
+        this.playBonusId === "ssc_star3_last_kd"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1551,8 +1619,8 @@ export default {
       }
       //二星直选和值 -
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_and" ||
-        this.$store.state.playBonusId === "ssc_star2_last_and"
+        this.playBonusId === "ssc_star2_front_and" ||
+        this.playBonusId === "ssc_star2_last_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1561,8 +1629,8 @@ export default {
       }
       //二星组选和值 -
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_group_and" ||
-        this.$store.state.playBonusId === "ssc_star2_last_group_and"
+        this.playBonusId === "ssc_star2_front_group_and" ||
+        this.playBonusId === "ssc_star2_last_group_and"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;
@@ -1571,8 +1639,8 @@ export default {
       }
       //二星跨度 -
       if (
-        this.$store.state.playBonusId === "ssc_star2_front_kd" ||
-        this.$store.state.playBonusId === "ssc_star2_last_kd"
+        this.playBonusId === "ssc_star2_front_kd" ||
+        this.playBonusId === "ssc_star2_last_kd"
       ) {
         this.dd = this.d.filter(function(n) {
           return n;

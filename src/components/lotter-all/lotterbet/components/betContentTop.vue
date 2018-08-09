@@ -47,15 +47,13 @@ export default {
       return this.$store.state.betContentTopPopFlag;
     },
     seasonId() {
-      return (
-        this.$store.state.seasonId2
-          .substring(4)
-          .split("-")
-          .join("") * 1
-      );
+      return  this.$store.getters.seasonId;
     },
     seasonId2() {
       return this.$store.state.seasonId2;
+    },
+    getPastOpens() {
+      return this.$store.state.getPastOpens;
     }
   },
   data() {
@@ -94,9 +92,8 @@ export default {
   },
   methods: {
     changeBetContentTopPop() {
-      this.$store.state.betContentTopPopFlag = !this.$store.state
-        .betContentTopPopFlag;
-      this.$store.state.showRight = false;
+      this.$store.commit("BET_CONTENT_FLAG", "reverse");
+      this.$store.commit("SHOW_RIGHT", false);
     },
     endCount() {
       clearInterval(this.timer);
@@ -134,16 +131,19 @@ export default {
           this.timesUp();
         }
         if (
+          this.getPastOpenB[0] &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
           this.getPastOp();
         } else if (
+          this.getPastOpenB[0] &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
           this.getPastOp();
         } else if (
+          this.getPastOpenB[0] &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
@@ -193,11 +193,11 @@ export default {
         })
         .then(res => {
           if (res.data.code === 1) {
-            this.$store.state.seasonId2 = res.data.data.seasonId;
+            this.$store.commit("SEASONID2",res.data.data.seasonId)
             this.lastSeasonId = res.data.data.lastSeasonId;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
-            this.getPastOp(); //获取过去开奖号码10个
+            this.getPastOp(); //获取过去开奖号码20个
             this.initSetTimeout();
           }
         })
@@ -205,7 +205,7 @@ export default {
           console.log("获取彩種當前獎期時間No");
         });
     },
-    //获取过去开奖号码10个
+    //获取过去开奖号码20个
     getPastOp() {
       if (this.startyet == false) {
         this.start();
@@ -216,20 +216,32 @@ export default {
           params: { lotteryId: this.$route.query.id, count: 20 }
         })
         .then(res => {
-          this.getPastOpens = res.data.data;
-          this.getPastOpenB = res.data.data;
-          this.n1 = this.getPastOpens[0].n1;
-          this.n2 = this.getPastOpens[0].n2;
-          this.n3 = this.getPastOpens[0].n3;
-          this.n4 = this.getPastOpens[0].n4;
-          this.n5 = this.getPastOpens[0].n5;
-          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            this.reGetPastOp();
-          } else {
-            clearTimeout(this.timer2);
-            this.end();
-            this.startyet = false;
-            this.shownum = false;
+          if (res.data.code === 1 && res.data.data.length != 0) {
+            this.$store.commit("GET_PAST_OPENS",res.data.data);
+            this.getPastOpenB = res.data.data;
+            this.n1 = res.data.data[0].n1;
+            this.n2 = res.data.data[0].n2;
+            this.n3 = res.data.data[0].n3;
+            this.n4 = res.data.data[0].n4;
+            this.n5 = res.data.data[0].n5;
+            if (
+              Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)
+            ) {
+              this.reGetPastOp();
+            } else {
+              clearTimeout(this.timer2);
+              this.end();
+              this.startyet = false;
+              this.shownum = false;
+            }
+          } else if (res.data.data.length === 0) {
+            this.$pop.show({
+              title: "发生错误",
+              content: "暂无开奖记录！",
+              content1: "",
+              content2: "",
+              number: 1
+            });
           }
         })
         .catch(error => {

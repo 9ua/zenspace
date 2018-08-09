@@ -531,6 +531,14 @@ export default new Router({
       },
     },
     {
+      path: '/weixinbcharge',
+      name: 'weixinbcharge',
+      component: resolve => require(['@/components/page-five/money/weixinbcharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
       path: '/creditccharge',
       name: 'creditccharge',
       component: resolve => require(['@/components/page-five/money/creditccharge.vue'], resolve),

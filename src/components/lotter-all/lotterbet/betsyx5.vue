@@ -1,12 +1,12 @@
 <template lang="jade">
 .bet
-  betTop(:lotteryId='lotteryId',@changeLotteryId='changeLotteryId',@iscreat='iscreat')
+  betTop(:lotteryId='lotteryId',:group="group" @changeLotteryId='changeLotteryId',@iscreat='iscreat')
   lookMore
   .bet-content
     div
       betContentTop(:lotteryId='lotteryId',@tolooksucc='tolooksucc',ref='betContentTop',@iscreat='iscreat')
       betContentTopPop
-      betContentFoot(:lotteryId='lotteryId',ref='betContentFoot')
+      betContent(:lotteryId='lotteryId',ref='betContent')
   betGoshow(@iscreat='iscreat')
   betFooter(@iscreat='iscreat')
   bets(ref='pop')
@@ -17,7 +17,7 @@ import betTop from "./components/betTop.vue";
 import betContentTop from "./components/betContentTop.vue";
 import lookMore from "./components/lookMore.vue";
 import betContentTopPop from "./components/betContentTopPop.vue";
-import betContentFoot from "./components/betContentFoot.vue";
+import betContent from "./components/betContentX11X5.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
 import betFooter from "./components/betFooter.vue";
 import betGoshow from "./components/betGoshow.vue";
 import betsuccess from "./components/betsuccess.vue";
@@ -25,17 +25,18 @@ export default {
   components: {
     bets, //投注记录
     betTop, //顶部彩种切换
-    betContentTop, //开奖结果，倒计时
+    betContentTop, //开奖结果+倒计时
     betContentTopPop, //10期开奖结果
     lookMore, //20期开奖结果
-    betContentFoot, //选号区域
-    betFooter, //确认投注，输入金额
+    betContent, //选号区域
+    betFooter, //确认投注+输入金额
     betsuccess, //投注成功弹出框
-    betGoshow //确认投注弹出框
+    betGoshow, //确认投注弹出框
   },
   data() {
     return {
-      lotteryId: "cqssc" //配置彩种信息
+      lotteryId: "ah11x5", //配置默认彩种（安徽快三）
+      group:"x11x5",//配置彩种种类（11选5）
     };
   },
   destroyed() {
@@ -57,8 +58,8 @@ export default {
   methods: {
     //调用子页面清空方法
     iscreat() {
-      if (this.$refs.betContentFoot) {
-        this.$refs.betContentFoot.iscreat();
+      if (this.$refs.betContent) {
+        this.$refs.betContent.iscreat();
       }
     },
     //通过子页面回传的lotteryId更改页面显示的彩种信息
@@ -74,7 +75,7 @@ export default {
       }
     },
     tolooksucc() {
-      this.$store.state.betContentTopPopFlag = false;
+      this.$store.commit('BET_CONTENT_FLAG', false);
       this.$refs.pop.banckto();
       this.$refs.pop.getTradeList();
     }

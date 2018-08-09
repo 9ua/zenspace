@@ -26,25 +26,18 @@ export default {
     betContentTopPopFlag() {
       return this.$store.state.betContentTopPopFlag;
     },
-    seasonId() {
-      return this.$store.state.seasonId;
-    },
     getPastOpens() {
       return this.$store.state.getPastOpens;
     }
   },
-  mounted() {
-    this.getPastOp(20);
-  },
   methods: {
     changeBetContentTopPop() {
-      this.$store.state.betContentTopPopFlag = !this.$store.state
-        .betContentTopPopFlag;
+        this.$store.commit("BET_CONTENT_FLAG","reverse");
     },
     //查看20条记录
     lookAll() {
-      this.$store.state.betContentTopPopFlag = false;
-      this.$store.state.lookAllUl = !this.$store.state.lookAllUl;
+      this.$store.commit("BET_CONTENT_FLAG",false);
+      this.$store.commit("LOOK_ALL_UL","reverse");
     },
 
     //往期开奖
@@ -58,19 +51,6 @@ export default {
         }
       });
     },
-    //获取过去开奖号码20个
-    getPastOp(count) {
-      this.$axios
-        .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: count }
-        })
-        .then(res => {
-          this.$store.state.getPastOpens = res.data.data;
-        })
-        .catch(error => {
-          console.log("获取过去开奖号码No");
-        });
-    }
   }
 };
 </script>

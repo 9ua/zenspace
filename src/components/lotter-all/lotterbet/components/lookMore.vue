@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     lookAllDivTitle() {
-      this.$store.state.lookAllUl = !this.$store.state.lookAllUl;
+      this.$store.commit("LOOK_ALL_UL","reverse");
     }
   }
 };

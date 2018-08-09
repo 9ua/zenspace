@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       money: "",
-      playBonusId: this.$store.state.playBonusId //点击选中后获取此玩法ID
     };
   },
   computed: {
@@ -52,6 +51,9 @@ export default {
     },
     displayBonus() {
       return this.$store.state.current_player.displayBonus;
+    },
+    playBonusId(){
+      return this.$store.getters.playBonusId;
     },
     displayBonus1() {
       let displayBonus1 = "";
@@ -86,7 +88,7 @@ export default {
         // }, 1000);
       } else {
         this.money = parseInt(newVal);
-        this.$store.state.money = parseInt(newVal);
+        this.$store.commit("MONEY",parseInt(newVal));
       }
     }
   },
@@ -111,7 +113,7 @@ export default {
         });
       }
       if (this.zhu > 0 && this.money !== "") {
-        this.$store.state.betGoshow = !this.$store.state.betGoshow;
+         this.$store.commit("BET_GO_SHOW", "reverse");
       }
     }
   },

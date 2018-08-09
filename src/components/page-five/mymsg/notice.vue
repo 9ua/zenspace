@@ -14,7 +14,7 @@
               |  {{item.title}}
           .mInvite-right
             p
-              span
+              span.isNotices(:class='item.isRead ? "" : "active"')
     div.showBottom(v-show='show2',@click='show2 = false')
       ul.listStyle-V
         li
@@ -28,6 +28,7 @@
 export default {
   data() {
     return {
+      isRead:false,
       letterlist: [],
       showFlag: true,
       show2: false,
@@ -45,7 +46,11 @@ export default {
     },
     select(a) {
       this.selected = a;
+      a.isRead = true;
       this.getNoticeInfor(a.id);
+      if(a.isRead === true){
+        this.addReadNotice(a.id);
+      }
       this.show2 = !this.show2;
     },
     onClick(item) {
@@ -61,7 +66,7 @@ export default {
     getUserNoticeList() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getUserNoticeList", {
-          params: { type: 1 }
+          params: { type: 1,start:0,limit:10}
         })
         .then(res => {
           this.letterlist = res.data.data;
@@ -70,6 +75,10 @@ export default {
           console.log("获取彩種ratio ERROR");
         });
     },
+    addReadNotice(x){
+      this.$axios.get(this.$store.state.url + "api/proxy/addReadNotice", {params: { noticeId: x }})
+    },
+    
     getNoticeInfor(x) {
       this.$axios
         .get(this.$store.state.url + "/api/proxy/getNoticeInfor", {

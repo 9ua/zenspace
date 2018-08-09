@@ -40,7 +40,9 @@
         .five-content-nav
           i.iconfont(:class='fiveNavs.icon')
           p {{fiveNavs.name}}
-        i.iconfont.icon-you
+        .NoticeBox
+          span.isNotices(:class='$store.state.isNotice ? "active" : ""' v-if='index === 4')
+          i.iconfont.icon-you
   div.show(v-show='show2')
     ul
       li.title
@@ -56,7 +58,7 @@ import headers from "../public/header";
 export default {
   data() {
     return {
-      username:localStorage.getItem('Globalname'),
+      username: localStorage.getItem("Globalname"),
       bankUserFlag: "", //银行卡状态
       securityCoe: "", //安全码状态
       question: "", //密保问题状态
@@ -113,6 +115,7 @@ export default {
     this.checkType();
   },
   methods: {
+    
     checkType() {
       if (this.$store.state.userType == 1) {
         this.fiveNav[2].viewC = true;
@@ -193,7 +196,7 @@ export default {
         });
     },
     goToSet() {
-      console.log(111)
+      console.log(111);
       if (this.securityCoe == 0) {
         this.$router.push({ path: "/setSafePwd" });
       } else if (this.bankUserFlag == 0) {
@@ -206,16 +209,18 @@ export default {
     },
     //获取头部个人信息
     getTopUserData() {
-      if(localStorage.getItem("image") !== null){
+      if (localStorage.getItem("image") !== null) {
         this.image = localStorage.getItem("image");
-      }else{
-        this.$axios.get(this.$store.state.url + "api/userCenter/getTopUserData").then(res => {
-          localStorage.setItem("image",res.data.data.image);
-          this.image = localStorage.getItem("image");
-        })
-        .catch(error => {
-          console.log("获取头部个人信息No");
-        });
+      } else {
+        this.$axios
+          .get(this.$store.state.url + "api/userCenter/getTopUserData")
+          .then(res => {
+            localStorage.setItem("image", res.data.data.image);
+            this.image = localStorage.getItem("image");
+          })
+          .catch(error => {
+            console.log("获取头部个人信息No");
+          });
       }
     },
     //获取用户余额
@@ -255,6 +260,6 @@ export default {
   display: inline-block;
 }
 i {
-  text-align:center;
+  text-align: center;
 }
 </style>

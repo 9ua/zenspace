@@ -6,16 +6,15 @@
       </li>
       <li>
         <p class="wangfa">玩<br/>法</p>
-        <div @click="show = !show" class="menu">{{titles}}
+        <div class="menu" @click="showa = false,show = !show">{{title}}
           <i class="iconfont" :class="show ? 'icon-up' : 'icon-down'"></i>
         </div>
         <div class="menu-list" v-show="show" @click="show = false">
           <div class="menu-listShow">
             <ul class="menu-list-top">
-              <li v-for="(into,index) in playBonus" :key="index" v-show="isdfk3(index)" :class="{'active': index === navlist}" @click="k3Tab($event,index,into)">
+              <li v-for="(into,index) in poptitle" :key="index" v-if="isdfk3(index)" :class="{'active': index === navlist}" @click="k3Tab($event,index,into)">
                 <div class="title"> {{into.title}}</div>
-                <div v-show=" index !== 3" class="xq">赔率 {{into.displayBonus | keepTwoNum}}</div>
-                <div v-show=" index === 3" class="xq">赔率 {{playBonus[4].displayBonus | keepTwoNum}}</div>
+                <div class="xq">赔率 {{into.rate | keepTwoNum}}</div>
                 <div class="img">
                   <span class="img1"></span>
                   <span class="img2"></span>
@@ -27,8 +26,8 @@
         </div>
       </li>
       <li class="betk3list">
-        <span @click="showa = !showa">{{listname}}</span>
-        <i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="showa = !showa"></i>
+        <span @click="show = false,showa = !showa">{{listname}}</span>
+        <i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="show = false,showa = !showa"></i>
         <div class="betk3listRight" v-show="showa">
           <ul>
             <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)">
@@ -159,9 +158,10 @@
           </p>
         </div>
         <div class="betk3-content-foot">
-          <p v-for="(item,index) in playBonus" :key="index" v-show="index === navlist">{{item.remark}}
+          <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{item.remark}}
             <span v-show="index !== 3">赔率
-              <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span>
+              <span class="k3remark">{{ displayBonus | keepTwoNum}}</span> 倍。</span>
+            <!-- <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span> -->
             <!-- 单挑一骰-->
             <ul v-show="index === 0" class="yishai">
               <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in yishai" :key="index" @click="k3option($event,index,k3item)">
@@ -192,14 +192,8 @@
                 <span v-else>赔 {{k3item.rate | keepTwoNum}}</span>
               </li>
             </ul>
-            <!-- 大小单双-->
-            <ul v-show="index === 4" class="daoxiaodanshuang">
-              <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in daxiaodanshuang" :key="index" @click="k3option($event,index,k3item)">
-                <h2>{{k3item.title}}</h2>
-              </li>
-            </ul>
             <!-- 三连号-->
-            <ul v-show="index === 5" class="sanlianhao">
+            <ul v-show="index === 4" class="sanlianhao">
               <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanlianhao" :key="index" @click="k3option($event,index,k3item)">
                 <h2>
                   <a></a>
@@ -209,7 +203,7 @@
               </li>
             </ul>
             <!-- 三同号-->
-            <ul v-show="index === 6" class="santonghao">
+            <ul v-show="index === 5" class="santonghao">
               <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in santonghao" :key="index" @click="santonghaoto($event,index,k3item)">
                 <h2 v-if="index&lt;6">
                   <a></a>
@@ -220,7 +214,7 @@
               </li>
             </ul>
             <!-- 三不同-->
-            <ul v-show="index === 7" class="sanbutong">
+            <ul v-show="index === 6" class="sanbutong">
               <li :class="k3item.selected ? 'active' : ''" v-for="(k3item,index) in sanbutong" :key="index" @click="k3option($event,index,k3item)">
                 <h2></h2>
               </li>
@@ -240,7 +234,7 @@
           <input type="number" v-model="money" onfocus="this.select()" />
           <span v-if="money === '' ">请输入要投注的金额</span>
           <span v-else>单注最高可中
-            <p>{{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(rates*1000)*money/1000 | keepThreeNum}}</p>元</span>
+            <p>{{navlist === 3 ? parseInt(rates*1000)*money/1000 : parseInt(displayBonus*100)*money/100 | keepThreeNum}}</p>元</span>
         </div>
       </div>
       <div class="betk3-footer-buttom">
@@ -317,10 +311,10 @@ export default {
       navs: 0,
       navlist: 3,
       timer: "",
-      titles: "和值",
+      title: "和值",
       listname: "江苏",
       lotteryId: "jsk3",
-      playId: "k3_star1", //玩法术
+      playId: "k3_star3_and", //玩法术
       playId1: "", //玩法术
       playId2: "", //玩法术
       n1: 1,
@@ -358,165 +352,126 @@ export default {
       cons: "",
       startyet: false,
       playBonus: "", //玩法树
+      displayBonus: "", //当前玩法的赔率
+      bonusArray: [], //大小单双赔率
       timer2: "",
       betnot: true,
+      countNum: 10,
+      //头部菜单
+      poptitle:[
+        {title:"单挑一骰",rate:"64.73", id:"k3_star1", remark: "选择1个或者多个骰号，如果开奖号码中包含该号（顺序不限）即中奖" },
+        {title:"二同号",rate:"64.73", id:"k3_star2_same", remark: "选择1对相同号码和1个不同号码进行单选或者多选投注，选号与开奖号相同（顺序不限）即中奖" },
+        {title:"二不同",rate:"64.73", id:"k3_star2_same_not", remark: "对所有2不同号进行单选或多选，选号与开奖号中任意2个号码相同即中奖" },
+        {title:"和值",rate:"64.73", id:"k3_star3_and", remark: "猜3个开奖号相加的和,3-10为小,11-18为大" },
+        {title:"三连号",rate:"64.73", id:"k3_star3_link", remark: "对所有3个相连的号码（123，234，345，456)进行单选或多选投注，选号与开奖号相同（顺序不限）即中奖" },
+        {title:"三同号",rate:"64.73", id:"k3_star3_same", remark: "对豹子号（111，222，333，444，555，666）进行单选或通选投注，选号与开奖号相同即中奖" },
+        {title:"三不同",rate:"64.73", id:"k3_star3_same_not", remark: "对所有3不同号进行单选或多选，选号与开奖号相同（顺序不限）即中奖" },
+      ],
       // 单挑一骰
       yishai: [
-        { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "2", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "3", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "4", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "5", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "6", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "1", rate: "63.72", selected: false },
+        { title: "2", rate: "63.72", selected: false },
+        { title: "3", rate: "63.72", selected: false },
+        { title: "4", rate: "63.72", selected: false },
+        { title: "5", rate: "63.72", selected: false },
+        { title: "6", rate: "63.72", selected: false }
       ],
       // 二同号
       ertonghao: [
-        { title: "112", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "221", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "331", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "113", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "223", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "332", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "114", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "224", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "334", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "115", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "225", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "335", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "116", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "226", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "336", rates: "赔率63.72", rate: "63.72", selected: false },
-        {
-          title: "全选-11",
-          rates: "赔率63.72",
-          rate: "63.72",
-          selected: false
-        },
-        {
-          title: "全选-22",
-          rates: "赔率63.72",
-          rate: "63.72",
-          selected: false
-        },
-        {
-          title: "全选-33",
-          rates: "赔率63.72",
-          rate: "63.72",
-          selected: false
-        },
-        { title: "441", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "551", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "661", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "442", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "552", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "662", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "443", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "553", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "663", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "445", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "554", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "664", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "446", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "556", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "665", rates: "赔率63.72", rate: "63.72", selected: false },
-        {
-          title: "全选-44",
-          rates: "赔率63.72",
-          rate: "63.72",
-          selected: false
-        },
-        {
-          title: "全选-55",
-          rates: "赔率63.72",
-          rate: "63.72",
-          selected: false
-        },
-        { title: "全选-66", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "112", rate: "63.72", selected: false },
+        { title: "221", rate: "63.72", selected: false },
+        { title: "331", rate: "63.72", selected: false },
+        { title: "113", rate: "63.72", selected: false },
+        { title: "223", rate: "63.72", selected: false },
+        { title: "332", rate: "63.72", selected: false },
+        { title: "114", rate: "63.72", selected: false },
+        { title: "224", rate: "63.72", selected: false },
+        { title: "334", rate: "63.72", selected: false },
+        { title: "115", rate: "63.72", selected: false },
+        { title: "225", rate: "63.72", selected: false },
+        { title: "335", rate: "63.72", selected: false },
+        { title: "116", rate: "63.72", selected: false },
+        { title: "226", rate: "63.72", selected: false },
+        { title: "336", rate: "63.72", selected: false },
+        { title: "全选-11", rate: "63.72", selected: false },
+        { title: "全选-22", rate: "63.72", selected: false },
+        { title: "全选-33", rate: "63.72", selected: false },
+        { title: "441", rate: "63.72", selected: false },
+        { title: "551", rate: "63.72", selected: false },
+        { title: "661", rate: "63.72", selected: false },
+        { title: "442", rate: "63.72", selected: false },
+        { title: "552", rate: "63.72", selected: false },
+        { title: "662", rate: "63.72", selected: false },
+        { title: "443", rate: "63.72", selected: false },
+        { title: "553", rate: "63.72", selected: false },
+        { title: "663", rate: "63.72", selected: false },
+        { title: "445", rate: "63.72", selected: false },
+        { title: "554", rate: "63.72", selected: false },
+        { title: "664", rate: "63.72", selected: false },
+        { title: "446", rate: "63.72", selected: false },
+        { title: "556", rate: "63.72", selected: false },
+        { title: "665", rate: "63.72", selected: false },
+        { title: "全选-44", rate: "63.72", selected: false },
+        { title: "全选-55", rate: "63.72", selected: false },
+        { title: "全选-66", rate: "63.72", selected: false }
       ],
       // 二不同
       erbutong: [
-        { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "2", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "3", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "4", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "5", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "6", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "1", rate: "63.72", selected: false },
+        { title: "2", rate: "63.72", selected: false },
+        { title: "3", rate: "63.72", selected: false },
+        { title: "4", rate: "63.72", selected: false },
+        { title: "5", rate: "63.72", selected: false },
+        { title: "6", rate: "63.72", selected: false }
       ],
       // 和值
       k3options: [
-        {
-          title: "大",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
-        {
-          title: "小",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
-        {
-          title: "单",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
-        {
-          title: "双",
-          rates: "赔率1.998750",
-          rate: "1.998750",
-          selected: false
-        },
-        { title: "03", rates: "赔率60.8400", rate: "60.8400", selected: false },
-        { title: "04", rates: "赔率60.8400", rate: "60.8400", selected: false },
-        { title: "05", rates: "赔率30.4200", rate: "30.4200", selected: false },
-        { title: "06", rates: "赔率20.2800", rate: "20.2800", selected: false },
-        { title: "07", rates: "赔率12.1680", rate: "12.1680", selected: false },
-        { title: "08", rates: "赔率8.6914", rate: "8.6914", selected: false },
-        { title: "09", rates: "赔率7.6050", rate: "7.6050", selected: false },
-        { title: "10", rates: "赔率6.7600", rate: "6.7600", selected: false },
-        { title: "11", rates: "赔率6.7600", rate: "6.7600", selected: false },
-        { title: "12", rates: "赔率7.6050", rate: "7.6050", selected: false },
-        { title: "13", rates: "赔率8.6914", rate: "8.6914", selected: false },
-        { title: "14", rates: "赔率12.1680", rate: "12.1680", selected: false },
-        { title: "15", rates: "赔率20.2800", rate: "20.2800", selected: false },
-        { title: "16", rates: "赔率30.4200", rate: "30.4200", selected: false },
-        { title: "17", rates: "赔率60.8400", rate: "60.8400", selected: false },
-        { title: "18", rates: "赔率60.8400", rate: "60.8400", selected: false }
-      ],
-      // 大小单双
-      daxiaodanshuang: [
-        { title: "大", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "小", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "单", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "双", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "大", rate: "194.180", selected: false },
+        { title: "小", rate: "194.180", selected: false },
+        { title: "单", rate: "194.180", selected: false },
+        { title: "双", rate: "194.180", selected: false },
+        { title: "03", rate: "194.18", selected: false },
+        { title: "04", rate: "64.73", selected: false },
+        { title: "05", rate: "32.36", selected: false },
+        { title: "06", rate: "21.58", selected: false },
+        { title: "07", rate: "12.95", selected: false },
+        { title: "08", rate: "9.25", selected: false },
+        { title: "09", rate: "8.09", selected: false },
+        { title: "10", rate: "7.19", selected: false },
+        { title: "11", rate: "7.19", selected: false },
+        { title: "12", rate: "8.09", selected: false },
+        { title: "13", rate: "9.25", selected: false },
+        { title: "14", rate: "12.95", selected: false },
+        { title: "15", rate: "21.58", selected: false },
+        { title: "16", rate: "32.36", selected: false },
+        { title: "17", rate: "64.73", selected: false },
+        { title: "18", rate: "194.18", selected: false }
       ],
       // 三连号
       sanlianhao: [
-        { title: "123", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "234", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "345", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "456", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "123", rate: "63.72", selected: false },
+        { title: "234", rate: "63.72", selected: false },
+        { title: "345", rate: "63.72", selected: false },
+        { title: "456", rate: "63.72", selected: false }
       ],
       // 三同号
       santonghao: [
-        { title: "111", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "222", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "333", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "444", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "555", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "666", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "通选", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "111", rate: "63.72", selected: false },
+        { title: "222", rate: "63.72", selected: false },
+        { title: "333", rate: "63.72", selected: false },
+        { title: "444", rate: "63.72", selected: false },
+        { title: "555", rate: "63.72", selected: false },
+        { title: "666", rate: "63.72", selected: false },
+        { title: "通选", rate: "63.72", selected: false }
       ],
       // 三不同
       sanbutong: [
-        { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "2", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "3", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "4", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "5", rates: "赔率63.72", rate: "63.72", selected: false },
-        { title: "6", rates: "赔率63.72", rate: "63.72", selected: false }
+        { title: "1", rate: "63.72", selected: false },
+        { title: "2", rate: "63.72", selected: false },
+        { title: "3", rate: "63.72", selected: false },
+        { title: "4", rate: "63.72", selected: false },
+        { title: "5", rate: "63.72", selected: false },
+        { title: "6", rate: "63.72", selected: false }
       ]
     };
   },
@@ -541,11 +496,9 @@ export default {
   mounted() {
     document.addEventListener("visibilitychange",this.listen);
     this.endCount();
-    if (!this.$route.meta.isBack) {
-      this.geteServerTime(); //获取彩種當前獎期時間
-      this.getPlayTree();
-    }
-    this.$route.meta.isBack = false;
+    this.geteServerTime(); //获取彩種當前獎期時間
+    this.getPlayTreeBetRate();
+    this.getLotteryPlayBetRate();
   },
   beforeDestroy() {
     this.endCount();
@@ -588,9 +541,11 @@ export default {
     isdfk3(index) {
       if (this.$route.query.id === "dfk3") {
         return index != -1;
+      }else{
+        return index != 5;
       }
-      return index != 6;
     },
+    //非宏发快3，不显示3,18
     isdfk3Cen(index) {
       if (this.$route.query.id === "dfk3") {
         return index != -1;
@@ -604,8 +559,10 @@ export default {
     },
     //查看20条记录
     lookAll() {
+      this.countNum = 20;
       this.betk3ContentTopPop = !this.betk3ContentTopPop;
       this.lookAllUl = !this.lookAllUl;
+      this.getPastOp();
     },
     //往期开奖
     lookAllTo() {
@@ -761,7 +718,7 @@ export default {
       this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 20 }
+          params: { lotteryId: this.$route.query.id, count: this.countNum }
         })
         .then(res => {
           this.getPastOpens = res.data.data;
@@ -826,31 +783,26 @@ export default {
       this.lotteryId = into.id;
       this.showan = index;
       this.showa = !this.showa;
-      this.$router.push({ query: { id: into.id } });
-      this.endCount();
-      this.iscreat(); //清空
-      this.getPlayTree(); //玩法术
-      this.geteServerTime(); //获取彩種當前獎期時間
-      this.$router.push({
-        query: {
-          id: this.$route.query.id,
-          name: into.name,
-          group: this.groupId
-        }
-      });
-      if (this.$route.query.id !== "dfk3" && this.navlist === 6) {
+      this.$router.push({ query: { id: into.id, name: into.name, group: this.groupId }});
+      if (this.$route.query.id !== "dfk3" && this.navlist === 5) {
         this.navlist = 3;
-        this.titles = "和值";
+        this.title = "和值";
+        this.playId = 'k3_star3_and';
+      }
+      this.geteServerTime(); //获取彩種當前獎期時間
+      this.iscreat(); //清空
+      if(this.navlist === 3){
+        this.getPlayTreeBetRate();
       }
     },
     //头部菜单项
     k3Tab(e, index, into) {
       this.iscreat();
-      this.titles = into.title;
+      this.title = into.title;
       this.navlist = index;
       this.show = !this.show;
-      this.playId = this.playBonus[index].id;
-      this.rates = this.playBonus[this.navlist].displayBonus;
+      this.playId = into.id;
+      this.getPlayTreeBetRate();
     },
     //二同複選xx
     onClickStan1(e) {
@@ -1101,7 +1053,6 @@ export default {
           this.con2 = this.dd.join(",");
           this.zhu2++;
         }
-
         this.d[index] = k3item.title;
         this.peilv[index] = k3item.rate;
         this.peilv1 = this.peilv.filter(function(n) {
@@ -1144,109 +1095,47 @@ export default {
         this.zhu = this.zhu1 + this.zhu2;
       }
     },
-    //大小单双，赔率显示
-    setupPlayTree(resData) {
-      this.playBonus = resData;
-      let arrpeilv1 = [];
-      let arrpeilv2 = [];
-      arrpeilv1 = this.playBonus[3].bonusArray;
-      arrpeilv2 = this.playBonus[4].bonusArray;
-      for (let i = 0; i < this.k3options.length; i++) {
-        this.k3options[0].rate = arrpeilv2.大;
-        this.k3options[1].rate = arrpeilv2.小;
-        this.k3options[2].rate = arrpeilv2.单;
-        this.k3options[3].rate = arrpeilv2.双;
-        this.k3options[4].rate = arrpeilv1[3];
-        this.k3options[5].rate = arrpeilv1[4];
-        this.k3options[6].rate = arrpeilv1[5];
-        this.k3options[7].rate = arrpeilv1[6];
-        this.k3options[8].rate = arrpeilv1[7];
-        this.k3options[9].rate = arrpeilv1[8];
-        this.k3options[10].rate = arrpeilv1[9];
-        this.k3options[11].rate = arrpeilv1[10];
-        this.k3options[12].rate = arrpeilv1[11];
-        this.k3options[13].rate = arrpeilv1[12];
-        this.k3options[14].rate = arrpeilv1[13];
-        this.k3options[15].rate = arrpeilv1[14];
-        this.k3options[16].rate = arrpeilv1[15];
-        this.k3options[17].rate = arrpeilv1[16];
-        this.k3options[18].rate = arrpeilv1[17];
-        this.k3options[19].rate = arrpeilv1[18];
-      }
+    //头部菜单项--赔率
+    getLotteryPlayBetRate(){
+      this.$axios.get(this.$store.state.url + "api/lottery/getLotteryPlayBetRate",{params: {lotteryId: this.$route.query.id}}).then(res =>{
+        this.poptitle[0].rate = res.data.data["单挑一骰"];
+        this.poptitle[1].rate = res.data.data["二同号"];
+        this.poptitle[2].rate = res.data.data["二不同"];
+        this.poptitle[3].rate = res.data.data["和值"];
+        this.poptitle[4].rate = res.data.data["三连号"];
+        this.poptitle[5].rate = res.data.data["三同号"];
+        this.poptitle[6].rate = res.data.data["三不同"];
+      })
     },
-    // 玩法树
-    getPlayTree() {
-      var now = new Date().getTime();
-      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
-        var setupTime = localStorage.getItem(
-          "date_playTree_" + this.$route.query.id
-        );
-        if (null == setupTime || now - setupTime > this.cacheTime) {
-          localStorage.removeItem("playTree_" + this.$route.query.id);
-          localStorage.removeItem("date_playTree_" + this.$route.query.id);
-          this.$axios
-            .get(this.$store.state.url + "api/lottery/getPlayTree", {
-              params: { lotteryId: this.$route.query.id }
-            })
-            .then(res => {
-              this.setupPlayTree(
-                JSON.parse(JSON.stringify(res.data.data.playBonus))
-              );
-              localStorage.setItem(
-                "playTree_" + this.$route.query.id,
-                JSON.stringify(res.data.data.playBonus)
-              );
-              localStorage.setItem(
-                "date_playTree_" + this.$route.query.id,
-                now
-              );
-            })
-            .catch(error => {
-              console.log("玩法树No");
-              this.$store.state.loginStatus = false;
-              this.$pop.show({
-                error: "",
-                title: "温馨提示",
-                content: "获取不成功,请检查您的网络！",
-                content1: "",
-                content2: "",
-                number: 1
-              });
-            });
-        } else
-          this.setupPlayTree(
-            JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id))
-          );
-      } else {
-        this.$axios
-          .get(this.$store.state.url + "api/lottery/getPlayTree", {
-            params: { lotteryId: this.$route.query.id }
-          })
-          // this.$axios.get("./static/k3s.json")
-          .then(res => {
-            this.setupPlayTree(
-              JSON.parse(JSON.stringify(res.data.data.playBonus))
-            );
-            //set to local storage
-            localStorage.setItem(
-              "playTree_" + this.$route.query.id,
-              JSON.stringify(res.data.data.playBonus)
-            );
-            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
-          })
-          .catch(error => {
-            console.log("玩法树No");
-            this.$store.state.loginStatus = false;
-            this.$pop.show({
-              error: "",
-              title: "温馨提示",
-              content: "获取不成功!",
-              content1: "",
-              content2: "",
-              number: 2
-            });
-          });
-      }
+    //大小单双，赔率显示
+    getPlayTreeBetRate() {
+      this.$axios.get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {params: { lotteryId: this.$route.query.id, playId: this.playId }}).then(res => {
+          this.displayBonus = res.data.data.displayBonus;
+          if(this.navlist === 3){
+            localStorage.setItem("bonusArray",JSON.stringify(res.data.data.bonusArray));
+            this.bonusArray = JSON.parse(localStorage.getItem("bonusArray"));
+            this.k3options[0].rate = this.bonusArray["大"];
+            this.k3options[1].rate = this.bonusArray["小"];
+            this.k3options[2].rate = this.bonusArray["单"];
+            this.k3options[3].rate = this.bonusArray["双"];
+            this.k3options[4].rate = this.bonusArray["03"];
+            this.k3options[5].rate = this.bonusArray["04"];
+            this.k3options[6].rate = this.bonusArray["05"];
+            this.k3options[7].rate = this.bonusArray["06"];
+            this.k3options[8].rate = this.bonusArray["07"];
+            this.k3options[9].rate = this.bonusArray["08"];
+            this.k3options[10].rate = this.bonusArray["09"];
+            this.k3options[11].rate = this.bonusArray["10"];
+            this.k3options[12].rate = this.bonusArray["11"];
+            this.k3options[13].rate = this.bonusArray["12"];
+            this.k3options[14].rate = this.bonusArray["13"];
+            this.k3options[15].rate = this.bonusArray["14"];
+            this.k3options[16].rate = this.bonusArray["15"];
+            this.k3options[17].rate = this.bonusArray["16"];
+            this.k3options[18].rate = this.bonusArray["17"];
+            this.k3options[19].rate = this.bonusArray["18"];
+          }
+        });
     },
     //中间->投注选号
     k3option(e, index, k3item) {
@@ -1360,14 +1249,9 @@ export default {
         this.money = "";
         this.playId1 = "";
         this.playId2 = "";
-      }
-      // 大小单双
-      for (let i = 0; i < this.daxiaodanshuang.length; i++) {
-        this.daxiaodanshuang[i].selected = false;
-        this.d = [];
-        this.con = "";
-        this.zhu = 0;
-        this.money = "";
+        this.peilv=[];
+        this.peilv1 = 0;
+        this.rates = 0;
       }
       // 三连号
       for (let i = 0; i < this.sanlianhao.length; i++) {

@@ -269,6 +269,7 @@ export default {
       cacheTime: 600000,
       historyNum: 0,
       betnot:true,
+      countNum:10,
     };
   },
   destroyed() {
@@ -341,8 +342,10 @@ export default {
     },
     //查看20条记录
     lookAll() {
+      this.countNum = 20;
       this.betsscContentTopPop = !this.betsscContentTopPop;
       this.lookAllUl = !this.lookAllUl;
+      this.getPastOp();
     },
     //往期开奖
     lookAllTo() {
@@ -1911,7 +1914,7 @@ export default {
     },
     //玩法术
     getPlayTree() {
-      this.$axios.get("../../../static/ssc.json")
+      this.$axios.get("static/ssc.json")
         .then(res => {
             this.playBonus = res.data.data.playBonus;
             this.playGroups = res.data.data.playGroups;
@@ -1920,8 +1923,6 @@ export default {
           })
           .catch(error => {
             console.log("玩法树No");
-            this.$store.state.loginStatus = false;
-            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
           });
 
 
@@ -2164,7 +2165,7 @@ export default {
       this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 20 }
+          params: { lotteryId: this.$route.query.id, count: this.countNum }
         })
         .then(res => {
           this.getPastOpens = res.data.data;

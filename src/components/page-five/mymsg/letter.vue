@@ -45,7 +45,7 @@ export default {
     getUserNoticeList() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/getUserNoticeList", {
-          params: { type: 2 }
+          params: {  type: 2,start:0,limit:100}
         })
         .then(res => {
           this.letterlist = res.data.data;

@@ -19,6 +19,8 @@ const state = {
   balance: null, //余额
   userType: localStorage.getItem('userType'), //0会员，1代理
   historyNum: "/one",
+  isNotice:false,//是否有未读消息
+  noticeCount:0,//有未读消息，多少条
 
   //游戏投注相关
   betContentTopPopFlag: false, //是否弹出投注记录

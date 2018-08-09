@@ -121,6 +121,18 @@
   }
 }
 
+.NoticeBox {
+  @extend %flex;
+  margin-right: 16px;
+  // & .isNotices.active {
+  //   background: rgb(175, 58, 49);
+  //   width: 12px;
+  //   height: 12px;
+  //   border-radius: 50%;
+  //   margin-right: 16px;
+  // }
+}
+
 .icon-top {
   margin-top: 10px;
   width: 50px;

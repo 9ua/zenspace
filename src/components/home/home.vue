@@ -26,11 +26,10 @@ export default {
       ]
     };
   },
-  created(){
-    // this.getUserNoticeList();
-  },
   mounted(){
-    this.getUserNoticeList();
+    if(this.$store.state.loginStatus === true){
+      this.getUserNoticeList();
+    }
   },
   methods: {
     historyNum() {

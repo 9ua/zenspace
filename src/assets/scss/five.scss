@@ -123,6 +123,7 @@
 
 .NoticeBox {
   @extend %flex;
+  margin-right: 16px;
   // & .isNotices.active {
   //   background: rgb(175, 58, 49);
   //   width: 12px;

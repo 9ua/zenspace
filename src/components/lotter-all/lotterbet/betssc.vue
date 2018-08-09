@@ -269,6 +269,7 @@ export default {
       cacheTime: 600000,
       historyNum: 0,
       betnot:true,
+      countNum:10,
     };
   },
   destroyed() {
@@ -341,8 +342,10 @@ export default {
     },
     //查看20条记录
     lookAll() {
+      this.countNum = 20;
       this.betsscContentTopPop = !this.betsscContentTopPop;
       this.lookAllUl = !this.lookAllUl;
+      this.getPastOp();
     },
     //往期开奖
     lookAllTo() {
@@ -2162,7 +2165,7 @@ export default {
       this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 20 }
+          params: { lotteryId: this.$route.query.id, count: this.countNum }
         })
         .then(res => {
           this.getPastOpens = res.data.data;

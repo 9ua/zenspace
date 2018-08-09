@@ -97,17 +97,19 @@
             & li.active {
               border: 1px solid #f4c829;
             }
-            
-            & li:nth-child(5) {
-              display: none;
+            & li:nth-child(3n){
+              margin-right: 0px;
             }
+            // & li:nth-child(5) {
+            //   display: none;
+            // }
             & li:nth-child(7) {
               margin-right: 0px;
             }
-            & li:nth-child(3),
-            & li:nth-child(8) {
-              margin-right: 0;
-            }
+            // & li:nth-child(3),
+            // & li:nth-child(8) {
+            //   margin-right: 0;
+            // }
           }
         }
       }

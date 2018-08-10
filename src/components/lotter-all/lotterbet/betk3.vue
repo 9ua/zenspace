@@ -80,7 +80,7 @@
     <div class="betk3-content">
       <div>
         <div class="betk3-content-top">
-          <div class="content-left" @click=" betk3ContentTopPop = !betk3ContentTopPop">
+          <div class="content-left" @click="countNums">
             <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId}}期开奖号码</p>
             <p v-if="$route.query.id !== 'bjk3'">{{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
             </p>
@@ -359,6 +359,7 @@ export default {
       playBonus: "", //玩法树
       timer2: "",
       betnot: true,
+      countNum:1,
       // 单挑一骰
       yishai: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -598,6 +599,8 @@ export default {
     lookAll() {
       this.betk3ContentTopPop = !this.betk3ContentTopPop;
       this.lookAllUl = !this.lookAllUl;
+      this.countNum = 20;
+      this.getPastOp();
     },
     //往期开奖
     lookAllTo() {
@@ -708,16 +711,19 @@ export default {
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
+          this.countNum = 1;
           this.getPastOp();
         } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
+          this.countNum = 1;
           this.getPastOp();
         } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
+          this.countNum = 1;
           this.getPastOp();
         }
       }, 1000);
@@ -734,6 +740,11 @@ export default {
       });
       this.geteServerTime();
     },
+    countNums(){
+      this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      this.countNum = 10;
+      this.getPastOp();
+    },
     //获取过去开奖号码10个
     getPastOp() {
       if (this.startyet == false) {
@@ -742,7 +753,7 @@ export default {
       this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
-          params: { lotteryId: this.$route.query.id, count: 20 }
+          params: { lotteryId: this.$route.query.id, count: this.countNum}
         })
         .then(res => {
           this.getPastOpens = res.data.data;
@@ -775,6 +786,7 @@ export default {
     getLotteryList() {
       this.show = false;
       this.showa = !this.showa;
+      this.countNum = 1;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
         this.groupId = this.LotteryList[0].groupId;

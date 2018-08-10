@@ -697,7 +697,7 @@ export default {
       this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        console.log(this.today);
+        // console.log(this.today);
         this.setTimeMode();
         if (this.today < 1) {
           this.endCount();

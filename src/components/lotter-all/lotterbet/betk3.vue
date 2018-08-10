@@ -6,7 +6,7 @@
       </li>
       <li>
         <p class="wangfa">玩<br/>法</p>
-        <div @click="show = !show" class="menu">{{titles}}
+        <div @click="showa=false,show = !show" class="menu">{{titles}}
           <i class="iconfont" :class="show ? 'icon-up' : 'icon-down'"></i>
         </div>
         <div class="menu-list" v-show="show" @click="show = false">
@@ -27,8 +27,8 @@
         </div>
       </li>
       <li class="betk3list">
-        <span @click="showa = !showa">{{listname}}</span>
-        <i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="showa = !showa"></i>
+        <span @click="getLotteryList">{{listname}}</span>
+        <i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="getLotteryList"></i>
         <div class="betk3listRight" v-show="showa">
           <ul>
             <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)">
@@ -317,7 +317,7 @@ export default {
       navlist: 3,
       timer: "",
       titles: "和值",
-      listname: "江苏",
+      listname: this.$route.query.name.substring(0, 2),
       lotteryId: "jsk3",
       playId: "k3_star1", //玩法术
       playId1: "", //玩法术
@@ -534,37 +534,30 @@ export default {
   },
   created() {
     this.noGetItem();
-    this.getLotteryList();
+    // this.getLotteryList();
     this.endCount();
   },
   mounted() {
-    // document.addEventListener("visibilitychange",this.listen);
+    document.addEventListener("visibilitychange",this.listen);
     this.endCount();
-    if (!this.$route.meta.isBack) {
-      this.geteServerTime(); //获取彩種當前獎期時間
-      this.getPlayTree();
-    }
-    this.$route.meta.isBack = false;
+    this.geteServerTime(); //获取彩種當前獎期時間
+    this.getPlayTree();
   },
-  destroyed() {
+  beforeDestroy() {
     this.endCount();
     this.iscreat();
-    // document.removeEventListener("visibilitychange",this.listen);
+    document.removeEventListener("visibilitychange",this.listen);
   },
   methods: {
-    // listen() {
-    //     if(document.hidden === false){
-    //       this.geteServerTime();
-    //     }
-    //     if(document.hidden === true){
-    //       this.endCount();
-    //     }
-    // },
+    listen() {
+        if(document.hidden === false){
+          this.geteServerTime();
+        }
+    },
     //没打接口前
     noGetItem() {
       if (this.startyet == false) {
         this.start();
-        this.initSetTimeout();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
@@ -638,14 +631,20 @@ export default {
       clearInterval(this.interval);
     },
     endCount() {
-      clearInterval(this.timer);
-      clearTimeout(this.timer2);
+      if (this.timer) {
+        for (let i= 0;i <=this.timer;i++) {
+          clearInterval(i);
+        }
+      }
+      if (this.timer2) {
+        for (let i= 0;i <=this.timer2;i++) {
+          clearTimeout(i);
+        }
+      }
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      // console.log("getserver");
-      clearInterval(this.timer);
-      clearTimeout(this.timer2);
+      // clearInterval(this.timer);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
@@ -665,8 +664,8 @@ export default {
             }
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
-            this.getPastOp();
             this.initSetTimeout();
+            this.getPastOp();
           }
         })
         .catch(error => {
@@ -691,24 +690,31 @@ export default {
     },
     //倒计时
     initSetTimeout() {
+      this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
+        console.log(this.today);
         this.setTimeMode();
         if (this.today < 1) {
-          clearInterval(this.timer);
+          this.endCount();
           this.timesUp();
         }
-        if (
+        if (this.getPastOpenB &&
+          this.getPastOpenB[0].lotteryId !== this.$route.query.id
+        ) {
+          this.endCount();
+        }
+        if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
           this.getPastOp();
-        } else if (
+        } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
           this.getPastOp();
-        } else if (
+        } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
@@ -745,7 +751,9 @@ export default {
           this.n2 = this.getPastOpens[0].n2;
           this.n3 = this.getPastOpens[0].n3;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            this.reGetPastOp();
+            if (res.data.data[0].lotteryId === this.$route.query.id) {
+              this.reGetPastOp();
+            }
           } else {
             clearTimeout(this.timer2);
             this.end();
@@ -765,6 +773,8 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
+      this.show = false;
+      this.showa = !this.showa;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
         this.groupId = this.LotteryList[0].groupId;

@@ -359,7 +359,7 @@ export default {
       playBonus: "", //玩法树
       timer2: "",
       betnot: true,
-      countNum:1,
+      countNum:20,
       // 单挑一骰
       yishai: [
         { title: "1", rates: "赔率63.72", rate: "63.72", selected: false },
@@ -599,8 +599,7 @@ export default {
     lookAll() {
       this.betk3ContentTopPop = !this.betk3ContentTopPop;
       this.lookAllUl = !this.lookAllUl;
-      this.countNum = 20;
-      this.getPastOp();
+      // this.getPastOp();
     },
     //往期开奖
     lookAllTo() {
@@ -668,7 +667,6 @@ export default {
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
             this.initSetTimeout();
-            this.countNum = 1;
             this.getPastOp();
           }
         })
@@ -712,19 +710,16 @@ export default {
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
-          this.countNum = 1;
           this.getPastOp();
         }
       }, 1000);
@@ -744,10 +739,9 @@ export default {
     countNums(){
       this.showa = false;
       this.betk3ContentTopPop = !this.betk3ContentTopPop;
-      this.countNum = 10;
-      if(this.betk3ContentTopPop === true){
-        this.getPastOp();
-      }
+      // if(this.betk3ContentTopPop === true){
+      //   this.getPastOp();
+      // }
     },
     //获取过去开奖号码10个
     getPastOp() {
@@ -783,7 +777,6 @@ export default {
     reGetPastOp() {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
-        this.countNum = 1;
         this.getPastOp();
       }, 12000);
     },
@@ -792,7 +785,6 @@ export default {
       this.show = false;
       this.betk3ContentTopPop = false;
       this.showa = !this.showa;
-      this.countNum = 1;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
         this.groupId = this.LotteryList[0].groupId;

@@ -742,9 +742,12 @@ export default {
       this.geteServerTime();
     },
     countNums(){
+      this.showa = false;
       this.betk3ContentTopPop = !this.betk3ContentTopPop;
       this.countNum = 10;
-      this.getPastOp();
+      if(this.betk3ContentTopPop === true){
+        this.getPastOp();
+      }
     },
     //获取过去开奖号码10个
     getPastOp() {
@@ -787,6 +790,7 @@ export default {
     //右上获取彩种
     getLotteryList() {
       this.show = false;
+      this.betk3ContentTopPop = false;
       this.showa = !this.showa;
       this.countNum = 1;
       if (localStorage.getItem("lotteryList") !== null) {

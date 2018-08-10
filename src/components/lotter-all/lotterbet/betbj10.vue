@@ -29,8 +29,8 @@
         </div>
       </li>
       <li class="betbj10list">
-        <span @click="showa = !showa">{{listname}}</span>
-        <i :class="showa ? 'icon-up' : 'icon-down' " @click="showa = !showa" class="iconfont"></i>
+        <span @click="getLotteryList">{{listname}}</span>
+        <i :class="showa ? 'icon-up' : 'icon-down' " @click="getLotteryList" class="iconfont"></i>
         <div v-show="showa" class="betk3listRight">
           <ul>
             <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)">
@@ -409,7 +409,7 @@ export default {
   },
   created() {
     this.noGetItem();
-    this.getLotteryList();
+    // this.getLotteryList();
     this.endCount();
   },
   mounted() {
@@ -1682,6 +1682,8 @@ export default {
     //右上获取彩种
     getLotteryList() {
       this.countNum = 1;
+      this.betsscContentTopPop = false;
+      this.showa = !this.showa;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).pk10;
         this.groupId = this.LotteryList[0].groupId;
@@ -1917,9 +1919,12 @@ export default {
       this.geteServerTime();
     },
     countNums(){
+      this.showa = false;
       this.betsscContentTopPop = !this.betsscContentTopPop;
       this.countNum = 10;
-      this.getPastOp();
+      if(this.betsscContentTopPop === true){
+        this.getPastOp();
+      }
     },
     //获取过去开奖号码20个
     getPastOp() {

@@ -22,8 +22,8 @@
                     span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
                       a {{player.groupName}}{{player.title}}
     li.betssclist
-      span(@click='showa = !showa') {{listname}}
-      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
+      span(@click='getLotteryList') {{listname}}
+      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='getLotteryList')
       .betk3listRight(v-show='showa')
         ul
           li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
@@ -280,7 +280,7 @@ export default {
   },
   created() {
     this.noGetItem();
-    this.getLotteryList();
+    // this.getLotteryList();
     this.endCount();
   },
   mounted() {
@@ -2044,6 +2044,8 @@ export default {
     //右上获取彩种
     getLotteryList() {
       this.countNum = 1;
+      this.betsscContentTopPop = false;
+      this.showa = !this.showa;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).ssc;
         this.groupId = this.LotteryList[0].groupId;
@@ -2210,9 +2212,12 @@ export default {
       this.geteServerTime();
     },
     countNums(){
+      this.showa = false;
       this.betsscContentTopPop = !this.betsscContentTopPop;
       this.countNum = 10;
-      this.getPastOp();
+      if(this.betsscContentTopPop === true){
+        this.getPastOp();
+      }
     },
     //获取过去开奖号码10个
     getPastOp() {

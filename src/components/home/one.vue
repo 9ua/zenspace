@@ -97,11 +97,7 @@ export default {
       })
     },
     toLogin(){
-      this.$pop.show({error: "",title: "温馨提示",content: "获取不成功,请检查您的网络！",content1: "",content2: "",number: 1});
-      setTimeout(() => {
-        this.$pop.hide();
         this.$router.push("/login")
-      },1000)
     },
     a() {
       this.isbanner = true

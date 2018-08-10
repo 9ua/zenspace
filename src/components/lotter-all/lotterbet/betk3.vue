@@ -668,6 +668,7 @@ export default {
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
             this.initSetTimeout();
+            this.countNum = 1;
             this.getPastOp();
           }
         })
@@ -779,6 +780,7 @@ export default {
     reGetPastOp() {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
+        this.countNum = 1;
         this.getPastOp();
       }, 12000);
     },

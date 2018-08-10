@@ -510,9 +510,6 @@ export default {
         if(document.hidden === false){
           this.geteServerTime();
         }
-        if(document.hidden === true){
-          this.endCount();
-        }
     },
     //没打接口前
     noGetItem() {
@@ -636,7 +633,7 @@ export default {
             this.setTimeMode();
             this.initSetTimeout();
             this.getPastOp();
-          }
+          } 
         })
         .catch(error => {
           console.log("获取彩種當前獎期時間No");

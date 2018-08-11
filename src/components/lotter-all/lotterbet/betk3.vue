@@ -598,25 +598,19 @@ export default {
       clearInterval(_this.interval);
     },
     endCount() {
-      // clearInterval(this.timer);
-      // console.log("before:" + this.timer);
       if (this.timer) {
         for (let i = 0; i <= this.timer; i++) {
           clearInterval(i);
         }
       }
-      // console.log("after:" + this.timer);
       if (this.timer2) {
         for (let i = 0; i <= timer2; i++) {
           clearTimeout(i);
         }
       }
-      // clearTimeout(this.timer2);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      // console.log("getserver");
-      // this.endCount();
       clearInterval(this.timer);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {

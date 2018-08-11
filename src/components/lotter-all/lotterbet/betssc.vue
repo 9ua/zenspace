@@ -306,9 +306,6 @@ export default {
         if(document.hidden === false){
           this.geteServerTime();
         }
-        if(document.hidden === true){
-          this.endCount();
-        }
     },
     //没打接口前
     noGetItem(){

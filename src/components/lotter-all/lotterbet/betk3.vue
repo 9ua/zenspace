@@ -665,7 +665,6 @@ export default {
       clearInterval(this.timer);
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        // this.setTimeMode();
         if (this.today < 1) {
           clearInterval(this.timer);
           this.timesUp();
@@ -754,11 +753,13 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
+      this.$loading.show({number:"a"});
       this.show = false;
       this.showa = !this.showa;
       this.betk3ContentTopPop = false;
       this.countNum = 1;
       if (localStorage.getItem("lotteryList") !== null) {
+        this.$loading.hide();
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
@@ -770,6 +771,7 @@ export default {
         this.$axios
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
+            this.$loading.hide();
             localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
             this.LotteryList = res.data.data.k3;
             this.groupId = this.LotteryList[0].groupId;

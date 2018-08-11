@@ -2131,7 +2131,7 @@ export default {
       this.countDown = hours + ":" + minutes + ":" + seconds;
     },
     //倒计时
-    initSetTimeout(today) {
+    initSetTimeout() {
       this.timer = setInterval(() => {
         this.today = this.today - 1;
         this.setTimeMode();

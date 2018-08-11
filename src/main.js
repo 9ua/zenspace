@@ -11,8 +11,10 @@ import VueAxios from 'vue-axios'
 import store from './vuex/store'
 import md5 from 'js-md5';
 import popTo from "./components/public/pop"
+import Loading from "./components/public/loading"
 
 Vue.use(popTo);
+Vue.use(Loading);
 axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 window.axios = axios;

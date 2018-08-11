@@ -492,21 +492,17 @@ export default {
   },
   created() {
     this.noGetItem();
-    // this.getLotteryList();
-    // this.endCount();
-    clearInterval(this.timer);
+    this.endCount();
   },
   mounted() {
     document.addEventListener("visibilitychange",this.listen);
-    // this.endCount();
-    clearInterval(this.timer);
+    this.endCount();
     this.geteServerTime(); //获取彩種當前獎期時間
     this.getPlayTreeBetRate();
     this.getLotteryPlayBetRate();
   },
   beforeDestroy() {
-    // this.endCount();
-    clearInterval(this.timer);
+    this.endCount();
     this.iscreat();
     document.removeEventListener("visibilitychange",this.listen);
   },
@@ -520,7 +516,6 @@ export default {
     noGetItem() {
       if (this.startyet == false) {
         this.start();
-        // this.initSetTimeout();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
@@ -611,7 +606,6 @@ export default {
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      clearInterval(this.timer);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
@@ -662,27 +656,23 @@ export default {
         this.start();
       }
       this.shownum = true;
-      clearInterval(this.timer);
+      this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
         if (this.today < 1) {
-          clearInterval(this.timer);
+          this.endCount();
           this.timesUp();
         }
         if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
-          clearInterval(this.timer);
+          this.endCount();
         }
         if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 48) {
-          this.countNum = 1;
           this.getPastOp();
         } else if (this.getPastOpenB &&  this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47 ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46 ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45) {
-          this.countNum = 1;
           this.getPastOp();
         }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId === this.lastSeasonId){
           this.end();

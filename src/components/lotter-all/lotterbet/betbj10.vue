@@ -405,15 +405,14 @@ export default {
   destroyed() {
     this.endCount();
     this.iscreat();
-    // document.removeEventListener("visibilitychange",this.listen);
+    document.removeEventListener("visibilitychange",this.listen);
   },
   created() {
     this.noGetItem();
-    // this.getLotteryList();
     this.endCount();
   },
   mounted() {
-    // document.addEventListener("visibilitychange",this.listen);
+    document.addEventListener("visibilitychange",this.listen);
     this.endCount();
     if (!this.$route.meta.isBack) {
       this.getPlayTree();
@@ -510,8 +509,16 @@ export default {
       clearInterval(this.interval);
     },
     endCount() {
-      clearInterval(this.timer);
-      clearTimeout(this.timer2);
+      if (this.timer) {
+        for (let i = 0; i <= this.timer; i++) {
+          clearInterval(i);
+        }
+      }
+      if (this.timer2) {
+        for (let i = 0; i <= timer2; i++) {
+          clearTimeout(i);
+        }
+      }
     },
     //中间->投注选号
     curBalls(indexff, indexg, num, numViews, player) {
@@ -1808,7 +1815,6 @@ export default {
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      clearInterval(this.timer);
       clearTimeout(this.timer2);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
@@ -1849,30 +1855,35 @@ export default {
     },
     //倒计时
     initSetTimeout(today) {
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
+      this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
         this.setTimeMode();
         if (this.today < 1) {
-          clearInterval(this.timer);
+          this.endCount();
           this.timesUp();
+        }
+        if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
+          this.endCount();
         }
         if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
-          this.countNum = 1;
           this.getPastOp();
         }
       }, 1000);
@@ -1898,10 +1909,6 @@ export default {
     },
     //获取过去开奖号码20个
     getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
-      this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: this.countNum }

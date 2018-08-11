@@ -19,7 +19,7 @@
       li
         p 商户单号后6码
         div
-          input(placeholder='请输入订单号后6位', v-model='checkCode', value='checkCode', clearable='')
+          input(placeholder='请输入商户单号后6码', v-model='checkCode', value='checkCode', clearable='')
       li
         .button
           button.button1(@click='isshow3') 充值申请
@@ -128,17 +128,17 @@ export default {
         this.content = "请输入姓名!";
         this.$pop.show({error:'',title:'温馨提示',content:'请输入姓名!',content1:'',content2:'',number:2});
       }else if(this.checkCode === ''){
-        this.content = "请输入附言!";
-        this.$pop.show({error:'',title:'温馨提示',content:'请输入附言!',content1:'',content2:'',number:2});
+        this.content = "请输入商户单号后6码!";
+        this.$pop.show({error:'',title:'温馨提示',content:'请输入商户单号后6码!',content1:'',content2:'',number:2});
       }else{
         this.show2 = !this.show2;
       }
     },
     sendReq() {
       if (this.checkCode == "") {
-        this.content = "订单号不能為空！";
+        this.content = "单号不能為空！";
         this.show2 = !this.show2;
-        this.$pop.show({error:'',title:'温馨提示',content:'订单号不能為空！',content1:'',content2:'',number:2});
+        this.$pop.show({error:'',title:'温馨提示',content:'单号不能為空！',content1:'',content2:'',number:2});
       } else {
         let config = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },

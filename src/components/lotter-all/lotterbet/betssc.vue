@@ -1976,13 +1976,9 @@ export default {
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
-              this.$pop.show({title:'温馨提示',content:'恭喜您，投注成功！',content1:'',content2:'',number:1});
               this.betnot = true;
-              setTimeout(() => {
-                this.$pop.hide();
-                this.betsuccess = !this.betsuccess;
-                this.iscreat();
-              }, 600);
+              this.betsuccess = !this.betsuccess;
+              this.iscreat();
           } else {
                 this.betnot = true;
                 this.iscreat();

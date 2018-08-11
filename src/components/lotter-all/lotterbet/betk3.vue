@@ -1361,20 +1361,9 @@ export default {
             .then(res => {
               if (res.data.message === "success") {
                 if (this.con1 !== "" && this.con2 === "") {
-                  this.$pop.show({
-                    error: "",
-                    title: "温馨提示",
-                    content: "恭喜您，投注成功！",
-                    content1: "",
-                    content2: "",
-                    number: 1
-                  });
                   this.betnot = true;
-                  setTimeout(() => {
-                    this.$pop.hide();
-                    this.betsuccess = !this.betsuccess;
-                    this.iscreat();
-                  }, 600);
+                  this.betsuccess = !this.betsuccess;
+                  this.iscreat();
                 }
               } else {
                 this.betnot = true;
@@ -1416,20 +1405,9 @@ export default {
             .then(res => {
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
-                  this.$pop.show({
-                    error: "",
-                    title: "温馨提示",
-                    content: "恭喜您，投注成功！",
-                    content1: "",
-                    content2: "",
-                    number: 1
-                  });
                   this.betnot = true;
-                  setTimeout(() => {
-                    this.$pop.hide();
-                    this.betsuccess = !this.betsuccess;
-                    this.iscreat();
-                  }, 600);
+                  this.betsuccess = !this.betsuccess;
+                  this.iscreat();
                 }
               }
             })
@@ -1472,20 +1450,9 @@ export default {
           .post(this.$store.state.url + "api/lottery/bet", formData, config)
           .then(res => {
             if (res.data.message === "success") {
-              this.$pop.show({
-                error: "",
-                title: "温馨提示",
-                content: "恭喜您，投注成功！",
-                content1: "",
-                content2: "",
-                number: 1
-              });
               this.betnot = true;
-              setTimeout(() => {
-                this.$pop.hide();
                 this.betsuccess = !this.betsuccess;
                 this.iscreat();
-              }, 600);
             }
           })
           .catch(error => {

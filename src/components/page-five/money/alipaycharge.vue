@@ -17,14 +17,14 @@
         div
           input(placeholder='请输入充值人姓名', v-model='niceName', value='niceName', clearable='')
       li
-        p 订单号后6位
+        p 商户单号后6码
         div
           input(placeholder='请输入订单号后6位', v-model='checkCode', value='checkCode', clearable='')
       li
         .button
           button.button1(@click='isshow3') 充值申请
       .warning
-        p 1、请务必填写正确订单号后6位！
+        p 1、请务必填写正确商户单号后6码！
         br
         p 2、请正确填写姓名和充值金额，以便及时核对。
         br
@@ -44,7 +44,7 @@
         p 充值人姓名
         span {{niceName}}
       li
-        p 订单号后6位
+        p 商户单号后6码
         span {{checkCode}}
       li(style='text-align:center;background:#fff;')
         .center

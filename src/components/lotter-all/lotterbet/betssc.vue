@@ -270,7 +270,7 @@ export default {
       cacheTime: 600000,
       historyNum: 0,
       betnot: true,
-      countNum: 1,
+      countNum: 20,
     };
   },
   beforeDestroy() {
@@ -339,10 +339,9 @@ export default {
     },
     //查看20条记录
     lookAll() {
-      this.countNum = 20;
       this.betsscContentTopPop = !this.betsscContentTopPop;
       this.lookAllUl = !this.lookAllUl;
-      this.getPastOp();
+      // this.getPastOp();
     },
     //往期开奖
     lookAllTo() {
@@ -2043,7 +2042,6 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
-      this.countNum = 1;
       this.betsscContentTopPop = false;
       this.showa = !this.showa;
       if (localStorage.getItem("lotteryList") !== null) {
@@ -2135,7 +2133,6 @@ export default {
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
             this.initSetTimeout();
-            this.countNum = 1;
             this.getPastOp();
           }
         })
@@ -2181,21 +2178,18 @@ export default {
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if (
           this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
-          this.countNum = 1;
           this.getPastOp();
         } else if (
           this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
-          this.countNum = 1;
           this.getPastOp();
         }
       }, 1000);
@@ -2214,7 +2208,6 @@ export default {
     countNums(){
       this.showa = false;
       this.betsscContentTopPop = !this.betsscContentTopPop;
-      this.countNum = 10;
       if(this.betsscContentTopPop === true){
         this.getPastOp();
       }
@@ -2257,7 +2250,6 @@ export default {
         clearTimeout(i);
       }
       this.timer2 = setTimeout(() => {
-        this.countNum = 1;
         this.getPastOp();
       }, 12000);
     },

@@ -12,15 +12,15 @@
   bets(ref='pop')
 </template>
 <script>
-import bets from "../../page-five/money/bets.vue";
-import betTop from "./components/betTop.vue";
-import betContentTop from "./components/betContentTop.vue";
-import lookMore from "./components/lookMore.vue";
-import betContentTopPop from "./components/betContentTopPop.vue";
+import bets from "../../page-five/money/bets.vue";//右滑页面
+import betTop from "./components/betTop.vue";//头部
+import betContentTop from "./components/betContentTop.vue";//开奖号码，倒计时
+import lookMore from "./components/lookMore.vue";//
+import betContentTopPop from "./components/betContentTopPop.vue";//查看开奖记录，往期开奖
 import betContent from "./components/betContentX11X5.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
-import betFooter from "./components/betFooter.vue";
-import betGoshow from "./components/betGoshow.vue";
-import betsuccess from "./components/betsuccess.vue";
+import betFooter from "./components/betFooter.vue";//底部，确认投注
+import betGoshow from "./components/betGoshow.vue";//投注确认弹窗
+import betsuccess from "./components/betsuccess.vue";//投注成功，弹窗
 export default {
   components: {
     bets, //投注记录

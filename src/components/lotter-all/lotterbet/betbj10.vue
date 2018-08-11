@@ -29,8 +29,8 @@
         </div>
       </li>
       <li class="betbj10list">
-        <span @click="showa = !showa">{{listname}}</span>
-        <i :class="showa ? 'icon-up' : 'icon-down' " @click="showa = !showa" class="iconfont"></i>
+        <span @click="getLotteryList">{{listname}}</span>
+        <i :class="showa ? 'icon-up' : 'icon-down' " @click="getLotteryList" class="iconfont"></i>
         <div v-show="showa" class="betk3listRight">
           <ul>
             <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)">
@@ -78,7 +78,7 @@
     <div class="betbj10-content">
       <div v-show="!show">
         <div class="betk3-content-top">
-          <div @click=" betsscContentTopPop = !betsscContentTopPop" class="content-left">
+          <div @click=" countNums" class="content-left">
             <p v-if="$route.query.id === 'pk10'">{{lastSeasonId*1}}期开奖号码
               <i :class="betsscContentTopPop ? 'icon-up' : 'icon-down'" class="iconfont"></i>
             </p>
@@ -399,7 +399,7 @@ export default {
       timer2: "",
       historyNum: 0,
       betnot: true,
-      countNum:10,
+      countNum:1,
     };
   },
   destroyed() {
@@ -409,7 +409,7 @@ export default {
   },
   created() {
     this.noGetItem();
-    this.getLotteryList();
+    // this.getLotteryList();
     this.endCount();
   },
   mounted() {
@@ -1566,19 +1566,12 @@ export default {
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
+            this.$pop.show({ title: "温馨提示", content: "恭喜您，投注成功！", content1: "", content2: "", number: 1 });
+            this.betnot = true;
             setTimeout(() => {
-              this.$pop.show({
-                title: "温馨提示",
-                content: "恭喜您，投注成功！",
-                content1: "",
-                content2: "",
-                number: 1
-              });
-              this.betnot = true;
-              setTimeout(() => {
-                this.betsuccess = !this.betsuccess;
-                this.iscreat();
-              }, 800);
+              this.$pop.hide();
+              this.betsuccess = !this.betsuccess;
+              this.iscreat();
             }, 600);
           } else {
             this.betnot = true;
@@ -1622,54 +1615,58 @@ export default {
     },
     //玩法树
     getPlayTree() {
-      this.$axios
-        .get("static/pk10.json")
-        .then(res => {
-          this.playBonus = res.data.data.playBonus;
-          this.playGroups = res.data.data.playGroups;
-          this.current_player = this.playGroups[0].groups[0].players[0];
-          this.setupPlayTree();
-        })
-        .catch(error => {
-          console.log("玩法树No");
-        });
+      // this.$axios
+      //   .get("static/pk10.json")
+      //   .then(res => {
+      //     this.playBonus = res.data.data.playBonus;
+      //     this.playGroups = res.data.data.playGroups;
+      //     this.current_player = this.playGroups[0].groups[0].players[0];
+      //     this.setupPlayTree();
+      //   })
+      //   .catch(error => {
+      //     console.log("玩法树No");
+      //   });
 
-      // const now = new Date().getTime();
-      // if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
-      //   this.playBonus = JSON.parse(
-      //     localStorage.getItem("playTree_" + this.$route.query.id)
-      //   ).playBonus;
-      //   this.playGroups = JSON.parse(
-      //     localStorage.getItem("playTree_" + this.$route.query.id)
-      //   ).playGroups;
-      //   this.setupPlayTree();
-      // } else if (
-      //   localStorage.getItem("playTree_" + this.$route.query.id) === null
-      // ) {
-      //   this.$axios
-      //     .get(this.$store.state.url + "api/lottery/getPlayTree", {
-      //       params: { lotteryId: this.lotteryId }
-      //     })
-      //     .then(res => {
-      //       this.playBonus = res.data.data.playBonus;
-      //       this.playGroups = res.data.data.playGroups;
-      //       this.current_player = this.playGroups[0].groups[0].players[0];
-      //       localStorage.setItem(
-      //         "playTree_" + this.$route.query.id,
-      //         JSON.stringify(res.data.data)
-      //       );
-      //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);
-      //       this.setupPlayTree();
-      //     })
-      //     .catch(error => {
-      //       console.log("玩法树No");
-      //       this.$store.state.loginStatus = false;
-      //       this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
-      //     });
-      // }
+      const now = new Date().getTime();
+      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
+        this.playBonus = JSON.parse(
+          localStorage.getItem("playTree_" + this.$route.query.id)
+        ).playBonus;
+        this.playGroups = JSON.parse(
+          localStorage.getItem("playTree_" + this.$route.query.id)
+        ).playGroups;
+        this.current_player = this.playGroups[0].groups[0].players[0];
+        this.setupPlayTree();
+      } else if (
+        localStorage.getItem("playTree_" + this.$route.query.id) === null
+      ) {
+        this.$axios
+          .get(this.$store.state.url + "api/lottery/getPlayTree", {
+            params: { lotteryId: this.lotteryId }
+          })
+          .then(res => {
+            this.playBonus = res.data.data.playBonus;
+            this.playGroups = res.data.data.playGroups;
+            this.current_player = this.playGroups[0].groups[0].players[0];
+            localStorage.setItem(
+              "playTree_" + this.$route.query.id,
+              JSON.stringify(res.data.data)
+            );
+            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+            this.setupPlayTree();
+          })
+          .catch(error => {
+            console.log("玩法树No");
+            this.$store.state.loginStatus = false;
+            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
+          });
+      }
     },
     //右上获取彩种
     getLotteryList() {
+      this.showa = !this.showa;
+      this.betsscContentTopPop = false;
+      this.countNum =1;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).pk10;
         this.groupId = this.LotteryList[0].groupId;
@@ -1832,6 +1829,7 @@ export default {
             this.lastSeasonId = res.data.data.lastSeasonId;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
+            this.countNum = 1;
             this.getPastOp(); //获取过去开奖号码10个
             this.initSetTimeout();
           }
@@ -1865,20 +1863,23 @@ export default {
           clearInterval(this.timer);
           this.timesUp();
         }
-        if (
+        if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 47
         ) {
+          this.countNum = 1;
           this.getPastOp();
-        } else if (
+        } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 46
         ) {
+          this.countNum = 1;
           this.getPastOp();
-        } else if (
+        } else if (this.getPastOpenB &&
           this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
           this.today === 45
         ) {
+          this.countNum = 1;
           this.getPastOp();
         }
       }, 1000);
@@ -1893,6 +1894,14 @@ export default {
         number: 3
       });
       this.geteServerTime();
+    },
+    countNums(){
+      this.showa = false;
+      this.betsscContentTopPop = !this.betsscContentTopPop;
+      this.countNum = 10;
+      if(this.betsscContentTopPop === true){
+        this.getPastOp();
+      }
     },
     //获取过去开奖号码20个
     getPastOp() {
@@ -1933,6 +1942,7 @@ export default {
     reGetPastOp() {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
+        this.countNum = 1;
         this.getPastOp();
       }, 12000);
     }

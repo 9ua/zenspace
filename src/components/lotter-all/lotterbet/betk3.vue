@@ -26,8 +26,9 @@
         </div>
       </li>
       <li class="betk3list">
-        <span @click="show = false,showa = !showa">{{listname}}</span>
-        <i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="show = false,showa = !showa"></i>
+        <!-- <span @click="show = false,showa = !showa">{{listname}}</span> -->
+        <span @click="getLotteryList">{{listname}}</span>
+        <i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="getLotteryList"></i>
         <div class="betk3listRight" v-show="showa">
           <ul>
             <li v-for="(listk3,index) in LotteryList" :key="index" @click="listnames($event,index,listk3)">
@@ -79,7 +80,7 @@
     <div class="betk3-content">
       <div>
         <div class="betk3-content-top">
-          <div class="content-left" @click=" betk3ContentTopPop = !betk3ContentTopPop">
+          <div class="content-left" @click="countNums">
             <p v-if="$route.query.id === 'bjk3'">{{lastSeasonId}}期开奖号码</p>
             <p v-if="$route.query.id !== 'bjk3'">{{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
             </p>
@@ -312,8 +313,8 @@ export default {
       navlist: 3,
       timer: "",
       title: "和值",
-      listname: "江苏",
-      lotteryId: "jsk3",
+      listname: this.$route.query.name.substring(0, 2),
+      lotteryId: "dfk3",
       playId: "k3_star3_and", //玩法术
       playId1: "", //玩法术
       playId2: "", //玩法术
@@ -334,6 +335,7 @@ export default {
       betsuccess: false,
       betGoshow: false,
       betk3ContentTopPop: false,
+      getLotteryPlayBetRates:null,
       today: "",
       countDown: "",
       peilv: [], //当前赔率
@@ -356,7 +358,7 @@ export default {
       bonusArray: [], //大小单双赔率
       timer2: "",
       betnot: true,
-      countNum: 10,
+      countNum: 1,
       //头部菜单
       poptitle:[
         {title:"单挑一骰",rate:"64.73", id:"k3_star1", remark: "选择1个或者多个骰号，如果开奖号码中包含该号（顺序不限）即中奖" },
@@ -490,18 +492,21 @@ export default {
   },
   created() {
     this.noGetItem();
-    this.getLotteryList();
-    this.endCount();
+    // this.getLotteryList();
+    // this.endCount();
+    clearInterval(this.timer);
   },
   mounted() {
     document.addEventListener("visibilitychange",this.listen);
-    this.endCount();
+    // this.endCount();
+    clearInterval(this.timer);
     this.geteServerTime(); //获取彩種當前獎期時間
     this.getPlayTreeBetRate();
     this.getLotteryPlayBetRate();
   },
   beforeDestroy() {
-    this.endCount();
+    // this.endCount();
+    clearInterval(this.timer);
     this.iscreat();
     document.removeEventListener("visibilitychange",this.listen);
   },
@@ -597,13 +602,13 @@ export default {
     },
     endCount() {
       // clearInterval(this.timer);
-      console.log("before:" + this.timer);
+      // console.log("before:" + this.timer);
       if (this.timer) {
         for (let i = 0; i <= this.timer; i++) {
           clearInterval(i);
         }
       }
-      console.log("after:" + this.timer);
+      // console.log("after:" + this.timer);
       if (this.timer2) {
         for (let i = 0; i <= timer2; i++) {
           clearTimeout(i);
@@ -614,12 +619,14 @@ export default {
     //获取彩種當前獎期時間
     geteServerTime() {
       // console.log("getserver");
-      this.endCount();
+      // this.endCount();
+      clearInterval(this.timer);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
         })
         .then(res => {
+          // console.log("获取彩種當前獎期時間",res)
           if (res.data.code === 1) {
             if (this.$route.query.id === "bjk3") {
               this.seasonId2 = res.data.data.seasonId;
@@ -660,42 +667,41 @@ export default {
     },
     //倒计时
     initSetTimeout() {
-      console.log(this.timer);
-      this.endCount();
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
+      clearInterval(this.timer);
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        console.log(this.today);
-        this.setTimeMode();
+        // this.setTimeMode();
         if (this.today < 1) {
-          this.endCount();
+          clearInterval(this.timer);
           this.timesUp();
         }
-        if (
-          this.getPastOpenB &&
-          this.getPastOpenB[0].lotteryId != this.$route.query.id
-        ) {
-          this.endCount();
+        if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
+          clearInterval(this.timer);
         }
-        if (
-          this.getPastOpenB &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 47
-        ) {
+        if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 48) {
+          this.countNum = 1;
           this.getPastOp();
-        } else if (
-          this.getPastOpenB &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 46
-        ) {
+        } else if (this.getPastOpenB &&  this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47 ) {
+          this.countNum = 1;
           this.getPastOp();
-        } else if (
-          this.getPastOpenB &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 45
-        ) {
+        } else if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46 ) {
+          this.countNum = 1;
           this.getPastOp();
+        } else if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45) {
+          this.countNum = 1;
+          this.getPastOp();
+        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId === this.lastSeasonId){
+          this.end();
+          this.startyet = false;
+          this.shownum = false;
         }
+        this.setTimeMode();
       }, 1000);
+      console.log(this.lastSeasonId);
     },
 
     //時間到彈窗
@@ -710,12 +716,18 @@ export default {
       });
       this.geteServerTime();
     },
+    countNums(){
+      this.showa = false;
+      this.betk3ContentTopPop = !this.betk3ContentTopPop;
+      this.countNum = 10;
+      this.getPastOp();
+    },
     //获取过去开奖号码10个
     getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
-      this.shownum = true;
+      // if (this.startyet == false) {
+      //   this.start();
+      // }
+      // this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: this.countNum }
@@ -726,16 +738,16 @@ export default {
           this.n1 = this.getPastOpens[0].n1;
           this.n2 = this.getPastOpens[0].n2;
           this.n3 = this.getPastOpens[0].n3;
-          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            if (res.data.data[0].lotteryId === this.$route.query.id) {
-              this.reGetPastOp();
-            }
-          } else {
-            clearTimeout(this.timer2);
-            this.end();
-            this.startyet = false;
-            this.shownum = false;
-          }
+          // if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+          //   if (res.data.data[0].lotteryId === this.$route.query.id) {
+          //     this.reGetPastOp();
+          //   }
+          // } else {
+          //   clearTimeout(this.timer2);
+          //   this.end();
+          //   this.startyet = false;
+          //   this.shownum = false;
+          // }
         })
         .catch(error => {
           console.log("获取过去开奖号码No");
@@ -751,6 +763,10 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
+      this.show = false;
+      this.showa = !this.showa;
+      this.betk3ContentTopPop = false;
+      this.countNum = 1;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
         this.groupId = this.LotteryList[0].groupId;
@@ -1097,19 +1113,29 @@ export default {
     },
     //头部菜单项--赔率
     getLotteryPlayBetRate(){
-      this.$axios.get(this.$store.state.url + "api/lottery/getLotteryPlayBetRate",{params: {lotteryId: this.$route.query.id}}).then(res =>{
-        this.poptitle[0].rate = res.data.data["单挑一骰"];
-        this.poptitle[1].rate = res.data.data["二同号"];
-        this.poptitle[2].rate = res.data.data["二不同"];
-        this.poptitle[3].rate = res.data.data["和值"];
-        this.poptitle[4].rate = res.data.data["三连号"];
-        this.poptitle[5].rate = res.data.data["三同号"];
-        this.poptitle[6].rate = res.data.data["三不同"];
-      })
+      if(localStorage.getItem("getLotteryPlayBetRates") !== null){
+        this.getLotteryPlayBetRates = JSON.parse(localStorage.getItem("getLotteryPlayBetRates"));
+      }else{
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryPlayBetRate",{params: {lotteryId: this.$route.query.id}}).then(res =>{
+          localStorage.setItem("getLotteryPlayBetRates",JSON.stringify(res.data.data));
+          this.getLotteryPlayBetRates = JSON.parse(localStorage.getItem("getLotteryPlayBetRates"));
+          this.poptitle[0].rate = res.data.data["单挑一骰"];
+          this.poptitle[1].rate = res.data.data["二同号"];
+          this.poptitle[2].rate = res.data.data["二不同"];
+          this.poptitle[3].rate = res.data.data["和值"];
+          this.poptitle[4].rate = res.data.data["三连号"];
+          this.poptitle[5].rate = res.data.data["三同号"];
+          this.poptitle[6].rate = res.data.data["三不同"];
+        })
+      }
+      
     },
     //大小单双，赔率显示
     getPlayTreeBetRate() {
-      this.$axios.get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {params: { lotteryId: this.$route.query.id, playId: this.playId }}).then(res => {
+      if( localStorage.getItem("bonusArray") !== null){
+        this.bonusArray = JSON.parse(localStorage.getItem("bonusArray"));
+      }else{
+        this.$axios.get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {params: { lotteryId: this.$route.query.id, playId: this.playId }}).then(res => {
           this.displayBonus = res.data.data.displayBonus;
           if(this.navlist === 3){
             localStorage.setItem("bonusArray",JSON.stringify(res.data.data.bonusArray));
@@ -1136,6 +1162,7 @@ export default {
             this.k3options[19].rate = this.bonusArray["18"];
           }
         });
+      }
     },
     //中间->投注选号
     k3option(e, index, k3item) {
@@ -1340,23 +1367,22 @@ export default {
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
               if (res.data.message === "success") {
-                setTimeout(() => {
-                  if (this.con1 !== "" && this.con2 === "") {
-                    this.$pop.show({
-                      error: "",
-                      title: "温馨提示",
-                      content: "恭喜您，投注成功！",
-                      content1: "",
-                      content2: "",
-                      number: 1
-                    });
-                    this.betnot = true;
-                    setTimeout(() => {
-                      this.iscreat();
-                      this.betsuccess = !this.betsuccess;
-                    }, 800);
-                  }
-                }, 600);
+                if (this.con1 !== "" && this.con2 === "") {
+                  this.$pop.show({
+                    error: "",
+                    title: "温馨提示",
+                    content: "恭喜您，投注成功！",
+                    content1: "",
+                    content2: "",
+                    number: 1
+                  });
+                  this.betnot = true;
+                  setTimeout(() => {
+                    this.$pop.hide();
+                    this.betsuccess = !this.betsuccess;
+                    this.iscreat();
+                  }, 600);
+                }
               } else {
                 this.betnot = true;
                 this.iscreat();
@@ -1397,20 +1423,19 @@ export default {
             .then(res => {
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
+                  this.$pop.show({
+                    error: "",
+                    title: "温馨提示",
+                    content: "恭喜您，投注成功！",
+                    content1: "",
+                    content2: "",
+                    number: 1
+                  });
+                  this.betnot = true;
                   setTimeout(() => {
-                    this.$pop.show({
-                      error: "",
-                      title: "温馨提示",
-                      content: "恭喜您，投注成功！",
-                      content1: "",
-                      content2: "",
-                      number: 1
-                    });
-                    this.betnot = true;
-                    setTimeout(() => {
-                      this.betsuccess = !this.betsuccess;
-                      this.iscreat();
-                    }, 800);
+                    this.$pop.hide();
+                    this.betsuccess = !this.betsuccess;
+                    this.iscreat();
                   }, 600);
                 }
               }
@@ -1454,20 +1479,19 @@ export default {
           .post(this.$store.state.url + "api/lottery/bet", formData, config)
           .then(res => {
             if (res.data.message === "success") {
+              this.$pop.show({
+                error: "",
+                title: "温馨提示",
+                content: "恭喜您，投注成功！",
+                content1: "",
+                content2: "",
+                number: 1
+              });
+              this.betnot = true;
               setTimeout(() => {
-                this.$pop.show({
-                  error: "",
-                  title: "温馨提示",
-                  content: "恭喜您，投注成功！",
-                  content1: "",
-                  content2: "",
-                  number: 1
-                });
-                this.betnot = true;
-                setTimeout(() => {
-                  this.betsuccess = !this.betsuccess;
-                  this.iscreat();
-                }, 800);
+                this.$pop.hide();
+                this.betsuccess = !this.betsuccess;
+                this.iscreat();
               }, 600);
             }
           })

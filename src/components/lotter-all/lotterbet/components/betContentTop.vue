@@ -105,7 +105,6 @@ export default {
         this.start();
         this.initSetTimeout();
         this.isGetItem = true;
-
         let myDate = new Date();
         let getMonth = myDate.getMonth() + 1;
         let getDate = myDate.getDate();

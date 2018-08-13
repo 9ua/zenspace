@@ -160,7 +160,7 @@
         <div class="betk3-content-foot">
           <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{item.remark}}
             <span v-show="index !== 3">赔率
-              <span class="k3remark">{{ displayBonus | keepTwoNum}}</span> 倍。</span>
+              <span class="k3remark">{{ item.rate | keepTwoNum}}</span> 倍。</span>
             <!-- <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span> -->
             <!-- 单挑一骰-->
             <ul v-show="index === 0" class="yishai">
@@ -1081,56 +1081,45 @@ export default {
     },
     //头部菜单项--赔率
     getLotteryPlayBetRate(){
-      if(localStorage.getItem("getLotteryPlayBetRates") !== null){
-        this.getLotteryPlayBetRates = JSON.parse(localStorage.getItem("getLotteryPlayBetRates"));
-      }else{
-        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryPlayBetRate",{params: {lotteryId: this.$route.query.id}}).then(res =>{
-          localStorage.setItem("getLotteryPlayBetRates",JSON.stringify(res.data.data));
-          this.getLotteryPlayBetRates = JSON.parse(localStorage.getItem("getLotteryPlayBetRates"));
-          this.poptitle[0].rate = res.data.data["单挑一骰"];
-          this.poptitle[1].rate = res.data.data["二同号"];
-          this.poptitle[2].rate = res.data.data["二不同"];
-          this.poptitle[3].rate = res.data.data["和值"];
-          this.poptitle[4].rate = res.data.data["三连号"];
-          this.poptitle[5].rate = res.data.data["三同号"];
-          this.poptitle[6].rate = res.data.data["三不同"];
-        })
-      }
-      
+      this.$axios.get(this.$store.state.url + "api/lottery/getLotteryPlayBetRate",{params: {lotteryId: this.$route.query.id}}).then(res =>{
+        this.getLotteryPlayBetRates = res.data.data
+        this.poptitle[0].rate = res.data.data["单挑一骰"];
+        this.poptitle[1].rate = res.data.data["二同号"];
+        this.poptitle[2].rate = res.data.data["二不同"];
+        this.poptitle[3].rate = res.data.data["和值"];
+        this.poptitle[4].rate = res.data.data["三连号"];
+        this.poptitle[5].rate = res.data.data["三同号"];
+        this.poptitle[6].rate = res.data.data["三不同"];
+      })
     },
     //大小单双，赔率显示
     getPlayTreeBetRate() {
-      if( localStorage.getItem("bonusArray") !== null){
-        this.bonusArray = JSON.parse(localStorage.getItem("bonusArray"));
-      }else{
-        this.$axios.get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {params: { lotteryId: this.$route.query.id, playId: this.playId }}).then(res => {
-          this.displayBonus = res.data.data.displayBonus;
-          if(this.navlist === 3){
-            localStorage.setItem("bonusArray",JSON.stringify(res.data.data.bonusArray));
-            this.bonusArray = JSON.parse(localStorage.getItem("bonusArray"));
-            this.k3options[0].rate = this.bonusArray["大"];
-            this.k3options[1].rate = this.bonusArray["小"];
-            this.k3options[2].rate = this.bonusArray["单"];
-            this.k3options[3].rate = this.bonusArray["双"];
-            this.k3options[4].rate = this.bonusArray["03"];
-            this.k3options[5].rate = this.bonusArray["04"];
-            this.k3options[6].rate = this.bonusArray["05"];
-            this.k3options[7].rate = this.bonusArray["06"];
-            this.k3options[8].rate = this.bonusArray["07"];
-            this.k3options[9].rate = this.bonusArray["08"];
-            this.k3options[10].rate = this.bonusArray["09"];
-            this.k3options[11].rate = this.bonusArray["10"];
-            this.k3options[12].rate = this.bonusArray["11"];
-            this.k3options[13].rate = this.bonusArray["12"];
-            this.k3options[14].rate = this.bonusArray["13"];
-            this.k3options[15].rate = this.bonusArray["14"];
-            this.k3options[16].rate = this.bonusArray["15"];
-            this.k3options[17].rate = this.bonusArray["16"];
-            this.k3options[18].rate = this.bonusArray["17"];
-            this.k3options[19].rate = this.bonusArray["18"];
-          }
-        });
-      }
+      this.$axios.get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {params: { lotteryId: this.$route.query.id, playId: this.playId }}).then(res => {
+        this.displayBonus = res.data.data.displayBonus;
+        if(this.navlist === 3){
+          this.bonusArray = res.data.data.bonusArray;
+          this.k3options[0].rate = this.bonusArray["大"];
+          this.k3options[1].rate = this.bonusArray["小"];
+          this.k3options[2].rate = this.bonusArray["单"];
+          this.k3options[3].rate = this.bonusArray["双"];
+          this.k3options[4].rate = this.bonusArray["03"];
+          this.k3options[5].rate = this.bonusArray["04"];
+          this.k3options[6].rate = this.bonusArray["05"];
+          this.k3options[7].rate = this.bonusArray["06"];
+          this.k3options[8].rate = this.bonusArray["07"];
+          this.k3options[9].rate = this.bonusArray["08"];
+          this.k3options[10].rate = this.bonusArray["09"];
+          this.k3options[11].rate = this.bonusArray["10"];
+          this.k3options[12].rate = this.bonusArray["11"];
+          this.k3options[13].rate = this.bonusArray["12"];
+          this.k3options[14].rate = this.bonusArray["13"];
+          this.k3options[15].rate = this.bonusArray["14"];
+          this.k3options[16].rate = this.bonusArray["15"];
+          this.k3options[17].rate = this.bonusArray["16"];
+          this.k3options[18].rate = this.bonusArray["17"];
+          this.k3options[19].rate = this.bonusArray["18"];
+        }
+      });
     },
     //中间->投注选号
     k3option(e, index, k3item) {

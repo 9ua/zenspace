@@ -2,7 +2,8 @@
 .ssc
   ul
     router-link(v-for='(item,index) in lotteryListssc', :key='index', tag='li', :to="{path:'/ssc',query:{id:item.id,name:item.name}}")
-      img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
+      span
+        i.iconfont(:class='"icon-"+item.groupId')
       h5 {{item.name}}
 </template>
 <script>

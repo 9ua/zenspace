@@ -2,7 +2,8 @@
 .looterAll
   ul
     router-link(v-for='(item,index) in lotteryListAll', :key='index', tag='li', :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name}}")
-      img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
+      span
+        i.iconfont(:class='"icon-"+item.groupId')
       h5 {{item.name}}
 </template>
 <script>

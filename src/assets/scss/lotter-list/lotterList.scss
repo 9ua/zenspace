@@ -41,11 +41,15 @@
           @extend %fdc;
           @extend %aitems;
           background: #000;
-          & img {
+          & span{
             margin: 8px 0px 0px;
             width: 40px;
             height: 40px;
-            border-radius: 20%;
+            background-color: #fff;
+            border-radius: 50%;
+            & i.iconfont{
+              font-size: 40px;
+            }
           }
           & h5 {
             font-size: 14px;

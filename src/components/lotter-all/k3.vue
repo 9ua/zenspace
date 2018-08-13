@@ -2,7 +2,8 @@
 .k3
   ul
     router-link(v-for='(item,index) in lotteryListk3', :key='index', tag='li', :to="{path:'/k3',query:{id:item.id,name:item.name}}")
-      img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
+      span
+        i.iconfont(:class='"icon-"+item.groupId')
       h5 {{item.name}}
 </template>
 <script>

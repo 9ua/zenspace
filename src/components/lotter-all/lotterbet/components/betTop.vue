@@ -90,7 +90,6 @@ export default {
         );
       } else if (localStorage.getItem("playTree_" + this.queryId) === null) {
         this.$axios
-          // .get( "./static/ssc.json", {
           .get(this.$store.state.url + "api/lottery/getPlayTree", {
             params: { lotteryId: this.lotteryId }
           })

@@ -35,8 +35,8 @@ export default {
   },
   data() {
     return {
-      lotteryId: "ah11x5", //配置默认彩种（安徽快三）
-      group:"x11x5",//配置彩种种类（11选5）
+      lotteryId: this.$route.query.id, //配置默认彩种（安徽快三）
+      group:this.$route.query.group,//配置彩种种类（11选5）
     };
   },
   destroyed() {

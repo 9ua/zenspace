@@ -16,9 +16,9 @@
                 <div class="title"> {{into.title}}</div>
                 <div class="xq">赔率 {{into.rate | keepTwoNum}}</div>
                 <div class="img">
-                  <span class="img1"></span>
-                  <span class="img2"></span>
-                  <span class="img3"></span>
+                  <span class="img1 Dice Dice1"></span>
+                  <span class="img2 Dice Dice1"></span>
+                  <span class="img3 Dice Dice1"></span>
                 </div>
               </li>
             </ul>
@@ -26,7 +26,6 @@
         </div>
       </li>
       <li class="betk3list">
-        <!-- <span @click="show = false,showa = !showa">{{listname}}</span> -->
         <span @click="getLotteryList">{{listname}}</span>
         <i class="iconfont" :class="showa ? 'icon-up' : 'icon-down' " @click="getLotteryList"></i>
         <div class="betk3listRight" v-show="showa">
@@ -61,9 +60,9 @@
               <i class="iconfont icon-plus-minus"></i>
             </p>
             <p>
-              <a><img :src='"@/assets/img/one/n"+item.n1+".png"' alt="" /></a>
-              <a><img :src='"@/assets/img/one/n"+item.n2+".png"' alt="" /></a>
-              <a><img :src='"@/assets/img/one/n"+item.n3+".png"' alt="" /></a>
+              <a><span class="Dice" :class="'Dice'+item.n1"></span></a>
+              <a><span class="Dice" :class="'Dice'+item.n2"></span></a>
+              <a><span class="Dice" :class="'Dice'+item.n3"></span></a>
             </p>
             <p>{{item.n1+item.n2+item.n3}}</p>
             <p>
@@ -85,26 +84,26 @@
             <p v-if="$route.query.id !== 'bjk3'">{{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
             </p>
             <div v-if="shownum === false" class="contnet-left-num">
-              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n1 +'.png') + ')'}"></p>
-              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n2 +'.png') + ')'}"></p>
-              <p :style="{backgroundImage: 'url(' + require('@/assets/img/one/n'+ n3 +'.png') + ')'}"></p>
+              <p class="Dice" :class="'Dice'+n1"></p>
+              <p class="Dice" :class="'Dice'+n2"></p>
+              <p class="Dice" :class="'Dice'+n3"></p>
               <i class="iconfont" :class="betk3ContentTopPop ? 'icon-up' : 'icon-down'"></i>
             </div>
             <div v-if="shownum === true && isGetItem === true" class="contnet-left-num">
               <div class="num">
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ i +'.png') + ')'}"></div>
+                    <div class="Dice" :class="'Dice'+i"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ j +'.png') + ')'}"></div>
+                    <div class="Dice" :class="'Dice'+j"></div>
                   </transition>
                 </div>
                 <div class="span">
                   <transition name="down-up-translate-fade">
-                    <div :style="{backgroundImage: 'url(' + require('@/assets/img/one/dd'+ k +'.png') + ')'}"></div>
+                    <div class="Dice" :class="'Dice'+k"></div>
                   </transition>
                 </div>
               </div>
@@ -140,9 +139,9 @@
                 <i class="iconfont icon-plus-minus"></i>
               </p>
               <p>
-                <a><img :src='"@/assets/img/one/n"+item.n1+".png"' alt="" /></a>
-                <a><img :src='"@/assets/img/one/n"+item.n2+".png"' alt="" /></a>
-                <a><img :src='"@/assets/img/one/n"+item.n3+".png"' alt="" /></a>
+                <a><span class="Dice" :class="'Dice'+item.n1"></span></a>
+                <a><span class="Dice" :class="'Dice'+item.n2"></span></a>
+                <a><span class="Dice" :class="'Dice'+item.n3"></span></a>
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
               <p>
@@ -358,7 +357,7 @@ export default {
       bonusArray: [], //大小单双赔率
       timer2: "",
       betnot: true,
-      countNum: 1,
+      countNum: 10,
       //头部菜单
       poptitle:[
         {title:"单挑一骰",rate:"64.73", id:"k3_star1", remark: "选择1个或者多个骰号，如果开奖号码中包含该号（顺序不限）即中奖" },
@@ -681,7 +680,6 @@ export default {
         }
         this.setTimeMode();
       }, 1000);
-      console.log(this.lastSeasonId);
     },
 
     //時間到彈窗
@@ -704,10 +702,6 @@ export default {
     },
     //获取过去开奖号码10个
     getPastOp() {
-      // if (this.startyet == false) {
-      //   this.start();
-      // }
-      // this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: this.countNum }
@@ -718,16 +712,6 @@ export default {
           this.n1 = this.getPastOpens[0].n1;
           this.n2 = this.getPastOpens[0].n2;
           this.n3 = this.getPastOpens[0].n3;
-          // if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-          //   if (res.data.data[0].lotteryId === this.$route.query.id) {
-          //     this.reGetPastOp();
-          //   }
-          // } else {
-          //   clearTimeout(this.timer2);
-          //   this.end();
-          //   this.startyet = false;
-          //   this.shownum = false;
-          // }
         })
         .catch(error => {
           console.log("获取过去开奖号码No");
@@ -747,7 +731,7 @@ export default {
       this.show = false;
       this.showa = !this.showa;
       this.betk3ContentTopPop = false;
-      this.countNum = 1;
+      this.countNum = 10;
       if (localStorage.getItem("lotteryList") !== null) {
         this.$loading.hide();
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
@@ -778,6 +762,7 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
+      this.countNum = 10;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;

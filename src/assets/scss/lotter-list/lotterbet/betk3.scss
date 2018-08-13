@@ -83,14 +83,11 @@
               & .img {
                 @extend %flex;
                 & span {
-                  width: 24px;
-                  height: 24px;
-                  background-size: 100% 100%;
-                  margin: 0px 2px;
-                }
-                & img {
-                  width: 24px;
-                  height: 24px;
+                  width: 28px;
+                  height: 28px;
+                  background-image: url(../../../assets/img/one/diceK3.png);
+                  background-size: 200% 600%;
+                  vertical-align:middle;
                 }
               }
             }
@@ -100,16 +97,9 @@
             & li:nth-child(3n){
               margin-right: 0px;
             }
-            // & li:nth-child(5) {
-            //   display: none;
-            // }
             & li:nth-child(7) {
               margin-right: 0px;
             }
-            // & li:nth-child(3),
-            // & li:nth-child(8) {
-            //   margin-right: 0;
-            // }
           }
         }
       }
@@ -224,30 +214,65 @@
           @extend %flex;
           @extend %aitems;
           margin-bottom: 4px;
+          & p.Dice{
+            background: url(../../../assets/img/one/diceK3.png);
+            background-size: 200% 600%;
+            vertical-align:middle;
+          }
+          & p.Dice.Dice1{
+            background-position: 0 0;
+          }
+          & p.Dice.Dice2{
+            background-position: 0 -100%;
+          }
+          & p.Dice.Dice3{
+            background-position: 0 -200%;
+          }
+          & p.Dice.Dice4{
+            background-position: 0 -300%;
+          }
+          & p.Dice.Dice5{
+            background-position: 0 -400%;
+          }
+          & p.Dice.Dice6{
+            background-position: 0 -500%;
+          }
           & p {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             overflow: hidden;
-            margin: 0px 2px 4px;
             background-size: 100% 100%;
           }
           & .num {
             align-items: center;
-            width: 76px;
-            height: 24px;
-            line-height: 24px;
+            height: 28px;
+            line-height: 28px;
             overflow: hidden;
             & .span {
               color: #fff;
-              width: 24px;
-              height: 24px;
+              width: 28px;
+              height: 28px;
               font-weight: bold;
               float: left;
               & div {
                 color: #fff;
-                width: 24px;
-                height: 24px;
+                width: 28px;
+                height: 28px;
                 background-size: 100% 100%;
+              }
+              & div.Dice{
+                background: url(../../../assets/img/one/diceK3.png);
+                background-size: 200% 600%;
+                vertical-align:middle;
+              }
+              & div.Dice1,div.Dice4{
+                background-position: -100% 0;
+              }
+              & div.Dice2,div.Dice5{
+                background-position: -100% -100%;
+              }
+              & div.Dice3,div.Dice6{
+                background-position: -100% -200%;
               }
             }
             & .span:nth-child(2) {
@@ -420,14 +445,37 @@
           color: #caebda;
           padding: 4px 0px;
           & a {
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
             overflow: hidden;
             color: #caebda;
             margin-right: 4px;
-            & img {
-              width: 20px;
-              height: 20px;
+            background-size: 100% 100%;
+            & span{
+              display: inline-block;
+              width: 28px;
+              height: 28px;
+              background: url(../../../assets/img/one/diceK3.png);
+              background-size: 200% 600%;
+              vertical-align:middle;
+            }
+            & span.Dice.Dice1{
+              background-position: 0 0;
+            }
+            & span.Dice.Dice2{
+              background-position: 0 -100%;
+            }
+            & span.Dice.Dice3{
+              background-position: 0 -200%;
+            }
+            & span.Dice.Dice4{
+              background-position: 0 -300%;
+            }
+            & span.Dice.Dice5{
+              background-position: 0 -400%;
+            }
+            & span.Dice.Dice6{
+              background-position: 0 -500%;
             }
           }
         }
@@ -494,14 +542,37 @@
         color: #caebda;
         padding: 4px 0px;
         & a {
-          width: 20px;
-          height: 20px;
+          width: 28px;
+          height: 28px;
           overflow: hidden;
           color: #caebda;
           margin-right: 4px;
-          & img {
-            width: 20px;
-            height: 20px;
+          background-size: 100% 100%;
+          & span{
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: url(../../../assets/img/one/diceK3.png);
+            background-size: 200% 600%;
+            vertical-align:middle;
+          }
+          & span.Dice.Dice1{
+            background-position: 0 0;
+          }
+          & span.Dice.Dice2{
+            background-position: 0 -100%;
+          }
+          & span.Dice.Dice3{
+            background-position: 0 -200%;
+          }
+          & span.Dice.Dice4{
+            background-position: 0 -300%;
+          }
+          & span.Dice.Dice5{
+            background-position: 0 -400%;
+          }
+          & span.Dice.Dice6{
+            background-position: 0 -500%;
           }
         }
       }
@@ -684,110 +755,86 @@
 }
 
 .menu-list-top li:nth-child(1) {
-  .img1 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img1 {
+    background-position: 0 0;
   }
-  .img2 {
-    background: url(../../../assets/img/one/n2.png) no-repeat center;
+  & span.img2 {
+    background-position: 0 -100%;
   }
-  .img3 {
-    background: url(../../../assets/img/one/n3.png) no-repeat center;
+  & span.img3 {
+    background-position: 0 -200%;
   }
 }
 
 .menu-list-top li:nth-child(2) {
-  .img1 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img1 {
+    background-position: 0 0;
   }
-  .img2 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img2 {
+    background-position: 0 0;
   }
-  .img3 {
-    background: url(../../../assets/img/one/n3.png) no-repeat center;
+  & span.img3 {
+    background-position: 0 -200%;
   }
 }
 
 .menu-list-top li:nth-child(3) {
-  .img1 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img1 {
+    background-position: 0 0;
   }
-  .img2 {
-    background: url(../../../assets/img/one/n4.png) no-repeat center;
+  & span.img2 {
+    background-position: 0 -300%;
   }
-  .img3 {
-    background: url(../../../assets/img/one/n4.png) no-repeat center;
+  & span.img3 {
+    background-position: 0 -300%;
   }
 }
 
 .menu-list-top li:nth-child(4) {
-  .img1 {
-    background: url(../../../assets/img/one/n2.png) no-repeat center;
+  & span.img1 {
+    background-position: 0 -100%;
   }
-  .img2 {
-    background: url(../../../assets/img/one/n3.png) no-repeat center;
+  & span.img2 {
+    background-position: 0 -200%;
   }
-  .img3 {
-    background: url(../../../assets/img/one/n4.png) no-repeat center;
+  & span.img3 {
+    background-position: 0 -300%;
   }
 }
 
 .menu-list-top li:nth-child(5) {
-  .img1 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img1 {
+    background-position: 0 0;
   }
-  .img2 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img2 {
+    background-position: 0 0;
   }
-  .img3 {
-    background: url(../../../assets/img/one/n3.png) no-repeat center;
+  & span.img3 {
+    background-position: 0 -200%;
   }
 }
 
 .menu-list-top li:nth-child(6) {
-  .img1 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img1 {
+    background-position: 0 0;
   }
-  .img2 {
-    background: url(../../../assets/img/one/n2.png) no-repeat center;
+  & span.img2 {
+    background-position: 0 -100%;
   }
-  .img3 {
-    background: url(../../../assets/img/one/n3.png) no-repeat center;
+  & span.img3 {
+    background-position: 0 -200%;
   }
 }
 
 .menu-list-top li:nth-child(7) {
-  .img1 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img1 {
+    background-position: 0 0;
   }
-  .img2 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
+  & span.img2 {
+    background-position: 0 0;
   }
-  .img3 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
-  }
-}
-
-.menu-list-top li:nth-child(8) {
-  .img1 {
-    background: url(../../../assets/img/one/n2.png) no-repeat center;
-  }
-  .img2 {
-    background: url(../../../assets/img/one/n3.png) no-repeat center;
-  }
-  .img3 {
-    background: url(../../../assets/img/one/n5.png) no-repeat center;
-  }
-}
-
-.menu-list-top li:nth-child(9) {
-  .img1 {
-    background: url(../../../assets/img/one/n1.png) no-repeat center;
-  }
-  .img2 {
-    background: url(../../../assets/img/one/n2.png) no-repeat center;
-  }
-  .img3 {
-    background: url(../../../assets/img/one/n3.png) no-repeat center;
+  & span.img3 {
+    background-position: 0 0;
   }
 }
 
@@ -799,45 +846,18 @@
   & li {
     width: 12% !important;
     & h2 {
-      width: 24px !important;
-      height: 24px !important;
+      width: 28px !important;
+      height: 28px !important;
       padding: 0px !important;
     }
   }
-  & li:nth-child(1) {
-    & h2 {
-      background: url(../../../assets/img/one/n1.png) no-repeat center;
-      background-size: 100% 100%;
-    }
-  }
-  & li:nth-child(2) {
-    & h2 {
-      background: url(../../../assets/img/one/n2.png) no-repeat center center;
-      background-size: 100% 100%;
-    }
-  }
-  & li:nth-child(3) {
-    & h2 {
-      background: url(../../../assets/img/one/n3.png) no-repeat center;
-      background-size: 100% 100%;
-    }
-  }
-  & li:nth-child(4) {
-    & h2 {
-      background: url(../../../assets/img/one/n4.png) no-repeat center;
-      background-size: 100% 100%;
-    }
-  }
-  & li:nth-child(5) {
-    & h2 {
-      background: url(../../../assets/img/one/n5.png) no-repeat center;
-      background-size: 100% 100%;
-    }
-  }
-  & li:nth-child(6) {
-    & h2 {
-      background: url(../../../assets/img/one/n6.png) no-repeat center;
-      background-size: 100% 100%;
+  @for $i from 1 through 6 {
+    > li:nth-child(#{$i}){
+      & h2{
+        background-image: url(../../../assets/img/one/diceK3.png);
+        background-size: 200% 600%;
+        background-position: 0% -100% * ($i - 1);
+      }
     }
   }
 }
@@ -857,8 +877,7 @@
         border: 0.026667rem solid rgba(255, 255, 255, 0.3);
         width: 32% !important;
         margin: 0px !important;
-        & span,
-        & p {
+        & span{
           @extend %faj;
           width: 85%;
           font-size: 14px !important;
@@ -868,25 +887,6 @@
           background: #164630;
           border: 1px solid #164630;
           margin-bottom: 0px;
-        }
-        & p {
-          width: 52px;
-          margin: 0;
-          & a:nth-child(1) {
-            width: 22px;
-            height: 22px;
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            width: 22px;
-            height: 22px;
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-            background-size: 200% 600%;
-          }
-        }
-        & p.active {
-          border: 1px solid #f4c829;
         }
         & span {
           & a:nth-child(1) {
@@ -921,559 +921,7 @@
             height: 0px;
           }
         }
-      } //第一组
-      & li:nth-child(1) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(4) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(7) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(10) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(13) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(16) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 00px;
-            background-size: 200% 600%;
-          }
-        }
-      } //第二组
-      & li:nth-child(2) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(5) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(8) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(11) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(14) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(17) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-        }
-      } //第三组
-      & li:nth-child(3) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px 0px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(6) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(9) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(12) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(15) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(18) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-        }
-      } //第四组
-      & li:nth-child(19) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -0px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(22) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(25) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(28) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(31) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(34) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-        }
-      } //第五组
-      & li:nth-child(20) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -0px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(23) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(26) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(29) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(32) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(35) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-        }
-      } //第六组
-      & li:nth-child(21) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -0px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(24) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -22px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(27) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -44px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(30) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -66px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(33) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(3) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -88px;
-            background-size: 200% 600%;
-          }
-        }
-      }
-      & li:nth-child(36) {
-        & span {
-          & a:nth-child(1) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-          & a:nth-child(2) {
-            background: url(../../../assets/img/one/diceK3.png) no-repeat 0px -110px;
-            background-size: 200% 600%;
-          }
-        }
-      }
+      } 
     }
   }
 }
@@ -1490,80 +938,71 @@
     & h2 {
       @extend %faj;
       width: 100% !important;
-      height: 22px !important;
+      height: 28px !important;
       overflow: hidden;
-      margin: 4px 0px;
+      margin: 4px 0px 0px;
+      padding-left: 4px;
       & a {
-        margin: 0px 2px;
-        width: 22px !important;
-        height: 22px !important;
+        width: 28px !important;
+        height: 28px !important;
+        background-image: url(../../../assets/img/one/diceK3.png);
+        background-size: 200% 600%;
       }
     }
   }
   & li:nth-child(1) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n1.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% 0%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n2.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -100%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n3.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -200%;
       }
     }
   }
   & li:nth-child(2) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n2.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -100%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n3.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -200%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n4.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -300%;
       }
     }
   }
   & li:nth-child(3) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n3.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -200%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n4.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -300%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n5.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -400%;
       }
     }
   }
   & li:nth-child(4) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n4.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -300%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n5.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -400%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n6.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -500%;
       }
     }
   }
+  
 }
 
 .santonghao {
@@ -1579,13 +1018,14 @@
       @extend %flex;
       @extend %jcontent;
       width: 100% !important;
-      height: 22px;
+      height: 28px;
       overflow: hidden;
       & a {
         @extend %flex;
-        margin: 0 2px;
-        width: 22px !important;
-        height: 22px !important;
+        width: 28px !important;
+        height: 28px !important;
+        background-image: url(../../../assets/img/one/diceK3.png);
+        background-size: 200% 600%;
       }
     }
   }
@@ -1607,96 +1047,78 @@
   & li:nth-child(1) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n1.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% 0%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n1.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% 0%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n1.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% 0%;
       }
     }
   }
   & li:nth-child(2) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n2.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -100%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n2.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -100%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n2.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -100%;
       }
     }
   }
   & li:nth-child(3) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n3.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -200%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n3.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -200%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n3.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -200%;
       }
     }
   }
   & li:nth-child(4) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n4.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -300%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n4.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -300%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n4.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -300%;
       }
     }
   }
   & li:nth-child(5) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n5.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -400%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n5.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -400%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n5.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -400%;
       }
     }
   }
   & li:nth-child(6) {
     & h2 {
       & a:nth-child(1) {
-        background: url(../../../assets/img/one/n6.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -500%;
       }
       & a:nth-child(2) {
-        background: url(../../../assets/img/one/n6.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -500%;
       }
       & a:nth-child(3) {
-        background: url(../../../assets/img/one/n6.png) no-repeat center;
-        background-size: 100% 100%;
+        background-position: 0% -500%;
       }
     }
   }

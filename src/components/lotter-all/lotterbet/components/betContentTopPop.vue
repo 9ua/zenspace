@@ -10,11 +10,11 @@
         | {{item.seasonId.substring(4).split("-").join("")*1}}
         i.iconfont.icon-plus-minus
       p
-        a {{item.n1}}
-        a {{item.n2}}
-        a {{item.n3}}
-        a {{item.n4}}
-        a {{item.n5}}
+        a {{item.n1 &lt; 10 ? '0'+item.n1 : item.n1}}
+        a {{item.n2 &lt; 10 ? '0'+item.n2 : item.n2}}
+        a {{item.n3 &lt; 10 ? '0'+item.n3 : item.n3}}
+        a {{item.n4 &lt; 10 ? '0'+item.n4 : item.n4}}
+        a {{item.n5 &lt; 10 ? '0'+item.n5 : item.n5}}
       p {{item.addTime.substring(11)}}
   p.lookAll
     button(@click.stop='lookAll') 查看更多

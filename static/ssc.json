@@ -50,11 +50,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "千位",
             "nums": [{
@@ -87,11 +83,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "百位",
             "nums": [{
@@ -124,11 +116,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "十位",
             "nums": [{
@@ -161,11 +149,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "个位",
             "nums": [{
@@ -198,11 +182,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -254,11 +234,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "单号",
             "nums": [{
@@ -291,11 +267,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -343,11 +315,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "二重号",
             "nums": [{
@@ -380,11 +348,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -432,11 +396,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "单号",
             "nums": [{
@@ -469,11 +429,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -521,11 +477,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "单号",
             "nums": [{
@@ -558,11 +510,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -610,11 +558,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "单号",
             "nums": [{
@@ -647,11 +591,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -699,11 +639,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -755,11 +691,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -807,11 +739,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -859,11 +787,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -911,11 +835,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -967,11 +887,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1019,11 +935,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1071,11 +983,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1131,11 +1039,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "千位",
             "nums": [{
@@ -1168,11 +1072,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "百位",
             "nums": [{
@@ -1205,11 +1105,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "十位",
             "nums": [{
@@ -1242,11 +1138,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1298,11 +1190,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "单号",
             "nums": [{
@@ -1335,11 +1223,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1387,11 +1271,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1439,11 +1319,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "单号",
             "nums": [{
@@ -1476,11 +1352,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1528,11 +1400,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1584,11 +1452,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1636,11 +1500,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1696,11 +1556,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "千位",
             "nums": [{
@@ -1733,11 +1589,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "百位",
             "nums": [{
@@ -1770,11 +1622,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1876,11 +1724,7 @@
             }, {
               "ball": "27",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1928,11 +1772,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -1984,11 +1824,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2036,11 +1872,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2137,11 +1969,7 @@
             }, {
               "ball": "26",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2189,11 +2017,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 1,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2244,11 +2068,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2296,11 +2116,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2356,11 +2172,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "百位",
             "nums": [{
@@ -2393,11 +2205,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "十位",
             "nums": [{
@@ -2430,11 +2238,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2536,11 +2340,7 @@
             }, {
               "ball": "27",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2588,11 +2388,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2644,11 +2440,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2696,11 +2488,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2797,11 +2585,7 @@
             }, {
               "ball": "26",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2849,11 +2633,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 1,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2904,11 +2684,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -2956,11 +2732,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3016,11 +2788,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "十位",
             "nums": [{
@@ -3053,11 +2821,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "个位",
             "nums": [{
@@ -3090,11 +2854,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3196,11 +2956,7 @@
             }, {
               "ball": "27",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3248,11 +3004,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3304,11 +3056,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3356,11 +3104,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3457,11 +3201,7 @@
             }, {
               "ball": "26",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3509,11 +3249,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 1,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3564,11 +3300,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3616,11 +3348,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3676,11 +3404,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "千位",
             "nums": [{
@@ -3713,11 +3437,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3792,11 +3512,7 @@
             }, {
               "ball": "18",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3844,11 +3560,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3900,11 +3612,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -3973,11 +3681,7 @@
             }, {
               "ball": "17",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4025,11 +3729,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 1,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4085,11 +3785,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "个位",
             "nums": [{
@@ -4122,11 +3818,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4201,11 +3893,7 @@
             }, {
               "ball": "18",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4253,11 +3941,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4309,11 +3993,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4382,11 +4062,7 @@
             }, {
               "ball": "17",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4434,11 +4110,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 1,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4494,11 +4166,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "千位",
             "nums": [{
@@ -4531,11 +4199,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "百位",
             "nums": [{
@@ -4568,11 +4232,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "十位",
             "nums": [{
@@ -4605,11 +4265,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "个位",
             "nums": [{
@@ -4642,11 +4298,7 @@
             }, {
               "ball": "9",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": true,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4682,11 +4334,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "万百",
             "nums": [{
@@ -4698,11 +4346,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "万十",
             "nums": [{
@@ -4714,11 +4358,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "万个",
             "nums": [{
@@ -4730,11 +4370,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "千百",
             "nums": [{
@@ -4746,11 +4382,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "千十",
             "nums": [{
@@ -4762,11 +4394,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "千个",
             "nums": [{
@@ -4778,11 +4406,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "百十",
             "nums": [{
@@ -4794,11 +4418,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "百个",
             "nums": [{
@@ -4810,11 +4430,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }, {
             "title": "十个",
             "nums": [{
@@ -4826,11 +4442,7 @@
             }, {
               "ball": "和",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": true
+            }]
           }],
           "anyList": null,
           "anySelect": null,
@@ -4883,11 +4495,7 @@
             }, {
               "ball": "小双",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "千",
             "nums": [{
@@ -4917,11 +4525,7 @@
             }, {
               "ball": "小双",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "百",
             "nums": [{
@@ -4951,11 +4555,7 @@
             }, {
               "ball": "小双",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "十",
             "nums": [{
@@ -4985,11 +4585,7 @@
             }, {
               "ball": "小双",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }, {
             "title": "个",
             "nums": [{
@@ -5019,11 +4615,7 @@
             }, {
               "ball": "小双",
               "choose": false
-            }],
-            "numBonus": null,
-            "hasBut": false,
-            "maxSelect": 0,
-            "towLine": false
+            }]
           }],
           "anyList": null,
           "anySelect": null,

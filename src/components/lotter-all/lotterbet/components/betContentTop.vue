@@ -3,11 +3,11 @@
   .content-left(@click='changeBetContentTopPop')
     p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
     div(v-if='shownum === false')
-      p {{n1}}
-      p {{n2}}
-      p {{n3}}
-      p {{n4}}
-      p {{n5}}
+      p {{n1 &lt; 10 ? '0'+n1 : n1}}
+      p {{n2 &lt; 10 ? '0'+n2 : n2}}
+      p {{n3 &lt; 10 ? '0'+n3 : n3}}
+      p {{n4 &lt; 10 ? '0'+n4 : n4}}
+      p {{n5 &lt; 10 ? '0'+n5 : n5}}
       i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
     .contnet-left-num(v-if='shownum === true && isGetItem === true')
       .num

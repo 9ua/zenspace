@@ -79,7 +79,7 @@ export default {
     //清空
     iscreat() {
       this.$store.state.zhu = "";
-      // this.$store.state.money = "";
+      this.$store.state.money = "";
       this.$store.state.con = "";
       this.d = [];
       this.dd = [];

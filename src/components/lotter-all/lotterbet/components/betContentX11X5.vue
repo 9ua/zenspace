@@ -64,7 +64,7 @@ export default {
     iscreat() {
       this.$store.commit("ZHU", "");
       this.$store.commit("CON", "");
-      // this.$store.state.money = "";
+      this.$store.state.money = "";
       this.d = [];
       this.dd = [];
       this.ka = [];

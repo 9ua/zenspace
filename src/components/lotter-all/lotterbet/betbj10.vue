@@ -515,7 +515,7 @@ export default {
         }
       }
       if (this.timer2) {
-        for (let i = 0; i <= timer2; i++) {
+        for (let i = 0; i <= this.timer2; i++) {
           clearTimeout(i);
         }
       }
@@ -1666,7 +1666,7 @@ export default {
     getLotteryList() {
       this.showa = !this.showa;
       this.betsscContentTopPop = false;
-      this.countNum =1;
+      this.countNum =10;
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).pk10;
         this.groupId = this.LotteryList[0].groupId;
@@ -1695,7 +1695,8 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
-      this.historyNum++;
+      this.countNum = 10;
+      // this.historyNum++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
@@ -1828,7 +1829,6 @@ export default {
             this.lastSeasonId = res.data.data.lastSeasonId;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
-            this.countNum = 1;
             this.getPastOp(); //获取过去开奖号码10个
             this.initSetTimeout();
           }
@@ -1854,7 +1854,7 @@ export default {
       this.countDown = hours + ":" + minutes + ":" + seconds;
     },
     //倒计时
-    initSetTimeout(today) {
+    initSetTimeout() {
       if (this.startyet == false) {
         this.start();
       }
@@ -1942,7 +1942,7 @@ export default {
     reGetPastOp() {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
-        this.countNum = 1;
+        this.countNum = 10;
         this.getPastOp();
       }, 12000);
     }

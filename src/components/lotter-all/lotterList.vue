@@ -2,11 +2,11 @@
 .lotterList
   .lotterList-top
     i.iconfont.icon-left(@click='listStyleToSafety')
-    p 全部彩种
+    p {{title}}
   .lotterList-nav
     .lotterList-nav-box
       ul
-        router-link(:to="'/lotterList/'+navTitles.pathsrc", tag='li', v-for='(navTitles,index) in navTitle', :title='navTitles.name', :key='index')
+        li(:class='{"active" : navNumber === index}', v-for='(navTitles,index) in navTitle', :title='navTitles.name', :key='index', @click='selectLottery(navTitles,index)')
           span
             i.iconfont(:class='navTitles.icon')
           h5 {{navTitles.name}}
@@ -17,6 +17,8 @@
 export default {
   data() {
     return {
+      navNumber:0,
+      title:'全部彩种',
       navTitle: [
         { name: "全部彩种", pathsrc: "lotterAll",icon:"icon-all" },
         { name: "快3", pathsrc: "k3s",icon:"icon-k3" },
@@ -30,6 +32,11 @@ export default {
     listStyleToSafety(){
       this.$router.push('/one')
     },
+    selectLottery(navTitles,index){
+      this.navNumber = index;
+      this.$router.push("/lotterList/"+navTitles.pathsrc);
+      this.title = navTitles.name;
+    }
   }
 };
 </script>

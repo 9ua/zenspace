@@ -44,6 +44,13 @@
         <button class="logoAffirm" @click="openSimple = false">确认</button>
       </li>
     </ul>
+    <!-- show pic -->
+    <ul class="loginSuccess num2" v-if="number =='5'">
+      <li class="content"><img :src='"@/assets/img/one/"+content+".png"' style="width:100%"></li>
+      <li class="button">
+        <button class="logoAffirm" @click="openSimple = false">确认</button>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -60,6 +67,7 @@ export default {
     content: String,
     content1: String,
     content2: String,
+    content5: String,
     number: String,
   },
   mounted() {

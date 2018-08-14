@@ -66,6 +66,7 @@ export default {
       invitelist: "",
       selected: [],
       showFlag: true,
+      count:20,
       actions: [
         {
           name: "今天",
@@ -125,7 +126,9 @@ export default {
         .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
           params: {
             account: this.username,
-            dateFlag: this.dateFlag
+            dateFlag: this.dateFlag,
+            start:0,
+            limit: this.count,
           }
         })
         .then(res => {

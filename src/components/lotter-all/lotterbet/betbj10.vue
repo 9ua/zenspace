@@ -287,11 +287,9 @@
         </li>
       </ul>
     </div>
-    <bets ref="pop"></bets>
   </div>
 </template>
 <script>
-import bets from "../../page-five/money/bets.vue";
 export default {
   data() {
     return {
@@ -1740,10 +1738,11 @@ export default {
       this.betsuccess = !this.betsuccess;
     },
     tolooksucc() {
-      this.looks = !this.looks;
-      this.betsscContentTopPop = false;
-      this.$refs.pop.banckto();
-      this.$refs.pop.getTradeList();
+      this.$router.push('/bet');
+      // this.looks = !this.looks;
+      // this.betsscContentTopPop = false;
+      // this.$refs.pop.banckto();
+      // this.$refs.pop.getTradeList();
     },
     //继续投注
     betsucc() {
@@ -1946,9 +1945,6 @@ export default {
         this.getPastOp();
       }, 12000);
     }
-  },
-  components: {
-    bets
   },
   directives: {
     focus: {

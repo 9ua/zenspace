@@ -170,10 +170,8 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  bets(ref='pop')
 </template>
 <script>
-import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -2004,10 +2002,7 @@ export default {
       this.betsuccess = !this.betsuccess;
     },
     tolooksucc(){
-      this.looks = !this.looks;
-      this.betsscContentTopPop = false;
-      this.$refs.pop.banckto();
-      this.$refs.pop.getTradeList();
+      this.$router.push("/bet");
     },
     betsucc() {
       this.betsuccess = !this.betsuccess;
@@ -2215,9 +2210,6 @@ export default {
         this.betGoshow = !this.betGoshow;
       }
     }
-  },
-  components:{
-    bets
   },
   //focus
   directives: {

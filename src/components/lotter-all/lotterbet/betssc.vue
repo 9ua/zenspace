@@ -170,7 +170,7 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  bets(ref='pop')
+  bets(ref='pop')      
 </template>
 <script>
 import bets from '../../page-five/money/bets.vue';
@@ -269,7 +269,7 @@ export default {
       cacheTime: 600000,
       historyNum: 0,
       betnot:true,
-      countNum:1,
+      countNum:10,
     };
   },
   destroyed() {
@@ -310,7 +310,6 @@ export default {
     noGetItem(){
       if(this.startyet == false){
         this.start();
-        this.initSetTimeout();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
@@ -1958,6 +1957,7 @@ export default {
     },
     //投注
     betGo() {
+      this.$loading.show({number:"a"});
       this.betGoshow = false;
       this.betnot = false;
       let config = {
@@ -1983,6 +1983,7 @@ export default {
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
+            this.$loading.hide();
               this.betnot = true;
               this.betsuccess = !this.betsuccess;
               this.iscreat();
@@ -2015,11 +2016,13 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
+      this.$loading.show({number:"a"});
       this.showa = !this.showa;
       this.betsscContentTopPop = false;
       this.countNum = 10;
-      if (localStorage.getItem("lotteryList") !== null) {
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).ssc;
+      if (localStorage.getItem("lotteryListSSC") !== null) {
+        this.$loading.hide();
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListSSC"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -2028,10 +2031,11 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList")
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'ssc'}})
           .then(res => {
-            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
-            this.LotteryList = res.data.data.ssc;
+            this.$loading.hide();
+            localStorage.setItem("lotteryListSSC", JSON.stringify(res.data.data));
+            this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
@@ -2140,7 +2144,6 @@ export default {
       this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        this.setTimeMode();
         if (this.today < 1) {
           this.endCount();
           this.timesUp();
@@ -2154,7 +2157,12 @@ export default {
           this.getPastOp();
         }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
           this.getPastOp();
+        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId === this.lastSeasonId){
+          this.end();
+          this.startyet = false;
+          this.shownum = false;
         }
+        this.setTimeMode();
       }, 1000);
     },
     //時間到彈窗

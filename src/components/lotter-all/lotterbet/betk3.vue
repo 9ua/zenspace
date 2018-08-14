@@ -286,7 +286,7 @@
   </div>
 </template>
 <script>
-import bets from "../../page-five/money/bets.vue";
+import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -610,7 +610,6 @@ export default {
           params: { lotteryId: this.$route.query.id }
         })
         .then(res => {
-          // console.log("获取彩種當前獎期時間",res)
           if (res.data.code === 1) {
             if (this.$route.query.id === "bjk3") {
               this.seasonId2 = res.data.data.seasonId;
@@ -732,9 +731,9 @@ export default {
       this.showa = !this.showa;
       this.betk3ContentTopPop = false;
       this.countNum = 10;
-      if (localStorage.getItem("lotteryList") !== null) {
+      if (localStorage.getItem("lotteryListk3") !== null) {
         this.$loading.hide();
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListk3"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -743,11 +742,11 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList")
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'k3'}})
           .then(res => {
             this.$loading.hide();
-            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
-            this.LotteryList = res.data.data.k3;
+            localStorage.setItem("lotteryListk3", JSON.stringify(res.data.data));
+            this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
@@ -1293,6 +1292,7 @@ export default {
     },
     //投注
     betGo() {
+      this.$loading.show({number:"a"});
       this.betGoshow = false;
       this.betnot = false;
       let config = {
@@ -1324,6 +1324,7 @@ export default {
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
               if (res.data.message === "success") {
+                this.$loading.hide();
                 if (this.con1 !== "" && this.con2 === "") {
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
@@ -1369,6 +1370,7 @@ export default {
             .then(res => {
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
+                  this.$loading.hide();
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
                   this.iscreat();
@@ -1414,6 +1416,7 @@ export default {
           .post(this.$store.state.url + "api/lottery/bet", formData, config)
           .then(res => {
             if (res.data.message === "success") {
+              this.$loading.hide();
               this.betnot = true;
                 this.betsuccess = !this.betsuccess;
                 this.iscreat();
@@ -1480,7 +1483,7 @@ export default {
       return groupArr;
     }
   },
-  components: {
+  components:{
     bets
   },
   directives: {

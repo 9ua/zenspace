@@ -1293,6 +1293,7 @@ export default {
     },
     //投注
     betGo() {
+      this.$loading.show({number:"a"});
       this.betGoshow = false;
       this.betnot = false;
       let config = {
@@ -1324,6 +1325,7 @@ export default {
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
               if (res.data.message === "success") {
+                this.$loading.hide();
                 if (this.con1 !== "" && this.con2 === "") {
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
@@ -1369,6 +1371,7 @@ export default {
             .then(res => {
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
+                  this.$loading.hide();
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
                   this.iscreat();
@@ -1414,6 +1417,7 @@ export default {
           .post(this.$store.state.url + "api/lottery/bet", formData, config)
           .then(res => {
             if (res.data.message === "success") {
+              this.$loading.hide();
               this.betnot = true;
                 this.betsuccess = !this.betsuccess;
                 this.iscreat();

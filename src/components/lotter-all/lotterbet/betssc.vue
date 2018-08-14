@@ -1958,6 +1958,7 @@ export default {
     },
     //投注
     betGo() {
+      this.$loading.show({number:"a"});
       this.betGoshow = false;
       this.betnot = false;
       let config = {
@@ -1983,6 +1984,7 @@ export default {
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
+            this.$loading.hide();
               this.betnot = true;
               this.betsuccess = !this.betsuccess;
               this.iscreat();

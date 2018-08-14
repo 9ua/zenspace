@@ -17,7 +17,7 @@
           <i class="iconfont icon-gantanhao"></i>{{content}}</p>
       </li>
       <li class="button">
-        <button class="logoAffirm" @click="openSimple = false">确认</button>
+        <button class="logoAffirm" @click="openSimple = false,$loading.hide()">确认</button>
       </li>
     </ul>
     <!-- 3秒后自动关闭 -->
@@ -41,7 +41,7 @@
         <p>投注时请注意期号!</p>
       </li>
       <li class="button">
-        <button class="logoAffirm" @click="openSimple = false">确认</button>
+        <button class="logoAffirm" @click="openSimple = false,$loading.hide()">确认</button>
       </li>
     </ul>
   </div>

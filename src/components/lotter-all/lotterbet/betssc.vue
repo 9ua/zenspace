@@ -2018,8 +2018,8 @@ export default {
       this.showa = !this.showa;
       this.betsscContentTopPop = false;
       this.countNum = 10;
-      if (localStorage.getItem("lotteryList") !== null) {
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).ssc;
+      if (localStorage.getItem("lotteryListSSC") !== null) {
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListSSC"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -2030,7 +2030,7 @@ export default {
         this.$axios
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
-            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
+            localStorage.setItem("lotteryListSSC", JSON.stringify(res.data.data));
             this.LotteryList = res.data.data.ssc;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {

@@ -732,9 +732,9 @@ export default {
       this.showa = !this.showa;
       this.betk3ContentTopPop = false;
       this.countNum = 10;
-      if (localStorage.getItem("lotteryList") !== null) {
+      if (localStorage.getItem("lotteryListk3") !== null) {
         this.$loading.hide();
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).k3;
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListk3"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -746,7 +746,7 @@ export default {
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
             this.$loading.hide();
-            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
+            localStorage.setItem("lotteryListk3", JSON.stringify(res.data.data));
             this.LotteryList = res.data.data.k3;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {

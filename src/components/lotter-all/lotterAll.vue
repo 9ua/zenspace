@@ -18,18 +18,17 @@ export default {
   },
   methods:{
     lotter(){
-      if(JSON.parse(localStorage.getItem("lotteryList")) !== null){
-        this.lotteryListAll = JSON.parse(localStorage.getItem("lotteryList")).all;
+      if(JSON.parse(localStorage.getItem("lotteryListAll")) !== null){
+        this.lotteryListAll = JSON.parse(localStorage.getItem("lotteryListAll"));
       }else {
-        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
-          localStorage.setItem("lotteryList",JSON.stringify(res.data.data));
-          this.lotteryListAll = res.data.data.all;
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:"all"}}).then(res => {
+          localStorage.setItem("lotteryListAll",JSON.stringify(res.data.data));
+          this.lotteryListAll = res.data.data;
         })
         .catch(error => {
           console.log("getLotteryListNo");
         });
       }
-      
     }
   }
 };

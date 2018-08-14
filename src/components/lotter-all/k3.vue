@@ -10,23 +10,25 @@
 export default {
   data() {
     return {
-      lotteryListk3: JSON.parse(localStorage.getItem("lotteryList")).k3
+      lotteryListk3: ''
     };
   },
   mounted() {
-    // this.lotteryk3();
+    this.lotteryk3();
   },
   methods: {
     lotteryk3() {
-      this.$axios
-        .get(this.$store.state.url + "api/lottery/getLotteryList")
-        .then(res => {
-          this.lotteryListk3 = res.data.data.k3;
-          console.log(res.data.data)
+      if(JSON.parse(localStorage.getItem("lotteryListk3")) !== null){
+        this.lotteryListk3 = JSON.parse(localStorage.getItem("lotteryListk3"));
+      }else {
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:"k3"}}).then(res => {
+          localStorage.setItem("lotteryListk3",JSON.stringify(res.data.data));
+          this.lotteryListk3 = res.data.data;
         })
         .catch(error => {
           console.log("getLotteryListNo");
         });
+      }
     }
   }
 };

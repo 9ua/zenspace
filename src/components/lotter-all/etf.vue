@@ -14,11 +14,17 @@ export default {
   },
   methods:{
     lotteryetf(){
-      this.$axios.get(this.$store.state.url+'api/lottery/getLotteryList').then((res) => {
-        this.lotteryListetf = res.data.data.x11x5;
-      }).catch((error) => {
-          console.log("getLotteryListNo")
-      })
+      if(JSON.parse(localStorage.getItem("lotteryListetf")) !== null){
+        this.lotteryListetf = JSON.parse(localStorage.getItem("lotteryListetf"));
+      }else {
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:"x11x5"}}).then(res => {
+          localStorage.setItem("lotteryListetf",JSON.stringify(res.data.data));
+          this.lotteryListetf = res.data.data;
+        })
+        .catch(error => {
+          console.log("getLotteryListNo");
+        });
+      }
     }
   }
 }

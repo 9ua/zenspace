@@ -332,8 +332,8 @@ export default {
       titles: "两面盘 龙虎",
       intotitle: "",
       itemstitle: "复式",
-      listname: "北京",
-      lotteryId: "pk10",
+      listname: this.$route.query.name.substring(0, 2),
+      lotteryId: "ffpk10",
       LotteryList: "",
       money: "", //投注金额
       displayBonus: 1.96,
@@ -1667,8 +1667,8 @@ export default {
       this.showa = !this.showa;
       this.betsscContentTopPop = false;
       this.countNum =10;
-      if (localStorage.getItem("lotteryList") !== null) {
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).pk10;
+      if (localStorage.getItem("lotteryListpk10") !== null) {
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListpk10"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -1679,7 +1679,7 @@ export default {
         this.$axios
           .get(this.$store.state.url + "api/lottery/getLotteryList")
           .then(res => {
-            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
+            localStorage.setItem("lotteryListpk10", JSON.stringify(res.data.data));
             this.LotteryList = res.data.data.pk10;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {

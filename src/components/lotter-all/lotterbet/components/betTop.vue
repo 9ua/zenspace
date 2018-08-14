@@ -131,7 +131,7 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'x11x5'}})
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:this.group}})
           .then(res => {
             this.$loading.hide();
             localStorage.setItem("lotteryListetf", JSON.stringify(res.data.data));

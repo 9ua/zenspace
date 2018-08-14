@@ -119,7 +119,6 @@ export default {
     },
     //中间->投注选号
     curBalls(indexff, indexg, num, numViews, player) {
-      console.log(this.playBonusId)
       num.choose = !num.choose;
       if (num.choose === true) {
         this.d[indexg] = num.ball;

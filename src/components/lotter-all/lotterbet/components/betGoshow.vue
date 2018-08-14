@@ -77,17 +77,8 @@ export default {
         .then(res => {
           if (res.data.message === "success") {
             this.$loading.hide();
-            this.$pop.show({
-              title: "温馨提示",
-              content: "恭喜您，投注成功！",
-              content1: "",
-              content2: "",
-              number: 1
-            });
             this.$store.commit("BET_NOT", true);
-            setTimeout(() => {
-              this.$store.commit("BET_SUCCESS", "reverse");
-            }, 600);
+              this.$store.commit("BET_SUCCESS", true);
           } else {
             this.$store.commit("BET_NOT", true);
             if (res.data.status === 501) {

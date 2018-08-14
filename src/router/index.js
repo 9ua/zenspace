@@ -111,8 +111,8 @@ export default new Router({
     },
     {
       path: "/ssc",
-      name: 'betssc',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betssc.vue'], resolve),
+      name: 'betsyx5',
+      component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
       meta: {
         keepAlive: true
       }

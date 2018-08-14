@@ -1299,7 +1299,6 @@ export default {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
       };
-
       if (
         this.playId1 === "k3_star3_big_odd" ||
         this.playId2 === "k3_star3_and" ||

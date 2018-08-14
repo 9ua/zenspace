@@ -610,7 +610,6 @@ export default {
           params: { lotteryId: this.$route.query.id }
         })
         .then(res => {
-          // console.log("获取彩種當前獎期時間",res)
           if (res.data.code === 1) {
             if (this.$route.query.id === "bjk3") {
               this.seasonId2 = res.data.data.seasonId;

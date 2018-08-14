@@ -269,7 +269,7 @@ export default {
       cacheTime: 600000,
       historyNum: 0,
       betnot:true,
-      countNum:1,
+      countNum:10,
     };
   },
   destroyed() {
@@ -310,7 +310,6 @@ export default {
     noGetItem(){
       if(this.startyet == false){
         this.start();
-        this.initSetTimeout();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
@@ -2145,7 +2144,6 @@ export default {
       this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        this.setTimeMode();
         if (this.today < 1) {
           this.endCount();
           this.timesUp();
@@ -2159,7 +2157,12 @@ export default {
           this.getPastOp();
         }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
           this.getPastOp();
+        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId === this.lastSeasonId){
+          this.end();
+          this.startyet = false;
+          this.shownum = false;
         }
+        this.setTimeMode();
       }, 1000);
     },
     //時間到彈窗

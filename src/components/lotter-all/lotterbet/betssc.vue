@@ -170,8 +170,10 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
+  bets(ref='pop')      
 </template>
 <script>
+import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -2002,7 +2004,10 @@ export default {
       this.betsuccess = !this.betsuccess;
     },
     tolooksucc(){
-      this.$router.push("/bet");
+      this.looks = !this.looks;
+      this.betsscContentTopPop = false;
+      this.$refs.pop.banckto();
+      this.$refs.pop.getTradeList();
     },
     betsucc() {
       this.betsuccess = !this.betsuccess;
@@ -2010,10 +2015,12 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
+      this.$loading.show({number:"a"});
       this.showa = !this.showa;
       this.betsscContentTopPop = false;
       this.countNum = 10;
       if (localStorage.getItem("lotteryListSSC") !== null) {
+        this.$loading.hide();
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryListSSC"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
@@ -2023,10 +2030,11 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList")
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'ssc'}})
           .then(res => {
+            this.$loading.hide();
             localStorage.setItem("lotteryListSSC", JSON.stringify(res.data.data));
-            this.LotteryList = res.data.data.ssc;
+            this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
@@ -2210,6 +2218,9 @@ export default {
         this.betGoshow = !this.betGoshow;
       }
     }
+  },
+  components:{
+    bets
   },
   //focus
   directives: {

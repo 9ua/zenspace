@@ -9,10 +9,10 @@
       betContent(:lotteryId='lotteryId',ref='betContent')
   betGoshow(@iscreat='iscreat')
   betFooter(@iscreat='iscreat')
-  //- bets(ref='pop')
+  bets(ref='pop')
 </template>
 <script>
-// import bets from "../../page-five/money/bets.vue";//右滑页面
+import bets from "../../page-five/money/bets.vue";//右滑页面
 import betTop from "./components/betTop.vue";//头部
 import betContentTop from "./components/betContentTop.vue";//开奖号码，倒计时
 import lookMore from "./components/lookMore.vue";//
@@ -23,7 +23,7 @@ import betGoshow from "./components/betGoshow.vue";//投注确认弹窗
 import betsuccess from "./components/betsuccess.vue";//投注成功，弹窗
 export default {
   components: {
-    // bets, //投注记录
+    bets, //投注记录
     betTop, //顶部彩种切换
     betContentTop, //开奖结果+倒计时
     betContentTopPop, //10期开奖结果
@@ -75,10 +75,9 @@ export default {
       }
     },
     tolooksucc() {
-      this.$router.push("/bet");
-      // this.$store.commit('BET_CONTENT_FLAG', false);
-      // this.$refs.pop.banckto();
-      // this.$refs.pop.getTradeList();
+      this.$store.commit('BET_CONTENT_FLAG', false);
+      this.$refs.pop.banckto();
+      this.$refs.pop.getTradeList();
     }
   },
   // 保留三个小数,不四舍五入

@@ -282,9 +282,11 @@
         </li>
       </ul>
     </div>
+    <bets ref="pop"></bets>
   </div>
 </template>
 <script>
+import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -741,11 +743,11 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList")
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'k3'}})
           .then(res => {
             this.$loading.hide();
             localStorage.setItem("lotteryListk3", JSON.stringify(res.data.data));
-            this.LotteryList = res.data.data.k3;
+            this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
@@ -1438,7 +1440,9 @@ export default {
       this.betsuccess = !this.betsuccess;
     },
     tolooksucc() {
-      this.$router.push('/bet');
+      this.looks = !this.looks;
+      this.$refs.pop.banckto();
+      this.$refs.pop.getTradeList();
     },
     //继续投注
     betsucc() {
@@ -1475,6 +1479,9 @@ export default {
 
       return groupArr;
     }
+  },
+  components:{
+    bets
   },
   directives: {
     focus: {

@@ -75,7 +75,7 @@ export default {
     };
   },
   mounted() {
-    // this.getLotterlist();
+    this.getLotterlist();
     this.showBanner();
   },
   methods: {

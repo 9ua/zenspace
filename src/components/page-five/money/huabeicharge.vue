@@ -102,7 +102,7 @@ export default {
     rechargeEntrance() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
-          params: { rechargeWay: 6 }
+          params: { rechargeWay: this.$route.query.id }
         })
         .then(res => {
           this.QRCodeUrl = res.data.data.QRCodeUrl;

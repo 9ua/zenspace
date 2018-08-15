@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/components/home/home.vue'
 import one from '@/components/home/one.vue'
-import baipin from '@/components/home/baipin.vue'
 import betk3 from '@/components/lotter-all/lotterbet/betk3.vue'
 import betsyx5 from '@/components/lotter-all/lotterbet/betsyx5.vue'
 import betbj10 from '@/components/lotter-all/lotterbet/betbj10.vue'
@@ -164,11 +163,6 @@ export default new Router({
           },
         }
       ]
-    },
-    {
-      path:'/',
-      name:'baipin',
-      component:baipin
     },
     {
       path: '/',

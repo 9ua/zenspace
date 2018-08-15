@@ -507,9 +507,9 @@ export default {
   },
   methods: {
     listen() {
-        if(document.hidden === false){
-          this.geteServerTime();
-        }
+      if(document.hidden === false){
+        this.geteServerTime();
+      }
     },
     //没打接口前
     noGetItem() {
@@ -585,7 +585,7 @@ export default {
         _this.i = _this.i % 3 + 1;
         _this.j = _this.j % 3 + 1;
         _this.k = _this.k % 3 + 1;
-      }, 100);
+      }, 48);
     },
     end() {
       var _this = this;
@@ -680,7 +680,6 @@ export default {
         this.setTimeMode();
       }, 1000);
     },
-
     //時間到彈窗
     timesUp() {
       this.$pop.show({
@@ -711,6 +710,14 @@ export default {
           this.n1 = this.getPastOpens[0].n1;
           this.n2 = this.getPastOpens[0].n2;
           this.n3 = this.getPastOpens[0].n3;
+          if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+            this.reGetPastOp();
+          } else {
+            clearTimeout(this.timer2);
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
+          }
         })
         .catch(error => {
           console.log("获取过去开奖号码No");

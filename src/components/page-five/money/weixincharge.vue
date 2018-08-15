@@ -17,18 +17,18 @@
         div
           input(placeholder='请输入充值人姓名', v-model='niceName', value='niceName', clearable='')
       li
-        p 交易订单号后6位
+        p {{attfirst}}
         div
-          input(placeholder='请输入订单号后6位', v-model='checkCode', value='checkCode', clearable='')
+          input(:placeholder='attsecond', v-model='checkCode', value='checkCode', clearable='')
       li
         .button
           button.button1(@click='isshow3') 充值申请
-    ul
-      li(style='background-color:#ddd;height:40px')
-        .button
-          button.button1(@click='popup()',style='background-color:#ddd;color:#888') 支付教程
+      //- ul
+      //-   li(style='background-color:#ddd;height:40px')
+      //-     .button
+      //-       button.button1(@click='popup()',style='background-color:#ddd;color:#888') 支付教程
       .warning
-        p 1、请务必填写正确交易订单号后6位！
+        p 1、{{attthird}}
         br
         p 2、请正确填写姓名和充值金额，以便及时核对。
         br
@@ -48,7 +48,7 @@
         p 充值人姓名
         span {{niceName}}
       li
-        p 订单号后6位
+        p {{attfirst}}
         span {{checkCode}}
       li(style='text-align:center;background:#fff;')
         .center
@@ -86,7 +86,10 @@ export default {
       receiveBankId: "",
       receiveBankName: "",
       receiveCard: "",
-      receiveNiceName: ""
+      receiveNiceName: "",
+      attfirst:"订单号后6位",
+      attsecond:"请输入订单号后6位",
+      attthird:"请务必填写正确订单号后6位！",
     };
   },
   mounted() {
@@ -100,7 +103,7 @@ export default {
     rechargeEntrance() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
-          params: { rechargeWay: 1 }
+          params: { rechargeWay: this.$route.query.id }
         })
         .then(res => {
           this.QRCodeUrl = res.data.data.QRCodeUrl;
@@ -109,6 +112,9 @@ export default {
           this.receiveBankName = res.data.data.receiveBankName;
           this.receiveCard = res.data.data.receiveCard;
           this.receiveNiceName = res.data.data.receiveNiceName;
+          this.attfirst = res.data.data.attfirst;
+          this.attsecond = res.data.data.attsecond;
+          this.attthird = res.data.data.attthird;
         })
         .catch(error => {
           console.log("获取列表Error");

@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import home from '@/components/home/home.vue'
+import one from '@/components/home/one.vue'
+import baipin from '@/components/home/baipin.vue'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -176,17 +179,25 @@ export default new Router({
       ]
     },
     {
+      path:'/',
+      name:'baipin',
+      component:baipin
+    },
+    {
       path: '/',
       name: 'home',
       redirect: 'one',
-      component: resolve => require(['@/components/home/home.vue'], resolve),
+      component:home,
+      // component: resolve => require(['@/components/home/home.vue'], resolve),
       meta: {
         keepAlive: true
       },
-      children: [{
+      children: [
+        {
           path: 'one',
           name: 'one',
-          component: resolve => require(['@/components/home/one.vue'], resolve),
+          component:one,
+          // component: resolve => require(['@/components/home/one.vue'], resolve),
           meta: {
             keepAlive: true
           },

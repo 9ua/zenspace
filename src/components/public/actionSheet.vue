@@ -22,7 +22,7 @@
 </template>
 <script>
 import Modal from "./Modal";
-// import Vue from "vue";
+import Vue from "vue";
 export default {
   name: "actionsheet",
   props: {

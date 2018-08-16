@@ -2,29 +2,33 @@
 .ssc
   ul
     router-link(v-for='(item,index) in lotteryListssc', :key='index', tag='li', :to="{path:'/ssc',query:{id:item.id,name:item.name}}")
-      img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
+      span
+        i.iconfont(:class='"icon-"+item.groupId')
       h5 {{item.name}}
 </template>
 <script>
 export default {
   data() {
     return {
-      lotteryListssc: JSON.parse(localStorage.getItem("lotteryList")).ssc
+      lotteryListssc:''
     };
   },
   mounted() {
-    // this.lotteryssc();
+    this.lotteryssc();
   },
   methods: {
     lotteryssc() {
-      this.$axios
-        .get(this.$store.state.url + "api/lottery/getLotteryList")
-        .then(res => {
-          this.lotteryListssc = res.data.data.ssc;
+      if(JSON.parse(localStorage.getItem("lotteryListSSC")) !== null){
+        this.lotteryListssc = JSON.parse(localStorage.getItem("lotteryListSSC"));
+      }else {
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:"ssc"}}).then(res => {
+          localStorage.setItem("lotteryListSSC",JSON.stringify(res.data.data));
+          this.lotteryListssc = res.data.data;
         })
         .catch(error => {
           console.log("getLotteryListNo");
         });
+      }
     }
   }
 };

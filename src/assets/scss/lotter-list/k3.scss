@@ -18,11 +18,15 @@
       border-left: 0px solid #DFE4ED;
       width: 33%;
       padding: 5px 0 10px;
-      & img {
+      & span {
+        @extend %faj;
         margin: 10px 0px 5px;
         width: 60px;
         height: 60px;
         border-radius: 50%;
+        & i.iconfont{
+          font-size: 56px;
+        }
       }
       & h5 {
         font-weight: 400;

@@ -19,6 +19,23 @@ const state = {
   balance: null, //余额
   userType: localStorage.getItem('userType'), //0会员，1代理
   historyNum: "/one",
+  isNotice:false,//是否有未读消息
+  noticeCount:0,//有未读消息，多少条
+
+  //游戏投注相关
+  betContentTopPopFlag: false, //是否弹出投注记录
+  showRight: false, //头部右侧切换彩种
+  current_player: {}, //当前玩法树
+  money: "", //投注金额  
+  zhu: 0, //注单数
+  con: "", //已选号码
+  betsuccess: false, //投注是否成功标识
+  betGoshow: false, //投注确认标识
+  betnot: true, //取消投注
+  listname: "", //彩种
+  seasonId2: "", //当前期号  
+  getPastOpens: "", //过去20期开奖
+  lookAllUl: false, //是否查看过去20期开奖
 }
 //test & prod
 if (process.env.NODE_ENV === 'production') {
@@ -31,9 +48,35 @@ if (process.env.NODE_ENV === 'production') {
 else {
   state.url = 'http://edu0370.com/';
 }
-
+//getters
+const getters = {
+  playBonusId: state => {
+    return state.current_player.id
+  },
+  seasonId: state => {
+    return state.seasonId2.substring(4).split("-").join("") * 1;
+  },
+  displayBonus1() {
+    let displayBonus1 = "";
+    if (state.current_player.displayBonus && state.current_player.displayBonus.indexOf("-") != -1) {
+      displayBonus1 = state.current_player.displayBonus.split("-")[0];
+      displayBonus1 = Number(displayBonus1);
+    }
+    return displayBonus1;
+  },
+  displayBonus2() {
+    let displayBonus2 = "";
+    if (state.current_player.displayBonus && state.current_player.displayBonus.indexOf("-") != -1) {
+      displayBonus2 = state.current_player.displayBonus.split("-")[1];
+      displayBonus2 = Number(displayBonus2);
+    }
+    return displayBonus2;
+  }
+}
 export default new Vuex.Store({
   state,
+  getters,
   actions,
   mutations,
+  // strict: process.env.NODE_ENV !== 'production'
 })

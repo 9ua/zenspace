@@ -11,7 +11,7 @@
             span ￥{{item.bonus}}
       .profit-right
         span {{index+1}}
-  pop(:pop='selectedFood', ref='pop', @sonclick='haashow')
+  //- pop(:pop='selectedFood', ref='pop', @sonclick='haashow')
 </template>
 <script>
 import pop from "./pop";

@@ -1,5 +1,6 @@
 <template lang="jade">
 .head-top
+  .pop-head
   .pop-top
     .pop-top-left
     .pop-top-middle
@@ -15,10 +16,10 @@
 export default {
   data() {
     return {
+      isAndroidHeard:false,
       os: "",
       content: [
         {
-          // title: '首页',
           show: "one",
           check: false
         },
@@ -76,6 +77,9 @@ export default {
   position: fixed;
   top: 0px;
   z-index: 11;
+  & .pop-head{
+    // height: 46px;
+  }
   & .pop-top {
     height: 50px;
     width: 100%;

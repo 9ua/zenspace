@@ -5,7 +5,7 @@ $desw: 750;
 }
 
 @mixin Bg($pic, $width, $height) {
-  background: url('../../assets/img/home/'+$pic) no-repeat;
+  background: url('../../assets/img/one/'+$pic) no-repeat;
   height: $height;
   width: $width;
 }
@@ -69,6 +69,7 @@ a {
         & li:nth-child(#{$i}) {
           @extend %faj;
           @extend %fdc;
+          position: relative;
           width: 25%;
           height: 56px;
           color: #ddd;
@@ -84,6 +85,25 @@ a {
   }
 }
 
+.isNotice.active {
+  position: absolute;
+  top: 4px;
+  right: -10px;
+  background: rgb(175, 58, 49);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.isNotices.active {
+  @extend %flex;
+  background: rgb(175, 58, 49);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
 .router-link-exact-active.router-link-active {
   background: rgb(175, 58, 49);
 }

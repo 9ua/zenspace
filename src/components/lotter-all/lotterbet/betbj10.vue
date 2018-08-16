@@ -78,7 +78,7 @@
     <div class="betbj10-content">
       <div v-show="!show">
         <div class="betk3-content-top">
-          <div @click="countNums" class="content-left">
+          <div @click=" countNums" class="content-left">
             <p v-if="$route.query.id === 'pk10'">{{lastSeasonId*1}}期开奖号码
               <i :class="betsscContentTopPop ? 'icon-up' : 'icon-down'" class="iconfont"></i>
             </p>
@@ -291,7 +291,7 @@
   </div>
 </template>
 <script>
-import bets from "../../page-five/money/bets.vue";
+import bets from '../../page-five/money/bets.vue';
 export default {
   data() {
     return {
@@ -333,7 +333,7 @@ export default {
       intotitle: "",
       itemstitle: "复式",
       listname: this.$route.query.name.substring(0, 2),
-      lotteryId: "pk10",
+      lotteryId: "ffpk10",
       LotteryList: "",
       money: "", //投注金额
       displayBonus: 1.96,
@@ -399,21 +399,20 @@ export default {
       timer2: "",
       historyNum: 0,
       betnot: true,
-      countNum: 20,
+      countNum:10,
     };
   },
-  beforeDestroy() {
+  destroyed() {
     this.endCount();
     this.iscreat();
-    document.removeEventListener("visibilitychange", this.listen);
+    document.removeEventListener("visibilitychange",this.listen);
   },
   created() {
     this.noGetItem();
-    // this.getLotteryList();
     this.endCount();
   },
   mounted() {
-    document.addEventListener("visibilitychange", this.listen);
+    document.addEventListener("visibilitychange",this.listen);
     this.endCount();
     if (!this.$route.meta.isBack) {
       this.getPlayTree();
@@ -436,9 +435,9 @@ export default {
   },
   methods: {
     listen() {
-      if (document.hidden === false) {
-        this.geteServerTime();
-      }
+        if(document.hidden === false){
+          this.geteServerTime();
+        }
     },
     //没打接口前
     noGetItem() {
@@ -468,10 +467,10 @@ export default {
     },
     //查看20条记录
     lookAll() {
-      // this.countNum = 20;
+      this.countNum = 20;
       this.betsscContentTopPop = !this.betsscContentTopPop;
       this.lookAllUl = !this.lookAllUl;
-      // this.getPastOp();
+      this.getPastOp();
     },
     //往期开奖
     lookAllTo() {
@@ -1545,6 +1544,7 @@ export default {
 
     //投注
     betGo() {
+      this.$loading.show({number:"a"});
       this.betGoshow = false;
       this.betnot = false;
       let config = {
@@ -1570,20 +1570,10 @@ export default {
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
-            setTimeout(() => {
-              this.$pop.show({
-                title: "温馨提示",
-                content: "恭喜您，投注成功！",
-                content1: "",
-                content2: "",
-                number: 1
-              });
-              this.betnot = true;
-              setTimeout(() => {
-                this.betsuccess = !this.betsuccess;
-                this.iscreat();
-              }, 800);
-            }, 600);
+            this.$loading.hide();
+            this.betnot = true;
+            this.betsuccess = !this.betsuccess;
+            this.iscreat();
           } else {
             this.betnot = true;
             this.iscreat();
@@ -1669,22 +1659,19 @@ export default {
           .catch(error => {
             console.log("玩法树No");
             this.$store.state.loginStatus = false;
-            this.$pop.show({
-              title: "温馨提示",
-              content: "获取不成功,请检查您的网络！",
-              content1: "",
-              content2: "",
-              number: 1
-            });
+            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
           });
       }
     },
     //右上获取彩种
     getLotteryList() {
-      this.betsscContentTopPop = false;
+      this.$loading.show({number:"a"});
       this.showa = !this.showa;
-      if (localStorage.getItem("lotteryList") !== null) {
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).pk10;
+      this.betsscContentTopPop = false;
+      this.countNum =10;
+      if (localStorage.getItem("lotteryListpk10") !== null) {
+        this.$loading.hide();
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListpk10"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -1693,10 +1680,11 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList")
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'pk10'}})
           .then(res => {
-            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
-            this.LotteryList = res.data.data.pk10;
+            this.$loading.hide();
+            localStorage.setItem("lotteryListpk10", JSON.stringify(res.data.data));
+            this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
@@ -1711,7 +1699,8 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
-      this.historyNum++;
+      this.countNum = 10;
+      // this.historyNum++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
@@ -1755,6 +1744,7 @@ export default {
       this.betsuccess = !this.betsuccess;
     },
     tolooksucc() {
+      // this.$router.push('/bet');
       this.looks = !this.looks;
       this.betsscContentTopPop = false;
       this.$refs.pop.banckto();
@@ -1831,7 +1821,7 @@ export default {
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      this.endCount();
+      clearTimeout(this.timer2);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
@@ -1869,19 +1859,19 @@ export default {
       this.countDown = hours + ":" + minutes + ":" + seconds;
     },
     //倒计时
-    initSetTimeout(today) {
+    initSetTimeout() {
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
       this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        this.setTimeMode();
         if (this.today < 1) {
-          clearInterval(this.timer);
+          this.endCount();
           this.timesUp();
         }
-        if (
-          this.getPastOpenB &&
-          this.getPastOpenB[0].lotteryId != this.$route.query.id
-        ) {
+        if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
           this.endCount();
         }
         if (this.getPastOpenB &&
@@ -1899,7 +1889,12 @@ export default {
           this.today === 45
         ) {
           this.getPastOp();
+        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId === this.lastSeasonId){
+          this.end();
+          this.startyet = false;
+          this.shownum = false;
         }
+        this.setTimeMode();
       }, 1000);
     },
     //時間到彈窗
@@ -1916,16 +1911,13 @@ export default {
     countNums(){
       this.showa = false;
       this.betsscContentTopPop = !this.betsscContentTopPop;
+      this.countNum = 10;
       if(this.betsscContentTopPop === true){
         this.getPastOp();
       }
     },
     //获取过去开奖号码20个
     getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
-      this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: this.countNum }
@@ -1944,9 +1936,7 @@ export default {
           this.n9 = this.getPastOpens[0].n9;
           this.n10 = this.getPastOpens[0].n10;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            if (res.data.data[0].lotteryId === this.$route.query.id) {
-              this.reGetPastOp();
-            }
+            this.reGetPastOp();
           } else {
             clearTimeout(this.timer2);
             this.end();
@@ -1961,11 +1951,12 @@ export default {
     reGetPastOp() {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
+        this.countNum = 10;
         this.getPastOp();
       }, 12000);
     }
   },
-  components: {
+  components:{
     bets
   },
   directives: {

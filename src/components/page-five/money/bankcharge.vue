@@ -27,14 +27,14 @@
         div
           input(placeholder='请输入充值人姓名', v-model='niceName', value='niceName', clearable='')
       li
-        p 附言
+        p {{attfirst}}
         div
-          input(placeholder='请输入附言', v-model='checkCode', value='checkCode', clearable='')
+          input(:placeholder='attsecond', v-model='checkCode', value='checkCode', clearable='')
       li
         .button
           button.button1(@click="isshow3") 充值申请
       .warning
-        p 1、请转账到以上收款银行账户。
+        p 1、{{attthird}}
         br
         p 2、请正确填写转账银行卡的持卡人姓名和充值金额，以便及时核对。
         br
@@ -55,7 +55,7 @@
         p 充值人姓名
         span {{niceName}}
       li
-        p 附言
+        p {{attfirst}}
         span {{checkCode}}
       li(style='text-align:center;background:#fff;')
         .center
@@ -97,7 +97,10 @@ export default {
       receiveBankId: "",
       receiveBankName: "",
       receiveCard: "",
-      receiveNiceName: ""
+      receiveNiceName: "",
+      attfirst:"附言",
+      attsecond:"请输入附言",
+      attthird:"请转账到以上收款银行账户。",
     };
   },
   mounted() {
@@ -114,7 +117,7 @@ export default {
     rechargeEntrance() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
-          params: { rechargeWay: 5 }
+          params: { rechargeWay: this.$route.query.id }
         })
         .then(res => {
           this.QRCodeUrl = res.data.data.QRCodeUrl;
@@ -123,6 +126,9 @@ export default {
           this.receiveBankName = res.data.data.receiveBankName;
           this.receiveCard = res.data.data.receiveCard;
           this.receiveNiceName = res.data.data.receiveNiceName;
+          this.attfirst = res.data.data.attfirst;
+          this.attsecond = res.data.data.attsecond;
+          this.attthird = res.data.data.attthird;
         })
         .catch(error => {
           console.log("获取列表Error");

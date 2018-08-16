@@ -1,7 +1,18 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-Vue.use(Router)
-export default new Router({
+import VueRouter from 'vue-router'
+import home from '@/components/home/home.vue'
+import one from '@/components/home/one.vue'
+import betk3 from '@/components/lotter-all/lotterbet/betk3.vue'
+import betssc from '@/components/lotter-all/lotterbet/betssc.vue'
+import betbj10 from '@/components/lotter-all/lotterbet/betbj10.vue'
+import second from '@/components/home/second.vue'
+import three from '@/components/home/three.vue'
+import four from '@/components/home/four.vue'
+import five from '@/components/home/five.vue'
+import winning from '@/components/page-four/winning.vue'
+
+Vue.use(VueRouter)
+export default new VueRouter({
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
@@ -71,8 +82,9 @@ export default new Router({
     },
     {
       path: "/pk10",
-      name: 'betbj10',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve),
+      name: "betbj10",
+      component: betbj10,
+      // component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve),
       meta: {
         keepAlive: true
       }
@@ -86,25 +98,10 @@ export default new Router({
       }
     },
     {
-      path: "/x11x5",
-      name: 'betetf',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betetf.vue'], resolve),
-      meta: {
-        keepAlive: true
-      }
-    },
-    {
       path: "/k3",
       name: 'betk3',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betk3.vue'], resolve),
-      meta: {
-        keepAlive: true
-      }
-    },
-    {
-      path: "/betlhc",
-      name: 'betlhc',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betlhc.vue'], resolve),
+      component:betk3,
+      // component: resolve => require(['@/components/lotter-all/lotterbet/betk3.vue'], resolve),
       meta: {
         keepAlive: true
       }
@@ -112,7 +109,16 @@ export default new Router({
     {
       path: "/ssc",
       name: 'betssc',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betssc.vue'], resolve),
+      component:betssc,
+      // component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: "/syx5",
+      name: 'betsyx5',
+      component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
       meta: {
         keepAlive: true
       }
@@ -150,17 +156,17 @@ export default new Router({
           },
         },
         {
-          path: 'klcs',
-          name: 'klcs',
-          component: resolve => require(['@/components/lotter-all/klc.vue'], resolve),
+          path: 'etfs',
+          name: 'etfs',
+          component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
           meta: {
             keepAlive: true
           },
         },
         {
-          path: 'etfs',
-          name: 'etfs',
-          component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
+          path: 'klcs',
+          name: 'klcs',
+          component: resolve => require(['@/components/lotter-all/klc.vue'], resolve),
           meta: {
             keepAlive: true
           },
@@ -171,14 +177,17 @@ export default new Router({
       path: '/',
       name: 'home',
       redirect: 'one',
-      component: resolve => require(['@/components/home/home.vue'], resolve),
+      component:home,
+      // component: resolve => require(['@/components/home/home.vue'], resolve),
       meta: {
         keepAlive: true
       },
-      children: [{
+      children: [
+        {
           path: 'one',
           name: 'one',
-          component: resolve => require(['@/components/home/one.vue'], resolve),
+          component:one,
+          // component: resolve => require(['@/components/home/one.vue'], resolve),
           meta: {
             keepAlive: true
           },
@@ -186,7 +195,8 @@ export default new Router({
         {
           path: 'second',
           name: 'second',
-          component: resolve => require(['@/components/home/second.vue'], resolve),
+          component:second,
+          // component: resolve => require(['@/components/home/second.vue'], resolve),
           meta: {
             keepAlive: true
           },
@@ -202,7 +212,8 @@ export default new Router({
         {
           path: 'three',
           name: 'three',
-          component: resolve => require(['@/components/home/three.vue'], resolve),
+          component:three,
+          // component: resolve => require(['@/components/home/three.vue'], resolve),
           meta: {
             keepAlive: true
           }
@@ -211,13 +222,15 @@ export default new Router({
           path: 'four',
           name: 'four',
           redirect: 'four/winning',
-          component: resolve => require(['@/components/home/four.vue'], resolve),
+          component:four,
+          // component: resolve => require(['@/components/home/four.vue'], resolve),
           meta: {
             keepAlive: false
           },
           children: [{
               path: 'winning',
               name: 'winning',
+              // component:winning,
               component: resolve => require(['@/components/page-four/winning.vue'], resolve),
               meta: {
                 keepAlive: true
@@ -236,7 +249,8 @@ export default new Router({
         {
           path: 'five',
           name: 'five',
-          component: resolve => require(['@/components/home/five.vue'], resolve),
+          component:five,
+          // component: resolve => require(['@/components/home/five.vue'], resolve),
           meta: {
             keepAlive: false
           }
@@ -518,6 +532,14 @@ export default new Router({
       path: '/weixincharge',
       name: 'weixincharge',
       component: resolve => require(['@/components/page-five/money/weixincharge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/weixinbcharge',
+      name: 'weixinbcharge',
+      component: resolve => require(['@/components/page-five/money/weixinbcharge.vue'], resolve),
       meta: {
         keepAlive: false
       },

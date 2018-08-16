@@ -13,6 +13,11 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  // externals:{
+  //   'vue':'Vue',
+  //   'vue-router':'VueRouter',
+  //   'vuex':'Vuex',
+  // },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -69,7 +74,6 @@ module.exports = {
         }
       },
       {
-        //从这一段上面是默认的不用改！下面是没有的需要你手动添加，相当于是编译识别sass!
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
       },

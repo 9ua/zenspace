@@ -6,7 +6,7 @@
       p 玩家信息
   .pop-center
     .pop-center-top
-      img(src='http://imagess-google.com/system/common/other/playerHomeBg.jpg')
+      //- img(src='http://imagess-google.com/system/common/other/playerHomeBg.jpg')
     .pop-center-middle
       .pop-center-box
         .pop-center-position

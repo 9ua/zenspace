@@ -31,7 +31,7 @@
               br
               span
           i.iconfont.icon-xia
-        li(@click='reGetTradeList()',v-if='count <= betOrderAllCount',style='text-align:center')
+        li.col(@click='reGetTradeList()',v-if='count <= betOrderAllCount',style='text-align:center')
           p 查看更多
   actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
@@ -212,4 +212,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../../assets/scss/listStyle.scss";
+.col {
+  background:#f2f2f2 !important;
+  color:#ca2a2a;
+}
 </style>

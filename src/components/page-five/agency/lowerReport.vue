@@ -26,7 +26,7 @@
           p {{item.teamCount}}
         .title
           p {{item.count}}
-      li(@click='getAddUnderLevelReport()',v-if='count <= underUserListCount',style='text-align:center')
+      li.col(@click='getAddUnderLevelReport()',v-if='count <= underUserListCount',style='text-align:center')
         p 查看更多
   actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
@@ -181,4 +181,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../../assets/scss/listStyle.scss";
+.col {
+  background:#f2f2f2 !important;
+  color:#ca2a2a;
+}
 </style>

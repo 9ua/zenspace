@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import home from '@/components/home/home.vue'
 import one from '@/components/home/one.vue'
 import betk3 from '@/components/lotter-all/lotterbet/betk3.vue'
@@ -10,8 +10,9 @@ import three from '@/components/home/three.vue'
 import four from '@/components/home/four.vue'
 import five from '@/components/home/five.vue'
 import winning from '@/components/page-four/winning.vue'
-Vue.use(Router)
-export default new Router({
+
+Vue.use(VueRouter)
+export default new VueRouter({
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
@@ -221,8 +222,8 @@ export default new Router({
           children: [{
               path: 'winning',
               name: 'winning',
-              component:winning,
-              // component: resolve => require(['@/components/page-four/winning.vue'], resolve),
+              // component:winning,
+              component: resolve => require(['@/components/page-four/winning.vue'], resolve),
               meta: {
                 keepAlive: true
               }

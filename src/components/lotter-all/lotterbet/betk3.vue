@@ -591,7 +591,7 @@ export default {
         }
       }
       if (this.timer2) {
-        for (let i = 0; i <= timer2; i++) {
+        for (let i= 0;i <=this.timer2;i++) {
           clearTimeout(i);
         }
       }
@@ -704,7 +704,9 @@ export default {
           this.n2 = this.getPastOpens[0].n2;
           this.n3 = this.getPastOpens[0].n3;
           if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
-            this.reGetPastOp();
+            if (res.data.data[0].lotteryId === this.$route.query.id) {
+              this.reGetPastOp();
+            }
           } else {
             clearTimeout(this.timer2);
             this.end();

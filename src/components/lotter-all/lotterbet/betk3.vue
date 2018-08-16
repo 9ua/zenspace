@@ -562,14 +562,7 @@ export default {
     },
     //往期开奖
     lookAllTo() {
-      this.$router.push({
-        path: "second/past",
-        query: {
-          id: this.$route.query.id,
-          name: this.$route.query.name,
-          group: this.groupId
-        }
-      });
+      this.$router.push({ path: "second/past", query: { id: this.$route.query.id, name: this.$route.query.name, group: this.$route.query.group } });
     },
     lookAllDivTitle() {
       this.lookAllUl = !this.lookAllUl;

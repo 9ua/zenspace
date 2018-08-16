@@ -4,9 +4,6 @@
       <div class="loader-line-wrap">
         <div class="loader-line"></div>
       </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
       <!-- <div class="loader-line-wrap">
         <div class="loader-line"></div>
       </div>
@@ -15,7 +12,10 @@
       </div>
       <div class="loader-line-wrap">
         <div class="loader-line"></div>
-      </div> -->
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -70,7 +70,7 @@ export default {
   width: 100px;
 }
 .loader-line {
-  border: 4px solid transparent;
+  border: 20px solid transparent;
   border-radius: 100%;
   box-sizing: border-box;
   height: 120px;
@@ -98,39 +98,38 @@ export default {
 }
 
 .loader-line-wrap:nth-child(1) .loader-line {
-  border-color: hsl(0, 80%, 60%);
+  border-color: hsl(0, 70%, 33%);
   height: 90px;
   width: 90px;
   top: 7px;
 }
 .loader-line-wrap:nth-child(2) .loader-line {
-  border-color: hsl(60, 80%, 60%);
+  border-color: hsl(0, 70%, 33%);
   height: 76px;
   width: 76px;
   top: 14px;
 }
 .loader-line-wrap:nth-child(3) .loader-line {
-  border-color: hsl(120, 80%, 60%);
+  border-color: hsl(0, 70%, 33%);
   height: 62px;
   width: 62px;
   top: 21px;
 }
 .loader-line-wrap:nth-child(4) .loader-line {
-  border-color: hsl(180, 80%, 60%);
+  border-color: hsl(0, 70%, 33%);
   height: 48px;
   width: 48px;
   top: 28px;
 }
 .loader-line-wrap:nth-child(5) .loader-line {
-  border-color: hsl(240, 80%, 60%);
+  border-color: hsl(0, 70%, 33%);
   height: 34px;
   width: 34px;
   top: 35px;
 }
 
 @keyframes spin {
-  0%,
-  15% {
+  0% {
     transform: rotate(0);
   }
   100% {

@@ -12,10 +12,6 @@ import store from './vuex/store'
 import md5 from 'js-md5';
 import popTo from "./components/public/pop"
 import Loading from "./components/public/loading"
-// import VConsole from 'vconsole'
-
-// const vConsole = new VConsole()
-// console.log(vConsole.version)
 
 Vue.use(popTo);
 Vue.use(Loading);

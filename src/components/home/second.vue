@@ -75,7 +75,7 @@ export default {
     looksucc(e, all) {
       this.$router.push({
         path: all.groupName,
-        query: { id: all.lotteryId, name: all.name, group: all.groupId }
+        query: { id: all.lotteryId, name: all.name, group: all.groupName }
       });
       this.betsuccess = !this.betsuccess;
     },

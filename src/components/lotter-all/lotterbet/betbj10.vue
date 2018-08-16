@@ -198,20 +198,10 @@
         <div class="betk3-content-foot">
           <div v-for="(item,indexc) in playGroups" :key="indexc" v-show="indexc === navlist">
             <div v-for="(group,indexd) in item.groups" :key="indexd" v-show="indexd === navlistb" class="betssc-list-box">
-              <span v-for="(itemabc,indexabc) in playBonus" :key="indexabc" v-show="itemabc.id === playGroupsId">{{itemabc.remark}}
+              <span>{{current_player.remark}}
                 <b>。奖金
-                  <i v-show="Number(itemabc.displayBonus)">{{itemabc.displayBonus | keepTwoNum}}</i>
-                  <i v-show="isNaN(itemabc.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b><br/></span>
-              <!-- <ul class="fushi">
-                <li v-for="(player,indexf) in group.players" :key="indexf" v-show="playGroupsId === player.id">
-                  <p v-for="(numViews,indexff) in player.numView" :key="indexff">
-                    <b>{{numViews.title}}</b>
-                    <span>
-                      <a v-for="(num,indexg) in numViews.nums" :key="indexg" :class="num.choose ? 'active' : '' " @click="curBalls(indexff,indexg,num,numViews,player)">{{num.ball}}</a>
-                    </span>
-                  </p>
-                </li>
-              </ul> -->
+                  <i v-show="Number(current_player.displayBonus)">{{current_player.displayBonus | keepTwoNum}}</i>
+                  <i v-show="isNaN(current_player.displayBonus)">{{displayBonus1 | keepTwoNum}}—{{displayBonus2 | keepTwoNum}}</i> 元</b><br/></span>
               <ul class="fushi">
                 <li v-for="(numViews, indexf) in current_player.numView" :key="indexf">
                   <p>

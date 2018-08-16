@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import home from '@/components/home/home.vue'
 import one from '@/components/home/one.vue'
 import betk3 from '@/components/lotter-all/lotterbet/betk3.vue'
-import betsyx5 from '@/components/lotter-all/lotterbet/betsyx5.vue'
+import betssc from '@/components/lotter-all/lotterbet/betssc.vue'
 import betbj10 from '@/components/lotter-all/lotterbet/betbj10.vue'
 import second from '@/components/home/second.vue'
 import three from '@/components/home/three.vue'
@@ -82,8 +82,8 @@ export default new VueRouter({
     },
     {
       path: "/pk10",
-      name: 'betbj10',
-      component:betbj10,
+      name: "betbj10",
+      component: betbj10,
       // component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve),
       meta: {
         keepAlive: true
@@ -108,8 +108,8 @@ export default new VueRouter({
     },
     {
       path: "/ssc",
-      name: 'betsyx5',
-      component:betsyx5,
+      name: 'betssc',
+      component:betssc,
       // component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
       meta: {
         keepAlive: true
@@ -151,6 +151,14 @@ export default new VueRouter({
           path: 'sscs',
           name: 'sscs',
           component: resolve => require(['@/components/lotter-all/ssc.vue'], resolve),
+          meta: {
+            keepAlive: true
+          },
+        },
+        {
+          path: 'etfs',
+          name: 'etfs',
+          component: resolve => require(['@/components/lotter-all/etf.vue'], resolve),
           meta: {
             keepAlive: true
           },

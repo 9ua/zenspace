@@ -45,6 +45,9 @@ export default {
       jn: ""
     };
   },
+  destroyed() {
+    this.iscreat();
+  },
   computed: {
     current_player() {
       return this.$store.state.current_player;

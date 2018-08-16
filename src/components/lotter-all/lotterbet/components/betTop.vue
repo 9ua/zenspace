@@ -40,6 +40,9 @@ export default {
       default: "ssc"
     }
   },
+  destroyed(){
+    this.$store.state.showRight = false;
+  },
   computed: {
     listname() {
       return this.$store.state.listname;

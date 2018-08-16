@@ -4,9 +4,13 @@
   lookMore
   .bet-content
     div
-      betContentTop(:lotteryId='lotteryId',@tolooksucc='tolooksucc',ref='betContentTop',@iscreat='iscreat')
-      betContentTopPop
-      betContent(:lotteryId='lotteryId',ref='betContent')
+      betContentTop(v-if='$route.query.group !== "pk10"', :lotteryId='lotteryId',@tolooksucc='tolooksucc',ref='betContentTop',@iscreat='iscreat')
+      betContentTopPk(v-else, :lotteryId='lotteryId',@tolooksucc='tolooksucc',ref='betContentTop',@iscreat='iscreat')
+      betContentTopPop(v-if='$route.query.group !== "pk10"')
+      betContentTopPopPk(v-else)
+      betContentS(:lotteryId='lotteryId',ref='betContent',v-if='$route.query.group === "ssc"')
+      betContentP(:lotteryId='lotteryId',ref='betContent',v-if='$route.query.group === "pk10"')
+      betContentX(:lotteryId='lotteryId',ref='betContent',v-if='$route.query.group === "x11x5"')
   betGoshow(@iscreat='iscreat')
   betFooter(@iscreat='iscreat',ref="betFooter")
   bets(ref='pop')
@@ -16,9 +20,13 @@
 import bets from "../../page-five/money/bets.vue";//右滑页面
 import betTop from "./components/betTop.vue";//头部
 import betContentTop from "./components/betContentTop.vue";//开奖号码，倒计时
+import betContentTopPk from "./components/betContentTopPk10.vue";//开奖号码，倒计时
 import lookMore from "./components/lookMore.vue";//
 import betContentTopPop from "./components/betContentTopPop.vue";//查看开奖记录，往期开奖
-import betContent from "./components/betContentSSC.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
+import betContentTopPopPk from "./components/betContentTopPopPk10.vue";//查看开奖记录，往期开奖
+import betContentS from "./components/betContentSSC.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
+import betContentP from "./components/betContentPk10.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
+import betContentX from "./components/betContentX11X5.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
 import betFooter from "./components/betFooter.vue";//底部，确认投注
 import betGoshow from "./components/betGoshow.vue";//投注确认弹窗
 import betsuccess from "./components/betsuccess.vue";//投注成功，弹窗
@@ -27,9 +35,13 @@ export default {
     bets, //投注记录
     betTop, //顶部彩种切换
     betContentTop, //开奖结果+倒计时
+    betContentTopPk, //开奖结果+倒计时
     betContentTopPop, //10期开奖结果
+    betContentTopPopPk, //10期开奖结果
     lookMore, //20期开奖结果
-    betContent, //选号区域
+    betContentS, //选号区域
+    betContentP, //选号区域
+    betContentX, //选号区域
     betFooter, //确认投注+输入金额
     betsuccess, //投注成功弹出框
     betGoshow, //确认投注弹出框

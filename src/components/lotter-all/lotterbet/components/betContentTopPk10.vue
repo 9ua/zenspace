@@ -1,14 +1,19 @@
 <template lang='jade'>
 .bet-content-top
-  .content-left(@click='changeBetContentTopPop')
+  .content-left-pk10(v-if='$route.query.group === "pk10"', @click='changeBetContentTopPop')
     p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
+      i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
     .contnet-left-num(v-if='shownum === false')
       p {{n1 &lt; 10 ? '0'+n1 : n1}}
       p {{n2 &lt; 10 ? '0'+n2 : n2}}
       p {{n3 &lt; 10 ? '0'+n3 : n3}}
       p {{n4 &lt; 10 ? '0'+n4 : n4}}
       p {{n5 &lt; 10 ? '0'+n5 : n5}}
-      i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
+      p {{n6 &lt; 10 ? '0'+n6 : n6}}
+      p {{n7 &lt; 10 ? '0'+n7 : n7}}
+      p {{n8 &lt; 10 ? '0'+n8 : n8}}
+      p {{n9 &lt; 10 ? '0'+n9 : n9}}
+      p {{n10 &lt; 10 ? '0'+n10 : n10}}
     .contnet-left-shownum(v-if='shownum === true && isGetItem === true')
       .num
         .span
@@ -26,7 +31,21 @@
         .span
           transition(name='down-up-translate-fade')
             div {{h}}
-      i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
+        .span
+          transition(name='down-up-translate-fade')
+            div {{q}}
+        .span
+          transition(name='down-up-translate-fade')
+            div {{w}}
+        .span
+          transition(name='down-up-translate-fade')
+            div {{e}}      
+        .span
+          transition(name='down-up-translate-fade')
+            div {{r}}   
+        .span
+          transition(name='down-up-translate-fade')
+            div {{t}}           
   .content-right(@click='$emit("tolooksucc")')
     div
       p.seasonId {{seasonId !== '' ? seasonId : Number(lastSeasonIds)+1}}期投注截止
@@ -74,11 +93,21 @@ export default {
       n3: 1,
       n4: 1,
       n5: 1,
+      n6: 1,
+      n7: 1,
+      n8: 1,
+      n9: 1,
+      n10: 1,
       i: 0, //动画
       j: 0,
       k: 0,
       l: 0,
-      h: 0
+      h: 0,
+      q: 0,
+      w: 0,
+      e: 0,
+      r: 0,
+      t: 0
     };
   },
   created() {
@@ -176,6 +205,11 @@ export default {
         _this.k = Math.floor(Math.random() * 9 + 1);
         _this.l = Math.floor(Math.random() * 9 + 1);
         _this.h = Math.floor(Math.random() * 9 + 1);
+        _this.q = Math.floor(Math.random() * 9 + 1);
+        _this.w = Math.floor(Math.random() * 9 + 1);
+        _this.e = Math.floor(Math.random() * 9 + 1);
+        _this.r = Math.floor(Math.random() * 9 + 1);
+        _this.t = Math.floor(Math.random() * 9 + 1);
       }, 39);
     },
     end() {
@@ -223,6 +257,11 @@ export default {
             this.n3 = res.data.data[0].n3;
             this.n4 = res.data.data[0].n4;
             this.n5 = res.data.data[0].n5;
+            this.n6 = res.data.data[0].n6;
+            this.n7 = res.data.data[0].n7;
+            this.n8 = res.data.data[0].n8;
+            this.n9 = res.data.data[0].n9;
+            this.n10 = res.data.data[0].n10;
             if (
               Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)
             ) {
@@ -268,6 +307,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTop.scss";
+@import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTopPK10.scss";
 @import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTopR.scss";
 </style>

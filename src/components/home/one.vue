@@ -31,7 +31,7 @@
         </router-link>
       </ul>
       <ul class="lotteryList" v-show="$store.state.loginStatus">
-        <router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name}}">
+        <router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name,group:item.groupId}}">
           <span><i class="iconfont" :class="'icon-'+item.groupId"></i></span>
           <h5>{{item.name}}</h5>
         </router-link>

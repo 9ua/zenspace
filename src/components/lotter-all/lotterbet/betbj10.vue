@@ -469,7 +469,7 @@ export default {
         query: {
           id: this.$route.query.id,
           name: this.$route.query.name,
-          group: this.groupId
+          group: this.$route.query.group
         }
       });
     },

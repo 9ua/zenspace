@@ -31,25 +31,25 @@ Vue.config.productionTip = false
 // http请求拦截器
 
 
-// axios.interceptors.response.use(data => { // 响应成功关闭loading
-//   if (data.data.status === 302) {
-//     router.push('/login');
-//     this.$store.state.loginStatus = false;
-//   }
-//   if (data.data.pup === true) {
-//     if (data.data.data.message && data.data.data.message !== "参数错误") {
-//       Vue.prototype.$pop.show({error:'',title:'温馨提示',content:data.data.data.message,content1:'',content2:'',number:1});
-//     } else {
-//       if (data.data.data !== "参数错误") {
-//         Vue.prototype.$pop.show({error:'',title:'温馨提示',content:data.data.data,content1:'',content2:'',number:1});
-//       }
-//     }
-//   }
-//   return data
-// }, error => {
-//   return Promise.reject(error)
-// })
-// export default axios
+axios.interceptors.response.use(data => { // 响应成功关闭loading
+  if (data.data.status === 302) {
+    router.push('/login');
+    this.$store.state.loginStatus = false;
+  }
+  if (data.data.pup === true) {
+    if (data.data.data.message && data.data.data.message !== "参数错误") {
+      Vue.prototype.$pop.show({error:'',title:'温馨提示',content:data.data.data.message,content1:'',content2:'',number:1});
+    } else {
+      if (data.data.data !== "参数错误") {
+        Vue.prototype.$pop.show({error:'',title:'温馨提示',content:data.data.data,content1:'',content2:'',number:1});
+      }
+    }
+  }
+  return data
+}, error => {
+  return Promise.reject(error)
+})
+export default axios
 new Vue({
   el: '#app',
   router,

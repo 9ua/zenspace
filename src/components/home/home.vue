@@ -19,9 +19,9 @@ export default {
       list: 0,
       navbat: [
         { icon: "icon-home", name: "首页", pathbat: "one" },
-        { icon: "icon-date", name: "往期开奖", pathbat: "second" },
-        { icon: "icon-campaign", name: "活动", pathbat: "three" },
-        { icon: "icon-trophy", name: "发现", pathbat: "four" },
+        { icon: "icon-date", name: "往期开奖", pathbat: this.$store.state.loginStatus ? "second" : "login" },
+        { icon: "icon-campaign", name: "活动", pathbat: this.$store.state.loginStatus ? "three" : "login" },
+        { icon: "icon-trophy", name: "发现", pathbat: this.$store.state.loginStatus ? "four" : "login" },
         { icon: "icon-vcard", name: "我的", pathbat: this.$store.state.loginStatus ? "five" : "login" }
       ]
     };

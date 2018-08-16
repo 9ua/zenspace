@@ -26,6 +26,8 @@
           p {{item.teamCount}}
         .title
           p {{item.count}}
+      li(@click='getAddUnderLevelReport()',v-if='count <= underUserListCount',style='text-align:center')
+        p 查看更多
   actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
@@ -67,6 +69,7 @@ export default {
       selected: [],
       showFlag: true,
       count:20,
+      underUserListCount:'',
       actions: [
         {
           name: "今天",
@@ -132,7 +135,27 @@ export default {
           }
         })
         .then(res => {
-          this.underLevelReport = res.data.data;
+          this.underLevelReport = res.data.data.list;
+          this.underUserListCount = res.data.data.underUserListCount;
+        })
+        .catch(error => {
+          console.log("获取列表Error");
+        });
+    },
+    getAddUnderLevelReport() {
+      this.nowAccount = this.username;
+      this.count = this.count+ 20;
+      this.$axios
+        .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
+          params: {
+            account: this.username,
+            dateFlag: this.dateFlag,
+            start:0,
+            limit: this.count,
+          }
+        })
+        .then(res => {
+          this.underLevelReport = res.data.data.list;
         })
         .catch(error => {
           console.log("获取列表Error");
@@ -140,9 +163,10 @@ export default {
     },
     getUnderLevelReport2() {
       this.nowAccount = this.selected.account;
+      this.count = 20;
       this.$axios
         .get(this.$store.state.url + "api/proxy/getUnderLevelReport", {
-          params: { account: this.selected.account, dateFlag: this.dateFlag }
+          params: { account: this.selected.account, dateFlag: this.dateFlag,start: 0,limit: this.count }
         })
         .then(res => {
           this.underLevelReport = res.data.data;

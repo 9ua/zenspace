@@ -1098,7 +1098,8 @@ export default {
         this.playBonusId === "ssc_star3_last" ||
         this.playBonusId === "ssc_star2_front" ||
         this.playBonusId === "ssc_star2_last" ||
-        this.playBonusId === "ssc_star1_dwd") {
+        this.playBonusId === "ssc_star1_dwd"
+      ) {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
           this.dd = this.ka;

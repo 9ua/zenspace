@@ -4,18 +4,6 @@
       <div class="loader-line-wrap">
         <div class="loader-line"></div>
       </div>
-      <!-- <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div>
-      </div>
-      <div class="loader-line-wrap">
-        <div class="loader-line"></div> -->
-      </div>
     </div>
   </div>
 </template>

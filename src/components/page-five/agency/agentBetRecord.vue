@@ -31,6 +31,8 @@
               br
               span
           i.iconfont.icon-xia
+        li(@click='reGetTradeList()',v-if='count <= betOrderAllCount',style='text-align:center')
+          p 查看更多
   actionSheet(v-model='show2',@hide='hide')
     ul.listStyle-II
       li
@@ -90,6 +92,8 @@ export default {
       invitelist: "",
       selected: [],
       showFlag: true,
+      count:20,
+      betOrderAllCount:'',
       pagelist: [
         {
           name: "全部",
@@ -159,6 +163,10 @@ export default {
       this.accountChangeType = item.Type;
       this.getTradeList();
     },
+    reGetTradeList(){
+      this.count = this.count +20;
+      this.getTradeList();
+    },
     getTradeList() {
       if (this.accountName == "") {
         this.$axios
@@ -167,11 +175,14 @@ export default {
               account: this.username,
               include: 2,
               status: this.accountChangeType,
-              betweenType: this.betweenType
+              betweenType: this.betweenType,
+              start:0,
+              limit: this.count,
             }
           })
           .then(res => {
             this.tradelist = res.data.data.list;
+            this.betOrderAllCount = res.data.data.betOrderAllCount;
           })
           .catch(error => {
             console.log("获取彩種ratio ERROR");
@@ -183,7 +194,9 @@ export default {
               account: this.accountName,
               include: 0,
               status: this.accountChangeType,
-              betweenType: this.betweenType
+              betweenType: this.betweenType,
+              start:0,
+              limit: this.count,
             }
           })
           .then(res => {

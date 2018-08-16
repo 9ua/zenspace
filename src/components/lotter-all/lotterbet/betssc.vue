@@ -517,17 +517,23 @@ export default {
         this.playBonusId === "ssc_star1_dwd" ) {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka;
+          this.dd = this.ka.filter(function(n) {
+            return n;
+          });
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb;
+          this.dd = this.kb.filter(function(n) {
+            return n;
+          });
           this.bn = this.dd.join("");
         }
         if (indexff === 2) {
           this.kc[indexg] = num.ball;
-          this.dd = this.kc;
+          this.dd = this.kc.filter(function(n) {
+            return n;
+          });
           this.cn = this.dd.join("");
         }
         if (indexff === 3) {
@@ -539,7 +545,9 @@ export default {
         }
         if (indexff === 4) {
           this.ke[indexg] = num.ball;
-          this.dd = this.ke;
+          this.dd = this.ke.filter(function(n) {
+            return n;
+          });
           this.en = this.dd.join("");
         }
         if (this.playBonusId === "ssc_star4_front") {
@@ -629,16 +637,7 @@ export default {
             this.en;
         }
         if (this.playBonusId === "ssc_star5") {
-          this.con =
-            this.an +
-            "," +
-            this.bn +
-            "," +
-            this.cn +
-            "," +
-            this.dn +
-            "," +
-            this.en;
+          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + "," + this.en;
           this.zhu = this.getCount(this.con.split(","), 5);
         }
       }
@@ -1102,17 +1101,23 @@ export default {
       ) {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka;
+          this.dd = this.ka.filter(function(n) {
+            return n;
+          });
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb;
+          this.dd = this.kb.filter(function(n) {
+            return n;
+          });
           this.bn = this.dd.join("");
         }
         if (indexff === 2) {
           this.kc.splice(indexg, 1, "");
-          this.dd = this.kc;
+          this.dd = this.kc.filter(function(n) {
+            return n;
+          });
           this.cn = this.dd.join("");
         }
         if (indexff === 3) {
@@ -1124,7 +1129,9 @@ export default {
         }
         if (indexff === 4) {
           this.ke.splice(indexg, 1, "");
-          this.dd = this.ke;
+          this.dd = this.ke.filter(function(n) {
+            return n;
+          });
           this.en = this.dd.join("");
         }
         if (this.playBonusId === "ssc_star4_front") {
@@ -1148,7 +1155,7 @@ export default {
         } else if (this.playBonusId === "ssc_star1_dwd") {
           this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
         } else if (this.playBonusId === "ssc_star5") {
-          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
+          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + "," + this.en;
           this.zhu = this.getCount(this.con.split(","), 5);
         }
       }

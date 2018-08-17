@@ -307,6 +307,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTopPK10.scss";
+@import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTopPk10.scss";
 @import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTopR.scss";
 </style>

@@ -116,7 +116,7 @@ export default new VueRouter({
       }
     },
     {
-      path: "/syx5",
+      path: "/x11x5",
       name: 'betsyx5',
       component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
       meta: {

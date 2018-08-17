@@ -32,7 +32,7 @@ export default {
       bn: "",
       cn: "",
       dn: "",
-      en: "",
+      en: ""
     };
   },
   computed: {
@@ -104,13 +104,11 @@ export default {
       if (size >= 1 && size <= maxSize) {
         getArr(arr, 0, []);
       }
-
       function each(arr, index, fn) {
         for (let i = index; i < maxSize; i++) {
           fn(arr[i], i, arr);
         }
       }
-
       function getArr(arr, _size, _arr, index) {
         if (_size === size) {
           return;
@@ -126,16 +124,13 @@ export default {
       }
       return groupArr;
     },
-    //字符串"010203"拆分成数组[01,02,03]
+    //字符串"010203"拆分成数组["01","02","03"]
     strToarr(str) {
-      let arr = [];
-      for (var i = 0; i < str.length / 2; i++) {
-        let subStr = str.slice(i * 2, (i + 1) * 2);
-        if (subStr) {
-          arr.push(subStr);
-        }
-      }
-      return arr;
+      return str.split("").reduce((arr, v, i, self) => {
+        return !(i % 2)
+          ? arr.concat(self.slice(i, i + 2).join(""))
+          : arr.concat();
+      }, []);
     },
     //胆拖
     getCountDt(betContent, stars) {
@@ -146,15 +141,15 @@ export default {
         let n = betContent[i];
         n = this.strToarr(n);
         if (i === 0) {
-          dmArr=n;
+          dmArr = n;
         } else if (i === 1) {
-          tmArr=n;
+          tmArr = n;
         }
       }
-      if(dmArr.length===0){
+      if (dmArr.length === 0) {
         return 0;
       }
-      count=this.groupSplit(tmArr,stars-dmArr.length).length;
+      count = this.groupSplit(tmArr, stars - dmArr.length).length;
       return count;
     },
     //直选排列组合
@@ -302,7 +297,6 @@ export default {
             "," +
             this.en
         );
-        // this.$store.commit("ZHU", this.dd.length);
       }
       //复式 ++
       this.fushi();
@@ -392,7 +386,10 @@ export default {
           this.ka = [...this.$store.state.dmArr];
           //选择了胆码，取消拖码选择
           if (this.current_player.numView[1].nums[indexg].choose === true) {
-            this.$store.commit("CURRENT_PLAYER",{target:"chooseFalse",index:indexg})
+            this.$store.commit("CURRENT_PLAYER", {
+              target: "chooseFalse",
+              index: indexg
+            });
             this.kb.splice(indexg, 1, "");
             this.dd = this.kb;
             this.bn = this.dd.join("");
@@ -411,7 +408,10 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.commit("CON", this.an + "," + this.bn);
-        let count = this.getCountDt(this.con.split(","), this.$store.state.dmNum+1);
+        let count = this.getCountDt(
+          this.con.split(","),
+          this.$store.state.dmNum + 1
+        );
         this.$store.commit("ZHU", count);
       }
     },
@@ -471,7 +471,6 @@ export default {
             "," +
             this.en
         );
-        // this.$store.commit("ZHU", this.dd.length);
       }
       //复式 --
       this.fushi();
@@ -541,7 +540,10 @@ export default {
           this.bn = this.dd.join("");
         }
         this.$store.commit("CON", this.an + "," + this.bn);
-        let count = this.getCountDt(this.con.split(","),  this.$store.state.dmNum+1);
+        let count = this.getCountDt(
+          this.con.split(","),
+          this.$store.state.dmNum + 1
+        );
         this.$store.commit("ZHU", count);
       }
     }

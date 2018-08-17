@@ -50,6 +50,7 @@ export default {
     },
     //投注
     betGo() {
+      this.$loading.show({number:"a"});
       this.$store.commit("BET_GO_SHOW", false);
       this.$store.commit("BET_NOT", false);
       let config = {
@@ -75,17 +76,9 @@ export default {
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
-            this.$pop.show({
-              title: "温馨提示",
-              content: "恭喜您，投注成功！",
-              content1: "",
-              content2: "",
-              number: 1
-            });
+            this.$loading.hide();
             this.$store.commit("BET_NOT", true);
-            setTimeout(() => {
-              this.$store.commit("BET_SUCCESS", "reverse");
-            }, 600);
+              this.$store.commit("BET_SUCCESS", true);
           } else {
             this.$store.commit("BET_NOT", true);
             if (res.data.status === 501) {
@@ -96,6 +89,7 @@ export default {
                 content2: "",
                 number: 1
               });
+              
             }
           }
         })

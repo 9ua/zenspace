@@ -23,6 +23,10 @@
       li
         .button
           button.button1(@click='isshow3') 充值申请
+      //- ul
+      //-   li(style='background-color:#ddd;height:40px')
+      //-     .button
+      //-       button.button1(@click='popup()',style='background-color:#ddd;color:#888') 支付教程
       .warning
         p 1、请务必填写正确交易订单号后6位！
         br
@@ -96,7 +100,7 @@ export default {
     rechargeEntrance() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
-          params: { rechargeWay: 8 }
+          params: { rechargeWay: this.$route.query.id }
         })
         .then(res => {
           if (res.data.data.QRCodeUrl1 !== "") {
@@ -146,6 +150,12 @@ export default {
       } else {
         this.show2 = !this.show2;
       }
+    },
+    popup(){
+      this.$pop.show({
+              content: "qq",
+              number: 5
+            });
     },
     sendReq() {
       if (this.checkCode == "") {

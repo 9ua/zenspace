@@ -6,33 +6,36 @@
       span {{con}}
     .bet-footer-buttoms
       p 每注金额
-      input(type='number', v-model='money', onfocus='this.select()')
-      span(v-if="money === ''") 请输入要投注的金额
+      input(type='number', v-model='meiyoumoney', onfocus='this.select()')
+      span(v-if="meiyoumoney === ''") 请输入要投注的金额
       span(v-else='v-else', v-show="playBonusId !== 'ssc_dxds'")
         | 单注最高可中
-        p(v-show='! isNaN(money*displayBonus)') {{(money*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
-        p(v-show='isNaN(money*displayBonus)')
-          | {{youhezhi ? (money*parseInt(displayBonus2*1000))/1000 : (money* parseInt(displayBonus1*1000))/1000 | keepTwoNum}}
+        p(v-show='! isNaN(meiyoumoney*displayBonus)') {{(meiyoumoney*parseInt(displayBonus*1000))/1000 | keepTwoNum}}
+        p(v-show='isNaN(meiyoumoney*displayBonus)')
+          | {{youhezhi ? (meiyoumoney*parseInt(displayBonus2*1000))/1000 : (meiyoumoney* parseInt(displayBonus1*1000))/1000 | keepTwoNum}}
         | 元
   .bet-footer-buttom
     .bet-footer-buttom-left
       button(@click='$emit("iscreat")') 清空
       p
         span(v-if='zhu >0') 共{{zhu}}注,
-        span(v-if="money !== '' ") 共{{zhu*money}}元
+        span(v-if="meiyoumoney !== '' ") 共{{zhu*meiyoumoney}}元
     .bet-footer-buttom-right(@click='betC', v-show='betnot') 马上投注
 </template>
 <script>
 export default {
   data() {
     return {
-      money: "",
+      meiyoumoney: this.$store.state.money,
     };
   },
   computed: {
     zhu() {
       return this.$store.state.zhu;
     },
+    // money() {
+    //   return this.$store.state.money;
+    // },
     youhezhi() {
       if (this.con && this.con.indexOf("和") !== -1) {
         return true;
@@ -79,20 +82,23 @@ export default {
     }
   },
   watch: {
-    money(newVal) {
-      if (this.money === "") {
-        // setTimeout(() => {
-        //   if (this.money === "") {
-        //     this.money = "";
-        //   }
-        // }, 1000);
+    meiyoumoney(newVal) {
+      if (this.meiyoumoney === "") {
+        setTimeout(() => {
+          if (this.meiyoumoney === "") {
+            this.meiyoumoney = "";
+          }
+        }, 1000);
       } else {
-        this.money = parseInt(newVal);
+        this.meiyoumoney = parseInt(newVal);
         this.$store.commit("MONEY",parseInt(newVal));
       }
     }
   },
   methods: {
+    clear(){
+      this.meiyoumoney="";
+    },
     betC() {
       if (this.zhu <= 0) {
         this.$pop.show({
@@ -103,7 +109,7 @@ export default {
           number: 2
         });
       }
-      if (this.money === "") {
+      if (this.meiyoumoney === "") {
         this.$pop.show({
           title: "温馨提示",
           content: "请填写您要投注的金额!",
@@ -112,7 +118,7 @@ export default {
           number: 2
         });
       }
-      if (this.zhu > 0 && this.money !== "") {
+      if (this.zhu > 0 && this.meiyoumoney !== "") {
          this.$store.commit("BET_GO_SHOW", "reverse");
       }
     }

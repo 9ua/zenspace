@@ -11,8 +11,10 @@ import VueAxios from 'vue-axios'
 import store from './vuex/store'
 import md5 from 'js-md5';
 import popTo from "./components/public/pop"
+import Loading from "./components/public/loading"
 
 Vue.use(popTo);
+Vue.use(Loading);
 axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 window.axios = axios;
@@ -27,22 +29,18 @@ axios.defaults.timeout = 20000
 
 axios.interceptors.response.use(data => { // 响应成功关闭loading
   if (data.data.status === 302) {
-    // localStorage.clear();
     router.push('/login');
     this.$store.state.loginStatus = false;
   }
   if (data.data.pup === true) {
     if (data.data.data.message && data.data.data.message !== "参数错误") {
-      // Vue.prototype.$pop.show({error:data.data.data.message,number:10});
       Vue.prototype.$pop.show({error:'',title:'温馨提示',content:data.data.data.message,content1:'',content2:'',number:1});
     } else {
       if (data.data.data !== "参数错误") {
-        // Vue.prototype.$pop.show({error:data.data.data,number:1});
         Vue.prototype.$pop.show({error:'',title:'温馨提示',content:data.data.data,content1:'',content2:'',number:1});
       }
     }
   }
-
   return data
 }, error => {
   return Promise.reject(error)

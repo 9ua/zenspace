@@ -45,6 +45,9 @@ export default {
       jn: ""
     };
   },
+  destroyed() {
+    this.iscreat();
+  },
   computed: {
     current_player() {
       return this.$store.state.current_player;
@@ -79,7 +82,7 @@ export default {
     //清空
     iscreat() {
       this.$store.state.zhu = "";
-      // this.$store.state.money = "";
+      this.$store.state.money = "";
       this.$store.state.con = "";
       this.d = [];
       this.dd = [];
@@ -119,7 +122,6 @@ export default {
     },
     //中间->投注选号
     curBalls(indexff, indexg, num, numViews, player) {
-      console.log(this.playBonusId)
       num.choose = !num.choose;
       if (num.choose === true) {
         this.d[indexg] = num.ball;

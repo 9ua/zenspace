@@ -60,11 +60,31 @@
 .conter.k3 {
   @extend %faj;
   height: 60px;
-  & span {
+  & span.Dice {
     @extend %faj;
-    width: 36px;
-    height: 36px;
-    margin: 0px 4px;
+    width: 44px;
+    height: 44px;
+    background-image: url(../../assets/img/one/diceK3.png);
+    background-size: 200% 600%;
+    vertical-align:middle;
+  }
+  & span.Dice.Dice1{
+    background-position: 0 0;
+  }
+  & span.Dice.Dice2{
+    background-position: 0 -100%;
+  }
+  & span.Dice.Dice3{
+    background-position: 0 -200%;
+  }
+  & span.Dice.Dice4{
+    background-position: 0 -300%;
+  }
+  & span.Dice.Dice5{
+    background-position: 0 -400%;
+  }
+  & span.Dice.Dice6{
+    background-position: 0 -500%;
   }
 }
 .conter.ssc {

@@ -2,29 +2,33 @@
 .klc
   ul
     router-link(v-for='(item,index) in lotteryListklc', :key='index', tag='li', :to="{path:'/pk10',query:{id:item.id,name:item.name}}")
-      img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
+      span
+        i.iconfont(:class='"icon-"+item.groupId')
       h5 {{item.name}}
 </template>
 <script>
 export default {
   data() {
     return {
-      lotteryListklc: JSON.parse(localStorage.getItem("lotteryList")).pk10
+      lotteryListklc: ''
     };
   },
-  // mounted() {
-  //   this.lotteryklc();
-  // },
+  mounted() {
+    this.lotteryklc();
+  },
   methods: {
     lotteryklc() {
-      this.$axios
-        .get(this.$store.state.url + "api/lottery/getLotteryList")
-        .then(res => {
-          this.lotteryListklc = res.data.data.pk10;
+      if(JSON.parse(localStorage.getItem("lotteryListpk10")) !== null){
+        this.lotteryListklc = JSON.parse(localStorage.getItem("lotteryListpk10"));
+      }else {
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:"pk10"}}).then(res => {
+          localStorage.setItem("lotteryListpk10",JSON.stringify(res.data.data));
+          this.lotteryListklc = res.data.data;
         })
         .catch(error => {
           console.log("getLotteryListNo");
         });
+      }
     }
   }
 };

@@ -1,32 +1,51 @@
 <template lang='jade'>
 .bet-content-top
-  .content-left(@click='changeBetContentTopPop')
+  .content-left-pk10(v-if='$route.query.group === "pk10"', @click='changeBetContentTopPop')
     p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
+      i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
     .contnet-left-num(v-if='shownum === false')
       p {{n1 &lt; 10 ? '0'+n1 : n1}}
       p {{n2 &lt; 10 ? '0'+n2 : n2}}
       p {{n3 &lt; 10 ? '0'+n3 : n3}}
       p {{n4 &lt; 10 ? '0'+n4 : n4}}
       p {{n5 &lt; 10 ? '0'+n5 : n5}}
-      i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
+      p {{n6 &lt; 10 ? '0'+n6 : n6}}
+      p {{n7 &lt; 10 ? '0'+n7 : n7}}
+      p {{n8 &lt; 10 ? '0'+n8 : n8}}
+      p {{n9 &lt; 10 ? '0'+n9 : n9}}
+      p {{n10 &lt; 10 ? '0'+n10 : n10}}
     .contnet-left-shownum(v-if='shownum === true && isGetItem === true')
       .num
         .span
           transition(name='down-up-translate-fade')
-            div {{i|addZero}}
+            div {{i}}
         .span
           transition(name='down-up-translate-fade')
-            div {{j|addZero}}
+            div {{j}}
         .span
           transition(name='down-up-translate-fade')
-            div {{k|addZero}}
+            div {{k}}
         .span
           transition(name='down-up-translate-fade')
-            div {{l|addZero}}
+            div {{l}}
         .span
           transition(name='down-up-translate-fade')
-            div {{h|addZero}}
-      i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
+            div {{h}}
+        .span
+          transition(name='down-up-translate-fade')
+            div {{q}}
+        .span
+          transition(name='down-up-translate-fade')
+            div {{w}}
+        .span
+          transition(name='down-up-translate-fade')
+            div {{e}}      
+        .span
+          transition(name='down-up-translate-fade')
+            div {{r}}   
+        .span
+          transition(name='down-up-translate-fade')
+            div {{t}}           
   .content-right(@click='$emit("tolooksucc")')
     div
       p.seasonId {{seasonId !== '' ? seasonId : Number(lastSeasonIds)+1}}期投注截止
@@ -47,28 +66,13 @@ export default {
       return this.$store.state.betContentTopPopFlag;
     },
     seasonId() {
-      return this.$store.getters.seasonId;
+      return  this.$store.getters.seasonId;
     },
     seasonId2() {
       return this.$store.state.seasonId2;
     },
     getPastOpens() {
-      return this.$store.getters.getPastOpens;
-    },
-    n1() {
-      return this.getPastOpenB?this.getPastOpenB[0].n1:1;
-    },
-    n2() {
-      return this.getPastOpenB?this.getPastOpenB[0].n2:1;
-    },
-    n3() {
-      return this.getPastOpenB?this.getPastOpenB[0].n3:1;
-    },
-    n4() {
-      return this.getPastOpenB?this.getPastOpenB[0].n4:1;
-    },
-    n5() {
-      return this.getPastOpenB?this.getPastOpenB[0].n5:1;
+      return this.$store.state.getPastOpens;
     }
   },
   data() {
@@ -84,11 +88,26 @@ export default {
       today: "",
       timer: "",
       timer2: "",
+      n1: 1,
+      n2: 1,
+      n3: 1,
+      n4: 1,
+      n5: 1,
+      n6: 1,
+      n7: 1,
+      n8: 1,
+      n9: 1,
+      n10: 1,
       i: 0, //动画
       j: 0,
       k: 0,
       l: 0,
-      h: 0
+      h: 0,
+      q: 0,
+      w: 0,
+      e: 0,
+      r: 0,
+      t: 0
     };
   },
   created() {
@@ -106,21 +125,14 @@ export default {
       this.$store.commit("SHOW_RIGHT", false);
     },
     endCount() {
-      if (this.timer) {
-        for (let i = 0; i <= this.timer; i++) {
-          clearInterval(i);
-        }
-      }
-      if (this.timer2) {
-        for (let i = 0; i <= this.timer2; i++) {
-          clearTimeout(i);
-        }
-      }
+      clearInterval(this.timer);
+      clearTimeout(this.timer2);
     },
     //没打接口前
     noGetItem() {
       if (this.startyet == false) {
         this.start();
+        this.initSetTimeout();
         this.isGetItem = true;
         let myDate = new Date();
         let getMonth = myDate.getMonth() + 1;
@@ -188,11 +200,16 @@ export default {
       var _this = this;
       this.startyet = true;
       this.interval = setInterval(function() {
-        _this.i = Math.floor(Math.random() * 10 + 1);
-        _this.j = Math.floor(Math.random() * 10 + 1);
-        _this.k = Math.floor(Math.random() * 10 + 1);
-        _this.l = Math.floor(Math.random() * 10 + 1);
-        _this.h = Math.floor(Math.random() * 10 + 1);
+        _this.i = Math.floor(Math.random() * 9 + 1);
+        _this.j = Math.floor(Math.random() * 9 + 1);
+        _this.k = Math.floor(Math.random() * 9 + 1);
+        _this.l = Math.floor(Math.random() * 9 + 1);
+        _this.h = Math.floor(Math.random() * 9 + 1);
+        _this.q = Math.floor(Math.random() * 9 + 1);
+        _this.w = Math.floor(Math.random() * 9 + 1);
+        _this.e = Math.floor(Math.random() * 9 + 1);
+        _this.r = Math.floor(Math.random() * 9 + 1);
+        _this.t = Math.floor(Math.random() * 9 + 1);
       }, 39);
     },
     end() {
@@ -201,19 +218,20 @@ export default {
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      this.endCount();
+      clearInterval(this.timer);
+      clearTimeout(this.timer2);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
         })
         .then(res => {
           if (res.data.code === 1) {
-            this.$store.commit("SEASONID2", res.data.data.seasonId);
+            this.$store.commit("SEASONID2",res.data.data.seasonId)
             this.lastSeasonId = res.data.data.lastSeasonId;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
+            this.getPastOp(); //获取过去开奖号码20个
             this.initSetTimeout();
-            this.getPastOp();
           }
         })
         .catch(error => {
@@ -232,8 +250,18 @@ export default {
         })
         .then(res => {
           if (res.data.code === 1 && res.data.data.length != 0) {
-            this.$store.commit("GET_PAST_OPENS", res.data.data);
+            this.$store.commit("GET_PAST_OPENS",res.data.data);
             this.getPastOpenB = res.data.data;
+            this.n1 = res.data.data[0].n1;
+            this.n2 = res.data.data[0].n2;
+            this.n3 = res.data.data[0].n3;
+            this.n4 = res.data.data[0].n4;
+            this.n5 = res.data.data[0].n5;
+            this.n6 = res.data.data[0].n6;
+            this.n7 = res.data.data[0].n7;
+            this.n8 = res.data.data[0].n8;
+            this.n9 = res.data.data[0].n9;
+            this.n10 = res.data.data[0].n10;
             if (
               Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)
             ) {
@@ -275,19 +303,10 @@ export default {
         this.getPastOp();
       }, 12000);
     }
-  },
-  filters:{
-    addZero(v){
-      if(v<10){
-        return "0"+v;
-      }else{
-        return v;
-      }
-    }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTop.scss";
+@import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTopPK10.scss";
 @import "../../../../assets/scss/lotter-list/lotterbet/components/betContentTopR.scss";
 </style>

@@ -40,6 +40,9 @@ export default {
       default: "ssc"
     }
   },
+  destroyed(){
+    this.$store.state.showRight = false;
+  },
   computed: {
     listname() {
       return this.$store.state.listname;
@@ -90,7 +93,6 @@ export default {
         );
       } else if (localStorage.getItem("playTree_" + this.queryId) === null) {
         this.$axios
-          // .get( "./static/ssc.json", {
           .get(this.$store.state.url + "api/lottery/getPlayTree", {
             params: { lotteryId: this.lotteryId }
           })
@@ -120,8 +122,14 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
+<<<<<<< HEAD
       if (localStorage.getItem("lotteryList") !== null) {
         this.LotteryList = JSON.parse(localStorage.getItem("lotteryList"+this.group))
+=======
+      if (localStorage.getItem("lotteryListetf") !== null) {
+        this.$loading.hide();
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListetf"));
+>>>>>>> 8b01efc7594b7b5c83b46f7057e76fbcce6f30a1
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -131,9 +139,16 @@ export default {
         }
       } else {
         this.$axios
+<<<<<<< HEAD
           .get(this.$store.state.url + "api/lottery/getLotteryList?type="+this.group)
           .then(res => {
             localStorage.setItem("lotteryList"+this.group, JSON.stringify(res.data.data));
+=======
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:this.group}})
+          .then(res => {
+            this.$loading.hide();
+            localStorage.setItem("lotteryListetf", JSON.stringify(res.data.data));
+>>>>>>> 8b01efc7594b7b5c83b46f7057e76fbcce6f30a1
             this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {

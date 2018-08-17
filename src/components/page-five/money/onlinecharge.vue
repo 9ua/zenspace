@@ -18,6 +18,10 @@
       li
         .button
           button.button1(@click='sendReq()') 支付申请
+      //- ul
+      //-   li(style='background-color:#ddd;height:40px')
+      //-     .button
+      //-       button.button1(@click='popup()',style='background-color:#ddd;color:#888') 支付教程
   div.show(v-show='show3')
     ul
       .title
@@ -99,6 +103,12 @@ export default {
       this.selectBank = item.name;
       this.bankUserId = item.code;
       this.show1 = !this.show1;
+    },
+    popup(){
+      this.$pop.show({
+              content: "qq",
+              number: 5
+            });
     },
     sendReq() {
       if (this.amount === "") {

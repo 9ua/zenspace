@@ -22,8 +22,8 @@
                     span(v-for='(player,indexb) in group.players', :key='indexb', @click='k3Tab($event,indexa,indexb,player,group,into,index)')
                       a {{player.groupName}}{{player.title}}
     li.betssclist
-      span(@click='showa = !showa') {{listname}}
-      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='showa = !showa')
+      span(@click='getLotteryList') {{listname}}
+      i.iconfont(:class="showa ? 'icon-up' : 'icon-down' ", @click='getLotteryList')
       .betk3listRight(v-show='showa')
         ul
           li(v-for='(listssc,index) in LotteryList', :key='index', @click='listnames($event,index,listssc)')
@@ -52,7 +52,7 @@
   .betssc-content
     div(v-show='!show')
       .betk3-content-top
-        .content-left(@click=' betsscContentTopPop = !betsscContentTopPop')
+        .content-left(@click='countNums')
           p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
           div(v-if="shownum === false")
             p {{n1}}
@@ -170,7 +170,7 @@
       li
         button(@click='looksucc') 查看注单
         button(@click='betsucc') 继续投注
-  bets(ref='pop')
+  bets(ref='pop')      
 </template>
 <script>
 import bets from '../../page-five/money/bets.vue';
@@ -202,8 +202,8 @@ export default {
       showan: 0, //头部右数字
       time: "",
       titles: "五星 复式",
-      listname: "重庆",
-      lotteryId: "cqssc",
+      listname: this.$route.query.name.substring(0, 2),
+      lotteryId: "sj1fc",
       LotteryList: "",
       money: "", //投注金额
       groupId: "",
@@ -275,21 +275,17 @@ export default {
   destroyed() {
     this.endCount();
     this.iscreat();
-    // document.removeEventListener("visibilitychange",this.listen);
+    document.removeEventListener("visibilitychange",this.listen);
   },
   created() {
     this.noGetItem();
-    this.getLotteryList();
     this.endCount();
   },
   mounted() {
-    // document.addEventListener("visibilitychange",this.listen);
+    document.addEventListener("visibilitychange",this.listen);
     this.endCount();
-    if (!this.$route.meta.isBack) {
-      this.getPlayTree();
-      this.geteServerTime(); //获取彩種當前獎期時間
-    }
-    this.$route.meta.isBack = false;
+    this.getPlayTree();
+    this.geteServerTime(); //获取彩種當前獎期時間
   },
   watch: {
     money(newVal) {
@@ -305,19 +301,15 @@ export default {
     }
   },
   methods: {
-    // listen() {
-    //     if(document.hidden === false){
-    //       this.geteServerTime();
-    //     }
-    //     if(document.hidden === true){
-    //       this.endCount();
-    //     }
-    // },
+    listen() {
+        if(document.hidden === false){
+          this.geteServerTime();
+        }
+    },
     //没打接口前
     noGetItem(){
       if(this.startyet == false){
         this.start();
-        this.initSetTimeout();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
@@ -354,7 +346,7 @@ export default {
         query: {
           id: this.$route.query.id,
           name: this.$route.query.name,
-          group: this.groupId
+          group: this.$route.query.group
         }
       });
     },
@@ -378,8 +370,16 @@ export default {
       clearInterval(this.interval);
     },
     endCount() {
-      clearInterval(this.timer);
-      clearTimeout(this.timer2);
+      if (this.timer) {
+        for (let i = 0; i <= this.timer; i++) {
+          clearInterval(i);
+        }
+      }
+      if (this.timer2) {
+        for (let i = 0; i <= this.timer2; i++) {
+          clearTimeout(i);
+        }
+      }
     },
     //中间->投注选号
     curBalls(indexff, indexg, num, numViews, player) {
@@ -517,17 +517,23 @@ export default {
         this.playBonusId === "ssc_star1_dwd" ) {
         if (indexff === 0) {
           this.ka[indexg] = num.ball;
-          this.dd = this.ka;
+          this.dd = this.ka.filter(function(n) {
+            return n;
+          });
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
-          this.dd = this.kb;
+          this.dd = this.kb.filter(function(n) {
+            return n;
+          });
           this.bn = this.dd.join("");
         }
         if (indexff === 2) {
           this.kc[indexg] = num.ball;
-          this.dd = this.kc;
+          this.dd = this.kc.filter(function(n) {
+            return n;
+          });
           this.cn = this.dd.join("");
         }
         if (indexff === 3) {
@@ -539,7 +545,9 @@ export default {
         }
         if (indexff === 4) {
           this.ke[indexg] = num.ball;
-          this.dd = this.ke;
+          this.dd = this.ke.filter(function(n) {
+            return n;
+          });
           this.en = this.dd.join("");
         }
         if (this.playBonusId === "ssc_star4_front") {
@@ -629,16 +637,7 @@ export default {
             this.en;
         }
         if (this.playBonusId === "ssc_star5") {
-          this.con =
-            this.an +
-            "," +
-            this.bn +
-            "," +
-            this.cn +
-            "," +
-            this.dn +
-            "," +
-            this.en;
+          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + "," + this.en;
           this.zhu = this.getCount(this.con.split(","), 5);
         }
       }
@@ -1102,17 +1101,23 @@ export default {
       ) {
         if (indexff === 0) {
           this.ka.splice(indexg, 1, "");
-          this.dd = this.ka;
+          this.dd = this.ka.filter(function(n) {
+            return n;
+          });
           this.an = this.dd.join("");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
-          this.dd = this.kb;
+          this.dd = this.kb.filter(function(n) {
+            return n;
+          });
           this.bn = this.dd.join("");
         }
         if (indexff === 2) {
           this.kc.splice(indexg, 1, "");
-          this.dd = this.kc;
+          this.dd = this.kc.filter(function(n) {
+            return n;
+          });
           this.cn = this.dd.join("");
         }
         if (indexff === 3) {
@@ -1124,7 +1129,9 @@ export default {
         }
         if (indexff === 4) {
           this.ke.splice(indexg, 1, "");
-          this.dd = this.ke;
+          this.dd = this.ke.filter(function(n) {
+            return n;
+          });
           this.en = this.dd.join("");
         }
         if (this.playBonusId === "ssc_star4_front") {
@@ -1148,7 +1155,7 @@ export default {
         } else if (this.playBonusId === "ssc_star1_dwd") {
           this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
         } else if (this.playBonusId === "ssc_star5") {
-          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + this.en;
+          this.con = this.an + "," + this.bn + "," + this.cn + "," + this.dn + "," + this.en;
           this.zhu = this.getCount(this.con.split(","), 5);
         }
       }
@@ -1914,51 +1921,50 @@ export default {
     },
     //玩法术
     getPlayTree() {
-      this.$axios.get("static/ssc.json")
-        .then(res => {
-            this.playBonus = res.data.data.playBonus;
-            this.playGroups = res.data.data.playGroups;
-            this.current_player = this.playGroups[0].groups[0].players[0];
-            this.setupPlayTree();
-          })
-          .catch(error => {
-            console.log("玩法树No");
-          });
-
-
-
-
-      // const now = new Date().getTime();
-      // if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
-      //   this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
-      //   this.playGroups = JSON.parse(
-      //     localStorage.getItem("playTree_" + this.$route.query.id)
-      //   ).playGroups;
-      //   this.setupPlayTree();
-      // } else if (
-      //   localStorage.getItem("playTree_" + this.$route.query.id) === null
-      // ) {
-      //   this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.lotteryId }})
+      // this.$axios.get("static/ssc.json")
       //   .then(res => {
       //       this.playBonus = res.data.data.playBonus;
       //       this.playGroups = res.data.data.playGroups;
       //       this.current_player = this.playGroups[0].groups[0].players[0];
-      //       localStorage.setItem(
-      //         "playTree_" + this.$route.query.id,
-      //         JSON.stringify(res.data.data)
-      //       );
-      //       localStorage.setItem("date_playTree_" + this.$route.query.id, now);
       //       this.setupPlayTree();
       //     })
       //     .catch(error => {
       //       console.log("玩法树No");
-      //       this.$store.state.loginStatus = false;
-      //       this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
       //     });
-      // }
+
+      const now = new Date().getTime();
+      if (localStorage.getItem("playTree_" + this.$route.query.id) !== null) {
+        this.playBonus = JSON.parse(localStorage.getItem("playTree_" + this.$route.query.id)).playBonus;
+        this.playGroups = JSON.parse(
+          localStorage.getItem("playTree_" + this.$route.query.id)
+        ).playGroups;
+        this.current_player = this.playGroups[0].groups[0].players[0];
+        this.setupPlayTree();
+      } else if (
+        localStorage.getItem("playTree_" + this.$route.query.id) === null
+      ) {
+        this.$axios.get(this.$store.state.url + "api/lottery/getPlayTree", {params: { lotteryId: this.lotteryId }})
+        .then(res => {
+            this.playBonus = res.data.data.playBonus;
+            this.playGroups = res.data.data.playGroups;
+            this.current_player = this.playGroups[0].groups[0].players[0];
+            localStorage.setItem(
+              "playTree_" + this.$route.query.id,
+              JSON.stringify(res.data.data)
+            );
+            localStorage.setItem("date_playTree_" + this.$route.query.id, now);
+            this.setupPlayTree();
+          })
+          .catch(error => {
+            console.log("玩法树No");
+            this.$store.state.loginStatus = false;
+            this.$pop.show({title:'温馨提示',content:'获取不成功,请检查您的网络！',content1:'',content2:'',number:1});
+          });
+      }
     },
     //投注
     betGo() {
+      this.$loading.show({number:"a"});
       this.betGoshow = false;
       this.betnot = false;
       let config = {
@@ -1984,14 +1990,10 @@ export default {
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
           if (res.data.message === "success") {
-            setTimeout(() => {
-              this.$pop.show({title:'温馨提示',content:'恭喜您，投注成功！',content1:'',content2:'',number:1});
+            this.$loading.hide();
               this.betnot = true;
-              setTimeout(() => {
-                this.betsuccess = !this.betsuccess;
-                this.iscreat();
-              }, 800);
-            }, 600);
+              this.betsuccess = !this.betsuccess;
+              this.iscreat();
           } else {
                 this.betnot = true;
                 this.iscreat();
@@ -2021,8 +2023,13 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
-      if (localStorage.getItem("lotteryList") !== null) {
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryList")).ssc;
+      this.$loading.show({number:"a"});
+      this.showa = !this.showa;
+      this.betsscContentTopPop = false;
+      this.countNum = 10;
+      if (localStorage.getItem("lotteryListSSC") !== null) {
+        this.$loading.hide();
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListSSC"));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -2031,10 +2038,11 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList")
+          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'ssc'}})
           .then(res => {
-            localStorage.setItem("lotteryList", JSON.stringify(res.data.data));
-            this.LotteryList = res.data.data.ssc;
+            this.$loading.hide();
+            localStorage.setItem("lotteryListSSC", JSON.stringify(res.data.data));
+            this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
               if (this.LotteryList[i].id === this.$route.query.id) {
@@ -2049,8 +2057,9 @@ export default {
     },
     //头部右->菜单点击
     listnames(e, index, into) {
+      this.countNum = 10;
       this.titles ="五星 复式";
-      this.historyNum++;
+      // this.historyNum++;
       this.listname = into.name.substring(0, 2);
       this.lotteryId = into.id;
       this.showan = index;
@@ -2080,7 +2089,6 @@ export default {
       this.current_player = items;
       this.current_player_bonus = this.current_player;
       this.displayBonus = items.displayBonus;
-      console.log(items,'------')
       if (isNaN(this.displayBonus)) {
         let ar = [];
         ar = this.displayBonus.split("-");
@@ -2092,7 +2100,6 @@ export default {
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      clearInterval(this.timer);
       clearTimeout(this.timer2);
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
@@ -2135,21 +2142,33 @@ export default {
       this.countDown = hours + ":" + minutes + ":" + seconds;
     },
     //倒计时
-    initSetTimeout(today) {
+    initSetTimeout() {
+      if (this.startyet == false) {
+        this.start();
+      }
+      this.shownum = true;
+      this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
-        this.setTimeMode();
         if (this.today < 1) {
-          clearInterval(this.timer);
+          this.endCount();
           this.timesUp();
         }
-        if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47){
-          this.getPastOp();
-        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46){
-          this.getPastOp();
-        }else if(this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
-          this.getPastOp();
+        if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
+          this.endCount();
         }
+        if(this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47){
+          this.getPastOp();
+        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46){
+          this.getPastOp();
+        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45){
+          this.getPastOp();
+        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId === this.lastSeasonId){
+          this.end();
+          this.startyet = false;
+          this.shownum = false;
+        }
+        this.setTimeMode();
       }, 1000);
     },
     //時間到彈窗
@@ -2157,12 +2176,16 @@ export default {
       this.$pop.show({title:'温馨提示',content:'',content1:String(this.seasonId*1 ),content2:String(Number(this.seasonId+1)),number:3});
       this.geteServerTime();
     },
+    countNums(){
+      this.showa = false;
+      this.betsscContentTopPop = !this.betsscContentTopPop;
+      this.countNum = 10;
+      if(this.betsscContentTopPop === true){
+        this.getPastOp();
+      }
+    },
     //获取过去开奖号码10个
     getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
-      this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: this.countNum }
@@ -2191,6 +2214,7 @@ export default {
     reGetPastOp() {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
+        this.countNum = 10;
         this.getPastOp();
       }, 12000);
     },

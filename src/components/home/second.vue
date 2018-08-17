@@ -15,12 +15,9 @@
             span
               i(v-for='(cd,indexa) in times', :key='indexa', v-if='indexa === index') {{cd | setTime}}
         .conter(:class='all.groupName', v-if="all.groupName === 'k3'")
-          span
-            img(:src='"../../assets/img/one/n"+all.n1+".png"', alt='')
-          span
-            img(:src='"../../assets/img/one/n"+all.n2+".png"', alt='')
-          span
-            img(:src='"../../assets/img/one/n"+all.n3+".png"', alt='')
+          span.Dice(:class="'Dice'+all.n1")
+          span.Dice(:class="'Dice'+all.n2")
+          span.Dice(:class="'Dice'+all.n3")
         .conter(:class='all.groupName', v-if="all.groupName === 'ssc'")
           span {{all.n1}}
           span {{all.n2}}
@@ -78,7 +75,7 @@ export default {
     looksucc(e, all) {
       this.$router.push({
         path: all.groupName,
-        query: { id: all.lotteryId, name: all.name, group: all.groupId }
+        query: { id: all.lotteryId, name: all.name, group: all.groupName }
       });
       this.betsuccess = !this.betsuccess;
     },

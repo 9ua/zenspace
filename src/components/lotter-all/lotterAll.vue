@@ -2,7 +2,8 @@
 .looterAll
   ul
     router-link(v-for='(item,index) in lotteryListAll', :key='index', tag='li', :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name}}")
-      img(:src='"@/assets/img/one/"+item.groupId+".png"', alt='images')
+      span
+        i.iconfont(:class='"icon-"+item.groupId')
       h5 {{item.name}}
 </template>
 <script>
@@ -17,18 +18,17 @@ export default {
   },
   methods:{
     lotter(){
-      if(JSON.parse(localStorage.getItem("lotteryList")) !== null){
-        this.lotteryListAll = JSON.parse(localStorage.getItem("lotteryList")).all;
+      if(JSON.parse(localStorage.getItem("lotteryListAll")) !== null){
+        this.lotteryListAll = JSON.parse(localStorage.getItem("lotteryListAll"));
       }else {
-        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList").then(res => {
-          localStorage.setItem("lotteryList",JSON.stringify(res.data.data));
-          this.lotteryListAll = res.data.data.all;
+        this.$axios.get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:"all"}}).then(res => {
+          localStorage.setItem("lotteryListAll",JSON.stringify(res.data.data));
+          this.lotteryListAll = res.data.data;
         })
         .catch(error => {
           console.log("getLotteryListNo");
         });
       }
-      
     }
   }
 };

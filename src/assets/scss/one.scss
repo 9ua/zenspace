@@ -7,8 +7,13 @@
   color: #333;
   height: 46px;
   padding: 0px 14px !important;
-  & img{
+  & span{
     width: 18px;
+    & i{
+      color:#f60;
+      font-size: 22px;
+    }
+    
   }
   & marquee{
     color:#f60;
@@ -35,7 +40,7 @@
 .one-center {
   height: 100%;
   background: #fff;
-  ul {
+  ul.lotteryList {
     @extend %flex;
     @extend %fr;
     background: #fff;
@@ -50,12 +55,15 @@
       border-left: 0px solid #DFE4ED;
       width: 33%;
       padding: 0px 0 5px;
-      & img {
-        margin: 10px 0px 5px;
+      & span {
+        @extend %faj;
         width: 50%;
         height: auto;
         padding: 10px 0px;
         border-radius: 50%;
+        & i.iconfont{
+          font-size: 56px;
+        }
       }
       & h5 {
         font-weight: 400;

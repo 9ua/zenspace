@@ -25,7 +25,7 @@ import lookMore from "./components/lookMore.vue";//
 import betContentTopPop from "./components/betContentTopPop.vue";//查看开奖记录，往期开奖
 import betContentTopPopPk from "./components/betContentTopPopPk10.vue";//查看开奖记录，往期开奖
 import betContentS from "./components/betContentSSC.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
-import betContentP from "./components/betContentPk10.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
+import betContentP from "./components/betContentPK10.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
 import betContentX from "./components/betContentX11X5.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
 import betFooter from "./components/betFooter.vue";//底部，确认投注
 import betGoshow from "./components/betGoshow.vue";//投注确认弹窗

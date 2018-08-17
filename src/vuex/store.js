@@ -19,10 +19,11 @@ const state = {
   balance: null, //余额
   userType: localStorage.getItem('userType'), //0会员，1代理
   historyNum: "/one",
-  isNotice:false,//是否有未读消息
-  noticeCount:0,//有未读消息，多少条
+  isNotice: false, //是否有未读消息
+  noticeCount: 0, //有未读消息，多少条
 
   //游戏投注相关
+  group:"",//配置彩种种类（11选5）
   betContentTopPopFlag: false, //是否弹出投注记录
   showRight: false, //头部右侧切换彩种
   current_player: {}, //当前玩法树
@@ -36,6 +37,8 @@ const state = {
   seasonId2: "", //当前期号  
   getPastOpens: "", //过去20期开奖
   lookAllUl: false, //是否查看过去20期开奖
+  dmNum: "", //可选择胆码数量
+  dmArr: [] //最新选中胆码下标
 }
 //test & prod
 if (process.env.NODE_ENV === 'production') {
@@ -71,6 +74,19 @@ const getters = {
       displayBonus2 = Number(displayBonus2);
     }
     return displayBonus2;
+  },
+  getPastOpens() {
+    let getPastOpens=state.getPastOpens;  
+    if (getPastOpens&&state.group==="x11x5") {
+      getPastOpens.forEach((item, index) => {
+        [1, 2, 3, 4, 5].forEach((item1, index1) => {
+          if (item["n" + item1] < 10) {
+            getPastOpens[index]["n" + item1] = "0" + item["n" + item1]
+          }
+        })
+      })
+    }
+    return getPastOpens;
   }
 }
 export default new Vuex.Store({

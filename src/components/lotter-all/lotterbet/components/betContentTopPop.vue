@@ -27,7 +27,7 @@ export default {
       return this.$store.state.betContentTopPopFlag;
     },
     getPastOpens() {
-      return this.$store.state.getPastOpens;
+      return this.$store.getters.getPastOpens;
     }
   },
   methods: {

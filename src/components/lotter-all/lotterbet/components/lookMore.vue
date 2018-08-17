@@ -26,7 +26,7 @@
 export default {
   computed: {
     getPastOpens(){
-      return this.$store.state.getPastOpens;
+      return this.$store.getters.getPastOpens;
     },
     lookAllUl(){
         return this.$store.state.lookAllUl;

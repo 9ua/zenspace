@@ -4,7 +4,7 @@
     li 投注确认
     li
       p
-        span {{listname}}快3 ：
+        span {{$route.query.name}} ：
         | {{seasonId}}期
       p
         span 投注金额：
@@ -21,9 +21,6 @@ export default {
   computed: {
     betGoshow() {
       return this.$store.state.betGoshow;
-    },
-    listname() {
-      return this.$store.state.listname;
     },
     zhu() {
       return this.$store.state.zhu;

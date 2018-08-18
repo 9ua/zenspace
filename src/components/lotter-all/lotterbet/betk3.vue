@@ -158,7 +158,7 @@
           </p>
         </div>
         <div class="betk3-content-foot">
-          <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{item.remark}}
+          <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{$route.query.id=="dfk3"?item.remark:item.remark+"(不含豹子号)"}} 
             <span v-show="index !== 3">赔率
               <span class="k3remark">{{ item.rate | keepTwoNum}}</span> 倍。</span>
             <!-- <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span> -->

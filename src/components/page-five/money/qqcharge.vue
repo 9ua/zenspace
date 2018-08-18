@@ -21,14 +21,14 @@
     //-   li(style='background-color:#ddd;height:40px')
     //-     .button
     //-       button.button1(@click='popup()',style='background-color:#ddd;color:#888') 支付教程
-  div.show(v-show='show3')
-    ul
-      .title
-        p 温馨提示！
-      .cont
-        p {{content}}
-      .but
-        button.nodel(@click='goBack()') 确定
+  //- div.show(v-show='show3')
+  //-   ul
+  //-     .title
+  //-       p 温馨提示！
+  //-     .cont
+  //-       p {{content}}
+  //-     .but
+  //-       button.nodel(@click='goBack()') 确定
   actionSheet.mIcode-go(v-model='show1', :actions='payway', cancel-text='取消',@hide='hide')
   div#monster
 </template>

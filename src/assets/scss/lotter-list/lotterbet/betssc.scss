@@ -159,10 +159,16 @@
 .pageNum0{
   transition: .6s;
   transform: translateX(0px);
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -o-transform: translateX(0px);
 }
 .pageNum1{
   transition: .6s;
   transform: translateX(460px);
+  -webkit-transform: translateX(460px);
+  -moz-transform: translateX(460px);
+  -o-transform: translateX(460px);
 }
 .betssc-content {
   height: 100%;

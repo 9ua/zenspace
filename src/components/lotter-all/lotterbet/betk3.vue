@@ -158,7 +158,7 @@
           </p>
         </div>
         <div class="betk3-content-foot">
-          <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{$route.query.id=="dfk3"?item.remark:item.remark+"(不含豹子号)"}} 
+          <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{$route.query.id=="dfk3"?item.remark+"3-10为小,11-18为大":item.remark+"4-10为小,11-17为大（不含豹子号）"}} 
             <span v-show="index !== 3">赔率
               <span class="k3remark">{{ item.rate | keepTwoNum}}</span> 倍。</span>
             <!-- <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span> -->
@@ -363,7 +363,7 @@ export default {
         {title:"单挑一骰",rate:"0.00", id:"k3_star1", remark: "选择1个或者多个骰号，如果开奖号码中包含该号（顺序不限）即中奖" },
         {title:"二同号",rate:"0.00", id:"k3_star2_same", remark: "选择1对相同号码和1个不同号码进行单选或者多选投注，选号与开奖号相同（顺序不限）即中奖" },
         {title:"二不同",rate:"0.00", id:"k3_star2_same_not", remark: "对所有2不同号进行单选或多选，选号与开奖号中任意2个号码相同即中奖" },
-        {title:"和值",rate:"0.00", id:"k3_star3_and", remark: "猜3个开奖号相加的和,3-10为小,11-18为大" },
+        {title:"和值",rate:"0.00", id:"k3_star3_and", remark: "猜3个开奖号相加的和," },
         {title:"三连号",rate:"0.00", id:"k3_star3_link", remark: "对所有3个相连的号码（123，234，345，456)进行单选或多选投注，选号与开奖号相同（顺序不限）即中奖" },
         {title:"三同号",rate:"0.00", id:"k3_star3_same", remark: "对豹子号（111，222，333，444，555，666）进行单选或通选投注，选号与开奖号相同即中奖" },
         {title:"三不同",rate:"0.00", id:"k3_star3_same_not", remark: "对所有3不同号进行单选或多选，选号与开奖号相同（顺序不限）即中奖" },

@@ -28,6 +28,8 @@ export default {
       kc: [], //选中的号码的下标
       kd: [], //选中的号码的下标
       ke: [], //选中的号码的下标
+      dm: "", //胆码
+      tm: "", //拖码
       an: "",
       bn: "",
       cn: "",
@@ -59,7 +61,7 @@ export default {
       this.$store.commit("CON", "");
       this.$store.state.money = "";
       this.d = [];
-      this.dd = [];
+      (this.dm = ""), (this.tm = ""), (this.dd = []);
       this.ka = [];
       this.kb = [];
       this.kc = [];
@@ -97,6 +99,54 @@ export default {
       }
     },
     //----------公用函数-----------
+    //共用函式
+    getCombin(num, len) {
+      if (num < len) {
+        return 0;
+      }
+      let nums = 1;
+      let lens = 1;
+      for (let i = 0; i < len; i++) {
+        nums *= num - i;
+        lens *= len - i;
+      }
+      return nums / lens;
+    },
+
+    getCount(bets) {
+      let line = bets.split(";");
+      if (line.length != 2) {
+        return 0;
+      }
+      let dan = line[0].substring(1).join("");
+      if (hasSame(dan)) {
+        return 0;
+      }
+      //取交集
+      if (dan.retainAll(this.nums)) {
+        return 0;
+      }
+      let tuo = line[1].join("");
+      if (hasSame(tuo)) {
+        return 0;
+      }
+      if (tuo.retainAll(this.nums)) {
+        return 0;
+      }
+      let allSize = 0;
+      for (let d in dan) {
+        let s = tuo.length;
+        if (tuo.indexOf(d) >= 0) {
+          s--;
+        }
+        let ls = getCombin(s, getSelectNum() - 1);
+        if (ls == 0) {
+          return 0;
+        }
+        allSize += ls;
+      }
+      return allSize;
+    },
     //排列组合
     groupSplit(arr, size) {
       let maxSize = arr.length,
@@ -149,8 +199,10 @@ export default {
       if (dmArr.length === 0) {
         return 0;
       }
-      count = this.groupSplit(tmArr, stars - dmArr.length).length;
-      return count;
+      // count = this.groupSplit(tmArr, stars - dmArr.length).length;//胆码全中方式
+      // return count;//胆码全中方式
+      count = this.groupSplit(tmArr, stars - 1).length;
+      return count*dmArr.length;
     },
     //直选排列组合
     getCountFront(betContent, stars) {
@@ -312,8 +364,7 @@ export default {
           this.dd = this.kb;
           this.bn = this.dd.join("");
         }
-        this.$store.commit("CON", this.an + "," + this.bn);
-        let count = this.getCountFront(this.con.split(","), 2);
+        let count = this.getCountFront(this.an + "," + this.bn, 2);
         this.$store.commit("CON", this.an + "," + this.bn);
         this.$store.commit("ZHU", count);
       }
@@ -336,7 +387,6 @@ export default {
         }
         this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn);
         let count = this.getCountFront(this.con.split(","), 3);
-        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn);
         this.$store.commit("ZHU", count);
       }
       //任选胆拖 ++
@@ -393,6 +443,7 @@ export default {
             this.kb.splice(indexg, 1, "");
             this.dd = this.kb;
             this.bn = this.dd.join("");
+            this.tm = this.strToarr(this.bn).join(",");
           }
           this.$store.commit("CURRENT_PLAYER", {
             target: "noVisiable",
@@ -401,17 +452,19 @@ export default {
           });
           this.dd = this.ka;
           this.an = this.dd.join("");
+          this.dm = this.dd.join(",");
         }
         if (indexff === 1) {
           this.kb[indexg] = num.ball;
           this.dd = this.kb;
           this.bn = this.dd.join("");
+          this.tm = this.strToarr(this.bn).join(",");
         }
-        this.$store.commit("CON", this.an + "," + this.bn);
         let count = this.getCountDt(
-          this.con.split(","),
+          (this.an + "," + this.bn).split(","),
           this.$store.state.dmNum + 1
         );
+        this.$store.commit("CON", "胆" + this.dm + ";" + this.tm);
         this.$store.commit("ZHU", count);
       }
     },
@@ -510,7 +563,6 @@ export default {
         }
         this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn);
         let count = this.getCountFront(this.con.split(","), 3);
-        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn);
         this.$store.commit("ZHU", count);
       }
       //任选胆拖 --
@@ -533,17 +585,20 @@ export default {
           this.ka = [...this.$store.state.dmArr];
           this.dd = this.ka;
           this.an = this.dd.join("");
+          this.dm = this.dd.join(",");
         }
         if (indexff === 1) {
           this.kb.splice(indexg, 1, "");
           this.dd = this.kb;
           this.bn = this.dd.join("");
+          this.tm = this.strToarr(this.bn).join(",");
         }
-        this.$store.commit("CON", this.an + "," + this.bn);
         let count = this.getCountDt(
-          this.con.split(","),
+          (this.an + "," + this.bn).split(","),
           this.$store.state.dmNum + 1
         );
+        console.log(this.dm, this.tm);
+        this.$store.commit("CON", "胆" + this.dm + ";" + this.tm);
         this.$store.commit("ZHU", count);
       }
     }

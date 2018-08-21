@@ -364,8 +364,8 @@ export default {
           this.dd = this.kb;
           this.bn = this.dd.join("");
         }
-        let count = this.getCountFront(this.an + "," + this.bn, 2);
-        this.$store.commit("CON", this.an + "," + this.bn);
+        let count = this.getCountFront((this.an + "," + this.bn).split(","), 2);
+        this.$store.commit("CON", this.an + "," + this.bn + ",-" + ",-" + ",-");
         this.$store.commit("ZHU", count);
       }
       //选三直选复式 ++
@@ -385,8 +385,8 @@ export default {
           this.dd = this.kc;
           this.cn = this.dd.join("");
         }
-        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn);
-        let count = this.getCountFront(this.con.split(","), 3);
+        let count = this.getCountFront((this.an + "," + this.bn + "," + this.cn).split(","), 3);
+        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn + ",-" + ",-");
         this.$store.commit("ZHU", count);
       }
       //任选胆拖 ++
@@ -539,9 +539,8 @@ export default {
           this.dd = this.kb;
           this.bn = this.dd.join("");
         }
-        this.$store.commit("CON", this.an + "," + this.bn);
-        let count = this.getCountFront(this.con.split(","), 2);
-        this.$store.commit("CON", this.an + "," + this.bn);
+        let count = this.getCountFront((this.an + "," + this.bn).split(","), 2);
+        this.$store.commit("CON", this.an + "," + this.bn + ",-" + ",-" + ",-");
         this.$store.commit("ZHU", count);
       }
       //选三直选复式 -
@@ -561,8 +560,8 @@ export default {
           this.dd = this.kc;
           this.cn = this.dd.join("");
         }
-        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn);
-        let count = this.getCountFront(this.con.split(","), 3);
+        let count = this.getCountFront((this.an + "," + this.bn + "," + this.cn).split(","), 3);
+        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn + ",-" + ",-");
         this.$store.commit("ZHU", count);
       }
       //任选胆拖 --

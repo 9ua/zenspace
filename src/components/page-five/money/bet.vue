@@ -118,7 +118,7 @@ export default {
         },
         {
           name: "等待开奖",
-          Type: 6,
+          Type: 0,
           callback: this.print
         }
       ],

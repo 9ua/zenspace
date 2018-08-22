@@ -93,14 +93,24 @@ export default {
   },
   created() {
     this.noGetItem();
-  },
-  destroyed() {
     this.endCount();
   },
+  beforeDestroy() {
+    this.endCount();
+    this.iscreat();
+    document.removeEventListener("visibilitychange",this.listen);
+  },
   mounted() {
+    document.addEventListener("visibilitychange",this.listen);
+    this.endCount();
     this.getPastOp();
   },
   methods: {
+    listen() {
+      if(document.hidden === false){
+        this.geteServerTime();
+      }
+    },
     changeBetContentTopPop() {
       this.$store.commit("BET_CONTENT_FLAG", "reverse");
       this.$store.commit("SHOW_RIGHT", false);
@@ -139,6 +149,7 @@ export default {
     },
     //倒计时
     initSetTimeout(today) {
+      this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
         this.setTimeMode();
@@ -146,24 +157,8 @@ export default {
           clearInterval(this.timer);
           this.timesUp();
         }
-        if (
-          this.getPastOpenB[0] &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 47
-        ) {
-          this.getPastOp();
-        } else if (
-          this.getPastOpenB[0] &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 46
-        ) {
-          this.getPastOp();
-        } else if (
-          this.getPastOpenB[0] &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 45
-        ) {
-          this.getPastOp();
+        if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
+          this.endCount();
         }
       }, 1000);
     },
@@ -183,7 +178,7 @@ export default {
       }
       this.countDown = hours + ":" + minutes + ":" + seconds;
     },
-    //筛子动画
+    //动画
     start() {
       var _this = this;
       this.startyet = true;
@@ -196,12 +191,10 @@ export default {
       }, 39);
     },
     end() {
-      var _this = this;
-      clearInterval(_this.interval);
+      clearInterval(this.interval);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
-      this.endCount();
       this.$axios
         .get(this.$store.state.url + "api/lottery/getCurrentSaleTime", {
           params: { lotteryId: this.$route.query.id }
@@ -234,10 +227,11 @@ export default {
           if (res.data.code === 1 && res.data.data.length != 0) {
             this.$store.commit("GET_PAST_OPENS", res.data.data);
             this.getPastOpenB = res.data.data;
-            if (
-              Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)
-            ) {
+            console.log(this.lastSeasonId)
+            if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+              if (res.data.data[0].lotteryId === this.$route.query.id) {
               this.reGetPastOp();
+            }
             } else {
               clearTimeout(this.timer2);
               this.end();
@@ -255,7 +249,7 @@ export default {
           }
         })
         .catch(error => {
-          console.log("获取过去开奖号码No");
+          console.log(error);
         });
     },
     //時間到彈窗
@@ -270,11 +264,13 @@ export default {
       this.geteServerTime();
     },
     reGetPastOp() {
-      clearTimeout(this.timer2);
+      for (let i = 0; i <= this.timer2; i++) {
+        clearTimeout(i);
+      }
       this.timer2 = setTimeout(() => {
         this.getPastOp();
       }, 12000);
-    }
+    },
   },
   filters:{
     addZero(v){

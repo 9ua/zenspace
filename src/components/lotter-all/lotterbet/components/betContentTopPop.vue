@@ -50,7 +50,7 @@ export default {
         query: {
           id: this.$route.query.id,
           name: this.$route.query.name,
-          group: this.groupId
+          group: this.groupId||this.$route.query.group
         }
       });
     },

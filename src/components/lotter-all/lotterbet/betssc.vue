@@ -272,7 +272,7 @@ export default {
       countNum:10,
     };
   },
-  destroyed() {
+  beforeDestroy() {
     this.endCount();
     this.iscreat();
     document.removeEventListener("visibilitychange",this.listen);

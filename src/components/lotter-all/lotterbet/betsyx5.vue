@@ -52,7 +52,7 @@ export default {
       group:this.$route.query.group,//配置彩种种类（11选5）
     };
   },
-  destroyed() {
+  beforeDestroy() {
     this.iscreat();
   },
   mounted() {

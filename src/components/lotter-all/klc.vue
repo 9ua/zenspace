@@ -1,7 +1,7 @@
 <template lang="jade">
 .klc
   ul
-    router-link(v-for='(item,index) in lotteryListklc', :key='index', tag='li', :to="{path:'/pk10',query:{id:item.id,name:item.name}}")
+    router-link(v-for='(item,index) in lotteryListklc', :key='index', tag='li', :to="{path:'/pk10',query:{id:item.id,name:item.name,group:item.groupId}}")
       span
         i.iconfont(:class='"icon-"+item.groupId')
       h5 {{item.name}}

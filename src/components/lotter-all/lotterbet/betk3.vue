@@ -715,14 +715,14 @@ export default {
           }
         })
         .catch(error => {
-          console.log("获取过去开奖号码No");
+          console.log(error);
         });
     },
     reGetPastOp() {
       for (let i = 0; i <= this.timer2; i++) {
         clearTimeout(i);
       }
-      this.timer2 = this.setTimeout(() => {
+      this.timer2 = setTimeout(() => {
         this.getPastOp();
       }, 12000);
     },

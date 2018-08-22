@@ -1,11 +1,11 @@
 <template lang="jade">
 .etf
-  //- ul
-  //-   router-link(v-for='(item,index) in lotteryListetf', :key='index', tag='li', :to="{path:'/x11x5',query:{id:item.id,name:item.name}}")
-  //-     span
-  //-       i.iconfont(:class='"icon-"+item.groupId')
-  //-     h5 {{item.name}}
-  p 敬请期待......
+  ul(v-if="lotteryListetf!==''")
+    router-link(v-for='(item,index) in lotteryListetf', :key='index', tag='li', :to="{path:'/x11x5',query:{id:item.id,name:item.name,group:item.groupId}}")
+      span
+        i.iconfont(:class='"icon-"+item.groupId')
+      h5 {{item.name}}
+  p(v-else) 敬请期待......
 </template>
 <script>
 export default {

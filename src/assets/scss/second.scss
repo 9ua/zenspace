@@ -87,7 +87,7 @@
     background-position: 0 -500%;
   }
 }
-.conter.ssc {
+.conter.ssc ,.conter.x11x5{
   @extend %faj;
   height: 60px;
   & span {
@@ -244,7 +244,7 @@
       font-size: 16px;
     }
   }
-  & .ssc {
+  & .ssc ,& .x11x5{
     @extend %flex;
     & span {
       @extend %faj;
@@ -278,9 +278,9 @@
     }
   }
 }
-.pastListCenter.ssc{
+.pastListCenter.ssc,.pastListCenter.x11x5{
   @extend %faj;
-  & .ssc {
+  & .ssc ,& .x11x5{
     @extend %flex;
     & span {
       @extend %faj;

@@ -39,6 +39,12 @@
             span {{getopen.n3}}
             span {{getopen.n4}}
             span {{getopen.n5}}
+          div(:class='$route.query.group', v-if="$route.query.group === 'x11x5'")
+            span {{getopen.n1|addZero}}
+            span {{getopen.n2|addZero}}
+            span {{getopen.n3|addZero}}
+            span {{getopen.n4|addZero}}
+            span {{getopen.n5|addZero}}
           div(:class='$route.query.group', v-if="$route.query.group === 'pk10'")
             span {{getopen.n1}}
             span {{getopen.n2}}
@@ -93,7 +99,7 @@ export default {
       lotteryAll: null,
       isCheckList: false,
       checkListId: null,
-      arrAll:[],
+      arrAll: []
     };
   },
   watch: {
@@ -148,13 +154,14 @@ export default {
       this.$axios
         .get(this.$store.state.url + "api/lottery/getLotteryList")
         .then(res => {
-          this.lotteryAll = res.data.data.all;
+          this.lotteryAll = res.data.data;
         })
         .catch(error => {
           console.log("获取所有彩种No");
         });
     },
     getPastOp() {
+      this.getPastOpens=0;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: this.count }
@@ -163,6 +170,15 @@ export default {
           this.getPastOpens = res.data.data;
         })
         .catch(error => {});
+    }
+  },
+  filters: {
+    addZero(v) {
+      if (v < 10) {
+        return "0" + v;
+      }else{
+        return v;
+      }
     }
   }
 };

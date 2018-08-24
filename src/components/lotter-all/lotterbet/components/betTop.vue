@@ -1,16 +1,16 @@
 <template lang="jade">
 ul.bet-top
   li
-    i.iconfont.icon-left(@click='banckto')
+    i.iconfont.icon-left(@click.stop='banckto')
   li
     p.wangfa
       | 玩
       br
       | 法
-    .menu(@click='showCenter = !showCenter')
+    .menu(@click.stop='showCenter = !showCenter')
       | {{titles}}
       i.iconfont(:class="showCenter ? 'icon-up' : 'icon-down'")
-    .menu-list(v-show='showCenter', @click='showCenter = false')
+    .menu-list(v-show='showCenter', @click.stop='showCenter = false')
       .menu-listShow
         .popscroll
           ul.menu-list-top
@@ -18,7 +18,7 @@ ul.bet-top
               .title {{into.title}}
               .menu-list-list-box
                 .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
-                  span(v-for='(player,indexb) in group.players', :key='indexb', @click='tab($event,indexa,indexb,player,group,into,index)')
+                  span(v-for='(player,indexb) in group.players', :key='indexb', @click.stop='tab($event,indexa,indexb,player,group,into,index)')
                     a {{player.groupName}}{{player.title}}
   li.betlist
     span(@click.stop='rightFlag') {{listname}}
@@ -122,9 +122,9 @@ export default {
     },
     //右上获取彩种
     getLotteryList() {
-      if (localStorage.getItem("lotteryListetf") !== null) {
+      if (localStorage.getItem("lotteryListe"+this.group) !== null) {
         this.$loading.hide();
-        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListetf"));
+        this.LotteryList = JSON.parse(localStorage.getItem("lotteryListe"+this.group));
         this.groupId = this.LotteryList[0].groupId;
         for (let i = 0; i < this.LotteryList.length; i++) {
           if (this.LotteryList[i].id === this.$route.query.id) {
@@ -137,7 +137,7 @@ export default {
           .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:this.group}})
           .then(res => {
             this.$loading.hide();
-            localStorage.setItem("lotteryListetf", JSON.stringify(res.data.data));
+            localStorage.setItem("lotteryListe"+this.group, JSON.stringify(res.data.data));
             this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {

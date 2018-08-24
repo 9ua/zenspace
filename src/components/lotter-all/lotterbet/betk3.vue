@@ -501,7 +501,16 @@ export default {
     this.getLotteryPlayBetRate();
   },
   beforeDestroy() {
-    this.endCount();
+    if (this.timer) {
+        for (let i = 0; i <= this.timer+this.interval; i++) {
+          clearInterval(i);
+        }
+      }
+      if (this.timer2) {
+        for (let i = 0; i <= this.timer2; i++) {
+          clearTimeout(i);
+        }
+      }
     this.iscreat();
     document.removeEventListener("visibilitychange",this.listen);
   },
@@ -581,19 +590,14 @@ export default {
       }, 88);
     },
     end() {
-      var _this = this;
-      clearInterval(_this.interval);
+      clearInterval(this.interval);
     },
     endCount() {
       if (this.timer) {
-        for (let i = 0; i <= this.timer; i++) {
-          clearInterval(i);
-        }
+        clearInterval(this.timer);
       }
       if (this.timer2) {
-        for (let i= 0;i <=this.timer2;i++) {
-          clearTimeout(i);
-        }
+        clearTimeout(this.timer2);
       }
     },
     //获取彩種當前獎期時間
@@ -719,9 +723,7 @@ export default {
         });
     },
     reGetPastOp() {
-      for (let i = 0; i <= this.timer2; i++) {
-        clearTimeout(i);
-      }
+      clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
       }, 12000);
@@ -1324,8 +1326,8 @@ export default {
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
+              this.$loading.hide();
               if (res.data.message === "success") {
-                this.$loading.hide();
                 if (this.con1 !== "" && this.con2 === "") {
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
@@ -1337,7 +1339,7 @@ export default {
               }
             })
             .catch(error => {
-              console.log("大小单双投注No");
+              this.$loading.hide();
               this.$pop.show({
                 error: "",
                 title: "温馨提示",
@@ -1369,9 +1371,9 @@ export default {
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
+              this.$loading.hide();
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
-                  this.$loading.hide();
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
                   this.iscreat();
@@ -1379,7 +1381,7 @@ export default {
               }
             })
             .catch(error => {
-              console.log("和值投注No");
+              this.$loading.hide();
               this.iscreat();
               this.$pop.show({
                 error: "",
@@ -1424,7 +1426,7 @@ export default {
             }
           })
           .catch(error => {
-            console.log("投注No");
+            console.log(error);
             this.iscreat();
             this.$pop.show({
               error: "",

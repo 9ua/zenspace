@@ -83,8 +83,8 @@ export default new VueRouter({
     {
       path: "/pk10",
       name: "betbj10",
-      component: betbj10,
-      // component: resolve => require(['@/components/lotter-all/lotterbet/betbj10.vue'], resolve),
+      // component: betbj10,
+      component: resolve => require(['@/components/lotter-all/lotterbet/bet.vue'], resolve),
       meta: {
         keepAlive: true
       }
@@ -109,16 +109,16 @@ export default new VueRouter({
     {
       path: "/ssc",
       name: 'betssc',
-      component:betssc,
-      // component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
+      // component:betssc,
+      component: resolve => require(['@/components/lotter-all/lotterbet/bet.vue'], resolve),
       meta: {
         keepAlive: true
       }
     },
     {
       path: "/x11x5",
-      name: 'betsyx5',
-      component: resolve => require(['@/components/lotter-all/lotterbet/betsyx5.vue'], resolve),
+      name: 'x11x5',
+      component: resolve => require(['@/components/lotter-all/lotterbet/bet.vue'], resolve),
       meta: {
         keepAlive: true
       }

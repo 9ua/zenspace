@@ -72,8 +72,8 @@ export default {
       this.$axios
         .post(this.$store.state.url + "api/lottery/bet", formData, config)
         .then(res => {
+          this.$loading.hide();
           if (res.data.message === "success") {
-            this.$loading.hide();
             this.$store.commit("BET_NOT", true);
               this.$store.commit("BET_SUCCESS", true);
           } else {
@@ -86,11 +86,11 @@ export default {
                 content2: "",
                 number: 1
               });
-              
             }
           }
         })
         .catch(error => {
+          this.$loading.hide();
           this.$pop.show({
             title: "温馨提示",
             content: "投注失败,请检查您的网络！",

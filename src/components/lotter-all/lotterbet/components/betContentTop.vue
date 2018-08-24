@@ -3,29 +3,34 @@
   .content-left(@click='changeBetContentTopPop')
     p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
     .contnet-left-num(v-if='shownum === false')
-      p {{n1 &lt; 10 ? '0'+n1 : n1}}
-      p {{n2 &lt; 10 ? '0'+n2 : n2}}
-      p {{n3 &lt; 10 ? '0'+n3 : n3}}
-      p {{n4 &lt; 10 ? '0'+n4 : n4}}
-      p {{n5 &lt; 10 ? '0'+n5 : n5}}
+      p {{n1}}
+      p {{n2}}
+      p {{n3}}
+      p {{n4}}
+      p {{n5}}
       i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
     .contnet-left-shownum(v-if='shownum === true && isGetItem === true')
       .num
         .span
           transition(name='down-up-translate-fade')
-            div {{i|addZero}}
+            div(v-if="$store.state.group==='x11x5'") {{i|addZero}}
+            div(v-else) {{i}}
         .span
           transition(name='down-up-translate-fade')
-            div {{j|addZero}}
+            div(v-if="$store.state.group==='x11x5'") {{j|addZero}}
+            div(v-else) {{j}}
         .span
           transition(name='down-up-translate-fade')
-            div {{k|addZero}}
+            div(v-if="$store.state.group==='x11x5'") {{k|addZero}}
+            div(v-else) {{k}}
         .span
           transition(name='down-up-translate-fade')
-            div {{l|addZero}}
+            div(v-if="$store.state.group==='x11x5'") {{l|addZero}}
+            div(v-else) {{l}}
         .span
           transition(name='down-up-translate-fade')
-            div {{h|addZero}}
+            div(v-if="$store.state.group==='x11x5'") {{h|addZero}}
+            div(v-else) {{h}}
       i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
   .content-right(@click='$emit("tolooksucc")')
     div
@@ -96,14 +101,21 @@ export default {
     this.endCount();
   },
   beforeDestroy() {
-    this.endCount();
-    this.iscreat();
+    if (this.timer||this.interval) {
+        for (let i = 0; i <= this.timer+this.interval; i++) {
+          clearInterval(i);
+        }
+      }
+      if (this.timer2) {
+        for (let i = 0; i <= this.timer2; i++) {
+          clearTimeout(i);
+        }
+      }
     document.removeEventListener("visibilitychange",this.listen);
   },
   mounted() {
     document.addEventListener("visibilitychange",this.listen);
-    this.endCount();
-    this.getPastOp();
+    this.start();
   },
   methods: {
     listen() {
@@ -117,21 +129,19 @@ export default {
     },
     endCount() {
       if (this.timer) {
-        for (let i = 0; i <= this.timer; i++) {
-          clearInterval(i);
-        }
+        clearInterval(this.timer);
       }
       if (this.timer2) {
-        for (let i = 0; i <= this.timer2; i++) {
-          clearTimeout(i);
-        }
+        clearTimeout(this.timer2);
       }
     },
     //没打接口前
     noGetItem() {
       if (this.startyet == false) {
-        this.start();
+        // this.end();
+        // this.start();
         this.isGetItem = true;
+        this.shownum = true;
         let myDate = new Date();
         let getMonth = myDate.getMonth() + 1;
         let getDate = myDate.getDate();
@@ -143,18 +153,23 @@ export default {
         }
         this.lastSeasonIds = getMonth + getDate.toString() + getHM;
       } else {
-        this.end();
+        // this.end();
         this.isGetItem = false;
       }
     },
     //倒计时
     initSetTimeout(today) {
+      // if (this.startyet == false && this.$route.query.group) {
+      //   this.end();
+      //   this.start();
+      // }
+      this.shownum = true;
       this.endCount();
       this.timer = setInterval(() => {
         this.today = this.today - 1;
         this.setTimeMode();
         if (this.today < 1) {
-          clearInterval(this.timer);
+          this.endCount();
           this.timesUp();
         }
         if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
@@ -180,19 +195,17 @@ export default {
     },
     //动画
     start() {
-      var _this = this;
-      this.startyet = true;
-      this.interval = setInterval(function() {
-        _this.i = Math.floor(Math.random() * 10 + 1);
-        _this.j = Math.floor(Math.random() * 10 + 1);
-        _this.k = Math.floor(Math.random() * 10 + 1);
-        _this.l = Math.floor(Math.random() * 10 + 1);
-        _this.h = Math.floor(Math.random() * 10 + 1);
+      this.interval = setInterval(()=> {
+        this.i = Math.floor(Math.random() * 10 + 1);
+        this.j = Math.floor(Math.random() * 10 + 1);
+        this.k = Math.floor(Math.random() * 10 + 1);
+        this.l = Math.floor(Math.random() * 10 + 1);
+        this.h = Math.floor(Math.random() * 10 + 1);
       }, 39);
     },
-    end() {
-      clearInterval(this.interval);
-    },
+    // end() {
+    //   clearInterval(this.interval);
+    // },
     //获取彩種當前獎期時間
     geteServerTime() {
       this.$axios
@@ -214,11 +227,7 @@ export default {
         });
     },
     //获取过去开奖号码20个
-    getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
-      this.shownum = true;
+    getPastOp() {  
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: 20 }
@@ -227,14 +236,13 @@ export default {
           if (res.data.code === 1 && res.data.data.length != 0) {
             this.$store.commit("GET_PAST_OPENS", res.data.data);
             this.getPastOpenB = res.data.data;
-            console.log(this.lastSeasonId)
-            if (Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+            if (this.lastSeasonId && Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
               if (res.data.data[0].lotteryId === this.$route.query.id) {
-              this.reGetPastOp();
-            }
+                this.reGetPastOp();
+              }
             } else {
               clearTimeout(this.timer2);
-              this.end();
+              // this.end();
               this.startyet = false;
               this.shownum = false;
             }
@@ -264,9 +272,7 @@ export default {
       this.geteServerTime();
     },
     reGetPastOp() {
-      for (let i = 0; i <= this.timer2; i++) {
-        clearTimeout(i);
-      }
+      clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
       }, 12000);

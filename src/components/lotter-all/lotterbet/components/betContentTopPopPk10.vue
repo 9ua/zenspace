@@ -6,7 +6,7 @@
       p 开奖号码
     li(v-for='(item,index) in getPastOpens', :key='index', v-if='index < 10')
       p
-        | {{item.seasonId.substring(4).split("-").join("")*1}}
+        | {{$route.query.id==="pk10" ? item.seasonId : item.seasonId.substring(4).split("-").join("")*1}}
         i.iconfont.icon-plus-minus
       p
         a {{item.n1 &lt; 10 ? '0'+item.n1 : item.n1}}

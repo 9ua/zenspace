@@ -1,7 +1,7 @@
 <template lang='jade'>
 .bet-content-top
   .content-left-pk10(v-if='$route.query.group === "pk10"', @click='changeBetContentTopPop')
-    p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
+    p {{$route.query.id==="pk10" ? lastSeasonId: lastSeasonId.slice(4)*1}}期开奖号码
       i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
     .contnet-left-num(v-if='shownum === false')
       p {{n1 &lt; 10 ? '0'+n1 : n1}}

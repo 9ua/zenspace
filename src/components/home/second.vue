@@ -24,6 +24,12 @@
           span {{all.n3}}
           span {{all.n4}}
           span {{all.n5}}
+        .conter(class='ssc', v-if="all.groupName === '11x5'")
+          span {{all.n1}}
+          span {{all.n2}}
+          span {{all.n3}}
+          span {{all.n4}}
+          span {{all.n5}}
         .conter(:class='all.groupName', v-if="all.groupName === 'pk10'")
           span {{all.n1}}
           span {{all.n2}}
@@ -36,7 +42,8 @@
           span {{all.n9}}
           span {{all.n10}}
         .btn
-          router-link(:to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:all.groupName}}", tag='button') 往期开奖
+          router-link(v-if="all.groupName !=='11x5'" , :to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:all.groupName}}", tag='button') 往期开奖
+          router-link(v-else , :to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:'x11x5'}}", tag='button') 往期开奖
           button(@click='looksucc($event,all)') 立即投注
 </template>
 <script>
@@ -44,13 +51,13 @@ import headers from "../public/header";
 export default {
   data() {
     return {
-      loading:true,
+      loading: true,
       getPastOpens: "",
       getPastOpens2: "",
       today: "",
       times: [],
-      h:'',
-      h2:'',
+      h: "",
+      h2: "",
       timer: "",
       lotteryId: -1,
       count: ""
@@ -73,10 +80,17 @@ export default {
   methods: {
     //立即投注
     looksucc(e, all) {
-      this.$router.push({
-        path: all.groupName,
-        query: { id: all.lotteryId, name: all.name, group: all.groupName }
-      });
+      if (all.groupName === "11x5") {
+        this.$router.push({
+          path: "x11x5",
+          query: { id: all.lotteryId, name: all.name, group: "x11x5" }
+        });
+      } else {
+        this.$router.push({
+          path: all.groupName,
+          query: { id: all.lotteryId, name: all.name, group: all.groupName }
+        });
+      }
       this.betsuccess = !this.betsuccess;
     },
     //获取全部彩种

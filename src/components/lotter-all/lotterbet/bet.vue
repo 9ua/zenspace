@@ -54,6 +54,7 @@ export default {
   },
   beforeDestroy() {
     this.iscreat();
+    this.$store.commit("RESET")
   },
   mounted() {
     let _this = this;

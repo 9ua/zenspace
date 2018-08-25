@@ -61,19 +61,19 @@ export default {
       return this.$store.getters.getPastOpens;
     },
     n1() {
-      return this.getPastOpenB?this.getPastOpenB[0].n1:1;
+      return this.getPastOpenB ? this.getPastOpenB[0].n1 : 1;
     },
     n2() {
-      return this.getPastOpenB?this.getPastOpenB[0].n2:1;
+      return this.getPastOpenB ? this.getPastOpenB[0].n2 : 1;
     },
     n3() {
-      return this.getPastOpenB?this.getPastOpenB[0].n3:1;
+      return this.getPastOpenB ? this.getPastOpenB[0].n3 : 1;
     },
     n4() {
-      return this.getPastOpenB?this.getPastOpenB[0].n4:1;
+      return this.getPastOpenB ? this.getPastOpenB[0].n4 : 1;
     },
     n5() {
-      return this.getPastOpenB?this.getPastOpenB[0].n5:1;
+      return this.getPastOpenB ? this.getPastOpenB[0].n5 : 1;
     }
   },
   data() {
@@ -101,25 +101,25 @@ export default {
     this.endCount();
   },
   beforeDestroy() {
-    if (this.timer||this.interval) {
-        for (let i = 0; i <= this.timer+this.interval; i++) {
-          clearInterval(i);
-        }
+    if (this.timer || this.interval) {
+      for (let i = 0; i <= this.timer + this.interval; i++) {
+        clearInterval(i);
       }
-      if (this.timer2) {
-        for (let i = 0; i <= this.timer2; i++) {
-          clearTimeout(i);
-        }
+    }
+    if (this.timer2) {
+      for (let i = 0; i <= this.timer2; i++) {
+        clearTimeout(i);
       }
-    document.removeEventListener("visibilitychange",this.listen);
+    }
+    document.removeEventListener("visibilitychange", this.listen);
   },
   mounted() {
-    document.addEventListener("visibilitychange",this.listen);
+    document.addEventListener("visibilitychange", this.listen);
     this.start();
   },
   methods: {
     listen() {
-      if(document.hidden === false){
+      if (document.hidden === false) {
         this.geteServerTime();
       }
     },
@@ -138,8 +138,6 @@ export default {
     //没打接口前
     noGetItem() {
       if (this.startyet == false) {
-        // this.end();
-        // this.start();
         this.isGetItem = true;
         this.shownum = true;
         let myDate = new Date();
@@ -153,29 +151,23 @@ export default {
         }
         this.lastSeasonIds = getMonth + getDate.toString() + getHM;
       } else {
-        // this.end();
         this.isGetItem = false;
       }
     },
     //倒计时
     initSetTimeout(today) {
-      // if (this.startyet == false && this.$route.query.group) {
-      //   this.end();
-      //   this.start();
-      // }
       this.shownum = true;
       this.endCount();
-      this.timer = setInterval(() => {
-        this.today = this.today - 1;
-        this.setTimeMode();
-        if (this.today < 1) {
-          this.endCount();
-          this.timesUp();
-        }
-        if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
-          this.endCount();
-        }
-      }, 1000);
+      if (this.$route.query.group) {
+        this.timer = setInterval(() => {
+          this.today = this.today - 1;
+          this.setTimeMode();
+          if (this.today < 1) {
+            this.endCount();
+            this.timesUp();
+          }
+        }, 1000);
+      }
     },
     //時間格式轉換
     setTimeMode() {
@@ -195,7 +187,7 @@ export default {
     },
     //动画
     start() {
-      this.interval = setInterval(()=> {
+      this.interval = setInterval(() => {
         this.i = Math.floor(Math.random() * 10 + 1);
         this.j = Math.floor(Math.random() * 10 + 1);
         this.k = Math.floor(Math.random() * 10 + 1);
@@ -203,9 +195,6 @@ export default {
         this.h = Math.floor(Math.random() * 10 + 1);
       }, 39);
     },
-    // end() {
-    //   clearInterval(this.interval);
-    // },
     //获取彩種當前獎期時間
     geteServerTime() {
       this.$axios
@@ -227,7 +216,7 @@ export default {
         });
     },
     //获取过去开奖号码20个
-    getPastOp() {  
+    getPastOp() {
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
           params: { lotteryId: this.$route.query.id, count: 20 }
@@ -236,13 +225,15 @@ export default {
           if (res.data.code === 1 && res.data.data.length != 0) {
             this.$store.commit("GET_PAST_OPENS", res.data.data);
             this.getPastOpenB = res.data.data;
-            if (this.lastSeasonId && Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)) {
+            if (
+              this.lastSeasonId &&
+              Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)
+            ) {
               if (res.data.data[0].lotteryId === this.$route.query.id) {
                 this.reGetPastOp();
               }
             } else {
               clearTimeout(this.timer2);
-              // this.end();
               this.startyet = false;
               this.shownum = false;
             }
@@ -276,13 +267,13 @@ export default {
       this.timer2 = setTimeout(() => {
         this.getPastOp();
       }, 12000);
-    },
+    }
   },
-  filters:{
-    addZero(v){
-      if(v<10){
-        return "0"+v;
-      }else{
+  filters: {
+    addZero(v) {
+      if (v < 10) {
+        return "0" + v;
+      } else {
         return v;
       }
     }

@@ -60,9 +60,15 @@
               <i class="iconfont icon-plus-minus"></i>
             </p>
             <p>
-              <a><span class="Dice" :class="'Dice'+item.n1"></span></a>
-              <a><span class="Dice" :class="'Dice'+item.n2"></span></a>
-              <a><span class="Dice" :class="'Dice'+item.n3"></span></a>
+              <a>
+                <span class="Dice" :class="'Dice'+item.n1"></span>
+              </a>
+              <a>
+                <span class="Dice" :class="'Dice'+item.n2"></span>
+              </a>
+              <a>
+                <span class="Dice" :class="'Dice'+item.n3"></span>
+              </a>
             </p>
             <p>{{item.n1+item.n2+item.n3}}</p>
             <p>
@@ -139,9 +145,15 @@
                 <i class="iconfont icon-plus-minus"></i>
               </p>
               <p>
-                <a><span class="Dice" :class="'Dice'+item.n1"></span></a>
-                <a><span class="Dice" :class="'Dice'+item.n2"></span></a>
-                <a><span class="Dice" :class="'Dice'+item.n3"></span></a>
+                <a>
+                  <span class="Dice" :class="'Dice'+item.n1"></span>
+                </a>
+                <a>
+                  <span class="Dice" :class="'Dice'+item.n2"></span>
+                </a>
+                <a>
+                  <span class="Dice" :class="'Dice'+item.n3"></span>
+                </a>
               </p>
               <p>{{item.n1+item.n2+item.n3}}</p>
               <p>
@@ -158,7 +170,7 @@
           </p>
         </div>
         <div class="betk3-content-foot">
-          <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{$route.query.id=="dfk3"?item.remark+"3-10为小,11-18为大":item.remark+"4-10为小,11-17为大（不含豹子号）"}} 
+          <p v-for="(item,index) in poptitle" :key="index" v-show="index === navlist">{{$route.query.id=="dfk3"?item.remark+"3-10为小,11-18为大":item.remark+"4-10为小,11-17为大（不含豹子号）"}}
             <span v-show="index !== 3">赔率
               <span class="k3remark">{{ item.rate | keepTwoNum}}</span> 倍。</span>
             <!-- <span class="k3remark">{{ item.displayBonus | keepTwoNum}}</span> 倍。</span> -->
@@ -286,7 +298,7 @@
   </div>
 </template>
 <script>
-import bets from '../../page-five/money/bets.vue';
+import bets from "../../page-five/money/bets.vue";
 export default {
   data() {
     return {
@@ -334,7 +346,7 @@ export default {
       betsuccess: false,
       betGoshow: false,
       betk3ContentTopPop: false,
-      getLotteryPlayBetRates:null,
+      getLotteryPlayBetRates: null,
       today: "",
       countDown: "",
       peilv: [], //当前赔率
@@ -359,14 +371,55 @@ export default {
       betnot: true,
       countNum: 10,
       //头部菜单
-      poptitle:[
-        {title:"单挑一骰",rate:"0.00", id:"k3_star1", remark: "选择1个或者多个骰号，如果开奖号码中包含该号（顺序不限）即中奖" },
-        {title:"二同号",rate:"0.00", id:"k3_star2_same", remark: "选择1对相同号码和1个不同号码进行单选或者多选投注，选号与开奖号相同（顺序不限）即中奖" },
-        {title:"二不同",rate:"0.00", id:"k3_star2_same_not", remark: "对所有2不同号进行单选或多选，选号与开奖号中任意2个号码相同即中奖" },
-        {title:"和值",rate:"0.00", id:"k3_star3_and", remark: "猜3个开奖号相加的和," },
-        {title:"三连号",rate:"0.00", id:"k3_star3_link", remark: "对所有3个相连的号码（123，234，345，456)进行单选或多选投注，选号与开奖号相同（顺序不限）即中奖" },
-        {title:"三同号",rate:"0.00", id:"k3_star3_same", remark: "对豹子号（111，222，333，444，555，666）进行单选或通选投注，选号与开奖号相同即中奖" },
-        {title:"三不同",rate:"0.00", id:"k3_star3_same_not", remark: "对所有3不同号进行单选或多选，选号与开奖号相同（顺序不限）即中奖" },
+      poptitle: [
+        {
+          title: "单挑一骰",
+          rate: "0.00",
+          id: "k3_star1",
+          remark:
+            "选择1个或者多个骰号，如果开奖号码中包含该号（顺序不限）即中奖"
+        },
+        {
+          title: "二同号",
+          rate: "0.00",
+          id: "k3_star2_same",
+          remark:
+            "选择1对相同号码和1个不同号码进行单选或者多选投注，选号与开奖号相同（顺序不限）即中奖"
+        },
+        {
+          title: "二不同",
+          rate: "0.00",
+          id: "k3_star2_same_not",
+          remark:
+            "对所有2不同号进行单选或多选，选号与开奖号中任意2个号码相同即中奖"
+        },
+        {
+          title: "和值",
+          rate: "0.00",
+          id: "k3_star3_and",
+          remark: "猜3个开奖号相加的和,"
+        },
+        {
+          title: "三连号",
+          rate: "0.00",
+          id: "k3_star3_link",
+          remark:
+            "对所有3个相连的号码（123，234，345，456)进行单选或多选投注，选号与开奖号相同（顺序不限）即中奖"
+        },
+        {
+          title: "三同号",
+          rate: "0.00",
+          id: "k3_star3_same",
+          remark:
+            "对豹子号（111，222，333，444，555，666）进行单选或通选投注，选号与开奖号相同即中奖"
+        },
+        {
+          title: "三不同",
+          rate: "0.00",
+          id: "k3_star3_same_not",
+          remark:
+            "对所有3不同号进行单选或多选，选号与开奖号相同（顺序不限）即中奖"
+        }
       ],
       // 单挑一骰
       yishai: [
@@ -494,20 +547,29 @@ export default {
     this.endCount();
   },
   mounted() {
-    document.addEventListener("visibilitychange",this.listen);
+    document.addEventListener("visibilitychange", this.listen);
     this.endCount();
     this.geteServerTime(); //获取彩種當前獎期時間
     this.getPlayTreeBetRate();
     this.getLotteryPlayBetRate();
   },
   beforeDestroy() {
-    this.endCount();
+    if (this.timer) {
+      for (let i = 0; i <= this.timer + this.interval; i++) {
+        clearInterval(i);
+      }
+    }
+    if (this.timer2) {
+      for (let i = 0; i <= this.timer2; i++) {
+        clearTimeout(i);
+      }
+    }
     this.iscreat();
-    document.removeEventListener("visibilitychange",this.listen);
+    document.removeEventListener("visibilitychange", this.listen);
   },
   methods: {
     listen() {
-      if(document.hidden === false){
+      if (document.hidden === false) {
         this.geteServerTime();
       }
     },
@@ -537,7 +599,7 @@ export default {
     isdfk3(index) {
       if (this.$route.query.id === "dfk3") {
         return index != -1;
-      }else{
+      } else {
         return index != 5;
       }
     },
@@ -562,7 +624,14 @@ export default {
     },
     //往期开奖
     lookAllTo() {
-      this.$router.push({ path: "second/past", query: { id: this.$route.query.id, name: this.$route.query.name, group: this.$route.query.group } });
+      this.$router.push({
+        path: "second/past",
+        query: {
+          id: this.$route.query.id,
+          name: this.$route.query.name,
+          group: this.$route.query.group
+        }
+      });
     },
     lookAllDivTitle() {
       this.lookAllUl = !this.lookAllUl;
@@ -581,19 +650,14 @@ export default {
       }, 88);
     },
     end() {
-      var _this = this;
-      clearInterval(_this.interval);
+      clearInterval(this.interval);
     },
     endCount() {
       if (this.timer) {
-        for (let i = 0; i <= this.timer; i++) {
-          clearInterval(i);
-        }
+        clearInterval(this.timer);
       }
       if (this.timer2) {
-        for (let i= 0;i <=this.timer2;i++) {
-          clearTimeout(i);
-        }
+        clearTimeout(this.timer2);
       }
     },
     //获取彩種當前獎期時間
@@ -619,7 +683,7 @@ export default {
             this.setTimeMode();
             this.initSetTimeout();
             this.getPastOp();
-          } 
+          }
         })
         .catch(error => {
           console.log("获取彩種當前獎期時間No");
@@ -648,30 +712,48 @@ export default {
       }
       this.shownum = true;
       this.endCount();
-      this.timer = setInterval(() => {
-        this.today = this.today - 1;
-        if (this.today < 1) {
-          this.endCount();
-          this.timesUp();
-        }
-        if ( this.getPastOpenB && this.getPastOpenB[0].lotteryId != this.$route.query.id ) {
-          this.endCount();
-        }
-        if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 48) {
-          this.getPastOp();
-        } else if (this.getPastOpenB &&  this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 47 ) {
-          this.getPastOp();
-        } else if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 46 ) {
-          this.getPastOp();
-        } else if ( this.getPastOpenB && this.getPastOpenB[0].seasonId !== this.lastSeasonId && this.today === 45) {
-          this.getPastOp();
-        }else if(this.getPastOpenB && this.getPastOpenB[0].seasonId === this.lastSeasonId){
-          this.end();
-          this.startyet = false;
-          this.shownum = false;
-        }
-        this.setTimeMode();
-      }, 1000);
+      if (this.$route.query.group) {
+        this.timer = setInterval(() => {
+          this.today = this.today - 1;
+          if (this.today < 1) {
+            this.endCount();
+            this.timesUp();
+          }
+          if (
+            this.getPastOpenB &&
+            this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
+            this.today === 48
+          ) {
+            this.getPastOp();
+          } else if (
+            this.getPastOpenB &&
+            this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
+            this.today === 47
+          ) {
+            this.getPastOp();
+          } else if (
+            this.getPastOpenB &&
+            this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
+            this.today === 46
+          ) {
+            this.getPastOp();
+          } else if (
+            this.getPastOpenB &&
+            this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
+            this.today === 45
+          ) {
+            this.getPastOp();
+          } else if (
+            this.getPastOpenB &&
+            this.getPastOpenB[0].seasonId === this.lastSeasonId
+          ) {
+            this.end();
+            this.startyet = false;
+            this.shownum = false;
+          }
+          this.setTimeMode();
+        }, 1000);
+      }
     },
     //時間到彈窗
     timesUp() {
@@ -685,7 +767,7 @@ export default {
       });
       this.geteServerTime();
     },
-    countNums(){
+    countNums() {
       this.showa = false;
       this.betk3ContentTopPop = !this.betk3ContentTopPop;
       this.countNum = 10;
@@ -719,16 +801,14 @@ export default {
         });
     },
     reGetPastOp() {
-      for (let i = 0; i <= this.timer2; i++) {
-        clearTimeout(i);
-      }
+      clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.getPastOp();
       }, 12000);
     },
     //右上获取彩种
     getLotteryList() {
-      this.$loading.show({number:"a"});
+      this.$loading.show({ number: "a" });
       this.show = false;
       this.showa = !this.showa;
       this.betk3ContentTopPop = false;
@@ -744,10 +824,15 @@ export default {
         }
       } else {
         this.$axios
-          .get(this.$store.state.url + "api/lottery/getLotteryList",{params:{type:'k3'}})
+          .get(this.$store.state.url + "api/lottery/getLotteryList", {
+            params: { type: "k3" }
+          })
           .then(res => {
             this.$loading.hide();
-            localStorage.setItem("lotteryListk3", JSON.stringify(res.data.data));
+            localStorage.setItem(
+              "lotteryListk3",
+              JSON.stringify(res.data.data)
+            );
             this.LotteryList = res.data.data;
             this.groupId = this.LotteryList[0].groupId;
             for (let i = 0; i < this.LotteryList.length; i++) {
@@ -768,15 +853,17 @@ export default {
       this.lotteryId = into.id;
       this.showan = index;
       this.showa = !this.showa;
-      this.$router.push({ query: { id: into.id, name: into.name, group: this.groupId }});
+      this.$router.push({
+        query: { id: into.id, name: into.name, group: this.groupId }
+      });
       if (this.$route.query.id !== "dfk3" && this.navlist === 5) {
         this.navlist = 3;
         this.title = "和值";
-        this.playId = 'k3_star3_and';
+        this.playId = "k3_star3_and";
       }
       this.geteServerTime(); //获取彩種當前獎期時間
       this.iscreat(); //清空
-      if(this.navlist === 3){
+      if (this.navlist === 3) {
         this.getPlayTreeBetRate();
       }
     },
@@ -1081,46 +1168,54 @@ export default {
       }
     },
     //头部菜单项--赔率
-    getLotteryPlayBetRate(){
-      this.$axios.get(this.$store.state.url + "api/lottery/getLotteryPlayBetRate",{params: {lotteryId: this.$route.query.id}}).then(res =>{
-        this.getLotteryPlayBetRates = res.data.data
-        this.poptitle[0].rate = res.data.data["单挑一骰"];
-        this.poptitle[1].rate = res.data.data["二同号"];
-        this.poptitle[2].rate = res.data.data["二不同"];
-        this.poptitle[3].rate = res.data.data["和值"];
-        this.poptitle[4].rate = res.data.data["三连号"];
-        this.poptitle[5].rate = res.data.data["三同号"];
-        this.poptitle[6].rate = res.data.data["三不同"];
-      })
+    getLotteryPlayBetRate() {
+      this.$axios
+        .get(this.$store.state.url + "api/lottery/getLotteryPlayBetRate", {
+          params: { lotteryId: this.$route.query.id }
+        })
+        .then(res => {
+          this.getLotteryPlayBetRates = res.data.data;
+          this.poptitle[0].rate = res.data.data["单挑一骰"];
+          this.poptitle[1].rate = res.data.data["二同号"];
+          this.poptitle[2].rate = res.data.data["二不同"];
+          this.poptitle[3].rate = res.data.data["和值"];
+          this.poptitle[4].rate = res.data.data["三连号"];
+          this.poptitle[5].rate = res.data.data["三同号"];
+          this.poptitle[6].rate = res.data.data["三不同"];
+        });
     },
     //大小单双，赔率显示
     getPlayTreeBetRate() {
-      this.$axios.get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {params: { lotteryId: this.$route.query.id, playId: this.playId }}).then(res => {
-        this.displayBonus = res.data.data.displayBonus;
-        if(this.navlist === 3){
-          this.bonusArray = res.data.data.bonusArray;
-          this.k3options[0].rate = this.bonusArray["大"];
-          this.k3options[1].rate = this.bonusArray["小"];
-          this.k3options[2].rate = this.bonusArray["单"];
-          this.k3options[3].rate = this.bonusArray["双"];
-          this.k3options[4].rate = this.bonusArray["03"];
-          this.k3options[5].rate = this.bonusArray["04"];
-          this.k3options[6].rate = this.bonusArray["05"];
-          this.k3options[7].rate = this.bonusArray["06"];
-          this.k3options[8].rate = this.bonusArray["07"];
-          this.k3options[9].rate = this.bonusArray["08"];
-          this.k3options[10].rate = this.bonusArray["09"];
-          this.k3options[11].rate = this.bonusArray["10"];
-          this.k3options[12].rate = this.bonusArray["11"];
-          this.k3options[13].rate = this.bonusArray["12"];
-          this.k3options[14].rate = this.bonusArray["13"];
-          this.k3options[15].rate = this.bonusArray["14"];
-          this.k3options[16].rate = this.bonusArray["15"];
-          this.k3options[17].rate = this.bonusArray["16"];
-          this.k3options[18].rate = this.bonusArray["17"];
-          this.k3options[19].rate = this.bonusArray["18"];
-        }
-      });
+      this.$axios
+        .get(this.$store.state.url + "api/lottery/getPlayTreeBetRate", {
+          params: { lotteryId: this.$route.query.id, playId: this.playId }
+        })
+        .then(res => {
+          this.displayBonus = res.data.data.displayBonus;
+          if (this.navlist === 3) {
+            this.bonusArray = res.data.data.bonusArray;
+            this.k3options[0].rate = this.bonusArray["大"];
+            this.k3options[1].rate = this.bonusArray["小"];
+            this.k3options[2].rate = this.bonusArray["单"];
+            this.k3options[3].rate = this.bonusArray["双"];
+            this.k3options[4].rate = this.bonusArray["03"];
+            this.k3options[5].rate = this.bonusArray["04"];
+            this.k3options[6].rate = this.bonusArray["05"];
+            this.k3options[7].rate = this.bonusArray["06"];
+            this.k3options[8].rate = this.bonusArray["07"];
+            this.k3options[9].rate = this.bonusArray["08"];
+            this.k3options[10].rate = this.bonusArray["09"];
+            this.k3options[11].rate = this.bonusArray["10"];
+            this.k3options[12].rate = this.bonusArray["11"];
+            this.k3options[13].rate = this.bonusArray["12"];
+            this.k3options[14].rate = this.bonusArray["13"];
+            this.k3options[15].rate = this.bonusArray["14"];
+            this.k3options[16].rate = this.bonusArray["15"];
+            this.k3options[17].rate = this.bonusArray["16"];
+            this.k3options[18].rate = this.bonusArray["17"];
+            this.k3options[19].rate = this.bonusArray["18"];
+          }
+        });
     },
     //中间->投注选号
     k3option(e, index, k3item) {
@@ -1234,7 +1329,7 @@ export default {
         this.money = "";
         this.playId1 = "";
         this.playId2 = "";
-        this.peilv=[];
+        this.peilv = [];
         this.peilv1 = 0;
         this.rates = 0;
       }
@@ -1294,7 +1389,7 @@ export default {
     },
     //投注
     betGo() {
-      this.$loading.show({number:"a"});
+      this.$loading.show({ number: "a" });
       this.betGoshow = false;
       this.betnot = false;
       let config = {
@@ -1324,8 +1419,8 @@ export default {
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
+              this.$loading.hide();
               if (res.data.message === "success") {
-                this.$loading.hide();
                 if (this.con1 !== "" && this.con2 === "") {
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
@@ -1337,7 +1432,7 @@ export default {
               }
             })
             .catch(error => {
-              console.log("大小单双投注No");
+              this.$loading.hide();
               this.$pop.show({
                 error: "",
                 title: "温馨提示",
@@ -1369,9 +1464,9 @@ export default {
           this.$axios
             .post(this.$store.state.url + "api/lottery/bet", formData, config)
             .then(res => {
+              this.$loading.hide();
               if (this.zhu1 < 1) {
                 if (res.data.message === "success") {
-                  this.$loading.hide();
                   this.betnot = true;
                   this.betsuccess = !this.betsuccess;
                   this.iscreat();
@@ -1379,7 +1474,7 @@ export default {
               }
             })
             .catch(error => {
-              console.log("和值投注No");
+              this.$loading.hide();
               this.iscreat();
               this.$pop.show({
                 error: "",
@@ -1419,12 +1514,12 @@ export default {
             if (res.data.message === "success") {
               this.$loading.hide();
               this.betnot = true;
-                this.betsuccess = !this.betsuccess;
-                this.iscreat();
+              this.betsuccess = !this.betsuccess;
+              this.iscreat();
             }
           })
           .catch(error => {
-            console.log("投注No");
+            console.log(error);
             this.iscreat();
             this.$pop.show({
               error: "",
@@ -1484,7 +1579,7 @@ export default {
       return groupArr;
     }
   },
-  components:{
+  components: {
     bets
   },
   directives: {

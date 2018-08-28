@@ -16,3 +16,4 @@ export const GET_PAST_OPENS= 'GET_PAST_OPENS'//过去20期开奖结果
 export const LOOK_ALL_UL= 'LOOK_ALL_UL'//是否过去20期开奖结果
 export const DMARR= 'DMARR'//胆码数组
 export const DMNUM= 'DMNUM'//胆码最大可选数量
+export const RESET= 'RESET'//重置游戏相关组件状态

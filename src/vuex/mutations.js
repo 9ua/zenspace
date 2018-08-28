@@ -17,6 +17,7 @@ import {
   LOOK_ALL_UL,
   DMNUM,
   DMARR,
+  RESET,
 } from './mutation-types';
 export default {
   historyNum(state, path) {
@@ -33,6 +34,24 @@ export default {
   [GROUP](state, value) {
     state.group = value
   },
+  [RESET](state) {
+    state.group = "", //配置彩种种类（11选5）
+      state.betContentTopPopFlag = false, //是否弹出投注记录
+      state.showRight = false, //头部右侧切换彩种
+      state.current_player = {}, //当前玩法树
+      state.money = "", //投注金额  
+      state.zhu = 0, //注单数
+      state.con = "", //已选号码
+      state.betsuccess = false, //投注是否成功标识
+      state.betGoshow = false, //投注确认标识
+      state.betnot = true, //取消投注
+      state.listname = "", //彩种
+      state.seasonId2 = "", //当前期号  
+      state.getPastOpens = "", //过去20期开奖
+      state.lookAllUl = false, //是否查看过去20期开奖
+      state.dmNum = "", //可选择胆码数量
+      state.dmArr = [] //最新选中胆码下标
+  },
   [BET_CONTENT_FLAG](state, flag) {
     if (flag === "reverse") {
       state.betContentTopPopFlag = !state.betContentTopPopFlag
@@ -48,7 +67,7 @@ export default {
     }
   },
   [CURRENT_PLAYER](state, flag) {
-    if (flag === "clear") {//清空选择状态以及不可选择状态
+    if (flag === "clear") { //清空选择状态以及不可选择状态
       state.dmArr = [];
       state.dmNum = "";
       if (state.current_player.numView) {
@@ -69,7 +88,7 @@ export default {
           }
         });
       }
-    }else if(flag.target === "chooseFalse"){//选中胆码取消拖码选中
+    } else if (flag.target === "chooseFalse") { //选中胆码取消拖码选中
       state.current_player.numView[1].nums[
         flag.index
       ].choose = false;
@@ -80,15 +99,15 @@ export default {
         }
       })
     } else if (flag.target === "noVisiable") { //控制拖码是否可选
-      let target = flag.flag.split("noVtrue")[1];//拖码不可选择
+      let target = flag.flag.split("noVtrue")[1]; //拖码不可选择
       if (target) {
         [...new Set(target)].forEach((item, index) => {
           state.current_player.numView[item].nums[
             flag.index
           ].noVisible = true;
         })
-      } 
-    }else if (flag.target === "fixDm") {//修正胆码排列
+      }
+    } else if (flag.target === "fixDm") { //修正胆码排列
       if (state.dmArr.length > 0) {
         if (state.dmArr.length > state.dmNum) {
           state.dmArr.splice(-2, 1);
@@ -167,10 +186,10 @@ export default {
     }
   },
   [DMARR](state, target) {
-    if (target.flag === "push") {//添加胆码
+    if (target.flag === "push") { //添加胆码
       state.dmArr.push(target.value);
     }
-    if (target.flag === "filter") {//去除胆码
+    if (target.flag === "filter") { //去除胆码
       state.dmArr = state.dmArr.filter((item, index) => {
         return item != target.value
       });

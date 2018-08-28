@@ -1,7 +1,7 @@
 <template lang='jade'>
 .bet-content-top
   .content-left-pk10(v-if='$route.query.group === "pk10"', @click='changeBetContentTopPop')
-    p {{lastSeasonId !== '' ? lastSeasonId.slice(4)*1 : lastSeasonIds}}期开奖号码
+    p {{$route.query.id==="pk10" ? lastSeasonId: lastSeasonId.slice(4)*1}}期开奖号码
       i.iconfont(:class="betContentTopPopFlag ? 'icon-up' : 'icon-down'")
     .contnet-left-num(v-if='shownum === false')
       p {{n1 &lt; 10 ? '0'+n1 : n1}}
@@ -66,7 +66,7 @@ export default {
       return this.$store.state.betContentTopPopFlag;
     },
     seasonId() {
-      return  this.$store.getters.seasonId;
+      return this.$store.getters.seasonId;
     },
     seasonId2() {
       return this.$store.state.seasonId2;
@@ -112,26 +112,46 @@ export default {
   },
   created() {
     this.noGetItem();
-  },
-  destroyed() {
     this.endCount();
   },
+  beforeDestroy() {
+    if (this.timer) {
+      for (let i = 0; i <= this.timer + this.interval; i++) {
+        clearInterval(i);
+      }
+    }
+    if (this.timer2) {
+      for (let i = 0; i <= this.timer2; i++) {
+        clearTimeout(i);
+      }
+    }
+    document.removeEventListener("visibilitychange", this.listen);
+  },
   mounted() {
-    this.getPastOp();
+    document.addEventListener("visibilitychange", this.listen);
+    this.start();
   },
   methods: {
+    listen() {
+      if (document.hidden === false) {
+        this.geteServerTime();
+      }
+    },
     changeBetContentTopPop() {
       this.$store.commit("BET_CONTENT_FLAG", "reverse");
       this.$store.commit("SHOW_RIGHT", false);
     },
     endCount() {
-      clearInterval(this.timer);
-      clearTimeout(this.timer2);
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+      if (this.timer2) {
+        clearTimeout(this.timer2);
+      }
     },
     //没打接口前
     noGetItem() {
       if (this.startyet == false) {
-        this.start();
         this.initSetTimeout();
         this.isGetItem = true;
         let myDate = new Date();
@@ -145,39 +165,23 @@ export default {
         }
         this.lastSeasonIds = getMonth + getDate.toString() + getHM;
       } else {
-        this.end();
         this.isGetItem = false;
       }
     },
     //倒计时
     initSetTimeout(today) {
-      this.timer = setInterval(() => {
-        this.today = this.today - 1;
-        this.setTimeMode();
-        if (this.today < 1) {
-          clearInterval(this.timer);
-          this.timesUp();
-        }
-        if (
-          this.getPastOpenB[0] &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 47
-        ) {
-          this.getPastOp();
-        } else if (
-          this.getPastOpenB[0] &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 46
-        ) {
-          this.getPastOp();
-        } else if (
-          this.getPastOpenB[0] &&
-          this.getPastOpenB[0].seasonId !== this.lastSeasonId &&
-          this.today === 45
-        ) {
-          this.getPastOp();
-        }
-      }, 1000);
+      this.shownum = true;
+      this.endCount();
+      if (this.$route.query.group) {
+        this.timer = setInterval(() => {
+          this.today = this.today - 1;
+          this.setTimeMode();
+          if (this.today < 1) {
+            this.endCount();
+            this.timesUp();
+          }
+        }, 1000);
+      }
     },
     //時間格式轉換
     setTimeMode() {
@@ -197,24 +201,19 @@ export default {
     },
     //筛子动画
     start() {
-      var _this = this;
       this.startyet = true;
-      this.interval = setInterval(function() {
-        _this.i = Math.floor(Math.random() * 9 + 1);
-        _this.j = Math.floor(Math.random() * 9 + 1);
-        _this.k = Math.floor(Math.random() * 9 + 1);
-        _this.l = Math.floor(Math.random() * 9 + 1);
-        _this.h = Math.floor(Math.random() * 9 + 1);
-        _this.q = Math.floor(Math.random() * 9 + 1);
-        _this.w = Math.floor(Math.random() * 9 + 1);
-        _this.e = Math.floor(Math.random() * 9 + 1);
-        _this.r = Math.floor(Math.random() * 9 + 1);
-        _this.t = Math.floor(Math.random() * 9 + 1);
+      this.interval = setInterval(() => {
+        this.i = Math.floor(Math.random() * 9 + 1);
+        this.j = Math.floor(Math.random() * 9 + 1);
+        this.k = Math.floor(Math.random() * 9 + 1);
+        this.l = Math.floor(Math.random() * 9 + 1);
+        this.h = Math.floor(Math.random() * 9 + 1);
+        this.q = Math.floor(Math.random() * 9 + 1);
+        this.w = Math.floor(Math.random() * 9 + 1);
+        this.e = Math.floor(Math.random() * 9 + 1);
+        this.r = Math.floor(Math.random() * 9 + 1);
+        this.t = Math.floor(Math.random() * 9 + 1);
       }, 39);
-    },
-    end() {
-      var _this = this;
-      clearInterval(_this.interval);
     },
     //获取彩種當前獎期時間
     geteServerTime() {
@@ -226,12 +225,12 @@ export default {
         })
         .then(res => {
           if (res.data.code === 1) {
-            this.$store.commit("SEASONID2",res.data.data.seasonId)
+            this.$store.commit("SEASONID2", res.data.data.seasonId);
             this.lastSeasonId = res.data.data.lastSeasonId;
             this.today = res.data.data.restSeconds;
             this.setTimeMode();
-            this.getPastOp(); //获取过去开奖号码20个
             this.initSetTimeout();
+            this.getPastOp();
           }
         })
         .catch(error => {
@@ -240,9 +239,6 @@ export default {
     },
     //获取过去开奖号码20个
     getPastOp() {
-      if (this.startyet == false) {
-        this.start();
-      }
       this.shownum = true;
       this.$axios
         .get(this.$store.state.url + "api/lottery/getPastOpen", {
@@ -250,7 +246,7 @@ export default {
         })
         .then(res => {
           if (res.data.code === 1 && res.data.data.length != 0) {
-            this.$store.commit("GET_PAST_OPENS",res.data.data);
+            this.$store.commit("GET_PAST_OPENS", res.data.data);
             this.getPastOpenB = res.data.data;
             this.n1 = res.data.data[0].n1;
             this.n2 = res.data.data[0].n2;
@@ -265,10 +261,11 @@ export default {
             if (
               Number(res.data.data[0].seasonId) !== Number(this.lastSeasonId)
             ) {
-              this.reGetPastOp();
+              if (res.data.data[0].lotteryId === this.$route.query.id) {
+                this.reGetPastOp();
+              }
             } else {
               clearTimeout(this.timer2);
-              this.end();
               this.startyet = false;
               this.shownum = false;
             }

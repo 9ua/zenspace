@@ -24,8 +24,8 @@ import betContentTopPk from "./components/betContentTopPk10.vue";//开奖号码�
 import lookMore from "./components/lookMore.vue";//
 import betContentTopPop from "./components/betContentTopPop.vue";//查看开奖记录，往期开奖
 import betContentTopPopPk from "./components/betContentTopPopPk10.vue";//查看开奖记录，往期开奖
-import betContentS from "./components/betContentSSC.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
-import betContentP from "./components/betContentPK10.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
+import betContentS from "./components/betContentSSC.vue";//（不同种类彩种调用不同组件，如时时彩调用:betContentSSC）
+import betContentP from "./components/betContentPK10.vue";//（不同种类彩种调用不同组件，如PK10调用:betContentPK10）
 import betContentX from "./components/betContentX11X5.vue";//（不同种类彩种调用不同组件，如11选5调用:betContentX11X5）
 import betFooter from "./components/betFooter.vue";//底部，确认投注
 import betGoshow from "./components/betGoshow.vue";//投注确认弹窗
@@ -54,6 +54,7 @@ export default {
   },
   beforeDestroy() {
     this.iscreat();
+    this.$store.commit("RESET")
   },
   mounted() {
     let _this = this;
@@ -66,6 +67,7 @@ export default {
       _this.geteServerTime();
     }
     this.$route.meta.isBack = false;
+    this.$store.commit("GROUP",this.group)
   },
 
   methods: {

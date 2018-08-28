@@ -99,54 +99,6 @@ export default {
       }
     },
     //----------公用函数-----------
-    //共用函式
-    getCombin(num, len) {
-      if (num < len) {
-        return 0;
-      }
-      let nums = 1;
-      let lens = 1;
-      for (let i = 0; i < len; i++) {
-        nums *= num - i;
-        lens *= len - i;
-      }
-      return nums / lens;
-    },
-
-    getCount(bets) {
-      let line = bets.split(";");
-      if (line.length != 2) {
-        return 0;
-      }
-      let dan = line[0].substring(1).join("");
-      if (hasSame(dan)) {
-        return 0;
-      }
-      //取交集
-      if (dan.retainAll(this.nums)) {
-        return 0;
-      }
-      let tuo = line[1].join("");
-      if (hasSame(tuo)) {
-        return 0;
-      }
-      if (tuo.retainAll(this.nums)) {
-        return 0;
-      }
-      let allSize = 0;
-      for (let d in dan) {
-        let s = tuo.length;
-        if (tuo.indexOf(d) >= 0) {
-          s--;
-        }
-        let ls = getCombin(s, getSelectNum() - 1);
-        if (ls == 0) {
-          return 0;
-        }
-        allSize += ls;
-      }
-      return allSize;
-    },
     //排列组合
     groupSplit(arr, size) {
       let maxSize = arr.length,

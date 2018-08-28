@@ -26,7 +26,8 @@
         p 充值人姓名
         div
           input(placeholder='请输入充值人姓名', v-model='niceName', value='niceName', clearable='')
-      li(v-if='attempty==1')
+      //- li(v-if='attempty==1')
+      li
         p {{attfirst}}
         div
           input(:placeholder='attsecond', v-model='checkCode', value='checkCode', clearable='')
@@ -54,7 +55,8 @@
         p 充值人姓名
         div
           input(placeholder='请输入充值人姓名', v-model='niceName', value='niceName', clearable='')
-      li(:v-if='attempty=1')
+      //- li(v-if='attempty==1')
+      li
         p {{attfirst}}
         div
           input(:placeholder='attsecond', v-model='checkCode', value='checkCode', clearable='')
@@ -97,6 +99,7 @@
       li
         p 充值人姓名
         span {{niceName}}
+      //- li(v-if='attempty==1')
       li
         p {{attfirst}}
         span {{checkCode}}

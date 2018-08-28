@@ -521,54 +521,6 @@ export default new VueRouter({
       },
     },
     {
-      path: '/bankcharge',
-      name: 'bankcharge',
-      component: resolve => require(['@/components/page-five/money/bankcharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/weixincharge',
-      name: 'weixincharge',
-      component: resolve => require(['@/components/page-five/money/weixincharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/weixinbcharge',
-      name: 'weixinbcharge',
-      component: resolve => require(['@/components/page-five/money/weixinbcharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/creditccharge',
-      name: 'creditccharge',
-      component: resolve => require(['@/components/page-five/money/creditccharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/huabeicharge',
-      name: 'huabeicharge',
-      component: resolve => require(['@/components/page-five/money/huabeicharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/alipaycharge',
-      name: 'alipaycharge',
-      component: resolve => require(['@/components/page-five/money/alipaycharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
       path: '/rechargeserch',
       name: 'rechargeserch',
       component: resolve => require(['@/components/page-five/money/rechargeserch.vue'], resolve),
@@ -627,30 +579,6 @@ export default new VueRouter({
       path: '/payway',
       name: 'payway',
       component: resolve => require(['@/components/page-five/money/payway.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/onlinecharge',
-      name: 'onlinecharge',
-      component: resolve => require(['@/components/page-five/money/onlinecharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/alimobilecharge',
-      name: 'alimobilecharge',
-      component: resolve => require(['@/components/page-five/money/alimobilecharge.vue'], resolve),
-      meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/qqcharge',
-      name: 'qqcharge',
-      component: resolve => require(['@/components/page-five/money/qqcharge.vue'], resolve),
       meta: {
         keepAlive: false
       },

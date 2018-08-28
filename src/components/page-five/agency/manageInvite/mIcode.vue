@@ -103,8 +103,14 @@ export default {
     select(a) {
       this.show = !this.show;
       this.selected = a;
+      console.log(location.hostname.match('localh') !== null);
+      if(location.hostname.match('mtxflower') !== null) {
+      this.url =
+        "http://m.hf89.com/registered?code=" + a.code;        
+      }else {
       this.url =
         "http://" + location.hostname + "/registered?code=" + a.code;
+      }
     },
     select2() {
       this.show2 = !this.show2;

@@ -663,5 +663,13 @@ export default new VueRouter({
         keepAlive: false
       },
     },
+    {
+      path: '/charge',
+      name: 'charge',
+      component: resolve => require(['@/components/page-five/money/charge.vue'], resolve),
+      meta: {
+        keepAlive: false
+      },
+    },
   ]
 })

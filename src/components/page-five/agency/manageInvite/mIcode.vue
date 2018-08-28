@@ -35,11 +35,14 @@
       li
         input(type='text', v-model='url', onfocus='this.select()')
       li
-        p 产生日期
-        span {{selected.date}}
+        p 返点
+        span {{selected.rebateRatio}}
       li
         p 注册数
         span ({{selected.count}})个帐户
+      li
+        p 产生日期
+        span {{selected.date}}
       li
         .button
           button.button2(@click='select2()') 删除此邀请码
@@ -103,7 +106,6 @@ export default {
     select(a) {
       this.show = !this.show;
       this.selected = a;
-      console.log(location.hostname.match('localh') !== null);
       if(location.hostname.match('mtxflower') !== null) {
       this.url =
         "http://m.hf89.com/registered?code=" + a.code;        

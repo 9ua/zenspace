@@ -18,7 +18,7 @@
           option(v-for='bet in betlist', :key='bet', :value='bet') {{bet}}
       li
         span 推广渠道
-        input(type='text', v-model='extaddress', onfocus='this.select()', placeholder='请输入推廣渠道')
+        input(type='text', v-model='extaddress', onfocus='this.select()', placeholder='如：QQ、论坛等')
   .mInvite-go
     button(@click='getInviteCode()') 取得邀请码
 </template>

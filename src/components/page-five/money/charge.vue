@@ -125,38 +125,28 @@ export default {
   },
   data() {
     return {
-      amount:'',
-      waytype:'',
-      title:'',
-      cardnum: "",
-      bankNameId: "",
-      chargeamount: "",
-      card: "",
-      niceName: "",
-      content: "",
-      checkCode: "",
+      amount:'', //金額
+      waytype:'', //渠道類型
+      title:'',  //標題
+      chargeamount: "",  //線下充值金額
+      niceName: "",   //使用者名稱
+      content: "",   //提示窗內容文字
+      checkCode: "",  //附言
       show1: false,
       show2: false,
       show4: false,
-      QRCodeUrl: "",
+      QRCodeUrl: "",  //QRcode連結
       receiveAddress: "",
       receiveBankId: "",
       receiveBankName: "",
       receiveCard: "",
       receiveNiceName: "",
-      attfirst:"附言",
-      attsecond:"请输入附言",
-      attthird:"请转账到以上收款银行账户。",
-      selectBank:"连线中..",
-      bankUserId:'',
-      bankList: [],
-      payway: [],
-      withdrawInformation: "",
-      securityCode: "",
-      moneyDepositMax: "",
-      myAmount: "",
-      moneyDepositMin: "",
-      countMax: "",
+      attfirst:"访问点连接中...",
+      attsecond:"访问点连接中...",
+      attthird:"访问点连接中...",
+      selectBank:"连接中..",
+      bankUserId:'',  //第三方線上渠道id
+      payway: [],   //渠道列表
       jId:"",
       attempty:'',
     };
@@ -177,6 +167,7 @@ export default {
         this.amount = parseInt(this.amount);
       }
     },
+    //獲取渠道資訊
     rechargeEntrance() {
       this.$axios
         .get(this.$store.state.url + "api/proxy/rechargeEntrance", {
@@ -186,7 +177,9 @@ export default {
           this.waytype = res.data.data.waytype;
           this.title = this.$route.query.alias;
           if (this.waytype === 3) {
+            //若waytype為3則為線上支付渠道
             this.sToJ()
+            //id轉換判斷
           } else {
           this.attempty = res.data.data.attempty;
           this.QRCodeUrl = res.data.data.QRCodeUrl;
@@ -205,9 +198,11 @@ export default {
           console.log("获取列表Error");
         });
     },
+    //執行傳入之js跳轉（線上渠道）
     excecuteJS(){
       setTimeout("document.getElementById('frm1').submit();",100);
     },
+    //id轉換判斷 stephen -> jason
     sToJ(){
       if(this.title.match('支付宝') !== null) {
         this.jId = 2;
@@ -220,6 +215,7 @@ export default {
       }
       this.getBanks()
     },
+    //獲取渠道資訊（線上用）
     getBanks() {
       this.$axios
         .get(this.$store.state.url + "api/pay/thirdparty/getBanks", {
@@ -255,6 +251,7 @@ export default {
         this.show2 = !this.show2;
       }
     },
+    //線上渠道支付申請
     sendReq2() {
       if (this.amount === "") {
         this.$pop.show({error:'',title:'温馨提示',content:'请输入金額!',content1:'',content2:'',number:2});
@@ -293,6 +290,7 @@ export default {
           });
       }
     },
+    //線下支付申請
     sendReq() {
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },

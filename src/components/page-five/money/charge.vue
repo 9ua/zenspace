@@ -300,7 +300,7 @@ export default {
         withCredentials: true
       };
       let formData = new FormData();
-      formData.append("rechargeWay", 5);
+      formData.append("rechargeWay", this.$route.query.id);
       formData.append("receiveBankId", this.receiveBankId);
       formData.append("chargeamount", this.chargeamount);
       formData.append("niceName", this.niceName);

@@ -18,7 +18,7 @@ ul.bet-top
               .title {{into.title}}
               .menu-list-list-box
                 .menu-list-list(v-for='(group,indexa) in into.groups', :key='indexa')
-                  span(v-for='(player,indexb) in group.players', :key='indexb',v-if="player.id!='n11x5_star3_big'&&player.id!='n11x5_star3_small'&&player.id!='n11x5_star3_odd'&&player.id!='n11x5_star3_even'" @click.stop='tab($event,indexa,indexb,player,group,into,index)')
+                  span(v-for='(player,indexb) in group.players',:class="{active:current_player.id===player.id}", :key='indexb',v-if="player.id!='n11x5_star3_big'&&player.id!='n11x5_star3_small'&&player.id!='n11x5_star3_odd'&&player.id!='n11x5_star3_even'" @click.stop='tab($event,indexa,indexb,player,group,into,index)')
                     a {{player.groupName}}{{player.title}}
   li.betlist
     span(@click.stop='rightFlag') {{listname}}
@@ -44,6 +44,9 @@ export default {
     this.$store.state.showRight = false;
   },
   computed: {
+    current_player() {
+      return this.$store.state.current_player;
+    },
     listname() {
       return this.$store.state.listname;
     },

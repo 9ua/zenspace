@@ -1,7 +1,8 @@
 <template lang="jade">
 .bet
   betTop(:lotteryId='lotteryId',:group="group" @changeLotteryId='changeLotteryId',@iscreat='iscreat')
-  lookMore
+  lookMorePK10(v-if='$route.query.group == "pk10"')
+  lookMore(v-else)
   .bet-content
     div
       betContentTop(v-if='$route.query.group !== "pk10"', :lotteryId='lotteryId',@tolooksucc='tolooksucc',ref='betContentTop',@iscreat='iscreat')
@@ -21,7 +22,8 @@ import bets from "../../page-five/money/bets.vue";//右滑页面
 import betTop from "./components/betTop.vue";//头部
 import betContentTop from "./components/betContentTop.vue";//开奖号码，倒计时
 import betContentTopPk from "./components/betContentTopPk10.vue";//开奖号码，倒计时
-import lookMore from "./components/lookMore.vue";//
+import lookMore from "./components/lookMore.vue";//查看20期
+import lookMorePK10 from "./components/lookMorePK10.vue";//查看PK10 20期
 import betContentTopPop from "./components/betContentTopPop.vue";//查看开奖记录，往期开奖
 import betContentTopPopPk from "./components/betContentTopPopPk10.vue";//查看开奖记录，往期开奖
 import betContentS from "./components/betContentSSC.vue";//（不同种类彩种调用不同组件，如时时彩调用:betContentSSC）
@@ -39,6 +41,7 @@ export default {
     betContentTopPop, //10期开奖结果
     betContentTopPopPk, //10期开奖结果
     lookMore, //20期开奖结果
+    lookMorePK10,//pk20期开奖结果
     betContentS, //选号区域
     betContentP, //选号区域
     betContentX, //选号区域

@@ -11,6 +11,10 @@
     & li {
       width: 33.33%;
     }
+    & .active{
+      background: #f0c930;
+      border: #f0c930;
+    }
     & li:nth-child(2) {
       width: 60%;
       text-align: center;

@@ -295,12 +295,18 @@ export default {
     },
     //線下支付申請
     sendReq() {
+      if(this.attempty==1) {
+        if(this.checkCode =="") {
+          this.$pop.show({error:'',title:'温馨提示',content:'请依页面提示输入资讯,以利迅速审核',content1:'',content2:'',number:2});
+          return false;
+        }
+      };
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
       };
       let formData = new FormData();
-      formData.append("rechargeWay", 5);
+      formData.append("rechargeWay", this.$route.query.id);
       formData.append("receiveBankId", this.receiveBankId);
       formData.append("chargeamount", this.chargeamount);
       formData.append("niceName", this.niceName);

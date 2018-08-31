@@ -18,6 +18,13 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      conTemp:"",
+      zhuTemp:"",
+      betFun: []
+    };
+  },
   computed: {
     betGoshow() {
       return this.$store.state.betGoshow;
@@ -28,14 +35,14 @@ export default {
     con() {
       return this.$store.state.con;
     },
-    seasonId() {
-      return  this.$store.getters.seasonId;
-    },
-    seasonId2() {
-      return  this.$store.state.seasonId2;
-    },
     money() {
       return this.$store.state.money;
+    },
+    seasonId() {
+      return this.$store.getters.seasonId;
+    },
+    seasonId2() {
+      return this.$store.state.seasonId2;
     },
     playBonusId() {
       return this.$store.getters.playBonusId;
@@ -45,61 +52,70 @@ export default {
     betCancel() {
       this.$store.commit("BET_GO_SHOW", "reverse");
     },
-    //投注
-    betGo() {
-      this.$loading.show({number:"a"});
-      this.$store.commit("BET_GO_SHOW", false);
-      this.$store.commit("BET_NOT", false);
+    bet(obj) {
       let config = {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true
       };
       let formData = new FormData();
-      formData.append("order[0].content", this.con);
-      formData.append("order[0].betCount", this.zhu);
+      formData.append("order[0].content", obj.con);
+      formData.append("order[0].betCount", obj.zhu);
       formData.append("order[0].price", this.money);
       formData.append("order[0].unit", 1);
       formData.append("order[0].playId", this.playBonusId);
-      formData.append("count", this.zhu);
+      formData.append("count", obj.zhu);
       formData.append("traceOrders[0].price", this.money);
       formData.append("traceOrders[0].seasonId", this.seasonId2);
       formData.append("bounsType", 0);
       formData.append("traceWinStop", 0);
       formData.append("isTrace", 0);
       formData.append("lotteryId", this.$route.query.id);
-      formData.append("amount", this.money * this.zhu);
-      this.$emit("iscreat");
-      this.$axios
-        .post(this.$store.state.url + "api/lottery/bet", formData, config)
-        .then(res => {
-          this.$loading.hide();
-          if (res.data.message === "success") {
-            this.$store.commit("BET_NOT", true);
-              this.$store.commit("BET_SUCCESS", true);
-          } else {
-            this.$store.commit("BET_NOT", true);
-            if (res.data.status === 501) {
-              this.$pop.show({
-                title: "发生错误",
-                content: res.data.content,
-                content1: "",
-                content2: "",
-                number: 1
-              });
-            }
+      formData.append("amount", this.money * obj.zhu);
+      return this.$axios.post(this.$store.state.url + "api/lottery/bet", formData, config)   
+    },
+    spli(str) {
+      this.betFun.push(this.bet({con:str,zhu:1}));
+      let con = this.conTemp.split(",");
+      con.splice(con.lastIndexOf(str), 1);
+      con=con.join(",");
+      this.conTemp=con;
+      this.zhuTemp-=1;
+    },
+    //投注
+    betGo() {
+      this.conTemp=this.con;
+      this.zhuTemp=this.zhu;
+      if (this.con.indexOf("大")!==-1) {
+        this.spli("大");
+      }if (this.con.indexOf("小")!==-1) {
+        this.spli("小");
+      }if (this.con.indexOf("单")!==-1) {
+        this.spli("单");
+      }if (this.con.indexOf("双")!==-1) {
+        this.spli("双");
+      }
+      this.betFun.push(this.bet({ con: this.conTemp,zhu: this.zhuTemp }));
+      this.$loading.show({ number: "a" });
+      this.$store.commit("BET_GO_SHOW", false);
+      this.$store.commit("BET_NOT", false);
+      this.$axios.all([...this.betFun]).then(
+        this.$axios.spread((...res) => {
+        let showFlag=true;
+        for (let item of res){
+          if(item.data.code!=1){
+            showFlag=false;
+            break;
           }
+        }
+        if(showFlag){
+          this.$store.commit("BET_SUCCESS",true);
+        }
+        this.betFun=[];
+        this.$emit("iscreat");
+        this.$store.commit("BET_NOT",true);
+        this.$loading.hide();          
         })
-        .catch(error => {
-          this.$loading.hide();
-          this.$pop.show({
-            title: "温馨提示",
-            content: "投注失败,请检查您的网络！",
-            content1: "",
-            content2: "",
-            number: 1
-          });
-          this.$store.commit("BET_NOT", true);
-        });
+      );
     }
   }
 };

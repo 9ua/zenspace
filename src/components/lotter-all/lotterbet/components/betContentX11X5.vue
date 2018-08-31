@@ -11,7 +11,14 @@
           |  元
         br
       ul.fushi
-        li(v-for='(numViews, indexff) in current_player.numView', :key='indexff')
+        li(v-if="current_player && current_player.id === 'n11x5_star3_and'")
+          p
+            b 中三
+              br
+              |和值
+            span
+              a(v-for='(num,indexg) in star3_and', :key='indexg', :class="num.choose ? 'active' : '' ", @click='curBalls(0,indexg,num,star3_and,current_player)') {{num.ball}}
+        li(v-else,v-for='(numViews, indexff) in current_player.numView', :key='indexff')
           p
             b {{numViews.title}}
             span
@@ -34,10 +41,17 @@ export default {
       bn: "",
       cn: "",
       dn: "",
-      en: ""
+      en: "",
     };
   },
   computed: {
+    star3_and(){
+      let arr=[];
+      this.current_player.numView.forEach((item,index)=>{
+        arr.push(...item.nums)
+      })
+      return arr;      
+    },
     current_player() {
       return this.$store.state.current_player;
     },
@@ -61,7 +75,9 @@ export default {
       this.$store.commit("CON", "");
       this.$store.state.money = "";
       this.d = [];
-      (this.dm = ""), (this.tm = ""), (this.dd = []);
+      this.dm = "";
+      this.tm = "";
+      this.dd = [];
       this.ka = [];
       this.kb = [];
       this.kc = [];
@@ -81,18 +97,26 @@ export default {
       }
       num.choose = !num.choose;
       if (num.choose === true) {
-        this.d[indexg] = num.ball;
-        this.dd = this.d.filter(function(n) {
-          return n;
-        });
+        if (this.playBonusId === "n11x5_star3_and") {
+          this.dd.push(num.ball);
+        } else {
+          this.d[indexg] = num.ball;
+          this.dd = this.d.filter(function(n) {
+            return n;
+          });
+        }
         this.$store.commit("CON", this.dd.join(","));
         this.$store.commit("ZHU", "add");
         this.bet_boxjia(indexff, indexg, num, numViews, player);
       } else if (num.choose === false) {
-        this.d.splice(indexg, 1, "");
-        this.dd = this.d.filter(function(n) {
-          return n;
-        });
+        if (this.playBonusId === "n11x5_star3_and") {
+          this.dd.splice(this.dd.lastIndexOf(num.ball), 1);
+        } else {
+          this.d.splice(indexg, 1, "");
+          this.dd = this.d.filter(function(n) {
+            return n;
+          });
+        }
         this.$store.commit("CON", this.dd.join(","));
         this.$store.commit("ZHU", "reduce");
         this.bet_boxjian(indexff, indexg, num, numViews, player);
@@ -154,7 +178,7 @@ export default {
       // count = this.groupSplit(tmArr, stars - dmArr.length).length;//胆码全中方式
       // return count;//胆码全中方式
       count = this.groupSplit(tmArr, stars - 1).length;
-      return count*dmArr.length;
+      return count * dmArr.length;
     },
     //直选排列组合
     getCountFront(betContent, stars) {
@@ -337,9 +361,17 @@ export default {
           this.dd = this.kc;
           this.cn = this.dd.join("");
         }
-        let count = this.getCountFront((this.an + "," + this.bn + "," + this.cn).split(","), 3);
-        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn + ",-" + ",-");
+        let count = this.getCountFront(
+          (this.an + "," + this.bn + "," + this.cn).split(","),
+          3
+        );
+        this.$store.commit(
+          "CON",
+          this.an + "," + this.bn + "," + this.cn + ",-" + ",-"
+        );
         this.$store.commit("ZHU", count);
+      }
+      if (this.playBonusId === "n11x5_star3_and") {
       }
       //任选胆拖 ++
       //组选胆拖 ++
@@ -512,8 +544,14 @@ export default {
           this.dd = this.kc;
           this.cn = this.dd.join("");
         }
-        let count = this.getCountFront((this.an + "," + this.bn + "," + this.cn).split(","), 3);
-        this.$store.commit("CON", this.an + "," + this.bn + "," + this.cn + ",-" + ",-");
+        let count = this.getCountFront(
+          (this.an + "," + this.bn + "," + this.cn).split(","),
+          3
+        );
+        this.$store.commit(
+          "CON",
+          this.an + "," + this.bn + "," + this.cn + ",-" + ",-"
+        );
         this.$store.commit("ZHU", count);
       }
       //任选胆拖 --

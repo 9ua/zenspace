@@ -93,7 +93,7 @@ export default {
         this.spli("单");
       }if (this.con.includes("双")) {
         this.spli("双");
-      }if(this.con.match(/\d/)){
+      }if(this.con.match(/\d/)||this.con.includes("龙")||this.con.includes("虎")){
         this.betFun.push(this.bet({ con: this.conTemp,zhu: this.zhuTemp }));
       }
       this.$loading.show({ number: "a" });

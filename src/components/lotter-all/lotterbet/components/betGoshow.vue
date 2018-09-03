@@ -85,16 +85,17 @@ export default {
     betGo() {
       this.conTemp=this.con;
       this.zhuTemp=this.zhu;
-      if (this.con.indexOf("大")!==-1) {
+      if (this.con.includes("大")) {
         this.spli("大");
-      }if (this.con.indexOf("小")!==-1) {
+      }if (this.con.includes("小")) {
         this.spli("小");
-      }if (this.con.indexOf("单")!==-1) {
+      }if (this.con.includes("单")) {
         this.spli("单");
-      }if (this.con.indexOf("双")!==-1) {
+      }if (this.con.includes("双")) {
         this.spli("双");
+      }if(this.con.match(/\d/)){
+        this.betFun.push(this.bet({ con: this.conTemp,zhu: this.zhuTemp }));
       }
-      this.betFun.push(this.bet({ con: this.conTemp,zhu: this.zhuTemp }));
       this.$loading.show({ number: "a" });
       this.$store.commit("BET_GO_SHOW", false);
       this.$store.commit("BET_NOT", false);

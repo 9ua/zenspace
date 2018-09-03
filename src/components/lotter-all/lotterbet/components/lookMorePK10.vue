@@ -15,16 +15,16 @@
           | {{item.seasonId.substring(4).split("-").join("")*1}}
           i.iconfont.icon-plus-minus
         p
-          a {{item.n1}}
-          a {{item.n2}}
-          a {{item.n3}}
-          a {{item.n4}}
-          a {{item.n5}}
-          a {{item.n6}}
-          a {{item.n7}}
-          a {{item.n8}}
-          a {{item.n9}}
-          a {{item.n10}}
+          a {{item.n1|addZero}}
+          a {{item.n2|addZero}}
+          a {{item.n3|addZero}}
+          a {{item.n4|addZero}}
+          a {{item.n5|addZero}}
+          a {{item.n6|addZero}}
+          a {{item.n7|addZero}}
+          a {{item.n8|addZero}}
+          a {{item.n9|addZero}}
+          a {{item.n10|addZero}}
         p {{item.addTime.substring(11)}}
 </template>
 <script>
@@ -41,10 +41,19 @@ export default {
     lookAllDivTitle() {
       this.$store.commit("LOOK_ALL_UL","reverse");
     }
+  },
+  filters:{
+      addZero(v){
+          if(v<10){
+              return "0"+v;
+          }else{
+              return v;
+          }
+      }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../../assets/scss/lotter-list/lotterbet/components/lookMore.scss";
+@import "../../../../assets/scss/lotter-list/lotterbet/components/lookMorePK10.scss";
 </style>
 

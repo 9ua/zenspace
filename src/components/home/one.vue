@@ -32,8 +32,11 @@
       </ul>
       <ul class="lotteryList" v-show="$store.state.loginStatus">
         <router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name,group:item.groupId}}">
+          <div class="ribbon" v-if="index==1"><p>★★★</p></div>
+          <div class="ribbon2" v-if="index==0"><p>HOT</p></div>
           <span><i class="iconfont" :class="'icon-'+item.groupId"></i></span>
           <h5>{{item.name}}</h5>
+          <h4 style="color:#ccc;">1分钟一期</h4>
         </router-link>
         <router-link to="/lotterList" tag="li" class="lotter-list">
           <i class="iconfont icon-jia"></i>

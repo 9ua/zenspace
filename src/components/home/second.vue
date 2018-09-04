@@ -44,6 +44,7 @@
         .btn
           router-link(v-if="all.groupName !=='11x5'" , :to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:all.groupName}}", tag='button') 往期开奖
           router-link(v-else , :to="{path:'/second/past',query:{id:all.lotteryId,name:all.name,group:'x11x5'}}", tag='button') 往期开奖
+          br
           button(@click='looksucc($event,all)') 立即投注
 </template>
 <script>

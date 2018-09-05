@@ -85,15 +85,15 @@ export default {
     betGo() {
       this.conTemp=this.con;
       this.zhuTemp=this.zhu;
-      if (this.con.includes("大")) {
+      if (this.con.includes("大") && this.playBonusId!=="n11x5_odd_even_count") {
         this.spli("大");
-      }if (this.con.includes("小")) {
+      }if (this.con.includes("小") && this.playBonusId!=="n11x5_odd_even_count") {
         this.spli("小");
-      }if (this.con.includes("单")) {
+      }if (this.con.includes("单") && this.playBonusId!=="n11x5_odd_even_count") {
         this.spli("单");
-      }if (this.con.includes("双")) {
+      }if (this.con.includes("双") && this.playBonusId!=="n11x5_odd_even_count") {
         this.spli("双");
-      }if(this.con.match(/\d/)||this.con.includes("龙")||this.con.includes("虎")){
+      }if(this.con.match(/\d/)||this.con.includes("龙")||this.con.includes("虎")||this.playBonusId==="n11x5_odd_even_count"){
         this.betFun.push(this.bet({ con: this.conTemp,zhu: this.zhuTemp }));
       }
       this.$loading.show({ number: "a" });

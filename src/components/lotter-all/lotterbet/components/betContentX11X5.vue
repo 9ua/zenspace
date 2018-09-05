@@ -22,7 +22,8 @@
           p
             b {{numViews.title}}
             span
-              a(v-for='(num,indexg) in numViews.nums', :key='indexg', :class="num.choose ? 'active' : '' ", @click='curBalls(indexff,indexg,num,numViews,current_player)') {{num.ball}}
+              a(v-if="current_player && current_player.id === 'n11x5_odd_even_count'",v-for='(num,indexg) in numViews.nums',:key='indexg', style="width:1.6rem;border-radius:0;", :class="num.choose ? 'active' : '' ", @click='curBalls(indexff,indexg,num,numViews,current_player)') {{num.ball}}
+              a(v-if="current_player && current_player.id !== 'n11x5_odd_even_count'",v-for='(num,indexg) in numViews.nums',:key='indexg', :class="num.choose ? 'active' : '' ", @click='curBalls(indexff,indexg,num,numViews,current_player)') {{num.ball}}
 </template>
 <script>
 export default {

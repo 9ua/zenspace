@@ -31,6 +31,11 @@ export default new VueRouter({
       }
     },
     {
+      path: "/refresh",
+      name: 'refresh',
+      component: resolve => require(['@/components/public/refresh.vue'], resolve),
+    },
+    {
       path: "/login",
       name: 'login',
       component: resolve => require(['@/components/login/login.vue'], resolve),

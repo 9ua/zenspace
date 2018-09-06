@@ -97,7 +97,7 @@ export default {
     //刷新
     refresh() {
       window.location.reload();
-      // this.reload();
+      // this.$router.replace('/refresh');
     },
     //1.5秒后自动关闭
     three() {

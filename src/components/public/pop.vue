@@ -51,6 +51,23 @@
         <button class="logoAffirm" @click="openSimple = false">确认</button>
       </li>
     </ul>
+    <!-- refresh -->
+    <ul class="loginSuccess num2" v-if="number =='6'">
+      <li class="title">
+        <span></span>
+        <p>{{title}}</p>
+        <span>
+          <i class="iconfont icon-cuo transition"></i>
+        </span>
+      </li>
+      <li class="content">
+        <p>{{content}}</p>
+      </li>
+      <li class="button">
+        <button class="logoAffirm" @click="refresh">刷新</button>
+        <!-- <button class="logoAffirm" @click="openSimple = false">确认</button> -->
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -76,6 +93,11 @@ export default {
   methods: {
     closeSimple() {
       this.$pop.hide();
+    },
+    //刷新
+    refresh() {
+      window.location.reload();
+      // this.reload();
     },
     //1.5秒后自动关闭
     three() {

@@ -1,11 +1,23 @@
 <template lang="jade">
 #app
-  router-view
+  router-view(v-if='isRouterAlive')
 </template>
 
 <script>
 export default {
-  name: "App",  
+  name: "App", 
+  data () {
+   return {
+     isRouterAlive: true
+   }
+  }, 
+  methods: {
+    reload () {
+      // this.isRouterAlive = false;
+      // this.$nextTick(() => (this.isRouterAlive = true));
+      console.log("hello!");
+    }   
+  }
 };
 </script>
 

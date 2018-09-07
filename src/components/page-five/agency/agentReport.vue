@@ -20,7 +20,7 @@
           span {{userTeam.betAmount}}
           span 投注金额
         li
-          span {{userTeam.winningAmount}}
+          span {{userTeam.winsAmount}}
           span 中奖金额
         li
           span {{userTeam.activityAmount}}

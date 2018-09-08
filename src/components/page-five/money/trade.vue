@@ -128,6 +128,11 @@ export default {
           this.tradelist = res.data.data.list;
         })
         .catch(error => {
+          this.$pop.show({
+            title: "温馨提示",
+            content: "数据加载失败，请重新加载",
+            number: 6
+          });
           console.log("获取彩種ratio ERROR");
         });
     }

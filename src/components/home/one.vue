@@ -9,14 +9,17 @@
       <div v-show="!$store.state.loginStatus">
         <div class="notice-bar">
           <span><i class="iconfont icon-laba"></i></span>
-          <marquee scrollamount="2" width='80%'>{{title}}</marquee>
+          <marquee scrollamount="2" width='70%'>{{title}}</marquee>
           <i class="iconfont icon-you active"></i>
         </div>
       </div>
-      <div v-show="$store.state.loginStatus">
+      <div v-show="$store.state.loginStatus" style="position:relative;width:100%">
+        <router-link to="/lotterList" class="" style="float:left;margin:auto;padding:9px 15px;background:#e9dac4;color:#997259;">
+          <h5>彩种<br>列表</h5>
+        </router-link>
         <div class="notice-bar" @click="noticeClick">
           <span><i class="iconfont icon-laba"></i></span>
-          <marquee scrollamount="2" width='80%'>{{title}}</marquee>
+          <marquee scrollamount="2" width='70%'>{{title}}</marquee>
           <i class="iconfont icon-you active"></i>
         </div>
       </div>
@@ -32,11 +35,11 @@
       </ul>
       <ul class="lotteryList" v-show="$store.state.loginStatus">
         <router-link v-for="(item,index) in lotteryList" :key="index" tag="li" v-if="item.groupId" :to="{path:'/'+item.groupId,query:{id:item.id,name:item.name,group:item.groupId}}">
-          <div class="ribbon" v-if="index==1"><p>★★★</p></div>
-          <div class="ribbon2" v-if="index==0"><p>HOT</p></div>
+          <div class="ribbon" v-if="index==1"><p>★★</p></div>
+          <div class="ribbon2" v-if="index==0"><p>★★★</p></div>
           <span><i class="iconfont" :class="'icon-'+item.groupId"></i></span>
           <h5>{{item.name}}</h5>
-          <h4 style="color:#ccc;">1分钟一期</h4>
+          <h4 style="color:#ccc;">{{item.time}}</h4>
         </router-link>
         <router-link to="/lotterList" tag="li" class="lotter-list">
           <i class="iconfont icon-jia"></i>
@@ -47,6 +50,26 @@
   </div>
 </template>
 <script>
+ var time = {
+  "dfk3": "1分钟1期",
+  "hbk3": "全天78期",
+  "ahk3": "全天80期",
+  "bjk3": "全天89期",
+  "jsk3": "全天82期",
+  "hebk3": "全天81期",
+  "shk3": "全天82期",
+  "gsk3": "全天78期",
+  "gsuk3": "全天72期",
+  "jlk3": "全天87期",
+  "f1_11x5": "1分钟1期",
+  "sh11x5": "全天90期",
+  "ah11x5": "全天81期",
+  "ffpk10": "1分钟1期",
+  "pk10": "全天179期",
+  "sj1fc": "1分钟1期",
+  "cqssc": "全天120期",
+  "xjssc": "全天96期"
+}
 import headers from "../public/header";
 import swipe from "../public/swipe";
 import swipeItem from "../public/swipe-item";
@@ -115,6 +138,9 @@ export default {
               localStorage.setItem("date_indexInfo", now);
               this.title = "";
               this.lotteryList = res.data.data.hotLotterys;
+              for (let i = 0; i < this.lotteryList.length; i++) {
+                this.lotteryList[i]["time"] = time[this.lotteryList[i].id];
+              }
               this.bannerList = res.data.data.banners;
               for (let i = 0; i < res.data.data.noticeList.length; i++) {
                 this.title =
@@ -128,6 +154,9 @@ export default {
           this.indexInfo = JSON.parse(localStorage.getItem("indexInfo"));
           this.title = "";
           this.lotteryList = this.indexInfo.hotLotterys;
+          for (let i = 0; i < this.lotteryList.length; i++) {
+                this.lotteryList[i]["time"] = time[this.lotteryList[i].id];
+              }
           this.bannerList = this.indexInfo.banners;
           for (let i = 0; i < this.indexInfo.noticeList.length; i++) {
             this.title =
@@ -142,6 +171,9 @@ export default {
             localStorage.setItem("date_indexInfo", now);
             this.title = "";
             this.lotteryList = res.data.data.hotLotterys;
+            for (let i = 0; i < this.lotteryList.length; i++) {
+                this.lotteryList[i]["time"] = time[this.lotteryList[i].id];
+              }
             this.bannerList = res.data.data.banners;
             for (let i = 0; i < res.data.data.noticeList.length; i++) {
               this.title =

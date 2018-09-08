@@ -48,9 +48,14 @@ export default {
           params: {  type: 2,start:0,limit:100}
         })
         .then(res => {
-          this.letterlist = res.data.data;
+          this.letterlist = res.data.data.list;
         })
         .catch(error => {
+          this.$pop.show({
+            title: "温馨提示",
+            content: "数据加载失败，请重新加载",
+            number: 6
+          });
           console.log("获取彩種ratio ERROR");
         });
     }

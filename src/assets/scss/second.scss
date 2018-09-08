@@ -5,9 +5,9 @@
 .second {
   @extend %flex;
   @extend %fdc;
-  // min-height: calc(100% + 1px);
-  // height: auto;
-  height: 100%;
+  min-height: calc(100% + 1px);
+  height: auto;
+  // height: 100%;
   width: 100%;
   overflow: hidden;
   & .one-top {
@@ -15,9 +15,9 @@
   }
   .second-conter {
     margin: 66px 10px 0px;
-    min-height: calc(100% + 1px);
-    height: auto;
-    // height: 556px;
+    // min-height: calc(100% + 1px);
+    // height: auto;
+    height: 556px;
     overflow: hidden;
     overflow-y: scroll;
     position: relative;
@@ -38,7 +38,8 @@
   border-bottom: 1px solid #eee;
   padding: 0px 10px;
   height: 30px;
-  background: rgb(211, 206, 202);
+  background: #997259;
+  color: #fff;
   & h2 {
     font-weight: 400;
     font-size: 14px;
@@ -51,9 +52,9 @@
       }
     }
     & span:nth-child(2) {
-      border: 1px solid #eee;
-      background: #eee;
-      border-radius: 6px;
+      // border: 1px solid #eee;
+      background: #af3a31;
+      border-radius: 4px;
       padding: 0px 6px;
       font-size: 12px;
       & i {
@@ -63,7 +64,7 @@
   }
 }
 .conter {
-  background: rgb(161, 149, 139);
+  background: #ebe0d1;
   
 }
 .conter.k3 {
@@ -105,8 +106,9 @@
     height: 30px;
     border: 0px solid #999;
     color:#fff;
-    text-shadow: 0px 0px 6px rgba(94, 38, 1, 0.9);
-    background: linear-gradient(135deg, rgb(255, 228, 193)0%, rgb(255, 153, 0)100%);
+    text-shadow: 0px 0px 6px rgba(51, 51, 51, 0.9);
+    background: linear-gradient(135deg, rgb(255, 208, 143)0%, rgb(244, 144, 0)100%);
+    // background: linear-gradient(135deg, rgb(172, 228, 233)0%, rgb(89, 186, 194)100%);
     border-radius: 50%;
     margin: 0px 4px;
   }
@@ -118,7 +120,10 @@
     @extend %faj;
     width: 26px;
     height: 26px;
-    border: 1px solid #999;
+    border: 0px solid #999;
+    color:#fff;
+    text-shadow: 0px 0px 6px rgba(51, 51, 51, 0.9);
+    background: linear-gradient(135deg, rgb(172, 228, 233)0%, rgb(89, 186, 194)100%);
     border-radius: 50%;
     margin: 0px 4px;
   }
@@ -129,7 +134,7 @@
   // @extend %aitems;
   // @extend %jcontent;
   height: 34px;
-  background: rgb(161, 149, 139);
+  background: #e9dac4;
   & button {
     border: 1px solid #eee;
     border-radius: 6px;

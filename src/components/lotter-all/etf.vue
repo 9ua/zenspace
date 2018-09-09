@@ -1,6 +1,6 @@
 <template lang="jade">
 .etf
-  ul(v-if="lotteryListetf!==''")
+  ul(v-if="lotteryListetf.length > 0")
     router-link(v-for='(item,index) in lotteryListetf', :key='index', tag='li', :to="{path:'/x11x5',query:{id:item.id,name:item.name,group:item.groupId}}")
       span
         i.iconfont(:class='"icon-"+item.groupId')
@@ -11,7 +11,7 @@
 export default {
   data(){
     return{
-      lotteryListetf:'',
+      lotteryListetf:[],
     }
   },
   mounted(){

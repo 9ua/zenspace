@@ -587,7 +587,6 @@ export default {
           (this.an + "," + this.bn).split(","),
           this.$store.state.dmNum + 1
         );
-        console.log(this.dm, this.tm);
         this.$store.commit("CON", "胆" + this.dm + ";" + this.tm);
         this.$store.commit("ZHU", count);
       }

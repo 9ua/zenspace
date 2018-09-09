@@ -44,25 +44,27 @@
     @extend %flex;
     @extend %fr;
     background: #fff;
-    margin: 6px 0px 0px;
     width: 100%;
     border-top: 1px solid #DFE4ED;
     & li {
       @extend %faj;
       @extend %fdc;
+      position: relative;
       border: 1px solid #DFE4ED;
       border-top: 0px solid #DFE4ED;
       border-left: 0px solid #DFE4ED;
       width: 33%;
-      padding: 0px 0 5px;
+      padding: 12px 0;
+      overflow: hidden;
       & span {
         @extend %faj;
         width: 50%;
         height: auto;
-        padding: 10px 0px;
+        // padding: 10px 0px;
         border-radius: 50%;
         & i.iconfont{
-          font-size: 56px;
+          font-size: 60px;
+          padding-bottom: 6px;
         }
       }
       & h5 {
@@ -70,6 +72,24 @@
         font-size: 14px;
         color: #777;
         padding: 2px;
+      }
+    }
+    & li:nth-child(1){
+      .ribbon2 {
+        position: absolute;
+        top:6%;
+        left:34%;
+        width:100%;
+        height:20px;
+        // border: 0px solid #e7c942; 
+        background: linear-gradient(68deg, rgba(238, 16, 16, 0.7)0%, rgba(180, 10, 10, 0.7)100%);
+        box-shadow: 0 3px 6px rgba(130,130,130,0.2);
+        color:rgba(255, 255, 255, 0.973);
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 2px;
+        transform: rotate(45deg);
+        z-index: 6;
       }
     }
     & .lotter-list {
@@ -130,4 +150,20 @@
       width: 100%;
     }
   }
+}
+.ribbon {
+  position: absolute;
+  top:6%;
+  left:38%;
+  width:100%;
+  height:20px;
+  // border: 0px solid #e7c942; 
+  background: linear-gradient(68deg, rgba(255, 161, 19, 0.7)0%, rgba(214, 75, 11, 0.7)100%);
+  box-shadow: 0 3px 6px rgba(130,130,130,0.2);
+  color:rgba(255, 255, 255, 0.973);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transform: rotate(45deg);
+  z-index: 5;
 }

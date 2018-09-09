@@ -112,14 +112,19 @@ export default {
             localStorage.setItem("date_playTree_" + this.queryId, now);
           })
           .catch(error => {
-            this.$store.state.loginStatus = false;
             this.$pop.show({
               title: "温馨提示",
-              content: "获取不成功,请检查您的网络！",
-              content1: "",
-              content2: "",
-              number: 1
+              content: "数据加载失败，请重新加载",
+              number: 6
             });
+            // this.$store.state.loginStatus = false;
+            // this.$pop.show({
+            //   title: "温馨提示",
+            //   content: "获取不成功,请检查您的网络！",
+            //   content1: "",
+            //   content2: "",
+            //   number: 1
+            // });
           });
       }
     },

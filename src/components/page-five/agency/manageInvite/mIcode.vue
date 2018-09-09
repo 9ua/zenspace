@@ -129,6 +129,11 @@ export default {
           this.invitelist = res.data.data;
         })
         .catch(error => {
+          this.$pop.show({
+            title: "温馨提示",
+            content: "数据加载失败，请重新加载",
+            number: 6
+          });
           console.log("获取邀请码列表Err");
         });
     },
@@ -154,6 +159,7 @@ export default {
           this.show2 = !this.show2;
         })
         .catch(error => {
+          
           console.log("deleteInviteCodeNo");
         });
     }

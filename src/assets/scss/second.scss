@@ -7,12 +7,16 @@
   @extend %fdc;
   min-height: calc(100% + 1px);
   height: auto;
+  // height: 100%;
   width: 100%;
+  overflow: hidden;
   & .one-top {
     color: #fff;
   }
   .second-conter {
     margin: 66px 10px 0px;
+    // min-height: calc(100% + 1px);
+    // height: auto;
     height: 556px;
     overflow: hidden;
     overflow-y: scroll;
@@ -33,7 +37,9 @@
   @extend %aitems;
   border-bottom: 1px solid #eee;
   padding: 0px 10px;
-  height: 38px;
+  height: 30px;
+  background: #997259;
+  color: #fff;
   & h2 {
     font-weight: 400;
     font-size: 14px;
@@ -46,8 +52,9 @@
       }
     }
     & span:nth-child(2) {
-      border: 1px solid #eee;
-      border-radius: 6px;
+      // border: 1px solid #eee;
+      background: #af3a31;
+      border-radius: 4px;
       padding: 0px 6px;
       font-size: 12px;
       & i {
@@ -56,14 +63,17 @@
     }
   }
 }
-
+.conter {
+  background: #ebe0d1;
+  
+}
 .conter.k3 {
   @extend %faj;
-  height: 60px;
+  height: 40px;
   & span.Dice {
     @extend %faj;
-    width: 44px;
-    height: 44px;
+    width: 33px;
+    height: 33px;
     background-image: url(../../assets/img/one/diceK3.png);
     background-size: 200% 600%;
     vertical-align:middle;
@@ -89,24 +99,31 @@
 }
 .conter.ssc ,.conter.x11x5{
   @extend %faj;
-  height: 60px;
+  height: 40px;
   & span {
     @extend %faj;
-    width: 36px;
-    height: 36px;
-    border: 1px solid #999;
+    width: 30px;
+    height: 30px;
+    border: 0px solid #999;
+    color:#fff;
+    text-shadow: 0px 0px 6px rgba(51, 51, 51, 0.9);
+    background: linear-gradient(135deg, rgb(255, 208, 143)0%, rgb(244, 144, 0)100%);
+    // background: linear-gradient(135deg, rgb(172, 228, 233)0%, rgb(89, 186, 194)100%);
     border-radius: 50%;
     margin: 0px 4px;
   }
 }
 .conter.pk10 {
   @extend %faj;
-  height: 60px;
+  height: 40px;
   & span {
     @extend %faj;
     width: 26px;
     height: 26px;
-    border: 1px solid #999;
+    border: 0px solid #999;
+    color:#fff;
+    text-shadow: 0px 0px 6px rgba(51, 51, 51, 0.9);
+    background: linear-gradient(135deg, rgb(172, 228, 233)0%, rgb(89, 186, 194)100%);
     border-radius: 50%;
     margin: 0px 4px;
   }
@@ -114,14 +131,17 @@
 
 .btn {
   @extend %faj;
-  height: 50px;
+  // @extend %aitems;
+  // @extend %jcontent;
+  height: 34px;
+  background: #e9dac4;
   & button {
     border: 1px solid #eee;
     border-radius: 6px;
-    padding: 6px 20px;
+    padding: 3px 20px;
     color: #000;
     background: #fff;
-    margin: 0px 4px;
+    margin: 0px 10px;
   }
 }
 

@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: "App",  
+  name: "App", 
 };
 </script>
 
@@ -19,7 +19,7 @@ html,
   width: 100%;
   height: 100%;
   background: #efeef4;
-  font-family: "微软雅黑";
+  font-family: "微软雅黑","PingFang SC";
 }
 *,
 body,

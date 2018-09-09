@@ -225,6 +225,7 @@ export default {
     },
     //获取用户余额
     getBalance() {
+      this.username = localStorage.getItem("Globalname");
       this.$axios
         .get(this.$store.state.url + "api/userCenter/getBalance")
         .then(res => {

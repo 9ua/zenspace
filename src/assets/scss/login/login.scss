@@ -5,14 +5,63 @@
   @extend %sbetween;
   background: rgb(175, 58, 49);
   height: 100%;
+  & .winning-right {
+    position: absolute;
+    bottom:-130vh;
+    left:-70vh;
+    width:198vh;
+    height:198vh;
+    z-index: 0;
+    margin-top:0px;
+    margin-left:0px;
+    background: linear-gradient(68deg, rgba(223, 84, 86, .9)40%, rgba(194, 144, 71, .7)100%); 
+    background: -moz-linear-gradient(68deg, rgba(179, 35, 35, .7)40%, rgba(194, 144, 71, .7)100%); 
+    background: -webkit-linear-gradient(68deg, rgba(179, 35, 35, .7)40%, rgba(194, 144, 71, .7)100%); 
+    background: -o-linear-gradient(68deg, rgba(179, 35, 35, .7)40%, rgba(194, 144, 71, .7)100%); //KIGARACHA  //AKABENI
+    border-radius: 45%;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transform-origin: 50% 48%;
+    animation: waves 3s infinite linear;
+    opacity: .9;
+    }
+  & .winning-right2 {
+      position: absolute;
+      bottom:-130vh;
+      left:-80vh;
+      width:200vh;
+      height:200vh;
+      z-index: 0;
+      margin-top:0px;
+      margin-left:0px;
+      background: linear-gradient(68deg, rgba(203, 64, 66, .9)40%, rgba(194, 144, 71, .7)100%); 
+      background: -moz-linear-gradient(68deg, rgba(179, 35, 35, .6)40%, rgba(194, 144, 71, .7)100%); 
+      background: -webkit-linear-gradient(68deg, rgba(179, 35, 35, .6)40%, rgba(194, 144, 71, .7)100%); 
+      background: -o-linear-gradient(68deg, rgba(179, 35, 35, .6)40%, rgba(194, 144, 71, .7)100%); 
+      border-radius: 45%;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      transform-origin: 50% 48%;
+      animation: waves 5s infinite linear;
+      opacity: .7;
+      }
+  @keyframes waves {
+    0%{
+      transform: rotate(0deg);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
   & .login-conter {
     margin-top: 46px;
     height: 100%;
-    background: rgb(175, 58, 49);
+    // background: rgb(175, 58, 49);
+    z-index: 3;
     & .login-center-img {
       @extend %faj;
       margin: 30px 0px;
-      background: rgb(175, 58, 49);
+      // background: rgb(175, 58, 49);
       & div {
         @extend %faj;
         height: 220px;
@@ -26,7 +75,7 @@
       @extend %flex;
       @extend %fdc;
       padding: 0 20px;
-      background: rgb(175, 58, 49);
+      // background: rgb(175, 58, 49);
       >div {
         @extend %flex;
         @extend %aitems;

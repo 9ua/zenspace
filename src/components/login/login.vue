@@ -22,7 +22,7 @@
       .login-rememb
         input(style='border-color:#FFF;color:#FFF;',type='checkbox',v-model='checked', @click='checkeds')
         span 记住密码
-      .login-go
+      .login-go(v-show='loginReq')
         button(@click='login', v-show='loginReq') 立即登陆
       .login-live
         router-link(to='registered') 立即注册
@@ -32,6 +32,8 @@
     div
       i.iconfont.icon-information
       | {{content}}
+  .winning-right
+  .winning-right2
 </template>
 <script>
 import md5 from "js-md5";
